@@ -27,7 +27,8 @@ limitations under the License.
 ** Init ORG-MODE
 ;; I need this for org-mode to work well
 
-(require 'ob-shell)
+(require 'ob-sh)
+;(require 'ob-shell)
 (org-babel-do-load-languages 'org-babel-load-languages '((sh . t)))
 (org-babel-do-load-languages 'org-babel-load-languages '((C . t)))
 (org-babel-do-load-languages 'org-babel-load-languages '((python . t)))
@@ -45,13 +46,14 @@ int main(int argc, char**argv) {
 #+END_SRC
 
 #+RESULTS:
+
 ** Remember how to compile?
 
 gcc -std=c99 -Wall -pedantic -Werror -o programname programname.c
 
 ** Unary versus Binary
 
-#+BEGIN_SRC C :exports both
+#+BEGIN_SRC C :exports both 
 #include <stdio.h>
 
 int main() {
@@ -59,6 +61,7 @@ int main() {
     int another_int = an_int + an_int; //binary
     printf("an_int=\t%d\n", an_int);
     printf("another_int=\t%d\n", another_int);
+    ++an_int;
     another_int = -(an_int) + +(an_int); //binary and unary
     printf("another_int=\t%d\n", another_int);
     another_int = -(an_int) + -(an_int); //binary and unary
@@ -71,7 +74,7 @@ int main() {
 : an_int=	-5
 : another_int=	-10
 : another_int=	0
-: another_int=	10
+: another_int=	8
 
 ** Arithmetic 
 
@@ -90,10 +93,10 @@ int main() {
     int order1 = an_int * an_int + an_int * an_int / an_int;
     int order2 = (an_int * an_int) + ((an_int * an_int) / an_int);
     int order3 = an_int * (an_int + (an_int * (an_int / (an_int))));
-    if (order1 == order2) {
-        printf("order1 == order2\n");
-    } else {
+    if ( !((order1) == order2) ) {
         printf("order1 != order2\n");
+    } else {
+        printf("order1 == order2\n");
     }
     if (order1 == order3) {
         printf("order1 == order3\n");
@@ -131,7 +134,7 @@ int main() {
         printf("false\n");
     }
     printf("(an_int *= 3) > 5: ");
-    if ((an_int *= 3) > 5) {
+    if ((an_int *=  3) > 5) {
         printf("true\n");
     } else {
         printf("false\n");
@@ -145,8 +148,8 @@ int main() {
 : an_int=5
 : (an_int = 2)=2
 : (an_int = 5) > 5: false
-: (an_int *= 3) > 5: true
-: an_int is now = 15
+: (an_int *= 3) > 5: false
+: an_int is now = 1
 
 ** Order of operations from Hazel
 
@@ -164,6 +167,13 @@ int main() {
     printf("two=%d\n", two);
     printf("three=%d\n", three);
     printf("(one++)=%d (one*=2)=%d\n", one++, one *= 2);
+    one = 2;
+    one *= 2;
+    //one++
+    int tmp = one;
+    one += 1;
+    printf("(one++)=%d (one*=2)=%d\n", tmp, one);
+
     return 0;
 }
 #+END_SRC
@@ -279,6 +289,18 @@ int main() {
     } else {
         printf("0 is not true!\n");
     }
+    if ( emptystring[0] ) {
+        printf("emptystring[0] is true!\n");
+    } else {
+        printf("emptystring[0] is not true!\n");
+    }
+    char * nostringatall = NULL; 
+    if ( nostringatall ) {
+        printf("nostringatall is true!\n");
+    } else {
+        printf("nostringatall is not true!\n");
+    }
+
     return 0;
 }
 #+END_SRC
@@ -289,6 +311,8 @@ int main() {
 : emptystring is true!
 : character array is true!
 : 0 is not true!
+: emptystring[0] is not true!
+: nostringatall is not true!
 
 
 ** Boolean Values from Hazel
@@ -380,14 +404,22 @@ int main() {
     
     // to fix this 4 < a && a < 10
     printf("4 < a_number < 10: ");
-    if (4 < a_number < 10) {
+    if ((4 < a_number) && (a_number < 10)) {
         printf("true\n");
     } else {
         printf("false\n");
     }
-    
+    int tmp = 0;
+    if (a_number < 2) {
+       tmp = 111;
+    } else {
+       tmp = 222;
+    }
+    tmp = (a_number < 2 ? 111 : 222);
+    a_number < 2 ? tmp = 111 : tmp = 222;
+    printf("(a_number < 2 ? 111 : 222)=%d\n", tmp);
     printf("(a_number < 2 ? 111 : 222)=%d\n", (a_number < 2 ? 111 : 222));
-    
+    (a_number < 2 ? 111 :((a_number < 1)? 000 : 222));
     return 0;
 }
 #+END_SRC
@@ -713,7 +745,7 @@ int main() {
 int main() {
     int an_int;
     int array[2] = { 100, 200 };
-    an_int = (1, 2), 3;
+    an_int = (1,2),3;
     printf("%d\n", an_int);
     return 0;
 }
@@ -723,7 +755,56 @@ int main() {
 : 2
 
 ** If statements
+#+BEGIN_SRC C :exports both
+#include <stdio.h>
+
+int main(int argc, char**argv) {
+    return 0;
+}
+#+END_SRC
+
+#+RESULTS:
+
 ** Ternary Statements
+#+BEGIN_SRC C :exports both
+#include <stdio.h>
+
+int main(int argc, char**argv) {
+    return 0;
+}
+#+END_SRC
+
+#+RESULTS:
+
 ** Switch Statements
+#+BEGIN_SRC C :exports both
+#include <stdio.h>
+
+int main(int argc, char**argv) {
+    return 0;
+}
+#+END_SRC
+
+#+RESULTS:
+
 ** While loops
+#+BEGIN_SRC C :exports both
+#include <stdio.h>
+
+int main(int argc, char**argv) {
+    return 0;
+}
+#+END_SRC
+
+#+RESULTS:
+
 ** For loops
+#+BEGIN_SRC C :exports both
+#include <stdio.h>
+
+int main(int argc, char**argv) {
+    return 0;
+}
+#+END_SRC
+
+#+RESULTS:
