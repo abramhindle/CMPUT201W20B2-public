@@ -8,8 +8,15 @@
 If you are in CMPUT201 at UAlberta this code is released in the public
 domain to you.
 
-Otherwise it is (c) 2020 Hazel Campbell, Abram Hindle under the Apache
-2 License.
+Otherwise it is (c) 2020 Abram Hindle under the Apache
+2 License.  Unless it is Hazel Code! Which is AGPL3.0!
+
+*** Hazel Code is licensed under AGPL3.0+
+
+Also found here https://github.com/hazelybell/examples/tree/C-2020-01
+
+Hazel code is licensed: The example code is licensed under the AGPL3+ license, unless otherwise noted.
+
 *** Apache 2 Preamble
 Copyright 2020 Hazel Campbell, Abram Hindle
 
