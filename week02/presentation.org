@@ -1,0 +1,342 @@
+#+TITLE: CMPUT201W20B2 Week 2
+#+PROPERTY: header-args:C             :results output :exports both :flags -std=c99 -Wall -pedantic -Werror -g 
+#+PROPERTY: header-args:sh            :results output :exports both
+
+* Week2
+** Copyright Statement
+
+If you are in CMPUT201 at UAlberta this code is released in the public
+domain to you.
+
+Otherwise it is (c) 2020 Hazel Campbell, Abram Hindle under the Apache
+2 License.
+*** Apache 2 Preamble
+Copyright 2020 Hazel Campbell, Abram Hindle
+
+Licensed under the Apache License, Version 2.0 (the "License");
+you may not use this file except in compliance with the License.
+You may obtain a copy of the License at
+
+    http://www.apache.org/licenses/LICENSE-2.0
+
+Unless required by applicable law or agreed to in writing, software
+distributed under the License is distributed on an "AS IS" BASIS,
+WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+See the License for the specific language governing permissions and
+limitations under the License.
+** Init ORG-MODE
+;; I need this for org-mode to work well
+
+(require 'ob-shell)
+(org-babel-do-load-languages 'org-babel-load-languages '((sh . t)))
+(org-babel-do-load-languages 'org-babel-load-languages '((C . t)))
+(org-babel-do-load-languages 'org-babel-load-languages '((python . t)))
+(setq org-src-fontify-natively t)
+
+** Org Template
+Copy and paste this to demo C
+
+#+BEGIN_SRC C :exports both
+#include <stdio.h>
+
+int main(int argc, char**argv) {
+    return 0;
+}
+#+END_SRC
+
+#+RESULTS:
+** Remember how to compile?
+
+gcc -std=c99 -Wall -pedantic -Werror -o programname programname.c
+
+** Arithmetic 
+
+Arithmetic operators have precedence. 
+
+#+BEGIN_SRC C :exports both
+#include <stdio.h>
+
+int main() {
+    int an_int = 5;
+    int another_int = an_int + an_int;
+    printf("another_int=%d\n", another_int);
+
+    another_int = an_int * an_int;
+    printf("(an_int*an_int) another_int=%d\n", another_int);
+    int order1 = an_int * an_int + an_int * an_int / an_int;
+    int order2 = (an_int * an_int) + ((an_int * an_int) / an_int);
+    int order3 = an_int * (an_int + (an_int * (an_int / (an_int))));
+    if (order1 == order2) {
+        printf("order1 == order2\n");
+    } else {
+        printf("order1 != order2\n");
+    }
+    if (order1 == order3) {
+        printf("order1 == order3\n");
+    } else {
+        printf("order1 != order3\n");
+    }
+    
+}
+#+END_SRC
+
+#+RESULTS:
+: another_int=10
+: (an_int*an_int) another_int=25
+: order1 == order2
+: order1 != order3
+
+
+** Assignments in Expressions [Hazel Example]
+
+This is a popular feature of C that causes a lot of bugs and lot of
+confusion with C.
+
+#+BEGIN_SRC C :exports both
+#include <stdio.h>
+
+int main() {
+    int an_int = 5;
+    printf("an_int=%d\n", an_int);
+    // We can use an assignment as an expression!
+    printf("(an_int = 2)=%d\n", an_int = 2);
+    printf("(an_int = 5) > 5: ");
+    if ((an_int = 5) > 5) {
+        printf("true\n");
+    } else {
+        printf("false\n");
+    }
+    printf("(an_int *= 3) > 5: ");
+    if ((an_int *= 3) > 5) {
+        printf("true\n");
+    } else {
+        printf("false\n");
+    }
+    printf("an_int is now = %d\n", an_int);
+    return 0;
+}
+#+END_SRC
+
+#+RESULTS:
+: an_int=5
+: (an_int = 2)=2
+: (an_int = 5) > 5: false
+: (an_int *= 3) > 5: true
+: an_int is now = 15
+
+** Order of operations from Hazel
+
+Order of operations for l-values is from right to left
+
+#+BEGIN_SRC C :exports both :flags "-std=c99 -Wall -pedantic"
+#include <stdio.h>
+#include <stdlib.h>
+
+int main() {
+    int one = 1;
+    int two = 2;
+    int three = one = two;     // does three == one or does three == two
+    printf("one=%d\n", one);
+    printf("two=%d\n", two);
+    printf("three=%d\n", three);
+    printf("(one++)=%d (one*=2)=%d\n", one++, one *= 2);
+    return 0;
+}
+#+END_SRC
+
+#+RESULTS:
+: one=2
+: two=2
+: three=2
+: (one++)=4 (one*=2)=5
+
+** Boolean Values from Hazel
+
+file:./bool.c
+
+#+BEGIN_SRC sh :exports both   
+   gcc -v -g -O0 -std=c99 -Wall -pedantic -o bool bool.c
+#+END_SRC
+
+#+RESULTS:
+
+#+BEGIN_SRC sh :exports both :results value drawer    
+  echo 2 | ./bool
+#+END_SRC
+
+#+RESULTS:
+:RESULTS:
+enter a number from 0-3: a is two
+(a_number < 2)=0
+(a_number == 2)=1
+true=1
+false=0
+lt_two=0
+(lt_two): false
+lt_two_int=0
+(lt_two_int): false
+(1 == true): 1
+(2 == true): 0
+4 < a_number < 10: true
+(a_number < 2 ? 111 : 222)=222
+:END:
+
+
+#+BEGIN_SRC C :exports both :eval no :flags "-std=c99 -Wall -pedantic" 
+#include <stdbool.h>
+#include <stdio.h>
+#include <stdlib.h>
+
+int main() {
+    int a_number = -1;
+    printf("enter a number from 0-3: ");
+    int scanf_result = scanf("%d", &a_number);
+    if (scanf_result != 1) {
+        printf("Error: didn't read a number!\n");
+        abort();
+    }
+    
+    if (a_number < 2) {
+        printf("a less than two\n");
+    } else if (a_number == 2) {
+        printf("a is two\n");
+    } else {
+        printf("a is greater than two\n");
+    }
+    
+    printf("(a_number < 2)=%d\n", a_number < 2);
+    
+    printf("(a_number == 2)=%d\n", a_number == 2);
+    
+    // using true and false by name: be sure to include <stdbool.h>
+    printf("true=%d\n", true);
+    printf("false=%d\n", false);
+    
+    bool lt_two = a_number < 2;
+    printf("lt_two=%d\n", lt_two);
+    
+    printf("(lt_two): ");
+    if (lt_two) {
+        printf("true\n");
+    } else {
+        printf("false\n");
+    }
+    
+    int lt_two_int = a_number < 2;
+    printf("lt_two_int=%d\n", lt_two_int);
+    
+    printf("(lt_two_int): ");
+    if (lt_two_int) {
+        printf("true\n");
+    } else {
+        printf("false\n");
+    }
+
+    // NEVER do == true, because any number that's not 0 is true.
+    printf("(1 == true): %d\n", 1 == true);
+    printf("(2 == true): %d\n", 2 == true);
+    
+    
+    // to fix this 4 < a && a < 10
+    printf("4 < a_number < 10: ");
+    if (4 < a_number < 10) {
+        printf("true\n");
+    } else {
+        printf("false\n");
+    }
+    
+    printf("(a_number < 2 ? 111 : 222)=%d\n", (a_number < 2 ? 111 : 222));
+    
+    return 0;
+}
+#+END_SRC
+
+#+RESULTS:
+
+** Comma Operator from Hazel
+
+#+BEGIN_SRC C :exports both :flags "-std=c99 -Wall -pedantic"
+#include <stdio.h>
+
+/* The comma operator:
+ * You should never use it in your own code!
+ * It evaluates the expression on the left side of the comma, and discards the result.
+ * Then it evaluates the expression on the right side. The value on the right side is the value of the expression.
+ */
+
+int main() {
+    int an_int;
+    int array[2] = { 100, 200 };
+    an_int = (1, 2), 3;
+    printf("%d\n", an_int);
+    return 0;
+}
+#+END_SRC
+
+#+RESULTS:
+: 2
+
+** L-value from Hazel
+
+#+BEGIN_SRC C :exports both :flags "-std=c99 -Wall -pedantic"
+#include <stdio.h>
+
+#define N 5
+
+int main() {
+    int an_int = 5;
+    printf("an_int = 5\n");
+    printf("an_int=%d\n", an_int);
+    an_int = 2;
+    printf("an_int = 2\n");
+    printf("an_int=%d\n", an_int);
+    // an_int is an "lvalue"
+    // aka. left value
+    // anything that can appear on the left of an assignment
+    // we can also use ++ and -- with lvalues
+    an_int += 20;
+    printf("an_int += 20\n");
+    printf("an_int=%d\n", an_int);
+    printf("an_int++=%d\n", an_int++);
+    printf("an_int=%d\n", an_int);
+    printf("++an_int=%d\n", ++an_int);
+    printf("an_int=%d\n", an_int);
+    an_int *= 10;
+    printf("an_int *= 10\n");
+    printf("an_int=%d\n", an_int);
+    printf("an_int--=%d\n", an_int--);
+    printf("an_int=%d\n", an_int);
+    printf("--an_int=%d\n", --an_int);
+    printf("an_int=%d\n", an_int);
+    // None of the following work, because they are NOT lvalues!
+    // 5 = 2;
+    // 5 *= 10;
+    // 5++;
+    // N = 2;
+    // N *= 10;
+    // N++;
+    return 0;
+}
+#+END_SRC
+
+#+RESULTS:
+#+begin_example
+an_int = 5
+an_int=5
+an_int = 2
+an_int=2
+an_int += 20
+an_int=22
+an_int++=22
+an_int=23
+++an_int=24
+an_int=24
+an_int *= 10
+an_int=240
+an_int--=240
+an_int=239
+--an_int=238
+an_int=238
+#+end_example
+
+
