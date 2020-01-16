@@ -752,42 +752,324 @@ int main() {
 int main() {
     int an_int;
     int array[2] = { 100, 200 };
+    // look at the inconsistency between an expression
+    an_int = (1,2,3);
+    printf("%d\n", an_int);
+    // an a direct assignment (take the left most)
+    an_int = 1,2,3;
+    printf("%d\n", an_int);
+    // first do (1,2) in expression order (take the right)
+    // then do 2,3 in assignment order! (take the left)
     an_int = (1,2),3;
     printf("%d\n", an_int);
+    printf("Don't rely on the comma operator!");
     return 0;
 }
 #+END_SRC
 
 #+RESULTS:
+: 3
+: 1
 : 2
 
 ** If statements
+
+   if statements are of the form:
+
+#+BEGIN_SRC C :eval no
+   if ( condition ) {
+      code for true case;
+   }
+
+   if ( condition ) {
+      code for true case;
+   } else {
+      code for false case;
+   }
+
+   if ( condition ) {
+      code for true case;
+   } else if ( condition2 ) {
+      code for !condition && condition2 case
+   } else {
+      code for false case;
+   }
+
+#+END_SRC
+
+
 #+BEGIN_SRC C :exports both
 #include <stdio.h>
 
 int main(int argc, char**argv) {
+
+   int input = 333;
+   int condition =  input > 1;
+   int condition2 = input == 1;
+   int condition3 = input > 0;
+
+   if ( condition ) {
+      printf("if code for true case\n");
+   }
+
+   if ( condition ) {
+      printf("if-else code for true case\n");
+   } else {
+      printf("if-else code for false case\n");
+   }
+
+   if ( condition ) {
+      printf("if-else-if-else code for condition is true case\n");
+   } else if ( condition2 ) {
+      printf("if-else-if-else code for !condition && condition2 case\n");
+   } else {
+      printf("if-else-if-else code for !condition && !condition2 case\n");
+   }
+
+   if (condition) {
+      printf("parallel-ifs condition!\n");
+   }
+   if (condition2) {
+      printf("parallel-ifs condition2!\n");
+   }
+   if (condition3) {
+      printf("parallel-ifs condition3!\n");
+   }
+
     return 0;
 }
 #+END_SRC
 
 #+RESULTS:
+: if code for true case
+: if-else code for true case
+: if-else-if-else code for condition is true case
+: parallel-ifs condition!
+: parallel-ifs condition3!
+
+** Blocks! from Hazel
+
+   Block are chunks of code that are related or grouped together by
+   the parser and compiler. The code that is executed on the else
+   statement of an if is a block.
+
+   Many C statements like if do not need { } braces for blocks
+
+#+BEGIN_SRC C :exports both
+#include <stdio.h>
+#include <stdlib.h>
+#include <string.h>
+
+int main() {
+    int some_num = 3;
+
+    // mildly confusing syntax
+    printf("Will print 0 if 0 is true:\n");
+    if (0) printf("0\n");
+
+    // more confusing syntax    
+    printf("Will print 1 if 1 is true:\n");
+    if (1)
+        printf("1\n");
+    
+    // really confusing syntax    
+    if (2) printf("2 is true\n");
+    else printf("2 is false\n");
+    
+    printf("------------------------------\n");
+    
+    // good syntax! Do this! Use braces!
+    printf("outside of if some_num=%d\n", some_num);
+    if (1) {
+        int some_num = 2;
+        printf("inside of if some_num=%d\n", some_num);
+    }
+    printf("outside of if some_num=%d\n", some_num);
+    
+    return 0;
+}
+#+END_SRC
+
+#+RESULTS:
+: Will print 0 if 0 is true:
+: Will print 1 if 1 is true:
+: 1
+: 2 is true
+: ------------------------------
+: outside of if some_num=3
+: inside of if some_num=2
+: outside of if some_num=3
+
 
 ** Ternary Statements
+
+   An if statement that is an expression!
+
+   ( condition ) ? ( true expression ) : ( false expression )
+
+   Only use 1 ternary at a time. More is confusing.
+
 #+BEGIN_SRC C :exports both
 #include <stdio.h>
 
 int main(int argc, char**argv) {
+    int a_number = 0;
+    int tmp = (a_number < 2 ? 111 : 222);
+    int res = a_number < 2 ? (tmp = 111) : (tmp = 222);
+    printf("res = a_number < 2 ? tmp = 111 : tmp = 222? res = %d\n", res);
+    printf("(a_number < 2 ? 111 : 222)=%d\n", tmp);
+    printf("(a_number < 2 ? 111 : 222)=%d\n", (a_number < 2 ? 111 : 222));
+    printf("An expression? %d\n", (a_number < 2 ? 111 :((a_number < 1)? 000 : 222)));
     return 0;
 }
 #+END_SRC
 
 #+RESULTS:
+: res = a_number < 2 ? tmp = 111 : tmp = 222? res = 111
+: (a_number < 2 ? 111 : 222)=111
+: (a_number < 2 ? 111 : 222)=111
+: An expression? 111
 
 ** Switch Statements
+
+Switch statement operators on values and matches values directly. If
+you use it with strings it will surprise you and not work as expected.
+Use it on characters, bools, ints. Try not to use it on floats.
+
 #+BEGIN_SRC C :exports both
 #include <stdio.h>
+#include <stdlib.h>
+#include <string.h>
 
-int main(int argc, char**argv) {
+int main() {
+    char direction = 'U';
+    switch(direction) {
+        case 'U':
+            printf("Up\n");
+            break;
+        case 'D':
+            printf("Down\n");
+            break;
+        case 'L':
+            printf("Left\n");
+        case 'R':
+            printf("Right\n");
+            break;
+        default:
+            printf("Direction is invalid");
+    }
+    return 0;
+}
+#+END_SRC
+
+#+RESULTS:
+: Up
+
+#+BEGIN_SRC C :exports both
+// Copyright (c) 2020 Hazel Campbell
+// Licensed under AGPL3.0+
+#include <stdio.h>
+#include <stdlib.h>
+#include <string.h>
+
+int main() {
+    char depth = 0;
+    switch(depth) {
+        case 0:
+            printf("0\n");
+        case 1:
+            printf("1111\n");
+        case 2:
+            printf("22222222\n");
+        case 3:
+            printf("333333333333\n");
+        case 4:
+            printf("4444444444444444\n");
+            break;
+        default:
+            printf("Too big or too small");
+    }
+    return 0;
+}
+#+END_SRC
+
+#+RESULTS:
+: 0
+: 1111
+: 22222222
+: 333333333333
+: 4444444444444444
+
+
+
+
+** Switch Statements [code from Hazel]
+
+file:./switch.c
+#+BEGIN_SRC sh :exports both
+   gcc -v -g -O0 -std=c99 -Wall -pedantic -o switch switch.c
+#+END_SRC
+
+#+RESULTS:
+
+#+BEGIN_SRC sh :exports both 
+   echo input  1
+   echo 1 | ./switch
+   echo input  2
+   echo 2 | ./switch
+   echo input  3
+   echo 3 | ./switch
+   echo input  4
+   echo 4 | ./switch
+   echo input  5
+   echo 5 | ./switch
+#+END_SRC
+
+#+RESULTS:
+#+begin_example
+input 1
+enter number number from 0-3: one
+input 2
+enter number number from 0-3: two
+two or three
+input 3
+enter number number from 0-3: two or three
+input 4
+enter number number from 0-3: not a number from 0-3
+input 5
+enter number number from 0-3: not a number from 0-3
+#+end_example
+
+
+
+#+BEGIN_SRC C :exports both
+#include <stdio.h>
+#include <stdlib.h>
+#include <string.h>
+
+int main() {
+    int number = -1;
+    printf("enter number number from 0-3: ");
+    int scanned = scanf("%d", &number);
+    if (scanned != 1) {
+        printf("Eh?\n");
+        abort();
+    }
+    switch(number) {
+        case 0:
+            printf("zero\n");
+            break;
+        case 1:
+            printf("one\n");
+            break;
+        case 2:
+            printf("two\n");
+        case 3:
+            printf("two or three\n");
+            break;
+        default:
+            printf("not a number from 0-3\n");
+    }
     return 0;
 }
 #+END_SRC
@@ -806,12 +1088,398 @@ int main(int argc, char**argv) {
 #+RESULTS:
 
 ** For loops
+
+#+BEGIN_SRC C :eval no :exports src
+
+   for ( init_condition; looping_condition ; runs_each_time )
+
+   // Loop from 0 to 10
+   for ( int i = 0 ; i < 10 ; i++ ) 
+   for ( int i = 0 ; i < 10 ; i+=1 ) 
+   for ( int i = 0 ; i < 10 ; ++i ) 
+
+#+END_SRC
+
 #+BEGIN_SRC C :exports both
 #include <stdio.h>
 
-int main(int argc, char**argv) {
+int main() {
+   printf("i++\n");
+   for ( int i = 0 ; i < 10 ; i++ ) {
+       printf("%d ", i);
+   }
+   // printf("i %d", i); i is undeclared in this scope!
+   printf("\ni+=1\n");
+   for ( int i = 0 ; i < 10 ; i+=1 )  {
+       printf("%d ", i);
+   }
+   printf("\n++i\n");
+   for ( int i = 0 ; i < 10 ; ++i )  {
+       printf("%d ", i);
+   }
+   printf("\ni+=3\n");
+   for ( int i = 0 ; i < 10 ; i+=3 )  {
+       printf("%d ", i);
+   }
+   return 0;
+}
+#+END_SRC
+
+#+RESULTS:
+: i++
+: 0 1 2 3 4 5 6 7 8 9 
+: i+=1
+: 0 1 2 3 4 5 6 7 8 9 
+: ++i
+: 0 1 2 3 4 5 6 7 8 9 
+: i+=3
+: 0 3 6 9
+
+
+*** Idiomatic For Loops
+
+Here's how you write good for loops in C99
+
+#+BEGIN_SRC C :exports both
+// Copyright (c) 2020 Hazel Campbell
+// Licensed under the AGPL3.0+
+#include <stdio.h>
+#include <stdlib.h>
+#include <string.h>
+
+int main() {
+    int count_to = 4;
+    // Counting from 0 to count_to-1 (3)
+    for (int counter = 0; counter < count_to; counter++) {
+        printf("%d ", counter);
+    }
+    printf("\n");
+    // Counting from 1 to count_to (4)
+    for (int counter = 1; counter <= count_to; counter++) {
+        printf("%d ", counter);
+    }
+    printf("\n");
+    // Counting from count_to-1 to 0
+    for (int counter = count_to-1; counter >= 0; counter--) {
+        printf("%d ", counter);
+    }
+    printf("\n");
+    // Counting from count_to to 1
+    for (int counter = count_to; counter >= 1; counter--) {
+        printf("%d ", counter);
+    }
+    printf("\n");
     return 0;
 }
 #+END_SRC
 
 #+RESULTS:
+
+*** Hazel's Gallery of Misfit For Loops
+
+
+#+BEGIN_SRC C :exports both
+// Copyright (c) 2020 Hazel Campbell
+// Licensed under AGPL3.0+
+#include <stdio.h>
+#include <stdlib.h>
+#include <string.h>
+
+#define COUNT_TO 5
+
+int main() {
+    int counter;
+    // clear idiomatic for loop!
+    for (counter = 0; counter < COUNT_TO; counter++) {
+        printf("%d\n", counter);
+    }
+    printf("---\n");
+    counter = 0;
+    // while loop that does the same thing :/
+    while (counter < COUNT_TO) {
+        printf("%d\n", counter);
+        counter++;
+    }
+    printf("---\n");
+    printf("%d\n", counter);
+    // for (
+    //  something that runs once ;
+    //  counter conditional that's checked 
+    //      each time;
+    //  something that happens each time ;
+    // )
+    printf("---\n");
+    counter = 0;
+    for (; counter < COUNT_TO; counter++) {
+        printf("%d\n", counter);
+    }
+    printf("---\n");
+    counter = 0;
+    for (; counter < COUNT_TO; counter++) {
+        printf("%d\n", counter);
+        counter = COUNT_TO;
+    }
+    printf("---\n");
+    printf("%d\n", counter);
+    printf("---\n");
+    counter = 0;
+    for (; counter < COUNT_TO;) {
+        printf("%d\n", counter);
+        counter = COUNT_TO;
+    }
+    printf("---\n");
+    printf("%d\n", counter);
+    return 0;
+}
+#+END_SRC
+
+#+RESULTS:
+#+begin_example
+0
+1
+2
+3
+4
+---
+0
+1
+2
+3
+4
+---
+5
+---
+0
+1
+2
+3
+4
+---
+0
+---
+6
+---
+0
+---
+5
+#+end_example
+** Break and For
+
+The break statement allows you to quit the immediate for loop or while
+loop you are in.
+
+#+BEGIN_SRC C :exports both
+// Copyright (c) 2020 Hazel Campbell
+// Licensed under AGPL3.0+
+
+#include <stdio.h>
+
+int main() {
+    int count_to = 4;
+    for (int i = 0; i < count_to; i++) {
+        for (int j = 0; j < count_to; j++) {
+            if (i+j == count_to) {
+                break;
+            }
+            printf("%d ", i+j);
+        }
+        printf("\n");
+    }
+}
+#+END_SRC
+
+#+RESULTS:
+: 0 1 2 3 
+: 1 2 3 
+: 2 3 
+: 3
+
+*** Continue
+
+Continue is like break except it skips the loop body to the end and
+restarts.
+
+#+BEGIN_SRC C :exports both
+// Copyright (c) 2020 Hazel Campbell
+// Licensed under AGPL3.0+
+
+#include <stdio.h>
+
+int main() {
+    int count_to = 4;
+    for (int i = 0; i < count_to; i++) {
+        for (int j = 0; j < count_to; j++) {
+            if (i+j == count_to) {
+                continue;
+            }
+            printf("%d ", i+j);
+        }
+        printf("\n");
+    }
+}
+#+END_SRC
+
+#+RESULTS:
+: 0 1 2 3 
+: 1 2 3 
+: 2 3 5 
+: 3 5 6
+
+** GOTO
+
+GOTO is basically our jmp opcode from assembler except we can only go to labels.
+
+labels in code are an identifier followed by a colon:
+
+If you have -g flags in gcc the label will be in executable, otherwise
+it will just be an offset that you jump to.
+
+GOTOs can only be in the same function in C.
+
+#+BEGIN_SRC C :exports both
+#include <stdio.h>
+#include <stdlib.h>
+#include <string.h>
+
+int main() {
+    goto super;
+    ala:
+    printf("Aladocious\n"); 
+    goto end;
+    expi:
+    printf("Expi\n");
+    goto ala;
+    fragi:
+    printf("Fragilistic\n");
+    goto expi;
+    cali:
+    printf("Cali\n");    
+    goto fragi;
+    super:
+    printf("Super\n");    
+    goto cali;
+    end:
+    printf("Done! Don't use GOTOs!");
+}
+
+#+END_SRC
+
+#+RESULTS:
+: Super
+: Cali
+: Fragilistic
+: Expi
+: Aladocious
+: Done! Don't use GOTOs!
+
+#+BEGIN_SRC C :exports both
+// Copyright (c) 2020 Hazel Campbell
+#include <stdio.h>
+#include <stdlib.h>
+#include <string.h>
+
+#define STOP_BEFORE 7
+
+int main() {
+    for (int counter = 0; counter < STOP_BEFORE; counter++) {
+        switch (counter) {
+            case 0:
+                printf("zero ");
+                break;
+            case 1:
+                printf("one ");
+                break;
+            case 2:
+                printf("two ");
+                break;
+            case 3:
+                printf("three ");
+                break;
+            default:
+                printf("error!\n");
+                goto done;
+                break;
+        }
+    }
+    done:
+    printf("\n");
+    return 0;
+}
+#+END_SRC
+
+#+RESULTS:
+: zero one two three error!
+
+** Types!
+
+*** int!
+
+In C ints are often 32-bit integers. They can have a sign.
+
+#+BEGIN_SRC C :exports both
+#include <stdio.h>
+#include <limits.h>
+int main() {
+    int an_int = 6;
+    printf("size_of(an_int) == %ld\n", sizeof(an_int));
+    int max_int = INT_MAX;
+    printf("max int == %11d\n", max_int);
+    int min_int = INT_MIN;
+    printf("min int == %11d\n", min_int);
+    printf("an_int  == %11d \t== 0x%08x\n", an_int,  an_int);
+    printf("min_int == %11d \t== 0x%08x\n", min_int, min_int);
+    printf("max_int == %11d \t== 0x%08x\n", max_int, max_int);
+    printf("     -1 == %11d \t== 0x%08x\n", -1,-1);
+    printf("      1 == %11d \t== 0x%08x\n", 1,1);
+    printf("      0 == %11d \t== 0x%08x\n", 0,0);
+
+    return 0;
+}
+#+END_SRC
+
+#+RESULTS:
+: size_of(an_int) == 4
+: max int ==  2147483647
+: min int == -2147483648
+: an_int  ==           6 	== 0x00000006
+: min_int == -2147483648 	== 0x80000000
+: max_int ==  2147483647 	== 0x7fffffff
+:      -1 ==          -1 	== 0xffffffff
+:       1 ==           1 	== 0x00000001
+:       0 ==           0 	== 0x00000000
+
+*** unsigned ints!
+
+You can only non-negative integers if you want
+
+#+BEGIN_SRC C :exports both
+#include <stdio.h>
+#include <limits.h>
+int main() {
+    unsigned int an_int = 6;
+    printf("size_of(an_int) == %ld\n", sizeof(an_int));
+    unsigned int max_int = UINT_MAX;
+    printf("max int == %11u\n", max_int);
+    unsigned int min_int = 0;
+    printf("min int == %11u\n", min_int);
+    printf("an_int  == %11u \t== 0x%08x\n", an_int,  an_int);
+    printf("min_int == %11u \t== 0x%08x\n", min_int, min_int);
+    printf("max_int == %11u \t== 0x%08x\n", max_int, max_int);
+    printf("     -1 == %11u \t== 0x%08x\n", -1,-1);
+    printf("      1 == %11u \t== 0x%08x\n", 1,1);
+    printf("      0 == %11u \t== 0x%08x\n", 0,0);
+    return 0;
+}
+#+END_SRC
+
+#+RESULTS:
+: size_of(an_int) == 4
+: max int ==  4294967295
+: min int ==           0
+: an_int  ==           6 	== 0x00000006
+: min_int ==           0 	== 0x00000000
+: max_int ==  4294967295 	== 0xffffffff
+:      -1 ==  4294967295 	== 0xffffffff
+:       1 ==           1 	== 0x00000001
+:       0 ==           0 	== 0x00000000
+
