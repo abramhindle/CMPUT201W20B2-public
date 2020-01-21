@@ -648,52 +648,374 @@ What if we use bigger numbers?
 #include <stdlib.h>
 
 int main() {
-    float f1 = 76.1;    
-    float f2 = 7.61e1;
-    float f3 = 76.1e0;
-    float f4 = 761e-1;
-    printf("sizeof(float)=%lu\n", sizeof(float));
-    printf("%f %f %f %f\n", f1, f2, f3, f4);
+    double f1 = 76.1;    
+    double f2 = 7.61e1;
+    double f3 = 76.1e0;
+    double f4 = 761e-1;
+    printf("sizeof(float)=%lu\n", sizeof(double));
+    printf("%lf %lf %lf %lf\n", f1, f2, f3, f4);
     return 0;
 }
 #+END_SRC
 
 #+RESULTS:
+: sizeof(float)=8
+: 76.100000 76.100000 76.100000 76.100000
 
+OK cool. Does that work for all numbers? No. No it does not.
 
+**** Floating Point Operations
+
+#+BEGIN_SRC C :exports both
+#include <stdio.h>
+#include <stdlib.h>
+
+int main() {
+    float  f1 = 61 / 3;    
+    int    i1 = 61 / 3;    
+    double d1 = 61 / 3;
+    printf("%f %d %lf\n", f1,i1,d1);
+    printf("61 %% 3 = %d\n", 61 % 3); //look how to print %
+    printf("(61 - 1) / 3 == 61/3 == %d\n", ((61-1)/3) == (61/3));
+
+    // force floating division
+    float  f2 = 61.0 / 3;    
+    int    i2 = 61.0 / 3;    
+    double d2 = 61.0 / 3;
+    printf("%f %d %lf\n", f2,i2,d2);
+
+    // force floating division
+    float  f3 = 61 / 3.0;    
+    int    i3 = 61 / 3.0;    
+    double d3 = 61 / 3.0;
+    printf("%f %d %lf\n", f3,i3,d3);
+    return 0;
+}
+#+END_SRC
+
+#+RESULTS:
+: 20.000000 20 20.000000
+: 61 % 3 = 1
+: (61 - 1) / 3 == 61/3 == 1
+: 20.333334 20 20.333333
+: 20.333334 20 20.333333
+
+*** Type Definitions
+**** #define
+
+ #define SYMBOL value 
+
+ defines a macro in C using the C Preprocessor. So all instances of SYMBOL
+ as identifiers (NOT WITHIN STRINGS) will be replaced by the string value
 
 #+BEGIN_SRC C :exports both :flags -std=c99
 #include <stdio.h>
 #include <stdlib.h>
 
+// please no don't do this, example only
+// change to value or notvalue
 
-int main(int argc, char ** argv) {
-    int a = 2147483648-1; // 31 bits for the number and 1 bit for sign
-    printf("%d\n", a);
-    unsigned int b = 4294967296-1;
-    printf("%u\n", b);
-    b = b + 1;
-    printf("%u\n", b);
-    int c = 0; // this is always going to take 4 bytes of memory    
-    float d = 16777216.0;
-    // just like scientific notation: 2.1*10^9
-    // 1 bit for the sign
-    // 8 bits for the exponent -126 to 127 (like our 9)
-    // remaining 23 bits for the fraction (like our 2.1)
-    // it doesn't make sense to write 0.1 * 10^9 when you could write 1 * 10^8
-    printf("%f\n", d);
-    d = d + 1; // we want something like 1.000000000000000000000001 * 2^24
-                // but we only get 1.00000000000000000000000 * 2^24
-    printf("%f\n", d); 
-    //printf("%f\n", 1/0);
-    return 0;
+// #define SYMBOL notvalue
+#define SYMBOL value
+
+int main() {
+    int value = 10;
+    int notvalue = 6;
+    printf("%d\n", SYMBOL);
+    printf("(SYMBOL == value) %d (SYMBOL == notvalue) %d", 
+           SYMBOL == value, 
+           SYMBOL == notvalue
+    );
 }
 #+END_SRC
 
 #+RESULTS:
-: 2147483647
-: 4294967295
-: 0
-: 16777216.000000
-: 16777216.000000
+: 10
+: (SYMBOL == value) 1 (SYMBOL == notvalue) 0
+
+  We can use #define to define types too
+
+#+BEGIN_SRC C :exports both
+#include <stdio.h>
+#include <stdlib.h>
+#include <math.h> // get some infinity 
+
+// please no don't do this, example only
+// change to value or notvalue
+
+// #define SYMBOL notvalue
+#define HONKIN long double
+
+int main() {
+    HONKIN value = 1e300;
+    printf("%Lf\n", value);
+    printf("%Le\n", value);
+    value = INFINITY;
+    printf("%Lf\n", value);
+    printf("%Le\n", value);
+    value = -INFINITY;
+    printf("%Lf\n", value);
+    printf("%Le\n", value);
+    printf("HONKIN SIZE %lu\n", sizeof(value));
+}
+#+END_SRC
+
+#+RESULTS:
+: 1000000000000000052504760255204420248704468581108159154915854115511802457988908195786371375080447864043704443832883878176942523235360430575644792184786706982848387200926575803737830233794788090059368953234970799945081119038967640880074652742780142494579258788820056842838115669472196386865459400540160.000000
+: 1.000000e+300
+: inf
+: inf
+: -inf
+: -inf
+: HONKIN SIZE 16
+
+*** Typedefs are better than defines
+
+#+BEGIN_SRC C :exports both
+#include <stdio.h>
+#include <stdlib.h>
+#include <math.h> // get some infinity 
+
+// please no don't do this, example only
+// change to value or notvalue
+
+// #define SYMBOL notvalue
+typedef long double HONKIN;
+
+int main() {
+    HONKIN value = 1e300;
+    printf("%Lf\n", value);
+    printf("%Le\n", value);
+    value = INFINITY;
+    printf("%Lf\n", value);
+    printf("%Le\n", value);
+    value = -INFINITY;
+    printf("%Lf\n", value);
+    printf("%Le\n", value);
+    printf("HONKIN SIZE %lu\n", sizeof(value));
+}
+#+END_SRC
+
+#+RESULTS:
+: 1000000000000000052504760255204420248704468581108159154915854115511802457988908195786371375080447864043704443832883878176942523235360430575644792184786706982848387200926575803737830233794788090059368953234970799945081119038967640880074652742780142494579258788820056842838115669472196386865459400540160.000000
+: 1.000000e+300
+: inf
+: inf
+: -inf
+: -inf
+: HONKIN SIZE 16
+
+But typedefs are more meaningful
+
+#+BEGIN_SRC C :exports both
+#include <stdio.h>
+#include <stdlib.h>
+#include <math.h> // get some infinity 
+
+
+// #define SYMBOL notvalue
+typedef long long Count;
+typedef double Measurement;
+
+
+int main() {
+    Count count = 1e9;
+    Measurement m = 1.5;
+    printf("Measurement %lf\n", m);
+    printf("%lld\n", count);
+    printf("Count SIZE %lu\n", sizeof(count));
+    printf("Measurement SIZE %lu\n", sizeof(m));
+}
+#+END_SRC
+
+#+RESULTS:
+: Measurement 1.500000
+: 1000000000
+: Count SIZE 8
+: Measurement SIZE 8
+
+
+#+BEGIN_SRC C :exports both
+#include <stdio.h>
+#include <stdlib.h>
+#include <math.h> // get some infinity 
+
+
+// #define SYMBOL notvalue
+typedef long long Count;
+typedef double Measurement;
+
+Count addCounts(Count count1, Count count2) {
+    return count1 + count2;
+}
+Measurement addMeasurements(Measurement m1, Measurement m2) {
+    return m1 + m2;
+}
+
+int main() {
+    Count count1 = 2e9;
+    Count count2 = 1e10;
+    Measurement m1 = 1.5;
+    Measurement m2 = 2.7;
+    // this is intended
+    printf("Measurement %lf\n", addMeasurements(m1,m2));
+    printf("Count %lld\n", addCounts(count1,count2));
+
+    // this shows the weakness of the lack of type checking on typedefs
+    // we shouldn't mix counts and measurements
+    printf("Measurement %lf\n", addMeasurements(m1,count1));
+    printf("Count %lld\n", addCounts(count1,m2));
+
+}
+#+END_SRC
+
+#+RESULTS:
+: Measurement 4.200000
+: Count 12000000000
+: Measurement 2000000001.500000
+: Count 2000000002
+
+** Arrays
+
+#+BEGIN_SRC C :exports both
+#include <stdio.h>
+#include <stdlib.h>
+
+#define N 10
+
+int main() {
+    // initialization
+    char notastring[N] = { 33, 34, 35, 37, 33,
+                           32, 'a', 'b', 'c', 'd'};
+    char astring[N] = "what!";
+    // iterate over the notastring
+    for ( int i = 0 ; i < N ; i++ ) {
+        putchar( notastring[i] );
+    }
+    putchar('\n');    
+    // iterate over the string terminating before we print \0
+    for ( int i = 0 ; i < N ; i++ ) {
+        if (astring[i] == '\0') {
+            break;
+        }
+        putchar( astring[i] );
+    }
+    putchar('\n');
+}
+#+END_SRC
+
+#+RESULTS:
+: !"#%! abcd
+: what!
+
+#+BEGIN_SRC C :exports both
+#include <stdio.h>
+#include <stdlib.h>
+
+#define N 10
+
+int main() {
+    // initialization
+    char notastring[N];
+    // init the array programatically
+    for ( int i = 0 ; i < N ; i++ ) {
+        notastring[i] = 'a';
+    }
+}
+#+END_SRC
+
+
+#+BEGIN_SRC C :exports both
+#include <stdio.h>
+#include <stdlib.h>
+
+int main() {
+    // initialization
+    char notastring[] = {'a','b','c','d'};
+    printf("notastring\t%ld\n",sizeof(notastring));
+    printf("notastring[0]\t%ld\n",sizeof(notastring[0]));
+    printf("char[1] \t%ld\n",sizeof(char[1]));
+    printf("char[2] \t%ld\n",sizeof(char[2]));
+    printf("char[4] \t%ld\n",sizeof(char[4]));
+    printf("char[16]\t%ld\n",sizeof(char[16]));
+    for ( int i = 0 ; i < sizeof( notastring ); i++ ) {
+        putchar( notastring[i] );
+    }
+    putchar( '\n' );
+}
+#+END_SRC
+
+#+RESULTS:
+: notastring	4
+: notastring[0]	1
+: char[1] 	1
+: char[2] 	2
+: char[4] 	4
+: char[16]	16
+: abcd
+
+
+#+BEGIN_SRC C :exports both
+#include <stdio.h>
+#include <stdlib.h>
+
+int main() {
+    // initialization
+    int notastring[] = {'a', 1, 99, 128, 256, 512};
+    printf("notastring\t%ld\n",sizeof(notastring));
+    printf("notastring[0]\t%ld\n",sizeof(notastring[0]));
+    printf("int[1] \t%ld\n",sizeof(int[1]));
+    printf("int[2] \t%ld\n",sizeof(int[2]));
+    printf("int[4] \t%ld\n",sizeof(int[4]));
+    printf("int[16]\t%ld\n",sizeof(int[16]));
+    for ( int i = 0 ; i < sizeof( notastring ); i++ ) {
+        printf("%d\t", notastring[i]);
+    }
+    putchar( '\n' );
+}
+#+END_SRC
+
+#+RESULTS:
+: notastring	24
+: notastring[0]	4
+: int[1] 	4
+: int[2] 	8
+: int[4] 	16
+: int[16]	64
+: 97	1	99	128	256	512	2059932928	-763646490	2144864288	21932	345484183	32750	1	0	-1683164136	32767	32768	1	2144863994	21932	0	0	1653697646	238604326
+
+Oops something went wrong...
+
+We're reading some memory that we shouldn't!
+
+sizeof returns the total number of bytes, not the total entities
+
+#+BEGIN_SRC C :exports both
+#include <stdio.h>
+#include <stdlib.h>
+
+int main() {
+    // initialization
+    int notastring[] = {'a', 1, 99, 128, 256, 512};
+    printf("notastring\t%ld\n",sizeof(notastring));
+    printf("notastring[0]\t%ld\n",sizeof(notastring[0]));
+    printf("int[1] \t%ld\n",sizeof(int[1]));
+    printf("int[2] \t%ld\n",sizeof(int[2]));
+    printf("int[4] \t%ld\n",sizeof(int[4]));
+    printf("int[16]\t%ld\n",sizeof(int[16]));
+    for ( int i = 0 ; i < sizeof( notastring ) /  sizeof( notastring[0] ); i++ ) {
+        printf("%d\t", notastring[i]);
+    }
+    putchar( '\n' );
+}
+#+END_SRC
+
+#+RESULTS:
+: notastring	24
+: notastring[0]	4
+: int[1] 	4
+: int[2] 	8
+: int[4] 	16
+: int[16]	64
+: 97	1	99	128	256	512
 
