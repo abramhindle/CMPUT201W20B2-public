@@ -433,6 +433,23 @@ my_char=248[ ]	my_char=249[ ]	my_char=250[ ]	my_char=251[ ]	my_char=252[ ]	my_ch
 We did iterate over i=512 iterations
 #+end_example
 
+
+#+BEGIN_SRC C :exports both
+#include <stdio.h>
+
+int main() {
+    unsigned short x = 1;
+    while(x!=0) {
+        x++;
+    }
+    printf("x=%u\n",x);
+}
+#+END_SRC
+
+#+RESULTS:
+: x=0
+
+
 Here's an example from Hazel where we get a negative character and it wraps as well.
 
 #+BEGIN_SRC C :exports both
@@ -685,9 +702,9 @@ int main() {
     printf("%f %d %lf\n", f2,i2,d2);
 
     // force floating division
-    float  f3 = 61 / 3.0;    
-    int    i3 = 61 / 3.0;    
-    double d3 = 61 / 3.0;
+    float  f3 = 61 / (float)3;    
+    int    i3 = 61 / (float)3;    
+    double d3 = 61 / (double)3;
     printf("%f %d %lf\n", f3,i3,d3);
     return 0;
 }
@@ -715,8 +732,8 @@ int main() {
 // please no don't do this, example only
 // change to value or notvalue
 
-// #define SYMBOL notvalue
-#define SYMBOL value
+#define SYMBOL notvalue
+// #define SYMBOL value
 
 int main() {
     int value = 10;
@@ -730,8 +747,8 @@ int main() {
 #+END_SRC
 
 #+RESULTS:
-: 10
-: (SYMBOL == value) 1 (SYMBOL == notvalue) 0
+: 6
+: (SYMBOL == value) 0 (SYMBOL == notvalue) 1
 
   We can use #define to define types too
 
@@ -906,7 +923,7 @@ int main() {
 
 #+RESULTS:
 : !"#%! abcd
-: what!
+: what!     
 
 #+BEGIN_SRC C :exports both
 #include <stdio.h>

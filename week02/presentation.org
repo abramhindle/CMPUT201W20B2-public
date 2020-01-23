@@ -771,6 +771,7 @@ int main() {
 : 3
 : 1
 : 2
+: Don't rely on the comma operator!
 
 ** If statements
 
@@ -795,6 +796,11 @@ int main() {
       code for false case;
    }
 
+   &i // where my int is
+   i & i // i and i
+   i | i // i or i
+   i ^ i // i xor i
+   i && i // i logical and i
 #+END_SRC
 
 
@@ -803,7 +809,7 @@ int main() {
 
 int main(int argc, char**argv) {
 
-   int input = 333;
+   int input = 0;
    int condition =  input > 1;
    int condition2 = input == 1;
    int condition3 = input > 0;
@@ -841,11 +847,8 @@ int main(int argc, char**argv) {
 #+END_SRC
 
 #+RESULTS:
-: if code for true case
-: if-else code for true case
-: if-else-if-else code for condition is true case
-: parallel-ifs condition!
-: parallel-ifs condition3!
+: if-else code for false case
+: if-else-if-else code for !condition && !condition2 case
 
 ** Blocks! from Hazel
 
@@ -855,7 +858,7 @@ int main(int argc, char**argv) {
 
    Many C statements like if do not need { } braces for blocks
 
-#+BEGIN_SRC C :exports both
+#+BEGIN_SRC C :exports both :flags -std=c99
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
@@ -866,12 +869,13 @@ int main() {
     // mildly confusing syntax
     printf("Will print 0 if 0 is true:\n");
     if (0) printf("0\n");
+    // printf("the real false 0\n");
 
     // more confusing syntax    
     printf("Will print 1 if 1 is true:\n");
     if (1)
         printf("1\n");
-    
+    printf("the real true 1\n");
     // really confusing syntax    
     if (2) printf("2 is true\n");
     else printf("2 is false\n");
@@ -894,13 +898,14 @@ int main() {
 : Will print 0 if 0 is true:
 : Will print 1 if 1 is true:
 : 1
+: the real true 1
 : 2 is true
 : ------------------------------
 : outside of if some_num=3
 : inside of if some_num=2
 : outside of if some_num=3
 
-
+   
 ** Ternary Statements
 
    An if statement that is an expression!
@@ -908,6 +913,13 @@ int main() {
    ( condition ) ? ( true expression ) : ( false expression )
 
    Only use 1 ternary at a time. More is confusing.
+   
+   // don't do this
+   // (condition > 0) * (true expression) + (condition == 0) * (false expression)
+
+   int functionName(int xx) {
+      int x = (xx == 0)?16:xx;
+   }
 
 #+BEGIN_SRC C :exports both
 #include <stdio.h>
@@ -915,6 +927,7 @@ int main() {
 int main(int argc, char**argv) {
     int a_number = 0;
     int tmp = (a_number < 2 ? 111 : 222);
+    // don't do this
     int res = a_number < 2 ? (tmp = 111) : (tmp = 222);
     printf("res = a_number < 2 ? tmp = 111 : tmp = 222? res = %d\n", res);
     printf("(a_number < 2 ? 111 : 222)=%d\n", tmp);
@@ -942,8 +955,9 @@ Use it on characters, bools, ints. Try not to use it on floats.
 #include <string.h>
 
 int main() {
-    char direction = 'U';
+    char direction = 'u';
     switch(direction) {
+        case 'u':
         case 'U':
             printf("Up\n");
             break;
@@ -951,7 +965,7 @@ int main() {
             printf("Down\n");
             break;
         case 'L':
-            printf("Left\n");
+            printf("Left\n"); // bug here
         case 'R':
             printf("Right\n");
             break;
@@ -973,7 +987,7 @@ int main() {
 #include <string.h>
 
 int main() {
-    char depth = 0;
+    char depth = 2;
     switch(depth) {
         case 0:
             printf("0\n");
@@ -994,8 +1008,6 @@ int main() {
 #+END_SRC
 
 #+RESULTS:
-: 0
-: 1111
 : 22222222
 : 333333333333
 : 4444444444444444
@@ -1094,9 +1106,9 @@ int main(int argc, char**argv) {
    for ( init_condition; looping_condition ; runs_each_time )
 
    // Loop from 0 to 10
-   for ( int i = 0 ; i < 10 ; i++ ) 
-   for ( int i = 0 ; i < 10 ; i+=1 ) 
-   for ( int i = 0 ; i < 10 ; ++i ) 
+   for ( int i = 0 ; i <= 10 ; i++ ) 
+   for ( int i = 0 ; i <= 10 ; i+=1 ) 
+   for ( int i = 0 ; i <= 10 ; ++i ) 
 
 #+END_SRC
 
@@ -1104,11 +1116,12 @@ int main(int argc, char**argv) {
 #include <stdio.h>
 
 int main() {
+   //int i = 0;
    printf("i++\n");
    for ( int i = 0 ; i < 10 ; i++ ) {
        printf("%d ", i);
    }
-   // printf("i %d", i); i is undeclared in this scope!
+   // printf("i %d", i); // i is undeclared in this scope!
    printf("\ni+=1\n");
    for ( int i = 0 ; i < 10 ; i+=1 )  {
        printf("%d ", i);
@@ -1118,9 +1131,11 @@ int main() {
        printf("%d ", i);
    }
    printf("\ni+=3\n");
-   for ( int i = 0 ; i < 10 ; i+=3 )  {
+   int i = 0;
+   for ( i = 0 ; i < 10 ; i+=3 )  {
        printf("%d ", i);
    }
+   printf("\ni left behind %d\n", i);
    return 0;
 }
 #+END_SRC
@@ -1133,7 +1148,8 @@ int main() {
 : ++i
 : 0 1 2 3 4 5 6 7 8 9 
 : i+=3
-: 0 3 6 9
+: 0 3 6 9 
+: i left behind 12
 
 
 *** Idiomatic For Loops
@@ -1174,6 +1190,10 @@ int main() {
 #+END_SRC
 
 #+RESULTS:
+: 0 1 2 3 
+: 1 2 3 4 
+: 3 2 1 0 
+: 4 3 2 1
 
 *** Hazel's Gallery of Misfit For Loops
 
@@ -1227,6 +1247,10 @@ int main() {
         printf("%d\n", counter);
         counter = COUNT_TO;
     }
+    for (;;) {
+       // infinite loop here
+       break;
+    }
     printf("---\n");
     printf("%d\n", counter);
     return 0;
@@ -1263,6 +1287,7 @@ int main() {
 ---
 5
 #+end_example
+
 ** Break and For
 
 The break statement allows you to quit the immediate for loop or while
@@ -1409,6 +1434,38 @@ int main() {
 
 #+RESULTS:
 : zero one two three error!
+**** Exercise
+
+     for ( int counter = 0; counter < 60 ; counter += 3 ) { 
+     for ( int counter = 1; counter < 60 ; counter *= 3 ) { 
+     for ( int i = 64;  i > 0; i /= 2)  {
+        printf("%d\n",i);
+     }
+
+#+BEGIN_SRC C :exports both
+// Copyright (c) 2020 Hazel Campbell
+#include <stdio.h>
+#include <stdlib.h>
+#include <string.h>
+
+#define STOP_BEFORE 7
+
+int main() {
+     for ( int i = 64;  i > 0; i /= 2)  {
+        printf("%d\n",i);
+     }
+     return 0; 
+}
+#+END_SRC
+
+#+RESULTS:
+: 64
+: 32
+: 16
+: 8
+: 4
+: 2
+: 1
 
 ** Types!
 
