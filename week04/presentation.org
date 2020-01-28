@@ -1,0 +1,756 @@
+#+TITLE: CMPUT201W20B2 Week 4
+#+PROPERTY: header-args:C             :results output :exports both :flags -std=c99 -Wall -pedantic -Werror -g 
+#+PROPERTY: header-args:sh            :results output :exports both
+
+* Week3
+** Copyright Statement
+
+If you are in CMPUT201 at UAlberta this code is released in the public
+domain to you.
+
+Otherwise it is (c) 2020 Abram Hindle, Hazel Campbell AGPL3.0+
+
+*** License
+
+    Week 3 notes
+    Copyright (C) 2020 Abram Hindle, Hazel Campbell
+
+    This program is free software: you can redistribute it and/or modify
+    it under the terms of the GNU Affero General Public License as
+    published by the Free Software Foundation, either version 3 of the
+    License, or (at your option) any later version.
+
+    This program is distributed in the hope that it will be useful,
+    but WITHOUT ANY WARRANTY; without even the implied warranty of
+    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+    GNU Affero General Public License for more details.
+
+    You should have received a copy of the GNU Affero General Public License
+    along with this program.  If not, see <https://www.gnu.org/licenses/>.
+
+
+*** Hazel Code is licensed under AGPL3.0+
+
+Hazel's code is also found here
+https://github.com/hazelybell/examples/tree/C-2020-01
+
+Hazel code is licensed: The example code is licensed under the AGPL3+
+license, unless otherwise noted.
+
+** Init ORG-MODE
+
+#+BEGIN_SRC elisp
+;; I need this for org-mode to work well
+
+(require 'ob-sh)
+;(require 'ob-shell)
+(org-babel-do-load-languages 'org-babel-load-languages '((sh . t)))
+(org-babel-do-load-languages 'org-babel-load-languages '((C . t)))
+(org-babel-do-load-languages 'org-babel-load-languages '((python . t)))
+(setq org-src-fontify-natively t)
+#+END_SRC
+
+#+RESULTS:
+: t
+
+** Org Template
+Copy and paste this to demo C
+
+#+BEGIN_SRC C :exports both
+#include <stdio.h>
+
+int main(int argc, char**argv) {
+    return 0;
+}
+#+END_SRC
+
+#+RESULTS:
+
+** Remember how to compile?
+
+gcc -std=c99 -Wall -pedantic -Werror -o programname programname.c
+
+** Functions
+
+Functions replicate functions in mathematics. They allocate space on
+the stack and have local variables.
+
+Very similar to python functions
+
+Define a function:
+
+return_type functionName(ArgType1 arg1, ArgType2 arg2, ArgType3 arg3 ) {
+    ...
+}
+
+Call a function:
+
+functionName( arg1, arg2, arg3 );
+
+return_type returnValue = functionName( arg1, arg2, arg3) ;
+
+IN C89 all variable declarations are at the top of the function.
+
+*** return_types
+    
+    - void -- nothing
+    - int
+    - char
+    - float
+    - double
+    - ...
+    - pointer (array or string)
+
+*** Example
+
+#+BEGIN_SRC C :exports both
+#include <stdio.h>
+#include <stdlib.h>
+
+void example() {
+    printf("I have been made an example of\n");
+}
+
+int main() {
+    example();
+}
+#+END_SRC
+
+#+RESULTS:
+: I have been made an example of
+
+
+*** Pass by Value
+
+The value of parameters are COPIED into registers and sometimes the
+stack. Thus the original variables that the parameters come from are
+safe.
+
+Except pointers are not safe because given a pointer the called
+function can manipulate the data the pointer points to, but they
+cannot modify the original pointer.
+
+#+BEGIN_SRC C :exports both
+#include <stdio.h>
+#include <stdlib.h>
+
+int example(int x) {
+    x++;
+    return x;
+}
+
+int main() {
+    int x = 10;
+    printf("x: %d\n", x);
+    int rx = example(x);
+    printf("x: %d\n", x);
+    printf("returned x vs x: %d vs %d\n", rx, x);
+}
+#+END_SRC
+
+#+RESULTS:
+: x: 10
+: x: 10
+: returned x vs x: 11 vs 10
+
+*** Arrays again
+
+    - void initArray(int cols, int values[cols]) {
+    - void initArray(int cols, int values[]) {
+
+You can specify array sizes in C99 but the size has to come earlier
+
+    - void init2D(int rows, int cols, int values[rows][cols]) {
+    - void init2D(int rows, int cols, int values[][cols]){ 
+    - void init3D(int planes, int rows, int cols, int values[planes][rows][cols]) {
+    - void init3D(int planes, int rows, int cols, int values[][rows][cols]) {
+
+
+*** Don't trust sizeof inside of functions!
+
+sizeof is only trustable if you declared the variable in your scope
+
+#+BEGIN_SRC C :exports both :flags -std=c99
+#include <stdio.h>
+#include <stdlib.h>
+#include <time.h>
+
+void init2D(int rows, int cols, int values[][cols]) {
+    int i = 0;
+    printf("init2D: sizeof(values)=%lu\n", sizeof(values));
+    printf("init2D: sizeof(values[0])=%lu\n", sizeof(values[0]));
+
+    for (int row = 0; row < rows; row++) {
+        for (int col = 0; col < cols; col++) {
+            values[row][col] = i++;
+        }
+    }
+}
+void example() {
+    unsigned int n = 1 + rand() % 10;
+    unsigned int m = 1 + rand() % 10;
+    printf("%d X %d was chosen!\n", m, n);
+    int values[m][n]; // SO the compiler can't predict this allocation ahead of time
+    printf("sizeof(values) = %ld\n", sizeof(values));
+    printf("sizeof(&values) = %ld\n", sizeof(&values));
+    printf("sizeof(values[0]) = %ld\n", sizeof(values[0]));
+    init2D(  m, n, values );
+}
+int main() {
+    srand(time(NULL)); //initialze based on the clock 
+    example();
+    example();
+    example();
+}
+#+END_SRC
+
+#+RESULTS:
+#+begin_example
+4 X 10 was chosen!
+sizeof(values) = 160
+sizeof(&values) = 8
+sizeof(values[0]) = 40
+init2D: sizeof(values)=8
+init2D: sizeof(values[0])=40
+1 X 6 was chosen!
+sizeof(values) = 24
+sizeof(&values) = 8
+sizeof(values[0]) = 24
+init2D: sizeof(values)=8
+init2D: sizeof(values[0])=24
+8 X 10 was chosen!
+sizeof(values) = 320
+sizeof(&values) = 8
+sizeof(values[0]) = 40
+init2D: sizeof(values)=8
+init2D: sizeof(values[0])=40
+#+end_example
+
+*** Returns
+
+Don't return arrays in general.
+
+To return a value and exit the function immediately run:
+
+   return expr 
+
+#+BEGIN_SRC C :exports both
+#include <stdio.h>
+#include <stdlib.h>
+
+int squareInt(int x) {
+    return x*x;
+}
+
+float squareFloat(float x) {
+    return x*x;
+}
+int intDiv(int x, int y) {
+    return x/y;
+}
+float floatDiv(float x, float y) {
+    return x/y;
+}
+char returnChar( int i ) {
+    return i;
+}
+
+int main() {
+    printf("squareInt\t %d\n", squareInt(25));
+    printf("squareInt\t %d\n", squareInt(1.47));
+    printf("squareFloat\t %f\n", squareFloat(1.47));
+    printf("squareFloat\t %f\n", squareFloat(25));
+    printf("intDiv\t %d\n", intDiv(64,31));
+    printf("intDiv\t %d\n", intDiv(64.2,31));
+    printf("floatDiv\t %f\n", floatDiv(64,31));
+    printf("floatDiv\t %f\n", floatDiv(64.2,31));
+    printf("returnChar\t %hhu\n", returnChar( 578 ) );
+    printf("returnChar\t %hhu\n", returnChar( 'a' ) );
+    printf("returnChar\t %hhu\n", returnChar( 66.1 ) );
+    printf("returnChar\t %c\n", returnChar( 578 ) );
+    printf("returnChar\t %c\n", returnChar( 'a' ) );
+    printf("returnChar\t %c\n", returnChar( 66.1 ) );
+
+}
+#+END_SRC
+
+#+RESULTS:
+#+begin_example
+squareInt	 625
+squareInt	 1
+squareFloat	 2.160900
+squareFloat	 625.000000
+intDiv	 2
+intDiv	 2
+floatDiv	 2.064516
+floatDiv	 2.070968
+returnChar	 66
+returnChar	 97
+returnChar	 66
+returnChar	 B
+returnChar	 a
+returnChar	 B
+#+end_example
+
+*** Recursion
+**** Recursion
+***** Recursion
+****** Recursion
+
+#+BEGIN_SRC C :exports both
+#include <stdio.h>
+#include <stdlib.h>
+
+int divisibleBy(int x, int y) {
+    printf("%d %d\n", x,y);
+    if (x == 0) { return 0; }
+    if (y <= 0) { return 0; }
+    if (x % y == 0) { return y; }
+    return divisibleBy(x, y - 1);
+}
+
+int main() {
+    printf("%d\n",divisibleBy(33,32));
+}
+#+END_SRC
+
+
+#+RESULTS:
+#+begin_example
+33 32
+33 31
+33 30
+33 29
+33 28
+33 27
+33 26
+33 25
+33 24
+33 23
+33 22
+33 21
+33 20
+33 19
+33 18
+33 17
+33 16
+33 15
+33 14
+33 13
+33 12
+33 11
+11
+#+end_example
+
+
+*** Prototypes
+
+#+BEGIN_SRC C :exports both
+#include <stdio.h>
+#include <stdlib.h>
+
+/* this is a prototype
+   it predeclares that a function with this
+   name will be available.
+*/
+// This program will not compile in C99 without this line:
+// 
+int divisibleBy(int x, int y);
+
+int main() {
+    printf("%d\n",divisibleBy(16,15));
+}
+
+int divisibleBy(int x, int y) {
+    printf("%d %d\n", x,y);
+    if (x == 0) { return 0; }
+    if (y <= 0) { return 0; }
+    if (x % y == 0) { return y; }
+    return divisibleBy(x, y - 1);
+}
+
+
+#+END_SRC
+
+#+RESULTS:
+: 16 15
+: 16 14
+: 16 13
+: 16 12
+: 16 11
+: 16 10
+: 16 9
+: 16 8
+: 8
+
+**** Prototypes and corecursive routines
+
+#+BEGIN_SRC C :exports both
+#include <stdio.h>
+#include <stdlib.h>
+
+/* this is a prototype
+   it predeclares that a function with this
+   name will be available.
+   This is useful for co-recursive functions.
+*/
+// This program will not compile in C99 without this line:
+// 
+int aReliesOnB(int x, int y);
+int bReliesOnA(int x, int y);
+
+int main() {
+    printf("%d\n",aReliesOnB(0,100));
+}
+int aReliesOnB(int x, int y) {
+    printf("> aReliesOnB( %d, %d)\n", x, y);
+    if (x >= y) {
+        return y;
+    }
+    return bReliesOnA(x+x+1, y);
+}
+int bReliesOnA(int x, int y) {
+    printf("> bReliesOnA( %d, %d)\n", x, y);
+    if (x >= y) {
+        return y;
+    }
+    return aReliesOnB(x * x+1, y);
+}
+#+END_SRC
+
+#+RESULTS:
+: > aReliesOnB( 0, 100)
+: > bReliesOnA( 1, 100)
+: > aReliesOnB( 2, 100)
+: > bReliesOnA( 5, 100)
+: > aReliesOnB( 26, 100)
+: > bReliesOnA( 53, 100)
+: > aReliesOnB( 2810, 100)
+: 100
+
+*** Exercise
+    - make a recursive countdown function, printing each number until 0 is met.
+    - make a recursive fibonacci
+** Scope
+*** const
+
+Instead of define you can use const for constants.
+
+#+BEGIN_SRC C :exports both
+#include <stdio.h>
+#include <stdlib.h>
+
+const int nine = 9;
+
+int catLives(int ncats) {
+    return nine * ncats;
+}
+int main() {    
+    printf("10 cats %d lives\n", catLives( 10 ));
+    // you can't modify nine
+    // nine++;
+    // *&nine = 10;
+}
+#+END_SRC
+
+#+RESULTS:
+
+
+*** Local variables
+
+
+#+BEGIN_SRC C :exports both
+#include <stdio.h>
+#include <stdlib.h>
+// no x here
+int example(int x) { // < this x is visible -- main's x is NOT visible here
+    x++;             // < within
+    return x;        // < this scope
+}
+// no x here
+int main() {
+    int x = 10;           // < this x is visible within all of main
+    printf("x: %d\n", x);
+    int rx = example(x);
+    printf("x: %d\n", x);
+    printf("returned x vs x: %d vs %d\n", rx, x);
+}
+#+END_SRC
+
+** Global Variables (BAD) / External Variables / File-level variables
+
+Too common. Too error prone. You will usually cause lots of bugs by
+making top-level variables. They will only be available within the
+file you declare.
+
+Global constants are fine. They are safe.
+
+If you make a global in a file, explicitly limit it to the current
+file with the static keyword.
+
+If static is not used and the variable is in included files then it
+will be visible across all files.
+
+#+BEGIN_SRC C :exports both
+#include <stdio.h>
+#include <stdlib.h>
+// BAD
+//int x = 111; // visible in all lines below unless occluded by local definitions
+
+// BETTER but still not OK 
+//static int x = 111;
+
+// BEST and allowed
+static const int x = 111;
+
+int globalX() {
+    return x; // returns the static global x
+}
+
+// no x here
+int example(int x) { // <x_2 this x, x_2 is visible -- main's x is NOT visible here nor is the global
+    x++;             // <x_2 within
+    return x;        // <x_2 this scope
+}
+// no x here
+int main() {
+    printf("Global x %d\n", globalX());
+    int x = 10;           // < this x, x_3 is visible within all of main
+    printf("x: %d\n", x); // x_3
+    int rx = example(x);  // x_3
+    printf("x: %d\n", x); // x_3
+    printf("returned x vs x: %d vs %d\n", rx, x); // x_3
+}
+#+END_SRC
+
+#+RESULTS:
+: x: 10
+: x: 10
+: returned x vs x: 11 vs 10
+
+** Static Function Scope
+
+Static function local variables keep their old values. It is similar
+to defining a global per function
+
+#+BEGIN_SRC C :exports both
+#include <stdio.h>
+#include <stdlib.h>
+#include <time.h>
+
+unsigned int counter() {
+    static unsigned int counter = 0; // this keeps its value
+    return ++counter;
+}
+
+static unsigned int __worseCounter__ = 0; // whoo don't touch this AKA DONT DO IT
+unsigned int worseCounter() {
+    return ++__worseCounter__;
+}
+
+
+#define N 1000
+int main() {
+    srand(time(NULL));
+    unsigned int count = 0;
+    unsigned int wCount = 0;
+    for (int i = 0 ; i < N; i++) {
+        if (rand() % 3 == 0) {
+            count = counter();
+            wCount = worseCounter();
+        }
+    }
+    printf("Counted %u / %u numbers divisible by 3 generated by rand\n", count, N);
+    printf("Worse: Counted %u / %u numbers divisible by 3 generated by rand\n", wCount, N);
+}
+#+END_SRC
+
+#+RESULTS:
+: Counted 358 / 1000 numbers divisible by 3 generated by rand
+: Worse: Counted 358 / 1000 numbers divisible by 3 generated by rand
+
+** Pointers!
+
+- What is a pointer? A number that is a memory address. 
+
+- What's at that memory address? the type of the pointer.
+
+   - char * str;
+
+- Why?
+
+   - you want to know the address so you can manipulate a value or
+     manipulate a shared value.
+   - you want to return multiple values from a function.
+   - your computer deals with memory as location and offsets the entire time
+   - the local variables is the current base pointer + an offset
+
+- What is str? A integer that is a memory address.
+- What does str point to? A character, but many an array of characters!
+- Can I tell if it is an array of characters? No.
+- How can I get the first element of a character array at str?
+ 
+   - str[0]
+   - *str
+
+- How can I make a pointer to:
+   - char myChar = 'a';
+   - char * ptrToMyChar = &myChar;
+
+- Can I manipulate pointers?
+  - char * ptrToChar = &myChar;
+  - ptrToChar++; // <--- goes to the following character in a character array
+  - *ptrToChar = 'b'; // Dereference ptrToChar and chance myChar to the value of 'b'
+
+*** Operators
+
+    - & unary operator means "address of" 
+    - * unary operator means "dereference pointer" -- that is return
+      the value it points to
+    - don't confuse declaration of a variable int * x with
+      dereferencing a variable in an expression: *x
+
+#+BEGIN_SRC C :exports both
+#include <stdio.h>
+#include <stdlib.h>
+
+// These are macros they cover up syntax
+// Return the address of X
+#define ADDRESSOF(X) (&X)
+// Dereference X
+#define DEREF(X)     (*X)
+typedef int * intptr_t;
+
+int main() {
+    int i = 99;
+    intptr_t ptrToI1 = ADDRESSOF(i); // these 2 lines
+    int * ptrToI2 = &i;              // are the same
+    printf("i: %4d,\naddress of i:  %p\n\tptrToI1: %p, *ptrToI1: %d\n\tptrToI2: %p, *ptrToI2: %d\n",
+           i,
+           (void*)&i,
+           (void*)ptrToI1,
+           DEREF(ptrToI1),
+           (void*)ptrToI2,
+           *ptrToI2
+    );
+    return 0;
+}
+#+END_SRC
+
+#+RESULTS:
+: i:   99,
+: address of i:  0x7ffe41e05144
+: 	ptrToI1: 0x7ffe41e05144, *ptrToI1: 99
+: 	ptrToI2: 0x7ffe41e05144, *ptrToI2: 99
+
+
+
+*** Character Arrays and Pointers
+
+#+BEGIN_SRC C :exports both
+#include <stdio.h>
+#include <stdlib.h>
+#include <string.h>
+#define N 1000
+
+int main() {
+    char myChars[] = "Abram believes he is a benevolent professor";
+    // char * strnstr(const char *big, const char *little, size_t len); from string.h
+    char * professor = strstr(myChars, "professor");
+    char * believes  = strstr(myChars, "believes");
+    printf("Size of a pointer %lu\n", sizeof(professor));
+    printf("Location pointed to %p\n", professor);
+    printf("full representation %016lX\n", (long unsigned int)professor); // look how many bits are used
+    printf("myChars: %s\n", myChars);
+    printf("myChars location: %p\n", myChars);
+    printf("professor: %s\n", professor);
+    printf("professor location: %p\n", professor);
+    printf("believes: %s\n", believes);
+    printf("believes location: %p\n", believes);
+    printf("believes - myChars location: %llu\n", (long long unsigned int)believes - (long long unsigned int)myChars);
+    printf("professor - myChars location: %llu\n", (long long unsigned int)professor - (long long unsigned int)myChars);
+
+    printf("\nBut where are myChars and professor and believes?\n");
+    printf("myChars location:   %p\t ptr address: %p \t*ptr %c\n", (void*)&myChars, myChars, *myChars);
+    printf("professor location: %p\t ptr address: %p \t*ptr %c\n", (void*)&professor, professor, *professor);
+    printf("believes location:  %p\t ptr address: %p \t*ptr %c\n", (void*)&believes, believes, *believes);
+}
+#+END_SRC
+
+#+RESULTS:
+#+begin_example
+Size of a pointer 8
+Location pointed to 0x7fffc1ac6192
+full representation 00007FFFC1AC6192
+myChars: Abram believes he is a benevolent professor
+myChars location: 0x7fffc1ac6170
+professor: professor
+professor location: 0x7fffc1ac6192
+believes: believes he is a benevolent professor
+believes location: 0x7fffc1ac6176
+believes - myChars location: 6
+professor - myChars location: 34
+
+But where are myChars and professor and believes?
+myChars location:   0x7fffc1ac6170	 ptr address: 0x7fffc1ac6170 	*ptr A
+professor location: 0x7fffc1ac6160	 ptr address: 0x7fffc1ac6192 	*ptr p
+believes location:  0x7fffc1ac6168	 ptr address: 0x7fffc1ac6176 	*ptr b
+#+end_example
+
+
+#+BEGIN_SRC C :exports both
+#include <stdio.h>
+#include <stdlib.h>
+#include <string.h>
+#define N 1000
+
+int main() {
+    int myInts[] = { 0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10 };
+    // char * strnstr(const char *big, const char *little, size_t len); from string.h
+    int * ptrToMyInts = &myInts[0];
+    int * five       = &myInts[5];
+    int * fiveAgain  = myInts + 5;
+    printf("myInts: %p\n", (void*)myInts);
+    printf("ptrToMyInts: %p\n", (void*)ptrToMyInts);
+    printf("five location:      %p five value:      %d\n", (void*)five, *five);
+    printf("fiveAgain location: %p fiveAgain value: %d\n", (void*)fiveAgain, *fiveAgain);
+    printf("five - myInts location: %llu\n", 
+           (long long unsigned int)five - (long long unsigned int)myInts);
+    printf("five - myInts location / sizeof(int): %llu\n", 
+           ((long long unsigned int)five - (long long unsigned int)myInts)/(sizeof(int)));
+
+    printf("\n OK... Where are they?\n");
+    printf("myInts     Location: %p\t ptr address: %p \t*ptr %d\n", (void*)&myInts, (void*)myInts, *myInts);
+    printf("ptrToMyIntsLocation: %p\t ptr address: %p \t*ptr %d\n", (void*)&ptrToMyInts, (void*)ptrToMyInts, *ptrToMyInts);
+    printf("five       Location: %p\t ptr address: %p \t*ptr %d\n", (void*)&five, (void*)five, *five);
+    printf("fiveAgain  Location: %p\t ptr address: %p \t*ptr %d\n", (void*)&fiveAgain, (void*)fiveAgain, *fiveAgain);
+
+    printf("\nLet's add 1 to five\n");
+    int * six = five + 1;
+    printf("five       Location: %p\t ptr address: %p \t*ptr %d\n", (void*)&five, (void*)five, *five);
+    printf("six        Location: %p\t ptr address: %p \t*ptr %d\n", (void*)&six, (void*)six, *six);
+    
+
+}
+#+END_SRC
+
+#+RESULTS:
+#+begin_example
+myInts: 0x7ffd9c59ae10
+ptrToMyInts: 0x7ffd9c59ae10
+five location:      0x7ffd9c59ae24 five value:      5
+fiveAgain location: 0x7ffd9c59ae24 fiveAgain value: 5
+five - myInts location: 20
+five - myInts location / sizeof(int): 5
+
+ OK... Where are they?
+myInts     Location: 0x7ffd9c59ae10	 ptr address: 0x7ffd9c59ae10 	*ptr 0
+ptrToMyIntsLocation: 0x7ffd9c59adf0	 ptr address: 0x7ffd9c59ae10 	*ptr 0
+five       Location: 0x7ffd9c59adf8	 ptr address: 0x7ffd9c59ae24 	*ptr 5
+fiveAgain  Location: 0x7ffd9c59ae00	 ptr address: 0x7ffd9c59ae24 	*ptr 5
+
+Let's add 1 to five
+five       Location: 0x7ffd9c59adf8	 ptr address: 0x7ffd9c59ae24 	*ptr 5
+six        Location: 0x7ffd9c59ae08	 ptr address: 0x7ffd9c59ae28 	*ptr 6
+#+end_example
+
