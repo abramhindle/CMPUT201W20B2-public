@@ -103,16 +103,18 @@ IN C89 all variable declarations are at the top of the function.
 
 *** Example
 
-#+BEGIN_SRC C :exports both
+#+BEGIN_SRC C :exports both :flags -std=c99 -Wall -pedantic -Werror -g 
 #include <stdio.h>
 #include <stdlib.h>
 
 void example() {
     printf("I have been made an example of\n");
+    // return; // void return
 }
 
 int main() {
     example();
+    return 0;
 }
 #+END_SRC
 
@@ -136,11 +138,13 @@ cannot modify the original pointer.
 
 int example(int x) {
     x++;
+    printf("example x:\t%p\n", (void*)&x);
     return x;
 }
 
 int main() {
     int x = 10;
+    printf("main x :\t%p\n", (void*)&x);
     printf("x: %d\n", x);
     int rx = example(x);
     printf("x: %d\n", x);
@@ -149,7 +153,9 @@ int main() {
 #+END_SRC
 
 #+RESULTS:
+: main x :	0x7ffcb783ed60
 : x: 10
+: example x:	0x7ffcb783ed4c
 : x: 10
 : returned x vs x: 11 vs 10
 
@@ -206,24 +212,24 @@ int main() {
 
 #+RESULTS:
 #+begin_example
-4 X 10 was chosen!
-sizeof(values) = 160
+4 X 3 was chosen!
+sizeof(values) = 48
 sizeof(&values) = 8
-sizeof(values[0]) = 40
+sizeof(values[0]) = 12
 init2D: sizeof(values)=8
-init2D: sizeof(values[0])=40
-1 X 6 was chosen!
-sizeof(values) = 24
+init2D: sizeof(values[0])=12
+2 X 7 was chosen!
+sizeof(values) = 56
 sizeof(&values) = 8
-sizeof(values[0]) = 24
+sizeof(values[0]) = 28
 init2D: sizeof(values)=8
-init2D: sizeof(values[0])=24
-8 X 10 was chosen!
-sizeof(values) = 320
+init2D: sizeof(values[0])=28
+10 X 1 was chosen!
+sizeof(values) = 40
 sizeof(&values) = 8
-sizeof(values[0]) = 40
+sizeof(values[0]) = 4
 init2D: sizeof(values)=8
-init2D: sizeof(values[0])=40
+init2D: sizeof(values[0])=4
 #+end_example
 
 *** Returns
@@ -301,6 +307,12 @@ returnChar	 B
 #include <stdio.h>
 #include <stdlib.h>
 
+int divisibleBy(int x, int y);
+
+int main() {
+    printf("%d\n",divisibleBy(33,32));
+}
+
 int divisibleBy(int x, int y) {
     printf("%d %d\n", x,y);
     if (x == 0) { return 0; }
@@ -309,38 +321,12 @@ int divisibleBy(int x, int y) {
     return divisibleBy(x, y - 1);
 }
 
-int main() {
-    printf("%d\n",divisibleBy(33,32));
-}
+
+
 #+END_SRC
 
 
 #+RESULTS:
-#+begin_example
-33 32
-33 31
-33 30
-33 29
-33 28
-33 27
-33 26
-33 25
-33 24
-33 23
-33 22
-33 21
-33 20
-33 19
-33 18
-33 17
-33 16
-33 15
-33 14
-33 13
-33 12
-33 11
-11
-#+end_example
 
 
 *** Prototypes
