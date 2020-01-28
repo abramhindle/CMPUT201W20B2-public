@@ -2,7 +2,7 @@
 #+PROPERTY: header-args:C             :results output :exports both :flags -std=c99 -Wall -pedantic -Werror -g 
 #+PROPERTY: header-args:sh            :results output :exports both
 
-* Week3
+* Week4
 ** Copyright Statement
 
 If you are in CMPUT201 at UAlberta this code is released in the public
