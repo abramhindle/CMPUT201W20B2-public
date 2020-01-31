@@ -722,15 +722,24 @@ int main() {
            (void*)ptrToI2,
            *ptrToI2
     );
+    printf("addressof i: %p,\naddress of ptrToI1:  %p\n\tptrToI2: %p\n",
+           (void*)&i,
+           (void*)&ptrToI1,
+           (void*)&ptrToI2
+    );
+
     return 0;
 }
 #+END_SRC
 
 #+RESULTS:
 : i:   99,
-: address of i:  0x7ffe41e05144
-: 	ptrToI1: 0x7ffe41e05144, *ptrToI1: 99
-: 	ptrToI2: 0x7ffe41e05144, *ptrToI2: 99
+: address of i:  0x7ffd2caf7bf4
+: 	ptrToI1: 0x7ffd2caf7bf4, *ptrToI1: 99
+: 	ptrToI2: 0x7ffd2caf7bf4, *ptrToI2: 99
+: addressof i: 0x7ffd2caf7bf4,
+: address of ptrToI1:  0x7ffd2caf7bf8
+: 	ptrToI2: 0x7ffd2caf7c00
 
 
 
@@ -768,21 +777,21 @@ int main() {
 #+RESULTS:
 #+begin_example
 Size of a pointer 8
-Location pointed to 0x7fffc1ac6192
-full representation 00007FFFC1AC6192
+Location pointed to 0x7ffe4bdef902
+full representation 00007FFE4BDEF902
 myChars: Abram believes he is a benevolent professor
-myChars location: 0x7fffc1ac6170
+myChars location: 0x7ffe4bdef8e0
 professor: professor
-professor location: 0x7fffc1ac6192
+professor location: 0x7ffe4bdef902
 believes: believes he is a benevolent professor
-believes location: 0x7fffc1ac6176
+believes location: 0x7ffe4bdef8e6
 believes - myChars location: 6
 professor - myChars location: 34
 
 But where are myChars and professor and believes?
-myChars location:   0x7fffc1ac6170	 ptr address: 0x7fffc1ac6170 	*ptr A
-professor location: 0x7fffc1ac6160	 ptr address: 0x7fffc1ac6192 	*ptr p
-believes location:  0x7fffc1ac6168	 ptr address: 0x7fffc1ac6176 	*ptr b
+myChars location:   0x7ffe4bdef8e0	 ptr address: 0x7ffe4bdef8e0 	*ptr A
+professor location: 0x7ffe4bdef8d0	 ptr address: 0x7ffe4bdef902 	*ptr p
+believes location:  0x7ffe4bdef8d8	 ptr address: 0x7ffe4bdef8e6 	*ptr b
 #+end_example
 
 *** Int arrays
@@ -827,24 +836,23 @@ int main() {
 #+END_SRC
 
 #+RESULTS:
-#+begin_example
-myInts: 0x7ffd9c59ae10
-ptrToMyInts: 0x7ffd9c59ae10
-five location:      0x7ffd9c59ae24 five value:      5
-fiveAgain location: 0x7ffd9c59ae24 fiveAgain value: 5
+myInts: 0x7ffd0bdc3f40
+ptrToMyInts: 0x7ffd0bdc3f40
+five location:      0x7ffd0bdc3f54 five value:      5
+fiveAgain location: 0x7ffd0bdc3f54 fiveAgain value: 5
 five - myInts location: 20
 five - myInts location / sizeof(int): 5
 
  OK... Where are they?
-myInts     Location: 0x7ffd9c59ae10	 ptr address: 0x7ffd9c59ae10 	*ptr 0
-ptrToMyIntsLocation: 0x7ffd9c59adf0	 ptr address: 0x7ffd9c59ae10 	*ptr 0
-five       Location: 0x7ffd9c59adf8	 ptr address: 0x7ffd9c59ae24 	*ptr 5
-fiveAgain  Location: 0x7ffd9c59ae00	 ptr address: 0x7ffd9c59ae24 	*ptr 5
+myInts     Location: 0x7ffd0bdc3f40	 ptr address: 0x7ffd0bdc3f40 	*ptr 0
+ptrToMyIntsLocation: 0x7ffd0bdc3f20	 ptr address: 0x7ffd0bdc3f40 	*ptr 0
+five       Location: 0x7ffd0bdc3f28	 ptr address: 0x7ffd0bdc3f54 	*ptr 5
+fiveAgain  Location: 0x7ffd0bdc3f30	 ptr address: 0x7ffd0bdc3f54 	*ptr 5
 
 Let's add 1 to five
-five       Location: 0x7ffd9c59adf8	 ptr address: 0x7ffd9c59ae24 	*ptr 5
-six        Location: 0x7ffd9c59ae08	 ptr address: 0x7ffd9c59ae28 	*ptr 6
-#+end_example
+five       Location: 0x7ffd0bdc3f28	 ptr address: 0x7ffd0bdc3f54 	*ptr 5
+six        Location: 0x7ffd0bdc3f38	 ptr address: 0x7ffd0bdc3f58 	*ptr 6
+
 *** Arrays as pointers
 #+BEGIN_SRC C :exports both
 #include <stdio.h>
@@ -877,7 +885,7 @@ int main() {
 *** Pointer arthimetic again
 
 When you add to pointers you add not just an integer but your
-sizeof(*p) + p where p is a pointer.
+n*sizeof(*p) + p where p is a pointer.
 
 *ptr++ is a common idiom, it means give me the current value and
 transition to the next memory location.
@@ -897,44 +905,46 @@ int main() {
        ptr++;
        count--;
     }
-    ptr = &myInts[0];
+    ptr = &myInts[10];
     count = sizeof(myInts) / sizeof(myInts[0]);
     while( count-- > 0) {
        void * oldptr = (void*) ptr;
-       printf("%ld \t %p\t", *ptr++, oldptr); // this *ptr++ is
+       printf("%ld \t %p\t", *ptr--, oldptr); // this *ptr++ is
                                              // idiomatic in C and
                                              // confusing but you must
                                              // learn it
        printf("ptr - oldptr %ld\n", (unsigned long int)ptr - (unsigned long int)oldptr);
     }
+    printf("%p %ld\n", (void*)ptr, *ptr);
     return 0;
 }
 #+END_SRC
 
 #+RESULTS:
 #+begin_example
-0 	 0x7ffef2f7d290
-1 	 0x7ffef2f7d298
-2 	 0x7ffef2f7d2a0
-3 	 0x7ffef2f7d2a8
-4 	 0x7ffef2f7d2b0
-5 	 0x7ffef2f7d2b8
-6 	 0x7ffef2f7d2c0
-7 	 0x7ffef2f7d2c8
-8 	 0x7ffef2f7d2d0
-9 	 0x7ffef2f7d2d8
-10 	 0x7ffef2f7d2e0
-0 	 0x7ffef2f7d290	ptr - oldptr 8
-1 	 0x7ffef2f7d298	ptr - oldptr 8
-2 	 0x7ffef2f7d2a0	ptr - oldptr 8
-3 	 0x7ffef2f7d2a8	ptr - oldptr 8
-4 	 0x7ffef2f7d2b0	ptr - oldptr 8
-5 	 0x7ffef2f7d2b8	ptr - oldptr 8
-6 	 0x7ffef2f7d2c0	ptr - oldptr 8
-7 	 0x7ffef2f7d2c8	ptr - oldptr 8
-8 	 0x7ffef2f7d2d0	ptr - oldptr 8
-9 	 0x7ffef2f7d2d8	ptr - oldptr 8
-10 	 0x7ffef2f7d2e0	ptr - oldptr 8
+0 	 0x7ffe397be8e0
+1 	 0x7ffe397be8e8
+2 	 0x7ffe397be8f0
+3 	 0x7ffe397be8f8
+4 	 0x7ffe397be900
+5 	 0x7ffe397be908
+6 	 0x7ffe397be910
+7 	 0x7ffe397be918
+8 	 0x7ffe397be920
+9 	 0x7ffe397be928
+10 	 0x7ffe397be930
+10 	 0x7ffe397be930	ptr - oldptr -8
+9 	 0x7ffe397be928	ptr - oldptr -8
+8 	 0x7ffe397be920	ptr - oldptr -8
+7 	 0x7ffe397be918	ptr - oldptr -8
+6 	 0x7ffe397be910	ptr - oldptr -8
+5 	 0x7ffe397be908	ptr - oldptr -8
+4 	 0x7ffe397be900	ptr - oldptr -8
+3 	 0x7ffe397be8f8	ptr - oldptr -8
+2 	 0x7ffe397be8f0	ptr - oldptr -8
+1 	 0x7ffe397be8e8	ptr - oldptr -8
+0 	 0x7ffe397be8e0	ptr - oldptr -8
+0x7ffe397be8d8 140729862842592
 #+end_example
 
 **** Now with Chars
@@ -1165,14 +1175,14 @@ sizeof(thing_2) = 4
 sizeof(a_pointer) = 8 (64 bits)
 
 a_pointer = &thing_1;
- &thing_1 = 0x7ffcd630f544
- &thing_2 = 0x7ffcd630f548
-a_pointer = 0x7ffcd630f544
-a_pointer = 140723902018884
+ &thing_1 = 0x7ffc2bed14d4
+ &thing_2 = 0x7ffc2bed14d8
+a_pointer = 0x7ffc2bed14d4
+a_pointer = 140721045443796
 *a_pointer = 100
 
 a_pointer = &thing_2;
-a_pointer = 0x7ffcd630f548
+a_pointer = 0x7ffc2bed14d8
 *a_pointer = 200
 
 copy value:
@@ -1180,48 +1190,48 @@ copy value:
 int value = thing_1;
 thing_1 = 100
   value = 100
- &thing_1 = 0x7ffcd630f544
-   &value = 0x7ffcd630f54c
+ &thing_1 = 0x7ffc2bed14d4
+   &value = 0x7ffc2bed14dc
 
 copy value using pointer:
 
 value = *(&thing_2);
 thing_2 = 200
   value = 200
- &thing_2 = 0x7ffcd630f548
-   &value = 0x7ffcd630f54c
+ &thing_2 = 0x7ffc2bed14d8
+   &value = 0x7ffc2bed14dc
 
 copy value using pointer:
 
 a_pointer = &thing_2;
-a_pointer = 0x7ffcd630f548
+a_pointer = 0x7ffc2bed14d8
 *a_pointer = 200
 value = *a_pointer;
 thing_2 = 200
   value = 200
- &thing_2 = 0x7ffcd630f548
-   &value = 0x7ffcd630f54c
+ &thing_2 = 0x7ffc2bed14d8
+   &value = 0x7ffc2bed14dc
 
 pass-by-value (copy):
 
 pbv(thing_1);
   thing_1 = 100
- &thing_1 = 0x7ffcd630f544
+ &thing_1 = 0x7ffc2bed14d4
    passed = 101
-  &passed = 0x7ffcd630f52c
+  &passed = 0x7ffc2bed14bc
   thing_1 = 100
- &thing_1 = 0x7ffcd630f544
+ &thing_1 = 0x7ffc2bed14d4
 
 pass-by-reference (no copy):
 
 pbr(&thing_1);
   thing_1 = 100
- &thing_1 = 0x7ffcd630f544
-   passed = 0x7ffcd630f544
+ &thing_1 = 0x7ffc2bed14d4
+   passed = 0x7ffc2bed14d4
   *passed = 100
-  &passed = 0x7ffcd630f528
+  &passed = 0x7ffc2bed14b8
   thing_1 = 101
- &thing_1 = 0x7ffcd630f544
+ &thing_1 = 0x7ffc2bed14d4
 #+end_example
 
 *** Hazel's ptr_const.c
@@ -1447,12 +1457,12 @@ int main() {
 #+END_SRC
 
 #+RESULTS:
-: myInts:	0x7ffde668c030
-: ptrToMyInts:	0x7ffde668c030
+: myInts:	0x7fffe871d490
+: ptrToMyInts:	0x7fffe871d490
 : deref myInts:	0
 : deref myInts + 1:	10
-: deref *myInts + 1:	1
 : deref secondRow:	10
+: deref *myInts + 1:	1
 
 
 *** Arrays of Pointers or Pointers of Pointers
