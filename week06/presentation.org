@@ -72,6 +72,138 @@ gcc -std=c99 -Wall -pedantic -Werror -o programname programname.c
 
 ** Structs!
 
+How do you store a record?
+
+In python you typically use a dictionary and store key value pairs
+within a dictionary.
+
+#+BEGIN_SRC python
+my_pet = {"name":"Dan", "type":"dog", "age":6 }
+#+END_SRC
+
+In C structures allow you to group relevant information together such
+that you can access fields (properties).
+
+#+BEGIN_SRC C :eval no
+#define NAME_LEN 17
+#define TYPE_LEN 9
+struct {
+    char name[NAME_LEN];
+    char type[TYPE_LEN];
+    int  age;
+} my_pet;
+#+END_SRC
+
+In python you access the dictionary or object with:
+#+BEGIN_SRC python :eval no
+my_pet = {"name":"Dan", "type":"dog", "age":6 }
+my_pet["name"]
+# or if it was an object
+my_pet = Pet("Dan","dog",6)
+my_pet.name
+#+END_SRC
+
+In C with structs you use the dot operator to access fields or members
+of the structs
+
+#+BEGIN_SRC C 
+#include <stdio.h>
+#define NAME_LEN 17
+#define TYPE_LEN 9
+
+int main() {
+    struct { // declare a struct type
+        char name[NAME_LEN];
+        char type[TYPE_LEN];
+        int  age;
+   } my_pet = { "Dan", "dog", 6 }; // name and initialize 1 instance of the struct
+   printf("%s, %s, %d\n", my_pet.name, my_pet.type, my_pet.age);
+   printf("sizeof(my_pet)=%lu\n",sizeof(my_pet));
+}
+#+END_SRC
+
+#+RESULTS:
+: Dan, dog, 6
+: sizeof(my_pet)=32
+
+*** Structs in memory
+
+Structs are very compact. They are all their field datatypes stacked
+together.
+
+It will be mixed datatypes in memory:
+
+| name | offset | value   |
+|------+--------+---------|
+| name |      0 | "Dan\0" |
+| type |     17 | "dog\0" |
+| age  |     26 | 6       |
+
+|   0 |     |     |      | 4 |   |   |   | 8 |   |   |   | 12 |   |   |   | 16 |     |     |     |   20 |   |   |   | 24 |   | 26 |    |    |    |
+|-----+-----+-----+------+---+---+---+---+---+---+---+---+----+---+---+---+----+-----+-----+-----+------+---+---+---+----+---+----+----+----+----|
+| 'D' | 'a' | 'n' | '\0' |   |   |   |   |   |   |   |   |    |   |   |   |    | 'd' | 'o' | 'g' | '\0' |   |   |   |    |   | 00 | 00 | 00 | 06 |
+
+
+#+BEGIN_SRC C 
+#include <stdio.h>
+#define NAME_LEN 17
+#define TYPE_LEN 9
+
+int main() {
+    struct { // declare a struct type
+        char name[NAME_LEN];
+        char type[TYPE_LEN];
+        int  age;
+   } my_pet = { "Dan", "dog", 6 }; // name and initialize 1 instance of the struct
+   printf("%s, %s, %d\n", my_pet.name, my_pet.type, my_pet.age);
+   printf("struct      location:\t %p\n", (void*)&my_pet);
+   printf("my_pet.name location:\t %p\n", (void*)&my_pet.name);
+   printf("my_pet.type location:\t %p\n", (void*)&my_pet.type);
+   printf("my_pet.age  location:\t %p\n", (void*)&my_pet.age);
+   printf("my_pet.name size:\t %lu\n", sizeof(my_pet.name));
+   printf("my_pet.type size:\t %lu\n", sizeof(my_pet.type));
+   printf("my_pet.age  size:\t %lu\n", sizeof(my_pet.age));
+   printf("sizeof(my_pet)=%lu\n",sizeof(my_pet));
+
+}
+#+END_SRC
+
+#+RESULTS:
+: Dan, dog, 6
+: struct      location:	 0x7ffc673a9c30
+: my_pet.name location:	 0x7ffc673a9c30
+: my_pet.type location:	 0x7ffc673a9c41
+: my_pet.age  location:	 0x7ffc673a9c4c
+: my_pet.name size:	 17
+: my_pet.type size:	 9
+: my_pet.age  size:	 4
+: sizeof(my_pet)=32
+
+*** Initializing
+#+BEGIN_SRC C 
+#include <stdio.h>
+#define NAME_LEN 17
+#define TYPE_LEN 9
+
+int main() {
+    struct { // declare a struct type
+        char name[NAME_LEN];
+        char type[TYPE_LEN];
+        int  age;
+   } my_pet1 = { "Dan", "dog", 6 }, // name and initialize 1 instance of the struct
+     my_pet2 = { .name = "Darren", .type = "cat", .age = 3 }; // designated initializer
+   printf("%s and %s get along just fine.\n", my_pet1.name, my_pet2.name);
+}
+#+END_SRC
+
+#+RESULTS:
+: Dan and Darren get along just fine.
+
+
+*** Structure Types
+
+
+
 #+BEGIN_SRC C :exports both
 #include <stdio.h>
 
