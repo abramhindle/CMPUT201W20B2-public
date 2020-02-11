@@ -71,7 +71,7 @@ int main(int argc, char**argv) {
 gcc -std=c99 -Wall -pedantic -Werror -o programname programname.c
 
 ** Structs!
-
+*** Struct Intro
 How do you store a record?
 
 In python you typically use a dictionary and store key value pairs
@@ -180,6 +180,7 @@ int main() {
 : sizeof(my_pet)=32
 
 *** Initializing
+
 #+BEGIN_SRC C 
 #include <stdio.h>
 #define NAME_LEN 17
@@ -202,6 +203,138 @@ int main() {
 
 *** Structure Types
 
+You can predeclare structure "tags" ahead of time so you can reuse your type.
+
+#+BEGIN_SRC C 
+#include <stdio.h>
+#define NAME_LEN 17
+#define TYPE_LEN 9
+
+struct my_pet { // declare a struct type
+    char name[NAME_LEN];
+    char type[TYPE_LEN];
+    int  age;
+}; // REMEMBER THE SEMICOLON
+
+int main() {
+    struct my_pet my_pet1 = { "Dan", "dog", 6 }; // name and initialize 1 instance of the struct
+    struct my_pet my_pet2 = { .name = "Darren", .type = "cat", .age = 3 }; // designated initializer
+    printf("%s and %s get along just fine.\n", my_pet1.name, my_pet2.name);
+}
+#+END_SRC
+
+#+RESULTS:
+: Dan and Darren get along just fine.
+
+**** Typedef instead of struct tag
+
+You can also typedef it away but it causes issues later.
+
+#+BEGIN_SRC C 
+#include <stdio.h>
+#define NAME_LEN 17
+#define TYPE_LEN 9
+
+typedef struct { // declare a struct type
+    char name[NAME_LEN];
+    char type[TYPE_LEN];
+    int  age;
+} MyPet; // REMEMBER THE SEMICOLON
+
+int main() {
+    MyPet my_pet1 = { "Dan", "dog", 6 }; // name and initialize 1 instance of the struct
+    MyPet my_pet2 = { .name = "Darren", .type = "cat", .age = 3 }; // designated initializer
+    printf("%s and %s get along just fine.\n", my_pet1.name, my_pet2.name);
+}
+#+END_SRC
+
+#+RESULTS:
+: Dan and Darren get along just fine.
+
+**** Or combine both typedef and struct tags
+
+#+BEGIN_SRC C 
+#include <stdio.h>
+#define NAME_LEN 17
+#define TYPE_LEN 9
+
+// First declare the struct tag
+
+struct my_pet { // declare a struct type
+    char name[NAME_LEN];
+    char type[TYPE_LEN];
+    int  age;
+}; // REMEMBER THE SEMICOLON
+
+// Then typedef it
+
+typedef struct my_pet MyPet;
+
+int main() {
+    MyPet my_pet1 = { "Dan", "dog", 6 }; // name and initialize 1 instance of the struct
+    MyPet my_pet2 = { .name = "Darren", .type = "cat", .age = 3 }; // designated initializer
+    printf("%s and %s get along just fine.\n", my_pet1.name, my_pet2.name);
+}
+#+END_SRC
+
+#+RESULTS:
+: Dan and Darren get along just fine.
+
+**** Hazel's example of typedef and style
+
+#+BEGIN_SRC C
+#include <stdio.h>
+
+/* A common thing to do is to typedef a struct
+ * so that you don't have to type struct whatever
+ * so often.
+ */
+
+struct coordinate {
+    float x;
+    float y;
+};
+
+// We use a capital first letter to indicate a type
+// This is a newer style.
+typedef struct coordinate Coordinate;
+// Or we could use "_t" at the end.
+// This is an older style. Remember uint64_t?
+typedef struct coordinate coordinate_t;
+
+Coordinate move_left(Coordinate position) {
+    position.x -= 1.0;
+    return position;
+}
+
+int main() {
+    Coordinate position = { 0, 0 };
+    printf("position=(%g,%g)\n",
+           position.x,
+           position.y
+    );
+    Coordinate new_position = move_left(position);
+    printf("position=(%g,%g)\n",
+           position.x,
+           position.y
+    );
+    printf("new_position=(%g,%g)\n",
+           new_position.x,
+           new_position.y
+    );
+    position = move_left(move_left(position));
+    printf("position=(%g,%g)\n",
+           position.x,
+           position.y
+    );
+}
+#+END_SRC
+
+#+RESULTS:
+: position=(0,0)
+: position=(0,0)
+: new_position=(-1,0)
+: position=(-2,0)
 
 
 #+BEGIN_SRC C :exports both
@@ -213,6 +346,9 @@ int main(int argc, char**argv) {
     return 0;
 }
 #+END_SRC
+
+
+
 
 *** Pass by Value
 
@@ -260,6 +396,269 @@ int main() {
 }
 #+END_SRC
 
+#+RESULTS:
+: position=(0,0)
+: position=(0,0)
+: new_position=(-1,0)
+: position=(-2,0)
+
+
+**** Pass by Value Gotcha
+
+#+BEGIN_SRC C
+#include <stdio.h>
+#include <string.h>
+
+/* The important thing to notice here is that
+ * structs are pass-by-value. Just like a single float,
+ * when we pass a struct to a function it gets a COPY
+ * of the original struct!
+ * We can also assign structs and we get a COPY.
+ * We can also return structs and we get a COPY.
+ */
+
+struct coordinate { // leaving behind for size comparison
+    float x;
+    float y;
+};
+
+struct named_coordinate {
+    float x;
+    float y;
+    char * name; // WARNING this is a pointer!
+};
+
+struct named_coordinate move_left(struct named_coordinate position) {
+    printf("I am moving position.name: %s [%p] LEFT\n", 
+           position.name, 
+           (void*)position.name);
+    position.x -= 1.0;
+    return position;
+}
+
+int main() {
+    char * my_string_literal = "YoloStringLiteral!-X-X-X-X-X-X";
+    printf("my_string_literal pointer is at %p\n", (void*)(&my_string_literal));
+    struct named_coordinate position = { 0, 0, my_string_literal };
+    printf("position=(%g,%g)\n",
+           position.x,
+           position.y
+    );
+    struct named_coordinate new_position = move_left(position);
+    printf("position=(%g,%g)\n",
+           position.x,
+           position.y
+    );
+    printf("new_position=(%g,%g)\n",
+           new_position.x,
+           new_position.y
+    );
+    position = move_left(move_left(position));
+    printf("position=(%g,%g)\n",
+           position.x,
+           position.y
+    );
+    // So we now have a string in our struct? How does it change the struct?
+    printf("Size of named_coordinate: %lu\n",sizeof(new_position));
+    printf("Size of coordinate: %lu\n",sizeof(struct coordinate));
+    printf("Size of my_string_literal: %lu\n",sizeof(my_string_literal));
+    printf("strlen of my_string_literal: %lu\n",strlen(my_string_literal));
+    // COPY BY VALUE MEANS POINTERS ARE COPIED, but not their contents.
+    printf("&position.name     %p\n",(void*)&position.name); // they have different pointers
+    printf("&new_position.name %p\n", (void*)&new_position.name);  // they have different pointers
+    printf("position.name      %p\n", (void*)position.name); // but they point to the same thing
+    printf("new_position.name  %p\n", (void*)new_position.name); // but they point to the same thing
+    printf("position.name      %s\n", position.name); // but they point to the same thing
+    printf("new_position.name  %s\n", new_position.name); // but they point to the same thing
+
+}
+#+END_SRC
+
+#+RESULTS:
+#+begin_example
+my_string_literal pointer is at 0x7fff4d374a48
+position=(0,0)
+I am moving position.name: YoloStringLiteral!-X-X-X-X-X-X [0x55b732d31a98] LEFT
+position=(0,0)
+new_position=(-1,0)
+I am moving position.name: YoloStringLiteral!-X-X-X-X-X-X [0x55b732d31a98] LEFT
+I am moving position.name: YoloStringLiteral!-X-X-X-X-X-X [0x55b732d31a98] LEFT
+position=(-2,0)
+Size of named_coordinate: 16
+Size of coordinate: 8
+Size of my_string_literal: 8
+strlen of my_string_literal: 30
+&position.name     0x7fff4d374a58
+&new_position.name 0x7fff4d374a68
+position.name      0x55b732d31a98
+new_position.name  0x55b732d31a98
+position.name      YoloStringLiteral!-X-X-X-X-X-X
+new_position.name  YoloStringLiteral!-X-X-X-X-X-X
+#+end_example
+
+
+*** Pointers and Structs
+
+#+BEGIN_SRC C
+#include <stdio.h>
+
+/* Using pointers to structs is very common.
+ * 
+ * Using typedef to define a type that is a pointer
+ * to a particular kind of struct is also very common
+ * to avoid having to write the pointer everywhere.
+ * 
+ * This allows us to make a sort of 
+ * object-like variable.
+ */
+
+struct coordinate {
+    float x;
+    float y;
+};
+
+typedef struct coordinate *Coordinate;
+typedef struct coordinate *coordinate_t;
+
+// When we have a pointer to a struct, we use
+// "->" instead of "." to talk about a field.
+
+void move_left(Coordinate position) {
+    position->x -= 1.0;
+}
+
+// "ptr->field" is just shorthand for "(*ptr).field"
+
+void move_up(Coordinate position) {
+    position->y -= 1.0;
+}
+
+int main() {
+    struct coordinate position = { 0, 0 };
+    printf("position=(%g,%g)\n",
+           position.x,
+           position.y
+    );
+    move_left(&position);
+    move_up(&position);
+    printf("position=(%g,%g)\n",
+           position.x,
+           position.y
+    );
+}
+#+END_SRC
+
+#+RESULTS:
+: position=(0,0)
+: position=(-1,-1)
+
+*** Elaborate Matrix Example
+
+#+BEGIN_SRC C
+  #include <stdio.h>
+  #include <stdlib.h>
+
+  /* But we don't just want to avoid duplicate function
+   ,* parameters, we want to avoid duplicate code too!
+   ,* Noticing that our bounds checking code appears
+   ,* twice, let's refactor...
+   ,*/
+
+  struct matrix {
+      int *elements;
+      size_t rows;
+      size_t cols;
+  };
+
+  typedef struct matrix Matrix;
+
+  struct matrix_element {
+      Matrix matrix;
+      size_t row;
+      size_t col;
+  };
+
+  typedef struct matrix_element MatrixElement;
+
+  /* We can add our own bounds-checking to C!
+   ,*/
+
+  void bounds_check(MatrixElement elt) {
+      if (elt.row >= elt.matrix.rows) {
+          printf("Error: row index out of bounds!\n");
+          abort();
+      }
+      if (elt.col >= elt.matrix.cols) {
+          printf("Error: col index out of bounds!\n");
+          abort();
+      }
+  }
+
+  int get_element(MatrixElement elt) {
+      bounds_check(elt);
+      return elt.matrix.elements[
+          elt.row * elt.matrix.cols + elt.col
+      ];
+  }
+
+  void set_element(
+      MatrixElement elt,
+      int value
+  ) {
+      bounds_check(elt);
+      elt.matrix.elements[
+          elt.row * elt.matrix.cols + elt.col
+      ] = value;
+  }
+
+  void init_matrix(Matrix matrix) {
+      // Note we don't have to keep reallocating memory because 
+      // structs are COPIED
+      MatrixElement elt = {matrix, 0, 0};
+      for (elt.row = 0; elt.row < matrix.rows; elt.row++) {
+          for (elt.col = 0; elt.col < matrix.cols; elt.col++) {
+              set_element(elt, 0);
+          }
+      }
+  }
+
+  void print_matrix(Matrix matrix) {
+      MatrixElement elt = {matrix, 0, 0};
+      for (elt.row = 0; elt.row < matrix.rows; elt.row++) {
+          for (elt.col = 0; elt.col < matrix.cols; elt.col++) {
+              int value = get_element(elt);
+              printf("%d ", value);
+          }
+          printf("\n");
+      }
+  }
+
+  int main() {
+      size_t rows = 3;
+      size_t cols = 3;
+      // we will use our init_matrix function to initialize insead of an
+      // initializer. That way we don't have know the size of
+      // matrix_memory at compile time.
+      int matrix_memory[rows * cols];
+      Matrix matrix = { matrix_memory, rows, cols };
+      init_matrix(matrix);
+      print_matrix(matrix);
+      printf("\n");
+      MatrixElement elt = {matrix, 1, 1};
+      set_element(elt, 2);
+      print_matrix(matrix);
+  }
+#+END_SRC
+
+#+RESULTS:
+: 0 0 0 
+: 0 0 0 
+: 0 0 0 
+: 
+: 0 0 0 
+: 0 2 0 
+: 0 0 0
+
 ** Enum
 
 Enums are enumerations, which is just a convienant way to make symbols
@@ -271,6 +670,65 @@ Enums are fundamental to symbolic computation.
 Enum work good for switch cases, if statements, for loops.
 
 Enums are good for representing the type of something or a category.
+
+*** Enum Example
+
+Enums are good for representing states, symbols, simple values, etc.
+
+#+BEGIN_SRC C
+#include <stdio.h>
+#include <stdlib.h>
+
+#define N_DIRECTIONS 4
+enum direction {
+    UP, DOWN, LEFT, RIGHT
+};
+typedef enum direction Direction;
+
+const char * const direction_names[N_DIRECTIONS] = {
+    [UP] = "Up",
+    [DOWN] = "Down",
+    [LEFT] = "Left",
+    [RIGHT] = "Right"
+};
+
+Direction clockwise(Direction direction) {
+    switch (direction) {
+        case UP:
+            return RIGHT;
+        case RIGHT:
+            return DOWN;
+        case DOWN:
+            return LEFT;
+        case LEFT:
+            return UP;
+        default:
+            abort();
+    }
+}
+
+int main() {
+    Direction d = UP;
+    for (int i = 0 ; i < 10; i++) {
+        d = clockwise(d);
+        printf("%d %s\t[%d]\n", i, direction_names[d], d);
+    }
+}
+#+END_SRC
+
+#+RESULTS:
+#+begin_example
+0 Right	[3]
+1 Down	[1]
+2 Left	[2]
+3 Up	[0]
+4 Right	[3]
+5 Down	[1]
+6 Left	[2]
+7 Up	[0]
+8 Right	[3]
+9 Down	[1]
+#+end_example
 
 *** enum_typedef.c
 
