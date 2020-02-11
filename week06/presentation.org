@@ -1,0 +1,368 @@
+#+TITLE: CMPUT201W20B2 Week 6
+#+PROPERTY: header-args:C             :results output :exports both :flags -std=c99 -Wall -pedantic -Werror -g 
+#+PROPERTY: header-args:sh            :results output :exports both
+
+* Week6
+** Copyright Statement
+
+If you are in CMPUT201 at UAlberta this code is released in the public
+domain to you.
+
+Otherwise it is (c) 2020 Abram Hindle, Hazel Campbell AGPL3.0+
+
+*** License
+
+    Week 3 notes
+    Copyright (C) 2020 Abram Hindle, Hazel Campbell
+
+    This program is free software: you can redistribute it and/or modify
+    it under the terms of the GNU Affero General Public License as
+    published by the Free Software Foundation, either version 3 of the
+    License, or (at your option) any later version.
+
+    This program is distributed in the hope that it will be useful,
+    but WITHOUT ANY WARRANTY; without even the implied warranty of
+    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+    GNU Affero General Public License for more details.
+
+    You should have received a copy of the GNU Affero General Public License
+    along with this program.  If not, see <https://www.gnu.org/licenses/>.
+
+
+*** Hazel Code is licensed under AGPL3.0+
+
+Hazel's code is also found here
+https://github.com/hazelybell/examples/tree/C-2020-01
+
+Hazel code is licensed: The example code is licensed under the AGPL3+
+license, unless otherwise noted.
+
+** Init ORG-MODE
+
+#+BEGIN_SRC elisp
+;; I need this for org-mode to work well
+
+(require 'ob-sh)
+;(require 'ob-shell)
+(org-babel-do-load-languages 'org-babel-load-languages '((sh . t)))
+(org-babel-do-load-languages 'org-babel-load-languages '((C . t)))
+(org-babel-do-load-languages 'org-babel-load-languages '((python . t)))
+(setq org-src-fontify-natively t)
+#+END_SRC
+
+#+RESULTS:
+: t
+
+** Org Template
+Copy and paste this to demo C
+
+#+BEGIN_SRC C :exports both
+#include <stdio.h>
+
+int main(int argc, char**argv) {
+    return 0;
+}
+#+END_SRC
+
+#+RESULTS:
+
+** Remember how to compile?
+
+gcc -std=c99 -Wall -pedantic -Werror -o programname programname.c
+
+** Structs!
+
+#+BEGIN_SRC C :exports both
+#include <stdio.h>
+
+struct SizedIntArray
+
+int main(int argc, char**argv) {
+    return 0;
+}
+#+END_SRC
+
+*** Pass by Value
+
+#+BEGIN_SRC C
+#include <stdio.h>
+
+/* The important thing to notice here is that
+ * structs are pass-by-value. Just like a single float,
+ * when we pass a struct to a function it gets a COPY
+ * of the original struct!
+ * We can also assign structs and we get a COPY.
+ * We can also return structs and we get a COPY.
+ */
+
+struct coordinate {
+    float x;
+    float y;
+};
+
+struct coordinate move_left(struct coordinate position) {
+    position.x -= 1.0;
+    return position;
+}
+
+int main() {
+    struct coordinate position = { 0, 0 };
+    printf("position=(%g,%g)\n",
+           position.x,
+           position.y
+    );
+    struct coordinate new_position = move_left(position);
+    printf("position=(%g,%g)\n",
+           position.x,
+           position.y
+    );
+    printf("new_position=(%g,%g)\n",
+           new_position.x,
+           new_position.y
+    );
+    position = move_left(move_left(position));
+    printf("position=(%g,%g)\n",
+           position.x,
+           position.y
+    );
+}
+#+END_SRC
+
+** Enum
+
+Enums are enumerations, which is just a convienant way to make symbols
+that have different values of the same type. Enums allow us to read
+and write values from files and inputs and extract their symbolic meaning.
+
+Enums are fundamental to symbolic computation.
+
+Enum work good for switch cases, if statements, for loops.
+
+Enums are good for representing the type of something or a category.
+
+*** enum_typedef.c
+
+Enums are annoying to type. Typing enum enumname all the time is repetitive.
+Typedefs allow us to label enum types with 1 word.
+
+Typedef this 
+
+enum enumname { ... } ;
+
+with:
+
+typedef enum enunumae Enumename ;
+
+
+#+BEGIN_SRC C
+#include <stdio.h>
+#include <stdlib.h>
+
+enum flavor {
+    VANILLA,
+    CHOCOLATE,
+    STRAWBERRY,
+};
+
+typedef enum flavor Flavor;
+
+int main() {
+    Flavor favourite = VANILLA;
+    printf("favourite=%d\n", favourite);
+    printf("sizeof(favourite)=%zu\n",
+           sizeof(favourite));
+    
+    switch (favourite) {
+        case VANILLA:
+            printf("favourite=VANILLA\n");
+            break;
+        case CHOCOLATE:
+            printf("favourite=CHOCOLATE\n");
+            break;
+        case STRAWBERRY:
+            printf("favourite=STRAWBERRY\n");
+            break;
+        default:
+            abort();
+    }
+}
+#+END_SRC
+
+#+RESULTS:
+| favourite=0         |
+| sizeof(favourite)=4 |
+| favourite=VANILLA   |
+
+
+
+*** EnumStart
+
+#+BEGIN_SRC C
+#include <stdio.h>
+#include <stdlib.h>
+
+enum flavor {
+    VANILLA = 100,
+    CHOCOLATE,
+    STRAWBERRY,
+};
+
+typedef enum flavor Flavor;
+
+int main() {
+    printf("VANILLA=%d\n", VANILLA);
+    printf("CHOCOLATE=%d\n", CHOCOLATE);
+    printf("STRAWBERRY=%d\n", STRAWBERRY);
+    printf("sizeof(Flavor)=%zu\n",
+           sizeof(Flavor));
+}
+#+END_SRC
+
+*** Enumassign 
+
+#+BEGIN_SRC C
+#include <stdio.h>
+#include <stdlib.h>
+
+enum flavor {
+    VANILLA = 100,
+    CHOCOLATE = 200,
+    STRAWBERRY = 300,
+};
+
+typedef enum flavor Flavor;
+
+int main() {
+    printf("VANILLA=%d\n", VANILLA);
+    printf("CHOCOLATE=%d\n", CHOCOLATE);
+    printf("STRAWBERRY=%d\n", STRAWBERRY);
+    printf("sizeof(Flavor)=%zu\n",
+           sizeof(Flavor));
+}
+#+END_SRC
+
+#+RESULTS:
+| VANILLA=100      |
+| CHOCOLATE=200    |
+| STRAWBERRY=300   |
+| sizeof(Flavor)=4 |
+
+*** Enum_loop_trick.c
+
+#+BEGIN_SRC C
+#include <stdio.h>
+#include <stdlib.h>
+
+// this only works as long as we don't provide our
+// own values!
+
+enum flavor {
+    VANILLA,
+    CHOCOLATE,
+    STRAWBERRY,
+    N_FLAVORS // Get the free max enum here
+};
+
+typedef enum flavor Flavor;
+
+int main() {
+    printf("VANILLA=%d\n", VANILLA);
+    printf("CHOCOLATE=%d\n", CHOCOLATE);
+    printf("STRAWBERRY=%d\n", STRAWBERRY);
+    printf("N_FLAVORS=%d\n", N_FLAVORS);
+    printf("sizeof(Flavor)=%zu\n",
+           sizeof(Flavor));
+    
+    for (Flavor flavor = 0; flavor < N_FLAVORS; flavor++) {
+        switch (flavor) {
+            case VANILLA:
+                printf("flavor=VANILLA\n");
+                break;
+            case CHOCOLATE:
+                printf("flavor=CHOCOLATE\n");
+                break;
+            case STRAWBERRY:
+                printf("flavor=STRAWBERRY\n");
+                break;
+            default:
+                abort();
+        }
+    }
+}
+#+END_SRC
+
+#+RESULTS:
+| VANILLA=0         |
+| CHOCOLATE=1       |
+| STRAWBERRY=2      |
+| N_FLAVORS=3       |
+| sizeof(Flavor)=4  |
+| flavor=VANILLA    |
+| flavor=CHOCOLATE  |
+| flavor=STRAWBERRY |
+
+*** Enum Int
+
+This is a fun trick to set a maximum value for your enum by using
+another symbol
+
+#+BEGIN_SRC C
+#include <stdio.h>
+#include <stdlib.h>
+
+enum flavor {
+    VANILLA,
+    CHOCOLATE,
+    STRAWBERRY,
+    N_FLAVORS // LOOK MA! No Defines! Cute trick, might surprise people.
+};
+
+typedef enum flavor Flavor;
+
+// Here we use the fact that enums are really just ints!
+Flavor random_flavor() {
+    return (rand() % N_FLAVORS);
+}
+
+void check_flavor(Flavor flavor) {
+    if (flavor >= N_FLAVORS) {
+        abort();
+    }
+    // Since a flavor is just an int, it could be negative...
+    if (flavor < 0) {
+        abort();
+    }
+}
+
+const char * get_flavor_name(Flavor flavor) {
+    check_flavor(flavor);
+    // Here we use "Designated Initializers"!
+    const char * const flavor_names[N_FLAVORS] = {
+        [CHOCOLATE] = "Hamburger flavor",
+        [VANILLA] = "Raspberry",
+        [STRAWBERRY] = "Those packets that come in the ramen"
+    };
+    const char * flavor_name = flavor_names[flavor];
+//     if (flavor_name == NULL) {
+//         printf("Flavor not found!\n");
+//         abort();
+//     }
+    return flavor_name;
+}
+
+
+
+int main() {
+    srand(time(NULL));
+    Flavor flavor = random_flavor();
+    printf(
+        "flavor %d = %s\n",
+        flavor,
+        get_flavor_name(flavor)
+    );
+}
+#+END_SRC
+
+#+RESULTS:
+: flavor 2 = Those packets that come in the ramen
+
