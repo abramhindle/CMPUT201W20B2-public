@@ -918,6 +918,109 @@ Can I get it any time.
 Sure.
 
 *** Malloc
+
+Just stack allocation
+#+BEGIN_SRC C
+#include <assert.h>
+#include <stdio.h>
+#include <stdlib.h>
+#include <string.h>
+
+void allocAndGo(const int len) {
+        int bigArray[len];
+        for(int idx=0; idx < len; idx++) {
+            bigArray[idx] = idx;
+        }
+        printf("%u ints allocated!\n",1+bigArray[len-1]);
+        printf("%lu bytes!\n", sizeof(int)*len);
+}
+int main() {
+    // let's find the max of the stack.
+    for (int i = 1; i < 900000; i+=256*1024) {
+        allocAndGo(i);
+    }
+}
+#+END_SRC
+
+#+RESULTS:
+:RESULTS:
+1 ints allocated!
+4 bytes!
+262145 ints allocated!
+1048580 bytes!
+524289 ints allocated!
+2097156 bytes!
+786433 ints allocated!
+3145732 bytes!
+:END:
+
+
+#+BEGIN_SRC C
+#include <assert.h>
+#include <stdio.h>
+#include <stdlib.h>
+#include <string.h>
+
+int * testAllocArray(int arrLen) {
+  size_t size = arrLen * sizeof(int);
+  int* array = malloc( size );
+  assert(array!=NULL);
+  memset((void*)array, 0, size);
+  for(int idx=0; idx<arrLen; idx++) {
+    array[idx] = idx;
+  }
+  return array;
+}
+int main() {
+    for (int i = 1; i < 90000000; i+=5*1024*1024) {
+        int * bigArray = testAllocArray( i );
+        printf("%u ints allocated!\n",1+bigArray[i-1]);
+        printf("%lu bytes!\n", sizeof(int)*i);
+        free(bigArray); // remember to free it when done!
+    }
+}
+#+END_SRC
+
+#+RESULTS:
+:RESULTS:
+1 ints allocated!
+4 bytes!
+5242881 ints allocated!
+20971524 bytes!
+10485761 ints allocated!
+41943044 bytes!
+15728641 ints allocated!
+62914564 bytes!
+20971521 ints allocated!
+83886084 bytes!
+26214401 ints allocated!
+104857604 bytes!
+31457281 ints allocated!
+125829124 bytes!
+36700161 ints allocated!
+146800644 bytes!
+41943041 ints allocated!
+167772164 bytes!
+47185921 ints allocated!
+188743684 bytes!
+52428801 ints allocated!
+209715204 bytes!
+57671681 ints allocated!
+230686724 bytes!
+62914561 ints allocated!
+251658244 bytes!
+68157441 ints allocated!
+272629764 bytes!
+73400321 ints allocated!
+293601284 bytes!
+78643201 ints allocated!
+314572804 bytes!
+83886081 ints allocated!
+335544324 bytes!
+89128961 ints allocated!
+356515844 bytes!
+:END:
+
 *** Calloc 
 *** Free
 *** Realloc
