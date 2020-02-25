@@ -1,0 +1,747 @@
+#+TITLE: CMPUT201W20B2 Week 6
+#+PROPERTY: header-args:C             :results output :exports both :flags -std=c99 -Wall -pedantic -Werror -g :results value drawer
+#+PROPERTY: header-args:sh            :results output :exports both
+
+* Week6
+** Copyright Statement
+
+If you are in CMPUT201 at UAlberta this code is released in the public
+domain to you.
+
+Otherwise it is (c) 2020 Abram Hindle, Hazel Campbell AGPL3.0+
+
+*** License
+
+    Week 3 notes
+    Copyright (C) 2020 Abram Hindle, Hazel Campbell
+
+    This program is free software: you can redistribute it and/or modify
+    it under the terms of the GNU Affero General Public License as
+    published by the Free Software Foundation, either version 3 of the
+    License, or (at your option) any later version.
+
+    This program is distributed in the hope that it will be useful,
+    but WITHOUT ANY WARRANTY; without even the implied warranty of
+    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+    GNU Affero General Public License for more details.
+
+    You should have received a copy of the GNU Affero General Public License
+    along with this program.  If not, see <https://www.gnu.org/licenses/>.
+
+
+*** Hazel Code is licensed under AGPL3.0+
+
+Hazel's code is also found here
+https://github.com/hazelybell/examples/tree/C-2020-01
+
+Hazel code is licensed: The example code is licensed under the AGPL3+
+license, unless otherwise noted.
+
+** Init ORG-MODE
+
+#+BEGIN_SRC elisp
+;; I need this for org-mode to work well
+
+(require 'ob-sh)
+;(require 'ob-shell)
+(org-babel-do-load-languages 'org-babel-load-languages '((sh . t)))
+(org-babel-do-load-languages 'org-babel-load-languages '((C . t)))
+(org-babel-do-load-languages 'org-babel-load-languages '((python . t)))
+(setq org-src-fontify-natively t)
+#+END_SRC
+
+#+RESULTS:
+: t
+
+** Org Template
+Copy and paste this to demo C
+
+#+BEGIN_SRC C :exports both
+#include <stdio.h>
+
+int main(int argc, char**argv) {
+    return 0;
+}
+#+END_SRC
+
+#+RESULTS:
+
+** Remember how to compile?
+
+gcc -std=c99 -Wall -pedantic -Werror -o programname programname.c
+
+
+** Enums!
+
+Enums are enumerations, which is just a convienant way to make symbols
+that have different values of the same type. Enums allow us to read
+and write values from files and inputs and extract their symbolic meaning.
+
+Enums are fundamental to symbolic computation.
+
+Enum work good for switch cases, if statements, for loops.
+
+Enums are good for representing the type of something or a category.
+
+*** Enum Example
+
+Enums are good for representing states, symbols, simple values, etc.
+
+#+BEGIN_SRC C :exports both
+#include <stdio.h>
+#include <stdlib.h>
+
+#define N_DIRECTIONS 4
+enum direction {
+    UP, DOWN, LEFT, RIGHT
+};
+typedef enum direction Direction;
+
+const char * const direction_names[N_DIRECTIONS] = {
+    [UP] = "Up",
+    [DOWN] = "Down",
+    [LEFT] = "Left",
+    [RIGHT] = "Right"
+};
+
+Direction clockwise(Direction direction) {
+    switch (direction) {
+        case UP:
+            return RIGHT;
+        case RIGHT:
+            return DOWN;
+        case DOWN:
+            return LEFT;
+        case LEFT:
+            return UP;
+        default:
+            abort();
+    }
+}
+
+int main() {
+    Direction d = UP;
+    for (int i = 0 ; i < 10; i++) {
+        d = clockwise(d);
+        printf("%d %s\t[%d]\n", i, direction_names[d], d);
+    }
+}
+#+END_SRC
+
+#+RESULTS:
+#+begin_example
+0 Right	[3]
+1 Down	[1]
+2 Left	[2]
+3 Up	[0]
+4 Right	[3]
+5 Down	[1]
+6 Left	[2]
+7 Up	[0]
+8 Right	[3]
+9 Down	[1]
+#+end_example
+
+*** enum_typedef.c
+
+Enums are annoying to type. Typing enum enumname all the time is
+repetitive. Typedefs allow us to label enum types with 1 word.
+
+Typedef this 
+
+enum enumname { ... } ;
+
+with:
+
+typedef enum enunumae Enumename ;
+
+
+#+BEGIN_SRC C :exports both
+#include <stdio.h>
+#include <stdlib.h>
+
+enum flavor {
+    VANILLA,
+    CHOCOLATE,
+    STRAWBERRY,
+};
+
+typedef enum flavor Flavor;
+
+int main() {
+    Flavor favourite = VANILLA;
+    printf("favourite=%d\n", favourite);
+    printf("sizeof(favourite)=%zu\n",
+           sizeof(favourite));
+    
+    switch (favourite) {
+        case VANILLA:
+            printf("favourite=VANILLA\n");
+            break;
+        case CHOCOLATE:
+            printf("favourite=CHOCOLATE\n");
+            break;
+        case STRAWBERRY:
+            printf("favourite=STRAWBERRY\n");
+            break;
+        default:
+            abort();
+    }
+}
+#+END_SRC
+
+#+RESULTS:
+: favourite=0
+: sizeof(favourite)=4
+: favourite=VANILLA
+
+
+
+*** EnumStart
+
+#+BEGIN_SRC C :exports both
+#include <stdio.h>
+#include <stdlib.h>
+
+enum flavor {
+    VANILLA = 100,
+    CHOCOLATE,
+    STRAWBERRY,
+};
+
+typedef enum flavor Flavor;
+
+int main() {
+    printf("VANILLA=%d\n", VANILLA);
+    printf("CHOCOLATE=%d\n", CHOCOLATE);
+    printf("STRAWBERRY=%d\n", STRAWBERRY);
+    printf("sizeof(Flavor)=%zu\n",
+           sizeof(Flavor));
+}
+#+END_SRC
+
+#+RESULTS:
+: VANILLA=100
+: CHOCOLATE=101
+: STRAWBERRY=102
+: sizeof(Flavor)=4
+
+*** Enumassign 
+
+#+BEGIN_SRC C :exports both
+#include <stdio.h>
+#include <stdlib.h>
+
+enum flavor {
+    VANILLA = 100,
+    CHOCOLATE = 200,
+    STRAWBERRY = 300,
+};
+
+typedef enum flavor Flavor;
+
+int main() {
+    printf("VANILLA=%d\n", VANILLA);
+    printf("CHOCOLATE=%d\n", CHOCOLATE);
+    printf("STRAWBERRY=%d\n", STRAWBERRY);
+    printf("sizeof(Flavor)=%zu\n",
+           sizeof(Flavor));
+}
+#+END_SRC
+
+#+RESULTS:
+: VANILLA=100
+: CHOCOLATE=200
+: STRAWBERRY=300
+: sizeof(Flavor)=4
+
+*** Enum_loop_trick.c
+
+This is a fun trick to set a maximum value for your enum by using
+another symbol
+
+
+#+BEGIN_SRC C :exports both
+#include <stdio.h>
+#include <stdlib.h>
+
+// this only works as long as we don't provide our
+// own values!
+
+enum flavor {
+    VANILLA,
+    CHOCOLATE,
+    STRAWBERRY,
+    N_FLAVORS // Get the free max enum here
+};
+
+typedef enum flavor Flavor;
+
+int main() {
+    printf("VANILLA=%d\n", VANILLA);
+    printf("CHOCOLATE=%d\n", CHOCOLATE);
+    printf("STRAWBERRY=%d\n", STRAWBERRY);
+    printf("N_FLAVORS=%d\n", N_FLAVORS);
+    printf("sizeof(Flavor)=%zu\n",
+           sizeof(Flavor));
+    
+    for (Flavor flavor = 0; flavor < N_FLAVORS; flavor++) {
+        switch (flavor) {
+            case VANILLA:
+                printf("flavor=VANILLA\n");
+                break;
+            case CHOCOLATE:
+                printf("flavor=CHOCOLATE\n");
+                break;
+            case STRAWBERRY:
+                printf("flavor=STRAWBERRY\n");
+                break;
+            default:
+                abort();
+        }
+    }
+}
+#+END_SRC
+
+#+RESULTS:
+: VANILLA=0
+: CHOCOLATE=1
+: STRAWBERRY=2
+: N_FLAVORS=3
+: sizeof(Flavor)=4
+: flavor=VANILLA
+: flavor=CHOCOLATE
+: flavor=STRAWBERRY
+
+*** Enum Int
+
+Enum are just integers. And you can treat them as such.
+
+#+BEGIN_SRC C :exports both
+#include <stdio.h>
+#include <stdlib.h>
+#include <time.h>
+
+enum flavor {
+    VANILLA,
+    CHOCOLATE,
+    STRAWBERRY,
+    N_FLAVORS // LOOK MA! No Defines! Cute trick, might surprise people.
+};
+
+typedef enum flavor Flavor;
+
+// Here we use the fact that enums are really just ints!
+Flavor random_flavor() {
+    return (rand() % N_FLAVORS);
+}
+
+void check_flavor(Flavor flavor) {
+    if (flavor >= N_FLAVORS) {
+        abort();
+    }
+    // Since a flavor is just an int, it could be negative...
+    if (flavor < 0) {
+        abort();
+    }
+}
+
+const char * get_flavor_name(Flavor flavor) {
+    check_flavor(flavor);
+    // Here we use "Designated Initializers"!
+    const char * const flavor_names[N_FLAVORS] = {
+        [CHOCOLATE] = "Hamburger flavor",
+        [VANILLA] = "Raspberry",
+        [STRAWBERRY] = "Those packets that come in the ramen"
+    };
+    const char * flavor_name = flavor_names[flavor];
+    return flavor_name;
+}
+
+int main() {
+    srand(time(NULL));
+    for (int i = 0 ; i < 4; i++) {
+       Flavor flavor = random_flavor();
+       printf(
+           "flavor %d = %s\n",
+           flavor,
+           get_flavor_name(flavor)
+       );
+    }
+}
+#+END_SRC
+
+#+RESULTS:
+:RESULTS:
+flavor 1 = Hamburger flavor
+flavor 0 = Raspberry
+flavor 1 = Hamburger flavor
+flavor 0 = Raspberry
+:END:
+
+*** Another motivating ENUM Example
+
+#+BEGIN_SRC C :exports both
+#include <stdbool.h> 
+#include <stdio.h>
+#include <stdlib.h>
+#include <time.h>
+
+enum card_face {
+    ACE = 1,
+    FACE2,
+    FACE3,
+    FACE4,
+    FACE5,
+    FACE6,
+    FACE7,
+    FACE8,
+    FACE9,
+    FACE10,
+    JACK,
+    QUEEN,
+    KING
+};
+
+typedef enum card_face CardFace;
+
+enum card_suit {
+    CLUBS,
+    HEARTS,
+    DIAMONDS,
+    SPADES
+};
+
+typedef enum card_suit CardSuit;
+
+struct playing_card {
+    CardFace face;
+    CardSuit suit;
+};
+
+typedef struct playing_card PlayingCard;
+
+#define HANDSIZE 5
+
+// A flush is a hand where all cards have the same suit
+// like 5 diamonds or 5 hearts
+bool isFlush(PlayingCard hand[HANDSIZE]) {
+    CardSuit suit = hand[0].suit;
+    for (int i = 1;  i < HANDSIZE; i++ ) {
+        if (suit != hand[i].suit) {
+            return false;
+        }
+    }
+    return true;
+}
+
+int main() {
+    srand(time(NULL));
+    PlayingCard hand[5] = {
+        {ACE, CLUBS},
+        {FACE2, CLUBS},
+        {KING, CLUBS},
+        {JACK, CLUBS},
+        {FACE4, CLUBS}
+    };
+    printf("isFlush? %u\n", isFlush(hand));
+    PlayingCard secondHand[5] = {
+        {ACE, CLUBS},
+        {ACE, SPADES},
+        {ACE, HEARTS},
+        {ACE, DIAMONDS},
+        {ACE, CLUBS} // CHEATER
+    };
+    printf("isFlush? %u\n", isFlush(secondHand));
+
+}
+#+END_SRC
+
+#+RESULTS:
+:RESULTS:
+isFlush? 1
+isFlush? 0
+:END:
+
+
+
+** Unions
+
+- Unions are a way to all the same types to share the same memory.
+- Some types like unsigned integers have different sizes:
+  
+#+BEGIN_SRC C :exports both 
+#include <stdio.h>
+int main() {
+    printf("sizeof(unsigned char):\t\t%ld\n", 
+        sizeof(unsigned char));
+    printf("sizeof(unsigned short):\t\t%ld\n", 
+        sizeof(unsigned short));
+    printf("sizeof(unsigned int):\t\t%ld\n", 
+        sizeof(unsigned int));
+    printf("sizeof(unsigned long):\t\t%ld\n", 
+        sizeof(unsigned long));
+    printf("sizeof(unsigned long long):\t%ld\n", 
+        sizeof(unsigned long long));
+    printf("sizeof(unsigned long long int):\t%ld\n", 
+        sizeof(unsigned long long int));
+
+}
+#+END_SRC
+
+#+RESULTS:
+:RESULTS:
+sizeof(unsigned char):		1
+sizeof(unsigned short):		2
+sizeof(unsigned int):		4
+sizeof(unsigned long):		8
+sizeof(unsigned long long):	8
+sizeof(unsigned long long int):	8
+:END:
+
+#+BEGIN_SRC C :exports both 
+#include <stdio.h>
+
+union uints {
+    unsigned char a_char;
+    unsigned short a_short;
+    unsigned int an_int;
+    unsigned long a_long;
+};
+typedef union uints UInts;
+
+#define EXAMPLES 7
+int main() {
+    unsigned long longs[EXAMPLES] = 
+        { 0, 1000, 1000000, 10000000000, 
+          65535, 4294967295, 18446744073709551615UL };
+    UInts uints;
+    for (int i = 0 ; i < EXAMPLES; i++) {
+        uints.a_long = longs[i];
+        printf("For the long %lu:\n", longs[i]);
+        printf("\tchar\t %hhu\n", uints.a_char);
+        printf("\tshort\t %hu\n", uints.a_short);
+        printf("\tint\t %u\n", uints.an_int);
+        printf("\tlong\t %lu\n", uints.a_long);
+    }
+    // lets see if we can overflow
+    uints.a_char++;
+    printf("Overflow kept local\t %lu\n", uints.a_long);
+}
+#+END_SRC
+
+#+RESULTS:
+:RESULTS:
+For the long 0:
+	char	 0
+	short	 0
+	int	 0
+	long	 0
+For the long 1000:
+	char	 232
+	short	 1000
+	int	 1000
+	long	 1000
+For the long 1000000:
+	char	 64
+	short	 16960
+	int	 1000000
+	long	 1000000
+For the long 10000000000:
+	char	 0
+	short	 58368
+	int	 1410065408
+	long	 10000000000
+For the long 65535:
+	char	 255
+	short	 65535
+	int	 65535
+	long	 65535
+For the long 4294967295:
+	char	 255
+	short	 65535
+	int	 4294967295
+	long	 4294967295
+For the long 18446744073709551615:
+	char	 255
+	short	 65535
+	int	 4294967295
+	long	 18446744073709551615
+Overflow kept local	 18446744073709551360
+:END:
+
+*** Structs versus Unions
+
+#+BEGIN_SRC C
+#include <stdio.h>
+
+struct uints {
+    unsigned char a_char;
+    unsigned short a_short;
+    unsigned int an_int;
+    unsigned long a_long;
+};
+typedef struct uints UInts;
+
+int main() {
+    UInts uints;
+    uints.a_long = 0;
+    printf("Hi I'm a struct!\n");
+    printf("sizeof(uints)=%zu\n", sizeof(uints));
+    printf("sizeof(uints.a_char)=%zu\n", sizeof(uints.a_char));
+    printf("sizeof(uints.a_short)=%zu\n", sizeof(uints.a_short));
+    printf("sizeof(uints.an_int)=%zu\n", sizeof(uints.an_int));
+    printf("sizeof(uints.a_long)=%zu\n", sizeof(uints.a_long));
+    printf("&uints=        %p\n", (void *) &uints);
+    printf("&uints.a_char= %p\n", (void *) &(uints.a_char));
+    printf("&uints.a_short=%p\n", (void *) &(uints.a_short));
+    printf("&uints.an_int= %p\n", (void *) &(uints.an_int));
+    printf("&uints.a_long= %p\n", (void *) &(uints.a_long));
+}
+#+END_SRC
+
+#+RESULTS:
+:RESULTS:
+Hi I'm a struct!
+sizeof(uints)=16
+sizeof(uints.a_char)=1
+sizeof(uints.a_short)=2
+sizeof(uints.an_int)=4
+sizeof(uints.a_long)=8
+&uints=        0x7fff012c6370
+&uints.a_char= 0x7fff012c6370
+&uints.a_short=0x7fff012c6372
+&uints.an_int= 0x7fff012c6374
+&uints.a_long= 0x7fff012c6378
+:END:
+
+#+BEGIN_SRC C
+#include <stdio.h>
+
+union uints {
+    unsigned char a_char;
+    unsigned short a_short;
+    unsigned int an_int;
+    unsigned long a_long;
+};
+typedef union uints UInts;
+
+int main() {
+    UInts uints;
+    uints.a_long = 0;
+    printf("Hi I'm a Union!\n");
+    printf("sizeof(uints)=%zu\n", sizeof(uints));
+    printf("sizeof(uints.a_char)=%zu\n", sizeof(uints.a_char));
+    printf("sizeof(uints.a_short)=%zu\n", sizeof(uints.a_short));
+    printf("sizeof(uints.an_int)=%zu\n", sizeof(uints.an_int));
+    printf("sizeof(uints.a_long)=%zu\n", sizeof(uints.a_long));
+    printf("&uints=        %p\n", (void *) &uints);
+    printf("&uints.a_char= %p\n", (void *) &(uints.a_char));
+    printf("&uints.a_short=%p\n", (void *) &(uints.a_short));
+    printf("&uints.an_int= %p\n", (void *) &(uints.an_int));
+    printf("&uints.a_long= %p\n", (void *) &(uints.a_long));
+}
+#+END_SRC
+
+#+RESULTS:
+:RESULTS:
+Hi I'm a Union!
+sizeof(uints)=8
+sizeof(uints.a_char)=1
+sizeof(uints.a_short)=2
+sizeof(uints.an_int)=4
+sizeof(uints.a_long)=8
+&uints=        0x7ffd4ac64830
+&uints.a_char= 0x7ffd4ac64830
+&uints.a_short=0x7ffd4ac64830
+&uints.an_int= 0x7ffd4ac64830
+&uints.a_long= 0x7ffd4ac64830
+:END:
+
+
+*** Union considerations
+
+    - they are aligned at the starting byte of each member.
+    - overflows are kept local to the member being addressed
+
+*** Type Punning      
+    - Type punning is breaking the type system to achieve a goal
+    - in C it is undefined behaviour to write to 1 part of the union
+      and then read from that data using a different overlapping
+      member. Yet it pretty common practice.
+    - GCC and others typically allow it.
+
+*** Unions with type tags
+
+It is common practice to treat unions like "dynamic types". But it is
+common practice to leave a hint in a tag to what type is actually
+being stored in that union.
+
+#+BEGIN_SRC C
+#include <stdio.h>
+#include <stdint.h>
+#include <limits.h>
+#include <stdlib.h>
+
+// Multitype is either NOTHING, AN_INT, or A_FLOAT
+// You should read it and write it based on its type (which)
+struct multi_type {
+    enum {
+        NOTHING,
+        AN_INT,
+        A_FLOAT
+    } which;
+    union {
+        int32_t an_int;
+        float a_float;
+    } value;
+};
+typedef struct multi_type MultiType;
+
+void print_mt(MultiType mt) {
+    if (mt.which == NOTHING) {
+        printf("nothing");
+    } else if (mt.which == AN_INT) {
+        printf("%d", (int) mt.value.an_int);
+    } else if (mt.which == A_FLOAT) {
+        printf("%e", mt.value.a_float);
+    } else {
+        abort();
+    }
+}
+
+void print_mt_array(MultiType *mt_array, size_t length) {
+    for (size_t idx = 0; idx < length; idx++) {
+        print_mt(mt_array[idx]);
+        printf(" ");
+    }
+    printf("\n");
+}
+#define EXAMPLES 6
+int main() {
+    MultiType mt_array[EXAMPLES] = {
+        { NOTHING },
+        { AN_INT, { .an_int=10 } },
+        { A_FLOAT, { .a_float=0.1 } },
+        { NOTHING },
+        { A_FLOAT, { .a_float=99.9 } },
+        { AN_INT, { .an_int=99.9 } },
+    };
+    printf("\n");
+    printf("sizeof(mt_array)    == %lu\n",sizeof(mt_array));
+    printf("sizeof(mt_array[0]) == %lu\n",sizeof(mt_array[0]));
+    printf("sizeof(mt_array[1]) == %lu\n",sizeof(mt_array[0]));
+    printf("sizeof(mt_array[2]) == %lu\n",sizeof(mt_array[0]));
+    print_mt_array(mt_array, EXAMPLES);
+}
+#+END_SRC
+
+#+RESULTS:
+:RESULTS:
+sizeof(mt_array)    == 48
+sizeof(mt_array[0]) == 8
+sizeof(mt_array[1]) == 8
+sizeof(mt_array[2]) == 8
+sizeof(mt_array[0].which) == 4
+nothing 10 1.000000e-01 nothing 9.990000e+01 99
+:END:
