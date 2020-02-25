@@ -819,6 +819,5 @@ sizeof(mt_array)    == 48
 sizeof(mt_array[0]) == 8
 sizeof(mt_array[1]) == 8
 sizeof(mt_array[2]) == 8
-sizeof(mt_array[0].which) == 4
 nothing 10 1.000000e-01 nothing 9.990000e+01 99
 :END:
