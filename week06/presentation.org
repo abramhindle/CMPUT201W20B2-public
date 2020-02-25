@@ -71,6 +71,14 @@ int main(int argc, char**argv) {
 gcc -std=c99 -Wall -pedantic -Werror -o programname programname.c
 
 ** Structs!
+*** A pointer is not a l value
+
+    p = string
+    p++
+    tmp = p
+    p = (char*)p + 1*sizeof(void)
+    
+
 *** Struct Intro
 How do you store a record?
 
@@ -103,8 +111,26 @@ my_pet = Pet("Dan","dog",6)
 my_pet.name
 #+END_SRC
 
+(&my_pet)->name
+my_pet.name
+
 In C with structs you use the dot operator to access fields or members
 of the structs
+
+names = { "Darren", "Dan" }
+ages  = { 3       , 6 }
+type  = {"cat",     "dog" }
+          0           1
+
+#define DARREN 0
+names[DARREN]
+ages[DARREN]
+type[DARREN]
+
+darren.name
+darren.age
+darren.type
+
 
 #+BEGIN_SRC C 
 #include <stdio.h>
@@ -112,11 +138,17 @@ of the structs
 #define TYPE_LEN 9
 
 int main() {
+    struct { 
+        int x;
+        int y;
+    } foo;
     struct { // declare a struct type
         char name[NAME_LEN];
         char type[TYPE_LEN];
+        double doub;
         int  age;
-   } my_pet = { "Dan", "dog", 6 }; // name and initialize 1 instance of the struct
+   } my_pet  = { "Dan", "dog", 5.0, 6 }, // name and initialize 1 instance of the struct
+     my_pet2 = { "Dan", "dog", 5.0, 6 }; // name and initialize 1 instance of the struct
    printf("%s, %s, %d\n", my_pet.name, my_pet.type, my_pet.age);
    printf("sizeof(my_pet)=%lu\n",sizeof(my_pet));
 }
@@ -124,7 +156,7 @@ int main() {
 
 #+RESULTS:
 : Dan, dog, 6
-: sizeof(my_pet)=32
+: sizeof(my_pet)=48
 
 *** Structs in memory
 
@@ -170,10 +202,10 @@ int main() {
 
 #+RESULTS:
 : Dan, dog, 6
-: struct      location:	 0x7ffc673a9c30
-: my_pet.name location:	 0x7ffc673a9c30
-: my_pet.type location:	 0x7ffc673a9c41
-: my_pet.age  location:	 0x7ffc673a9c4c
+: struct      location:	 0x7ffe2d7e85e0
+: my_pet.name location:	 0x7ffe2d7e85e0
+: my_pet.type location:	 0x7ffe2d7e85f1
+: my_pet.age  location:	 0x7ffe2d7e85fc
 : my_pet.name size:	 17
 : my_pet.type size:	 9
 : my_pet.age  size:	 4
@@ -259,11 +291,12 @@ int main() {
 #define TYPE_LEN 9
 
 // First declare the struct tag
-
+// struct my_pet
 struct my_pet { // declare a struct type
     char name[NAME_LEN];
     char type[TYPE_LEN];
     int  age;
+    struct my_pet * ptr;
 }; // REMEMBER THE SEMICOLON
 
 // Then typedef it
@@ -314,72 +347,6 @@ int main() {
            position.y
     );
     Coordinate new_position = move_left(position);
-    printf("position=(%g,%g)\n",
-           position.x,
-           position.y
-    );
-    printf("new_position=(%g,%g)\n",
-           new_position.x,
-           new_position.y
-    );
-    position = move_left(move_left(position));
-    printf("position=(%g,%g)\n",
-           position.x,
-           position.y
-    );
-}
-#+END_SRC
-
-#+RESULTS:
-: position=(0,0)
-: position=(0,0)
-: new_position=(-1,0)
-: position=(-2,0)
-
-
-#+BEGIN_SRC C :exports both
-#include <stdio.h>
-
-struct SizedIntArray
-
-int main(int argc, char**argv) {
-    return 0;
-}
-#+END_SRC
-
-
-
-
-*** Pass by Value
-
-#+BEGIN_SRC C
-#include <stdio.h>
-
-/* The important thing to notice here is that
- * structs are pass-by-value. Just like a single float,
- * when we pass a struct to a function it gets a COPY
- * of the original struct!
- * We can also assign structs and we get a COPY.
- * We can also return structs and we get a COPY.
- */
-
-struct coordinate {
-    float x;
-    float y;
-};
-
-struct coordinate move_left(struct coordinate position) {
-    position.x -= 1.0;
-    return position;
-}
-
-int main() {
-    struct coordinate position = { 0, 0 };
-    printf("position=(%g,%g)\n",
-           position.x,
-           position.y
-    );
-    struct coordinate new_position = move_left(position);
     printf("position=(%g,%g)\n",
            position.x,
            position.y
@@ -476,22 +443,22 @@ int main() {
 
 #+RESULTS:
 #+begin_example
-my_string_literal pointer is at 0x7fff4d374a48
+my_string_literal pointer is at 0x7ffc034aeb68
 position=(0,0)
-I am moving position.name: YoloStringLiteral!-X-X-X-X-X-X [0x55b732d31a98] LEFT
+I am moving position.name: YoloStringLiteral!-X-X-X-X-X-X [0x5567c2ff4a98] LEFT
 position=(0,0)
 new_position=(-1,0)
-I am moving position.name: YoloStringLiteral!-X-X-X-X-X-X [0x55b732d31a98] LEFT
-I am moving position.name: YoloStringLiteral!-X-X-X-X-X-X [0x55b732d31a98] LEFT
+I am moving position.name: YoloStringLiteral!-X-X-X-X-X-X [0x5567c2ff4a98] LEFT
+I am moving position.name: YoloStringLiteral!-X-X-X-X-X-X [0x5567c2ff4a98] LEFT
 position=(-2,0)
 Size of named_coordinate: 16
 Size of coordinate: 8
 Size of my_string_literal: 8
 strlen of my_string_literal: 30
-&position.name     0x7fff4d374a58
-&new_position.name 0x7fff4d374a68
-position.name      0x55b732d31a98
-new_position.name  0x55b732d31a98
+&position.name     0x7ffc034aeb78
+&new_position.name 0x7ffc034aeb88
+position.name      0x5567c2ff4a98
+new_position.name  0x5567c2ff4a98
 position.name      YoloStringLiteral!-X-X-X-X-X-X
 new_position.name  YoloStringLiteral!-X-X-X-X-X-X
 #+end_example
