@@ -3,7 +3,7 @@
 "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
 <head>
-<!-- 2020-02-25 Tue 11:21 -->
+<!-- 2020-02-25 Tue 11:56 -->
 <meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <title>CMPUT201W20B2 Week 7</title>
@@ -234,34 +234,43 @@ for the JavaScript code in this tag.
 <h2>Table of Contents</h2>
 <div id="text-table-of-contents">
 <ul>
-<li><a href="#org54a137a">1. Week7</a>
+<li><a href="#org9f1e941">1. Week7</a>
 <ul>
-<li><a href="#orgac53ae5">1.1. Copyright Statement</a>
+<li><a href="#org192bbe1">1.1. Copyright Statement</a>
 <ul>
-<li><a href="#org0561a25">1.1.1. License</a></li>
-<li><a href="#org9c488b5">1.1.2. Hazel Code is licensed under AGPL3.0+</a></li>
+<li><a href="#org59fccd2">1.1.1. License</a></li>
+<li><a href="#orgb3da3b6">1.1.2. Hazel Code is licensed under AGPL3.0+</a></li>
 </ul>
 </li>
-<li><a href="#orgc48150c">1.2. Init ORG-MODE</a></li>
-<li><a href="#orgdbdb9d6">1.3. Org Template</a></li>
-<li><a href="#org3c14437">1.4. Remember how to compile?</a></li>
-<li><a href="#org43594f1">1.5. Enums!</a>
+<li><a href="#org6667693">1.2. Init ORG-MODE</a></li>
+<li><a href="#org1c07000">1.3. Org Template</a></li>
+<li><a href="#org749b74e">1.4. Remember how to compile?</a></li>
+<li><a href="#org9a9aff5">1.5. Enums!</a>
 <ul>
-<li><a href="#orgffbf499">1.5.1. Enum Example</a></li>
-<li><a href="#org7fa1cae">1.5.2. enum<sub>typedef.c</sub></a></li>
-<li><a href="#orgbcb8180">1.5.3. EnumStart</a></li>
-<li><a href="#org022e465">1.5.4. Enumassign</a></li>
-<li><a href="#orgde015d8">1.5.5. Enum<sub>loop</sub><sub>trick.c</sub></a></li>
-<li><a href="#org000cde3">1.5.6. Enum Int</a></li>
-<li><a href="#orge2f7a44">1.5.7. Another motivating ENUM Example</a></li>
+<li><a href="#orgc9b9164">1.5.1. Enum Example</a></li>
+<li><a href="#org307c068">1.5.2. enum<sub>typedef.c</sub></a></li>
+<li><a href="#org59f6f93">1.5.3. EnumStart</a></li>
+<li><a href="#org0e5f0c5">1.5.4. Enumassign</a></li>
+<li><a href="#org2de2a0a">1.5.5. Enum<sub>loop</sub><sub>trick.c</sub></a></li>
+<li><a href="#orgb5ec28a">1.5.6. Enum Int</a></li>
+<li><a href="#org27ed01b">1.5.7. Another motivating ENUM Example</a></li>
 </ul>
 </li>
-<li><a href="#org3f6c2a9">1.6. Unions</a>
+<li><a href="#orgd89f144">1.6. Unions</a>
 <ul>
-<li><a href="#org1e33030">1.6.1. Structs versus Unions</a></li>
-<li><a href="#org0f471ad">1.6.2. Union considerations</a></li>
-<li><a href="#orgb61eaf8">1.6.3. Type Punning</a></li>
-<li><a href="#org4682847">1.6.4. Unions with type tags</a></li>
+<li><a href="#org211fd57">1.6.1. Structs versus Unions</a></li>
+<li><a href="#org5faea83">1.6.2. Union considerations</a></li>
+<li><a href="#org34100c3">1.6.3. Type Punning</a></li>
+<li><a href="#org21fe93c">1.6.4. Unions with type tags</a></li>
+</ul>
+</li>
+<li><a href="#org07f5307">1.7. Malloc! The Heap!</a>
+<ul>
+<li><a href="#org24be879">1.7.1. On my computer</a></li>
+<li><a href="#orgdd0c4d2">1.7.2. Malloc</a></li>
+<li><a href="#org2771c0e">1.7.3. Calloc</a></li>
+<li><a href="#orgb3c6ed6">1.7.4. Free</a></li>
+<li><a href="#orgc29aaca">1.7.5. Realloc</a></li>
 </ul>
 </li>
 </ul>
@@ -270,12 +279,12 @@ for the JavaScript code in this tag.
 </div>
 </div>
 
-<div id="outline-container-org54a137a" class="outline-2">
-<h2 id="org54a137a"><span class="section-number-2">1</span> Week7</h2>
+<div id="outline-container-org9f1e941" class="outline-2">
+<h2 id="org9f1e941"><span class="section-number-2">1</span> Week7</h2>
 <div class="outline-text-2" id="text-1">
 </div>
-<div id="outline-container-orgac53ae5" class="outline-3">
-<h3 id="orgac53ae5"><span class="section-number-3">1.1</span> Copyright Statement</h3>
+<div id="outline-container-org192bbe1" class="outline-3">
+<h3 id="org192bbe1"><span class="section-number-3">1.1</span> Copyright Statement</h3>
 <div class="outline-text-3" id="text-1-1">
 <p>
 If you are in CMPUT201 at UAlberta this code is released in the public
@@ -287,8 +296,8 @@ Otherwise it is (c) 2020 Abram Hindle, Hazel Campbell AGPL3.0+
 </p>
 </div>
 
-<div id="outline-container-org0561a25" class="outline-4">
-<h4 id="org0561a25"><span class="section-number-4">1.1.1</span> License</h4>
+<div id="outline-container-org59fccd2" class="outline-4">
+<h4 id="org59fccd2"><span class="section-number-4">1.1.1</span> License</h4>
 <div class="outline-text-4" id="text-1-1-1">
 <p>
 Week 3 notes
@@ -317,8 +326,8 @@ along with this program.  If not, see <a href="https://www.gnu.org/licenses/">ht
 </div>
 
 
-<div id="outline-container-org9c488b5" class="outline-4">
-<h4 id="org9c488b5"><span class="section-number-4">1.1.2</span> Hazel Code is licensed under AGPL3.0+</h4>
+<div id="outline-container-orgb3da3b6" class="outline-4">
+<h4 id="orgb3da3b6"><span class="section-number-4">1.1.2</span> Hazel Code is licensed under AGPL3.0+</h4>
 <div class="outline-text-4" id="text-1-1-2">
 <p>
 Hazel's code is also found here
@@ -333,8 +342,8 @@ license, unless otherwise noted.
 </div>
 </div>
 
-<div id="outline-container-orgc48150c" class="outline-3">
-<h3 id="orgc48150c"><span class="section-number-3">1.2</span> Init ORG-MODE</h3>
+<div id="outline-container-org6667693" class="outline-3">
+<h3 id="org6667693"><span class="section-number-3">1.2</span> Init ORG-MODE</h3>
 <div class="outline-text-3" id="text-1-2">
 <div class="org-src-container">
 <pre class="src src-elisp"><span style="color: #b22222;">;; </span><span style="color: #b22222;">I need this for org-mode to work well</span>
@@ -350,8 +359,8 @@ license, unless otherwise noted.
 </div>
 </div>
 
-<div id="outline-container-orgdbdb9d6" class="outline-3">
-<h3 id="orgdbdb9d6"><span class="section-number-3">1.3</span> Org Template</h3>
+<div id="outline-container-org1c07000" class="outline-3">
+<h3 id="org1c07000"><span class="section-number-3">1.3</span> Org Template</h3>
 <div class="outline-text-3" id="text-1-3">
 <p>
 Copy and paste this to demo C
@@ -368,8 +377,8 @@ Copy and paste this to demo C
 </div>
 </div>
 
-<div id="outline-container-org3c14437" class="outline-3">
-<h3 id="org3c14437"><span class="section-number-3">1.4</span> Remember how to compile?</h3>
+<div id="outline-container-org749b74e" class="outline-3">
+<h3 id="org749b74e"><span class="section-number-3">1.4</span> Remember how to compile?</h3>
 <div class="outline-text-3" id="text-1-4">
 <p>
 gcc -std=c99 -Wall -pedantic -Werror -o programname programname.c
@@ -378,8 +387,8 @@ gcc -std=c99 -Wall -pedantic -Werror -o programname programname.c
 </div>
 
 
-<div id="outline-container-org43594f1" class="outline-3">
-<h3 id="org43594f1"><span class="section-number-3">1.5</span> Enums!</h3>
+<div id="outline-container-org9a9aff5" class="outline-3">
+<h3 id="org9a9aff5"><span class="section-number-3">1.5</span> Enums!</h3>
 <div class="outline-text-3" id="text-1-5">
 <p>
 Enums are enumerations, which is just a convienant way to make symbols
@@ -400,8 +409,8 @@ Enums are good for representing the type of something or a category.
 </p>
 </div>
 
-<div id="outline-container-orgffbf499" class="outline-4">
-<h4 id="orgffbf499"><span class="section-number-4">1.5.1</span> Enum Example</h4>
+<div id="outline-container-orgc9b9164" class="outline-4">
+<h4 id="orgc9b9164"><span class="section-number-4">1.5.1</span> Enum Example</h4>
 <div class="outline-text-4" id="text-1-5-1">
 <p>
 Enums are good for representing states, symbols, simple values, etc.
@@ -464,8 +473,8 @@ Enums are good for representing states, symbols, simple values, etc.
 </div>
 </div>
 
-<div id="outline-container-org7fa1cae" class="outline-4">
-<h4 id="org7fa1cae"><span class="section-number-4">1.5.2</span> enum<sub>typedef.c</sub></h4>
+<div id="outline-container-org307c068" class="outline-4">
+<h4 id="org307c068"><span class="section-number-4">1.5.2</span> enum<sub>typedef.c</sub></h4>
 <div class="outline-text-4" id="text-1-5-2">
 <p>
 Enums are annoying to type. Typing enum enumname all the time is
@@ -534,8 +543,8 @@ favourite=VANILLA
 
 
 
-<div id="outline-container-orgbcb8180" class="outline-4">
-<h4 id="orgbcb8180"><span class="section-number-4">1.5.3</span> EnumStart</h4>
+<div id="outline-container-org59f6f93" class="outline-4">
+<h4 id="org59f6f93"><span class="section-number-4">1.5.3</span> EnumStart</h4>
 <div class="outline-text-4" id="text-1-5-3">
 <div class="org-src-container">
 <pre class="src src-C"><span style="color: #483d8b;">#include</span> <span style="color: #8b2252;">&lt;stdio.h&gt;</span>
@@ -568,8 +577,8 @@ sizeof(Flavor)=4
 </div>
 </div>
 
-<div id="outline-container-org022e465" class="outline-4">
-<h4 id="org022e465"><span class="section-number-4">1.5.4</span> Enumassign</h4>
+<div id="outline-container-org0e5f0c5" class="outline-4">
+<h4 id="org0e5f0c5"><span class="section-number-4">1.5.4</span> Enumassign</h4>
 <div class="outline-text-4" id="text-1-5-4">
 <div class="org-src-container">
 <pre class="src src-C"><span style="color: #483d8b;">#include</span> <span style="color: #8b2252;">&lt;stdio.h&gt;</span>
@@ -602,8 +611,8 @@ sizeof(Flavor)=4
 </div>
 </div>
 
-<div id="outline-container-orgde015d8" class="outline-4">
-<h4 id="orgde015d8"><span class="section-number-4">1.5.5</span> Enum<sub>loop</sub><sub>trick.c</sub></h4>
+<div id="outline-container-org2de2a0a" class="outline-4">
+<h4 id="org2de2a0a"><span class="section-number-4">1.5.5</span> Enum<sub>loop</sub><sub>trick.c</sub></h4>
 <div class="outline-text-4" id="text-1-5-5">
 <p>
 This is a fun trick to set a maximum value for your enum by using
@@ -667,8 +676,8 @@ flavor=STRAWBERRY
 </div>
 </div>
 
-<div id="outline-container-org000cde3" class="outline-4">
-<h4 id="org000cde3"><span class="section-number-4">1.5.6</span> Enum Int</h4>
+<div id="outline-container-orgb5ec28a" class="outline-4">
+<h4 id="orgb5ec28a"><span class="section-number-4">1.5.6</span> Enum Int</h4>
 <div class="outline-text-4" id="text-1-5-6">
 <p>
 Enum are just integers. And you can treat them as such.
@@ -732,14 +741,14 @@ Enum are just integers. And you can treat them as such.
 <p>
 flavor 1 = Hamburger flavor
 flavor 1 = Hamburger flavor
-flavor 2 = Those packets that come in the ramen
-flavor 0 = Raspberry
+flavor 1 = Hamburger flavor
+flavor 1 = Hamburger flavor
 </p>
 </div>
 </div>
 
-<div id="outline-container-orge2f7a44" class="outline-4">
-<h4 id="orge2f7a44"><span class="section-number-4">1.5.7</span> Another motivating ENUM Example</h4>
+<div id="outline-container-org27ed01b" class="outline-4">
+<h4 id="org27ed01b"><span class="section-number-4">1.5.7</span> Another motivating ENUM Example</h4>
 <div class="outline-text-4" id="text-1-5-7">
 <div class="org-src-container">
 <pre class="src src-C"><span style="color: #483d8b;">#include</span> <span style="color: #8b2252;">&lt;stdbool.h&gt;</span> 
@@ -828,8 +837,8 @@ isFlush? 0
 
 
 
-<div id="outline-container-org3f6c2a9" class="outline-3">
-<h3 id="org3f6c2a9"><span class="section-number-3">1.6</span> Unions</h3>
+<div id="outline-container-orgd89f144" class="outline-3">
+<h3 id="orgd89f144"><span class="section-number-3">1.6</span> Unions</h3>
 <div class="outline-text-3" id="text-1-6">
 <ul class="org-ul">
 <li>Unions are a way to all the same types to share the same memory.</li>
@@ -937,8 +946,8 @@ Overflow kept local	 18446744073709551360
 </p>
 </div>
 
-<div id="outline-container-org1e33030" class="outline-4">
-<h4 id="org1e33030"><span class="section-number-4">1.6.1</span> Structs versus Unions</h4>
+<div id="outline-container-org211fd57" class="outline-4">
+<h4 id="org211fd57"><span class="section-number-4">1.6.1</span> Structs versus Unions</h4>
 <div class="outline-text-4" id="text-1-6-1">
 <div class="org-src-container">
 <pre class="src src-C"><span style="color: #483d8b;">#include</span> <span style="color: #8b2252;">&lt;stdio.h&gt;</span>
@@ -976,11 +985,11 @@ sizeof(uints.a<sub>char</sub>)=1
 sizeof(uints.a<sub>short</sub>)=2
 sizeof(uints.an<sub>int</sub>)=4
 sizeof(uints.a<sub>long</sub>)=8
-&amp;uints=        0x7ffcf221d760
-&amp;uints.a<sub>char</sub>= 0x7ffcf221d760
-&amp;uints.a<sub>short</sub>=0x7ffcf221d762
-&amp;uints.an<sub>int</sub>= 0x7ffcf221d764
-&amp;uints.a<sub>long</sub>= 0x7ffcf221d768
+&amp;uints=        0x7ffe2c56ec60
+&amp;uints.a<sub>char</sub>= 0x7ffe2c56ec60
+&amp;uints.a<sub>short</sub>=0x7ffe2c56ec62
+&amp;uints.an<sub>int</sub>= 0x7ffe2c56ec64
+&amp;uints.a<sub>long</sub>= 0x7ffe2c56ec68
 </p>
 
 <div class="org-src-container">
@@ -1019,18 +1028,18 @@ sizeof(uints.a<sub>char</sub>)=1
 sizeof(uints.a<sub>short</sub>)=2
 sizeof(uints.an<sub>int</sub>)=4
 sizeof(uints.a<sub>long</sub>)=8
-&amp;uints=        0x7ffcb3c65120
-&amp;uints.a<sub>char</sub>= 0x7ffcb3c65120
-&amp;uints.a<sub>short</sub>=0x7ffcb3c65120
-&amp;uints.an<sub>int</sub>= 0x7ffcb3c65120
-&amp;uints.a<sub>long</sub>= 0x7ffcb3c65120
+&amp;uints=        0x7fff8a3ed5f0
+&amp;uints.a<sub>char</sub>= 0x7fff8a3ed5f0
+&amp;uints.a<sub>short</sub>=0x7fff8a3ed5f0
+&amp;uints.an<sub>int</sub>= 0x7fff8a3ed5f0
+&amp;uints.a<sub>long</sub>= 0x7fff8a3ed5f0
 </p>
 </div>
 </div>
 
 
-<div id="outline-container-org0f471ad" class="outline-4">
-<h4 id="org0f471ad"><span class="section-number-4">1.6.2</span> Union considerations</h4>
+<div id="outline-container-org5faea83" class="outline-4">
+<h4 id="org5faea83"><span class="section-number-4">1.6.2</span> Union considerations</h4>
 <div class="outline-text-4" id="text-1-6-2">
 <ul class="org-ul">
 <li>they are aligned at the starting byte of each member.</li>
@@ -1039,8 +1048,8 @@ sizeof(uints.a<sub>long</sub>)=8
 </div>
 </div>
 
-<div id="outline-container-orgb61eaf8" class="outline-4">
-<h4 id="orgb61eaf8"><span class="section-number-4">1.6.3</span> Type Punning</h4>
+<div id="outline-container-org34100c3" class="outline-4">
+<h4 id="org34100c3"><span class="section-number-4">1.6.3</span> Type Punning</h4>
 <div class="outline-text-4" id="text-1-6-3">
 <ul class="org-ul">
 <li>Type punning is breaking the type system to achieve a goal</li>
@@ -1132,8 +1141,8 @@ cc1: all warnings being treated as errors
 </div>
 
 
-<div id="outline-container-org4682847" class="outline-4">
-<h4 id="org4682847"><span class="section-number-4">1.6.4</span> Unions with type tags</h4>
+<div id="outline-container-org21fe93c" class="outline-4">
+<h4 id="org21fe93c"><span class="section-number-4">1.6.4</span> Unions with type tags</h4>
 <div class="outline-text-4" id="text-1-6-4">
 <p>
 It is common practice to treat unions like "dynamic types". But it is
@@ -1211,11 +1220,265 @@ nothing 10 1.000000e-01 nothing 9.990000e+01 99
 </div>
 </div>
 </div>
+
+<div id="outline-container-org07f5307" class="outline-3">
+<h3 id="org07f5307"><span class="section-number-3">1.7</span> Malloc! The Heap!</h3>
+<div class="outline-text-3" id="text-1-7">
+<p>
+Memory!
+</p>
+
+<p>
+Your programs use the following kinds of memory:
+</p>
+<ul class="org-ul">
+<li>Code: this is for constants and compiled code for the CPU to run</li>
+<li>Data: this is for strings, literals, and other values you predefine
+in your program.</li>
+<li>Stack: this is where the data for your function locals goes</li>
+<li>Heap: this is where dynamically allocated memory goes. It is the largest pool.</li>
+</ul>
+
+<p>
+What memory does our program use? (OS and compiler specific)
+</p>
+<ul class="org-ul">
+<li>Globals? Data.</li>
+<li>Static variables? Data.</li>
+<li>Constants? Code and or Data</li>
+<li>Local variables? stack</li>
+<li>Dynamic allocation? heap</li>
+</ul>
+</div>
+
+<div id="outline-container-org24be879" class="outline-4">
+<h4 id="org24be879"><span class="section-number-4">1.7.1</span> On my computer</h4>
+<div class="outline-text-4" id="text-1-7-1">
+<p>
+Here's what emacs is using
+</p>
+
+<p>
+root@st-francis:/proc/27627# cat maps
+00400000-00641000 r-xp 00000000 09:00 116130283                          /usr/bin/emacs25-x
+00841000-00848000 r&#x2013;p 00241000 09:00 116130283                          /usr/bin/emacs25-x
+00848000-01615000 rw-p 00248000 09:00 116130283                          /usr/bin/emacs25-x
+03155000-0d208000 rw-p 00000000 00:00 0                                  [heap]
+7f16739f4000-7f1673a74000 rw-s 00000000 00:05 935100458                  /SYSV00000000 (deleted)
+7f1673a74000-7f1673a79000 r-xp 00000000 09:00 394799                     /usr/lib/x86<sub>64</sub>-linux-gnu/gdk-pixbuf-2.0/2.10.0/loaders/libpixbufloader-png.so
+7f1673a79000-7f1673c78000 &#x2014;p 00005000 09:00 394799                     /usr/lib/x86<sub>64</sub>-linux-gnu/gdk-pixbuf-2.0/2.10.0/loaders/libpixbufloader-png.so
+7f1673c78000-7f1673c79000 r&#x2013;p 00004000 09:00 394799                     /usr/lib/x86<sub>64</sub>-linux-gnu/gdk-pixbuf-2.0/2.10.0/loaders/libpixbufloader-png.so
+&#x2026;
+7f168942a000-7f168942b000 r&#x2013;p 00027000 09:00 103024636                  /lib/x86<sub>64</sub>-linux-gnu/ld-2.27.so
+7f168942b000-7f168942c000 rw-p 00028000 09:00 103024636                  /lib/x86<sub>64</sub>-linux-gnu/ld-2.27.so
+7f168942c000-7f168942d000 rw-p 00000000 00:00 0 
+7fffcf9ad000-7fffcfa6d000 rw-p 00000000 00:00 0                          [stack]
+7fffcfb29000-7fffcfb2c000 r&#x2013;p 00000000 00:00 0                          [vvar]
+7fffcfb2c000-7fffcfb2e000 r-xp 00000000 00:00 0                          [vdso]
+ffffffffff600000-ffffffffff601000 r-xp 00000000 00:00 0                  [vsyscall]
+</p>
+
+<p>
+Here's the important lines
+</p>
+<p>
+code        00400000-00641000 r-xp 00000000 09:00 116130283                          /usr/bin/emacs25-x
+data?       00841000-00848000 r&#x2013;p 00241000 09:00 116130283                          /usr/bin/emacs25-x
+data?       00848000-01615000 rw-p 00248000 09:00 116130283                          /usr/bin/emacs25-x
+heap        03155000-0d208000 rw-p 00000000 00:00 0                                  [heap]
+stack       7fffcf9ad000-7fffcfa6d000 rw-p 00000000 00:00 0                          [stack]
+</p>
+
+<p>
+So stack is limited
+</p>
+
+<p>
+hindle1@st-francis:~$ ulimit -a
+core file size          (blocks, -c) 0
+data seg size           (kbytes, -d) unlimited
+scheduling priority             (-e) 0
+file size               (blocks, -f) unlimited
+pending signals                 (-i) 273535
+max locked memory       (kbytes, -l) 16384
+max memory size         (kbytes, -m) unlimited
+open files                      (-n) 1024
+pipe size            (512 bytes, -p) 8
+POSIX message queues     (bytes, -q) 819200
+real-time priority              (-r) 0
+stack size              (kbytes, -s) 8192
+cpu time               (seconds, -t) unlimited
+max user processes              (-u) 273535
+virtual memory          (kbytes, -v) unlimited
+file locks                      (-x) unlimited
+</p>
+
+<p>
+stack size              (kbytes, -s) 8192
+</p>
+
+<p>
+8megs of stack.
+</p>
+
+<p>
+What if I want a big array?
+</p>
+
+<p>
+I can tell bash to give me more, but sometimes you are limited.
+</p>
+
+<p>
+How do programs using more than 8mb of memory?
+</p>
+
+<p>
+THE HEAP!!
+</p>
+
+<p>
+How do I get heap memory?
+</p>
+
+<p>
+malloc!
+</p>
+
+<p>
+Can I get it any time.
+</p>
+
+<p>
+Sure.
+</p>
+</div>
+</div>
+
+<div id="outline-container-orgdd0c4d2" class="outline-4">
+<h4 id="orgdd0c4d2"><span class="section-number-4">1.7.2</span> Malloc</h4>
+<div class="outline-text-4" id="text-1-7-2">
+<p>
+Just stack allocation
+</p>
+<div class="org-src-container">
+<pre class="src src-C"><span style="color: #483d8b;">#include</span> <span style="color: #8b2252;">&lt;assert.h&gt;</span>
+<span style="color: #483d8b;">#include</span> <span style="color: #8b2252;">&lt;stdio.h&gt;</span>
+<span style="color: #483d8b;">#include</span> <span style="color: #8b2252;">&lt;stdlib.h&gt;</span>
+<span style="color: #483d8b;">#include</span> <span style="color: #8b2252;">&lt;string.h&gt;</span>
+
+<span style="color: #228b22;">void</span> <span style="color: #0000ff;">allocAndGo</span>(<span style="color: #a020f0;">const</span> <span style="color: #228b22;">int</span> <span style="color: #a0522d;">len</span>) {
+        <span style="color: #228b22;">int</span> <span style="color: #a0522d;">bigArray</span>[len];
+        <span style="color: #a020f0;">for</span>(<span style="color: #228b22;">int</span> <span style="color: #a0522d;">idx</span>=0; idx &lt; len; idx++) {
+            bigArray[idx] = idx;
+        }
+        printf(<span style="color: #8b2252;">"%u ints allocated!\n"</span>,1+bigArray[len-1]);
+        printf(<span style="color: #8b2252;">"%lu bytes!\n"</span>, <span style="color: #a020f0;">sizeof</span>(<span style="color: #228b22;">int</span>)*len);
+}
+<span style="color: #228b22;">int</span> <span style="color: #0000ff;">main</span>() {
+    <span style="color: #b22222;">// </span><span style="color: #b22222;">let's find the max of the stack.</span>
+    <span style="color: #a020f0;">for</span> (<span style="color: #228b22;">int</span> <span style="color: #a0522d;">i</span> = 1; i &lt; 900000; i+=256*1024) {
+        allocAndGo(i);
+    }
+}
+</pre>
+</div>
+
+<p>
+1 ints allocated!
+4 bytes!
+262145 ints allocated!
+1048580 bytes!
+524289 ints allocated!
+2097156 bytes!
+786433 ints allocated!
+3145732 bytes!
+</p>
+
+
+<div class="org-src-container">
+<pre class="src src-C"><span style="color: #483d8b;">#include</span> <span style="color: #8b2252;">&lt;assert.h&gt;</span>
+<span style="color: #483d8b;">#include</span> <span style="color: #8b2252;">&lt;stdio.h&gt;</span>
+<span style="color: #483d8b;">#include</span> <span style="color: #8b2252;">&lt;stdlib.h&gt;</span>
+<span style="color: #483d8b;">#include</span> <span style="color: #8b2252;">&lt;string.h&gt;</span>
+
+<span style="color: #228b22;">int</span> * <span style="color: #0000ff;">testAllocArray</span>(<span style="color: #228b22;">int</span> <span style="color: #a0522d;">arrLen</span>) {
+  <span style="color: #228b22;">size_t</span> <span style="color: #a0522d;">size</span> = arrLen * <span style="color: #a020f0;">sizeof</span>(<span style="color: #228b22;">int</span>);
+  <span style="color: #228b22;">int</span>* <span style="color: #a0522d;">array</span> = malloc( size );
+  assert(array!=<span style="color: #008b8b;">NULL</span>);
+  memset((<span style="color: #228b22;">void</span>*)array, 0, size);
+  <span style="color: #a020f0;">for</span>(<span style="color: #228b22;">int</span> <span style="color: #a0522d;">idx</span>=0; idx&lt;arrLen; idx++) {
+    array[idx] = idx;
+  }
+  <span style="color: #a020f0;">return</span> array;
+}
+<span style="color: #228b22;">int</span> <span style="color: #0000ff;">main</span>() {
+    <span style="color: #a020f0;">for</span> (<span style="color: #228b22;">int</span> <span style="color: #a0522d;">i</span> = 1; i &lt; 90000000; i+=5*1024*1024) {
+        <span style="color: #228b22;">int</span> * <span style="color: #a0522d;">bigArray</span> = testAllocArray( i );
+        printf(<span style="color: #8b2252;">"%u ints allocated!\n"</span>,1+bigArray[i-1]);
+        printf(<span style="color: #8b2252;">"%lu bytes!\n"</span>, <span style="color: #a020f0;">sizeof</span>(<span style="color: #228b22;">int</span>)*i);
+        free(bigArray); <span style="color: #b22222;">// </span><span style="color: #b22222;">remember to free it when done!</span>
+    }
+}
+</pre>
+</div>
+
+<p>
+1 ints allocated!
+4 bytes!
+5242881 ints allocated!
+20971524 bytes!
+10485761 ints allocated!
+41943044 bytes!
+15728641 ints allocated!
+62914564 bytes!
+20971521 ints allocated!
+83886084 bytes!
+26214401 ints allocated!
+104857604 bytes!
+31457281 ints allocated!
+125829124 bytes!
+36700161 ints allocated!
+146800644 bytes!
+41943041 ints allocated!
+167772164 bytes!
+47185921 ints allocated!
+188743684 bytes!
+52428801 ints allocated!
+209715204 bytes!
+57671681 ints allocated!
+230686724 bytes!
+62914561 ints allocated!
+251658244 bytes!
+68157441 ints allocated!
+272629764 bytes!
+73400321 ints allocated!
+293601284 bytes!
+78643201 ints allocated!
+314572804 bytes!
+83886081 ints allocated!
+335544324 bytes!
+89128961 ints allocated!
+356515844 bytes!
+</p>
+</div>
+</div>
+
+<div id="outline-container-org2771c0e" class="outline-4">
+<h4 id="org2771c0e"><span class="section-number-4">1.7.3</span> Calloc</h4>
+</div>
+<div id="outline-container-orgb3c6ed6" class="outline-4">
+<h4 id="orgb3c6ed6"><span class="section-number-4">1.7.4</span> Free</h4>
+</div>
+<div id="outline-container-orgc29aaca" class="outline-4">
+<h4 id="orgc29aaca"><span class="section-number-4">1.7.5</span> Realloc</h4>
+</div>
+</div>
 </div>
 </div>
 <div id="postamble" class="status">
 <p class="author">Author: Abram Hindle</p>
-<p class="date">Created: 2020-02-25 Tue 11:21</p>
+<p class="date">Created: 2020-02-25 Tue 11:56</p>
 <p class="validation"><a href="http://validator.w3.org/check?uri=referer">Validate</a></p>
 </div>
 </body>
