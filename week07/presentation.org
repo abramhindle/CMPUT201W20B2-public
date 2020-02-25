@@ -824,6 +824,99 @@ nothing 10 1.000000e-01 nothing 9.990000e+01 99
 
 ** Malloc! The Heap!
 
+Memory!
+
+Your programs use the following kinds of memory:
+- Code: this is for constants and compiled code for the CPU to run
+- Data: this is for strings, literals, and other values you predefine
+  in your program.
+- Stack: this is where the data for your function locals goes
+- Heap: this is where dynamically allocated memory goes. It is the largest pool.
+
+What memory does our program use? (OS and compiler specific)
+- Globals? Data.
+- Static variables? Data.
+- Constants? Code and or Data
+- Local variables? stack
+- Dynamic allocation? heap
+
+*** On my computer
+
+Here's what emacs is using
+
+:EXAMPLE:
+root@st-francis:/proc/27627# cat maps
+00400000-00641000 r-xp 00000000 09:00 116130283                          /usr/bin/emacs25-x
+00841000-00848000 r--p 00241000 09:00 116130283                          /usr/bin/emacs25-x
+00848000-01615000 rw-p 00248000 09:00 116130283                          /usr/bin/emacs25-x
+03155000-0d208000 rw-p 00000000 00:00 0                                  [heap]
+7f16739f4000-7f1673a74000 rw-s 00000000 00:05 935100458                  /SYSV00000000 (deleted)
+7f1673a74000-7f1673a79000 r-xp 00000000 09:00 394799                     /usr/lib/x86_64-linux-gnu/gdk-pixbuf-2.0/2.10.0/loaders/libpixbufloader-png.so
+7f1673a79000-7f1673c78000 ---p 00005000 09:00 394799                     /usr/lib/x86_64-linux-gnu/gdk-pixbuf-2.0/2.10.0/loaders/libpixbufloader-png.so
+7f1673c78000-7f1673c79000 r--p 00004000 09:00 394799                     /usr/lib/x86_64-linux-gnu/gdk-pixbuf-2.0/2.10.0/loaders/libpixbufloader-png.so
+...
+7f168942a000-7f168942b000 r--p 00027000 09:00 103024636                  /lib/x86_64-linux-gnu/ld-2.27.so
+7f168942b000-7f168942c000 rw-p 00028000 09:00 103024636                  /lib/x86_64-linux-gnu/ld-2.27.so
+7f168942c000-7f168942d000 rw-p 00000000 00:00 0 
+7fffcf9ad000-7fffcfa6d000 rw-p 00000000 00:00 0                          [stack]
+7fffcfb29000-7fffcfb2c000 r--p 00000000 00:00 0                          [vvar]
+7fffcfb2c000-7fffcfb2e000 r-xp 00000000 00:00 0                          [vdso]
+ffffffffff600000-ffffffffff601000 r-xp 00000000 00:00 0                  [vsyscall]
+:END:
+
+Here's the important lines
+:EXAMPLE:
+code        00400000-00641000 r-xp 00000000 09:00 116130283                          /usr/bin/emacs25-x
+data?       00841000-00848000 r--p 00241000 09:00 116130283                          /usr/bin/emacs25-x
+data?       00848000-01615000 rw-p 00248000 09:00 116130283                          /usr/bin/emacs25-x
+heap        03155000-0d208000 rw-p 00000000 00:00 0                                  [heap]
+stack       7fffcf9ad000-7fffcfa6d000 rw-p 00000000 00:00 0                          [stack]
+:END:
+
+So stack is limited
+
+:EXAMPLE:
+hindle1@st-francis:~$ ulimit -a
+core file size          (blocks, -c) 0
+data seg size           (kbytes, -d) unlimited
+scheduling priority             (-e) 0
+file size               (blocks, -f) unlimited
+pending signals                 (-i) 273535
+max locked memory       (kbytes, -l) 16384
+max memory size         (kbytes, -m) unlimited
+open files                      (-n) 1024
+pipe size            (512 bytes, -p) 8
+POSIX message queues     (bytes, -q) 819200
+real-time priority              (-r) 0
+stack size              (kbytes, -s) 8192
+cpu time               (seconds, -t) unlimited
+max user processes              (-u) 273535
+virtual memory          (kbytes, -v) unlimited
+file locks                      (-x) unlimited
+:END:
+
+:RESULTS:
+stack size              (kbytes, -s) 8192
+:END:
+
+8megs of stack.
+
+What if I want a big array?
+
+I can tell bash to give me more, but sometimes you are limited.
+
+How do programs using more than 8mb of memory?
+
+THE HEAP!!
+
+How do I get heap memory?
+
+malloc!
+
+Can I get it any time.
+
+Sure.
+
 *** Malloc
 *** Calloc 
 *** Free
