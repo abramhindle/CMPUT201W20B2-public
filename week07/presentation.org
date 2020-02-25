@@ -129,7 +129,7 @@ int main() {
 #+END_SRC
 
 #+RESULTS:
-:RESULTS:
+#+begin_example
 0 Right	[3]
 1 Down	[1]
 2 Left	[2]
@@ -140,7 +140,7 @@ int main() {
 7 Up	[0]
 8 Right	[3]
 9 Down	[1]
-:END:
+#+end_example
 
 *** enum_typedef.c
 
