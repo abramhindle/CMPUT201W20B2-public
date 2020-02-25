@@ -1,0 +1,1222 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
+<head>
+<!-- 2020-02-25 Tue 11:21 -->
+<meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>CMPUT201W20B2 Week 7</title>
+<meta name="generator" content="Org mode" />
+<meta name="author" content="Abram Hindle" />
+<style type="text/css">
+ <!--/*--><![CDATA[/*><!--*/
+  .title  { text-align: center;
+             margin-bottom: .2em; }
+  .subtitle { text-align: center;
+              font-size: medium;
+              font-weight: bold;
+              margin-top:0; }
+  .todo   { font-family: monospace; color: red; }
+  .done   { font-family: monospace; color: green; }
+  .priority { font-family: monospace; color: orange; }
+  .tag    { background-color: #eee; font-family: monospace;
+            padding: 2px; font-size: 80%; font-weight: normal; }
+  .timestamp { color: #bebebe; }
+  .timestamp-kwd { color: #5f9ea0; }
+  .org-right  { margin-left: auto; margin-right: 0px;  text-align: right; }
+  .org-left   { margin-left: 0px;  margin-right: auto; text-align: left; }
+  .org-center { margin-left: auto; margin-right: auto; text-align: center; }
+  .underline { text-decoration: underline; }
+  #postamble p, #preamble p { font-size: 90%; margin: .2em; }
+  p.verse { margin-left: 3%; }
+  pre {
+    border: 1px solid #ccc;
+    box-shadow: 3px 3px 3px #eee;
+    padding: 8pt;
+    font-family: monospace;
+    overflow: auto;
+    margin: 1.2em;
+  }
+  pre.src {
+    position: relative;
+    overflow: visible;
+    padding-top: 1.2em;
+  }
+  pre.src:before {
+    display: none;
+    position: absolute;
+    background-color: white;
+    top: -10px;
+    right: 10px;
+    padding: 3px;
+    border: 1px solid black;
+  }
+  pre.src:hover:before { display: inline;}
+  /* Languages per Org manual */
+  pre.src-asymptote:before { content: 'Asymptote'; }
+  pre.src-awk:before { content: 'Awk'; }
+  pre.src-C:before { content: 'C'; }
+  /* pre.src-C++ doesn't work in CSS */
+  pre.src-clojure:before { content: 'Clojure'; }
+  pre.src-css:before { content: 'CSS'; }
+  pre.src-D:before { content: 'D'; }
+  pre.src-ditaa:before { content: 'ditaa'; }
+  pre.src-dot:before { content: 'Graphviz'; }
+  pre.src-calc:before { content: 'Emacs Calc'; }
+  pre.src-emacs-lisp:before { content: 'Emacs Lisp'; }
+  pre.src-fortran:before { content: 'Fortran'; }
+  pre.src-gnuplot:before { content: 'gnuplot'; }
+  pre.src-haskell:before { content: 'Haskell'; }
+  pre.src-hledger:before { content: 'hledger'; }
+  pre.src-java:before { content: 'Java'; }
+  pre.src-js:before { content: 'Javascript'; }
+  pre.src-latex:before { content: 'LaTeX'; }
+  pre.src-ledger:before { content: 'Ledger'; }
+  pre.src-lisp:before { content: 'Lisp'; }
+  pre.src-lilypond:before { content: 'Lilypond'; }
+  pre.src-lua:before { content: 'Lua'; }
+  pre.src-matlab:before { content: 'MATLAB'; }
+  pre.src-mscgen:before { content: 'Mscgen'; }
+  pre.src-ocaml:before { content: 'Objective Caml'; }
+  pre.src-octave:before { content: 'Octave'; }
+  pre.src-org:before { content: 'Org mode'; }
+  pre.src-oz:before { content: 'OZ'; }
+  pre.src-plantuml:before { content: 'Plantuml'; }
+  pre.src-processing:before { content: 'Processing.js'; }
+  pre.src-python:before { content: 'Python'; }
+  pre.src-R:before { content: 'R'; }
+  pre.src-ruby:before { content: 'Ruby'; }
+  pre.src-sass:before { content: 'Sass'; }
+  pre.src-scheme:before { content: 'Scheme'; }
+  pre.src-screen:before { content: 'Gnu Screen'; }
+  pre.src-sed:before { content: 'Sed'; }
+  pre.src-sh:before { content: 'shell'; }
+  pre.src-sql:before { content: 'SQL'; }
+  pre.src-sqlite:before { content: 'SQLite'; }
+  /* additional languages in org.el's org-babel-load-languages alist */
+  pre.src-forth:before { content: 'Forth'; }
+  pre.src-io:before { content: 'IO'; }
+  pre.src-J:before { content: 'J'; }
+  pre.src-makefile:before { content: 'Makefile'; }
+  pre.src-maxima:before { content: 'Maxima'; }
+  pre.src-perl:before { content: 'Perl'; }
+  pre.src-picolisp:before { content: 'Pico Lisp'; }
+  pre.src-scala:before { content: 'Scala'; }
+  pre.src-shell:before { content: 'Shell Script'; }
+  pre.src-ebnf2ps:before { content: 'ebfn2ps'; }
+  /* additional language identifiers per "defun org-babel-execute"
+       in ob-*.el */
+  pre.src-cpp:before  { content: 'C++'; }
+  pre.src-abc:before  { content: 'ABC'; }
+  pre.src-coq:before  { content: 'Coq'; }
+  pre.src-groovy:before  { content: 'Groovy'; }
+  /* additional language identifiers from org-babel-shell-names in
+     ob-shell.el: ob-shell is the only babel language using a lambda to put
+     the execution function name together. */
+  pre.src-bash:before  { content: 'bash'; }
+  pre.src-csh:before  { content: 'csh'; }
+  pre.src-ash:before  { content: 'ash'; }
+  pre.src-dash:before  { content: 'dash'; }
+  pre.src-ksh:before  { content: 'ksh'; }
+  pre.src-mksh:before  { content: 'mksh'; }
+  pre.src-posh:before  { content: 'posh'; }
+  /* Additional Emacs modes also supported by the LaTeX listings package */
+  pre.src-ada:before { content: 'Ada'; }
+  pre.src-asm:before { content: 'Assembler'; }
+  pre.src-caml:before { content: 'Caml'; }
+  pre.src-delphi:before { content: 'Delphi'; }
+  pre.src-html:before { content: 'HTML'; }
+  pre.src-idl:before { content: 'IDL'; }
+  pre.src-mercury:before { content: 'Mercury'; }
+  pre.src-metapost:before { content: 'MetaPost'; }
+  pre.src-modula-2:before { content: 'Modula-2'; }
+  pre.src-pascal:before { content: 'Pascal'; }
+  pre.src-ps:before { content: 'PostScript'; }
+  pre.src-prolog:before { content: 'Prolog'; }
+  pre.src-simula:before { content: 'Simula'; }
+  pre.src-tcl:before { content: 'tcl'; }
+  pre.src-tex:before { content: 'TeX'; }
+  pre.src-plain-tex:before { content: 'Plain TeX'; }
+  pre.src-verilog:before { content: 'Verilog'; }
+  pre.src-vhdl:before { content: 'VHDL'; }
+  pre.src-xml:before { content: 'XML'; }
+  pre.src-nxml:before { content: 'XML'; }
+  /* add a generic configuration mode; LaTeX export needs an additional
+     (add-to-list 'org-latex-listings-langs '(conf " ")) in .emacs */
+  pre.src-conf:before { content: 'Configuration File'; }
+
+  table { border-collapse:collapse; }
+  caption.t-above { caption-side: top; }
+  caption.t-bottom { caption-side: bottom; }
+  td, th { vertical-align:top;  }
+  th.org-right  { text-align: center;  }
+  th.org-left   { text-align: center;   }
+  th.org-center { text-align: center; }
+  td.org-right  { text-align: right;  }
+  td.org-left   { text-align: left;   }
+  td.org-center { text-align: center; }
+  dt { font-weight: bold; }
+  .footpara { display: inline; }
+  .footdef  { margin-bottom: 1em; }
+  .figure { padding: 1em; }
+  .figure p { text-align: center; }
+  .inlinetask {
+    padding: 10px;
+    border: 2px solid gray;
+    margin: 10px;
+    background: #ffffcc;
+  }
+  #org-div-home-and-up
+   { text-align: right; font-size: 70%; white-space: nowrap; }
+  textarea { overflow-x: auto; }
+  .linenr { font-size: smaller }
+  .code-highlighted { background-color: #ffff00; }
+  .org-info-js_info-navigation { border-style: none; }
+  #org-info-js_console-label
+    { font-size: 10px; font-weight: bold; white-space: nowrap; }
+  .org-info-js_search-highlight
+    { background-color: #ffff00; color: #000000; font-weight: bold; }
+  .org-svg { width: 90%; }
+  /*]]>*/-->
+</style>
+<script type="text/javascript">
+/*
+@licstart  The following is the entire license notice for the
+JavaScript code in this tag.
+
+Copyright (C) 2012-2017 Free Software Foundation, Inc.
+
+The JavaScript code in this tag is free software: you can
+redistribute it and/or modify it under the terms of the GNU
+General Public License (GNU GPL) as published by the Free Software
+Foundation, either version 3 of the License, or (at your option)
+any later version.  The code is distributed WITHOUT ANY WARRANTY;
+without even the implied warranty of MERCHANTABILITY or FITNESS
+FOR A PARTICULAR PURPOSE.  See the GNU GPL for more details.
+
+As additional permission under GNU GPL version 3 section 7, you
+may distribute non-source (e.g., minimized or compacted) forms of
+that code without the copy of the GNU GPL normally required by
+section 4, provided you include this license notice and a URL
+through which recipients can access the Corresponding Source.
+
+
+@licend  The above is the entire license notice
+for the JavaScript code in this tag.
+*/
+<!--/*--><![CDATA[/*><!--*/
+ function CodeHighlightOn(elem, id)
+ {
+   var target = document.getElementById(id);
+   if(null != target) {
+     elem.cacheClassElem = elem.className;
+     elem.cacheClassTarget = target.className;
+     target.className = "code-highlighted";
+     elem.className   = "code-highlighted";
+   }
+ }
+ function CodeHighlightOff(elem, id)
+ {
+   var target = document.getElementById(id);
+   if(elem.cacheClassElem)
+     elem.className = elem.cacheClassElem;
+   if(elem.cacheClassTarget)
+     target.className = elem.cacheClassTarget;
+ }
+/*]]>*///-->
+</script>
+</head>
+<body>
+<div id="content">
+<h1 class="title">CMPUT201W20B2 Week 7</h1>
+<div id="table-of-contents">
+<h2>Table of Contents</h2>
+<div id="text-table-of-contents">
+<ul>
+<li><a href="#org54a137a">1. Week7</a>
+<ul>
+<li><a href="#orgac53ae5">1.1. Copyright Statement</a>
+<ul>
+<li><a href="#org0561a25">1.1.1. License</a></li>
+<li><a href="#org9c488b5">1.1.2. Hazel Code is licensed under AGPL3.0+</a></li>
+</ul>
+</li>
+<li><a href="#orgc48150c">1.2. Init ORG-MODE</a></li>
+<li><a href="#orgdbdb9d6">1.3. Org Template</a></li>
+<li><a href="#org3c14437">1.4. Remember how to compile?</a></li>
+<li><a href="#org43594f1">1.5. Enums!</a>
+<ul>
+<li><a href="#orgffbf499">1.5.1. Enum Example</a></li>
+<li><a href="#org7fa1cae">1.5.2. enum<sub>typedef.c</sub></a></li>
+<li><a href="#orgbcb8180">1.5.3. EnumStart</a></li>
+<li><a href="#org022e465">1.5.4. Enumassign</a></li>
+<li><a href="#orgde015d8">1.5.5. Enum<sub>loop</sub><sub>trick.c</sub></a></li>
+<li><a href="#org000cde3">1.5.6. Enum Int</a></li>
+<li><a href="#orge2f7a44">1.5.7. Another motivating ENUM Example</a></li>
+</ul>
+</li>
+<li><a href="#org3f6c2a9">1.6. Unions</a>
+<ul>
+<li><a href="#org1e33030">1.6.1. Structs versus Unions</a></li>
+<li><a href="#org0f471ad">1.6.2. Union considerations</a></li>
+<li><a href="#orgb61eaf8">1.6.3. Type Punning</a></li>
+<li><a href="#org4682847">1.6.4. Unions with type tags</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</div>
+</div>
+
+<div id="outline-container-org54a137a" class="outline-2">
+<h2 id="org54a137a"><span class="section-number-2">1</span> Week7</h2>
+<div class="outline-text-2" id="text-1">
+</div>
+<div id="outline-container-orgac53ae5" class="outline-3">
+<h3 id="orgac53ae5"><span class="section-number-3">1.1</span> Copyright Statement</h3>
+<div class="outline-text-3" id="text-1-1">
+<p>
+If you are in CMPUT201 at UAlberta this code is released in the public
+domain to you.
+</p>
+
+<p>
+Otherwise it is (c) 2020 Abram Hindle, Hazel Campbell AGPL3.0+
+</p>
+</div>
+
+<div id="outline-container-org0561a25" class="outline-4">
+<h4 id="org0561a25"><span class="section-number-4">1.1.1</span> License</h4>
+<div class="outline-text-4" id="text-1-1-1">
+<p>
+Week 3 notes
+Copyright (C) 2020 Abram Hindle, Hazel Campbell
+</p>
+
+<p>
+This program is free software: you can redistribute it and/or modify
+it under the terms of the GNU Affero General Public License as
+published by the Free Software Foundation, either version 3 of the
+License, or (at your option) any later version.
+</p>
+
+<p>
+This program is distributed in the hope that it will be useful,
+but WITHOUT ANY WARRANTY; without even the implied warranty of
+MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+GNU Affero General Public License for more details.
+</p>
+
+<p>
+You should have received a copy of the GNU Affero General Public License
+along with this program.  If not, see <a href="https://www.gnu.org/licenses/">https://www.gnu.org/licenses/</a>.
+</p>
+</div>
+</div>
+
+
+<div id="outline-container-org9c488b5" class="outline-4">
+<h4 id="org9c488b5"><span class="section-number-4">1.1.2</span> Hazel Code is licensed under AGPL3.0+</h4>
+<div class="outline-text-4" id="text-1-1-2">
+<p>
+Hazel's code is also found here
+<a href="https://github.com/hazelybell/examples/tree/C-2020-01">https://github.com/hazelybell/examples/tree/C-2020-01</a>
+</p>
+
+<p>
+Hazel code is licensed: The example code is licensed under the AGPL3+
+license, unless otherwise noted.
+</p>
+</div>
+</div>
+</div>
+
+<div id="outline-container-orgc48150c" class="outline-3">
+<h3 id="orgc48150c"><span class="section-number-3">1.2</span> Init ORG-MODE</h3>
+<div class="outline-text-3" id="text-1-2">
+<div class="org-src-container">
+<pre class="src src-elisp"><span style="color: #b22222;">;; </span><span style="color: #b22222;">I need this for org-mode to work well</span>
+
+(<span style="color: #a020f0;">require</span> '<span style="color: #008b8b;">ob-sh</span>)
+<span style="color: #b22222;">;</span><span style="color: #b22222;">(require 'ob-shell)</span>
+(org-babel-do-load-languages 'org-babel-load-languages '((sh . t)))
+(org-babel-do-load-languages 'org-babel-load-languages '((C . t)))
+(org-babel-do-load-languages 'org-babel-load-languages '((python . t)))
+(<span style="color: #a020f0;">setq</span> org-src-fontify-natively t)
+</pre>
+</div>
+</div>
+</div>
+
+<div id="outline-container-orgdbdb9d6" class="outline-3">
+<h3 id="orgdbdb9d6"><span class="section-number-3">1.3</span> Org Template</h3>
+<div class="outline-text-3" id="text-1-3">
+<p>
+Copy and paste this to demo C
+</p>
+
+<div class="org-src-container">
+<pre class="src src-C"><span style="color: #483d8b;">#include</span> <span style="color: #8b2252;">&lt;stdio.h&gt;</span>
+
+<span style="color: #228b22;">int</span> <span style="color: #0000ff;">main</span>(<span style="color: #228b22;">int</span> <span style="color: #a0522d;">argc</span>, <span style="color: #228b22;">char</span>**<span style="color: #a0522d;">argv</span>) {
+    <span style="color: #a020f0;">return</span> 0;
+}
+</pre>
+</div>
+</div>
+</div>
+
+<div id="outline-container-org3c14437" class="outline-3">
+<h3 id="org3c14437"><span class="section-number-3">1.4</span> Remember how to compile?</h3>
+<div class="outline-text-3" id="text-1-4">
+<p>
+gcc -std=c99 -Wall -pedantic -Werror -o programname programname.c
+</p>
+</div>
+</div>
+
+
+<div id="outline-container-org43594f1" class="outline-3">
+<h3 id="org43594f1"><span class="section-number-3">1.5</span> Enums!</h3>
+<div class="outline-text-3" id="text-1-5">
+<p>
+Enums are enumerations, which is just a convienant way to make symbols
+that have different values of the same type. Enums allow us to read
+and write values from files and inputs and extract their symbolic meaning.
+</p>
+
+<p>
+Enums are fundamental to symbolic computation.
+</p>
+
+<p>
+Enum work good for switch cases, if statements, for loops.
+</p>
+
+<p>
+Enums are good for representing the type of something or a category.
+</p>
+</div>
+
+<div id="outline-container-orgffbf499" class="outline-4">
+<h4 id="orgffbf499"><span class="section-number-4">1.5.1</span> Enum Example</h4>
+<div class="outline-text-4" id="text-1-5-1">
+<p>
+Enums are good for representing states, symbols, simple values, etc.
+</p>
+
+<div class="org-src-container">
+<pre class="src src-C"><span style="color: #483d8b;">#include</span> <span style="color: #8b2252;">&lt;stdio.h&gt;</span>
+<span style="color: #483d8b;">#include</span> <span style="color: #8b2252;">&lt;stdlib.h&gt;</span>
+
+<span style="color: #483d8b;">#define</span> <span style="color: #a0522d;">N_DIRECTIONS</span> 4
+<span style="color: #a020f0;">enum</span> <span style="color: #228b22;">direction</span> {
+    <span style="color: #a0522d;">UP</span>, <span style="color: #a0522d;">DOWN</span>, <span style="color: #a0522d;">LEFT</span>, <span style="color: #a0522d;">RIGHT</span>
+};
+<span style="color: #a020f0;">typedef</span> <span style="color: #a020f0;">enum</span> <span style="color: #228b22;">direction</span> <span style="color: #228b22;">Direction</span>;
+
+<span style="color: #a020f0;">const</span> <span style="color: #228b22;">char</span> * <span style="color: #a020f0;">const</span> <span style="color: #a0522d;">direction_names</span>[N_DIRECTIONS] = {
+    [UP] = <span style="color: #8b2252;">"Up"</span>,
+    [DOWN] = <span style="color: #8b2252;">"Down"</span>,
+    [LEFT] = <span style="color: #8b2252;">"Left"</span>,
+    [RIGHT] = <span style="color: #8b2252;">"Right"</span>
+};
+
+<span style="color: #228b22;">Direction</span> <span style="color: #0000ff;">clockwise</span>(<span style="color: #228b22;">Direction</span> <span style="color: #a0522d;">direction</span>) {
+    <span style="color: #a020f0;">switch</span> (direction) {
+        <span style="color: #a020f0;">case</span> UP:
+            <span style="color: #a020f0;">return</span> RIGHT;
+        <span style="color: #a020f0;">case</span> RIGHT:
+            <span style="color: #a020f0;">return</span> DOWN;
+        <span style="color: #a020f0;">case</span> DOWN:
+            <span style="color: #a020f0;">return</span> LEFT;
+        <span style="color: #a020f0;">case</span> LEFT:
+            <span style="color: #a020f0;">return</span> UP;
+        <span style="color: #a020f0;">default</span>:
+            abort();
+    }
+}
+
+<span style="color: #228b22;">int</span> <span style="color: #0000ff;">main</span>() {
+    <span style="color: #228b22;">Direction</span> <span style="color: #a0522d;">d</span> = UP;
+    <span style="color: #a020f0;">for</span> (<span style="color: #228b22;">int</span> <span style="color: #a0522d;">i</span> = 0 ; i &lt; 10; i++) {
+        d = clockwise(d);
+        printf(<span style="color: #8b2252;">"%d %s\t[%d]\n"</span>, i, direction_names[d], d);
+    }
+}
+</pre>
+</div>
+
+<p>
+0 Right	[3]
+1 Down	[1]
+2 Left	[2]
+3 Up	[0]
+4 Right	[3]
+5 Down	[1]
+6 Left	[2]
+7 Up	[0]
+8 Right	[3]
+9 Down	[1]
+</p>
+</div>
+</div>
+
+<div id="outline-container-org7fa1cae" class="outline-4">
+<h4 id="org7fa1cae"><span class="section-number-4">1.5.2</span> enum<sub>typedef.c</sub></h4>
+<div class="outline-text-4" id="text-1-5-2">
+<p>
+Enums are annoying to type. Typing enum enumname all the time is
+repetitive. Typedefs allow us to label enum types with 1 word.
+</p>
+
+<p>
+Typedef this 
+</p>
+
+<p>
+enum enumname { &#x2026; } ;
+</p>
+
+<p>
+with:
+</p>
+
+<p>
+typedef enum enunumae Enumename ;
+</p>
+
+
+<div class="org-src-container">
+<pre class="src src-C"><span style="color: #483d8b;">#include</span> <span style="color: #8b2252;">&lt;stdio.h&gt;</span>
+<span style="color: #483d8b;">#include</span> <span style="color: #8b2252;">&lt;stdlib.h&gt;</span>
+
+<span style="color: #a020f0;">enum</span> <span style="color: #228b22;">flavor</span> {
+    <span style="color: #a0522d;">VANILLA</span>,
+    <span style="color: #a0522d;">CHOCOLATE</span>,
+    <span style="color: #a0522d;">STRAWBERRY</span>,
+};
+
+<span style="color: #a020f0;">typedef</span> <span style="color: #a020f0;">enum</span> <span style="color: #228b22;">flavor</span> <span style="color: #228b22;">Flavor</span>;
+
+<span style="color: #228b22;">int</span> <span style="color: #0000ff;">main</span>() {
+    <span style="color: #228b22;">Flavor</span> <span style="color: #a0522d;">favourite</span> = VANILLA;
+    printf(<span style="color: #8b2252;">"favourite=%d\n"</span>, favourite);
+    printf(<span style="color: #8b2252;">"sizeof(favourite)=%zu\n"</span>,
+           <span style="color: #a020f0;">sizeof</span>(favourite));
+
+    <span style="color: #a020f0;">switch</span> (favourite) {
+        <span style="color: #a020f0;">case</span> VANILLA:
+            printf(<span style="color: #8b2252;">"favourite=VANILLA\n"</span>);
+            <span style="color: #a020f0;">break</span>;
+        <span style="color: #a020f0;">case</span> CHOCOLATE:
+            printf(<span style="color: #8b2252;">"favourite=CHOCOLATE\n"</span>);
+            <span style="color: #a020f0;">break</span>;
+        <span style="color: #a020f0;">case</span> STRAWBERRY:
+            printf(<span style="color: #8b2252;">"favourite=STRAWBERRY\n"</span>);
+            <span style="color: #a020f0;">break</span>;
+        <span style="color: #a020f0;">default</span>:
+            abort();
+    }
+}
+</pre>
+</div>
+
+<p>
+favourite=0
+sizeof(favourite)=4
+favourite=VANILLA
+</p>
+</div>
+</div>
+
+
+
+<div id="outline-container-orgbcb8180" class="outline-4">
+<h4 id="orgbcb8180"><span class="section-number-4">1.5.3</span> EnumStart</h4>
+<div class="outline-text-4" id="text-1-5-3">
+<div class="org-src-container">
+<pre class="src src-C"><span style="color: #483d8b;">#include</span> <span style="color: #8b2252;">&lt;stdio.h&gt;</span>
+<span style="color: #483d8b;">#include</span> <span style="color: #8b2252;">&lt;stdlib.h&gt;</span>
+
+<span style="color: #a020f0;">enum</span> <span style="color: #228b22;">flavor</span> {
+    <span style="color: #a0522d;">VANILLA</span> = 100,
+    <span style="color: #a0522d;">CHOCOLATE</span>,
+    <span style="color: #a0522d;">STRAWBERRY</span>,
+};
+
+<span style="color: #a020f0;">typedef</span> <span style="color: #a020f0;">enum</span> <span style="color: #228b22;">flavor</span> <span style="color: #228b22;">Flavor</span>;
+
+<span style="color: #228b22;">int</span> <span style="color: #0000ff;">main</span>() {
+    printf(<span style="color: #8b2252;">"VANILLA=%d\n"</span>, VANILLA);
+    printf(<span style="color: #8b2252;">"CHOCOLATE=%d\n"</span>, CHOCOLATE);
+    printf(<span style="color: #8b2252;">"STRAWBERRY=%d\n"</span>, STRAWBERRY);
+    printf(<span style="color: #8b2252;">"sizeof(Flavor)=%zu\n"</span>,
+           <span style="color: #a020f0;">sizeof</span>(Flavor));
+}
+</pre>
+</div>
+
+<p>
+VANILLA=100
+CHOCOLATE=101
+STRAWBERRY=102
+sizeof(Flavor)=4
+</p>
+</div>
+</div>
+
+<div id="outline-container-org022e465" class="outline-4">
+<h4 id="org022e465"><span class="section-number-4">1.5.4</span> Enumassign</h4>
+<div class="outline-text-4" id="text-1-5-4">
+<div class="org-src-container">
+<pre class="src src-C"><span style="color: #483d8b;">#include</span> <span style="color: #8b2252;">&lt;stdio.h&gt;</span>
+<span style="color: #483d8b;">#include</span> <span style="color: #8b2252;">&lt;stdlib.h&gt;</span>
+
+<span style="color: #a020f0;">enum</span> <span style="color: #228b22;">flavor</span> {
+    <span style="color: #a0522d;">VANILLA</span> = 100,
+    <span style="color: #a0522d;">CHOCOLATE</span> = 200,
+    <span style="color: #a0522d;">STRAWBERRY</span> = 300,
+};
+
+<span style="color: #a020f0;">typedef</span> <span style="color: #a020f0;">enum</span> <span style="color: #228b22;">flavor</span> <span style="color: #228b22;">Flavor</span>;
+
+<span style="color: #228b22;">int</span> <span style="color: #0000ff;">main</span>() {
+    printf(<span style="color: #8b2252;">"VANILLA=%d\n"</span>, VANILLA);
+    printf(<span style="color: #8b2252;">"CHOCOLATE=%d\n"</span>, CHOCOLATE);
+    printf(<span style="color: #8b2252;">"STRAWBERRY=%d\n"</span>, STRAWBERRY);
+    printf(<span style="color: #8b2252;">"sizeof(Flavor)=%zu\n"</span>,
+           <span style="color: #a020f0;">sizeof</span>(Flavor));
+}
+</pre>
+</div>
+
+<p>
+VANILLA=100
+CHOCOLATE=200
+STRAWBERRY=300
+sizeof(Flavor)=4
+</p>
+</div>
+</div>
+
+<div id="outline-container-orgde015d8" class="outline-4">
+<h4 id="orgde015d8"><span class="section-number-4">1.5.5</span> Enum<sub>loop</sub><sub>trick.c</sub></h4>
+<div class="outline-text-4" id="text-1-5-5">
+<p>
+This is a fun trick to set a maximum value for your enum by using
+another symbol
+</p>
+
+
+<div class="org-src-container">
+<pre class="src src-C"><span style="color: #483d8b;">#include</span> <span style="color: #8b2252;">&lt;stdio.h&gt;</span>
+<span style="color: #483d8b;">#include</span> <span style="color: #8b2252;">&lt;stdlib.h&gt;</span>
+
+<span style="color: #b22222;">// </span><span style="color: #b22222;">this only works as long as we don't provide our</span>
+<span style="color: #b22222;">// </span><span style="color: #b22222;">own values!</span>
+
+<span style="color: #a020f0;">enum</span> <span style="color: #228b22;">flavor</span> {
+    <span style="color: #a0522d;">VANILLA</span>,
+    <span style="color: #a0522d;">CHOCOLATE</span>,
+    <span style="color: #a0522d;">STRAWBERRY</span>,
+    <span style="color: #a0522d;">N_FLAVORS</span> <span style="color: #b22222;">// </span><span style="color: #b22222;">Get the free max enum here</span>
+};
+
+<span style="color: #a020f0;">typedef</span> <span style="color: #a020f0;">enum</span> <span style="color: #228b22;">flavor</span> <span style="color: #228b22;">Flavor</span>;
+
+<span style="color: #228b22;">int</span> <span style="color: #0000ff;">main</span>() {
+    printf(<span style="color: #8b2252;">"VANILLA=%d\n"</span>, VANILLA);
+    printf(<span style="color: #8b2252;">"CHOCOLATE=%d\n"</span>, CHOCOLATE);
+    printf(<span style="color: #8b2252;">"STRAWBERRY=%d\n"</span>, STRAWBERRY);
+    printf(<span style="color: #8b2252;">"N_FLAVORS=%d\n"</span>, N_FLAVORS);
+    printf(<span style="color: #8b2252;">"sizeof(Flavor)=%zu\n"</span>,
+           <span style="color: #a020f0;">sizeof</span>(Flavor));
+
+    <span style="color: #a020f0;">for</span> (<span style="color: #228b22;">Flavor</span> <span style="color: #a0522d;">flavor</span> = 0; flavor &lt; N_FLAVORS; flavor++) {
+        <span style="color: #a020f0;">switch</span> (flavor) {
+            <span style="color: #a020f0;">case</span> VANILLA:
+                printf(<span style="color: #8b2252;">"flavor=VANILLA\n"</span>);
+                <span style="color: #a020f0;">break</span>;
+            <span style="color: #a020f0;">case</span> CHOCOLATE:
+                printf(<span style="color: #8b2252;">"flavor=CHOCOLATE\n"</span>);
+                <span style="color: #a020f0;">break</span>;
+            <span style="color: #a020f0;">case</span> STRAWBERRY:
+                printf(<span style="color: #8b2252;">"flavor=STRAWBERRY\n"</span>);
+                <span style="color: #a020f0;">break</span>;
+            <span style="color: #a020f0;">default</span>:
+                abort();
+        }
+    }
+}
+</pre>
+</div>
+
+<p>
+VANILLA=0
+CHOCOLATE=1
+STRAWBERRY=2
+N<sub>FLAVORS</sub>=3
+sizeof(Flavor)=4
+flavor=VANILLA
+flavor=CHOCOLATE
+flavor=STRAWBERRY
+</p>
+</div>
+</div>
+
+<div id="outline-container-org000cde3" class="outline-4">
+<h4 id="org000cde3"><span class="section-number-4">1.5.6</span> Enum Int</h4>
+<div class="outline-text-4" id="text-1-5-6">
+<p>
+Enum are just integers. And you can treat them as such.
+</p>
+
+<div class="org-src-container">
+<pre class="src src-C"><span style="color: #483d8b;">#include</span> <span style="color: #8b2252;">&lt;stdio.h&gt;</span>
+<span style="color: #483d8b;">#include</span> <span style="color: #8b2252;">&lt;stdlib.h&gt;</span>
+<span style="color: #483d8b;">#include</span> <span style="color: #8b2252;">&lt;time.h&gt;</span>
+
+<span style="color: #a020f0;">enum</span> <span style="color: #228b22;">flavor</span> {
+    <span style="color: #a0522d;">VANILLA</span>,
+    <span style="color: #a0522d;">CHOCOLATE</span>,
+    <span style="color: #a0522d;">STRAWBERRY</span>,
+    <span style="color: #a0522d;">N_FLAVORS</span> <span style="color: #b22222;">// </span><span style="color: #b22222;">LOOK MA! No Defines! Cute trick, might surprise people.</span>
+};
+
+<span style="color: #a020f0;">typedef</span> <span style="color: #a020f0;">enum</span> <span style="color: #228b22;">flavor</span> <span style="color: #228b22;">Flavor</span>;
+
+<span style="color: #b22222;">// </span><span style="color: #b22222;">Here we use the fact that enums are really just ints!</span>
+<span style="color: #228b22;">Flavor</span> <span style="color: #0000ff;">random_flavor</span>() {
+    <span style="color: #a020f0;">return</span> (rand() % N_FLAVORS);
+}
+
+<span style="color: #228b22;">void</span> <span style="color: #0000ff;">check_flavor</span>(<span style="color: #228b22;">Flavor</span> <span style="color: #a0522d;">flavor</span>) {
+    <span style="color: #a020f0;">if</span> (flavor &gt;= N_FLAVORS) {
+        abort();
+    }
+    <span style="color: #b22222;">// </span><span style="color: #b22222;">Since a flavor is just an int, it could be negative...</span>
+    <span style="color: #a020f0;">if</span> (flavor &lt; 0) {
+        abort();
+    }
+}
+
+<span style="color: #a020f0;">const</span> <span style="color: #228b22;">char</span> * <span style="color: #0000ff;">get_flavor_name</span>(<span style="color: #228b22;">Flavor</span> <span style="color: #a0522d;">flavor</span>) {
+    check_flavor(flavor);
+    <span style="color: #b22222;">// </span><span style="color: #b22222;">Here we use "Designated Initializers"!</span>
+    <span style="color: #a020f0;">const</span> <span style="color: #228b22;">char</span> * <span style="color: #a020f0;">const</span> <span style="color: #a0522d;">flavor_names</span>[N_FLAVORS] = {
+        [CHOCOLATE] = <span style="color: #8b2252;">"Hamburger flavor"</span>,
+        [VANILLA] = <span style="color: #8b2252;">"Raspberry"</span>,
+        [STRAWBERRY] = <span style="color: #8b2252;">"Those packets that come in the ramen"</span>
+    };
+    <span style="color: #a020f0;">const</span> <span style="color: #228b22;">char</span> * <span style="color: #a0522d;">flavor_name</span> = flavor_names[flavor];
+    <span style="color: #a020f0;">return</span> flavor_name;
+}
+
+<span style="color: #228b22;">int</span> <span style="color: #0000ff;">main</span>() {
+    srand(time(<span style="color: #008b8b;">NULL</span>));
+    <span style="color: #a020f0;">for</span> (<span style="color: #228b22;">int</span> <span style="color: #a0522d;">i</span> = 0 ; i &lt; 4; i++) {
+       <span style="color: #228b22;">Flavor</span> <span style="color: #a0522d;">flavor</span> = random_flavor();
+       printf(
+           <span style="color: #8b2252;">"flavor %d = %s\n"</span>,
+           flavor,
+           get_flavor_name(flavor)
+       );
+    }
+}
+</pre>
+</div>
+
+<p>
+flavor 1 = Hamburger flavor
+flavor 1 = Hamburger flavor
+flavor 2 = Those packets that come in the ramen
+flavor 0 = Raspberry
+</p>
+</div>
+</div>
+
+<div id="outline-container-orge2f7a44" class="outline-4">
+<h4 id="orge2f7a44"><span class="section-number-4">1.5.7</span> Another motivating ENUM Example</h4>
+<div class="outline-text-4" id="text-1-5-7">
+<div class="org-src-container">
+<pre class="src src-C"><span style="color: #483d8b;">#include</span> <span style="color: #8b2252;">&lt;stdbool.h&gt;</span> 
+<span style="color: #483d8b;">#include</span> <span style="color: #8b2252;">&lt;stdio.h&gt;</span>
+<span style="color: #483d8b;">#include</span> <span style="color: #8b2252;">&lt;stdlib.h&gt;</span>
+<span style="color: #483d8b;">#include</span> <span style="color: #8b2252;">&lt;time.h&gt;</span>
+
+<span style="color: #a020f0;">enum</span> <span style="color: #228b22;">card_face</span> {
+    <span style="color: #a0522d;">ACE</span> = 1,
+    <span style="color: #a0522d;">FACE2</span>,
+    <span style="color: #a0522d;">FACE3</span>,
+    <span style="color: #a0522d;">FACE4</span>,
+    <span style="color: #a0522d;">FACE5</span>,
+    <span style="color: #a0522d;">FACE6</span>,
+    <span style="color: #a0522d;">FACE7</span>,
+    <span style="color: #a0522d;">FACE8</span>,
+    <span style="color: #a0522d;">FACE9</span>,
+    <span style="color: #a0522d;">FACE10</span>,
+    <span style="color: #a0522d;">JACK</span>,
+    <span style="color: #a0522d;">QUEEN</span>,
+    <span style="color: #a0522d;">KING</span>
+};
+
+<span style="color: #a020f0;">typedef</span> <span style="color: #a020f0;">enum</span> <span style="color: #228b22;">card_face</span> <span style="color: #228b22;">CardFace</span>;
+
+<span style="color: #a020f0;">enum</span> <span style="color: #228b22;">card_suit</span> {
+    <span style="color: #a0522d;">CLUBS</span>,
+    <span style="color: #a0522d;">HEARTS</span>,
+    <span style="color: #a0522d;">DIAMONDS</span>,
+    <span style="color: #a0522d;">SPADES</span>
+};
+
+<span style="color: #a020f0;">typedef</span> <span style="color: #a020f0;">enum</span> <span style="color: #228b22;">card_suit</span> <span style="color: #228b22;">CardSuit</span>;
+
+<span style="color: #a020f0;">struct</span> <span style="color: #228b22;">playing_card</span> {
+    <span style="color: #228b22;">CardFace</span> <span style="color: #a0522d;">face</span>;
+    <span style="color: #228b22;">CardSuit</span> <span style="color: #a0522d;">suit</span>;
+};
+
+<span style="color: #a020f0;">typedef</span> <span style="color: #a020f0;">struct</span> <span style="color: #228b22;">playing_card</span> <span style="color: #228b22;">PlayingCard</span>;
+
+<span style="color: #483d8b;">#define</span> <span style="color: #a0522d;">HANDSIZE</span> 5
+
+<span style="color: #b22222;">// </span><span style="color: #b22222;">A flush is a hand where all cards have the same suit</span>
+<span style="color: #b22222;">// </span><span style="color: #b22222;">like 5 diamonds or 5 hearts</span>
+<span style="color: #228b22;">bool</span> <span style="color: #0000ff;">isFlush</span>(<span style="color: #228b22;">PlayingCard</span> <span style="color: #a0522d;">hand</span>[HANDSIZE]) {
+    <span style="color: #228b22;">CardSuit</span> <span style="color: #a0522d;">suit</span> = hand[0].suit;
+    <span style="color: #a020f0;">for</span> (<span style="color: #228b22;">int</span> <span style="color: #a0522d;">i</span> = 1;  i &lt; HANDSIZE; i++ ) {
+        <span style="color: #a020f0;">if</span> (suit != hand[i].suit) {
+            <span style="color: #a020f0;">return</span> <span style="color: #008b8b;">false</span>;
+        }
+    }
+    <span style="color: #a020f0;">return</span> <span style="color: #008b8b;">true</span>;
+}
+
+<span style="color: #228b22;">int</span> <span style="color: #0000ff;">main</span>() {
+    srand(time(<span style="color: #008b8b;">NULL</span>));
+    <span style="color: #228b22;">PlayingCard</span> <span style="color: #a0522d;">hand</span>[5] = {
+        {ACE, CLUBS},
+        {FACE2, CLUBS},
+        {KING, CLUBS},
+        {JACK, CLUBS},
+        {FACE4, CLUBS}
+    };
+    printf(<span style="color: #8b2252;">"isFlush? %u\n"</span>, isFlush(hand));
+    <span style="color: #228b22;">PlayingCard</span> <span style="color: #a0522d;">secondHand</span>[5] = {
+        {ACE, CLUBS},
+        {ACE, SPADES},
+        {ACE, HEARTS},
+        {ACE, DIAMONDS},
+        {ACE, CLUBS} <span style="color: #b22222;">// </span><span style="color: #b22222;">CHEATER</span>
+    };
+    printf(<span style="color: #8b2252;">"isFlush? %u\n"</span>, isFlush(secondHand));
+
+}
+</pre>
+</div>
+
+<p>
+isFlush? 1
+isFlush? 0
+</p>
+</div>
+</div>
+</div>
+
+
+
+<div id="outline-container-org3f6c2a9" class="outline-3">
+<h3 id="org3f6c2a9"><span class="section-number-3">1.6</span> Unions</h3>
+<div class="outline-text-3" id="text-1-6">
+<ul class="org-ul">
+<li>Unions are a way to all the same types to share the same memory.</li>
+<li>Some types like unsigned integers have different sizes:</li>
+</ul>
+
+<div class="org-src-container">
+<pre class="src src-C"><span style="color: #483d8b;">#include</span> <span style="color: #8b2252;">&lt;stdio.h&gt;</span>
+<span style="color: #228b22;">int</span> <span style="color: #0000ff;">main</span>() {
+    printf(<span style="color: #8b2252;">"sizeof(unsigned char):\t\t%ld\n"</span>, 
+        <span style="color: #a020f0;">sizeof</span>(<span style="color: #228b22;">unsigned</span> <span style="color: #228b22;">char</span>));
+    printf(<span style="color: #8b2252;">"sizeof(unsigned short):\t\t%ld\n"</span>, 
+        <span style="color: #a020f0;">sizeof</span>(<span style="color: #228b22;">unsigned</span> <span style="color: #228b22;">short</span>));
+    printf(<span style="color: #8b2252;">"sizeof(unsigned int):\t\t%ld\n"</span>, 
+        <span style="color: #a020f0;">sizeof</span>(<span style="color: #228b22;">unsigned</span> <span style="color: #228b22;">int</span>));
+    printf(<span style="color: #8b2252;">"sizeof(unsigned long):\t\t%ld\n"</span>, 
+        <span style="color: #a020f0;">sizeof</span>(<span style="color: #228b22;">unsigned</span> <span style="color: #228b22;">long</span>));
+    printf(<span style="color: #8b2252;">"sizeof(unsigned long long):\t%ld\n"</span>, 
+        <span style="color: #a020f0;">sizeof</span>(<span style="color: #228b22;">unsigned</span> <span style="color: #228b22;">long</span> <span style="color: #228b22;">long</span>));
+    printf(<span style="color: #8b2252;">"sizeof(unsigned long long int):\t%ld\n"</span>, 
+        <span style="color: #a020f0;">sizeof</span>(<span style="color: #228b22;">unsigned</span> <span style="color: #228b22;">long</span> <span style="color: #228b22;">long</span> <span style="color: #228b22;">int</span>));
+
+}
+</pre>
+</div>
+
+<p>
+sizeof(unsigned char):		1
+sizeof(unsigned short):		2
+sizeof(unsigned int):		4
+sizeof(unsigned long):		8
+sizeof(unsigned long long):	8
+sizeof(unsigned long long int):	8
+</p>
+
+<div class="org-src-container">
+<pre class="src src-C"><span style="color: #483d8b;">#include</span> <span style="color: #8b2252;">&lt;stdio.h&gt;</span>
+
+<span style="color: #a020f0;">union</span> <span style="color: #228b22;">uints</span> {
+    <span style="color: #228b22;">unsigned</span> <span style="color: #228b22;">char</span> <span style="color: #a0522d;">a_char</span>;
+    <span style="color: #228b22;">unsigned</span> <span style="color: #228b22;">short</span> <span style="color: #a0522d;">a_short</span>;
+    <span style="color: #228b22;">unsigned</span> <span style="color: #228b22;">int</span> <span style="color: #a0522d;">an_int</span>;
+    <span style="color: #228b22;">unsigned</span> <span style="color: #228b22;">long</span> <span style="color: #a0522d;">a_long</span>;
+};
+<span style="color: #a020f0;">typedef</span> <span style="color: #a020f0;">union</span> <span style="color: #228b22;">uints</span> <span style="color: #228b22;">UInts</span>;
+
+<span style="color: #483d8b;">#define</span> <span style="color: #a0522d;">EXAMPLES</span> 7
+<span style="color: #228b22;">int</span> <span style="color: #0000ff;">main</span>() {
+    <span style="color: #228b22;">unsigned</span> <span style="color: #228b22;">long</span> <span style="color: #a0522d;">longs</span>[EXAMPLES] = 
+        { 0, 1000, 1000000, 10000000000, 
+          65535, 4294967295, 18446744073709551615UL };
+    <span style="color: #228b22;">UInts</span> <span style="color: #a0522d;">uints</span>;
+    <span style="color: #a020f0;">for</span> (<span style="color: #228b22;">int</span> <span style="color: #a0522d;">i</span> = 0 ; i &lt; EXAMPLES; i++) {
+        uints.a_long = longs[i];
+        printf(<span style="color: #8b2252;">"For the long %lu:\n"</span>, longs[i]);
+        printf(<span style="color: #8b2252;">"\tchar\t %hhu\n"</span>, uints.a_char);
+        printf(<span style="color: #8b2252;">"\tshort\t %hu\n"</span>, uints.a_short);
+        printf(<span style="color: #8b2252;">"\tint\t %u\n"</span>, uints.an_int);
+        printf(<span style="color: #8b2252;">"\tlong\t %lu\n"</span>, uints.a_long);
+    }
+    <span style="color: #b22222;">// </span><span style="color: #b22222;">lets see if we can overflow</span>
+    uints.a_char++;
+    printf(<span style="color: #8b2252;">"Overflow kept local\t %lu\n"</span>, uints.a_long);
+}
+</pre>
+</div>
+
+<p>
+For the long 0:
+	char	 0
+	short	 0
+	int	 0
+	long	 0
+For the long 1000:
+	char	 232
+	short	 1000
+	int	 1000
+	long	 1000
+For the long 1000000:
+	char	 64
+	short	 16960
+	int	 1000000
+	long	 1000000
+For the long 10000000000:
+	char	 0
+	short	 58368
+	int	 1410065408
+	long	 10000000000
+For the long 65535:
+	char	 255
+	short	 65535
+	int	 65535
+	long	 65535
+For the long 4294967295:
+	char	 255
+	short	 65535
+	int	 4294967295
+	long	 4294967295
+For the long 18446744073709551615:
+	char	 255
+	short	 65535
+	int	 4294967295
+	long	 18446744073709551615
+Overflow kept local	 18446744073709551360
+</p>
+</div>
+
+<div id="outline-container-org1e33030" class="outline-4">
+<h4 id="org1e33030"><span class="section-number-4">1.6.1</span> Structs versus Unions</h4>
+<div class="outline-text-4" id="text-1-6-1">
+<div class="org-src-container">
+<pre class="src src-C"><span style="color: #483d8b;">#include</span> <span style="color: #8b2252;">&lt;stdio.h&gt;</span>
+
+<span style="color: #a020f0;">struct</span> <span style="color: #228b22;">uints</span> {
+    <span style="color: #228b22;">unsigned</span> <span style="color: #228b22;">char</span> <span style="color: #a0522d;">a_char</span>;
+    <span style="color: #228b22;">unsigned</span> <span style="color: #228b22;">short</span> <span style="color: #a0522d;">a_short</span>;
+    <span style="color: #228b22;">unsigned</span> <span style="color: #228b22;">int</span> <span style="color: #a0522d;">an_int</span>;
+    <span style="color: #228b22;">unsigned</span> <span style="color: #228b22;">long</span> <span style="color: #a0522d;">a_long</span>;
+};
+<span style="color: #a020f0;">typedef</span> <span style="color: #a020f0;">struct</span> <span style="color: #228b22;">uints</span> <span style="color: #228b22;">UInts</span>;
+
+<span style="color: #228b22;">int</span> <span style="color: #0000ff;">main</span>() {
+    <span style="color: #228b22;">UInts</span> <span style="color: #a0522d;">uints</span>;
+    uints.a_long = 0;
+    printf(<span style="color: #8b2252;">"Hi I'm a struct!\n"</span>);
+    printf(<span style="color: #8b2252;">"sizeof(uints)=%zu\n"</span>, <span style="color: #a020f0;">sizeof</span>(uints));
+    printf(<span style="color: #8b2252;">"sizeof(uints.a_char)=%zu\n"</span>, <span style="color: #a020f0;">sizeof</span>(uints.a_char));
+    printf(<span style="color: #8b2252;">"sizeof(uints.a_short)=%zu\n"</span>, <span style="color: #a020f0;">sizeof</span>(uints.a_short));
+    printf(<span style="color: #8b2252;">"sizeof(uints.an_int)=%zu\n"</span>, <span style="color: #a020f0;">sizeof</span>(uints.an_int));
+    printf(<span style="color: #8b2252;">"sizeof(uints.a_long)=%zu\n"</span>, <span style="color: #a020f0;">sizeof</span>(uints.a_long));
+    printf(<span style="color: #8b2252;">"&amp;uints=        %p\n"</span>, (<span style="color: #228b22;">void</span> *) &amp;uints);
+    printf(<span style="color: #8b2252;">"&amp;uints.a_char= %p\n"</span>, (<span style="color: #228b22;">void</span> *) &amp;(uints.a_char));
+    printf(<span style="color: #8b2252;">"&amp;uints.a_short=%p\n"</span>, (<span style="color: #228b22;">void</span> *) &amp;(uints.a_short));
+    printf(<span style="color: #8b2252;">"&amp;uints.an_int= %p\n"</span>, (<span style="color: #228b22;">void</span> *) &amp;(uints.an_int));
+    printf(<span style="color: #8b2252;">"&amp;uints.a_long= %p\n"</span>, (<span style="color: #228b22;">void</span> *) &amp;(uints.a_long));
+}
+</pre>
+</div>
+
+<p>
+Hi I'm a struct!
+sizeof(uints)=16
+sizeof(uints.a<sub>char</sub>)=1
+sizeof(uints.a<sub>short</sub>)=2
+sizeof(uints.an<sub>int</sub>)=4
+sizeof(uints.a<sub>long</sub>)=8
+&amp;uints=        0x7ffcf221d760
+&amp;uints.a<sub>char</sub>= 0x7ffcf221d760
+&amp;uints.a<sub>short</sub>=0x7ffcf221d762
+&amp;uints.an<sub>int</sub>= 0x7ffcf221d764
+&amp;uints.a<sub>long</sub>= 0x7ffcf221d768
+</p>
+
+<div class="org-src-container">
+<pre class="src src-C"><span style="color: #483d8b;">#include</span> <span style="color: #8b2252;">&lt;stdio.h&gt;</span>
+
+<span style="color: #a020f0;">union</span> <span style="color: #228b22;">uints</span> {
+    <span style="color: #228b22;">unsigned</span> <span style="color: #228b22;">char</span> <span style="color: #a0522d;">a_char</span>;
+    <span style="color: #228b22;">unsigned</span> <span style="color: #228b22;">short</span> <span style="color: #a0522d;">a_short</span>;
+    <span style="color: #228b22;">unsigned</span> <span style="color: #228b22;">int</span> <span style="color: #a0522d;">an_int</span>;
+    <span style="color: #228b22;">unsigned</span> <span style="color: #228b22;">long</span> <span style="color: #a0522d;">a_long</span>;
+};
+<span style="color: #a020f0;">typedef</span> <span style="color: #a020f0;">union</span> <span style="color: #228b22;">uints</span> <span style="color: #228b22;">UInts</span>;
+
+<span style="color: #228b22;">int</span> <span style="color: #0000ff;">main</span>() {
+    <span style="color: #228b22;">UInts</span> <span style="color: #a0522d;">uints</span>;
+    uints.a_long = 0;
+    printf(<span style="color: #8b2252;">"Hi I'm a Union!\n"</span>);
+    printf(<span style="color: #8b2252;">"sizeof(uints)=%zu\n"</span>, <span style="color: #a020f0;">sizeof</span>(uints));
+    printf(<span style="color: #8b2252;">"sizeof(uints.a_char)=%zu\n"</span>, <span style="color: #a020f0;">sizeof</span>(uints.a_char));
+    printf(<span style="color: #8b2252;">"sizeof(uints.a_short)=%zu\n"</span>, <span style="color: #a020f0;">sizeof</span>(uints.a_short));
+    printf(<span style="color: #8b2252;">"sizeof(uints.an_int)=%zu\n"</span>, <span style="color: #a020f0;">sizeof</span>(uints.an_int));
+    printf(<span style="color: #8b2252;">"sizeof(uints.a_long)=%zu\n"</span>, <span style="color: #a020f0;">sizeof</span>(uints.a_long));
+    printf(<span style="color: #8b2252;">"&amp;uints=        %p\n"</span>, (<span style="color: #228b22;">void</span> *) &amp;uints);
+    printf(<span style="color: #8b2252;">"&amp;uints.a_char= %p\n"</span>, (<span style="color: #228b22;">void</span> *) &amp;(uints.a_char));
+    printf(<span style="color: #8b2252;">"&amp;uints.a_short=%p\n"</span>, (<span style="color: #228b22;">void</span> *) &amp;(uints.a_short));
+    printf(<span style="color: #8b2252;">"&amp;uints.an_int= %p\n"</span>, (<span style="color: #228b22;">void</span> *) &amp;(uints.an_int));
+    printf(<span style="color: #8b2252;">"&amp;uints.a_long= %p\n"</span>, (<span style="color: #228b22;">void</span> *) &amp;(uints.a_long));
+}
+</pre>
+</div>
+
+<p>
+Hi I'm a Union!
+sizeof(uints)=8
+sizeof(uints.a<sub>char</sub>)=1
+sizeof(uints.a<sub>short</sub>)=2
+sizeof(uints.an<sub>int</sub>)=4
+sizeof(uints.a<sub>long</sub>)=8
+&amp;uints=        0x7ffcb3c65120
+&amp;uints.a<sub>char</sub>= 0x7ffcb3c65120
+&amp;uints.a<sub>short</sub>=0x7ffcb3c65120
+&amp;uints.an<sub>int</sub>= 0x7ffcb3c65120
+&amp;uints.a<sub>long</sub>= 0x7ffcb3c65120
+</p>
+</div>
+</div>
+
+
+<div id="outline-container-org0f471ad" class="outline-4">
+<h4 id="org0f471ad"><span class="section-number-4">1.6.2</span> Union considerations</h4>
+<div class="outline-text-4" id="text-1-6-2">
+<ul class="org-ul">
+<li>they are aligned at the starting byte of each member.</li>
+<li>overflows are kept local to the member being addressed</li>
+</ul>
+</div>
+</div>
+
+<div id="outline-container-orgb61eaf8" class="outline-4">
+<h4 id="orgb61eaf8"><span class="section-number-4">1.6.3</span> Type Punning</h4>
+<div class="outline-text-4" id="text-1-6-3">
+<ul class="org-ul">
+<li>Type punning is breaking the type system to achieve a goal</li>
+<li>in C it is undefined behaviour to write to 1 part of the union
+and then read from that data using a different overlapping
+member. Yet it pretty common practice.</li>
+<li>GCC and others typically allow it.</li>
+</ul>
+
+<div class="org-src-container">
+<pre class="src src-C"><span style="color: #483d8b;">#include</span> <span style="color: #8b2252;">&lt;stdio.h&gt;</span>
+<span style="color: #483d8b;">#include</span> <span style="color: #8b2252;">&lt;stdint.h&gt;</span>
+<span style="color: #483d8b;">#include</span> <span style="color: #8b2252;">&lt;limits.h&gt;</span>
+<span style="color: #483d8b;">#include</span> <span style="color: #8b2252;">&lt;stdlib.h&gt;</span>
+
+<span style="color: #b22222;">// </span><span style="color: #b22222;">This is super useful, but we can't do it in C99</span>
+
+<span style="color: #a020f0;">struct</span> <span style="color: #228b22;">multi_type</span> {
+    <span style="color: #a020f0;">enum</span> {
+        <span style="color: #a0522d;">NOTHING</span>,
+        <span style="color: #a0522d;">AN_INT</span>,
+        <span style="color: #a0522d;">A_FLOAT</span>
+    } <span style="color: #a0522d;">which</span>;
+    <span style="color: #a020f0;">union</span> {
+        <span style="color: #228b22;">int32_t</span> <span style="color: #a0522d;">an_int</span>;
+        <span style="color: #228b22;">float</span> <span style="color: #a0522d;">a_float</span>;
+    };
+};
+<span style="color: #a020f0;">typedef</span> <span style="color: #a020f0;">struct</span> <span style="color: #228b22;">multi_type</span> <span style="color: #228b22;">MultiType</span>;
+
+<span style="color: #228b22;">void</span> <span style="color: #0000ff;">print_mt</span>(<span style="color: #228b22;">MultiType</span> <span style="color: #a0522d;">mt</span>) {
+    <span style="color: #a020f0;">if</span> (mt.which == NOTHING) {
+        printf(<span style="color: #8b2252;">"nothing"</span>);
+    } <span style="color: #a020f0;">else</span> <span style="color: #a020f0;">if</span> (mt.which == AN_INT) {
+        printf(<span style="color: #8b2252;">"%d"</span>, (<span style="color: #228b22;">int</span>) mt.an_int);
+    } <span style="color: #a020f0;">else</span> <span style="color: #a020f0;">if</span> (mt.which == A_FLOAT) {
+        printf(<span style="color: #8b2252;">"%e"</span>, mt.a_float);
+    } <span style="color: #a020f0;">else</span> {
+        abort();
+    }
+}
+
+<span style="color: #228b22;">void</span> <span style="color: #0000ff;">print_mt_array</span>(<span style="color: #228b22;">MultiType</span> *<span style="color: #a0522d;">mt_array</span>, <span style="color: #228b22;">size_t</span> <span style="color: #a0522d;">length</span>) {
+    <span style="color: #a020f0;">for</span> (<span style="color: #228b22;">size_t</span> <span style="color: #a0522d;">idx</span> = 0; idx &lt; length; idx++) {
+        print_mt(mt_array[idx]);
+        printf(<span style="color: #8b2252;">" "</span>);
+    }
+    printf(<span style="color: #8b2252;">"\n"</span>);
+}
+
+<span style="color: #228b22;">MultiType</span> <span style="color: #0000ff;">new_mt_int</span>(<span style="color: #228b22;">int</span> <span style="color: #a0522d;">value</span>) {
+    <span style="color: #228b22;">MultiType</span> <span style="color: #a0522d;">new</span>;
+    new.which = AN_INT;
+    new.an_int = value;
+    <span style="color: #a020f0;">return</span> new;
+}
+
+<span style="color: #228b22;">MultiType</span> <span style="color: #0000ff;">new_mt_float</span>(<span style="color: #228b22;">float</span> <span style="color: #a0522d;">value</span>) {
+    <span style="color: #228b22;">MultiType</span> <span style="color: #a0522d;">new</span>;
+    new.which = A_FLOAT;
+    new.a_float = value;
+    <span style="color: #a020f0;">return</span> new;
+}
+
+<span style="color: #228b22;">int</span> <span style="color: #0000ff;">main</span>() {
+    <span style="color: #228b22;">MultiType</span> <span style="color: #a0522d;">mt_array</span>[4] = { { NOTHING } };
+    mt_array[0] = new_mt_int(24);
+    mt_array[1] = new_mt_int(48);
+    mt_array[2] = new_mt_float(0.24);
+    mt_array[3] = new_mt_float(0.12);
+    printf(<span style="color: #8b2252;">"\n"</span>);
+    print_mt_array(mt_array, 4);
+}
+</pre>
+</div>
+
+<p>
+The error message:
+</p>
+
+<p>
+/tmp/babel-27627ARt/C-src-27627FnU.c:24:6: error: ISO C99 doesn’t support unnamed structs/unions [-Werror=pedantic]
+     };
+      ^
+cc1: all warnings being treated as errors
+/bin/bash: /tmp/babel-27627ARt/C-bin-27627Sxa: Permission denied
+</p>
+</div>
+</div>
+
+
+<div id="outline-container-org4682847" class="outline-4">
+<h4 id="org4682847"><span class="section-number-4">1.6.4</span> Unions with type tags</h4>
+<div class="outline-text-4" id="text-1-6-4">
+<p>
+It is common practice to treat unions like "dynamic types". But it is
+common practice to leave a hint in a tag to what type is actually
+being stored in that union.
+</p>
+
+<div class="org-src-container">
+<pre class="src src-C"><span style="color: #483d8b;">#include</span> <span style="color: #8b2252;">&lt;stdio.h&gt;</span>
+<span style="color: #483d8b;">#include</span> <span style="color: #8b2252;">&lt;stdint.h&gt;</span>
+<span style="color: #483d8b;">#include</span> <span style="color: #8b2252;">&lt;limits.h&gt;</span>
+<span style="color: #483d8b;">#include</span> <span style="color: #8b2252;">&lt;stdlib.h&gt;</span>
+
+<span style="color: #b22222;">// </span><span style="color: #b22222;">Multitype is either NOTHING, AN_INT, or A_FLOAT</span>
+<span style="color: #b22222;">// </span><span style="color: #b22222;">You should read it and write it based on its type (which)</span>
+<span style="color: #a020f0;">struct</span> <span style="color: #228b22;">multi_type</span> {
+    <span style="color: #a020f0;">enum</span> {
+        <span style="color: #a0522d;">NOTHING</span>,
+        <span style="color: #a0522d;">AN_INT</span>,
+        <span style="color: #a0522d;">A_FLOAT</span>
+    } <span style="color: #a0522d;">which</span>;
+    <span style="color: #a020f0;">union</span> {
+        <span style="color: #228b22;">int32_t</span> <span style="color: #a0522d;">an_int</span>;
+        <span style="color: #228b22;">float</span> <span style="color: #a0522d;">a_float</span>;
+    } <span style="color: #a0522d;">value</span>;
+};
+<span style="color: #a020f0;">typedef</span> <span style="color: #a020f0;">struct</span> <span style="color: #228b22;">multi_type</span> <span style="color: #228b22;">MultiType</span>;
+
+<span style="color: #228b22;">void</span> <span style="color: #0000ff;">print_mt</span>(<span style="color: #228b22;">MultiType</span> <span style="color: #a0522d;">mt</span>) {
+    <span style="color: #a020f0;">if</span> (mt.which == NOTHING) {
+        printf(<span style="color: #8b2252;">"nothing"</span>);
+    } <span style="color: #a020f0;">else</span> <span style="color: #a020f0;">if</span> (mt.which == AN_INT) {
+        printf(<span style="color: #8b2252;">"%d"</span>, (<span style="color: #228b22;">int</span>) mt.value.an_int);
+    } <span style="color: #a020f0;">else</span> <span style="color: #a020f0;">if</span> (mt.which == A_FLOAT) {
+        printf(<span style="color: #8b2252;">"%e"</span>, mt.value.a_float);
+    } <span style="color: #a020f0;">else</span> {
+        abort();
+    }
+}
+
+<span style="color: #228b22;">void</span> <span style="color: #0000ff;">print_mt_array</span>(<span style="color: #228b22;">MultiType</span> *<span style="color: #a0522d;">mt_array</span>, <span style="color: #228b22;">size_t</span> <span style="color: #a0522d;">length</span>) {
+    <span style="color: #a020f0;">for</span> (<span style="color: #228b22;">size_t</span> <span style="color: #a0522d;">idx</span> = 0; idx &lt; length; idx++) {
+        print_mt(mt_array[idx]);
+        printf(<span style="color: #8b2252;">" "</span>);
+    }
+    printf(<span style="color: #8b2252;">"\n"</span>);
+}
+<span style="color: #483d8b;">#define</span> <span style="color: #a0522d;">EXAMPLES</span> 6
+<span style="color: #228b22;">int</span> <span style="color: #0000ff;">main</span>() {
+    <span style="color: #228b22;">MultiType</span> <span style="color: #a0522d;">mt_array</span>[EXAMPLES] = {
+        { NOTHING },
+        { AN_INT, { .an_int=10 } },
+        { A_FLOAT, { .a_float=0.1 } },
+        { NOTHING },
+        { A_FLOAT, { .a_float=99.9 } },
+        { AN_INT, { .an_int=99.9 } },
+    };
+    printf(<span style="color: #8b2252;">"\n"</span>);
+    printf(<span style="color: #8b2252;">"sizeof(mt_array)    == %lu\n"</span>,<span style="color: #a020f0;">sizeof</span>(mt_array));
+    printf(<span style="color: #8b2252;">"sizeof(mt_array[0]) == %lu\n"</span>,<span style="color: #a020f0;">sizeof</span>(mt_array[0]));
+    printf(<span style="color: #8b2252;">"sizeof(mt_array[1]) == %lu\n"</span>,<span style="color: #a020f0;">sizeof</span>(mt_array[0]));
+    printf(<span style="color: #8b2252;">"sizeof(mt_array[2]) == %lu\n"</span>,<span style="color: #a020f0;">sizeof</span>(mt_array[0]));
+    print_mt_array(mt_array, EXAMPLES);
+}
+</pre>
+</div>
+
+<p>
+sizeof(mt<sub>array</sub>)    <code>= 48
+sizeof(mt_array[0]) =</code> 8
+sizeof(mt<sub>array</sub>[1]) <code>= 8
+sizeof(mt_array[2]) =</code> 8
+nothing 10 1.000000e-01 nothing 9.990000e+01 99
+</p>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div id="postamble" class="status">
+<p class="author">Author: Abram Hindle</p>
+<p class="date">Created: 2020-02-25 Tue 11:21</p>
+<p class="validation"><a href="http://validator.w3.org/check?uri=referer">Validate</a></p>
+</div>
+</body>
+</html>
