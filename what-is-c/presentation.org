@@ -1,6 +1,5 @@
 * C
 ** Init ORG-MODE
-
 ;; I need this for org-mode to work well
 
 (require 'ob-sh)
