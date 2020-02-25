@@ -1,5 +1,5 @@
 #+TITLE: CMPUT201W20B2 Week 6
-#+PROPERTY: header-args:C             :results output :exports both :flags -std=c99 -Wall -pedantic -Werror -g :results value drawer
+#+PROPERTY: header-args:C             :results output :exports both :flags -std=c99 -Wall -pedantic -Werror -g 
 #+PROPERTY: header-args:sh            :results output :exports both
 
 * Week6
@@ -608,11 +608,11 @@ sizeof(uints.a_char)=1
 sizeof(uints.a_short)=2
 sizeof(uints.an_int)=4
 sizeof(uints.a_long)=8
-&uints=        0x7fff012c6370
-&uints.a_char= 0x7fff012c6370
-&uints.a_short=0x7fff012c6372
-&uints.an_int= 0x7fff012c6374
-&uints.a_long= 0x7fff012c6378
+&uints=        0x7ffc1f575350
+&uints.a_char= 0x7ffc1f575350
+&uints.a_short=0x7ffc1f575352
+&uints.an_int= 0x7ffc1f575354
+&uints.a_long= 0x7ffc1f575358
 :END:
 
 #+BEGIN_SRC C
@@ -651,11 +651,11 @@ sizeof(uints.a_char)=1
 sizeof(uints.a_short)=2
 sizeof(uints.an_int)=4
 sizeof(uints.a_long)=8
-&uints=        0x7ffd4ac64830
-&uints.a_char= 0x7ffd4ac64830
-&uints.a_short=0x7ffd4ac64830
-&uints.an_int= 0x7ffd4ac64830
-&uints.a_long= 0x7ffd4ac64830
+&uints=        0x7ffd6541e670
+&uints.a_char= 0x7ffd6541e670
+&uints.a_short=0x7ffd6541e670
+&uints.an_int= 0x7ffd6541e670
+&uints.a_long= 0x7ffd6541e670
 :END:
 
 
