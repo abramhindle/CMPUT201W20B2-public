@@ -654,8 +654,8 @@ typedef enum direction Direction;
 
 const char * const direction_names[N_DIRECTIONS] = {
     [UP] = "Up",
-    [DOWN] = "Down",
     [LEFT] = "Left",
+    [DOWN] = "Down",
     [RIGHT] = "Right"
 };
 
