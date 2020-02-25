@@ -1,8 +1,8 @@
-#+TITLE: CMPUT201W20B2 Week 6
-#+PROPERTY: header-args:C             :results output :exports both :flags -std=c99 -Wall -pedantic -Werror -g 
+#+TITLE: CMPUT201W20B2 Week 7
+#+PROPERTY: header-args:C             :results output :exports both :flags -std=c99 -Wall -pedantic -Werror -g :eval yes :results value drawer
 #+PROPERTY: header-args:sh            :results output :exports both
 
-* Week6
+* Week7
 ** Copyright Statement
 
 If you are in CMPUT201 at UAlberta this code is released in the public
@@ -129,7 +129,7 @@ int main() {
 #+END_SRC
 
 #+RESULTS:
-#+begin_example
+:RESULTS:
 0 Right	[3]
 1 Down	[1]
 2 Left	[2]
@@ -140,7 +140,7 @@ int main() {
 7 Up	[0]
 8 Right	[3]
 9 Down	[1]
-#+end_example
+:END:
 
 *** enum_typedef.c
 
