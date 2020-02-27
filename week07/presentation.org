@@ -402,12 +402,10 @@ int main() {
 #+END_SRC
 
 #+RESULTS:
-:RESULTS:
-flavor 1 = Hamburger flavor
-flavor 2 = Those packets that come in the ramen
-flavor 0 = Raspberry
-flavor 1 = Hamburger flavor
-:END:
+: flavor 0 = Raspberry
+: flavor 0 = Raspberry
+: flavor 0 = Raspberry
+: flavor 2 = Those packets that come in the ramen
 
 *** Another motivating ENUM Example
 
@@ -562,7 +560,7 @@ int main() {
 #+END_SRC
 
 #+RESULTS:
-:RESULTS:
+#+begin_example
 For the long 0:
 	char	 0
 	short	 0
@@ -599,7 +597,7 @@ For the long 18446744073709551615:
 	int	 4294967295
 	long	 18446744073709551615
 Overflow kept local	 18446744073709551360
-:END:
+#+end_example
 
 *** Structs versus Unions
 
@@ -639,11 +637,11 @@ sizeof(uints.a_char)=1
 sizeof(uints.a_short)=2
 sizeof(uints.an_int)=4
 sizeof(uints.a_long)=8
-&uints=        0x7fff13306380
-&uints.a_char= 0x7fff13306380
-&uints.a_short=0x7fff13306382
-&uints.an_int= 0x7fff13306384
-&uints.a_long= 0x7fff13306388
+&uints=        0x7ffddf8dfaa0
+&uints.a_char= 0x7ffddf8dfaa0
+&uints.a_short=0x7ffddf8dfaa2
+&uints.an_int= 0x7ffddf8dfaa4
+&uints.a_long= 0x7ffddf8dfaa8
 #+end_example
 
 #+BEGIN_SRC C
@@ -675,19 +673,19 @@ int main() {
 #+END_SRC
 
 #+RESULTS:
-:RESULTS:
+#+begin_example
 Hi I'm a Union!
 sizeof(uints)=8
 sizeof(uints.a_char)=1
 sizeof(uints.a_short)=2
 sizeof(uints.an_int)=4
 sizeof(uints.a_long)=8
-&uints=        0x7fff37a95230
-&uints.a_char= 0x7fff37a95230
-&uints.a_short=0x7fff37a95230
-&uints.an_int= 0x7fff37a95230
-&uints.a_long= 0x7fff37a95230
-:END:
+&uints=        0x7ffdf782b730
+&uints.a_char= 0x7ffdf782b730
+&uints.a_short=0x7ffdf782b730
+&uints.an_int= 0x7ffdf782b730
+&uints.a_long= 0x7ffdf782b730
+#+end_example
 
 
 *** Union considerations
@@ -977,16 +975,14 @@ int main() {
 #+END_SRC
 
 #+RESULTS:
-:RESULTS:
-1 ints allocated!
-4 bytes!
-262145 ints allocated!
-1048580 bytes!
-524289 ints allocated!
-2097156 bytes!
-786433 ints allocated!
-3145732 bytes!
-:END:
+: 1 ints allocated!
+: 4 bytes!
+: 262145 ints allocated!
+: 1048580 bytes!
+: 524289 ints allocated!
+: 2097156 bytes!
+: 786433 ints allocated!
+: 3145732 bytes!
 
 
 #+BEGIN_SRC C
@@ -1016,7 +1012,7 @@ int main() {
 #+END_SRC
 
 #+RESULTS:
-:RESULTS:
+#+begin_example
 1 ints allocated!
 4 bytes!
 5242881 ints allocated!
@@ -1053,7 +1049,7 @@ int main() {
 335544324 bytes!
 89128961 ints allocated!
 356515844 bytes!
-:END:
+#+end_example
 
 *** Malloc2
 
@@ -1067,7 +1063,7 @@ gcc -std=c99 -Wall -pedantic -Werror -o board ./board.c
 #+RESULTS:
 :    8192    8192 67117056
 
-#+BEGIN_SRC C
+#+BEGIN_SRC C :eval no
 #include <stdint.h>
 #include <stdio.h>
 #include <stdlib.h> // <-- malloc is in stdlib.h
@@ -1121,6 +1117,8 @@ int main() {
 }
 #+END_SRC
 
+#+RESULTS:
+
 *** Calloc 
 
 Calloc is like malloc except it will initialize the memory for you!
@@ -1159,7 +1157,7 @@ int main() {
 #+END_SRC
 
 #+RESULTS:
-:RESULTS:
+#+begin_example
 1 ints allocated!
 4 bytes!
 5242881 ints allocated!
@@ -1196,7 +1194,7 @@ int main() {
 335544324 bytes!
 89128961 ints allocated!
 356515844 bytes!
-:END:
+#+end_example
 
 *** strdup
 
@@ -1243,14 +1241,12 @@ int main() {
 #+END_SRC
 
 #+RESULTS:
-:RESULTS:
-0x559972824984 hello, world!
-0x5599749b8270 hello, world!
-0x5599749b8290 hello, world!
-hello, world!
-Mello, world!
-Jello, world!
-:END:
+: 0x558193a11984 hello, world!
+: 0x558194305270 hello, world!
+: 0x558194305290 hello, world!
+: hello, world!
+: Mello, world!
+: Jello, world!
 
 *** free
 
@@ -1474,36 +1470,36 @@ int main() {
 
 #+RESULTS:
 #+begin_example
-size: 00030 array1: old: 0x55804dd28260 new: 0x55804dd282d0
-size: 00045 array1: old: 0x55804dd282d0 new: 0x55804dd29340
-size: 00060 array1: old: 0x55804dd29340 new: 0x55804dd29400
-size: 00075 array1: old: 0x55804dd29400 new: 0x55804dd294f0
-size: 00090 array1: old: 0x55804dd294f0 new: 0x55804dd29610
-size: 00105 array1: old: 0x55804dd29610 new: 0x55804dd29760
-size: 00125 array1: old: 0x55804dd29760 new: 0x55804dd298e0
-size: 00140 array1: old: 0x55804dd298e0 new: 0x55804dd29a90
-size: 00155 array1: old: 0x55804dd29a90 new: 0x55804dd29c70
-size: 00170 array1: old: 0x55804dd29c70 new: 0x55804dd29e80
-size: 00185 array1: old: 0x55804dd29e80 new: 0x55804dd2a0c0
-size: 00205 array1: old: 0x55804dd2a0c0 new: 0x55804dd2a330
-size: 00220 array1: old: 0x55804dd2a330 new: 0x55804dd2a5d0
-size: 00235 array1: old: 0x55804dd2a5d0 new: 0x55804dd2a8a0
-size: 00250 array1: old: 0x55804dd2a8a0 new: 0x55804dd2aba0
-size: 00265 array1: old: 0x55804dd2aba0 new: 0x55804dd2aed0
-size: 00285 array1: old: 0x55804dd2aed0 new: 0x55804dd2b230
-size: 00300 array1: old: 0x55804dd2b230 new: 0x55804dd2b5c0
-size: 00315 array1: old: 0x55804dd2b5c0 new: 0x55804dd2b980
-size: 00330 array1: old: 0x55804dd2b980 new: 0x55804dd2bd70
-size: 00345 array1: old: 0x55804dd2bd70 new: 0x55804dd2c190
-size: 00365 array1: old: 0x55804dd2c190 new: 0x55804dd2c5e0
-size: 00380 array1: old: 0x55804dd2c5e0 new: 0x55804dd2ca60
-size: 00395 array1: old: 0x55804dd2ca60 new: 0x55804dd2cf10
-size: 00410 array1: old: 0x55804dd2cf10 new: 0x55804dd2d3f0
-size: 00425 array1: old: 0x55804dd2d3f0 new: 0x55804dd2d900
-size: 00445 array1: old: 0x55804dd2d900 new: 0x55804dd2de40
-size: 00460 array1: old: 0x55804dd2de40 new: 0x55804dd2e3b0
-size: 00475 array1: old: 0x55804dd2e3b0 new: 0x55804dd2e950
-size: 00490 array1: old: 0x55804dd2e950 new: 0x55804dd2ef20
+size: 00030 array1: old: 0x559789757260 new: 0x5597897572d0
+size: 00045 array1: old: 0x5597897572d0 new: 0x559789758340
+size: 00060 array1: old: 0x559789758340 new: 0x559789758400
+size: 00075 array1: old: 0x559789758400 new: 0x5597897584f0
+size: 00090 array1: old: 0x5597897584f0 new: 0x559789758610
+size: 00105 array1: old: 0x559789758610 new: 0x559789758760
+size: 00125 array1: old: 0x559789758760 new: 0x5597897588e0
+size: 00140 array1: old: 0x5597897588e0 new: 0x559789758a90
+size: 00155 array1: old: 0x559789758a90 new: 0x559789758c70
+size: 00170 array1: old: 0x559789758c70 new: 0x559789758e80
+size: 00185 array1: old: 0x559789758e80 new: 0x5597897590c0
+size: 00205 array1: old: 0x5597897590c0 new: 0x559789759330
+size: 00220 array1: old: 0x559789759330 new: 0x5597897595d0
+size: 00235 array1: old: 0x5597897595d0 new: 0x5597897598a0
+size: 00250 array1: old: 0x5597897598a0 new: 0x559789759ba0
+size: 00265 array1: old: 0x559789759ba0 new: 0x559789759ed0
+size: 00285 array1: old: 0x559789759ed0 new: 0x55978975a230
+size: 00300 array1: old: 0x55978975a230 new: 0x55978975a5c0
+size: 00315 array1: old: 0x55978975a5c0 new: 0x55978975a980
+size: 00330 array1: old: 0x55978975a980 new: 0x55978975ad70
+size: 00345 array1: old: 0x55978975ad70 new: 0x55978975b190
+size: 00365 array1: old: 0x55978975b190 new: 0x55978975b5e0
+size: 00380 array1: old: 0x55978975b5e0 new: 0x55978975ba60
+size: 00395 array1: old: 0x55978975ba60 new: 0x55978975bf10
+size: 00410 array1: old: 0x55978975bf10 new: 0x55978975c3f0
+size: 00425 array1: old: 0x55978975c3f0 new: 0x55978975c900
+size: 00445 array1: old: 0x55978975c900 new: 0x55978975ce40
+size: 00460 array1: old: 0x55978975ce40 new: 0x55978975d3b0
+size: 00475 array1: old: 0x55978975d3b0 new: 0x55978975d950
+size: 00490 array1: old: 0x55978975d950 new: 0x55978975df20
 #+end_example
 
 
@@ -1600,27 +1596,27 @@ int main() {
 
 #+RESULTS:
 #+begin_example
-Flush found at card 890
-Suit 2
-Flush found at card 5235
-Suit 2
-Flush found at card 5910
+Flush found at card 450
 Suit 3
-Flush found at card 6035
-Suit 3
-Flush found at card 6585
+Flush found at card 1405
 Suit 2
-Flush found at card 7445
-Suit 2
-Flush found at card 10235
-Suit 2
-Flush found at card 11580
-Suit 3
-Flush found at card 11660
-Suit 2
-Flush found at card 12455
+Flush found at card 1605
 Suit 0
-We found 810 flushes out of 200000 hands: 0.004050
+Flush found at card 2165
+Suit 2
+Flush found at card 4575
+Suit 1
+Flush found at card 4680
+Suit 2
+Flush found at card 4705
+Suit 2
+Flush found at card 5410
+Suit 0
+Flush found at card 7130
+Suit 1
+Flush found at card 7185
+Suit 1
+We found 786 flushes out of 200000 hands: 0.003930
 #+end_example
 
 *** Malloc 2D arrays
@@ -1966,27 +1962,27 @@ int main() {
 
 #+RESULTS:
 #+begin_example
-Flush found at card 398
-Suit 2
-Flush found at card 489
-Suit 0
-Flush found at card 508
-Suit 0
-Flush found at card 941
+Flush found at card 19
 Suit 3
-Flush found at card 1543
+Flush found at card 340
+Suit 1
+Flush found at card 450
 Suit 0
-Flush found at card 1780
-Suit 2
-Flush found at card 2219
-Suit 2
-Flush found at card 2545
-Suit 2
-Flush found at card 2646
+Flush found at card 870
+Suit 0
+Flush found at card 918
 Suit 1
-Flush found at card 3083
-Suit 1
-We found 3945 flushes out of 1000000 hands: 0.003945
+Flush found at card 932
+Suit 2
+Flush found at card 970
+Suit 2
+Flush found at card 1375
+Suit 0
+Flush found at card 1438
+Suit 3
+Flush found at card 1631
+Suit 2
+We found 3902 flushes out of 1000000 hands: 0.003902
 #+end_example
 
 That's kind of gross, let's model our hands as arrays of 5 cards instead.
@@ -2082,25 +2078,25 @@ int main() {
 
 #+RESULTS:
 #+begin_example
-Flush found at card 98
+Flush found at card 85
+Suit 0
+Flush found at card 640
+Suit 0
+Flush found at card 728
+Suit 0
+Flush found at card 815
+Suit 1
+Flush found at card 914
+Suit 2
+Flush found at card 1253
 Suit 3
-Flush found at card 279
-Suit 2
-Flush found at card 291
+Flush found at card 2527
 Suit 1
-Flush found at card 796
-Suit 1
-Flush found at card 828
+Flush found at card 2540
 Suit 2
-Flush found at card 935
+Flush found at card 2574
 Suit 1
-Flush found at card 999
-Suit 2
-Flush found at card 1217
-Suit 0
-Flush found at card 1465
-Suit 0
-Flush found at card 1502
-Suit 0
-We found 3916 flushes out of 1000000 hands: 0.003916
+Flush found at card 2757
+Suit 1
+We found 3838 flushes out of 1000000 hands: 0.003838
 #+end_example
