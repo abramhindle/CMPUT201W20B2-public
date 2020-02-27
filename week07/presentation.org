@@ -93,7 +93,7 @@ Enums are good for representing states, symbols, simple values, etc.
 
 #define N_DIRECTIONS 4
 enum direction {
-    UP, DOWN, LEFT, RIGHT
+    UP=1, DOWN=2, LEFT=3, RIGHT=0
 };
 typedef enum direction Direction;
 
@@ -129,18 +129,18 @@ int main() {
 #+END_SRC
 
 #+RESULTS:
-#+begin_example
-0 Right	[3]
-1 Down	[1]
-2 Left	[2]
-3 Up	[0]
-4 Right	[3]
-5 Down	[1]
-6 Left	[2]
-7 Up	[0]
-8 Right	[3]
-9 Down	[1]
-#+end_example
+:RESULTS:
+0 Right	[0]
+1 Down	[2]
+2 Left	[3]
+3 Up	[1]
+4 Right	[0]
+5 Down	[2]
+6 Left	[3]
+7 Up	[1]
+8 Right	[0]
+9 Down	[2]
+:END:
 
 *** enum_typedef.c
 
@@ -211,20 +211,39 @@ enum flavor {
 
 typedef enum flavor Flavor;
 
+const char * flavorString(Flavor flavor) {
+    switch (flavor) {
+        case VANILLA:
+            return "Vanilla";
+        case CHOCOLATE:
+            return "Chocolate";
+        default:
+            abort();
+    }
+}
+
+
 int main() {
     printf("VANILLA=%d\n", VANILLA);
     printf("CHOCOLATE=%d\n", CHOCOLATE);
     printf("STRAWBERRY=%d\n", STRAWBERRY);
     printf("sizeof(Flavor)=%zu\n",
            sizeof(Flavor));
+    puts(flavorString(VANILLA));
+    puts(flavorString(100));
+
 }
 #+END_SRC
 
 #+RESULTS:
-: VANILLA=100
-: CHOCOLATE=101
-: STRAWBERRY=102
-: sizeof(Flavor)=4
+:RESULTS:
+VANILLA=100
+CHOCOLATE=101
+STRAWBERRY=102
+sizeof(Flavor)=4
+Vanilla
+Vanilla
+:END:
 
 *** Enumassign 
 
@@ -250,10 +269,12 @@ int main() {
 #+END_SRC
 
 #+RESULTS:
-: VANILLA=100
-: CHOCOLATE=200
-: STRAWBERRY=300
-: sizeof(Flavor)=4
+:RESULTS:
+VANILLA=100
+CHOCOLATE=200
+STRAWBERRY=300
+sizeof(Flavor)=4
+:END:
 
 *** Enum_loop_trick.c
 
@@ -270,6 +291,7 @@ another symbol
 
 enum flavor {
     VANILLA,
+    RHUBARB,
     CHOCOLATE,
     STRAWBERRY,
     N_FLAVORS // Get the free max enum here
@@ -296,6 +318,9 @@ int main() {
             case STRAWBERRY:
                 printf("flavor=STRAWBERRY\n");
                 break;
+            case RHUBARB:
+                printf("flavor=RHUBARB\n");
+                break;
             default:
                 abort();
         }
@@ -304,14 +329,17 @@ int main() {
 #+END_SRC
 
 #+RESULTS:
-: VANILLA=0
-: CHOCOLATE=1
-: STRAWBERRY=2
-: N_FLAVORS=3
-: sizeof(Flavor)=4
-: flavor=VANILLA
-: flavor=CHOCOLATE
-: flavor=STRAWBERRY
+:RESULTS:
+VANILLA=0
+CHOCOLATE=2
+STRAWBERRY=3
+N_FLAVORS=4
+sizeof(Flavor)=4
+flavor=VANILLA
+flavor=RHUBARB
+flavor=CHOCOLATE
+flavor=STRAWBERRY
+:END:
 
 *** Enum Int
 
@@ -374,9 +402,9 @@ int main() {
 #+RESULTS:
 :RESULTS:
 flavor 1 = Hamburger flavor
+flavor 2 = Those packets that come in the ramen
 flavor 0 = Raspberry
 flavor 1 = Hamburger flavor
-flavor 0 = Raspberry
 :END:
 
 *** Another motivating ENUM Example
@@ -400,7 +428,7 @@ enum card_face {
     FACE10,
     JACK,
     QUEEN,
-    KING
+    KING,
 };
 
 typedef enum card_face CardFace;
@@ -501,7 +529,12 @@ sizeof(unsigned long long int):	8
 
 #+BEGIN_SRC C :exports both 
 #include <stdio.h>
-
+/*
+[C][S][I][I][L][L][L][L]
+ S  I  L  L
+ I  L
+ L
+*/
 union uints {
     unsigned char a_char;
     unsigned short a_short;
@@ -608,11 +641,11 @@ sizeof(uints.a_char)=1
 sizeof(uints.a_short)=2
 sizeof(uints.an_int)=4
 sizeof(uints.a_long)=8
-&uints=        0x7ffc1f575350
-&uints.a_char= 0x7ffc1f575350
-&uints.a_short=0x7ffc1f575352
-&uints.an_int= 0x7ffc1f575354
-&uints.a_long= 0x7ffc1f575358
+&uints=        0x7ffea1ea8590
+&uints.a_char= 0x7ffea1ea8590
+&uints.a_short=0x7ffea1ea8592
+&uints.an_int= 0x7ffea1ea8594
+&uints.a_long= 0x7ffea1ea8598
 :END:
 
 #+BEGIN_SRC C
@@ -651,11 +684,11 @@ sizeof(uints.a_char)=1
 sizeof(uints.a_short)=2
 sizeof(uints.an_int)=4
 sizeof(uints.a_long)=8
-&uints=        0x7ffd6541e670
-&uints.a_char= 0x7ffd6541e670
-&uints.a_short=0x7ffd6541e670
-&uints.an_int= 0x7ffd6541e670
-&uints.a_long= 0x7ffd6541e670
+&uints=        0x7fff37a95230
+&uints.a_char= 0x7fff37a95230
+&uints.a_short=0x7fff37a95230
+&uints.an_int= 0x7fff37a95230
+&uints.a_long= 0x7fff37a95230
 :END:
 
 
@@ -671,13 +704,13 @@ sizeof(uints.a_long)=8
       member. Yet it pretty common practice.
     - GCC and others typically allow it.
 
-#+BEGIN_SRC C :eval no
+#+BEGIN_SRC C :eval yes :flags -std=c89
 #include <stdio.h>
 #include <stdint.h>
 #include <limits.h>
 #include <stdlib.h>
 
-// This is super useful, but we can't do it in C99
+/* This is super useful, but we can't do it in C99 */
 
 struct multi_type {
     enum {
@@ -705,7 +738,8 @@ void print_mt(MultiType mt) {
 }
 
 void print_mt_array(MultiType *mt_array, size_t length) {
-    for (size_t idx = 0; idx < length; idx++) {
+    size_t idx;
+    for (idx = 0; idx < length; idx++) {
         print_mt(mt_array[idx]);
         printf(" ");
     }
@@ -736,6 +770,10 @@ int main() {
     print_mt_array(mt_array, 4);
 }
 #+END_SRC
+
+#+RESULTS:
+:RESULTS:
+:END:
 
 The error message:
 
@@ -794,7 +832,7 @@ void print_mt_array(MultiType *mt_array, size_t length) {
     }
     printf("\n");
 }
-#define EXAMPLES 6
+#define EXAMPLES 7
 int main() {
     MultiType mt_array[EXAMPLES] = {
         { NOTHING },
@@ -803,23 +841,24 @@ int main() {
         { NOTHING },
         { A_FLOAT, { .a_float=99.9 } },
         { AN_INT, { .an_int=99.9 } },
+        { AN_INT, { .a_float=-99.9 } },
     };
     printf("\n");
     printf("sizeof(mt_array)    == %lu\n",sizeof(mt_array));
     printf("sizeof(mt_array[0]) == %lu\n",sizeof(mt_array[0]));
-    printf("sizeof(mt_array[1]) == %lu\n",sizeof(mt_array[0]));
-    printf("sizeof(mt_array[2]) == %lu\n",sizeof(mt_array[0]));
+    printf("sizeof(mt_array[1]) == %lu\n",sizeof(mt_array[1]));
+    printf("sizeof(mt_array[2]) == %lu\n",sizeof(mt_array[2]));
     print_mt_array(mt_array, EXAMPLES);
 }
 #+END_SRC
 
 #+RESULTS:
 :RESULTS:
-sizeof(mt_array)    == 48
+sizeof(mt_array)    == 56
 sizeof(mt_array[0]) == 8
 sizeof(mt_array[1]) == 8
 sizeof(mt_array[2]) == 8
-nothing 10 1.000000e-01 nothing 9.990000e+01 99
+nothing 10 1.000000e-01 nothing 9.990000e+01 99 -1027093299
 :END:
 
 ** Malloc! The Heap!
@@ -1022,5 +1061,342 @@ int main() {
 :END:
 
 *** Calloc 
-*** Free
-*** Realloc
+
+Calloc is like malloc except it will initialize the memory for you!
+Just to 0 though. Which is good enough.
+
+Calloc looks different 
+
+calloc( 
+man calloc sayss
+       void *calloc(size_t nmemb, size_t size);
+
+
+
+#+BEGIN_SRC C
+#include <assert.h>
+#include <stdio.h>
+#include <stdlib.h>
+#include <string.h>
+
+int * testAllocArray(int arrLen) {
+  int* array = calloc( sizeof(int), arrLen );
+  assert(array!=NULL);
+  for(int idx=0; idx<arrLen; idx++) {
+    array[idx] = idx;
+  }
+  return array;
+}
+int main() {
+    for (int i = 1; i < 90000000; i+=5*1024*1024) {
+        int * bigArray = testAllocArray( i );
+        printf("%u ints allocated!\n",1+bigArray[i-1]);
+        printf("%lu bytes!\n", sizeof(int)*i);
+        free(bigArray); // remember to free it when done!
+    }
+}
+#+END_SRC
+
+#+RESULTS:
+:RESULTS:
+1 ints allocated!
+4 bytes!
+5242881 ints allocated!
+20971524 bytes!
+10485761 ints allocated!
+41943044 bytes!
+15728641 ints allocated!
+62914564 bytes!
+20971521 ints allocated!
+83886084 bytes!
+26214401 ints allocated!
+104857604 bytes!
+31457281 ints allocated!
+125829124 bytes!
+36700161 ints allocated!
+146800644 bytes!
+41943041 ints allocated!
+167772164 bytes!
+47185921 ints allocated!
+188743684 bytes!
+52428801 ints allocated!
+209715204 bytes!
+57671681 ints allocated!
+230686724 bytes!
+62914561 ints allocated!
+251658244 bytes!
+68157441 ints allocated!
+272629764 bytes!
+73400321 ints allocated!
+293601284 bytes!
+78643201 ints allocated!
+314572804 bytes!
+83886081 ints allocated!
+335544324 bytes!
+89128961 ints allocated!
+356515844 bytes!
+:END:
+
+*** Malloc2
+
+Big allocation!
+
+#+BEGIN_SRC sh
+gcc -std=c99 -Wall -pedantic -Werror -o board ./board.c
+./board | wc
+#+END_SRC
+
+#+RESULTS:
+:    8192    8192 67117056
+
+#+BEGIN_SRC C
+#include <stdint.h>
+#include <stdio.h>
+#include <stdlib.h> // <-- malloc is in stdlib.h
+
+#define KIBI 1024L
+#define MEGA (KIBI*KIBI)
+#define SIZE 1024*8
+
+/*
+ * malloc: Memory ALLOCate, in number of bytes
+ * free: deallocate the memory
+ *  takes the pointer returned by malloc
+ * 
+ * Memory still needs to be initialized!
+ */
+
+uint8_t * get_board() {
+    void * allocated = malloc(sizeof(uint8_t) * SIZE * SIZE);
+    if (allocated == NULL) {
+        printf("Error: Out of memory!\n");
+        abort();
+    }
+    return allocated;
+}
+
+int main() {
+    uint8_t (*board)[SIZE] = NULL;
+    size_t total_size = sizeof(uint8_t) * SIZE * SIZE;
+    board = (uint8_t (*)[SIZE])get_board();
+    // board = malloc(total_size);
+    for (size_t row = 0; row < SIZE; row++) {
+        for (size_t col = 0; col < SIZE; col++) {
+            board[row][col] = rand() % 26 + 'A';
+        }
+    }
+    
+    for (size_t row = 0; row < SIZE; row++) {
+        for (size_t col = 0; col < SIZE; col++) {
+            printf("%c", (char) board[row][col]);
+        }
+        printf("\n");
+    }
+    printf("board is %zu mebibytes!\n", total_size/MEGA);
+    free(board);
+    for (size_t row = 0; row < SIZE; row++) {
+        for (size_t col = 0; col < SIZE; col++) {
+            printf("%c", (char) board[row][col]);
+        }
+        printf("\n");
+    }
+}
+#+END_SRC
+
+*** strdup
+
+strdup duplicates a string into newly malloc'd memory.
+
+Very handy.
+
+Very dangerous.
+
+#+BEGIN_SRC C
+#define _POSIX_C_SOURCE 200809L // <-- needed for strdup
+#include <stdint.h>
+#include <stdio.h>
+#include <stdlib.h>
+#include <string.h> // <-- strdup is in string.h
+
+/*
+ * strdup = malloc + strcpy
+ */
+
+int main() {
+    const char * message = "hello, world!";
+    // char buffer[14];
+    // strncpy(buffer, message, 14);
+    
+    // char * copy = malloc((strlen(message) + 1) * sizeof(char));
+    // strcpy(copy, message);
+    
+    char * copy = strdup(message);
+    printf("%s\n", copy);
+    message[0] = 'H';
+    copy[0] = 'H';
+    printf("%s\n", copy);
+    free(copy);
+}
+#+END_SRC
+
+*** free
+
+What happens if we don't free?
+
+Our program can get bigger!
+
+
+
+#+BEGIN_SRC C
+#include <assert.h>
+#include <stdio.h>
+#include <stdlib.h>
+#include <string.h>
+
+int * testAllocArray(int arrLen) {
+  int* array = calloc( sizeof(int), arrLen );
+  assert(array!=NULL);
+  for(int idx=0; idx<arrLen; idx++) {
+    array[idx] = idx;
+  }
+  return array;
+}
+int main() {
+    for (int i = 1; i < 10000000; i+=1*1024*1024) {
+        int * bigArray = testAllocArray( i );
+        printf("%u ints allocated!\n",1+bigArray[i-1]);
+        printf("%lu bytes!\n", sizeof(int)*i);
+        // free(bigArray); // remember to free it when done!
+    }
+}
+#+END_SRC
+
+#+RESULTS:
+:RESULTS:
+1 ints allocated!
+4 bytes!
+1048577 ints allocated!
+4194308 bytes!
+2097153 ints allocated!
+8388612 bytes!
+3145729 ints allocated!
+12582916 bytes!
+4194305 ints allocated!
+16777220 bytes!
+5242881 ints allocated!
+20971524 bytes!
+6291457 ints allocated!
+25165828 bytes!
+7340033 ints allocated!
+29360132 bytes!
+8388609 ints allocated!
+33554436 bytes!
+9437185 ints allocated!
+37748740 bytes!
+:END:
+
+Valgrind is a memory leak detector. It analyzes memory allocations and
+warns us about mistakes.
+
+Valgrind will show us that we're leaking memory (losing track of it
+and not freeing it).
+
+#+BEGIN_SRC sh
+gcc -std=c99 -Wall -pedantic -Werror -o nofree ./nofree.c
+valgrind ./nofree 2>&1
+valgrind --leak-check=full ./nofree 2>&1
+#+END_SRC
+
+#+RESULTS:
+#+begin_example
+==9746== Memcheck, a memory error detector
+==9746== Copyright (C) 2002-2017, and GNU GPL'd, by Julian Seward et al.
+==9746== Using Valgrind-3.13.0 and LibVEX; rerun with -h for copyright info
+==9746== Command: ./nofree
+==9746== 
+1 ints allocated!
+4 bytes!
+1048577 ints allocated!
+4194308 bytes!
+2097153 ints allocated!
+8388612 bytes!
+3145729 ints allocated!
+12582916 bytes!
+4194305 ints allocated!
+16777220 bytes!
+5242881 ints allocated!
+20971524 bytes!
+6291457 ints allocated!
+25165828 bytes!
+7340033 ints allocated!
+29360132 bytes!
+8388609 ints allocated!
+33554436 bytes!
+9437185 ints allocated!
+37748740 bytes!
+==9746== 
+==9746== HEAP SUMMARY:
+==9746==     in use at exit: 188,743,720 bytes in 10 blocks
+==9746==   total heap usage: 11 allocs, 1 frees, 188,747,816 bytes allocated
+==9746== 
+==9746== LEAK SUMMARY:
+==9746==    definitely lost: 117,440,540 bytes in 7 blocks
+==9746==    indirectly lost: 0 bytes in 0 blocks
+==9746==      possibly lost: 71,303,180 bytes in 3 blocks
+==9746==    still reachable: 0 bytes in 0 blocks
+==9746==         suppressed: 0 bytes in 0 blocks
+==9746== Rerun with --leak-check=full to see details of leaked memory
+==9746== 
+==9746== For counts of detected and suppressed errors, rerun with: -v
+==9746== ERROR SUMMARY: 0 errors from 0 contexts (suppressed: 0 from 0)
+==10000== Memcheck, a memory error detector
+==10000== Copyright (C) 2002-2017, and GNU GPL'd, by Julian Seward et al.
+==10000== Using Valgrind-3.13.0 and LibVEX; rerun with -h for copyright info
+==10000== Command: ./nofree
+==10000== 
+1 ints allocated!
+4 bytes!
+1048577 ints allocated!
+4194308 bytes!
+2097153 ints allocated!
+8388612 bytes!
+3145729 ints allocated!
+12582916 bytes!
+4194305 ints allocated!
+16777220 bytes!
+5242881 ints allocated!
+20971524 bytes!
+6291457 ints allocated!
+25165828 bytes!
+7340033 ints allocated!
+29360132 bytes!
+8388609 ints allocated!
+33554436 bytes!
+9437185 ints allocated!
+37748740 bytes!
+==10000== 
+==10000== HEAP SUMMARY:
+==10000==     in use at exit: 188,743,720 bytes in 10 blocks
+==10000==   total heap usage: 11 allocs, 1 frees, 188,747,816 bytes allocated
+==10000== 
+==10000== 71,303,180 bytes in 3 blocks are possibly lost in loss record 1 of 2
+==10000==    at 0x4C31B25: calloc (in /usr/lib/valgrind/vgpreload_memcheck-amd64-linux.so)
+==10000==    by 0x1086F6: testAllocArray (in /home/hindle1/projects/CMPUT201/CMPUT201W20B2-public/week07/nofree)
+==10000==    by 0x10876F: main (in /home/hindle1/projects/CMPUT201/CMPUT201W20B2-public/week07/nofree)
+==10000== 
+==10000== 117,440,540 bytes in 7 blocks are definitely lost in loss record 2 of 2
+==10000==    at 0x4C31B25: calloc (in /usr/lib/valgrind/vgpreload_memcheck-amd64-linux.so)
+==10000==    by 0x1086F6: testAllocArray (in /home/hindle1/projects/CMPUT201/CMPUT201W20B2-public/week07/nofree)
+==10000==    by 0x10876F: main (in /home/hindle1/projects/CMPUT201/CMPUT201W20B2-public/week07/nofree)
+==10000== 
+==10000== LEAK SUMMARY:
+==10000==    definitely lost: 117,440,540 bytes in 7 blocks
+==10000==    indirectly lost: 0 bytes in 0 blocks
+==10000==      possibly lost: 71,303,180 bytes in 3 blocks
+==10000==    still reachable: 0 bytes in 0 blocks
+==10000==         suppressed: 0 bytes in 0 blocks
+==10000== 
+==10000== For counts of detected and suppressed errors, rerun with: -v
+==10000== ERROR SUMMARY: 2 errors from 2 contexts (suppressed: 0 from 0)
+#+end_example
+
