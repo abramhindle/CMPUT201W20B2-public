@@ -1399,4 +1399,3 @@ valgrind --leak-check=full ./nofree 2>&1
 ==10000== For counts of detected and suppressed errors, rerun with: -v
 ==10000== ERROR SUMMARY: 2 errors from 2 contexts (suppressed: 0 from 0)
 #+end_example
-
