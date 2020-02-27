@@ -3,7 +3,7 @@
 "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
 <head>
-<!-- 2020-02-25 Tue 11:56 -->
+<!-- 2020-02-27 Thu 11:34 -->
 <meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <title>CMPUT201W20B2 Week 7</title>
@@ -234,43 +234,49 @@ for the JavaScript code in this tag.
 <h2>Table of Contents</h2>
 <div id="text-table-of-contents">
 <ul>
-<li><a href="#org9f1e941">1. Week7</a>
+<li><a href="#org185054c">1. Week7</a>
 <ul>
-<li><a href="#org192bbe1">1.1. Copyright Statement</a>
+<li><a href="#org8e7fb06">1.1. Copyright Statement</a>
 <ul>
-<li><a href="#org59fccd2">1.1.1. License</a></li>
-<li><a href="#orgb3da3b6">1.1.2. Hazel Code is licensed under AGPL3.0+</a></li>
+<li><a href="#org66bff0a">1.1.1. License</a></li>
+<li><a href="#org17a4fdf">1.1.2. Hazel Code is licensed under AGPL3.0+</a></li>
 </ul>
 </li>
-<li><a href="#org6667693">1.2. Init ORG-MODE</a></li>
-<li><a href="#org1c07000">1.3. Org Template</a></li>
-<li><a href="#org749b74e">1.4. Remember how to compile?</a></li>
-<li><a href="#org9a9aff5">1.5. Enums!</a>
+<li><a href="#org3efaf2b">1.2. Init ORG-MODE</a></li>
+<li><a href="#org834f4ea">1.3. Org Template</a></li>
+<li><a href="#orgdd09923">1.4. Remember how to compile?</a></li>
+<li><a href="#org5139fd7">1.5. Enums!</a>
 <ul>
-<li><a href="#orgc9b9164">1.5.1. Enum Example</a></li>
-<li><a href="#org307c068">1.5.2. enum<sub>typedef.c</sub></a></li>
-<li><a href="#org59f6f93">1.5.3. EnumStart</a></li>
-<li><a href="#org0e5f0c5">1.5.4. Enumassign</a></li>
-<li><a href="#org2de2a0a">1.5.5. Enum<sub>loop</sub><sub>trick.c</sub></a></li>
-<li><a href="#orgb5ec28a">1.5.6. Enum Int</a></li>
-<li><a href="#org27ed01b">1.5.7. Another motivating ENUM Example</a></li>
+<li><a href="#org0276f77">1.5.1. Enum Example</a></li>
+<li><a href="#orgd818c9b">1.5.2. enum<sub>typedef.c</sub></a></li>
+<li><a href="#org20adc4b">1.5.3. EnumStart</a></li>
+<li><a href="#org4a7ae7d">1.5.4. Enumassign</a></li>
+<li><a href="#org60b11b3">1.5.5. Enum<sub>loop</sub><sub>trick.c</sub></a></li>
+<li><a href="#orgc14056f">1.5.6. Enum Int</a></li>
+<li><a href="#org7b88e2a">1.5.7. Another motivating ENUM Example</a></li>
 </ul>
 </li>
-<li><a href="#orgd89f144">1.6. Unions</a>
+<li><a href="#org2d4e8f8">1.6. Unions</a>
 <ul>
-<li><a href="#org211fd57">1.6.1. Structs versus Unions</a></li>
-<li><a href="#org5faea83">1.6.2. Union considerations</a></li>
-<li><a href="#org34100c3">1.6.3. Type Punning</a></li>
-<li><a href="#org21fe93c">1.6.4. Unions with type tags</a></li>
+<li><a href="#orgcc8debe">1.6.1. Structs versus Unions</a></li>
+<li><a href="#org5455fdf">1.6.2. Union considerations</a></li>
+<li><a href="#orgf72751f">1.6.3. Type Punning</a></li>
+<li><a href="#orgab047e8">1.6.4. Unions with type tags</a></li>
 </ul>
 </li>
-<li><a href="#org07f5307">1.7. Malloc! The Heap!</a>
+<li><a href="#org1070be1">1.7. Malloc! The Heap!</a>
 <ul>
-<li><a href="#org24be879">1.7.1. On my computer</a></li>
-<li><a href="#orgdd0c4d2">1.7.2. Malloc</a></li>
-<li><a href="#org2771c0e">1.7.3. Calloc</a></li>
-<li><a href="#orgb3c6ed6">1.7.4. Free</a></li>
-<li><a href="#orgc29aaca">1.7.5. Realloc</a></li>
+<li><a href="#org8ad14c4">1.7.1. On my computer</a></li>
+<li><a href="#org46291f3">1.7.2. Malloc</a></li>
+<li><a href="#orgbe3b70c">1.7.3. Malloc2</a></li>
+<li><a href="#org395c784">1.7.4. Calloc</a></li>
+<li><a href="#orgf631b7a">1.7.5. strdup</a></li>
+<li><a href="#org0c20255">1.7.6. free</a></li>
+<li><a href="#org8ba35ef">1.7.7. realloc!</a></li>
+<li><a href="#org4f10e94">1.7.8. Malloc and structs</a></li>
+<li><a href="#org4416697">1.7.9. Malloc 2D arrays</a></li>
+<li><a href="#org4c81331">1.7.10. Malloc Array of Array versus 2D</a></li>
+<li><a href="#org952a85a">1.7.11. Malloc array of arrays structs?</a></li>
 </ul>
 </li>
 </ul>
@@ -279,12 +285,12 @@ for the JavaScript code in this tag.
 </div>
 </div>
 
-<div id="outline-container-org9f1e941" class="outline-2">
-<h2 id="org9f1e941"><span class="section-number-2">1</span> Week7</h2>
+<div id="outline-container-org185054c" class="outline-2">
+<h2 id="org185054c"><span class="section-number-2">1</span> Week7</h2>
 <div class="outline-text-2" id="text-1">
 </div>
-<div id="outline-container-org192bbe1" class="outline-3">
-<h3 id="org192bbe1"><span class="section-number-3">1.1</span> Copyright Statement</h3>
+<div id="outline-container-org8e7fb06" class="outline-3">
+<h3 id="org8e7fb06"><span class="section-number-3">1.1</span> Copyright Statement</h3>
 <div class="outline-text-3" id="text-1-1">
 <p>
 If you are in CMPUT201 at UAlberta this code is released in the public
@@ -296,8 +302,8 @@ Otherwise it is (c) 2020 Abram Hindle, Hazel Campbell AGPL3.0+
 </p>
 </div>
 
-<div id="outline-container-org59fccd2" class="outline-4">
-<h4 id="org59fccd2"><span class="section-number-4">1.1.1</span> License</h4>
+<div id="outline-container-org66bff0a" class="outline-4">
+<h4 id="org66bff0a"><span class="section-number-4">1.1.1</span> License</h4>
 <div class="outline-text-4" id="text-1-1-1">
 <p>
 Week 3 notes
@@ -326,8 +332,8 @@ along with this program.  If not, see <a href="https://www.gnu.org/licenses/">ht
 </div>
 
 
-<div id="outline-container-orgb3da3b6" class="outline-4">
-<h4 id="orgb3da3b6"><span class="section-number-4">1.1.2</span> Hazel Code is licensed under AGPL3.0+</h4>
+<div id="outline-container-org17a4fdf" class="outline-4">
+<h4 id="org17a4fdf"><span class="section-number-4">1.1.2</span> Hazel Code is licensed under AGPL3.0+</h4>
 <div class="outline-text-4" id="text-1-1-2">
 <p>
 Hazel's code is also found here
@@ -342,25 +348,33 @@ license, unless otherwise noted.
 </div>
 </div>
 
-<div id="outline-container-org6667693" class="outline-3">
-<h3 id="org6667693"><span class="section-number-3">1.2</span> Init ORG-MODE</h3>
+<div id="outline-container-org3efaf2b" class="outline-3">
+<h3 id="org3efaf2b"><span class="section-number-3">1.2</span> Init ORG-MODE</h3>
 <div class="outline-text-3" id="text-1-2">
 <div class="org-src-container">
 <pre class="src src-elisp"><span style="color: #b22222;">;; </span><span style="color: #b22222;">I need this for org-mode to work well</span>
 
-(<span style="color: #a020f0;">require</span> '<span style="color: #008b8b;">ob-sh</span>)
-<span style="color: #b22222;">;</span><span style="color: #b22222;">(require 'ob-shell)</span>
-(org-babel-do-load-languages 'org-babel-load-languages '((sh . t)))
+<span style="color: #b22222;">;</span><span style="color: #b22222;">(require 'ob-sh)</span>
+(<span style="color: #a020f0;">require</span> '<span style="color: #008b8b;">ob-shell</span>)
+<span style="color: #b22222;">; </span><span style="color: #b22222;">(org-babel-do-load-languages 'org-babel-load-languages '((sh . t)))</span>
+(org-babel-do-load-languages 'org-babel-load-languages '((shell . t)))
 (org-babel-do-load-languages 'org-babel-load-languages '((C . t)))
 (org-babel-do-load-languages 'org-babel-load-languages '((python . t)))
 (<span style="color: #a020f0;">setq</span> org-src-fontify-natively t)
+(<span style="color: #a020f0;">setq</span> org-confirm-babel-evaluate nil) <span style="color: #b22222;">;; </span><span style="color: #b22222;">danger!</span>
+(custom-set-faces
+ <span style="color: #b22222;">;; </span><span style="color: #b22222;">custom-set-faces was added by Custom.</span>
+ <span style="color: #b22222;">;; </span><span style="color: #b22222;">If you edit it by hand, you could mess it up, so be careful.</span>
+ <span style="color: #b22222;">;; </span><span style="color: #b22222;">Your init file should contain only one such instance.</span>
+ <span style="color: #b22222;">;; </span><span style="color: #b22222;">If there is more than one, they won't work right.</span>
+ '(org-block ((t (<span style="color: #483d8b;">:inherit</span> shadow <span style="color: #483d8b;">:foreground</span> <span style="color: #8b2252;">"black"</span>)))))
 </pre>
 </div>
 </div>
 </div>
 
-<div id="outline-container-org1c07000" class="outline-3">
-<h3 id="org1c07000"><span class="section-number-3">1.3</span> Org Template</h3>
+<div id="outline-container-org834f4ea" class="outline-3">
+<h3 id="org834f4ea"><span class="section-number-3">1.3</span> Org Template</h3>
 <div class="outline-text-3" id="text-1-3">
 <p>
 Copy and paste this to demo C
@@ -377,8 +391,8 @@ Copy and paste this to demo C
 </div>
 </div>
 
-<div id="outline-container-org749b74e" class="outline-3">
-<h3 id="org749b74e"><span class="section-number-3">1.4</span> Remember how to compile?</h3>
+<div id="outline-container-orgdd09923" class="outline-3">
+<h3 id="orgdd09923"><span class="section-number-3">1.4</span> Remember how to compile?</h3>
 <div class="outline-text-3" id="text-1-4">
 <p>
 gcc -std=c99 -Wall -pedantic -Werror -o programname programname.c
@@ -387,8 +401,8 @@ gcc -std=c99 -Wall -pedantic -Werror -o programname programname.c
 </div>
 
 
-<div id="outline-container-org9a9aff5" class="outline-3">
-<h3 id="org9a9aff5"><span class="section-number-3">1.5</span> Enums!</h3>
+<div id="outline-container-org5139fd7" class="outline-3">
+<h3 id="org5139fd7"><span class="section-number-3">1.5</span> Enums!</h3>
 <div class="outline-text-3" id="text-1-5">
 <p>
 Enums are enumerations, which is just a convienant way to make symbols
@@ -409,8 +423,8 @@ Enums are good for representing the type of something or a category.
 </p>
 </div>
 
-<div id="outline-container-orgc9b9164" class="outline-4">
-<h4 id="orgc9b9164"><span class="section-number-4">1.5.1</span> Enum Example</h4>
+<div id="outline-container-org0276f77" class="outline-4">
+<h4 id="org0276f77"><span class="section-number-4">1.5.1</span> Enum Example</h4>
 <div class="outline-text-4" id="text-1-5-1">
 <p>
 Enums are good for representing states, symbols, simple values, etc.
@@ -422,7 +436,7 @@ Enums are good for representing states, symbols, simple values, etc.
 
 <span style="color: #483d8b;">#define</span> <span style="color: #a0522d;">N_DIRECTIONS</span> 4
 <span style="color: #a020f0;">enum</span> <span style="color: #228b22;">direction</span> {
-    <span style="color: #a0522d;">UP</span>, <span style="color: #a0522d;">DOWN</span>, <span style="color: #a0522d;">LEFT</span>, <span style="color: #a0522d;">RIGHT</span>
+    <span style="color: #a0522d;">UP</span>=1, <span style="color: #a0522d;">DOWN</span>=2, <span style="color: #a0522d;">LEFT</span>=3, <span style="color: #a0522d;">RIGHT</span>=0
 };
 <span style="color: #a020f0;">typedef</span> <span style="color: #a020f0;">enum</span> <span style="color: #228b22;">direction</span> <span style="color: #228b22;">Direction</span>;
 
@@ -458,23 +472,23 @@ Enums are good for representing states, symbols, simple values, etc.
 </pre>
 </div>
 
-<p>
-0 Right	[3]
-1 Down	[1]
-2 Left	[2]
-3 Up	[0]
-4 Right	[3]
-5 Down	[1]
-6 Left	[2]
-7 Up	[0]
-8 Right	[3]
-9 Down	[1]
-</p>
+<pre class="example">
+0 Right	[0]
+1 Down	[2]
+2 Left	[3]
+3 Up	[1]
+4 Right	[0]
+5 Down	[2]
+6 Left	[3]
+7 Up	[1]
+8 Right	[0]
+9 Down	[2]
+</pre>
 </div>
 </div>
 
-<div id="outline-container-org307c068" class="outline-4">
-<h4 id="org307c068"><span class="section-number-4">1.5.2</span> enum<sub>typedef.c</sub></h4>
+<div id="outline-container-orgd818c9b" class="outline-4">
+<h4 id="orgd818c9b"><span class="section-number-4">1.5.2</span> enum<sub>typedef.c</sub></h4>
 <div class="outline-text-4" id="text-1-5-2">
 <p>
 Enums are annoying to type. Typing enum enumname all the time is
@@ -533,18 +547,19 @@ typedef enum enunumae Enumename ;
 </pre>
 </div>
 
-<p>
+<pre class="example">
 favourite=0
 sizeof(favourite)=4
 favourite=VANILLA
-</p>
+
+</pre>
 </div>
 </div>
 
 
 
-<div id="outline-container-org59f6f93" class="outline-4">
-<h4 id="org59f6f93"><span class="section-number-4">1.5.3</span> EnumStart</h4>
+<div id="outline-container-org20adc4b" class="outline-4">
+<h4 id="org20adc4b"><span class="section-number-4">1.5.3</span> EnumStart</h4>
 <div class="outline-text-4" id="text-1-5-3">
 <div class="org-src-container">
 <pre class="src src-C"><span style="color: #483d8b;">#include</span> <span style="color: #8b2252;">&lt;stdio.h&gt;</span>
@@ -558,27 +573,45 @@ favourite=VANILLA
 
 <span style="color: #a020f0;">typedef</span> <span style="color: #a020f0;">enum</span> <span style="color: #228b22;">flavor</span> <span style="color: #228b22;">Flavor</span>;
 
+<span style="color: #a020f0;">const</span> <span style="color: #228b22;">char</span> * <span style="color: #0000ff;">flavorString</span>(<span style="color: #228b22;">Flavor</span> <span style="color: #a0522d;">flavor</span>) {
+    <span style="color: #a020f0;">switch</span> (flavor) {
+        <span style="color: #a020f0;">case</span> VANILLA:
+            <span style="color: #a020f0;">return</span> <span style="color: #8b2252;">"Vanilla"</span>;
+        <span style="color: #a020f0;">case</span> CHOCOLATE:
+            <span style="color: #a020f0;">return</span> <span style="color: #8b2252;">"Chocolate"</span>;
+        <span style="color: #a020f0;">default</span>:
+            abort();
+    }
+}
+
+
 <span style="color: #228b22;">int</span> <span style="color: #0000ff;">main</span>() {
     printf(<span style="color: #8b2252;">"VANILLA=%d\n"</span>, VANILLA);
     printf(<span style="color: #8b2252;">"CHOCOLATE=%d\n"</span>, CHOCOLATE);
     printf(<span style="color: #8b2252;">"STRAWBERRY=%d\n"</span>, STRAWBERRY);
     printf(<span style="color: #8b2252;">"sizeof(Flavor)=%zu\n"</span>,
            <span style="color: #a020f0;">sizeof</span>(Flavor));
+    puts(flavorString(VANILLA));
+    puts(flavorString(100));
+
 }
 </pre>
 </div>
 
-<p>
+<pre class="example">
 VANILLA=100
 CHOCOLATE=101
 STRAWBERRY=102
 sizeof(Flavor)=4
-</p>
+Vanilla
+Vanilla
+
+</pre>
 </div>
 </div>
 
-<div id="outline-container-org0e5f0c5" class="outline-4">
-<h4 id="org0e5f0c5"><span class="section-number-4">1.5.4</span> Enumassign</h4>
+<div id="outline-container-org4a7ae7d" class="outline-4">
+<h4 id="org4a7ae7d"><span class="section-number-4">1.5.4</span> Enumassign</h4>
 <div class="outline-text-4" id="text-1-5-4">
 <div class="org-src-container">
 <pre class="src src-C"><span style="color: #483d8b;">#include</span> <span style="color: #8b2252;">&lt;stdio.h&gt;</span>
@@ -602,17 +635,18 @@ sizeof(Flavor)=4
 </pre>
 </div>
 
-<p>
+<pre class="example">
 VANILLA=100
 CHOCOLATE=200
 STRAWBERRY=300
 sizeof(Flavor)=4
-</p>
+
+</pre>
 </div>
 </div>
 
-<div id="outline-container-org2de2a0a" class="outline-4">
-<h4 id="org2de2a0a"><span class="section-number-4">1.5.5</span> Enum<sub>loop</sub><sub>trick.c</sub></h4>
+<div id="outline-container-org60b11b3" class="outline-4">
+<h4 id="org60b11b3"><span class="section-number-4">1.5.5</span> Enum<sub>loop</sub><sub>trick.c</sub></h4>
 <div class="outline-text-4" id="text-1-5-5">
 <p>
 This is a fun trick to set a maximum value for your enum by using
@@ -629,6 +663,7 @@ another symbol
 
 <span style="color: #a020f0;">enum</span> <span style="color: #228b22;">flavor</span> {
     <span style="color: #a0522d;">VANILLA</span>,
+    <span style="color: #a0522d;">RHUBARB</span>,
     <span style="color: #a0522d;">CHOCOLATE</span>,
     <span style="color: #a0522d;">STRAWBERRY</span>,
     <span style="color: #a0522d;">N_FLAVORS</span> <span style="color: #b22222;">// </span><span style="color: #b22222;">Get the free max enum here</span>
@@ -655,6 +690,9 @@ another symbol
             <span style="color: #a020f0;">case</span> STRAWBERRY:
                 printf(<span style="color: #8b2252;">"flavor=STRAWBERRY\n"</span>);
                 <span style="color: #a020f0;">break</span>;
+            <span style="color: #a020f0;">case</span> RHUBARB:
+                printf(<span style="color: #8b2252;">"flavor=RHUBARB\n"</span>);
+                <span style="color: #a020f0;">break</span>;
             <span style="color: #a020f0;">default</span>:
                 abort();
         }
@@ -663,21 +701,23 @@ another symbol
 </pre>
 </div>
 
-<p>
+<pre class="example">
 VANILLA=0
-CHOCOLATE=1
-STRAWBERRY=2
-N<sub>FLAVORS</sub>=3
+CHOCOLATE=2
+STRAWBERRY=3
+N_FLAVORS=4
 sizeof(Flavor)=4
 flavor=VANILLA
+flavor=RHUBARB
 flavor=CHOCOLATE
 flavor=STRAWBERRY
-</p>
+
+</pre>
 </div>
 </div>
 
-<div id="outline-container-orgb5ec28a" class="outline-4">
-<h4 id="orgb5ec28a"><span class="section-number-4">1.5.6</span> Enum Int</h4>
+<div id="outline-container-orgc14056f" class="outline-4">
+<h4 id="orgc14056f"><span class="section-number-4">1.5.6</span> Enum Int</h4>
 <div class="outline-text-4" id="text-1-5-6">
 <p>
 Enum are just integers. And you can treat them as such.
@@ -738,17 +778,18 @@ Enum are just integers. And you can treat them as such.
 </pre>
 </div>
 
-<p>
-flavor 1 = Hamburger flavor
-flavor 1 = Hamburger flavor
-flavor 1 = Hamburger flavor
-flavor 1 = Hamburger flavor
-</p>
+<pre class="example">
+flavor 2 = Those packets that come in the ramen
+flavor 0 = Raspberry
+flavor 0 = Raspberry
+flavor 0 = Raspberry
+
+</pre>
 </div>
 </div>
 
-<div id="outline-container-org27ed01b" class="outline-4">
-<h4 id="org27ed01b"><span class="section-number-4">1.5.7</span> Another motivating ENUM Example</h4>
+<div id="outline-container-org7b88e2a" class="outline-4">
+<h4 id="org7b88e2a"><span class="section-number-4">1.5.7</span> Another motivating ENUM Example</h4>
 <div class="outline-text-4" id="text-1-5-7">
 <div class="org-src-container">
 <pre class="src src-C"><span style="color: #483d8b;">#include</span> <span style="color: #8b2252;">&lt;stdbool.h&gt;</span> 
@@ -769,7 +810,7 @@ flavor 1 = Hamburger flavor
     <span style="color: #a0522d;">FACE10</span>,
     <span style="color: #a0522d;">JACK</span>,
     <span style="color: #a0522d;">QUEEN</span>,
-    <span style="color: #a0522d;">KING</span>
+    <span style="color: #a0522d;">KING</span>,
 };
 
 <span style="color: #a020f0;">typedef</span> <span style="color: #a020f0;">enum</span> <span style="color: #228b22;">card_face</span> <span style="color: #228b22;">CardFace</span>;
@@ -827,18 +868,19 @@ flavor 1 = Hamburger flavor
 </pre>
 </div>
 
-<p>
+<pre class="example">
 isFlush? 1
 isFlush? 0
-</p>
+
+</pre>
 </div>
 </div>
 </div>
 
 
 
-<div id="outline-container-orgd89f144" class="outline-3">
-<h3 id="orgd89f144"><span class="section-number-3">1.6</span> Unions</h3>
+<div id="outline-container-org2d4e8f8" class="outline-3">
+<h3 id="org2d4e8f8"><span class="section-number-3">1.6</span> Unions</h3>
 <div class="outline-text-3" id="text-1-6">
 <ul class="org-ul">
 <li>Unions are a way to all the same types to share the same memory.</li>
@@ -865,18 +907,24 @@ isFlush? 0
 </pre>
 </div>
 
-<p>
+<pre class="example">
 sizeof(unsigned char):		1
 sizeof(unsigned short):		2
 sizeof(unsigned int):		4
 sizeof(unsigned long):		8
 sizeof(unsigned long long):	8
 sizeof(unsigned long long int):	8
-</p>
+
+</pre>
 
 <div class="org-src-container">
 <pre class="src src-C"><span style="color: #483d8b;">#include</span> <span style="color: #8b2252;">&lt;stdio.h&gt;</span>
-
+<span style="color: #b22222;">/*</span>
+<span style="color: #b22222;">[C][S][I][I][L][L][L][L]</span>
+<span style="color: #b22222;"> S  I  L  L</span>
+<span style="color: #b22222;"> I  L</span>
+<span style="color: #b22222;"> L</span>
+<span style="color: #b22222;">*/</span>
 <span style="color: #a020f0;">union</span> <span style="color: #228b22;">uints</span> {
     <span style="color: #228b22;">unsigned</span> <span style="color: #228b22;">char</span> <span style="color: #a0522d;">a_char</span>;
     <span style="color: #228b22;">unsigned</span> <span style="color: #228b22;">short</span> <span style="color: #a0522d;">a_short</span>;
@@ -906,7 +954,7 @@ sizeof(unsigned long long int):	8
 </pre>
 </div>
 
-<p>
+<pre class="example">
 For the long 0:
 	char	 0
 	short	 0
@@ -943,11 +991,11 @@ For the long 18446744073709551615:
 	int	 4294967295
 	long	 18446744073709551615
 Overflow kept local	 18446744073709551360
-</p>
+</pre>
 </div>
 
-<div id="outline-container-org211fd57" class="outline-4">
-<h4 id="org211fd57"><span class="section-number-4">1.6.1</span> Structs versus Unions</h4>
+<div id="outline-container-orgcc8debe" class="outline-4">
+<h4 id="orgcc8debe"><span class="section-number-4">1.6.1</span> Structs versus Unions</h4>
 <div class="outline-text-4" id="text-1-6-1">
 <div class="org-src-container">
 <pre class="src src-C"><span style="color: #483d8b;">#include</span> <span style="color: #8b2252;">&lt;stdio.h&gt;</span>
@@ -978,19 +1026,19 @@ Overflow kept local	 18446744073709551360
 </pre>
 </div>
 
-<p>
+<pre class="example">
 Hi I'm a struct!
 sizeof(uints)=16
-sizeof(uints.a<sub>char</sub>)=1
-sizeof(uints.a<sub>short</sub>)=2
-sizeof(uints.an<sub>int</sub>)=4
-sizeof(uints.a<sub>long</sub>)=8
-&amp;uints=        0x7ffe2c56ec60
-&amp;uints.a<sub>char</sub>= 0x7ffe2c56ec60
-&amp;uints.a<sub>short</sub>=0x7ffe2c56ec62
-&amp;uints.an<sub>int</sub>= 0x7ffe2c56ec64
-&amp;uints.a<sub>long</sub>= 0x7ffe2c56ec68
-</p>
+sizeof(uints.a_char)=1
+sizeof(uints.a_short)=2
+sizeof(uints.an_int)=4
+sizeof(uints.a_long)=8
+&amp;uints=        0x7ffc6a631fb0
+&amp;uints.a_char= 0x7ffc6a631fb0
+&amp;uints.a_short=0x7ffc6a631fb2
+&amp;uints.an_int= 0x7ffc6a631fb4
+&amp;uints.a_long= 0x7ffc6a631fb8
+</pre>
 
 <div class="org-src-container">
 <pre class="src src-C"><span style="color: #483d8b;">#include</span> <span style="color: #8b2252;">&lt;stdio.h&gt;</span>
@@ -1021,25 +1069,25 @@ sizeof(uints.a<sub>long</sub>)=8
 </pre>
 </div>
 
-<p>
+<pre class="example">
 Hi I'm a Union!
 sizeof(uints)=8
-sizeof(uints.a<sub>char</sub>)=1
-sizeof(uints.a<sub>short</sub>)=2
-sizeof(uints.an<sub>int</sub>)=4
-sizeof(uints.a<sub>long</sub>)=8
-&amp;uints=        0x7fff8a3ed5f0
-&amp;uints.a<sub>char</sub>= 0x7fff8a3ed5f0
-&amp;uints.a<sub>short</sub>=0x7fff8a3ed5f0
-&amp;uints.an<sub>int</sub>= 0x7fff8a3ed5f0
-&amp;uints.a<sub>long</sub>= 0x7fff8a3ed5f0
-</p>
+sizeof(uints.a_char)=1
+sizeof(uints.a_short)=2
+sizeof(uints.an_int)=4
+sizeof(uints.a_long)=8
+&amp;uints=        0x7ffd8beb4160
+&amp;uints.a_char= 0x7ffd8beb4160
+&amp;uints.a_short=0x7ffd8beb4160
+&amp;uints.an_int= 0x7ffd8beb4160
+&amp;uints.a_long= 0x7ffd8beb4160
+</pre>
 </div>
 </div>
 
 
-<div id="outline-container-org5faea83" class="outline-4">
-<h4 id="org5faea83"><span class="section-number-4">1.6.2</span> Union considerations</h4>
+<div id="outline-container-org5455fdf" class="outline-4">
+<h4 id="org5455fdf"><span class="section-number-4">1.6.2</span> Union considerations</h4>
 <div class="outline-text-4" id="text-1-6-2">
 <ul class="org-ul">
 <li>they are aligned at the starting byte of each member.</li>
@@ -1048,8 +1096,8 @@ sizeof(uints.a<sub>long</sub>)=8
 </div>
 </div>
 
-<div id="outline-container-org34100c3" class="outline-4">
-<h4 id="org34100c3"><span class="section-number-4">1.6.3</span> Type Punning</h4>
+<div id="outline-container-orgf72751f" class="outline-4">
+<h4 id="orgf72751f"><span class="section-number-4">1.6.3</span> Type Punning</h4>
 <div class="outline-text-4" id="text-1-6-3">
 <ul class="org-ul">
 <li>Type punning is breaking the type system to achieve a goal</li>
@@ -1065,7 +1113,7 @@ member. Yet it pretty common practice.</li>
 <span style="color: #483d8b;">#include</span> <span style="color: #8b2252;">&lt;limits.h&gt;</span>
 <span style="color: #483d8b;">#include</span> <span style="color: #8b2252;">&lt;stdlib.h&gt;</span>
 
-<span style="color: #b22222;">// </span><span style="color: #b22222;">This is super useful, but we can't do it in C99</span>
+<span style="color: #b22222;">/* </span><span style="color: #b22222;">This is super useful, but we can't do it in C99 </span><span style="color: #b22222;">*/</span>
 
 <span style="color: #a020f0;">struct</span> <span style="color: #228b22;">multi_type</span> {
     <span style="color: #a020f0;">enum</span> {
@@ -1093,7 +1141,8 @@ member. Yet it pretty common practice.</li>
 }
 
 <span style="color: #228b22;">void</span> <span style="color: #0000ff;">print_mt_array</span>(<span style="color: #228b22;">MultiType</span> *<span style="color: #a0522d;">mt_array</span>, <span style="color: #228b22;">size_t</span> <span style="color: #a0522d;">length</span>) {
-    <span style="color: #a020f0;">for</span> (<span style="color: #228b22;">size_t</span> <span style="color: #a0522d;">idx</span> = 0; idx &lt; length; idx++) {
+    <span style="color: #228b22;">size_t</span> <span style="color: #a0522d;">idx</span>;
+    <span style="color: #a020f0;">for</span> (idx = 0; idx &lt; length; idx++) {
         print_mt(mt_array[idx]);
         printf(<span style="color: #8b2252;">" "</span>);
     }
@@ -1141,8 +1190,8 @@ cc1: all warnings being treated as errors
 </div>
 
 
-<div id="outline-container-org21fe93c" class="outline-4">
-<h4 id="org21fe93c"><span class="section-number-4">1.6.4</span> Unions with type tags</h4>
+<div id="outline-container-orgab047e8" class="outline-4">
+<h4 id="orgab047e8"><span class="section-number-4">1.6.4</span> Unions with type tags</h4>
 <div class="outline-text-4" id="text-1-6-4">
 <p>
 It is common practice to treat unions like "dynamic types". But it is
@@ -1190,7 +1239,7 @@ being stored in that union.
     }
     printf(<span style="color: #8b2252;">"\n"</span>);
 }
-<span style="color: #483d8b;">#define</span> <span style="color: #a0522d;">EXAMPLES</span> 6
+<span style="color: #483d8b;">#define</span> <span style="color: #a0522d;">EXAMPLES</span> 7
 <span style="color: #228b22;">int</span> <span style="color: #0000ff;">main</span>() {
     <span style="color: #228b22;">MultiType</span> <span style="color: #a0522d;">mt_array</span>[EXAMPLES] = {
         { NOTHING },
@@ -1199,30 +1248,32 @@ being stored in that union.
         { NOTHING },
         { A_FLOAT, { .a_float=99.9 } },
         { AN_INT, { .an_int=99.9 } },
+        { AN_INT, { .a_float=-99.9 } },
     };
     printf(<span style="color: #8b2252;">"\n"</span>);
     printf(<span style="color: #8b2252;">"sizeof(mt_array)    == %lu\n"</span>,<span style="color: #a020f0;">sizeof</span>(mt_array));
     printf(<span style="color: #8b2252;">"sizeof(mt_array[0]) == %lu\n"</span>,<span style="color: #a020f0;">sizeof</span>(mt_array[0]));
-    printf(<span style="color: #8b2252;">"sizeof(mt_array[1]) == %lu\n"</span>,<span style="color: #a020f0;">sizeof</span>(mt_array[0]));
-    printf(<span style="color: #8b2252;">"sizeof(mt_array[2]) == %lu\n"</span>,<span style="color: #a020f0;">sizeof</span>(mt_array[0]));
+    printf(<span style="color: #8b2252;">"sizeof(mt_array[1]) == %lu\n"</span>,<span style="color: #a020f0;">sizeof</span>(mt_array[1]));
+    printf(<span style="color: #8b2252;">"sizeof(mt_array[2]) == %lu\n"</span>,<span style="color: #a020f0;">sizeof</span>(mt_array[2]));
     print_mt_array(mt_array, EXAMPLES);
 }
 </pre>
 </div>
 
-<p>
-sizeof(mt<sub>array</sub>)    <code>= 48
-sizeof(mt_array[0]) =</code> 8
-sizeof(mt<sub>array</sub>[1]) <code>= 8
-sizeof(mt_array[2]) =</code> 8
-nothing 10 1.000000e-01 nothing 9.990000e+01 99
-</p>
+<pre class="example">
+sizeof(mt_array)    == 56
+sizeof(mt_array[0]) == 8
+sizeof(mt_array[1]) == 8
+sizeof(mt_array[2]) == 8
+nothing 10 1.000000e-01 nothing 9.990000e+01 99 -1027093299
+
+</pre>
 </div>
 </div>
 </div>
 
-<div id="outline-container-org07f5307" class="outline-3">
-<h3 id="org07f5307"><span class="section-number-3">1.7</span> Malloc! The Heap!</h3>
+<div id="outline-container-org1070be1" class="outline-3">
+<h3 id="org1070be1"><span class="section-number-3">1.7</span> Malloc! The Heap!</h3>
 <div class="outline-text-3" id="text-1-7">
 <p>
 Memory!
@@ -1251,49 +1302,49 @@ What memory does our program use? (OS and compiler specific)
 </ul>
 </div>
 
-<div id="outline-container-org24be879" class="outline-4">
-<h4 id="org24be879"><span class="section-number-4">1.7.1</span> On my computer</h4>
+<div id="outline-container-org8ad14c4" class="outline-4">
+<h4 id="org8ad14c4"><span class="section-number-4">1.7.1</span> On my computer</h4>
 <div class="outline-text-4" id="text-1-7-1">
 <p>
 Here's what emacs is using
 </p>
 
-<p>
+<pre class="example">
 root@st-francis:/proc/27627# cat maps
 00400000-00641000 r-xp 00000000 09:00 116130283                          /usr/bin/emacs25-x
-00841000-00848000 r&#x2013;p 00241000 09:00 116130283                          /usr/bin/emacs25-x
+00841000-00848000 r--p 00241000 09:00 116130283                          /usr/bin/emacs25-x
 00848000-01615000 rw-p 00248000 09:00 116130283                          /usr/bin/emacs25-x
 03155000-0d208000 rw-p 00000000 00:00 0                                  [heap]
 7f16739f4000-7f1673a74000 rw-s 00000000 00:05 935100458                  /SYSV00000000 (deleted)
-7f1673a74000-7f1673a79000 r-xp 00000000 09:00 394799                     /usr/lib/x86<sub>64</sub>-linux-gnu/gdk-pixbuf-2.0/2.10.0/loaders/libpixbufloader-png.so
-7f1673a79000-7f1673c78000 &#x2014;p 00005000 09:00 394799                     /usr/lib/x86<sub>64</sub>-linux-gnu/gdk-pixbuf-2.0/2.10.0/loaders/libpixbufloader-png.so
-7f1673c78000-7f1673c79000 r&#x2013;p 00004000 09:00 394799                     /usr/lib/x86<sub>64</sub>-linux-gnu/gdk-pixbuf-2.0/2.10.0/loaders/libpixbufloader-png.so
-&#x2026;
-7f168942a000-7f168942b000 r&#x2013;p 00027000 09:00 103024636                  /lib/x86<sub>64</sub>-linux-gnu/ld-2.27.so
-7f168942b000-7f168942c000 rw-p 00028000 09:00 103024636                  /lib/x86<sub>64</sub>-linux-gnu/ld-2.27.so
+7f1673a74000-7f1673a79000 r-xp 00000000 09:00 394799                     /usr/lib/x86_64-linux-gnu/gdk-pixbuf-2.0/2.10.0/loaders/libpixbufloader-png.so
+7f1673a79000-7f1673c78000 ---p 00005000 09:00 394799                     /usr/lib/x86_64-linux-gnu/gdk-pixbuf-2.0/2.10.0/loaders/libpixbufloader-png.so
+7f1673c78000-7f1673c79000 r--p 00004000 09:00 394799                     /usr/lib/x86_64-linux-gnu/gdk-pixbuf-2.0/2.10.0/loaders/libpixbufloader-png.so
+...
+7f168942a000-7f168942b000 r--p 00027000 09:00 103024636                  /lib/x86_64-linux-gnu/ld-2.27.so
+7f168942b000-7f168942c000 rw-p 00028000 09:00 103024636                  /lib/x86_64-linux-gnu/ld-2.27.so
 7f168942c000-7f168942d000 rw-p 00000000 00:00 0 
 7fffcf9ad000-7fffcfa6d000 rw-p 00000000 00:00 0                          [stack]
-7fffcfb29000-7fffcfb2c000 r&#x2013;p 00000000 00:00 0                          [vvar]
+7fffcfb29000-7fffcfb2c000 r--p 00000000 00:00 0                          [vvar]
 7fffcfb2c000-7fffcfb2e000 r-xp 00000000 00:00 0                          [vdso]
 ffffffffff600000-ffffffffff601000 r-xp 00000000 00:00 0                  [vsyscall]
-</p>
+</pre>
 
 <p>
 Here's the important lines
 </p>
-<p>
+<pre class="example">
 code        00400000-00641000 r-xp 00000000 09:00 116130283                          /usr/bin/emacs25-x
-data?       00841000-00848000 r&#x2013;p 00241000 09:00 116130283                          /usr/bin/emacs25-x
+data?       00841000-00848000 r--p 00241000 09:00 116130283                          /usr/bin/emacs25-x
 data?       00848000-01615000 rw-p 00248000 09:00 116130283                          /usr/bin/emacs25-x
 heap        03155000-0d208000 rw-p 00000000 00:00 0                                  [heap]
 stack       7fffcf9ad000-7fffcfa6d000 rw-p 00000000 00:00 0                          [stack]
-</p>
+</pre>
 
 <p>
 So stack is limited
 </p>
 
-<p>
+<pre class="example">
 hindle1@st-francis:~$ ulimit -a
 core file size          (blocks, -c) 0
 data seg size           (kbytes, -d) unlimited
@@ -1311,11 +1362,12 @@ cpu time               (seconds, -t) unlimited
 max user processes              (-u) 273535
 virtual memory          (kbytes, -v) unlimited
 file locks                      (-x) unlimited
-</p>
+</pre>
 
-<p>
+
+<pre class="example">
 stack size              (kbytes, -s) 8192
-</p>
+</pre>
 
 <p>
 8megs of stack.
@@ -1355,8 +1407,8 @@ Sure.
 </div>
 </div>
 
-<div id="outline-container-orgdd0c4d2" class="outline-4">
-<h4 id="orgdd0c4d2"><span class="section-number-4">1.7.2</span> Malloc</h4>
+<div id="outline-container-org46291f3" class="outline-4">
+<h4 id="org46291f3"><span class="section-number-4">1.7.2</span> Malloc</h4>
 <div class="outline-text-4" id="text-1-7-2">
 <p>
 Just stack allocation
@@ -1384,7 +1436,7 @@ Just stack allocation
 </pre>
 </div>
 
-<p>
+<pre class="example">
 1 ints allocated!
 4 bytes!
 262145 ints allocated!
@@ -1393,7 +1445,8 @@ Just stack allocation
 2097156 bytes!
 786433 ints allocated!
 3145732 bytes!
-</p>
+
+</pre>
 
 
 <div class="org-src-container">
@@ -1423,7 +1476,7 @@ Just stack allocation
 </pre>
 </div>
 
-<p>
+<pre class="example">
 1 ints allocated!
 4 bytes!
 5242881 ints allocated!
@@ -1460,25 +1513,1145 @@ Just stack allocation
 335544324 bytes!
 89128961 ints allocated!
 356515844 bytes!
-</p>
+</pre>
 </div>
 </div>
 
-<div id="outline-container-org2771c0e" class="outline-4">
-<h4 id="org2771c0e"><span class="section-number-4">1.7.3</span> Calloc</h4>
+<div id="outline-container-orgbe3b70c" class="outline-4">
+<h4 id="orgbe3b70c"><span class="section-number-4">1.7.3</span> Malloc2</h4>
+<div class="outline-text-4" id="text-1-7-3">
+<p>
+Big allocation!
+</p>
+
+<div class="org-src-container">
+<pre class="src src-sh">gcc -std=c99 -Wall -pedantic -Werror -o board ./board.c
+./board | wc
+</pre>
 </div>
-<div id="outline-container-orgb3c6ed6" class="outline-4">
-<h4 id="orgb3c6ed6"><span class="section-number-4">1.7.4</span> Free</h4>
+
+<pre class="example">
+8192    8192 67117056
+
+</pre>
+
+<div class="org-src-container">
+<pre class="src src-C"><span style="color: #483d8b;">#include</span> <span style="color: #8b2252;">&lt;stdint.h&gt;</span>
+<span style="color: #483d8b;">#include</span> <span style="color: #8b2252;">&lt;stdio.h&gt;</span>
+<span style="color: #483d8b;">#include</span> <span style="color: #8b2252;">&lt;stdlib.h&gt;</span> <span style="color: #b22222;">// </span><span style="color: #b22222;">&lt;-- malloc is in stdlib.h</span>
+
+<span style="color: #483d8b;">#define</span> <span style="color: #a0522d;">KIBI</span> 1024L
+<span style="color: #483d8b;">#define</span> <span style="color: #a0522d;">MEGA</span> (KIBI*KIBI)
+<span style="color: #483d8b;">#define</span> <span style="color: #a0522d;">SIZE</span> 1024*8
+
+<span style="color: #b22222;">/*</span>
+<span style="color: #b22222;"> * malloc: Memory ALLOCate, in number of bytes</span>
+<span style="color: #b22222;"> * free: deallocate the memory</span>
+<span style="color: #b22222;"> *  takes the pointer returned by malloc</span>
+<span style="color: #b22222;"> * </span>
+<span style="color: #b22222;"> * Memory still needs to be initialized!</span>
+<span style="color: #b22222;"> </span><span style="color: #b22222;">*/</span>
+
+<span style="color: #228b22;">uint8_t</span> * <span style="color: #0000ff;">get_board</span>() {
+    <span style="color: #228b22;">void</span> * <span style="color: #a0522d;">allocated</span> = malloc(<span style="color: #a020f0;">sizeof</span>(uint8_t) * SIZE * SIZE);
+    <span style="color: #a020f0;">if</span> (allocated == <span style="color: #008b8b;">NULL</span>) {
+        printf(<span style="color: #8b2252;">"Error: Out of memory!\n"</span>);
+        abort();
+    }
+    <span style="color: #a020f0;">return</span> allocated;
+}
+
+<span style="color: #228b22;">int</span> <span style="color: #0000ff;">main</span>() {
+    <span style="color: #228b22;">uint8_t</span> (*<span style="color: #a0522d;">board</span>)[SIZE] = <span style="color: #008b8b;">NULL</span>;
+    <span style="color: #228b22;">size_t</span> <span style="color: #a0522d;">total_size</span> = <span style="color: #a020f0;">sizeof</span>(uint8_t) * SIZE * SIZE;
+    board = (<span style="color: #228b22;">uint8_t</span> (*)[SIZE])get_board();
+    <span style="color: #b22222;">// </span><span style="color: #b22222;">board = malloc(total_size);</span>
+    <span style="color: #a020f0;">for</span> (<span style="color: #228b22;">size_t</span> <span style="color: #a0522d;">row</span> = 0; row &lt; SIZE; row++) {
+        <span style="color: #a020f0;">for</span> (<span style="color: #228b22;">size_t</span> <span style="color: #a0522d;">col</span> = 0; col &lt; SIZE; col++) {
+            board[row][col] = rand() % 26 + <span style="color: #8b2252;">'A'</span>;
+        }
+    }
+
+    <span style="color: #a020f0;">for</span> (<span style="color: #228b22;">size_t</span> <span style="color: #a0522d;">row</span> = 0; row &lt; SIZE; row++) {
+        <span style="color: #a020f0;">for</span> (<span style="color: #228b22;">size_t</span> <span style="color: #a0522d;">col</span> = 0; col &lt; SIZE; col++) {
+            printf(<span style="color: #8b2252;">"%c"</span>, (<span style="color: #228b22;">char</span>) board[row][col]);
+        }
+        printf(<span style="color: #8b2252;">"\n"</span>);
+    }
+    printf(<span style="color: #8b2252;">"board is %zu mebibytes!\n"</span>, total_size/MEGA);
+    free(board);
+    <span style="color: #a020f0;">for</span> (<span style="color: #228b22;">size_t</span> <span style="color: #a0522d;">row</span> = 0; row &lt; SIZE; row++) {
+        <span style="color: #a020f0;">for</span> (<span style="color: #228b22;">size_t</span> <span style="color: #a0522d;">col</span> = 0; col &lt; SIZE; col++) {
+            printf(<span style="color: #8b2252;">"%c"</span>, (<span style="color: #228b22;">char</span>) board[row][col]);
+        }
+        printf(<span style="color: #8b2252;">"\n"</span>);
+    }
+}
+</pre>
 </div>
-<div id="outline-container-orgc29aaca" class="outline-4">
-<h4 id="orgc29aaca"><span class="section-number-4">1.7.5</span> Realloc</h4>
+</div>
+</div>
+
+<div id="outline-container-org395c784" class="outline-4">
+<h4 id="org395c784"><span class="section-number-4">1.7.4</span> Calloc</h4>
+<div class="outline-text-4" id="text-1-7-4">
+<p>
+Calloc is like malloc except it will initialize the memory for you!
+Just to 0 though. Which is good enough.
+</p>
+
+<p>
+Calloc looks different 
+</p>
+
+<p>
+man calloc says
+</p>
+
+<p>
+void *calloc(size<sub>t</sub> nmemb, size<sub>t</sub> size);
+</p>
+
+<p>
+It's not void, it's void * so you have to cast.
+</p>
+
+<div class="org-src-container">
+<pre class="src src-C"><span style="color: #483d8b;">#include</span> <span style="color: #8b2252;">&lt;assert.h&gt;</span>
+<span style="color: #483d8b;">#include</span> <span style="color: #8b2252;">&lt;stdio.h&gt;</span>
+<span style="color: #483d8b;">#include</span> <span style="color: #8b2252;">&lt;stdlib.h&gt;</span>
+<span style="color: #483d8b;">#include</span> <span style="color: #8b2252;">&lt;string.h&gt;</span>
+
+<span style="color: #228b22;">int</span> * <span style="color: #0000ff;">testAllocArray</span>(<span style="color: #228b22;">int</span> <span style="color: #a0522d;">arrLen</span>) {
+  <span style="color: #228b22;">int</span>* <span style="color: #a0522d;">array</span> = calloc( <span style="color: #a020f0;">sizeof</span>(<span style="color: #228b22;">int</span>), arrLen );
+  assert(array!=<span style="color: #008b8b;">NULL</span>);
+  <span style="color: #a020f0;">for</span>(<span style="color: #228b22;">int</span> <span style="color: #a0522d;">idx</span>=0; idx&lt;arrLen; idx++) {
+    array[idx] = idx;
+  }
+  <span style="color: #a020f0;">return</span> array;
+}
+<span style="color: #228b22;">int</span> <span style="color: #0000ff;">main</span>() {
+    <span style="color: #a020f0;">for</span> (<span style="color: #228b22;">int</span> <span style="color: #a0522d;">i</span> = 1; i &lt; 90000000; i+=5*1024*1024) {
+        <span style="color: #228b22;">int</span> * <span style="color: #a0522d;">bigArray</span> = testAllocArray( i );
+        printf(<span style="color: #8b2252;">"%u ints allocated!\n"</span>,1+bigArray[i-1]);
+        printf(<span style="color: #8b2252;">"%lu bytes!\n"</span>, <span style="color: #a020f0;">sizeof</span>(<span style="color: #228b22;">int</span>)*i);
+        free(bigArray); <span style="color: #b22222;">// </span><span style="color: #b22222;">remember to free it when done!</span>
+    }
+}
+</pre>
+</div>
+
+<pre class="example">
+1 ints allocated!
+4 bytes!
+5242881 ints allocated!
+20971524 bytes!
+10485761 ints allocated!
+41943044 bytes!
+15728641 ints allocated!
+62914564 bytes!
+20971521 ints allocated!
+83886084 bytes!
+26214401 ints allocated!
+104857604 bytes!
+31457281 ints allocated!
+125829124 bytes!
+36700161 ints allocated!
+146800644 bytes!
+41943041 ints allocated!
+167772164 bytes!
+47185921 ints allocated!
+188743684 bytes!
+52428801 ints allocated!
+209715204 bytes!
+57671681 ints allocated!
+230686724 bytes!
+62914561 ints allocated!
+251658244 bytes!
+68157441 ints allocated!
+272629764 bytes!
+73400321 ints allocated!
+293601284 bytes!
+78643201 ints allocated!
+314572804 bytes!
+83886081 ints allocated!
+335544324 bytes!
+89128961 ints allocated!
+356515844 bytes!
+</pre>
+</div>
+</div>
+
+<div id="outline-container-orgf631b7a" class="outline-4">
+<h4 id="orgf631b7a"><span class="section-number-4">1.7.5</span> strdup</h4>
+<div class="outline-text-4" id="text-1-7-5">
+<p>
+strdup duplicates a string into newly malloc'd memory.
+</p>
+
+<p>
+Very handy.
+</p>
+
+<p>
+Very dangerous.
+</p>
+
+<div class="org-src-container">
+<pre class="src src-C"><span style="color: #483d8b;">#define</span> <span style="color: #a0522d;">_POSIX_C_SOURCE</span> 200809L <span style="color: #b22222;">// </span><span style="color: #b22222;">&lt;-- needed for strdup</span>
+<span style="color: #483d8b;">#include</span> <span style="color: #8b2252;">&lt;stdint.h&gt;</span>
+<span style="color: #483d8b;">#include</span> <span style="color: #8b2252;">&lt;stdio.h&gt;</span>
+<span style="color: #483d8b;">#include</span> <span style="color: #8b2252;">&lt;stdlib.h&gt;</span>
+<span style="color: #483d8b;">#include</span> <span style="color: #8b2252;">&lt;string.h&gt;</span> <span style="color: #b22222;">// </span><span style="color: #b22222;">&lt;-- strdup is in string.h</span>
+
+<span style="color: #b22222;">/*</span>
+<span style="color: #b22222;"> * strdup = malloc + strcpy</span>
+<span style="color: #b22222;"> </span><span style="color: #b22222;">*/</span>
+
+<span style="color: #228b22;">int</span> <span style="color: #0000ff;">main</span>() {
+    <span style="color: #a020f0;">const</span> <span style="color: #228b22;">char</span> * <span style="color: #a0522d;">message</span> = <span style="color: #8b2252;">"hello, world!"</span>;
+    <span style="color: #b22222;">// </span><span style="color: #b22222;">char buffer[14];</span>
+    <span style="color: #b22222;">// </span><span style="color: #b22222;">strncpy(buffer, message, 14);    </span>
+    printf(<span style="color: #8b2252;">"%p %s\n"</span>, (<span style="color: #228b22;">void</span>*)message, message);    
+    <span style="color: #b22222;">// </span><span style="color: #b22222;">hi this code is basically strdup</span>
+    <span style="color: #228b22;">char</span> * <span style="color: #a0522d;">copyMalloc</span> = malloc((strlen(message) + 1) * <span style="color: #a020f0;">sizeof</span>(<span style="color: #228b22;">char</span>));
+    strcpy(copyMalloc, message);
+    <span style="color: #b22222;">// </span><span style="color: #b22222;">^^^^ that was basically strdup</span>
+    printf(<span style="color: #8b2252;">"%p %s\n"</span>, (<span style="color: #228b22;">void</span>*)copyMalloc, copyMalloc);    
+    <span style="color: #228b22;">char</span> * <span style="color: #a0522d;">copyDup</span> = strdup(message);
+    printf(<span style="color: #8b2252;">"%p %s\n"</span>, (<span style="color: #228b22;">void</span>*)copyDup, copyDup);
+    <span style="color: #b22222;">// </span><span style="color: #b22222;">&gt; .c:30:16: error: assignment of read-only location &#8216;*message&#8217;</span>
+    <span style="color: #b22222;">// </span><span style="color: #b22222;">&gt;    message[0] = 'H';</span>
+    <span style="color: #b22222;">// </span><span style="color: #b22222;">message[0] = 'H';</span>
+    copyDup[0] = <span style="color: #8b2252;">'J'</span>;
+    copyMalloc[0] = <span style="color: #8b2252;">'M'</span>;
+    printf(<span style="color: #8b2252;">"%s\n"</span>, message);    
+    printf(<span style="color: #8b2252;">"%s\n"</span>, copyMalloc);    
+    printf(<span style="color: #8b2252;">"%s\n"</span>, copyDup);
+    free(copyDup);
+    free(copyMalloc);
+}
+</pre>
+</div>
+
+<pre class="example">
+0x55c8c5d66984 hello, world!
+0x55c8c75a3270 hello, world!
+0x55c8c75a3290 hello, world!
+hello, world!
+Mello, world!
+Jello, world!
+
+</pre>
+</div>
+</div>
+
+<div id="outline-container-org0c20255" class="outline-4">
+<h4 id="org0c20255"><span class="section-number-4">1.7.6</span> free</h4>
+<div class="outline-text-4" id="text-1-7-6">
+<p>
+What happens if we don't free?
+</p>
+
+<p>
+Our program can get bigger!
+</p>
+
+
+
+<div class="org-src-container">
+<pre class="src src-C"><span style="color: #483d8b;">#include</span> <span style="color: #8b2252;">&lt;assert.h&gt;</span>
+<span style="color: #483d8b;">#include</span> <span style="color: #8b2252;">&lt;stdio.h&gt;</span>
+<span style="color: #483d8b;">#include</span> <span style="color: #8b2252;">&lt;stdlib.h&gt;</span>
+<span style="color: #483d8b;">#include</span> <span style="color: #8b2252;">&lt;string.h&gt;</span>
+
+<span style="color: #228b22;">int</span> * <span style="color: #0000ff;">testAllocArray</span>(<span style="color: #228b22;">int</span> <span style="color: #a0522d;">arrLen</span>) {
+  <span style="color: #228b22;">int</span>* <span style="color: #a0522d;">array</span> = calloc( <span style="color: #a020f0;">sizeof</span>(<span style="color: #228b22;">int</span>), arrLen );
+  assert(array!=<span style="color: #008b8b;">NULL</span>);
+  <span style="color: #a020f0;">for</span>(<span style="color: #228b22;">int</span> <span style="color: #a0522d;">idx</span>=0; idx&lt;arrLen; idx++) {
+    array[idx] = idx;
+  }
+  <span style="color: #a020f0;">return</span> array;
+}
+<span style="color: #228b22;">int</span> <span style="color: #0000ff;">main</span>() {
+    <span style="color: #a020f0;">for</span> (<span style="color: #228b22;">int</span> <span style="color: #a0522d;">i</span> = 1; i &lt; 10000000; i+=1*1024*1024) {
+        <span style="color: #228b22;">int</span> * <span style="color: #a0522d;">bigArray</span> = testAllocArray( i );
+        printf(<span style="color: #8b2252;">"%u ints allocated!\n"</span>,1+bigArray[i-1]);
+        printf(<span style="color: #8b2252;">"%lu bytes!\n"</span>, <span style="color: #a020f0;">sizeof</span>(<span style="color: #228b22;">int</span>)*i);
+        <span style="color: #b22222;">// </span><span style="color: #b22222;">free(bigArray); // remember to free it when done!</span>
+    }
+}
+</pre>
+</div>
+
+<pre class="example">
+1 ints allocated!
+4 bytes!
+1048577 ints allocated!
+4194308 bytes!
+2097153 ints allocated!
+8388612 bytes!
+3145729 ints allocated!
+12582916 bytes!
+4194305 ints allocated!
+16777220 bytes!
+5242881 ints allocated!
+20971524 bytes!
+6291457 ints allocated!
+25165828 bytes!
+7340033 ints allocated!
+29360132 bytes!
+8388609 ints allocated!
+33554436 bytes!
+9437185 ints allocated!
+37748740 bytes!
+</pre>
+
+<p>
+Valgrind is a memory leak detector. It analyzes memory allocations and
+warns us about mistakes.
+</p>
+
+<p>
+Valgrind will show us that we're leaking memory (losing track of it
+and not freeing it).
+</p>
+
+<div class="org-src-container">
+<pre class="src src-sh">gcc -std=c99 -Wall -pedantic -Werror -o nofree ./nofree.c
+valgrind ./nofree 2&gt;&amp;1
+<span style="color: #483d8b;">echo</span> now let<span style="color: #8b2252;">\'</span>s leak check
+valgrind --leak-check=full ./nofree 2&gt;&amp;1
+</pre>
+</div>
+
+<pre class="example">
+==31794== Memcheck, a memory error detector
+==31794== Copyright (C) 2002-2017, and GNU GPL'd, by Julian Seward et al.
+==31794== Using Valgrind-3.13.0 and LibVEX; rerun with -h for copyright info
+==31794== Command: ./nofree
+==31794== 
+1 ints allocated!
+4 bytes!
+1048577 ints allocated!
+4194308 bytes!
+2097153 ints allocated!
+8388612 bytes!
+3145729 ints allocated!
+12582916 bytes!
+4194305 ints allocated!
+16777220 bytes!
+5242881 ints allocated!
+20971524 bytes!
+6291457 ints allocated!
+25165828 bytes!
+7340033 ints allocated!
+29360132 bytes!
+8388609 ints allocated!
+33554436 bytes!
+9437185 ints allocated!
+37748740 bytes!
+==31794== 
+==31794== HEAP SUMMARY:
+==31794==     in use at exit: 188,743,720 bytes in 10 blocks
+==31794==   total heap usage: 11 allocs, 1 frees, 188,747,816 bytes allocated
+==31794== 
+==31794== LEAK SUMMARY:
+==31794==    definitely lost: 100,663,320 bytes in 6 blocks
+==31794==    indirectly lost: 0 bytes in 0 blocks
+==31794==      possibly lost: 88,080,400 bytes in 4 blocks
+==31794==    still reachable: 0 bytes in 0 blocks
+==31794==         suppressed: 0 bytes in 0 blocks
+==31794== Rerun with --leak-check=full to see details of leaked memory
+==31794== 
+==31794== For counts of detected and suppressed errors, rerun with: -v
+==31794== ERROR SUMMARY: 0 errors from 0 contexts (suppressed: 0 from 0)
+now let's leak check
+==31803== Memcheck, a memory error detector
+==31803== Copyright (C) 2002-2017, and GNU GPL'd, by Julian Seward et al.
+==31803== Using Valgrind-3.13.0 and LibVEX; rerun with -h for copyright info
+==31803== Command: ./nofree
+==31803== 
+1 ints allocated!
+4 bytes!
+1048577 ints allocated!
+4194308 bytes!
+2097153 ints allocated!
+8388612 bytes!
+3145729 ints allocated!
+12582916 bytes!
+4194305 ints allocated!
+16777220 bytes!
+5242881 ints allocated!
+20971524 bytes!
+6291457 ints allocated!
+25165828 bytes!
+7340033 ints allocated!
+29360132 bytes!
+8388609 ints allocated!
+33554436 bytes!
+9437185 ints allocated!
+37748740 bytes!
+==31803== 
+==31803== HEAP SUMMARY:
+==31803==     in use at exit: 188,743,720 bytes in 10 blocks
+==31803==   total heap usage: 11 allocs, 1 frees, 188,747,816 bytes allocated
+==31803== 
+==31803== 88,080,400 bytes in 4 blocks are possibly lost in loss record 1 of 2
+==31803==    at 0x4C31B25: calloc (in /usr/lib/valgrind/vgpreload_memcheck-amd64-linux.so)
+==31803==    by 0x1086F6: testAllocArray (in /home/hindle1/projects/CMPUT201W20/2020-01/CMPUT201W20B2-public/week07/nofree)
+==31803==    by 0x10876F: main (in /home/hindle1/projects/CMPUT201W20/2020-01/CMPUT201W20B2-public/week07/nofree)
+==31803== 
+==31803== 100,663,320 bytes in 6 blocks are definitely lost in loss record 2 of 2
+==31803==    at 0x4C31B25: calloc (in /usr/lib/valgrind/vgpreload_memcheck-amd64-linux.so)
+==31803==    by 0x1086F6: testAllocArray (in /home/hindle1/projects/CMPUT201W20/2020-01/CMPUT201W20B2-public/week07/nofree)
+==31803==    by 0x10876F: main (in /home/hindle1/projects/CMPUT201W20/2020-01/CMPUT201W20B2-public/week07/nofree)
+==31803== 
+==31803== LEAK SUMMARY:
+==31803==    definitely lost: 100,663,320 bytes in 6 blocks
+==31803==    indirectly lost: 0 bytes in 0 blocks
+==31803==      possibly lost: 88,080,400 bytes in 4 blocks
+==31803==    still reachable: 0 bytes in 0 blocks
+==31803==         suppressed: 0 bytes in 0 blocks
+==31803== 
+==31803== For counts of detected and suppressed errors, rerun with: -v
+==31803== ERROR SUMMARY: 2 errors from 2 contexts (suppressed: 0 from 0)
+</pre>
+</div>
+</div>
+
+<div id="outline-container-org8ba35ef" class="outline-4">
+<h4 id="org8ba35ef"><span class="section-number-4">1.7.7</span> realloc!</h4>
+<div class="outline-text-4" id="text-1-7-7">
+<p>
+realloc does a lot of work for you!
+</p>
+
+<p>
+It will use the information that malloc uses to see if it can just
+leave the pointer in place and safely give it more space.
+</p>
+
+<p>
+If there's not enough space it will allocate a new region of memory
+and return that new pointer. It will free the old pointer if that was
+the case.
+</p>
+
+<p>
+There's no guarantee that you pointer stays in the same spot!
+</p>
+
+<ul class="org-ul">
+<li>With realloc, you must replace the old pointer with the new one!</li>
+<li>With realloc you must check if there was enough memory to do it!
+<ul class="org-ul">
+<li>check return value!</li>
+</ul></li>
+</ul>
+
+
+<div class="org-src-container">
+<pre class="src src-C"><span style="color: #483d8b;">#include</span> <span style="color: #8b2252;">&lt;assert.h&gt;</span>
+<span style="color: #483d8b;">#include</span> <span style="color: #8b2252;">&lt;stdio.h&gt;</span>
+<span style="color: #483d8b;">#include</span> <span style="color: #8b2252;">&lt;stdlib.h&gt;</span>
+<span style="color: #483d8b;">#include</span> <span style="color: #8b2252;">&lt;string.h&gt;</span>
+
+<span style="color: #b22222;">// </span><span style="color: #b22222;">We're going to malloc 3 regions and keep growing it</span>
+<span style="color: #b22222;">// </span><span style="color: #b22222;">by 5 characters</span>
+<span style="color: #228b22;">int</span> <span style="color: #0000ff;">main</span>() {
+    <span style="color: #228b22;">char</span> * <span style="color: #a0522d;">array1</span> = (<span style="color: #228b22;">char</span>*)malloc(10);
+    <span style="color: #228b22;">char</span> * <span style="color: #a0522d;">array2</span> = (<span style="color: #228b22;">char</span>*)malloc(20);
+    <span style="color: #228b22;">char</span> * <span style="color: #a0522d;">array3</span> = (<span style="color: #228b22;">char</span>*)malloc(30);
+    <span style="color: #a020f0;">for</span> (<span style="color: #228b22;">int</span> <span style="color: #a0522d;">i</span> = 30; i &lt; 500; i+=5) {
+        <span style="color: #228b22;">char</span> * <span style="color: #a0522d;">newArray1</span> = realloc(array1, <span style="color: #228b22;">i</span> * <span style="color: #a020f0;">sizeof</span>(<span style="color: #228b22;">char</span>));
+        <span style="color: #228b22;">char</span> * <span style="color: #a0522d;">newArray2</span> = realloc(array2, <span style="color: #228b22;">i</span> * <span style="color: #a020f0;">sizeof</span>(<span style="color: #228b22;">char</span>));
+        <span style="color: #228b22;">char</span> * <span style="color: #a0522d;">newArray3</span> = realloc(array3, <span style="color: #228b22;">i</span> * <span style="color: #a020f0;">sizeof</span>(<span style="color: #228b22;">char</span>));
+        assert(newArray1 != <span style="color: #008b8b;">NULL</span> || newArray2 != <span style="color: #008b8b;">NULL</span> || newArray3 != <span style="color: #008b8b;">NULL</span>);
+        <span style="color: #a020f0;">if</span> ( array1 != newArray1 )  {
+            printf(<span style="color: #8b2252;">"size: %05d array1: old: %p new: %p\n"</span>, i, array1, newArray1);
+        }
+        <span style="color: #b22222;">/*</span>
+<span style="color: #b22222;">        if ( array2 != newArray2 )  {</span>
+<span style="color: #b22222;">            printf("size: %05d array2: old: %p new: %p\n", i, array2, newArray2);</span>
+<span style="color: #b22222;">        }</span>
+<span style="color: #b22222;">        if ( array3 != newArray3 )  {</span>
+<span style="color: #b22222;">            printf("size: %05d array3: old: %p new: %p\n", i, array3, newArray3);</span>
+<span style="color: #b22222;">        }</span>
+<span style="color: #b22222;">        </span><span style="color: #b22222;">*/</span>
+        <span style="color: #b22222;">// </span><span style="color: #b22222;">YOU MUST REPLACE THE OLD VALUE, IT IS DANGEROUS!</span>
+        array1 = newArray1;
+        array2 = newArray2;
+        array3 = newArray3;
+    }
+    free(array1);
+    free(array2);
+    free(array3);
+}
+</pre>
+</div>
+
+<pre class="example">
+size: 00030 array1: old: 0x559564e1b260 new: 0x559564e1b2d0
+size: 00045 array1: old: 0x559564e1b2d0 new: 0x559564e1c340
+size: 00060 array1: old: 0x559564e1c340 new: 0x559564e1c400
+size: 00075 array1: old: 0x559564e1c400 new: 0x559564e1c4f0
+size: 00090 array1: old: 0x559564e1c4f0 new: 0x559564e1c610
+size: 00105 array1: old: 0x559564e1c610 new: 0x559564e1c760
+size: 00125 array1: old: 0x559564e1c760 new: 0x559564e1c8e0
+size: 00140 array1: old: 0x559564e1c8e0 new: 0x559564e1ca90
+size: 00155 array1: old: 0x559564e1ca90 new: 0x559564e1cc70
+size: 00170 array1: old: 0x559564e1cc70 new: 0x559564e1ce80
+size: 00185 array1: old: 0x559564e1ce80 new: 0x559564e1d0c0
+size: 00205 array1: old: 0x559564e1d0c0 new: 0x559564e1d330
+size: 00220 array1: old: 0x559564e1d330 new: 0x559564e1d5d0
+size: 00235 array1: old: 0x559564e1d5d0 new: 0x559564e1d8a0
+size: 00250 array1: old: 0x559564e1d8a0 new: 0x559564e1dba0
+size: 00265 array1: old: 0x559564e1dba0 new: 0x559564e1ded0
+size: 00285 array1: old: 0x559564e1ded0 new: 0x559564e1e230
+size: 00300 array1: old: 0x559564e1e230 new: 0x559564e1e5c0
+size: 00315 array1: old: 0x559564e1e5c0 new: 0x559564e1e980
+size: 00330 array1: old: 0x559564e1e980 new: 0x559564e1ed70
+size: 00345 array1: old: 0x559564e1ed70 new: 0x559564e1f190
+size: 00365 array1: old: 0x559564e1f190 new: 0x559564e1f5e0
+size: 00380 array1: old: 0x559564e1f5e0 new: 0x559564e1fa60
+size: 00395 array1: old: 0x559564e1fa60 new: 0x559564e1ff10
+size: 00410 array1: old: 0x559564e1ff10 new: 0x559564e203f0
+size: 00425 array1: old: 0x559564e203f0 new: 0x559564e20900
+size: 00445 array1: old: 0x559564e20900 new: 0x559564e20e40
+size: 00460 array1: old: 0x559564e20e40 new: 0x559564e213b0
+size: 00475 array1: old: 0x559564e213b0 new: 0x559564e21950
+size: 00490 array1: old: 0x559564e21950 new: 0x559564e21f20
+</pre>
+</div>
+</div>
+
+
+<div id="outline-container-org4f10e94" class="outline-4">
+<h4 id="org4f10e94"><span class="section-number-4">1.7.8</span> Malloc and structs</h4>
+<div class="outline-text-4" id="text-1-7-8">
+<p>
+Mallocs are often used with arrays of structs. You need to get the
+sizeof the struct.
+</p>
+
+<div class="org-src-container">
+<pre class="src src-C"><span style="color: #483d8b;">#include</span> <span style="color: #8b2252;">&lt;stdbool.h&gt;</span> 
+<span style="color: #483d8b;">#include</span> <span style="color: #8b2252;">&lt;stdio.h&gt;</span>
+<span style="color: #483d8b;">#include</span> <span style="color: #8b2252;">&lt;stdlib.h&gt;</span>
+<span style="color: #483d8b;">#include</span> <span style="color: #8b2252;">&lt;time.h&gt;</span>
+
+<span style="color: #a020f0;">enum</span> <span style="color: #228b22;">card_face</span> {
+    <span style="color: #a0522d;">ACE</span> = 1,
+    <span style="color: #a0522d;">FACE2</span>,
+    <span style="color: #a0522d;">FACE3</span>,
+    <span style="color: #a0522d;">FACE4</span>,
+    <span style="color: #a0522d;">FACE5</span>,
+    <span style="color: #a0522d;">FACE6</span>,
+    <span style="color: #a0522d;">FACE7</span>,
+    <span style="color: #a0522d;">FACE8</span>,
+    <span style="color: #a0522d;">FACE9</span>,
+    <span style="color: #a0522d;">FACE10</span>,
+    <span style="color: #a0522d;">JACK</span>,
+    <span style="color: #a0522d;">QUEEN</span>,
+    <span style="color: #a0522d;">KING</span>,
+};
+
+<span style="color: #a020f0;">typedef</span> <span style="color: #a020f0;">enum</span> <span style="color: #228b22;">card_face</span> <span style="color: #228b22;">CardFace</span>;
+
+<span style="color: #483d8b;">#define</span> <span style="color: #a0522d;">NFACES</span> 13
+<span style="color: #483d8b;">#define</span> <span style="color: #a0522d;">NFACEOFF</span> 1
+
+<span style="color: #a020f0;">enum</span> <span style="color: #228b22;">card_suit</span> {
+    <span style="color: #a0522d;">CLUBS</span>,
+    <span style="color: #a0522d;">HEARTS</span>,
+    <span style="color: #a0522d;">DIAMONDS</span>,
+    <span style="color: #a0522d;">SPADES</span>
+};
+
+<span style="color: #a020f0;">typedef</span> <span style="color: #a020f0;">enum</span> <span style="color: #228b22;">card_suit</span> <span style="color: #228b22;">CardSuit</span>;
+
+<span style="color: #483d8b;">#define</span> <span style="color: #a0522d;">NSUIT</span> 4
+
+<span style="color: #a020f0;">struct</span> <span style="color: #228b22;">playing_card</span> {
+    <span style="color: #228b22;">CardFace</span> <span style="color: #a0522d;">face</span>;
+    <span style="color: #228b22;">CardSuit</span> <span style="color: #a0522d;">suit</span>;
+};
+
+<span style="color: #a020f0;">typedef</span> <span style="color: #a020f0;">struct</span> <span style="color: #228b22;">playing_card</span> <span style="color: #228b22;">PlayingCard</span>;
+
+<span style="color: #483d8b;">#define</span> <span style="color: #a0522d;">HANDSIZE</span> 5
+
+<span style="color: #228b22;">bool</span> <span style="color: #0000ff;">isFlush</span>(<span style="color: #228b22;">PlayingCard</span> <span style="color: #a0522d;">hand</span>[HANDSIZE]) {
+    <span style="color: #228b22;">CardSuit</span> <span style="color: #a0522d;">suit</span> = hand[0].suit;
+    <span style="color: #a020f0;">for</span> (<span style="color: #228b22;">int</span> <span style="color: #a0522d;">i</span> = 1;  i &lt; HANDSIZE; i++ ) {
+        <span style="color: #a020f0;">if</span> (suit != hand[i].suit) {
+            <span style="color: #a020f0;">return</span> <span style="color: #008b8b;">false</span>;
+        }
+    }
+    <span style="color: #a020f0;">return</span> <span style="color: #008b8b;">true</span>;
+}
+
+<span style="color: #228b22;">PlayingCard</span> <span style="color: #0000ff;">randomCard</span>() {
+    <span style="color: #228b22;">PlayingCard</span> <span style="color: #a0522d;">card</span> = {ACE, CLUBS};
+    card.face = NFACEOFF + ( rand() % NFACES );
+    card.suit =  rand() % NSUIT;
+    <span style="color: #a020f0;">return</span> card;
+}
+<span style="color: #228b22;">int</span> <span style="color: #0000ff;">main</span>() {
+    srand(time(<span style="color: #008b8b;">NULL</span>));
+    <span style="color: #a020f0;">const</span> <span style="color: #228b22;">int</span> <span style="color: #a0522d;">N</span> = 1000000;
+    <span style="color: #228b22;">PlayingCard</span> * <span style="color: #a0522d;">bigHand</span> = malloc(<span style="color: #a020f0;">sizeof</span>(PlayingCard)*N);
+    <span style="color: #a020f0;">for</span> (<span style="color: #228b22;">int</span> <span style="color: #a0522d;">i</span> = 0; i &lt; N; i++) {
+        bigHand[i] = randomCard();
+    }
+    <span style="color: #228b22;">int</span> <span style="color: #a0522d;">flushes</span> = 0;
+    <span style="color: #a020f0;">for</span> (<span style="color: #228b22;">int</span> <span style="color: #a0522d;">i</span> = 0; i &lt; N - HANDSIZE; i+=HANDSIZE) {
+        <span style="color: #a020f0;">if</span> (isFlush(bigHand + i)) {
+            <span style="color: #a020f0;">if</span> (flushes &lt; 10) { <span style="color: #b22222;">// </span><span style="color: #b22222;">reduce printing</span>
+                printf(<span style="color: #8b2252;">"Flush found at card %d\n"</span>, i);
+                printf(<span style="color: #8b2252;">"Suit %d\n"</span>, bigHand[i].suit);
+            }
+            flushes++;
+        }
+    }
+    printf(<span style="color: #8b2252;">"We found %d flushes out of %d hands: %f\n"</span>, flushes, N/HANDSIZE, flushes/(<span style="color: #228b22;">float</span>)(N/HANDSIZE));
+}
+
+
+</pre>
+</div>
+
+<pre class="example">
+Flush found at card 1065
+Suit 3
+Flush found at card 3045
+Suit 3
+Flush found at card 3780
+Suit 1
+Flush found at card 3795
+Suit 0
+Flush found at card 3980
+Suit 1
+Flush found at card 5400
+Suit 1
+Flush found at card 7510
+Suit 3
+Flush found at card 7695
+Suit 1
+Flush found at card 14055
+Suit 0
+Flush found at card 15530
+Suit 3
+We found 798 flushes out of 200000 hands: 0.003990
+</pre>
+</div>
+</div>
+
+<div id="outline-container-org4416697" class="outline-4">
+<h4 id="org4416697"><span class="section-number-4">1.7.9</span> Malloc 2D arrays</h4>
+<div class="outline-text-4" id="text-1-7-9">
+<p>
+How does Malloc work with 2D arrays? Well 2D arrays are tightly packed
+so it is pretty easy to determine their size in memory.
+</p>
+
+<div class="org-src-container">
+<pre class="src src-C"><span style="color: #b22222;">// </span><span style="color: #b22222;">READ man 3 malloc</span>
+
+<span style="color: #483d8b;">#include</span> <span style="color: #8b2252;">&lt;stdio.h&gt;</span>
+<span style="color: #483d8b;">#include</span> <span style="color: #8b2252;">&lt;stdlib.h&gt;</span>
+<span style="color: #483d8b;">#include</span> <span style="color: #8b2252;">&lt;string.h&gt;</span>
+
+<span style="color: #b22222;">// </span><span style="color: #b22222;">Option 3:</span>
+<span style="color: #b22222;">// </span><span style="color: #b22222;">In functions... just a 2-D array as normal...</span>
+<span style="color: #b22222;">// </span><span style="color: #b22222;">...we could use either int a[n][n] OR</span>
+<span style="color: #b22222;">// </span><span style="color: #b22222;">int a[][n], but NOT a[][]!</span>
+<span style="color: #228b22;">void</span> <span style="color: #0000ff;">print_2d</span>(<span style="color: #228b22;">size_t</span> <span style="color: #a0522d;">n</span>, <span style="color: #228b22;">int</span> <span style="color: #a0522d;">a</span>[][n]) {
+    <span style="color: #a020f0;">for</span> (<span style="color: #228b22;">size_t</span> <span style="color: #a0522d;">i</span> = 0; i &lt; n; i++) {
+        <span style="color: #a020f0;">for</span> (<span style="color: #228b22;">size_t</span> <span style="color: #a0522d;">j</span> = 0; j &lt; n; j++) {
+            printf(<span style="color: #8b2252;">"%2d "</span>, a[i][j]);
+        }
+        printf(<span style="color: #8b2252;">"\n"</span>);
+    }
+}
+
+<span style="color: #228b22;">int</span> <span style="color: #0000ff;">main</span>(<span style="color: #228b22;">int</span> <span style="color: #a0522d;">argc</span>, <span style="color: #228b22;">char</span> **<span style="color: #a0522d;">argv</span>) {
+    <span style="color: #228b22;">size_t</span> <span style="color: #a0522d;">n</span> = 10;
+    <span style="color: #228b22;">int</span> * <span style="color: #a0522d;">array</span> = (<span style="color: #228b22;">int</span> *) <span style="color: #b22222;">// </span><span style="color: #b22222;">cast result of malloc to "ptr to an int"</span>
+        malloc(n * n * <span style="color: #a020f0;">sizeof</span>(<span style="color: #228b22;">int</span>));
+    <span style="color: #228b22;">int</span> (*<span style="color: #a0522d;">array2d</span>)[n] = (<span style="color: #228b22;">int</span> (*)[n]) array;
+    <span style="color: #228b22;">int</span> <span style="color: #a0522d;">k</span> = 0;
+    <span style="color: #a020f0;">for</span> (<span style="color: #228b22;">size_t</span> <span style="color: #a0522d;">i</span> = 0; i &lt; n; i++) {
+        <span style="color: #a020f0;">for</span> (<span style="color: #228b22;">size_t</span> <span style="color: #a0522d;">j</span> = 0; j &lt; n; j++) {
+            <span style="color: #b22222;">// </span><span style="color: #b22222;">Option 1:</span>
+            <span style="color: #b22222;">// </span><span style="color: #b22222;">Use a 1-D array and arithmetic</span>
+            array[i * n + j] = k++;
+        }
+    }
+    printf(<span style="color: #8b2252;">"Printing Option2\n\n"</span>);
+    <span style="color: #a020f0;">for</span> (<span style="color: #228b22;">size_t</span> <span style="color: #a0522d;">i</span> = 0; i &lt; n; i++) {
+        <span style="color: #a020f0;">for</span> (<span style="color: #228b22;">size_t</span> <span style="color: #a0522d;">j</span> = 0; j &lt; n; j++) {
+            <span style="color: #b22222;">// </span><span style="color: #b22222;">Option 2:</span>
+            <span style="color: #b22222;">// </span><span style="color: #b22222;">Use 2-D array</span>
+            printf(<span style="color: #8b2252;">"%2d "</span>, array2d[i][j]);
+        }
+        printf(<span style="color: #8b2252;">"\n"</span>);
+    }
+    printf(<span style="color: #8b2252;">"\nPrinting Option3\n\n"</span>);
+    print_2d(n, (<span style="color: #228b22;">int</span>(*)[n]) array);
+    free(array); <span style="color: #b22222;">// </span><span style="color: #b22222;">deallocates or "frees" the memory we were using for array</span>
+    <span style="color: #b22222;">// </span><span style="color: #b22222;">Now ALL pointers to or into the array are invalid!</span>
+}
+</pre>
+</div>
+
+<pre class="example">
+Printing Option2
+
+ 0  1  2  3  4  5  6  7  8  9 
+10 11 12 13 14 15 16 17 18 19 
+20 21 22 23 24 25 26 27 28 29 
+30 31 32 33 34 35 36 37 38 39 
+40 41 42 43 44 45 46 47 48 49 
+50 51 52 53 54 55 56 57 58 59 
+60 61 62 63 64 65 66 67 68 69 
+70 71 72 73 74 75 76 77 78 79 
+80 81 82 83 84 85 86 87 88 89 
+90 91 92 93 94 95 96 97 98 99 
+
+Printing Option3
+
+ 0  1  2  3  4  5  6  7  8  9 
+10 11 12 13 14 15 16 17 18 19 
+20 21 22 23 24 25 26 27 28 29 
+30 31 32 33 34 35 36 37 38 39 
+40 41 42 43 44 45 46 47 48 49 
+50 51 52 53 54 55 56 57 58 59 
+60 61 62 63 64 65 66 67 68 69 
+70 71 72 73 74 75 76 77 78 79 
+80 81 82 83 84 85 86 87 88 89 
+90 91 92 93 94 95 96 97 98 99
+</pre>
+</div>
+</div>
+
+<div id="outline-container-org4c81331" class="outline-4">
+<h4 id="org4c81331"><span class="section-number-4">1.7.10</span> Malloc Array of Array versus 2D</h4>
+<div class="outline-text-4" id="text-1-7-10">
+<p>
+So instead of allocating a big block and carving a 2D array out of it
+we could just allocate each row and make an array of arrays.
+</p>
+
+<p>
+Try playing with the order of allocation of rows. Does it affect the result?
+</p>
+
+
+<div class="org-src-container">
+<pre class="src src-C"><span style="color: #483d8b;">#include</span> <span style="color: #8b2252;">&lt;stdio.h&gt;</span>
+<span style="color: #483d8b;">#include</span> <span style="color: #8b2252;">&lt;stdlib.h&gt;</span>
+
+<span style="color: #b22222;">// </span><span style="color: #b22222;">This example compares using malloc to get space for a 2-D array vs using malloc to make space for a array of arrays.</span>
+
+<span style="color: #228b22;">int</span> * <span style="color: #0000ff;">alloc2d</span>(<span style="color: #228b22;">size_t</span> <span style="color: #a0522d;">n</span>) {
+    <span style="color: #b22222;">// </span><span style="color: #b22222;">we can just do 1 malloc()</span>
+    <span style="color: #a020f0;">return</span> (<span style="color: #228b22;">int</span> *) malloc(n * n * <span style="color: #a020f0;">sizeof</span>(<span style="color: #228b22;">int</span>));
+}
+
+<span style="color: #228b22;">int</span> ** <span style="color: #0000ff;">alloc_aoa</span>(<span style="color: #228b22;">size_t</span> <span style="color: #a0522d;">n</span>) {
+    <span style="color: #b22222;">// </span><span style="color: #b22222;">we have to do 1 + n malloc()s</span>
+    <span style="color: #228b22;">int</span> ** <span style="color: #a0522d;">p</span> = malloc(<span style="color: #228b22;">n</span> * <span style="color: #a020f0;">sizeof</span>(<span style="color: #228b22;">int</span> *));
+    <span style="color: #b22222;">// </span><span style="color: #b22222;">we don't need to do them in order...</span>
+    <span style="color: #a020f0;">for</span> (<span style="color: #228b22;">size_t</span> <span style="color: #a0522d;">i</span> = 0; i &lt; n; i++) {
+        p[i] = malloc(<span style="color: #228b22;">n</span> * <span style="color: #a020f0;">sizeof</span>(<span style="color: #228b22;">int</span>));
+    }
+    <span style="color: #a020f0;">return</span> p;
+}
+
+<span style="color: #228b22;">void</span> <span style="color: #0000ff;">free2d</span>(<span style="color: #228b22;">int</span> * <span style="color: #a0522d;">p</span>) {
+    <span style="color: #b22222;">// </span><span style="color: #b22222;">we can just do 1 free()</span>
+    free(p);
+}
+
+<span style="color: #228b22;">void</span> <span style="color: #0000ff;">free_aoa</span>(<span style="color: #228b22;">size_t</span> <span style="color: #a0522d;">n</span>, <span style="color: #228b22;">int</span> ** <span style="color: #a0522d;">p</span>) {
+    <span style="color: #b22222;">// </span><span style="color: #b22222;">we have to do n + 1 free()s</span>
+    <span style="color: #a020f0;">for</span> (<span style="color: #228b22;">size_t</span> <span style="color: #a0522d;">i</span> = 0; i &lt; n; i++) {
+        free(p[i]);
+    }
+    free(p);
+}
+
+<span style="color: #228b22;">int</span> <span style="color: #0000ff;">get2d</span>(<span style="color: #228b22;">size_t</span> <span style="color: #a0522d;">n</span>, <span style="color: #228b22;">int</span> * <span style="color: #a0522d;">p</span>, <span style="color: #228b22;">size_t</span> <span style="color: #a0522d;">i</span>, <span style="color: #228b22;">size_t</span> <span style="color: #a0522d;">j</span>) {
+    <span style="color: #a020f0;">return</span> p[i * n + j];
+}
+
+<span style="color: #228b22;">int</span> <span style="color: #0000ff;">get_aoa</span>(<span style="color: #228b22;">int</span> **<span style="color: #a0522d;">p</span>, <span style="color: #228b22;">size_t</span> <span style="color: #a0522d;">i</span>, <span style="color: #228b22;">size_t</span> <span style="color: #a0522d;">j</span>) {
+    <span style="color: #a020f0;">return</span> p[i][j];
+}
+
+<span style="color: #228b22;">int</span> <span style="color: #0000ff;">set2d</span>(<span style="color: #228b22;">size_t</span> <span style="color: #a0522d;">n</span>, <span style="color: #228b22;">int</span> * <span style="color: #a0522d;">p</span>, <span style="color: #228b22;">size_t</span> <span style="color: #a0522d;">i</span>, <span style="color: #228b22;">size_t</span> <span style="color: #a0522d;">j</span>, <span style="color: #228b22;">int</span> <span style="color: #a0522d;">v</span>) {
+    <span style="color: #a020f0;">return</span> p[i * n + j] = v;
+}
+
+<span style="color: #228b22;">int</span> <span style="color: #0000ff;">set_aoa</span>(<span style="color: #228b22;">int</span> **<span style="color: #a0522d;">p</span>, <span style="color: #228b22;">size_t</span> <span style="color: #a0522d;">i</span>, <span style="color: #228b22;">size_t</span> <span style="color: #a0522d;">j</span>, <span style="color: #228b22;">int</span> <span style="color: #a0522d;">v</span>) {
+    <span style="color: #a020f0;">return</span> p[i][j] = v;
+}
+
+<span style="color: #228b22;">int</span> <span style="color: #0000ff;">main</span>(<span style="color: #228b22;">int</span> <span style="color: #a0522d;">argc</span>, <span style="color: #228b22;">char</span> **<span style="color: #a0522d;">argv</span>) {
+    srand(1);
+    printf(<span style="color: #8b2252;">"I'm going to make space for a big, square table in memory.\n"</span>);
+    printf(<span style="color: #8b2252;">"How many rows and columns would you like to make space for? "</span>);
+    <span style="color: #228b22;">size_t</span> <span style="color: #a0522d;">n</span>;
+    <span style="color: #b22222;">// </span><span style="color: #b22222;">int r = scanf("%zu", &amp;n);</span>
+    n = 30;
+    <span style="color: #a020f0;">if</span> (n != 1) {
+        printf(<span style="color: #8b2252;">"Sorry, I couldn't understand that :(\n"</span>);
+    }
+    <span style="color: #b22222;">// </span><span style="color: #b22222;">allocate them</span>
+    <span style="color: #228b22;">int</span> *<span style="color: #a0522d;">p2d</span> = alloc2d(n);
+    <span style="color: #228b22;">int</span> **<span style="color: #a0522d;">aoa</span> = alloc_aoa(n);
+    <span style="color: #b22222;">// </span><span style="color: #b22222;">initialize them</span>
+    <span style="color: #a020f0;">for</span> (<span style="color: #228b22;">size_t</span> <span style="color: #a0522d;">i</span> = 0; i &lt; n; i++) {
+        <span style="color: #a020f0;">for</span> (<span style="color: #228b22;">size_t</span> <span style="color: #a0522d;">j</span> = 0; j &lt; n; j++) {
+            set2d(n, p2d, i, j, rand() % 10);
+            set_aoa(aoa, i, j, rand() % 10);
+        }
+    }
+    <span style="color: #b22222;">// </span><span style="color: #b22222;">print them out</span>
+    printf(<span style="color: #8b2252;">"2d:\n"</span>);
+    <span style="color: #a020f0;">for</span> (<span style="color: #228b22;">size_t</span> <span style="color: #a0522d;">i</span> = 0; i &lt; n; i++) {
+        <span style="color: #a020f0;">for</span> (<span style="color: #228b22;">size_t</span> <span style="color: #a0522d;">j</span> = 0; j &lt; n; j++) {
+            <span style="color: #228b22;">int</span> <span style="color: #a0522d;">x</span> = get2d(n, p2d, i, j);
+            printf(<span style="color: #8b2252;">"%d "</span>, x);
+        }
+        printf(<span style="color: #8b2252;">"\n"</span>);
+    }
+    printf(<span style="color: #8b2252;">"aoa:\n"</span>);
+    <span style="color: #a020f0;">for</span> (<span style="color: #228b22;">size_t</span> <span style="color: #a0522d;">i</span> = 0; i &lt; n; i++) {
+        <span style="color: #a020f0;">for</span> (<span style="color: #228b22;">size_t</span> <span style="color: #a0522d;">j</span> = 0; j &lt; n; j++) {
+            <span style="color: #228b22;">int</span> <span style="color: #a0522d;">x</span> = get_aoa(aoa, i, j);
+            printf(<span style="color: #8b2252;">"%d "</span>, x);
+        }
+        printf(<span style="color: #8b2252;">"\n"</span>);
+    }
+    <span style="color: #b22222;">// </span><span style="color: #b22222;">free them</span>
+    free2d(p2d);
+    free_aoa(n, aoa);
+}
+</pre>
+</div>
+
+<pre class="example">
+I'm going to make space for a big, square table in memory.
+How many rows and columns would you like to make space for? Sorry, I couldn't understand that :(
+2d:
+3 7 3 6 9 2 0 3 0 2 1 7 2 2 7 9 2 9 3 1 9 1 4 8 5 3 1 6 2 6 
+5 4 6 6 3 4 2 4 4 3 7 6 8 3 4 2 6 9 6 4 5 4 7 7 7 2 1 6 5 4 
+0 1 7 1 9 7 7 6 6 9 8 2 3 0 8 0 6 8 6 1 9 4 1 3 4 4 7 3 7 9 
+2 7 5 4 8 9 5 8 3 8 6 3 3 6 4 8 9 7 4 0 0 2 4 5 4 9 2 7 5 8 
+2 9 6 0 1 5 1 8 0 4 2 8 2 4 2 0 2 9 8 3 1 3 0 9 9 9 3 0 6 4 
+0 6 6 5 9 7 8 9 6 2 6 3 1 9 1 9 0 5 7 4 0 2 6 0 2 2 5 2 0 8 
+8 4 9 9 2 4 9 3 0 0 9 3 1 4 1 6 4 2 4 2 8 2 8 6 3 3 3 0 7 8 
+0 8 9 3 3 3 6 2 5 7 6 4 0 8 0 6 4 9 9 8 0 7 9 5 9 5 4 9 5 3 
+7 8 9 7 2 3 9 2 1 6 1 0 3 1 0 6 7 0 4 4 5 2 0 6 6 8 6 7 1 1 
+7 2 4 2 2 0 9 5 0 7 8 0 6 6 9 5 7 5 3 3 9 7 7 1 0 8 5 4 7 3 
+0 7 9 2 3 1 2 2 7 1 4 7 1 7 4 8 1 6 1 6 8 8 0 2 7 6 6 7 7 9 
+7 6 8 3 4 5 1 5 9 3 5 2 7 3 6 6 3 4 9 2 8 0 4 6 7 3 3 5 0 7 
+3 0 0 1 3 9 4 5 8 5 5 9 7 3 6 5 6 0 1 2 9 0 2 4 3 8 3 0 3 9 
+7 2 2 4 8 0 9 2 1 3 2 4 1 5 1 9 1 3 7 8 7 4 4 1 8 2 9 6 6 9 
+0 9 1 8 6 7 7 2 1 0 0 0 3 4 1 0 2 7 6 4 2 7 4 6 7 5 2 3 4 9 
+2 1 3 2 5 5 0 4 6 2 8 5 6 8 7 2 0 8 5 7 8 3 7 7 9 1 0 9 8 3 
+0 9 1 7 7 2 1 8 4 6 6 4 8 8 5 4 0 7 2 2 3 9 1 5 4 2 1 2 2 9 
+4 5 1 0 1 7 9 1 7 0 0 5 9 1 1 0 8 4 2 4 9 2 9 0 4 9 5 6 3 9 
+2 3 9 1 4 8 7 3 9 5 8 0 3 1 7 5 1 3 0 5 2 9 9 9 1 3 3 4 1 6 
+7 2 2 1 4 8 3 7 3 2 3 6 1 6 0 5 5 9 8 2 9 1 0 6 9 8 8 3 0 5 
+3 8 1 9 0 5 4 4 9 9 3 3 7 4 9 9 2 6 9 6 1 3 2 3 9 4 4 9 8 2 
+5 3 4 5 7 9 7 7 9 5 4 7 3 2 2 3 1 8 0 2 9 9 3 8 6 7 7 1 0 4 
+3 3 7 1 9 6 9 5 1 9 1 2 0 3 1 7 8 0 4 3 9 4 5 2 7 8 9 3 8 4 
+6 8 5 1 6 8 6 5 6 1 3 5 6 4 6 7 3 9 0 2 9 3 5 7 7 6 4 3 2 6 
+9 5 3 4 1 1 9 5 2 9 7 4 1 1 8 4 3 3 7 3 8 0 8 8 3 5 5 2 8 2 
+3 7 7 6 2 7 3 2 5 7 9 1 4 5 8 3 5 1 5 0 8 9 9 6 5 5 0 2 9 2 
+6 5 8 7 6 2 9 0 7 5 4 0 8 4 4 8 2 6 2 7 4 6 4 4 5 6 3 7 2 0 
+9 1 4 5 2 0 3 1 5 4 0 3 9 4 3 2 5 8 1 1 8 3 9 5 4 6 2 0 3 7 
+3 1 4 1 6 3 7 0 4 3 7 9 3 2 9 5 0 3 9 5 3 2 7 7 0 6 5 8 9 7 
+0 1 3 7 2 1 3 8 8 8 8 9 3 4 7 3 6 2 2 5 4 4 1 3 8 3 9 4 1 0 
+aoa:
+6 5 5 2 1 7 9 6 6 6 8 9 0 3 5 2 8 7 6 2 3 9 7 4 0 6 0 3 0 1 
+5 7 5 9 7 5 5 7 4 0 8 8 4 1 9 0 8 2 6 9 0 8 1 2 2 6 0 1 9 9 
+9 7 1 5 7 6 3 5 3 4 1 9 9 8 5 9 3 5 1 5 8 8 0 0 4 4 6 1 5 6 
+1 8 7 1 5 7 3 8 1 9 4 3 8 0 8 8 7 6 3 3 9 5 0 9 6 2 4 7 4 1 
+8 3 8 2 0 1 0 5 6 6 5 6 8 7 4 6 9 0 1 1 0 4 3 1 6 3 8 5 6 0 
+4 2 7 6 8 2 2 9 0 7 1 2 5 9 4 1 7 8 0 8 4 9 1 4 2 0 5 9 2 3 
+0 0 1 6 5 4 9 6 5 2 4 5 7 3 4 9 2 6 1 8 9 8 8 8 8 3 8 4 6 9 
+6 7 0 3 7 2 5 6 8 9 0 1 4 7 8 2 7 3 2 3 1 8 1 4 2 7 9 4 9 5 
+0 1 9 8 5 4 0 0 9 2 2 7 1 9 5 7 4 6 7 8 8 6 6 4 2 9 0 0 0 3 
+7 6 5 0 9 9 4 1 3 8 6 4 7 0 7 9 8 3 8 7 3 8 4 9 9 8 8 3 1 8 
+9 9 3 4 7 2 0 1 5 7 1 1 1 0 0 5 6 2 9 4 0 1 2 9 5 4 3 9 4 1 
+0 0 5 9 1 4 5 4 8 8 2 2 0 4 3 3 4 3 7 5 9 2 7 5 1 3 8 1 8 6 
+5 8 4 1 5 3 1 0 3 6 9 0 6 7 1 0 5 8 2 6 1 4 7 0 2 0 7 0 4 2 
+4 5 4 3 6 8 2 3 8 4 2 5 7 7 6 8 3 3 9 6 0 8 8 6 5 1 9 0 4 9 
+8 3 4 9 7 3 1 2 5 9 4 1 7 1 3 3 1 5 5 2 1 2 1 5 8 9 7 6 7 7 
+2 6 0 1 6 0 3 6 0 5 9 0 0 3 8 1 5 5 0 3 2 0 7 6 1 9 8 8 0 7 
+6 2 7 9 6 7 5 8 5 5 8 8 3 7 2 5 5 3 7 1 4 4 9 7 1 2 6 0 2 7 
+3 6 4 3 2 7 8 0 6 1 2 1 7 3 2 6 7 9 4 5 1 8 6 6 0 4 4 6 9 5 
+1 0 9 3 5 5 3 8 5 3 6 3 6 8 0 1 0 0 4 4 4 9 4 8 6 9 3 6 5 1 
+2 9 8 2 7 6 7 2 7 5 7 8 3 4 3 8 0 9 0 4 0 2 0 3 0 3 7 1 0 0 
+1 0 7 1 3 9 8 6 2 0 0 3 9 9 1 4 0 5 5 1 4 7 7 3 2 4 9 3 3 9 
+4 9 9 5 3 0 2 2 0 0 1 9 6 1 5 9 8 7 5 7 1 6 6 4 6 2 4 0 6 4 
+7 4 2 7 5 8 5 2 5 9 6 1 5 2 9 6 2 6 3 6 0 8 1 9 3 0 2 1 7 1 
+3 5 0 2 4 5 2 2 9 3 1 2 9 4 0 4 7 0 2 6 0 5 8 1 0 0 1 0 9 0 
+3 4 6 3 9 0 4 6 5 1 7 1 9 3 7 9 1 8 9 8 4 0 6 2 8 0 9 6 5 8 
+6 8 2 6 9 0 7 3 1 8 4 6 3 4 7 3 0 4 7 7 9 3 4 4 5 6 6 6 9 9 
+5 3 6 3 0 6 3 8 6 2 0 6 5 9 6 3 3 2 4 0 9 5 6 2 1 1 7 1 1 8 
+0 3 8 8 2 6 6 0 7 2 0 3 0 3 4 4 3 1 3 5 1 3 7 4 9 7 1 1 7 6 
+9 0 1 8 4 4 7 7 5 0 2 9 0 7 9 2 8 5 6 6 0 0 4 3 1 7 7 8 0 8 
+3 0 6 3 2 5 3 2 5 0 6 3 7 3 1 9 4 0 9 7 6 9 2 1 1 8 2 5 0 1
+</pre>
+</div>
+</div>
+
+
+<div id="outline-container-org952a85a" class="outline-4">
+<h4 id="org952a85a"><span class="section-number-4">1.7.11</span> Malloc array of arrays structs?</h4>
+<div class="outline-text-4" id="text-1-7-11">
+<div class="org-src-container">
+<pre class="src src-C"><span style="color: #483d8b;">#include</span> <span style="color: #8b2252;">&lt;stdbool.h&gt;</span> 
+<span style="color: #483d8b;">#include</span> <span style="color: #8b2252;">&lt;stdio.h&gt;</span>
+<span style="color: #483d8b;">#include</span> <span style="color: #8b2252;">&lt;stdlib.h&gt;</span>
+<span style="color: #483d8b;">#include</span> <span style="color: #8b2252;">&lt;time.h&gt;</span>
+
+<span style="color: #a020f0;">enum</span> <span style="color: #228b22;">card_face</span> {
+    <span style="color: #a0522d;">ACE</span> = 1,
+    <span style="color: #a0522d;">FACE2</span>,
+    <span style="color: #a0522d;">FACE3</span>,
+    <span style="color: #a0522d;">FACE4</span>,
+    <span style="color: #a0522d;">FACE5</span>,
+    <span style="color: #a0522d;">FACE6</span>,
+    <span style="color: #a0522d;">FACE7</span>,
+    <span style="color: #a0522d;">FACE8</span>,
+    <span style="color: #a0522d;">FACE9</span>,
+    <span style="color: #a0522d;">FACE10</span>,
+    <span style="color: #a0522d;">JACK</span>,
+    <span style="color: #a0522d;">QUEEN</span>,
+    <span style="color: #a0522d;">KING</span>,
+};
+
+<span style="color: #a020f0;">typedef</span> <span style="color: #a020f0;">enum</span> <span style="color: #228b22;">card_face</span> <span style="color: #228b22;">CardFace</span>;
+
+<span style="color: #483d8b;">#define</span> <span style="color: #a0522d;">NFACES</span> 13
+<span style="color: #483d8b;">#define</span> <span style="color: #a0522d;">NFACEOFF</span> 1
+
+<span style="color: #a020f0;">enum</span> <span style="color: #228b22;">card_suit</span> {
+    <span style="color: #a0522d;">CLUBS</span>,
+    <span style="color: #a0522d;">HEARTS</span>,
+    <span style="color: #a0522d;">DIAMONDS</span>,
+    <span style="color: #a0522d;">SPADES</span>
+};
+
+<span style="color: #a020f0;">typedef</span> <span style="color: #a020f0;">enum</span> <span style="color: #228b22;">card_suit</span> <span style="color: #228b22;">CardSuit</span>;
+
+<span style="color: #483d8b;">#define</span> <span style="color: #a0522d;">NSUIT</span> 4
+
+<span style="color: #a020f0;">struct</span> <span style="color: #228b22;">playing_card</span> {
+    <span style="color: #228b22;">CardFace</span> <span style="color: #a0522d;">face</span>;
+    <span style="color: #228b22;">CardSuit</span> <span style="color: #a0522d;">suit</span>;
+};
+
+<span style="color: #a020f0;">typedef</span> <span style="color: #a020f0;">struct</span> <span style="color: #228b22;">playing_card</span> <span style="color: #228b22;">PlayingCard</span>;
+
+<span style="color: #483d8b;">#define</span> <span style="color: #a0522d;">HANDSIZE</span> 5
+
+<span style="color: #228b22;">bool</span> <span style="color: #0000ff;">isFlush</span>(<span style="color: #228b22;">PlayingCard</span> <span style="color: #a0522d;">hand</span>[HANDSIZE]) {
+    <span style="color: #228b22;">CardSuit</span> <span style="color: #a0522d;">suit</span> = hand[0].suit;
+    <span style="color: #a020f0;">for</span> (<span style="color: #228b22;">int</span> <span style="color: #a0522d;">i</span> = 1;  i &lt; HANDSIZE; i++ ) {
+        <span style="color: #a020f0;">if</span> (suit != hand[i].suit) {
+            <span style="color: #a020f0;">return</span> <span style="color: #008b8b;">false</span>;
+        }
+    }
+    <span style="color: #a020f0;">return</span> <span style="color: #008b8b;">true</span>;
+}
+
+<span style="color: #228b22;">PlayingCard</span> <span style="color: #0000ff;">randomCard</span>() {
+    <span style="color: #228b22;">PlayingCard</span> <span style="color: #a0522d;">card</span> = {ACE, CLUBS};
+    card.face = NFACEOFF + ( rand() % NFACES );
+    card.suit =  rand() % NSUIT;
+    <span style="color: #a020f0;">return</span> card;
+}
+<span style="color: #228b22;">int</span> <span style="color: #0000ff;">main</span>() {
+    srand(time(<span style="color: #008b8b;">NULL</span>));
+    <span style="color: #a020f0;">const</span> <span style="color: #228b22;">int</span> <span style="color: #a0522d;">HANDS</span> = 1000000;
+    <span style="color: #228b22;">PlayingCard</span> * <span style="color: #a0522d;">hands</span> = malloc(<span style="color: #a020f0;">sizeof</span>(PlayingCard)*HANDS*HANDSIZE);
+    <span style="color: #a020f0;">for</span> (<span style="color: #228b22;">int</span> <span style="color: #a0522d;">i</span> = 0; i &lt; HANDS*HANDSIZE; i++) {
+        hands[i] = randomCard();
+    }
+    <span style="color: #228b22;">int</span> <span style="color: #a0522d;">flushes</span> = 0;
+    <span style="color: #a020f0;">for</span> (<span style="color: #228b22;">int</span> <span style="color: #a0522d;">i</span> = 0; i &lt; HANDS; i++) {
+        <span style="color: #a020f0;">if</span> (isFlush(hands + i*HANDSIZE)) {
+            <span style="color: #a020f0;">if</span> (flushes &lt; 10) { <span style="color: #b22222;">// </span><span style="color: #b22222;">reduce printing</span>
+                printf(<span style="color: #8b2252;">"Flush found at card %d\n"</span>, i);
+                printf(<span style="color: #8b2252;">"Suit %d\n"</span>, hands[i].suit);
+            }
+            flushes++;
+        }
+    }
+    printf(<span style="color: #8b2252;">"We found %d flushes out of %d hands: %f\n"</span>, flushes, HANDS, flushes/(<span style="color: #228b22;">float</span>)(HANDS));
+}
+
+
+</pre>
+</div>
+
+<pre class="example">
+Flush found at card 141
+Suit 0
+Flush found at card 247
+Suit 1
+Flush found at card 502
+Suit 1
+Flush found at card 902
+Suit 3
+Flush found at card 1013
+Suit 3
+Flush found at card 1113
+Suit 3
+Flush found at card 1162
+Suit 1
+Flush found at card 1180
+Suit 1
+Flush found at card 1296
+Suit 2
+Flush found at card 1553
+Suit 3
+We found 3975 flushes out of 1000000 hands: 0.003975
+</pre>
+
+<p>
+That's kind of gross, let's model our hands as arrays of 5 cards instead.
+</p>
+
+<div class="org-src-container">
+<pre class="src src-C"><span style="color: #483d8b;">#include</span> <span style="color: #8b2252;">&lt;stdbool.h&gt;</span> 
+<span style="color: #483d8b;">#include</span> <span style="color: #8b2252;">&lt;stdio.h&gt;</span>
+<span style="color: #483d8b;">#include</span> <span style="color: #8b2252;">&lt;stdlib.h&gt;</span>
+<span style="color: #483d8b;">#include</span> <span style="color: #8b2252;">&lt;time.h&gt;</span>
+
+<span style="color: #a020f0;">enum</span> <span style="color: #228b22;">card_face</span> {
+    <span style="color: #a0522d;">ACE</span> = 1,
+    <span style="color: #a0522d;">FACE2</span>,
+    <span style="color: #a0522d;">FACE3</span>,
+    <span style="color: #a0522d;">FACE4</span>,
+    <span style="color: #a0522d;">FACE5</span>,
+    <span style="color: #a0522d;">FACE6</span>,
+    <span style="color: #a0522d;">FACE7</span>,
+    <span style="color: #a0522d;">FACE8</span>,
+    <span style="color: #a0522d;">FACE9</span>,
+    <span style="color: #a0522d;">FACE10</span>,
+    <span style="color: #a0522d;">JACK</span>,
+    <span style="color: #a0522d;">QUEEN</span>,
+    <span style="color: #a0522d;">KING</span>,
+};
+
+<span style="color: #a020f0;">typedef</span> <span style="color: #a020f0;">enum</span> <span style="color: #228b22;">card_face</span> <span style="color: #228b22;">CardFace</span>;
+
+<span style="color: #483d8b;">#define</span> <span style="color: #a0522d;">NFACES</span> 13
+<span style="color: #483d8b;">#define</span> <span style="color: #a0522d;">NFACEOFF</span> 1
+
+<span style="color: #a020f0;">enum</span> <span style="color: #228b22;">card_suit</span> {
+    <span style="color: #a0522d;">CLUBS</span>,
+    <span style="color: #a0522d;">HEARTS</span>,
+    <span style="color: #a0522d;">DIAMONDS</span>,
+    <span style="color: #a0522d;">SPADES</span>
+};
+
+<span style="color: #a020f0;">typedef</span> <span style="color: #a020f0;">enum</span> <span style="color: #228b22;">card_suit</span> <span style="color: #228b22;">CardSuit</span>;
+
+<span style="color: #483d8b;">#define</span> <span style="color: #a0522d;">NSUIT</span> 4
+
+<span style="color: #a020f0;">struct</span> <span style="color: #228b22;">playing_card</span> {
+    <span style="color: #228b22;">CardFace</span> <span style="color: #a0522d;">face</span>;
+    <span style="color: #228b22;">CardSuit</span> <span style="color: #a0522d;">suit</span>;
+};
+
+<span style="color: #a020f0;">typedef</span> <span style="color: #a020f0;">struct</span> <span style="color: #228b22;">playing_card</span> <span style="color: #228b22;">PlayingCard</span>;
+
+<span style="color: #483d8b;">#define</span> <span style="color: #a0522d;">HANDSIZE</span> 5
+
+<span style="color: #228b22;">bool</span> <span style="color: #0000ff;">isFlush</span>(<span style="color: #228b22;">PlayingCard</span> <span style="color: #a0522d;">hand</span>[HANDSIZE]) {
+    <span style="color: #228b22;">CardSuit</span> <span style="color: #a0522d;">suit</span> = hand[0].suit;
+    <span style="color: #a020f0;">for</span> (<span style="color: #228b22;">int</span> <span style="color: #a0522d;">i</span> = 1;  i &lt; HANDSIZE; i++ ) {
+        <span style="color: #a020f0;">if</span> (suit != hand[i].suit) {
+            <span style="color: #a020f0;">return</span> <span style="color: #008b8b;">false</span>;
+        }
+    }
+    <span style="color: #a020f0;">return</span> <span style="color: #008b8b;">true</span>;
+}
+
+<span style="color: #228b22;">PlayingCard</span> <span style="color: #0000ff;">randomCard</span>() {
+    <span style="color: #228b22;">PlayingCard</span> <span style="color: #a0522d;">card</span> = {ACE, CLUBS};
+    card.face = NFACEOFF + ( rand() % NFACES );
+    card.suit =  rand() % NSUIT;
+    <span style="color: #a020f0;">return</span> card;
+}
+<span style="color: #228b22;">int</span> <span style="color: #0000ff;">main</span>() {
+    srand(time(<span style="color: #008b8b;">NULL</span>));
+    <span style="color: #a020f0;">const</span> <span style="color: #228b22;">int</span> <span style="color: #a0522d;">HANDS</span> = 1000000;
+    <span style="color: #b22222;">// </span><span style="color: #b22222;">Pointer to arrays</span>
+    <span style="color: #228b22;">PlayingCard</span> (*<span style="color: #a0522d;">hands</span>)[5] = malloc(<span style="color: #a020f0;">sizeof</span>(PlayingCard[5])*HANDS);
+    <span style="color: #a020f0;">for</span> (<span style="color: #228b22;">int</span> <span style="color: #a0522d;">i</span> = 0; i &lt; HANDS; i++) {
+        <span style="color: #a020f0;">for</span> (<span style="color: #228b22;">int</span> <span style="color: #a0522d;">j</span> = 0; j &lt; HANDSIZE; j++) {
+            hands[i][j] = randomCard();
+        }
+    }
+    <span style="color: #228b22;">int</span> <span style="color: #a0522d;">flushes</span> = 0;
+    <span style="color: #a020f0;">for</span> (<span style="color: #228b22;">int</span> <span style="color: #a0522d;">i</span> = 0; i &lt; HANDS; i++) {
+        <span style="color: #a020f0;">if</span> (isFlush(hands[i])) {
+            <span style="color: #a020f0;">if</span> (flushes &lt; 10) { <span style="color: #b22222;">// </span><span style="color: #b22222;">reduce printing</span>
+                printf(<span style="color: #8b2252;">"Flush found at card %d\n"</span>, i);
+                printf(<span style="color: #8b2252;">"Suit %d\n"</span>, hands[i][0].suit);
+            }
+            flushes++;
+        }
+    }
+    printf(<span style="color: #8b2252;">"We found %d flushes out of %d hands: %f\n"</span>, flushes, HANDS, flushes/(<span style="color: #228b22;">float</span>)(HANDS));
+}
+
+
+</pre>
+</div>
+
+<pre class="example">
+Flush found at card 22
+Suit 0
+Flush found at card 456
+Suit 1
+Flush found at card 641
+Suit 1
+Flush found at card 668
+Suit 3
+Flush found at card 709
+Suit 0
+Flush found at card 999
+Suit 2
+Flush found at card 1243
+Suit 3
+Flush found at card 1261
+Suit 3
+Flush found at card 1322
+Suit 3
+Flush found at card 1417
+Suit 2
+We found 3994 flushes out of 1000000 hands: 0.003994
+</pre>
+</div>
 </div>
 </div>
 </div>
 </div>
 <div id="postamble" class="status">
 <p class="author">Author: Abram Hindle</p>
-<p class="date">Created: 2020-02-25 Tue 11:56</p>
+<p class="date">Created: 2020-02-27 Thu 11:34</p>
 <p class="validation"><a href="http://validator.w3.org/check?uri=referer">Validate</a></p>
 </div>
 </body>

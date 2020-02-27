@@ -877,7 +877,7 @@ What memory does our program use? (OS and compiler specific)
 
 Here's what emacs is using
 
-:EXAMPLE:
+#+begin_example
 root@st-francis:/proc/27627# cat maps
 00400000-00641000 r-xp 00000000 09:00 116130283                          /usr/bin/emacs25-x
 00841000-00848000 r--p 00241000 09:00 116130283                          /usr/bin/emacs25-x
@@ -895,20 +895,20 @@ root@st-francis:/proc/27627# cat maps
 7fffcfb29000-7fffcfb2c000 r--p 00000000 00:00 0                          [vvar]
 7fffcfb2c000-7fffcfb2e000 r-xp 00000000 00:00 0                          [vdso]
 ffffffffff600000-ffffffffff601000 r-xp 00000000 00:00 0                  [vsyscall]
-:END:
+#+end_example
 
 Here's the important lines
-:EXAMPLE:
+#+begin_example
 code        00400000-00641000 r-xp 00000000 09:00 116130283                          /usr/bin/emacs25-x
 data?       00841000-00848000 r--p 00241000 09:00 116130283                          /usr/bin/emacs25-x
 data?       00848000-01615000 rw-p 00248000 09:00 116130283                          /usr/bin/emacs25-x
 heap        03155000-0d208000 rw-p 00000000 00:00 0                                  [heap]
 stack       7fffcf9ad000-7fffcfa6d000 rw-p 00000000 00:00 0                          [stack]
-:END:
+#+end_example
 
 So stack is limited
 
-:EXAMPLE:
+#+begin_example
 hindle1@st-francis:~$ ulimit -a
 core file size          (blocks, -c) 0
 data seg size           (kbytes, -d) unlimited
@@ -926,11 +926,12 @@ cpu time               (seconds, -t) unlimited
 max user processes              (-u) 273535
 virtual memory          (kbytes, -v) unlimited
 file locks                      (-x) unlimited
-:END:
+#+end_example
 
-:RESULTS:
+
+#+begin_example
 stack size              (kbytes, -s) 8192
-:END:
+#+end_example
 
 8megs of stack.
 
