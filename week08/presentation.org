@@ -1,7 +1,7 @@
 #+TITLE: CMPUT201W20B2 Week 8
-#+PROPERTY: header-args:C             :results output :exports no-export :flags -std=c99 -pedantic -Wall -Wextra -ftrapv -ggdb3 :eval yes :results value verbatim
-#+PROPERTY: header-args:sh            :results output :exports no-export :eval yes :results value verbatim
-#+PROPERTY: header-args:shell         :results output :exports no-export :eval yes :results value verbatim
+#+PROPERTY: header-args:C             :results output :exports export :flags -std=c99 -pedantic -Wall -Wextra -ftrapv -ggdb3 :eval yes :results value verbatim
+#+PROPERTY: header-args:sh            :results output :exports export :eval yes :results value verbatim
+#+PROPERTY: header-args:shell         :results output :exports export :eval yes :results value verbatim
 
 * Week8
 ** Copyright Statement
@@ -87,7 +87,7 @@ int main(int argc, char**argv) {
 
 ** Remember how to compile?
 
-gcc -std=c99 -Wall -pedantic -Werror -o programname programname.c
+gcc  -std=c99 -pedantic -Wall -Wextra -ftrapv -ggdb3 -o programname programname.c
 
 ** Malloc continued!
 
@@ -1155,7 +1155,7 @@ Stack 0x55f488145260: 0 items starting at (nil)
 
 
 ** Debugging
-**** GDB
+*** GDB
      - debuggers let us step through programs and observe variables.
      - Compile a program with -g or -ggdb3 with gcc or clang
        - this adds debugging symbols (so you can read it!)
@@ -1187,6 +1187,10 @@ Stack 0x55f488145260: 0 items starting at (nil)
      - quit
        - q
      - man gdb to get more help
+       - GDB manual http://sourceware.org/gdb/current/onlinedocs/gdb/
+       - ctrl-x a put gdb in curses semi-graphical mode
+       - ddd is a graphical wrapper for gdb (probably not in your VM)
+         - I like ctrl-x a better
 
 #+begin_example
 hindle1@frail:~/projects/CMPUT201/CMPUT201W20B2-public/week08$ gdb ./bad_realloc 
