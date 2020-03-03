@@ -1,3 +1,4 @@
+
 #define _POSIX_C_SOURCE 200809L // <-- needed for getline
 #include <stdint.h>
 #include <stdio.h>
@@ -26,6 +27,7 @@
  * 
  */
 
+// OK so Stack is pointer of struct stack NOT struct stack.
 typedef struct stack {
     size_t size;
     char ** elts;
@@ -39,6 +41,7 @@ void show_stack(Stack stack) {
     );
 }
 
+// This is a good style, new_object, or object_create
 Stack new_stack() {
     /* Constructor */
     Stack new = malloc(sizeof(*new));
@@ -131,4 +134,3 @@ int main() {
     free_stack(stack1);
     return 0;
 }
-
