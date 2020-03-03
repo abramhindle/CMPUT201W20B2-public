@@ -1,7 +1,7 @@
 #+TITLE: CMPUT201W20B2 Week 8
-#+PROPERTY: header-args:C             :results output :exports both :flags -std=c99 -pedantic -Wall -Wextra -ftrapv -ggdb3 :eval yes :results value verbatim
-#+PROPERTY: header-args:sh            :results output :exports both :eval yes :results value verbatim
-#+PROPERTY: header-args:shell         :results output :exports both :eval yes :results value verbatim
+#+PROPERTY: header-args:C             :results output :exports no-export :flags -std=c99 -pedantic -Wall -Wextra -ftrapv -ggdb3 :eval yes :results value verbatim
+#+PROPERTY: header-args:sh            :results output :exports no-export :eval yes :results value verbatim
+#+PROPERTY: header-args:shell         :results output :exports no-export :eval yes :results value verbatim
 
 * Week8
 ** Copyright Statement
@@ -250,7 +250,7 @@ now let's leak check
 Mallocs are often used with arrays of structs. You need to get the
 sizeof the struct.
 
-#+BEGIN_SRC C :exports both
+#+BEGIN_SRC C 
 #include <stdbool.h> 
 #include <stdio.h>
 #include <stdlib.h>
@@ -535,7 +535,7 @@ aoa:
 
 *** Malloc array of arrays structs?
 
-#+BEGIN_SRC C :exports both
+#+BEGIN_SRC C 
 #include <stdbool.h> 
 #include <stdio.h>
 #include <stdlib.h>
@@ -648,7 +648,7 @@ We found 3902 flushes out of 1000000 hands: 0.003902
 
 That's kind of gross, let's model our hands as arrays of 5 cards instead.
 
-#+BEGIN_SRC C :exports both
+#+BEGIN_SRC C 
 #include <stdbool.h> 
 #include <stdio.h>
 #include <stdlib.h>
@@ -764,7 +764,7 @@ We found 3855 flushes out of 1000000 hands: 0.003855
 
 - Remember to tangle this to write to disk
 
-#+BEGIN_SRC C :exports both :tangle cards-aoa.c
+#+BEGIN_SRC C  :tangle cards-aoa.c
 #include <stdbool.h> 
 #include <stdio.h>
 #include <stdlib.h>
@@ -897,7 +897,7 @@ Suit 3
 We found 3910 flushes out of 1000000 hands: 0.003910
 #+end_example
 
-#+BEGIN_SRC sh :exports both
+#+BEGIN_SRC sh 
 gcc -std=c99 -pedantic -Wall -Wextra -ftrapv -ggdb3 -o cards-aoa ./cards-aoa.c
 valgrind --leak-check=full ./cards-aoa 2>&1
 #+END_SRC
@@ -959,7 +959,7 @@ We found 3987 flushes out of 1000000 hands: 0.003987
 *** Using pointers for protection
 
 file:./stack.c
-#+BEGIN_SRC C :exports both :tangle stack.c
+#+BEGIN_SRC C  :tangle stack.c
 #define _POSIX_C_SOURCE 200809L // <-- needed for getline
 #include <stdint.h>
 #include <stdio.h>
@@ -1101,7 +1101,7 @@ int main() {
 : Stack 0x56362ee8c260: 0 items starting at (nil)
 : Enter some lines. Press ctrl-d (EOF) to end.
 
-#+BEGIN_SRC sh :exports both
+#+BEGIN_SRC sh 
 gcc -std=c99 -pedantic -Wall -Wextra -ftrapv -ggdb3 -o stack ./stack.c
 seq 9990 9999 | ./stack
 #+END_SRC
@@ -1143,7 +1143,7 @@ Stack 0x55f488145260: 0 items starting at (nil)
 #+end_example
 
 
-*** Debugging
+** Debugging
 **** GDB
      - debuggers let us step through programs and observe variables.
      - Compile a program with -g or -ggdb3 with gcc or clang
@@ -1383,7 +1383,7 @@ We found 3857 flushes out of 1000000 hands: 0.003857
 
 **** Array Out of Bounds
 
-#+BEGIN_SRC C :exports both :eval no :tangle array_oob.c
+#+BEGIN_SRC C  :eval no :tangle array_oob.c
 #define _POSIX_C_SOURCE 200809L
 #include <stdint.h>
 #include <stdio.h>
@@ -1418,7 +1418,7 @@ int main() {
 
 #+RESULTS:
 
-#+BEGIN_SRC sh :exports both
+#+BEGIN_SRC sh 
 gcc -std=c99 -O0 -pedantic -Wall -Wextra -ftrapv -ggdb3 -o array_oob ./array_oob.c
 echo 32 | ./array_oob 
 echo $?
@@ -1431,7 +1431,7 @@ echo $?
 : 0
 
 
-#+BEGIN_SRC sh :exports both
+#+BEGIN_SRC sh 
 gcc -std=c99 -O0 -pedantic -Wall -Wextra -ftrapv -ggdb3 -o array_oob ./array_oob.c
 echo 32 | valgrind --leak-check=full  ./array_oob 2>&1
 echo $?
@@ -1520,7 +1520,7 @@ How big?
 
 The output is dependent on your input
 
-#+BEGIN_SRC sh :exports both
+#+BEGIN_SRC sh 
 gcc -std=c99 --stack-check -pedantic -Wall -Wextra -ftrapv -g3 -o array_oob ./array_oob.c || echo did not compile
 echo 32 | valgrind --tool=exp-sgcheck ./array_oob 2>&1
 echo $?
@@ -1560,7 +1560,7 @@ How big?
 
 
 
-#+BEGIN_SRC sh :exports both
+#+BEGIN_SRC sh 
 gcc -std=c99 -pedantic -Wall -Wextra -ftrapv -ggdb3 -o array_oob ./array_oob.c
 gnome-terminal -- gdb ./array_oob
 #+END_SRC
@@ -1569,7 +1569,7 @@ gnome-terminal -- gdb ./array_oob
 
 **** Array unitialized
 
-#+BEGIN_SRC C :exports both :eval no :tangle array_uninit.c
+#+BEGIN_SRC C  :eval no :tangle array_uninit.c
 #define _POSIX_C_SOURCE 200809L
 #include <stdint.h>
 #include <stdio.h>
@@ -1598,7 +1598,7 @@ int main() {
 }
 #+END_SRC
 
-#+BEGIN_SRC sh :exports both
+#+BEGIN_SRC sh 
 gcc -std=c99 -O0 -pedantic -Wall -Wextra -ftrapv -ggdb3 -o array_uninit ./array_uninit.c
 echo 10 | ./array_uninit 
 echo $?
@@ -1621,7 +1621,7 @@ How big?
 #+end_example
 
 
-#+BEGIN_SRC sh :exports both
+#+BEGIN_SRC sh 
 gcc -std=c99 -O0 -pedantic -Wall -Wextra -ftrapv -ggdb3 -o array_uninit ./array_uninit.c
 echo 5 | valgrind --leak-check=full  ./array_uninit 2>&1
 echo $?
@@ -1685,7 +1685,10 @@ Yeah valgrind did not like that. It complained about uninitiliazed values.
 
 *** More bad code 
 
-#+BEGIN_SRC sh :exports both
+These files are debugging examples where you should practice valgrind
+and gcc.
+
+#+BEGIN_SRC sh 
 # look a bash for loop!
 echo Compiling!
 for file in ./array_oob.c ./array_uninit.c ./bad_realloc.c ./bad_str.c ./double_free.c ./huge_array.c ./infinite_recursion.c ./malloc.c ./malloc_oob.c ./malloc_uninit.c ./segv.c ./simple_uninit.c ./stack.c ./stack_limit.c ./use_after_free.c 
@@ -1717,13 +1720,93 @@ file:./use_after_free.c
 **** ./array_oob.c
 file:./array_oob.c
 
-#+BEGIN_SRC sh :exports both
+#+BEGIN_SRC sh 
 gcc -std=c99 -pedantic -Wall -Wextra -ftrapv -ggdb3 -o array_oob ./array_oob.c
 echo 33 | valgrind ./array_oob 2>&1
 #+END_SRC
 
+#+RESULTS:
+#+begin_example
+==27387== Memcheck, a memory error detector
+==27387== Copyright (C) 2002-2017, and GNU GPL'd, by Julian Seward et al.
+==27387== Using Valgrind-3.13.0 and LibVEX; rerun with -h for copyright info
+==27387== Command: ./array_oob
+==27387== 
+==27387== Conditional jump or move depends on uninitialised value(s)
+==27387==    at 0x4E988DA: vfprintf (vfprintf.c:1642)
+==27387==    by 0x4EA0F25: printf (printf.c:33)
+==27387==    by 0x1088AE: main (array_oob.c:27)
+==27387== 
+==27387== Use of uninitialised value of size 8
+==27387==    at 0x4E9486B: _itoa_word (_itoa.c:179)
+==27387==    by 0x4E97F0D: vfprintf (vfprintf.c:1642)
+==27387==    by 0x4EA0F25: printf (printf.c:33)
+==27387==    by 0x1088AE: main (array_oob.c:27)
+==27387== 
+==27387== Conditional jump or move depends on uninitialised value(s)
+==27387==    at 0x4E94875: _itoa_word (_itoa.c:179)
+==27387==    by 0x4E97F0D: vfprintf (vfprintf.c:1642)
+==27387==    by 0x4EA0F25: printf (printf.c:33)
+==27387==    by 0x1088AE: main (array_oob.c:27)
+==27387== 
+==27387== Conditional jump or move depends on uninitialised value(s)
+==27387==    at 0x4E98014: vfprintf (vfprintf.c:1642)
+==27387==    by 0x4EA0F25: printf (printf.c:33)
+==27387==    by 0x1088AE: main (array_oob.c:27)
+==27387== 
+==27387== Conditional jump or move depends on uninitialised value(s)
+==27387==    at 0x4E98B4C: vfprintf (vfprintf.c:1642)
+==27387==    by 0x4EA0F25: printf (printf.c:33)
+==27387==    by 0x1088AE: main (array_oob.c:27)
+==27387== 
+==27387== Conditional jump or move depends on uninitialised value(s)
+==27387==    at 0x10895E: __addvsi3 (in /home/hindle1/projects/CMPUT201/CMPUT201W20B2-public/week08/array_oob)
+==27387==    by 0x1088C4: main (array_oob.c:28)
+==27387== 
+==27387== Conditional jump or move depends on uninitialised value(s)
+==27387==    at 0x4E988DA: vfprintf (vfprintf.c:1642)
+==27387==    by 0x4EA0F25: printf (printf.c:33)
+==27387==    by 0x1088ED: main (array_oob.c:29)
+==27387== 
+==27387== Use of uninitialised value of size 8
+==27387==    at 0x4E9486B: _itoa_word (_itoa.c:179)
+==27387==    by 0x4E97F0D: vfprintf (vfprintf.c:1642)
+==27387==    by 0x4EA0F25: printf (printf.c:33)
+==27387==    by 0x1088ED: main (array_oob.c:29)
+==27387== 
+==27387== Conditional jump or move depends on uninitialised value(s)
+==27387==    at 0x4E94875: _itoa_word (_itoa.c:179)
+==27387==    by 0x4E97F0D: vfprintf (vfprintf.c:1642)
+==27387==    by 0x4EA0F25: printf (printf.c:33)
+==27387==    by 0x1088ED: main (array_oob.c:29)
+==27387== 
+==27387== Conditional jump or move depends on uninitialised value(s)
+==27387==    at 0x4E98014: vfprintf (vfprintf.c:1642)
+==27387==    by 0x4EA0F25: printf (printf.c:33)
+==27387==    by 0x1088ED: main (array_oob.c:29)
+==27387== 
+==27387== Conditional jump or move depends on uninitialised value(s)
+==27387==    at 0x4E98B4C: vfprintf (vfprintf.c:1642)
+==27387==    by 0x4EA0F25: printf (printf.c:33)
+==27387==    by 0x1088ED: main (array_oob.c:29)
+==27387== 
+How big?
+0
+1
+==27387== 
+==27387== HEAP SUMMARY:
+==27387==     in use at exit: 0 bytes in 0 blocks
+==27387==   total heap usage: 2 allocs, 2 frees, 8,192 bytes allocated
+==27387== 
+==27387== All heap blocks were freed -- no leaks are possible
+==27387== 
+==27387== For counts of detected and suppressed errors, rerun with: -v
+==27387== Use --track-origins=yes to see where uninitialised values come from
+==27387== ERROR SUMMARY: 11 errors from 11 contexts (suppressed: 0 from 0)
+#+end_example
+
 Run GDB
-#+BEGIN_SRC sh :exports both
+#+BEGIN_SRC sh 
 gcc -std=c99 -pedantic -Wall -Wextra -ftrapv -ggdb3 -o array_oob ./array_oob.c
 gnome-terminal -- gdb ./array_oob
 #+END_SRC
@@ -1731,27 +1814,111 @@ gnome-terminal -- gdb ./array_oob
 **** ./array_uninit.c
 file:./array_uninit.c
 
-#+BEGIN_SRC sh :exports both
+#+BEGIN_SRC sh 
 gcc -std=c99 -pedantic -Wall -Wextra -ftrapv -ggdb3 -o array_uninit ./array_uninit.c
 echo 33 | valgrind ./array_uninit 2>&1
 #+END_SRC
 
+#+RESULTS:
+#+begin_example
+==27379== Memcheck, a memory error detector
+==27379== Copyright (C) 2002-2017, and GNU GPL'd, by Julian Seward et al.
+==27379== Using Valgrind-3.13.0 and LibVEX; rerun with -h for copyright info
+==27379== Command: ./array_uninit
+==27379== 
+==27379== Conditional jump or move depends on uninitialised value(s)
+==27379==    at 0x4E988DA: vfprintf (vfprintf.c:1642)
+==27379==    by 0x4EA0F25: printf (printf.c:33)
+==27379==    by 0x108891: main (array_uninit.c:24)
+==27379== 
+==27379== Use of uninitialised value of size 8
+==27379==    at 0x4E9486B: _itoa_word (_itoa.c:179)
+==27379==    by 0x4E97F0D: vfprintf (vfprintf.c:1642)
+==27379==    by 0x4EA0F25: printf (printf.c:33)
+==27379==    by 0x108891: main (array_uninit.c:24)
+==27379== 
+==27379== Conditional jump or move depends on uninitialised value(s)
+==27379==    at 0x4E94875: _itoa_word (_itoa.c:179)
+==27379==    by 0x4E97F0D: vfprintf (vfprintf.c:1642)
+==27379==    by 0x4EA0F25: printf (printf.c:33)
+==27379==    by 0x108891: main (array_uninit.c:24)
+==27379== 
+==27379== Conditional jump or move depends on uninitialised value(s)
+==27379==    at 0x4E98014: vfprintf (vfprintf.c:1642)
+==27379==    by 0x4EA0F25: printf (printf.c:33)
+==27379==    by 0x108891: main (array_uninit.c:24)
+==27379== 
+==27379== Conditional jump or move depends on uninitialised value(s)
+==27379==    at 0x4E98B4C: vfprintf (vfprintf.c:1642)
+==27379==    by 0x4EA0F25: printf (printf.c:33)
+==27379==    by 0x108891: main (array_uninit.c:24)
+==27379== 
+How big?
+8
+0
+82606643
+0
+0
+0
+0
+0
+0
+0
+8
+0
+86148960
+0
+1083828
+0
+86131360
+0
+0
+0
+0
+0
+82561679
+0
+0
+0
+0
+0
+-16776224
+31
+-16776320
+31
+0
+==27379== 
+==27379== HEAP SUMMARY:
+==27379==     in use at exit: 0 bytes in 0 blocks
+==27379==   total heap usage: 2 allocs, 2 frees, 8,192 bytes allocated
+==27379== 
+==27379== All heap blocks were freed -- no leaks are possible
+==27379== 
+==27379== For counts of detected and suppressed errors, rerun with: -v
+==27379== Use --track-origins=yes to see where uninitialised values come from
+==27379== ERROR SUMMARY: 265 errors from 5 contexts (suppressed: 0 from 0)
+#+end_example
+
 Run GDB
-#+BEGIN_SRC sh :exports both
+#+BEGIN_SRC sh 
 gcc -std=c99 -pedantic -Wall -Wextra -ftrapv -ggdb3 -o array_uninit ./array_uninit.c
 gnome-terminal -- gdb ./array_uninit
 #+END_SRC
 
+#+RESULTS:
+
 **** ./bad_realloc.c
 file:./bad_realloc.c
 
-#+BEGIN_SRC sh :exports both
+#+BEGIN_SRC sh 
 gcc -std=c99 -pedantic -Wall -Wextra -ftrapv -ggdb3 -o bad_realloc ./bad_realloc.c
 echo 33 | valgrind ./bad_realloc 2>&1
 #+END_SRC
 
+#+RESULTS:
+
 Run GDB
-#+BEGIN_SRC sh :exports both
+#+BEGIN_SRC sh 
 gcc -std=c99 -pedantic -Wall -Wextra -ftrapv -ggdb3 -o bad_realloc ./bad_realloc.c
 gnome-terminal -- gdb ./bad_realloc
 #+END_SRC
@@ -1759,13 +1926,39 @@ gnome-terminal -- gdb ./bad_realloc
 **** ./bad_str.c
 file:./bad_str.c
 
-#+BEGIN_SRC sh :exports both
+#+BEGIN_SRC sh 
 gcc -std=c99 -pedantic -Wall -Wextra -ftrapv -ggdb3 -o bad_str ./bad_str.c
 echo 33 | valgrind ./bad_str 2>&1
 #+END_SRC
 
+#+RESULTS:
+#+begin_example
+==27350== Memcheck, a memory error detector
+==27350== Copyright (C) 2002-2017, and GNU GPL'd, by Julian Seward et al.
+==27350== Using Valgrind-3.13.0 and LibVEX; rerun with -h for copyright info
+==27350== Command: ./bad_str
+==27350== 
+Enter a message:
+You entered: 33
+==27350== 
+==27350== HEAP SUMMARY:
+==27350==     in use at exit: 5 bytes in 1 blocks
+==27350==   total heap usage: 3 allocs, 2 frees, 8,197 bytes allocated
+==27350== 
+==27350== LEAK SUMMARY:
+==27350==    definitely lost: 5 bytes in 1 blocks
+==27350==    indirectly lost: 0 bytes in 0 blocks
+==27350==      possibly lost: 0 bytes in 0 blocks
+==27350==    still reachable: 0 bytes in 0 blocks
+==27350==         suppressed: 0 bytes in 0 blocks
+==27350== Rerun with --leak-check=full to see details of leaked memory
+==27350== 
+==27350== For counts of detected and suppressed errors, rerun with: -v
+==27350== ERROR SUMMARY: 0 errors from 0 contexts (suppressed: 0 from 0)
+#+end_example
+
 Run GDB
-#+BEGIN_SRC sh :exports both
+#+BEGIN_SRC sh 
 gcc -std=c99 -pedantic -Wall -Wextra -ftrapv -ggdb3 -o bad_str ./bad_str.c
 gnome-terminal -- gdb ./bad_str
 #+END_SRC
@@ -1773,13 +1966,75 @@ gnome-terminal -- gdb ./bad_str
 **** ./double_free.c
 file:./double_free.c
 
-#+BEGIN_SRC sh :exports both
+#+BEGIN_SRC sh 
 gcc -std=c99 -pedantic -Wall -Wextra -ftrapv -ggdb3 -o double_free ./double_free.c
 echo 33 | valgrind ./double_free 2>&1
 #+END_SRC
 
+#+RESULTS:
+#+begin_example
+==27337== Memcheck, a memory error detector
+==27337== Copyright (C) 2002-2017, and GNU GPL'd, by Julian Seward et al.
+==27337== Using Valgrind-3.13.0 and LibVEX; rerun with -h for copyright info
+==27337== Command: ./double_free
+==27337== 
+==27337== Invalid free() / delete / delete[] / realloc()
+==27337==    at 0x4C30D3B: free (in /usr/lib/valgrind/vgpreload_memcheck-amd64-linux.so)
+==27337==    by 0x108904: main (double_free.c:27)
+==27337==  Address 0x522f0c0 is 0 bytes inside a block of size 132 free'd
+==27337==    at 0x4C30D3B: free (in /usr/lib/valgrind/vgpreload_memcheck-amd64-linux.so)
+==27337==    by 0x1088F8: main (double_free.c:26)
+==27337==  Block was alloc'd at
+==27337==    at 0x4C2FB0F: malloc (in /usr/lib/valgrind/vgpreload_memcheck-amd64-linux.so)
+==27337==    by 0x10888E: main (double_free.c:21)
+==27337== 
+How big?
+0
+1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+12
+13
+14
+15
+16
+17
+18
+19
+20
+21
+22
+23
+24
+25
+26
+27
+28
+29
+30
+31
+32
+==27337== 
+==27337== HEAP SUMMARY:
+==27337==     in use at exit: 0 bytes in 0 blocks
+==27337==   total heap usage: 3 allocs, 4 frees, 8,324 bytes allocated
+==27337== 
+==27337== All heap blocks were freed -- no leaks are possible
+==27337== 
+==27337== For counts of detected and suppressed errors, rerun with: -v
+==27337== ERROR SUMMARY: 1 errors from 1 contexts (suppressed: 0 from 0)
+#+end_example
+
 Run GDB
-#+BEGIN_SRC sh :exports both
+#+BEGIN_SRC sh 
 gcc -std=c99 -pedantic -Wall -Wextra -ftrapv -ggdb3 -o double_free ./double_free.c
 gnome-terminal -- gdb ./double_free
 #+END_SRC
@@ -1787,13 +2042,76 @@ gnome-terminal -- gdb ./double_free
 **** ./huge_array.c
 file:./huge_array.c
 
-#+BEGIN_SRC sh :exports both
+#+BEGIN_SRC sh 
 gcc -std=c99 -pedantic -Wall -Wextra -ftrapv -ggdb3 -o huge_array ./huge_array.c
 echo 33 | valgrind ./huge_array 2>&1
 #+END_SRC
 
+#+RESULTS:
+#+begin_example
+==27323== Memcheck, a memory error detector
+==27323== Copyright (C) 2002-2017, and GNU GPL'd, by Julian Seward et al.
+==27323== Using Valgrind-3.13.0 and LibVEX; rerun with -h for copyright info
+==27323== Command: ./huge_array
+==27323== 
+==27323== Warning: client switching stacks?  SP change: 0x1fff0003e0 --> 0x1ffe8003d0
+==27323==          to suppress, use: --max-stackframe=8388624 or greater
+==27323== Invalid write of size 8
+==27323==    at 0x108728: main (huge_array.c:14)
+==27323==  Address 0x1ffe8003c8 is on thread 1's stack
+==27323==  in frame #0, created by main (huge_array.c:13)
+==27323== 
+==27323== Invalid write of size 8
+==27323==    at 0x4C36657: memset (in /usr/lib/valgrind/vgpreload_memcheck-amd64-linux.so)
+==27323==    by 0x10872C: main (huge_array.c:14)
+==27323==  Address 0x1ffe8003d0 is on thread 1's stack
+==27323==  in frame #1, created by main (huge_array.c:13)
+==27323== 
+==27323== Invalid write of size 8
+==27323==    at 0x4C3665A: memset (in /usr/lib/valgrind/vgpreload_memcheck-amd64-linux.so)
+==27323==    by 0x10872C: main (huge_array.c:14)
+==27323==  Address 0x1ffe8003d8 is on thread 1's stack
+==27323==  in frame #1, created by main (huge_array.c:13)
+==27323== 
+==27323== Invalid write of size 8
+==27323==    at 0x4C3665E: memset (in /usr/lib/valgrind/vgpreload_memcheck-amd64-linux.so)
+==27323==    by 0x10872C: main (huge_array.c:14)
+==27323==  Address 0x1ffe8003e0 is on thread 1's stack
+==27323==  in frame #1, created by main (huge_array.c:13)
+==27323== 
+==27323== Invalid write of size 8
+==27323==    at 0x4C36662: memset (in /usr/lib/valgrind/vgpreload_memcheck-amd64-linux.so)
+==27323==    by 0x10872C: main (huge_array.c:14)
+==27323==  Address 0x1ffe8003e8 is on thread 1's stack
+==27323==  in frame #1, created by main (huge_array.c:13)
+==27323== 
+==27323== Invalid read of size 8
+==27323==    at 0x4C366D5: memset (in /usr/lib/valgrind/vgpreload_memcheck-amd64-linux.so)
+==27323==    by 0x10872C: main (huge_array.c:14)
+==27323==  Address 0x1ffe8003c8 is on thread 1's stack
+==27323==  in frame #0, created by memset (???:)
+==27323== 
+==27323== Invalid read of size 4
+==27323==    at 0x10872D: main (huge_array.c:15)
+==27323==  Address 0x1ffe8003d0 is on thread 1's stack
+==27323==  in frame #0, created by main (huge_array.c:13)
+==27323== 
+==27323== Warning: client switching stacks?  SP change: 0x1ffe8003d0 --> 0x1fff0003e0
+==27323==          to suppress, use: --max-stackframe=8388624 or greater
+0
+==27323== 
+==27323== HEAP SUMMARY:
+==27323==     in use at exit: 0 bytes in 0 blocks
+==27323==   total heap usage: 1 allocs, 1 frees, 4,096 bytes allocated
+==27323== 
+==27323== All heap blocks were freed -- no leaks are possible
+==27323== 
+==27323== For counts of detected and suppressed errors, rerun with: -v
+==27323== ERROR SUMMARY: 1048565 errors from 7 contexts (suppressed: 0 from 0)
+#+end_example
+
 Run GDB
-#+BEGIN_SRC sh :exports both
+#+BEGIN_SRC sh 
 gcc -std=c99 -pedantic -Wall -Wextra -ftrapv -ggdb3 -o huge_array ./huge_array.c
 gnome-terminal -- gdb ./huge_array
 #+END_SRC
@@ -1801,13 +2119,37 @@ gnome-terminal -- gdb ./huge_array
 **** ./malloc_oob.c
 file:./malloc_oob.c
 
-#+BEGIN_SRC sh :exports both
+#+BEGIN_SRC sh 
 gcc -std=c99 -pedantic -Wall -Wextra -ftrapv -ggdb3 -o malloc_oob ./malloc_oob.c
 echo 33 | valgrind ./malloc_oob 2>&1
 #+END_SRC
 
+#+RESULTS:
+#+begin_example
+==27315== Memcheck, a memory error detector
+==27315== Copyright (C) 2002-2017, and GNU GPL'd, by Julian Seward et al.
+==27315== Using Valgrind-3.13.0 and LibVEX; rerun with -h for copyright info
+==27315== Command: ./malloc_oob
+==27315== 
+==27315== Invalid read of size 4
+==27315==    at 0x1088CF: main (malloc_oob.c:26)
+==27315==  Address 0x522f250 is 192 bytes inside an unallocated block of size 4,185,680 in arena "client"
+==27315== 
+How big?
+0
+==27315== 
+==27315== HEAP SUMMARY:
+==27315==     in use at exit: 0 bytes in 0 blocks
+==27315==   total heap usage: 3 allocs, 3 frees, 8,324 bytes allocated
+==27315== 
+==27315== All heap blocks were freed -- no leaks are possible
+==27315== 
+==27315== For counts of detected and suppressed errors, rerun with: -v
+==27315== ERROR SUMMARY: 1 errors from 1 contexts (suppressed: 0 from 0)
+#+end_example
+
 Run GDB
-#+BEGIN_SRC sh :exports both
+#+BEGIN_SRC sh 
 gcc -std=c99 -pedantic -Wall -Wextra -ftrapv -ggdb3 -o malloc_oob ./malloc_oob.c
 gnome-terminal -- gdb ./malloc_oob
 #+END_SRC
@@ -1815,13 +2157,99 @@ gnome-terminal -- gdb ./malloc_oob
 **** ./malloc_uninit.c
 file:./malloc_uninit.c
 
-#+BEGIN_SRC sh :exports both
+#+BEGIN_SRC sh 
 gcc -std=c99 -pedantic -Wall -Wextra -ftrapv -ggdb3 -o malloc_uninit ./malloc_uninit.c
 echo 33 | valgrind ./malloc_uninit 2>&1
 #+END_SRC
 
+#+RESULTS:
+#+begin_example
+==27303== Memcheck, a memory error detector
+==27303== Copyright (C) 2002-2017, and GNU GPL'd, by Julian Seward et al.
+==27303== Using Valgrind-3.13.0 and LibVEX; rerun with -h for copyright info
+==27303== Command: ./malloc_uninit
+==27303== 
+==27303== Conditional jump or move depends on uninitialised value(s)
+==27303==    at 0x4E988DA: vfprintf (vfprintf.c:1642)
+==27303==    by 0x4EA0F25: printf (printf.c:33)
+==27303==    by 0x108884: main (malloc_uninit.c:25)
+==27303== 
+==27303== Use of uninitialised value of size 8
+==27303==    at 0x4E9486B: _itoa_word (_itoa.c:179)
+==27303==    by 0x4E97F0D: vfprintf (vfprintf.c:1642)
+==27303==    by 0x4EA0F25: printf (printf.c:33)
+==27303==    by 0x108884: main (malloc_uninit.c:25)
+==27303== 
+==27303== Conditional jump or move depends on uninitialised value(s)
+==27303==    at 0x4E94875: _itoa_word (_itoa.c:179)
+==27303==    by 0x4E97F0D: vfprintf (vfprintf.c:1642)
+==27303==    by 0x4EA0F25: printf (printf.c:33)
+==27303==    by 0x108884: main (malloc_uninit.c:25)
+==27303== 
+==27303== Conditional jump or move depends on uninitialised value(s)
+==27303==    at 0x4E98014: vfprintf (vfprintf.c:1642)
+==27303==    by 0x4EA0F25: printf (printf.c:33)
+==27303==    by 0x108884: main (malloc_uninit.c:25)
+==27303== 
+==27303== Conditional jump or move depends on uninitialised value(s)
+==27303==    at 0x4E98B4C: vfprintf (vfprintf.c:1642)
+==27303==    by 0x4EA0F25: printf (printf.c:33)
+==27303==    by 0x108884: main (malloc_uninit.c:25)
+==27303== 
+How big?
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+==27303== 
+==27303== HEAP SUMMARY:
+==27303==     in use at exit: 132 bytes in 1 blocks
+==27303==   total heap usage: 3 allocs, 2 frees, 8,324 bytes allocated
+==27303== 
+==27303== LEAK SUMMARY:
+==27303==    definitely lost: 132 bytes in 1 blocks
+==27303==    indirectly lost: 0 bytes in 0 blocks
+==27303==      possibly lost: 0 bytes in 0 blocks
+==27303==    still reachable: 0 bytes in 0 blocks
+==27303==         suppressed: 0 bytes in 0 blocks
+==27303== Rerun with --leak-check=full to see details of leaked memory
+==27303== 
+==27303== For counts of detected and suppressed errors, rerun with: -v
+==27303== Use --track-origins=yes to see where uninitialised values come from
+==27303== ERROR SUMMARY: 165 errors from 5 contexts (suppressed: 0 from 0)
+#+end_example
+
 Run GDB
-#+BEGIN_SRC sh :exports both
+#+BEGIN_SRC sh 
 gcc -std=c99 -pedantic -Wall -Wextra -ftrapv -ggdb3 -o malloc_uninit ./malloc_uninit.c
 gnome-terminal -- gdb ./malloc_uninit
 #+END_SRC
@@ -1829,13 +2257,37 @@ gnome-terminal -- gdb ./malloc_uninit
 **** ./segv.c
 file:./segv.c
 
-#+BEGIN_SRC sh :exports both
+#+BEGIN_SRC sh 
 gcc -std=c99 -pedantic -Wall -Wextra -ftrapv -ggdb3 -o segv ./segv.c
 echo 33 | valgrind ./segv 2>&1
 #+END_SRC
 
+#+RESULTS:
+#+begin_example
+==27291== Memcheck, a memory error detector
+==27291== Copyright (C) 2002-2017, and GNU GPL'd, by Julian Seward et al.
+==27291== Using Valgrind-3.13.0 and LibVEX; rerun with -h for copyright info
+==27291== Command: ./segv
+==27291== 
+==27291== Invalid read of size 4
+==27291==    at 0x1088CF: main (segv.c:26)
+==27291==  Address 0x55ff9c0 is 3,999,792 bytes inside an unallocated block of size 4,185,680 in arena "client"
+==27291== 
+How big?
+0
+==27291== 
+==27291== HEAP SUMMARY:
+==27291==     in use at exit: 0 bytes in 0 blocks
+==27291==   total heap usage: 3 allocs, 3 frees, 8,324 bytes allocated
+==27291== 
+==27291== All heap blocks were freed -- no leaks are possible
+==27291== 
+==27291== For counts of detected and suppressed errors, rerun with: -v
+==27291== ERROR SUMMARY: 1 errors from 1 contexts (suppressed: 0 from 0)
+#+end_example
+
 Run GDB
-#+BEGIN_SRC sh :exports both
+#+BEGIN_SRC sh 
 gcc -std=c99 -pedantic -Wall -Wextra -ftrapv -ggdb3 -o segv ./segv.c
 gnome-terminal -- gdb ./segv
 #+END_SRC
@@ -1843,13 +2295,33 @@ gnome-terminal -- gdb ./segv
 **** ./simple_uninit.c
 file:./simple_uninit.c
 
-#+BEGIN_SRC sh :exports both
+#+BEGIN_SRC sh 
 gcc -std=c99 -pedantic -Wall -Wextra -ftrapv -ggdb3 -o simple_uninit ./simple_uninit.c
 echo 33 | valgrind ./simple_uninit 2>&1
 #+END_SRC
 
+#+RESULTS:
+#+begin_example
+==27279== Memcheck, a memory error detector
+==27279== Copyright (C) 2002-2017, and GNU GPL'd, by Julian Seward et al.
+==27279== Using Valgrind-3.13.0 and LibVEX; rerun with -h for copyright info
+==27279== Command: ./simple_uninit
+==27279== 
+Enter an int:
+33
+==27279== 
+==27279== HEAP SUMMARY:
+==27279==     in use at exit: 0 bytes in 0 blocks
+==27279==   total heap usage: 2 allocs, 2 frees, 8,192 bytes allocated
+==27279== 
+==27279== All heap blocks were freed -- no leaks are possible
+==27279== 
+==27279== For counts of detected and suppressed errors, rerun with: -v
+==27279== ERROR SUMMARY: 0 errors from 0 contexts (suppressed: 0 from 0)
+#+end_example
+
 Run GDB
-#+BEGIN_SRC sh :exports both
+#+BEGIN_SRC sh 
 gcc -std=c99 -pedantic -Wall -Wextra -ftrapv -ggdb3 -o simple_uninit ./simple_uninit.c
 gnome-terminal -- gdb ./simple_uninit
 #+END_SRC
@@ -1857,13 +2329,42 @@ gnome-terminal -- gdb ./simple_uninit
 **** ./stack.c
 file:./stack.c
 
-#+BEGIN_SRC sh :exports both
+#+BEGIN_SRC sh 
 gcc -std=c99 -pedantic -Wall -Wextra -ftrapv -ggdb3 -o stack ./stack.c
 echo 33 | valgrind ./stack 2>&1
 #+END_SRC
 
+#+RESULTS:
+#+begin_example
+==27253== Memcheck, a memory error detector
+==27253== Copyright (C) 2002-2017, and GNU GPL'd, by Julian Seward et al.
+==27253== Using Valgrind-3.13.0 and LibVEX; rerun with -h for copyright info
+==27253== Command: ./stack
+==27253== 
+Stack 0x522d040: 0 items starting at (nil)
+Enter some lines. Press ctrl-d (EOF) to end.
+Stack 0x522d040: 1 items starting at 0x522f1d0
+Stack 0x522d040: 0 items starting at (nil)
+33
+==27253== 
+==27253== HEAP SUMMARY:
+==27253==     in use at exit: 0 bytes in 1 blocks
+==27253==   total heap usage: 7 allocs, 6 frees, 8,456 bytes allocated
+==27253== 
+==27253== LEAK SUMMARY:
+==27253==    definitely lost: 0 bytes in 1 blocks
+==27253==    indirectly lost: 0 bytes in 0 blocks
+==27253==      possibly lost: 0 bytes in 0 blocks
+==27253==    still reachable: 0 bytes in 0 blocks
+==27253==         suppressed: 0 bytes in 0 blocks
+==27253== Rerun with --leak-check=full to see details of leaked memory
+==27253== 
+==27253== For counts of detected and suppressed errors, rerun with: -v
+==27253== ERROR SUMMARY: 0 errors from 0 contexts (suppressed: 0 from 0)
+#+end_example
+
 Run GDB
-#+BEGIN_SRC sh :exports both
+#+BEGIN_SRC sh 
 gcc -std=c99 -pedantic -Wall -Wextra -ftrapv -ggdb3 -o stack ./stack.c
 gnome-terminal -- gdb ./stack
 #+END_SRC
@@ -1871,13 +2372,15 @@ gnome-terminal -- gdb ./stack
 **** ./stack_limit.c
 file:./stack_limit.c
 
-#+BEGIN_SRC sh :exports both
+#+BEGIN_SRC sh 
 gcc -std=c99 -pedantic -Wall -Wextra -ftrapv -ggdb3 -o stack_limit ./stack_limit.c
 echo 33 | valgrind ./stack_limit 2>&1
 #+END_SRC
 
+#+RESULTS:
+
 Run GDB
-#+BEGIN_SRC sh :exports both
+#+BEGIN_SRC sh 
 gcc -std=c99 -pedantic -Wall -Wextra -ftrapv -ggdb3 -o stack_limit ./stack_limit.c
 gnome-terminal -- gdb ./stack_limit
 #+END_SRC
@@ -1885,13 +2388,13 @@ gnome-terminal -- gdb ./stack_limit
 **** ./use_after_free.c
 file:./use_after_free.c
 
-#+BEGIN_SRC sh :exports both
+#+BEGIN_SRC sh 
 gcc -std=c99 -pedantic -Wall -Wextra -ftrapv -ggdb3 -o use_after_free ./use_after_free.c
 echo 33 | valgrind ./use_after_free 2>&1
 #+END_SRC
 
 Run GDB
-#+BEGIN_SRC sh :exports both
+#+BEGIN_SRC sh 
 gcc -std=c99 -pedantic -Wall -Wextra -ftrapv -ggdb3 -o use_after_free ./use_after_free.c
 gnome-terminal -- gdb ./use_after_free
 #+END_SRC
@@ -1911,13 +2414,13 @@ echo
 echo \*\*\*\* $file
 echo file:$file
 echo 
-echo \#+BEGIN_SRC sh :exports both
+echo \#+BEGIN_SRC sh 
 echo gcc -std=c99 -pedantic -Wall -Wextra -ftrapv -ggdb3 -o $exe $file
 echo echo 33 \| valgrind ./$exe 2\>\&1
 echo \#+END_SRC
 echo 
 echo Run GDB
-echo \#+BEGIN_SRC sh :exports both
+echo \#+BEGIN_SRC sh 
 echo gcc -std=c99 -pedantic -Wall -Wextra -ftrapv -ggdb3 -o $exe $file
 echo gnome-terminal -- gdb ./$exe
 echo \#+END_SRC
