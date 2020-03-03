@@ -155,7 +155,7 @@ warns us about mistakes.
 Valgrind will show us that we're leaking memory (losing track of it
 and not freeing it).
 
-#+BEGIN_SRC sh :exportys both
+#+BEGIN_SRC sh :exports both
 gcc -std=c99 -Wall -pedantic -Werror -o nofree ./nofree.c
 valgrind ./nofree 2>&1
 echo now let\'s leak check
@@ -261,7 +261,7 @@ now let's leak check
 Mallocs are often used with arrays of structs. You need to get the
 sizeof the struct.
 
-#+BEGIN_SRC C 
+#+BEGIN_SRC C :exports both
 #include <stdbool.h> 
 #include <stdio.h>
 #include <stdlib.h>
@@ -546,7 +546,7 @@ aoa:
 
 *** Malloc array of arrays structs?
 
-#+BEGIN_SRC C 
+#+BEGIN_SRC C :exports both 
 #include <stdbool.h> 
 #include <stdio.h>
 #include <stdlib.h>
@@ -659,7 +659,7 @@ We found 3902 flushes out of 1000000 hands: 0.003902
 
 That's kind of gross, let's model our hands as arrays of 5 cards instead.
 
-#+BEGIN_SRC C 
+#+BEGIN_SRC C :exports both 
 #include <stdbool.h> 
 #include <stdio.h>
 #include <stdlib.h>
@@ -775,7 +775,7 @@ We found 3855 flushes out of 1000000 hands: 0.003855
 
 - Remember to tangle this to write to disk
 
-#+BEGIN_SRC C  :tangle cards-aoa.c
+#+BEGIN_SRC C :exports both  :tangle cards-aoa.c
 #include <stdbool.h> 
 #include <stdio.h>
 #include <stdlib.h>
@@ -908,7 +908,7 @@ Suit 3
 We found 3910 flushes out of 1000000 hands: 0.003910
 #+end_example
 
-#+BEGIN_SRC sh 
+#+BEGIN_SRC sh :exports both  
 gcc -std=c99 -pedantic -Wall -Wextra -ftrapv -ggdb3 -o cards-aoa ./cards-aoa.c
 valgrind --leak-check=full ./cards-aoa 2>&1
 #+END_SRC
@@ -970,7 +970,7 @@ We found 3987 flushes out of 1000000 hands: 0.003987
 *** Using pointers for protection
 
 file:./stack.c
-#+BEGIN_SRC C  :tangle stack.c
+#+BEGIN_SRC C :exports both  :tangle stack.c
 #define _POSIX_C_SOURCE 200809L // <-- needed for getline
 #include <stdint.h>
 #include <stdio.h>
@@ -1112,7 +1112,7 @@ int main() {
 : Stack 0x56362ee8c260: 0 items starting at (nil)
 : Enter some lines. Press ctrl-d (EOF) to end.
 
-#+BEGIN_SRC sh 
+#+BEGIN_SRC sh :exports both  
 gcc -std=c99 -pedantic -Wall -Wextra -ftrapv -ggdb3 -o stack ./stack.c
 seq 9990 9999 | ./stack
 #+END_SRC
@@ -1398,7 +1398,7 @@ We found 3857 flushes out of 1000000 hands: 0.003857
 
 **** Array Out of Bounds
 
-#+BEGIN_SRC C  :eval no :tangle array_oob.c
+#+BEGIN_SRC C :exports both  :eval no :tangle array_oob.c
 #define _POSIX_C_SOURCE 200809L
 #include <stdint.h>
 #include <stdio.h>
@@ -1433,7 +1433,7 @@ int main() {
 
 #+RESULTS:
 
-#+BEGIN_SRC sh 
+#+BEGIN_SRC sh :exports both  
 gcc -std=c99 -O0 -pedantic -Wall -Wextra -ftrapv -ggdb3 -o array_oob ./array_oob.c
 echo 32 | ./array_oob 
 echo $?
@@ -1446,7 +1446,7 @@ echo $?
 : 0
 
 
-#+BEGIN_SRC sh 
+#+BEGIN_SRC sh :exports both  
 gcc -std=c99 -O0 -pedantic -Wall -Wextra -ftrapv -ggdb3 -o array_oob ./array_oob.c
 echo 32 | valgrind --leak-check=full  ./array_oob 2>&1
 echo $?
@@ -1535,7 +1535,7 @@ How big?
 
 The output is dependent on your input
 
-#+BEGIN_SRC sh 
+#+BEGIN_SRC sh :exports both  
 gcc -std=c99 --stack-check -pedantic -Wall -Wextra -ftrapv -g3 -o array_oob ./array_oob.c || echo did not compile
 echo 32 | valgrind --tool=exp-sgcheck ./array_oob 2>&1
 echo $?
@@ -1575,7 +1575,7 @@ How big?
 
 
 
-#+BEGIN_SRC sh 
+#+BEGIN_SRC sh :exports both  
 gcc -std=c99 -pedantic -Wall -Wextra -ftrapv -ggdb3 -o array_oob ./array_oob.c
 gnome-terminal -- gdb ./array_oob
 #+END_SRC
@@ -1584,7 +1584,7 @@ gnome-terminal -- gdb ./array_oob
 
 **** Array unitialized
 
-#+BEGIN_SRC C  :eval no :tangle array_uninit.c
+#+BEGIN_SRC C :exports both  :eval no :tangle array_uninit.c
 #define _POSIX_C_SOURCE 200809L
 #include <stdint.h>
 #include <stdio.h>
@@ -1613,7 +1613,7 @@ int main() {
 }
 #+END_SRC
 
-#+BEGIN_SRC sh 
+#+BEGIN_SRC sh :exports both  
 gcc -std=c99 -O0 -pedantic -Wall -Wextra -ftrapv -ggdb3 -o array_uninit ./array_uninit.c
 echo 10 | ./array_uninit 
 echo $?
@@ -1636,7 +1636,7 @@ How big?
 #+end_example
 
 
-#+BEGIN_SRC sh 
+#+BEGIN_SRC sh :exports both  
 gcc -std=c99 -O0 -pedantic -Wall -Wextra -ftrapv -ggdb3 -o array_uninit ./array_uninit.c
 echo 5 | valgrind --leak-check=full  ./array_uninit 2>&1
 echo $?
@@ -1703,7 +1703,7 @@ Yeah valgrind did not like that. It complained about uninitiliazed values.
 These files are debugging examples where you should practice valgrind
 and gcc.
 
-#+BEGIN_SRC sh 
+#+BEGIN_SRC sh :exports both  
 # look a bash for loop!
 echo Compiling!
 for file in ./array_oob.c ./array_uninit.c ./bad_realloc.c ./bad_str.c ./double_free.c ./huge_array.c ./infinite_recursion.c ./malloc.c ./malloc_oob.c ./malloc_uninit.c ./segv.c ./simple_uninit.c ./stack.c ./stack_limit.c ./use_after_free.c 
@@ -1735,7 +1735,7 @@ file:./use_after_free.c
 **** ./array_oob.c
 file:./array_oob.c
 
-#+BEGIN_SRC sh 
+#+BEGIN_SRC sh :exports both  
 gcc -std=c99 -pedantic -Wall -Wextra -ftrapv -ggdb3 -o array_oob ./array_oob.c
 echo 33 | valgrind ./array_oob 2>&1
 #+END_SRC
@@ -1821,7 +1821,7 @@ How big?
 #+end_example
 
 Run GDB
-#+BEGIN_SRC sh 
+#+BEGIN_SRC sh :exports both  
 gcc -std=c99 -pedantic -Wall -Wextra -ftrapv -ggdb3 -o array_oob ./array_oob.c
 gnome-terminal -- gdb ./array_oob
 #+END_SRC
@@ -1829,7 +1829,7 @@ gnome-terminal -- gdb ./array_oob
 **** ./array_uninit.c
 file:./array_uninit.c
 
-#+BEGIN_SRC sh 
+#+BEGIN_SRC sh :exports both  
 gcc -std=c99 -pedantic -Wall -Wextra -ftrapv -ggdb3 -o array_uninit ./array_uninit.c
 echo 33 | valgrind ./array_uninit 2>&1
 #+END_SRC
@@ -1915,7 +1915,7 @@ How big?
 #+end_example
 
 Run GDB
-#+BEGIN_SRC sh 
+#+BEGIN_SRC sh :exports both  
 gcc -std=c99 -pedantic -Wall -Wextra -ftrapv -ggdb3 -o array_uninit ./array_uninit.c
 gnome-terminal -- gdb ./array_uninit
 #+END_SRC
@@ -1925,7 +1925,7 @@ gnome-terminal -- gdb ./array_uninit
 **** ./bad_realloc.c
 file:./bad_realloc.c
 
-#+BEGIN_SRC sh 
+#+BEGIN_SRC sh :exports both  
 gcc -std=c99 -pedantic -Wall -Wextra -ftrapv -ggdb3 -o bad_realloc ./bad_realloc.c
 echo 33 | valgrind ./bad_realloc 2>&1
 #+END_SRC
@@ -1933,7 +1933,7 @@ echo 33 | valgrind ./bad_realloc 2>&1
 #+RESULTS:
 
 Run GDB
-#+BEGIN_SRC sh 
+#+BEGIN_SRC sh :exports both  
 gcc -std=c99 -pedantic -Wall -Wextra -ftrapv -ggdb3 -o bad_realloc ./bad_realloc.c
 gnome-terminal -- gdb ./bad_realloc
 #+END_SRC
@@ -1941,7 +1941,7 @@ gnome-terminal -- gdb ./bad_realloc
 **** ./bad_str.c
 file:./bad_str.c
 
-#+BEGIN_SRC sh 
+#+BEGIN_SRC sh :exports both  
 gcc -std=c99 -pedantic -Wall -Wextra -ftrapv -ggdb3 -o bad_str ./bad_str.c
 echo 33 | valgrind ./bad_str 2>&1
 #+END_SRC
@@ -1973,7 +1973,7 @@ You entered: 33
 #+end_example
 
 Run GDB
-#+BEGIN_SRC sh 
+#+BEGIN_SRC sh :exports both  
 gcc -std=c99 -pedantic -Wall -Wextra -ftrapv -ggdb3 -o bad_str ./bad_str.c
 gnome-terminal -- gdb ./bad_str
 #+END_SRC
@@ -1981,7 +1981,7 @@ gnome-terminal -- gdb ./bad_str
 **** ./double_free.c
 file:./double_free.c
 
-#+BEGIN_SRC sh 
+#+BEGIN_SRC sh :exports both  
 gcc -std=c99 -pedantic -Wall -Wextra -ftrapv -ggdb3 -o double_free ./double_free.c
 echo 33 | valgrind ./double_free 2>&1
 #+END_SRC
@@ -2049,7 +2049,7 @@ How big?
 #+end_example
 
 Run GDB
-#+BEGIN_SRC sh 
+#+BEGIN_SRC sh :exports both  
 gcc -std=c99 -pedantic -Wall -Wextra -ftrapv -ggdb3 -o double_free ./double_free.c
 gnome-terminal -- gdb ./double_free
 #+END_SRC
@@ -2057,7 +2057,7 @@ gnome-terminal -- gdb ./double_free
 **** ./huge_array.c
 file:./huge_array.c
 
-#+BEGIN_SRC sh 
+#+BEGIN_SRC sh :exports both  
 gcc -std=c99 -pedantic -Wall -Wextra -ftrapv -ggdb3 -o huge_array ./huge_array.c
 echo 33 | valgrind ./huge_array 2>&1
 #+END_SRC
@@ -2126,7 +2126,7 @@ echo 33 | valgrind ./huge_array 2>&1
 #+end_example
 
 Run GDB
-#+BEGIN_SRC sh 
+#+BEGIN_SRC sh :exports both  
 gcc -std=c99 -pedantic -Wall -Wextra -ftrapv -ggdb3 -o huge_array ./huge_array.c
 gnome-terminal -- gdb ./huge_array
 #+END_SRC
@@ -2134,7 +2134,7 @@ gnome-terminal -- gdb ./huge_array
 **** ./malloc_oob.c
 file:./malloc_oob.c
 
-#+BEGIN_SRC sh 
+#+BEGIN_SRC sh :exports both  
 gcc -std=c99 -pedantic -Wall -Wextra -ftrapv -ggdb3 -o malloc_oob ./malloc_oob.c
 echo 33 | valgrind ./malloc_oob 2>&1
 #+END_SRC
@@ -2164,7 +2164,7 @@ How big?
 #+end_example
 
 Run GDB
-#+BEGIN_SRC sh 
+#+BEGIN_SRC sh :exports both  
 gcc -std=c99 -pedantic -Wall -Wextra -ftrapv -ggdb3 -o malloc_oob ./malloc_oob.c
 gnome-terminal -- gdb ./malloc_oob
 #+END_SRC
@@ -2172,7 +2172,7 @@ gnome-terminal -- gdb ./malloc_oob
 **** ./malloc_uninit.c
 file:./malloc_uninit.c
 
-#+BEGIN_SRC sh 
+#+BEGIN_SRC sh :exports both  
 gcc -std=c99 -pedantic -Wall -Wextra -ftrapv -ggdb3 -o malloc_uninit ./malloc_uninit.c
 echo 33 | valgrind ./malloc_uninit 2>&1
 #+END_SRC
@@ -2264,7 +2264,7 @@ How big?
 #+end_example
 
 Run GDB
-#+BEGIN_SRC sh 
+#+BEGIN_SRC sh :exports both  
 gcc -std=c99 -pedantic -Wall -Wextra -ftrapv -ggdb3 -o malloc_uninit ./malloc_uninit.c
 gnome-terminal -- gdb ./malloc_uninit
 #+END_SRC
@@ -2272,7 +2272,7 @@ gnome-terminal -- gdb ./malloc_uninit
 **** ./segv.c
 file:./segv.c
 
-#+BEGIN_SRC sh 
+#+BEGIN_SRC sh :exports both  
 gcc -std=c99 -pedantic -Wall -Wextra -ftrapv -ggdb3 -o segv ./segv.c
 echo 33 | valgrind ./segv 2>&1
 #+END_SRC
@@ -2302,7 +2302,7 @@ How big?
 #+end_example
 
 Run GDB
-#+BEGIN_SRC sh 
+#+BEGIN_SRC sh :exports both  
 gcc -std=c99 -pedantic -Wall -Wextra -ftrapv -ggdb3 -o segv ./segv.c
 gnome-terminal -- gdb ./segv
 #+END_SRC
@@ -2310,7 +2310,7 @@ gnome-terminal -- gdb ./segv
 **** ./simple_uninit.c
 file:./simple_uninit.c
 
-#+BEGIN_SRC sh 
+#+BEGIN_SRC sh :exports both  
 gcc -std=c99 -pedantic -Wall -Wextra -ftrapv -ggdb3 -o simple_uninit ./simple_uninit.c
 echo 33 | valgrind ./simple_uninit 2>&1
 #+END_SRC
@@ -2336,7 +2336,7 @@ Enter an int:
 #+end_example
 
 Run GDB
-#+BEGIN_SRC sh 
+#+BEGIN_SRC sh :exports both  
 gcc -std=c99 -pedantic -Wall -Wextra -ftrapv -ggdb3 -o simple_uninit ./simple_uninit.c
 gnome-terminal -- gdb ./simple_uninit
 #+END_SRC
@@ -2344,7 +2344,7 @@ gnome-terminal -- gdb ./simple_uninit
 **** ./stack.c
 file:./stack.c
 
-#+BEGIN_SRC sh 
+#+BEGIN_SRC sh :exports both  
 gcc -std=c99 -pedantic -Wall -Wextra -ftrapv -ggdb3 -o stack ./stack.c
 echo 33 | valgrind ./stack 2>&1
 #+END_SRC
@@ -2379,7 +2379,7 @@ Stack 0x522d040: 0 items starting at (nil)
 #+end_example
 
 Run GDB
-#+BEGIN_SRC sh 
+#+BEGIN_SRC sh :exports both  
 gcc -std=c99 -pedantic -Wall -Wextra -ftrapv -ggdb3 -o stack ./stack.c
 gnome-terminal -- gdb ./stack
 #+END_SRC
@@ -2387,7 +2387,7 @@ gnome-terminal -- gdb ./stack
 **** ./stack_limit.c
 file:./stack_limit.c
 
-#+BEGIN_SRC sh 
+#+BEGIN_SRC sh :exports both  
 gcc -std=c99 -pedantic -Wall -Wextra -ftrapv -ggdb3 -o stack_limit ./stack_limit.c
 echo 33 | valgrind ./stack_limit 2>&1
 #+END_SRC
@@ -2395,7 +2395,7 @@ echo 33 | valgrind ./stack_limit 2>&1
 #+RESULTS:
 
 Run GDB
-#+BEGIN_SRC sh 
+#+BEGIN_SRC sh :exports both  
 gcc -std=c99 -pedantic -Wall -Wextra -ftrapv -ggdb3 -o stack_limit ./stack_limit.c
 gnome-terminal -- gdb ./stack_limit
 #+END_SRC
@@ -2403,13 +2403,13 @@ gnome-terminal -- gdb ./stack_limit
 **** ./use_after_free.c
 file:./use_after_free.c
 
-#+BEGIN_SRC sh 
+#+BEGIN_SRC sh :exports both  
 gcc -std=c99 -pedantic -Wall -Wextra -ftrapv -ggdb3 -o use_after_free ./use_after_free.c
 echo 33 | valgrind ./use_after_free 2>&1
 #+END_SRC
 
 Run GDB
-#+BEGIN_SRC sh 
+#+BEGIN_SRC sh :exports both  
 gcc -std=c99 -pedantic -Wall -Wextra -ftrapv -ggdb3 -o use_after_free ./use_after_free.c
 gnome-terminal -- gdb ./use_after_free
 #+END_SRC
