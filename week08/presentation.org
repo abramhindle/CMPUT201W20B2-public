@@ -61,6 +61,17 @@ license, unless otherwise noted.
 
 #+RESULTS:
 
+*** Org export
+#+BEGIN_SRC elisp
+(org-html-export-to-html)
+(org-latex-export-to-pdf)
+(org-ascii-export-to-ascii)
+#+END_SRC
+
+#+RESULTS:
+: ./presentation.txt
+
+
 ** Org Template
 Copy and paste this to demo C
 
@@ -2426,4 +2437,6 @@ echo gnome-terminal -- gdb ./$exe
 echo \#+END_SRC
 done
 #+END_SRC
+
+
 
