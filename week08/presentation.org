@@ -1,9 +1,9 @@
-#+TITLE: CMPUT201W20B2 Week 7
+#+TITLE: CMPUT201W20B2 Week 8
 #+PROPERTY: header-args:C             :results output :exports both :flags -std=c99 -Wall -pedantic -Werror -g :eval yes :results value verbatim
 #+PROPERTY: header-args:sh            :results output :exports both :eval yes :results value verbatim
 #+PROPERTY: header-args:shell         :results output :exports both :eval yes :results value verbatim
 
-* Week7
+* Week8
 ** Copyright Statement
 
 If you are in CMPUT201 at UAlberta this code is released in the public
