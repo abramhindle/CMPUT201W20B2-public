@@ -1,7 +1,7 @@
 #+TITLE: CMPUT201W20B2 Week 8
-#+PROPERTY: header-args:C             :results output :exports export :flags -std=c99 -pedantic -Wall -Wextra -ftrapv -ggdb3 :eval yes :results value verbatim
-#+PROPERTY: header-args:sh            :results output :exports export :eval yes :results value verbatim
-#+PROPERTY: header-args:shell         :results output :exports export :eval yes :results value verbatim
+#+PROPERTY: header-args:C             :results output :exports no-export :flags -std=c99 -pedantic -Wall -Wextra -ftrapv -ggdb3 :eval yes :results value verbatim
+#+PROPERTY: header-args:sh            :results output :exports no-export :eval yes :results value verbatim
+#+PROPERTY: header-args:shell         :results output :exports no-export :eval yes :results value verbatim
 
 * Week8
 ** Copyright Statement
@@ -101,7 +101,7 @@ Our program can get bigger!
 
 
 
-#+BEGIN_SRC C
+#+BEGIN_SRC C :exports both
 #include <assert.h>
 #include <stdio.h>
 #include <stdlib.h>
