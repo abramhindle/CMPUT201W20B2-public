@@ -546,6 +546,10 @@ aoa:
 
 *** Malloc array of arrays structs?
 
+Arrays of Arrays? Pointers?
+
+X ** x?
+
 #+BEGIN_SRC C :exports both 
 #include <stdbool.h> 
 #include <stdio.h>
@@ -775,6 +779,8 @@ We found 3855 flushes out of 1000000 hands: 0.003855
 
 - Remember to tangle this to write to disk
 
+file:./cards-aoa.c
+
 #+BEGIN_SRC C :exports both  :tangle cards-aoa.c
 #include <stdbool.h> 
 #include <stdio.h>
@@ -857,7 +863,7 @@ int main() {
     const int HANDS = 1000000;
     // Pointer to arrays of arrays
     PlayingCard **hands = malloc(sizeof(PlayingCard(*)[5]) * HANDS);
-    for (int i = 0; i < HANDS; i++) {
+    for (int i = HANDS-1; i >= 0; i--) {
         hands[i] = allocateHand();
         randomizeHand( hands[i] );
     }
@@ -874,10 +880,10 @@ int main() {
     printf("We found %d flushes out of %d hands: %f\n", flushes, HANDS, flushes/(float)(HANDS));
     for (int i = 0; i < HANDS; i++) {
         // comment these out to try valgrind
-        //free(hands[i]);
+        free(hands[i]);
     }
     // comment these out to try valgrind
-    // free(hands);
+    free(hands);
 }
 
 
@@ -885,27 +891,27 @@ int main() {
 
 #+RESULTS:
 #+begin_example
-Flush found at card 16
-Suit 2
-Flush found at card 307
-Suit 2
-Flush found at card 1199
-Suit 2
-Flush found at card 1485
+Flush found at card 148
 Suit 0
-Flush found at card 1516
-Suit 1
-Flush found at card 1520
+Flush found at card 792
 Suit 2
-Flush found at card 1542
-Suit 2
-Flush found at card 1606
-Suit 3
-Flush found at card 1780
+Flush found at card 845
 Suit 1
-Flush found at card 1829
+Flush found at card 1055
+Suit 1
+Flush found at card 1152
 Suit 3
-We found 3910 flushes out of 1000000 hands: 0.003910
+Flush found at card 1240
+Suit 0
+Flush found at card 1259
+Suit 3
+Flush found at card 1873
+Suit 1
+Flush found at card 2368
+Suit 0
+Flush found at card 2509
+Suit 0
+We found 4003 flushes out of 1000000 hands: 0.004003
 #+end_example
 
 #+BEGIN_SRC sh :exports both  
@@ -915,55 +921,41 @@ valgrind --leak-check=full ./cards-aoa 2>&1
 
 #+RESULTS:
 #+begin_example
-==12965== Memcheck, a memory error detector
-==12965== Copyright (C) 2002-2017, and GNU GPL'd, by Julian Seward et al.
-==12965== Using Valgrind-3.13.0 and LibVEX; rerun with -h for copyright info
-==12965== Command: ./cards-aoa
-==12965== 
-Flush found at card 194
+==16946== Memcheck, a memory error detector
+==16946== Copyright (C) 2002-2017, and GNU GPL'd, by Julian Seward et al.
+==16946== Using Valgrind-3.13.0 and LibVEX; rerun with -h for copyright info
+==16946== Command: ./cards-aoa
+==16946== 
+Flush found at card 14
+Suit 0
+Flush found at card 65
+Suit 0
+Flush found at card 126
 Suit 1
-Flush found at card 348
+Flush found at card 238
+Suit 1
+Flush found at card 246
+Suit 1
+Flush found at card 648
+Suit 1
+Flush found at card 738
 Suit 2
-Flush found at card 460
-Suit 3
-Flush found at card 1697
+Flush found at card 894
 Suit 1
-Flush found at card 1817
+Flush found at card 1076
 Suit 0
-Flush found at card 2480
-Suit 0
-Flush found at card 2504
-Suit 1
-Flush found at card 2576
-Suit 1
-Flush found at card 2904
+Flush found at card 1175
 Suit 2
-Flush found at card 3383
-Suit 0
-We found 3987 flushes out of 1000000 hands: 0.003987
-==12965== 
-==12965== HEAP SUMMARY:
-==12965==     in use at exit: 48,000,000 bytes in 1,000,001 blocks
-==12965==   total heap usage: 1,000,002 allocs, 1 frees, 48,004,096 bytes allocated
-==12965== 
-==12965== 80 bytes in 2 blocks are possibly lost in loss record 1 of 3
-==12965==    at 0x4C2FB0F: malloc (in /usr/lib/valgrind/vgpreload_memcheck-amd64-linux.so)
-==12965==    by 0x1088E2: allocateHand (cards-aoa.c:67)
-==12965==    by 0x1089C6: main (cards-aoa.c:84)
-==12965== 
-==12965== 47,999,920 (8,000,000 direct, 39,999,920 indirect) bytes in 1 blocks are definitely lost in loss record 3 of 3
-==12965==    at 0x4C2FB0F: malloc (in /usr/lib/valgrind/vgpreload_memcheck-amd64-linux.so)
-==12965==    by 0x10899A: main (cards-aoa.c:82)
-==12965== 
-==12965== LEAK SUMMARY:
-==12965==    definitely lost: 8,000,000 bytes in 1 blocks
-==12965==    indirectly lost: 39,999,920 bytes in 999,998 blocks
-==12965==      possibly lost: 80 bytes in 2 blocks
-==12965==    still reachable: 0 bytes in 0 blocks
-==12965==         suppressed: 0 bytes in 0 blocks
-==12965== 
-==12965== For counts of detected and suppressed errors, rerun with: -v
-==12965== ERROR SUMMARY: 2 errors from 2 contexts (suppressed: 0 from 0)
+We found 3845 flushes out of 1000000 hands: 0.003845
+==16946== 
+==16946== HEAP SUMMARY:
+==16946==     in use at exit: 0 bytes in 0 blocks
+==16946==   total heap usage: 1,000,002 allocs, 1,000,002 frees, 48,004,096 bytes allocated
+==16946== 
+==16946== All heap blocks were freed -- no leaks are possible
+==16946== 
+==16946== For counts of detected and suppressed errors, rerun with: -v
+==16946== ERROR SUMMARY: 0 errors from 0 contexts (suppressed: 0 from 0)
 #+end_example
 
 
@@ -1017,6 +1009,9 @@ void show_stack(Stack stack) {
 Stack new_stack() {
     /* Constructor */
     Stack new = malloc(sizeof(*new));
+    if (new == NULL) {
+        abort();
+    }
     new->size = 0;
     new->elts = NULL;
     show_stack(new);
@@ -2792,7 +2787,7 @@ void push_input_lines_stack(Stack stack) {
     }
 }
 
-void pop_lines_stak(Stack stack) {
+void pop_lines_stack(Stack stack) {
     while (stack->size > 0) {
         char * line = pop_stack(stack);
         puts(line);
@@ -2816,45 +2811,57 @@ int main() {
 #+END_SRC
 
 #+RESULTS:
+: Stack 0x55b4c76de260: 0 items starting at (nil)
+: Enter some lines. Press ctrl-d (EOF) to end.
 
 #+BEGIN_SRC sh :exports both  
-gcc -std=c99 -pedantic -Wall -Wextra -ftrapv -ggdb3 -o stack ./stack.c
-seq 9990 9999 | ./stack
+gcc -std=c99 -pedantic -Wall -Wextra -ftrapv -ggdb3 -o new_stack ./new_stack.c
+seq 9990 9999 | ./new_stack
 #+END_SRC
 
 #+RESULTS:
 #+begin_example
-Stack 0x55eecd55c260: 0 items starting at (nil)
+Stack 0x56180d47c260: 0 items starting at (nil)
 Enter some lines. Press ctrl-d (EOF) to end.
-Stack 0x55eecd55c260: 1 items starting at 0x55eecd55e320
-Stack 0x55eecd55c260: 2 items starting at 0x55eecd55e320
-Stack 0x55eecd55c260: 3 items starting at 0x55eecd55e320
-Stack 0x55eecd55c260: 4 items starting at 0x55eecd55e4c0
-Stack 0x55eecd55c260: 5 items starting at 0x55eecd55e4c0
-Stack 0x55eecd55c260: 6 items starting at 0x55eecd55e5f0
-Stack 0x55eecd55c260: 7 items starting at 0x55eecd55e5f0
-Stack 0x55eecd55c260: 8 items starting at 0x55eecd55e730
-Stack 0x55eecd55c260: 9 items starting at 0x55eecd55e730
-Stack 0x55eecd55c260: 10 items starting at 0x55eecd55e880
-Stack 0x55eecd55c260: 9 items starting at 0x55eecd55e880
+Stack 0x56180d47c260: 1 items starting at 0x56180d47e320
+Stack 0x56180d47c260: 2 items starting at 0x56180d47e320
+Stack 0x56180d47c260: 3 items starting at 0x56180d47e320
+Stack 0x56180d47c260: 4 items starting at 0x56180d47e4c0
+Stack 0x56180d47c260: 5 items starting at 0x56180d47e4c0
+Stack 0x56180d47c260: 6 items starting at 0x56180d47e5f0
+Stack 0x56180d47c260: 7 items starting at 0x56180d47e5f0
+Stack 0x56180d47c260: 8 items starting at 0x56180d47e730
+Stack 0x56180d47c260: 9 items starting at 0x56180d47e730
+Stack 0x56180d47c260: 10 items starting at 0x56180d47e880
+Stack 0x56180d47c260: 9 items starting at 0x56180d47e880
 9999
-Stack 0x55eecd55c260: 8 items starting at 0x55eecd55e880
+
+Stack 0x56180d47c260: 8 items starting at 0x56180d47e880
 9998
-Stack 0x55eecd55c260: 7 items starting at 0x55eecd55e880
+
+Stack 0x56180d47c260: 7 items starting at 0x56180d47e880
 9997
-Stack 0x55eecd55c260: 6 items starting at 0x55eecd55e880
+
+Stack 0x56180d47c260: 6 items starting at 0x56180d47e880
 9996
-Stack 0x55eecd55c260: 5 items starting at 0x55eecd55e880
+
+Stack 0x56180d47c260: 5 items starting at 0x56180d47e880
 9995
-Stack 0x55eecd55c260: 4 items starting at 0x55eecd55e880
+
+Stack 0x56180d47c260: 4 items starting at 0x56180d47e880
 9994
-Stack 0x55eecd55c260: 3 items starting at 0x55eecd55e880
+
+Stack 0x56180d47c260: 3 items starting at 0x56180d47e880
 9993
-Stack 0x55eecd55c260: 2 items starting at 0x55eecd55e880
+
+Stack 0x56180d47c260: 2 items starting at 0x56180d47e880
 9992
-Stack 0x55eecd55c260: 1 items starting at 0x55eecd55e880
+
+Stack 0x56180d47c260: 1 items starting at 0x56180d47e880
 9991
-Stack 0x55eecd55c260: 0 items starting at (nil)
+
+Stack 0x56180d47c260: 0 items starting at (nil)
 9990
+
 #+end_example
 

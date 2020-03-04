@@ -80,7 +80,7 @@ int main() {
     const int HANDS = 1000000;
     // Pointer to arrays of arrays
     PlayingCard **hands = malloc(sizeof(PlayingCard(*)[5]) * HANDS);
-    for (int i = 0; i < HANDS; i++) {
+    for (int i = HANDS-1; i >= 0; i--) {
         hands[i] = allocateHand();
         randomizeHand( hands[i] );
     }
@@ -97,8 +97,8 @@ int main() {
     printf("We found %d flushes out of %d hands: %f\n", flushes, HANDS, flushes/(float)(HANDS));
     for (int i = 0; i < HANDS; i++) {
         // comment these out to try valgrind
-        //free(hands[i]);
+        free(hands[i]);
     }
     // comment these out to try valgrind
-    // free(hands);
+    free(hands);
 }
