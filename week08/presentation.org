@@ -1148,6 +1148,793 @@ Stack 0x55f488145260: 0 items starting at (nil)
 9990
 #+end_example
 
+** Objects and APIs
+
+When you make a new type you should follow some guidelines:
+
+- put the name of the type at the start or end of function names:
+  - For type dog:
+    - dog_create()
+    - dog_free(dog)
+    - dog_move(dog,x,y)
+    - dog_bark(dog, bark_spec)
+    - createDog()
+    - freeDog(dog)
+    - moveDog(dog,x,y)
+    - barkDog(dog, barkSpec)
+  - For type cat:
+    - createCat()
+    - freeCat(cat)
+    - moveCat(cat)
+    - meowCat(cat, meow_spec)
+    - cat_create()
+    - cat_free(cat)
+    - cat_move(cat)
+    - cat_meow(cat, meow_spec)
+- Should your type be a struct or a pointer to a struct?
+  - struct pros:
+    + functional
+    + easy to copy
+    + stay on the stack
+    + safe shallow copy of data
+    + don't have to free
+  - struct cons:
+    - if structs have pointers then copies of structs might have old pointers
+    - doesn't play well we malloc and realloc
+    - stale info
+    - hard to ensure consistency
+    - big
+  - pointer to struct pros:
+    + small to pass (1 pointer)
+    + can have multiple references
+    + more control
+    + can hide implementation better
+    + consistency
+    + malloc and realloc friendly.
+  - pointer to struct cons:
+    - malloc
+    - must free
+    - hard to copy
+    - deepcopy required
+    - awkward with arrays
+
+*** original stack example 
+
+file:./stack.c
+#+BEGIN_SRC C :exports both  :tangle stack.c
+#define _POSIX_C_SOURCE 200809L // <-- needed for getline
+#include <stdint.h>
+#include <stdio.h>
+#include <stdlib.h>
+#include <string.h>
+
+/* Let's define Stack as a pointer to a struct,
+ * which itself contains the pointer to the actual
+ * data on the stack, which are pointers to chars (strings).
+ * 
+ * This is so that when we realloc() and update elts,
+ * we don't have to worry about some other piece of code
+ * having the old value of elts.
+ * 
+ * If we didn't hide our pointer that gets realloc'd behind
+ * another pointer, it is easy to have an old copy of the
+ * realloc'd pointer (which is now invalid) floating around.
+ * 
+ * But by putting it behind a pointer, new_stack() can
+ * create the single copy of the struct, which contains
+ * the elts pointer that changes. Since the sizeof the
+ * actual struct never changes, we never have to realloc
+ * that pointer, so we can ensure we only have one version
+ * of elts at all times. This is similar to how
+ * Java/Python/JS handle arrays internally.
+ * 
+ */
+
+// OK so Stack is pointer of struct stack NOT struct stack.
+typedef struct stack {
+    size_t size;
+    char ** elts;
+} * Stack;
+
+void show_stack(Stack stack) {
+    printf("Stack %p: %zu items starting at %p\n",
+           (void *) stack,
+           stack->size,
+           (void *) stack->elts
+    );
+}
+
+// This is a good style, new_object, or object_create
+Stack new_stack() {
+    /* Constructor */
+    Stack new = malloc(sizeof(*new));
+    new->size = 0;
+    new->elts = NULL;
+    show_stack(new);
+    return new;
+}
+
+/* this function deduplicates code from push and pop */
+void resize(Stack stack, size_t new_size) {
+    stack->elts = realloc(
+        stack->elts,
+        sizeof(char *) * new_size
+    );
+    
+    /* make sure any new elements are initialized */
+    size_t first_new_elt = stack->size;
+    for (size_t idx = first_new_elt;
+         idx < new_size;
+         idx++) {
+        stack->elts[idx] = NULL;
+    }
+    
+    stack->size = new_size;
+}
+
+void push(Stack stack, char * string) {
+    resize(stack, stack->size + 1);
+    stack->elts[stack->size-1] = string;
+    show_stack(stack);
+}
+
+char * pop(Stack stack) {
+    if (stack->size == 0) {
+        abort();
+    }
+    char * string = stack->elts[stack->size-1];
+    resize(stack, stack->size - 1);
+    show_stack(stack);
+    return string;
+}
+
+/* Destructor */
+void free_stack(Stack stack) {
+    resize(stack, 0);
+    free(stack);
+}
+
+char * checked_getline() {
+    char * line = NULL;
+    size_t alloc_len = 0;
+    ssize_t got = getline(&line, &alloc_len, stdin);
+    if (got < 0) {
+        if (line != NULL) {
+            free(line);
+        }
+        return NULL;
+    } else {
+        return line;
+    }
+}
+
+void push_input_lines(Stack stack) {
+    printf("Enter some lines. Press ctrl-d (EOF) to end.\n");
+    char * line = NULL;
+    while ((line = checked_getline()) != NULL) {
+        push(stack, line);
+    }
+}
+
+void pop_lines(Stack stack) {
+    while (stack->size > 0) {
+        char * line = pop(stack);
+        puts(line);
+        free(line);
+    }
+}
+
+int main() {
+    Stack stack1 = new_stack();
+    Stack stack2 = stack1;
+/* Because stack is a pointer, stack1 and stack2 are 
+ * actually the same stack!
+ * Because the actual struct doesn't need to change size,
+ * these pointers will be valid until we call free_stack()
+ */
+    push_input_lines(stack1);
+    pop_lines(stack2);
+    free_stack(stack1);
+    return 0;
+}
+#+END_SRC
+
+#+RESULTS:
+: Stack 0x55f01a3ba260: 0 items starting at (nil)
+: Enter some lines. Press ctrl-d (EOF) to end.
+
+*** Recommended stack example
+file:./new_stack.c
+#+BEGIN_SRC C :exports both  :tangle new_stack.c
+#define _POSIX_C_SOURCE 200809L // <-- needed for getline
+#include <stdint.h>
+#include <stdio.h>
+#include <stdlib.h>
+#include <string.h>
+
+/* Let's define Stack as a pointer to a struct,
+ * which itself contains the pointer to the actual
+ * data on the stack, which are pointers to chars (strings).
+ * 
+ * This is so that when we realloc() and update elts,
+ * we don't have to worry about some other piece of code
+ * having the old value of elts.
+ * 
+ * If we didn't hide our pointer that gets realloc'd behind
+ * another pointer, it is easy to have an old copy of the
+ * realloc'd pointer (which is now invalid) floating around.
+ * 
+ * But by putting it behind a pointer, new_stack() can
+ * create the single copy of the struct, which contains
+ * the elts pointer that changes. Since the sizeof the
+ * actual struct never changes, we never have to realloc
+ * that pointer, so we can ensure we only have one version
+ * of elts at all times. This is similar to how
+ * Java/Python/JS handle arrays internally.
+ * 
+ */
+
+// OK so Stack is pointer of struct stack NOT struct stack.
+typedef struct stack {
+    size_t size;
+    char ** elts;
+} * Stack;
+
+void show_stack(Stack stack) {
+    printf("Stack %p: %zu items starting at %p\n",
+           (void *) stack,
+           stack->size,
+           (void *) stack->elts
+    );
+}
+
+// This is a good style, new_object, or object_create
+Stack new_stack() {
+    /* Constructor */
+    Stack new = malloc(sizeof(*new));
+    new->size = 0;
+    new->elts = NULL;
+    show_stack(new);
+    return new;
+}
+
+/* this function deduplicates code from push and pop */
+void resize_stack(Stack stack, size_t new_size) {
+    stack->elts = realloc(
+        stack->elts,
+        sizeof(char *) * new_size
+    );
+    
+    /* make sure any new elements are initialized */
+    size_t first_new_elt = stack->size;
+    for (size_t idx = first_new_elt;
+         idx < new_size;
+         idx++) {
+        stack->elts[idx] = NULL;
+    }
+    
+    stack->size = new_size;
+}
+
+void push_stack(Stack stack, char * string) {
+    resize_stack(stack, stack->size + 1);
+    stack->elts[stack->size-1] = string;
+    show_stack(stack);
+}
+
+char * pop_stack(Stack stack) {
+    if (stack->size == 0) {
+        abort();
+    }
+    char * string = stack->elts[stack->size-1];
+    resize_stack(stack, stack->size - 1);
+    show_stack(stack);
+    return string;
+}
+
+/* Destructor */
+void free_stack(Stack stack) {
+    resize_stack(stack, 0);
+    free(stack);
+}
+
+char * checked_getline() {
+    char * line = NULL;
+    size_t alloc_len = 0;
+    ssize_t got = getline(&line, &alloc_len, stdin);
+    if (got < 0) {
+        if (line != NULL) {
+            free(line);
+        }
+        return NULL;
+    } else {
+        return line;
+    }
+}
+
+void push_input_lines_stack(Stack stack) {
+    printf("Enter some lines. Press ctrl-d (EOF) to end.\n");
+    char * line = NULL;
+    while ((line = checked_getline()) != NULL) {
+        push_stack(stack, line);
+    }
+}
+
+void pop_lines_stack(Stack stack) {
+    while (stack->size > 0) {
+        char * line = pop_stack(stack);
+        puts(line);
+        free(line);
+    }
+}
+
+int main() {
+    Stack stack1 = new_stack();
+    Stack stack2 = stack1;
+/* Because stack is a pointer, stack1 and stack2 are 
+ * actually the same stack!
+ * Because the actual struct doesn't need to change size,
+ * these pointers will be valid until we call free_stack()
+ */
+    push_input_lines_stack(stack1);
+    pop_lines_stack(stack2);
+    free_stack(stack1);
+    return 0;
+}
+#+END_SRC
+
+#+RESULTS:
+: Stack 0x55b4c76de260: 0 items starting at (nil)
+: Enter some lines. Press ctrl-d (EOF) to end.
+
+#+BEGIN_SRC sh :exports both  
+gcc -std=c99 -pedantic -Wall -Wextra -ftrapv -ggdb3 -o new_stack ./new_stack.c
+seq 9990 9999 | ./new_stack
+#+END_SRC
+
+#+RESULTS:
+#+begin_example
+Stack 0x56180d47c260: 0 items starting at (nil)
+Enter some lines. Press ctrl-d (EOF) to end.
+Stack 0x56180d47c260: 1 items starting at 0x56180d47e320
+Stack 0x56180d47c260: 2 items starting at 0x56180d47e320
+Stack 0x56180d47c260: 3 items starting at 0x56180d47e320
+Stack 0x56180d47c260: 4 items starting at 0x56180d47e4c0
+Stack 0x56180d47c260: 5 items starting at 0x56180d47e4c0
+Stack 0x56180d47c260: 6 items starting at 0x56180d47e5f0
+Stack 0x56180d47c260: 7 items starting at 0x56180d47e5f0
+Stack 0x56180d47c260: 8 items starting at 0x56180d47e730
+Stack 0x56180d47c260: 9 items starting at 0x56180d47e730
+Stack 0x56180d47c260: 10 items starting at 0x56180d47e880
+Stack 0x56180d47c260: 9 items starting at 0x56180d47e880
+9999
+
+Stack 0x56180d47c260: 8 items starting at 0x56180d47e880
+9998
+
+Stack 0x56180d47c260: 7 items starting at 0x56180d47e880
+9997
+
+Stack 0x56180d47c260: 6 items starting at 0x56180d47e880
+9996
+
+Stack 0x56180d47c260: 5 items starting at 0x56180d47e880
+9995
+
+Stack 0x56180d47c260: 4 items starting at 0x56180d47e880
+9994
+
+Stack 0x56180d47c260: 3 items starting at 0x56180d47e880
+9993
+
+Stack 0x56180d47c260: 2 items starting at 0x56180d47e880
+9992
+
+Stack 0x56180d47c260: 1 items starting at 0x56180d47e880
+9991
+
+Stack 0x56180d47c260: 0 items starting at (nil)
+9990
+
+#+end_example
+
+*** Test First Top Down Design
+
+** Recursive Definitions
+*** Mutually Recursive functions
+
+How do you get functions to call each other when they need each other
+to be defined?
+
+Function prototypes!
+
+#+BEGIN_SRC C :exports both
+#include <stdio.h>
+#include <stdint.h>
+#include <stdlib.h>
+
+int64_t addThenDecrementThenMul( int64_t current );
+
+int64_t mulThenDecrementThenAdd( int64_t current );
+
+
+int64_t addThenDecrementThenMul( int64_t current ) {
+    if (current <= 0) {
+        return current;
+    }
+    return current + mulThenDecrementThenAdd( current - 1 );
+}
+
+int64_t mulThenDecrementThenAdd( int64_t current ) {
+    if (current <= 0) {
+        return current;
+    }
+    return current * addThenDecrementThenMul( current - 1 );
+}
+
+int main() {
+    for (int i = 0 ; i <  33 ; i++ ) {
+        printf("addThenDecrementThenMul(%4d) ==%19ld\n", i, addThenDecrementThenMul( i ));
+        printf("mulThenDecrementThenAdd(%4d) ==%19ld\n", i, mulThenDecrementThenAdd( i ));   
+    }
+}
+#+END_SRC
+
+#+RESULTS:
+#+begin_example
+addThenDecrementThenMul(   0) ==                  0
+mulThenDecrementThenAdd(   0) ==                  0
+addThenDecrementThenMul(   1) ==                  1
+mulThenDecrementThenAdd(   1) ==                  0
+addThenDecrementThenMul(   2) ==                  2
+mulThenDecrementThenAdd(   2) ==                  2
+addThenDecrementThenMul(   3) ==                  5
+mulThenDecrementThenAdd(   3) ==                  6
+addThenDecrementThenMul(   4) ==                 10
+mulThenDecrementThenAdd(   4) ==                 20
+addThenDecrementThenMul(   5) ==                 25
+mulThenDecrementThenAdd(   5) ==                 50
+addThenDecrementThenMul(   6) ==                 56
+mulThenDecrementThenAdd(   6) ==                150
+addThenDecrementThenMul(   7) ==                157
+mulThenDecrementThenAdd(   7) ==                392
+addThenDecrementThenMul(   8) ==                400
+mulThenDecrementThenAdd(   8) ==               1256
+addThenDecrementThenMul(   9) ==               1265
+mulThenDecrementThenAdd(   9) ==               3600
+addThenDecrementThenMul(  10) ==               3610
+mulThenDecrementThenAdd(  10) ==              12650
+addThenDecrementThenMul(  11) ==              12661
+mulThenDecrementThenAdd(  11) ==              39710
+addThenDecrementThenMul(  12) ==              39722
+mulThenDecrementThenAdd(  12) ==             151932
+addThenDecrementThenMul(  13) ==             151945
+mulThenDecrementThenAdd(  13) ==             516386
+addThenDecrementThenMul(  14) ==             516400
+mulThenDecrementThenAdd(  14) ==            2127230
+addThenDecrementThenMul(  15) ==            2127245
+mulThenDecrementThenAdd(  15) ==            7746000
+addThenDecrementThenMul(  16) ==            7746016
+mulThenDecrementThenAdd(  16) ==           34035920
+addThenDecrementThenMul(  17) ==           34035937
+mulThenDecrementThenAdd(  17) ==          131682272
+addThenDecrementThenMul(  18) ==          131682290
+mulThenDecrementThenAdd(  18) ==          612646866
+addThenDecrementThenMul(  19) ==          612646885
+mulThenDecrementThenAdd(  19) ==         2501963510
+addThenDecrementThenMul(  20) ==         2501963530
+mulThenDecrementThenAdd(  20) ==        12252937700
+addThenDecrementThenMul(  21) ==        12252937721
+mulThenDecrementThenAdd(  21) ==        52541234130
+addThenDecrementThenMul(  22) ==        52541234152
+mulThenDecrementThenAdd(  22) ==       269564629862
+addThenDecrementThenMul(  23) ==       269564629885
+mulThenDecrementThenAdd(  23) ==      1208448385496
+addThenDecrementThenMul(  24) ==      1208448385520
+mulThenDecrementThenAdd(  24) ==      6469551117240
+addThenDecrementThenMul(  25) ==      6469551117265
+mulThenDecrementThenAdd(  25) ==     30211209638000
+addThenDecrementThenMul(  26) ==     30211209638026
+mulThenDecrementThenAdd(  26) ==    168208329048890
+addThenDecrementThenMul(  27) ==    168208329048917
+mulThenDecrementThenAdd(  27) ==    815702660226702
+addThenDecrementThenMul(  28) ==    815702660226730
+mulThenDecrementThenAdd(  28) ==   4709833213369676
+addThenDecrementThenMul(  29) ==   4709833213369705
+mulThenDecrementThenAdd(  29) ==  23655377146575170
+addThenDecrementThenMul(  30) ==  23655377146575200
+mulThenDecrementThenAdd(  30) == 141294996401091150
+addThenDecrementThenMul(  31) == 141294996401091181
+mulThenDecrementThenAdd(  31) == 733316691543831200
+addThenDecrementThenMul(  32) == 733316691543831232
+mulThenDecrementThenAdd(  32) ==4521439884834917792
+#+end_example
+
+
+
+If you don't use prototypes on your mutual recursive functions you will get errors like
+
+#+begin_example
+/tmp/babel-25087Va_/C-src-25087Eoy.c: In function ‘addThenDecrementThenMul’:
+/tmp/babel-25087Va_/C-src-25087Eoy.c:21:22: warning: implicit declaration of function ‘mulThenDecrementThenAdd’; did you mean ‘addThenDecrementThenMul’? [-Wimplicit-function-declaration]
+     return current + mulThenDecrementThenAdd( current - 1 );
+                      ^~~~~~~~~~~~~~~~~~~~~~~
+                      addThenDecrementThenMul
+/tmp/babel-25087Va_/C-src-25087Eoy.c: At top level:
+/tmp/babel-25087Va_/C-src-25087Eoy.c:24:9: error: conflicting types for ‘mulThenDecrementThenAdd’
+ int64_t mulThenDecrementThenAdd( int64_t current ) {
+         ^~~~~~~~~~~~~~~~~~~~~~~
+/tmp/babel-25087Va_/C-src-25087Eoy.c:21:22: note: previous implicit declaration of ‘mulThenDecrementThenAdd’ was here
+     return current + mulThenDecrementThenAdd( current - 1 );
+                      ^~~~~~~~~~~~~~~~~~~~~~~
+/bin/bash: /tmp/babel-25087Va_/C-bin-250872xB: Permission denied
+#+end_example
+*** Recursive Structs
+
+#+BEGIN_SRC C :exports both :tangle linkedlist.c
+#include <stdio.h>
+#include <stdint.h>
+#include <stdlib.h>
+
+enum atype {
+   INT,
+   LONG,
+   DOUBLE,
+   FLOAT,
+};
+union anything {
+int anInt;
+long aLong;
+double aDouble;
+float aFloat;
+};
+struct linkedList;
+struct linkedList { 
+    enum atype type;
+    union anything value;
+    struct linkedList *next; 
+};
+
+struct linkedList * allocLinkedList( enum atype type, 
+                                     union anything value, 
+                                     struct linkedList * next) {
+    struct linkedList * node = malloc(sizeof(struct linkedList));
+    node->type  = type;
+    node->value = value;
+    node->next  = next;
+    return node;
+}
+
+void freeLinkedList( struct linkedList * list) {
+    if (list == NULL ){
+       return;
+    }
+    freeLinkedList( list->next );
+    free( list );
+}
+
+int main() {
+    union anything v = {.aDouble = 1.2 };
+    struct linkedList * tail = allocLinkedList( DOUBLE, v, NULL);
+    struct linkedList * head = tail;
+    for (int i = 0 ; i < 10; i++) {
+        v.anInt = i*2;
+        head = allocLinkedList( INT, v, head );
+    }
+    struct linkedList * iter = head;
+    while(iter!=NULL) {
+        if (iter->type == INT) {
+            printf("Print node value: %5d next: %p\n", iter->value.anInt, (void*)iter->next);
+        } else {
+            printf("Print node type:  %5d next: %p\n", iter->type, (void*)iter->next);
+        }
+        iter = iter->next;
+    }    
+    freeLinkedList( head );
+    return 0;
+}
+#+END_SRC 
+
+#+RESULTS:
+#+begin_example
+Print node value:    18 next: 0x55dc0f440380
+Print node value:    16 next: 0x55dc0f440360
+Print node value:    14 next: 0x55dc0f440340
+Print node value:    12 next: 0x55dc0f440320
+Print node value:    10 next: 0x55dc0f440300
+Print node value:     8 next: 0x55dc0f4402e0
+Print node value:     6 next: 0x55dc0f4402c0
+Print node value:     4 next: 0x55dc0f4402a0
+Print node value:     2 next: 0x55dc0f440280
+Print node value:     0 next: 0x55dc0f440260
+Print node type:      2 next: (nil)
+#+end_example
+
+#+BEGIN_SRC sh :exports both
+gcc -std=c99 -Wall -pedantic -Werror -o linkedlist ./linkedlist.c
+valgrind ./linkedlist 2>&1
+echo now let\'s leak check
+valgrind --leak-check=full ./linkedlist 2>&1
+#+END_SRC
+
+#+RESULTS:
+#+begin_example
+==6272== Memcheck, a memory error detector
+==6272== Copyright (C) 2002-2017, and GNU GPL'd, by Julian Seward et al.
+==6272== Using Valgrind-3.13.0 and LibVEX; rerun with -h for copyright info
+==6272== Command: ./linkedlist
+==6272== 
+Print node value:    18 next: 0x522d3a0
+Print node value:    16 next: 0x522d340
+Print node value:    14 next: 0x522d2e0
+Print node value:    12 next: 0x522d280
+Print node value:    10 next: 0x522d220
+Print node value:     8 next: 0x522d1c0
+Print node value:     6 next: 0x522d160
+Print node value:     4 next: 0x522d100
+Print node value:     2 next: 0x522d0a0
+Print node value:     0 next: 0x522d040
+Print node value:    32 next: (nil)
+==6272== 
+==6272== HEAP SUMMARY:
+==6272==     in use at exit: 0 bytes in 0 blocks
+==6272==   total heap usage: 12 allocs, 12 frees, 4,360 bytes allocated
+==6272== 
+==6272== All heap blocks were freed -- no leaks are possible
+==6272== 
+==6272== For counts of detected and suppressed errors, rerun with: -v
+==6272== ERROR SUMMARY: 0 errors from 0 contexts (suppressed: 0 from 0)
+now let's leak check
+==6276== Memcheck, a memory error detector
+==6276== Copyright (C) 2002-2017, and GNU GPL'd, by Julian Seward et al.
+==6276== Using Valgrind-3.13.0 and LibVEX; rerun with -h for copyright info
+==6276== Command: ./linkedlist
+==6276== 
+Print node value:    18 next: 0x522d3a0
+Print node value:    16 next: 0x522d340
+Print node value:    14 next: 0x522d2e0
+Print node value:    12 next: 0x522d280
+Print node value:    10 next: 0x522d220
+Print node value:     8 next: 0x522d1c0
+Print node value:     6 next: 0x522d160
+Print node value:     4 next: 0x522d100
+Print node value:     2 next: 0x522d0a0
+Print node value:     0 next: 0x522d040
+Print node value:    32 next: (nil)
+==6276== 
+==6276== HEAP SUMMARY:
+==6276==     in use at exit: 0 bytes in 0 blocks
+==6276==   total heap usage: 12 allocs, 12 frees, 4,360 bytes allocated
+==6276== 
+==6276== All heap blocks were freed -- no leaks are possible
+==6276== 
+==6276== For counts of detected and suppressed errors, rerun with: -v
+==6276== ERROR SUMMARY: 0 errors from 0 contexts (suppressed: 0 from 0)
+#+end_example
+
+
+
+
+
+
+This is what happens when we don't free
+
+#+begin_example
+==6238== Memcheck, a memory error detector
+==6238== Copyright (C) 2002-2017, and GNU GPL'd, by Julian Seward et al.
+==6238== Using Valgrind-3.13.0 and LibVEX; rerun with -h for copyright info
+==6238== Command: ./linkedlist
+==6238== 
+Print node value:    18 next: 0x522d3a0
+Print node value:    16 next: 0x522d340
+Print node value:    14 next: 0x522d2e0
+Print node value:    12 next: 0x522d280
+Print node value:    10 next: 0x522d220
+Print node value:     8 next: 0x522d1c0
+Print node value:     6 next: 0x522d160
+Print node value:     4 next: 0x522d100
+Print node value:     2 next: 0x522d0a0
+Print node value:     0 next: 0x522d040
+Print node value:    32 next: (nil)
+==6238== 
+==6238== HEAP SUMMARY:
+==6238==     in use at exit: 264 bytes in 11 blocks
+==6238==   total heap usage: 12 allocs, 1 frees, 4,360 bytes allocated
+==6238== 
+==6238== LEAK SUMMARY:
+==6238==    definitely lost: 24 bytes in 1 blocks
+==6238==    indirectly lost: 240 bytes in 10 blocks
+==6238==      possibly lost: 0 bytes in 0 blocks
+==6238==    still reachable: 0 bytes in 0 blocks
+==6238==         suppressed: 0 bytes in 0 blocks
+==6238== Rerun with --leak-check=full to see details of leaked memory
+==6238== 
+==6238== For counts of detected and suppressed errors, rerun with: -v
+==6238== ERROR SUMMARY: 0 errors from 0 contexts (suppressed: 0 from 0)
+now let's leak check
+==6239== Memcheck, a memory error detector
+==6239== Copyright (C) 2002-2017, and GNU GPL'd, by Julian Seward et al.
+==6239== Using Valgrind-3.13.0 and LibVEX; rerun with -h for copyright info
+==6239== Command: ./linkedlist
+==6239== 
+Print node value:    18 next: 0x522d3a0
+Print node value:    16 next: 0x522d340
+Print node value:    14 next: 0x522d2e0
+Print node value:    12 next: 0x522d280
+Print node value:    10 next: 0x522d220
+Print node value:     8 next: 0x522d1c0
+Print node value:     6 next: 0x522d160
+Print node value:     4 next: 0x522d100
+Print node value:     2 next: 0x522d0a0
+Print node value:     0 next: 0x522d040
+Print node value:    32 next: (nil)
+==6239== 
+==6239== HEAP SUMMARY:
+==6239==     in use at exit: 264 bytes in 11 blocks
+==6239==   total heap usage: 12 allocs, 1 frees, 4,360 bytes allocated
+==6239== 
+==6239== 264 (24 direct, 240 indirect) bytes in 1 blocks are definitely lost in loss record 3 of 3
+==6239==    at 0x4C2FB0F: malloc (in /usr/lib/valgrind/vgpreload_memcheck-amd64-linux.so)
+==6239==    by 0x1086F6: allocLinkedList (in /home/hindle1/projects/CMPUT201W20/2020-01/CMPUT201W20B2-public/week08/linkedlist)
+==6239==    by 0x1087B4: main (in /home/hindle1/projects/CMPUT201W20/2020-01/CMPUT201W20B2-public/week08/linkedlist)
+==6239== 
+==6239== LEAK SUMMARY:
+==6239==    definitely lost: 24 bytes in 1 blocks
+==6239==    indirectly lost: 240 bytes in 10 blocks
+==6239==      possibly lost: 0 bytes in 0 blocks
+==6239==    still reachable: 0 bytes in 0 blocks
+==6239==         suppressed: 0 bytes in 0 blocks
+==6239== 
+==6239== For counts of detected and suppressed errors, rerun with: -v
+==6239== ERROR SUMMARY: 1 errors from 1 contexts (suppressed: 0 from 0)
+#+end_example
+
+
+*** Mutually Recursive Structs
+
+#+BEGIN_SRC C :exports both
+#include <stdio.h>
+#include <stdint.h>
+#include <stdlib.h>
+
+struct x;
+struct y;
+// field X and Y have incomplete types, NOT ALLOWED
+// try uncommenting this
+// struct z { struct x X; struct y Y; };
+struct x { struct y *yPtr; };
+struct y { struct x *xPtr; };
+struct z { struct x X; struct y Y; };
+
+int main() {
+    struct x sX = { .yPtr = NULL };
+    struct y sY = { .xPtr = &sX };
+    sX.yPtr = &sY;
+    struct z sZ = { .X = sX, .Y = sY };
+    printf("sX: %6zu\n", sizeof(sX));
+    printf("sY: %6zu\n", sizeof(sY));
+    printf("sZ: %6zu\n", sizeof(sZ));
+    printf("sZ.X.yPtr:\t %p\n", (void*)sZ.X.yPtr);
+    printf("sZ.Y.xPtr:\t %p\n", (void*)sZ.Y.xPtr);
+    printf("&sX:\t\t %p\n", (void*)&sX);
+    printf("&sY:\t\t %p\n", (void*)&sY);
+    printf("&sZ.X:\t %p\n", (void*)&(sZ.X));
+    printf("&sY.Y:\t %p\n", (void*)&(sZ.Y));
+    return 0;
+}
+#+END_SRC 
+
+#+RESULTS:
+: sX:      8
+: sY:      8
+: sZ:     16
+: sZ.X.yPtr:	 0x7fff840b7d28
+: sZ.Y.xPtr:	 0x7fff840b7d20
+: &sX:		 0x7fff840b7d20
+: &sY:		 0x7fff840b7d28
+: &sZ.X:	 0x7fff840b7d30
+: &sY.Y:	 0x7fff840b7d38
+
 
 ** Debugging
 *** GDB
@@ -1821,8 +2608,6 @@ gcc -std=c99 -pedantic -Wall -Wextra -ftrapv -ggdb3 -o array_oob ./array_oob.c
 gnome-terminal -- gdb ./array_oob
 #+END_SRC
 
-#+RESULTS:
-
 **** ./array_uninit.c
 file:./array_uninit.c
 
@@ -2476,394 +3261,4 @@ echo gnome-terminal -- gdb ./$exe
 echo \#+END_SRC
 done
 #+END_SRC
-
-** Objects and APIs
-
-When you make a new type you should follow some guidelines:
-
-- put the name of the type at the start or end of function names:
-  - For type dog:
-    - dog_create()
-    - dog_free(dog)
-    - dog_move(dog,x,y)
-    - dog_bark(dog, bark_spec)
-    - createDog()
-    - freeDog(dog)
-    - moveDog(dog,x,y)
-    - barkDog(dog, barkSpec)
-  - For type cat:
-    - createCat()
-    - freeCat(cat)
-    - moveCat(cat)
-    - meowCat(cat, meow_spec)
-    - cat_create()
-    - cat_free(cat)
-    - cat_move(cat)
-    - cat_meow(cat, meow_spec)
-- Should your type be a struct or a pointer to a struct?
-  - struct pros:
-    + functional
-    + easy to copy
-    + stay on the stack
-    + safe shallow copy of data
-    + don't have to free
-  - struct cons:
-    - if structs have pointers then copies of structs might have old pointers
-    - doesn't play well we malloc and realloc
-    - stale info
-    - hard to ensure consistency
-    - big
-  - pointer to struct pros:
-    + small to pass (1 pointer)
-    + can have multiple references
-    + more control
-    + can hide implementation better
-    + consistency
-    + malloc and realloc friendly.
-  - pointer to struct cons:
-    - malloc
-    - must free
-    - hard to copy
-    - deepcopy required
-    - awkward with arrays
-
-*** original stack example 
-
-file:./stack.c
-#+BEGIN_SRC C :exports both  :tangle stack.c
-#define _POSIX_C_SOURCE 200809L // <-- needed for getline
-#include <stdint.h>
-#include <stdio.h>
-#include <stdlib.h>
-#include <string.h>
-
-/* Let's define Stack as a pointer to a struct,
- * which itself contains the pointer to the actual
- * data on the stack, which are pointers to chars (strings).
- * 
- * This is so that when we realloc() and update elts,
- * we don't have to worry about some other piece of code
- * having the old value of elts.
- * 
- * If we didn't hide our pointer that gets realloc'd behind
- * another pointer, it is easy to have an old copy of the
- * realloc'd pointer (which is now invalid) floating around.
- * 
- * But by putting it behind a pointer, new_stack() can
- * create the single copy of the struct, which contains
- * the elts pointer that changes. Since the sizeof the
- * actual struct never changes, we never have to realloc
- * that pointer, so we can ensure we only have one version
- * of elts at all times. This is similar to how
- * Java/Python/JS handle arrays internally.
- * 
- */
-
-// OK so Stack is pointer of struct stack NOT struct stack.
-typedef struct stack {
-    size_t size;
-    char ** elts;
-} * Stack;
-
-void show_stack(Stack stack) {
-    printf("Stack %p: %zu items starting at %p\n",
-           (void *) stack,
-           stack->size,
-           (void *) stack->elts
-    );
-}
-
-// This is a good style, new_object, or object_create
-Stack new_stack() {
-    /* Constructor */
-    Stack new = malloc(sizeof(*new));
-    new->size = 0;
-    new->elts = NULL;
-    show_stack(new);
-    return new;
-}
-
-/* this function deduplicates code from push and pop */
-void resize(Stack stack, size_t new_size) {
-    stack->elts = realloc(
-        stack->elts,
-        sizeof(char *) * new_size
-    );
-    
-    /* make sure any new elements are initialized */
-    size_t first_new_elt = stack->size;
-    for (size_t idx = first_new_elt;
-         idx < new_size;
-         idx++) {
-        stack->elts[idx] = NULL;
-    }
-    
-    stack->size = new_size;
-}
-
-void push(Stack stack, char * string) {
-    resize(stack, stack->size + 1);
-    stack->elts[stack->size-1] = string;
-    show_stack(stack);
-}
-
-char * pop(Stack stack) {
-    if (stack->size == 0) {
-        abort();
-    }
-    char * string = stack->elts[stack->size-1];
-    resize(stack, stack->size - 1);
-    show_stack(stack);
-    return string;
-}
-
-/* Destructor */
-void free_stack(Stack stack) {
-    resize(stack, 0);
-    free(stack);
-}
-
-char * checked_getline() {
-    char * line = NULL;
-    size_t alloc_len = 0;
-    ssize_t got = getline(&line, &alloc_len, stdin);
-    if (got < 0) {
-        if (line != NULL) {
-            free(line);
-        }
-        return NULL;
-    } else {
-        return line;
-    }
-}
-
-void push_input_lines(Stack stack) {
-    printf("Enter some lines. Press ctrl-d (EOF) to end.\n");
-    char * line = NULL;
-    while ((line = checked_getline()) != NULL) {
-        push(stack, line);
-    }
-}
-
-void pop_lines(Stack stack) {
-    while (stack->size > 0) {
-        char * line = pop(stack);
-        puts(line);
-        free(line);
-    }
-}
-
-int main() {
-    Stack stack1 = new_stack();
-    Stack stack2 = stack1;
-/* Because stack is a pointer, stack1 and stack2 are 
- * actually the same stack!
- * Because the actual struct doesn't need to change size,
- * these pointers will be valid until we call free_stack()
- */
-    push_input_lines(stack1);
-    pop_lines(stack2);
-    free_stack(stack1);
-    return 0;
-}
-#+END_SRC
-
-#+RESULTS:
-: Stack 0x55f01a3ba260: 0 items starting at (nil)
-: Enter some lines. Press ctrl-d (EOF) to end.
-
-*** Recommended stack example
-file:./new_stack.c
-#+BEGIN_SRC C :exports both  :tangle new_stack.c
-#define _POSIX_C_SOURCE 200809L // <-- needed for getline
-#include <stdint.h>
-#include <stdio.h>
-#include <stdlib.h>
-#include <string.h>
-
-/* Let's define Stack as a pointer to a struct,
- * which itself contains the pointer to the actual
- * data on the stack, which are pointers to chars (strings).
- * 
- * This is so that when we realloc() and update elts,
- * we don't have to worry about some other piece of code
- * having the old value of elts.
- * 
- * If we didn't hide our pointer that gets realloc'd behind
- * another pointer, it is easy to have an old copy of the
- * realloc'd pointer (which is now invalid) floating around.
- * 
- * But by putting it behind a pointer, new_stack() can
- * create the single copy of the struct, which contains
- * the elts pointer that changes. Since the sizeof the
- * actual struct never changes, we never have to realloc
- * that pointer, so we can ensure we only have one version
- * of elts at all times. This is similar to how
- * Java/Python/JS handle arrays internally.
- * 
- */
-
-// OK so Stack is pointer of struct stack NOT struct stack.
-typedef struct stack {
-    size_t size;
-    char ** elts;
-} * Stack;
-
-void show_stack(Stack stack) {
-    printf("Stack %p: %zu items starting at %p\n",
-           (void *) stack,
-           stack->size,
-           (void *) stack->elts
-    );
-}
-
-// This is a good style, new_object, or object_create
-Stack new_stack() {
-    /* Constructor */
-    Stack new = malloc(sizeof(*new));
-    new->size = 0;
-    new->elts = NULL;
-    show_stack(new);
-    return new;
-}
-
-/* this function deduplicates code from push and pop */
-void resize_stack(Stack stack, size_t new_size) {
-    stack->elts = realloc(
-        stack->elts,
-        sizeof(char *) * new_size
-    );
-    
-    /* make sure any new elements are initialized */
-    size_t first_new_elt = stack->size;
-    for (size_t idx = first_new_elt;
-         idx < new_size;
-         idx++) {
-        stack->elts[idx] = NULL;
-    }
-    
-    stack->size = new_size;
-}
-
-void push_stack(Stack stack, char * string) {
-    resize_stack(stack, stack->size + 1);
-    stack->elts[stack->size-1] = string;
-    show_stack(stack);
-}
-
-char * pop_stack(Stack stack) {
-    if (stack->size == 0) {
-        abort();
-    }
-    char * string = stack->elts[stack->size-1];
-    resize_stack(stack, stack->size - 1);
-    show_stack(stack);
-    return string;
-}
-
-/* Destructor */
-void free_stack(Stack stack) {
-    resize_stack(stack, 0);
-    free(stack);
-}
-
-char * checked_getline() {
-    char * line = NULL;
-    size_t alloc_len = 0;
-    ssize_t got = getline(&line, &alloc_len, stdin);
-    if (got < 0) {
-        if (line != NULL) {
-            free(line);
-        }
-        return NULL;
-    } else {
-        return line;
-    }
-}
-
-void push_input_lines_stack(Stack stack) {
-    printf("Enter some lines. Press ctrl-d (EOF) to end.\n");
-    char * line = NULL;
-    while ((line = checked_getline()) != NULL) {
-        push_stack(stack, line);
-    }
-}
-
-void pop_lines_stack(Stack stack) {
-    while (stack->size > 0) {
-        char * line = pop_stack(stack);
-        puts(line);
-        free(line);
-    }
-}
-
-int main() {
-    Stack stack1 = new_stack();
-    Stack stack2 = stack1;
-/* Because stack is a pointer, stack1 and stack2 are 
- * actually the same stack!
- * Because the actual struct doesn't need to change size,
- * these pointers will be valid until we call free_stack()
- */
-    push_input_lines_stack(stack1);
-    pop_lines_stack(stack2);
-    free_stack(stack1);
-    return 0;
-}
-#+END_SRC
-
-#+RESULTS:
-: Stack 0x55b4c76de260: 0 items starting at (nil)
-: Enter some lines. Press ctrl-d (EOF) to end.
-
-#+BEGIN_SRC sh :exports both  
-gcc -std=c99 -pedantic -Wall -Wextra -ftrapv -ggdb3 -o new_stack ./new_stack.c
-seq 9990 9999 | ./new_stack
-#+END_SRC
-
-#+RESULTS:
-#+begin_example
-Stack 0x56180d47c260: 0 items starting at (nil)
-Enter some lines. Press ctrl-d (EOF) to end.
-Stack 0x56180d47c260: 1 items starting at 0x56180d47e320
-Stack 0x56180d47c260: 2 items starting at 0x56180d47e320
-Stack 0x56180d47c260: 3 items starting at 0x56180d47e320
-Stack 0x56180d47c260: 4 items starting at 0x56180d47e4c0
-Stack 0x56180d47c260: 5 items starting at 0x56180d47e4c0
-Stack 0x56180d47c260: 6 items starting at 0x56180d47e5f0
-Stack 0x56180d47c260: 7 items starting at 0x56180d47e5f0
-Stack 0x56180d47c260: 8 items starting at 0x56180d47e730
-Stack 0x56180d47c260: 9 items starting at 0x56180d47e730
-Stack 0x56180d47c260: 10 items starting at 0x56180d47e880
-Stack 0x56180d47c260: 9 items starting at 0x56180d47e880
-9999
-
-Stack 0x56180d47c260: 8 items starting at 0x56180d47e880
-9998
-
-Stack 0x56180d47c260: 7 items starting at 0x56180d47e880
-9997
-
-Stack 0x56180d47c260: 6 items starting at 0x56180d47e880
-9996
-
-Stack 0x56180d47c260: 5 items starting at 0x56180d47e880
-9995
-
-Stack 0x56180d47c260: 4 items starting at 0x56180d47e880
-9994
-
-Stack 0x56180d47c260: 3 items starting at 0x56180d47e880
-9993
-
-Stack 0x56180d47c260: 2 items starting at 0x56180d47e880
-9992
-
-Stack 0x56180d47c260: 1 items starting at 0x56180d47e880
-9991
-
-Stack 0x56180d47c260: 0 items starting at (nil)
-9990
-
-#+end_example
 
