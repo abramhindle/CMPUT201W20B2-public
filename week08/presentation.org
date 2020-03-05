@@ -1821,6 +1821,8 @@ gcc -std=c99 -pedantic -Wall -Wextra -ftrapv -ggdb3 -o array_oob ./array_oob.c
 gnome-terminal -- gdb ./array_oob
 #+END_SRC
 
+#+RESULTS:
+
 **** ./array_uninit.c
 file:./array_uninit.c
 
