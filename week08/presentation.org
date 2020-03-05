@@ -1148,6 +1148,408 @@ Stack 0x55f488145260: 0 items starting at (nil)
 9990
 #+end_example
 
+** Objects and APIs
+
+When you make a new type you should follow some guidelines:
+
+- put the name of the type at the start or end of function names:
+  - For type dog:
+    - dog_create()
+    - dog_free(dog)
+    - dog_move(dog,x,y)
+    - dog_bark(dog, bark_spec)
+    - createDog()
+    - freeDog(dog)
+    - moveDog(dog,x,y)
+    - barkDog(dog, barkSpec)
+  - For type cat:
+    - createCat()
+    - freeCat(cat)
+    - moveCat(cat)
+    - meowCat(cat, meow_spec)
+    - cat_create()
+    - cat_free(cat)
+    - cat_move(cat)
+    - cat_meow(cat, meow_spec)
+- Should your type be a struct or a pointer to a struct?
+  - struct pros:
+    + functional
+    + easy to copy
+    + stay on the stack
+    + safe shallow copy of data
+    + don't have to free
+  - struct cons:
+    - if structs have pointers then copies of structs might have old pointers
+    - doesn't play well we malloc and realloc
+    - stale info
+    - hard to ensure consistency
+    - big
+  - pointer to struct pros:
+    + small to pass (1 pointer)
+    + can have multiple references
+    + more control
+    + can hide implementation better
+    + consistency
+    + malloc and realloc friendly.
+  - pointer to struct cons:
+    - malloc
+    - must free
+    - hard to copy
+    - deepcopy required
+    - awkward with arrays
+
+*** original stack example 
+
+file:./stack.c
+#+BEGIN_SRC C :exports both  :tangle stack.c
+#define _POSIX_C_SOURCE 200809L // <-- needed for getline
+#include <stdint.h>
+#include <stdio.h>
+#include <stdlib.h>
+#include <string.h>
+
+/* Let's define Stack as a pointer to a struct,
+ * which itself contains the pointer to the actual
+ * data on the stack, which are pointers to chars (strings).
+ * 
+ * This is so that when we realloc() and update elts,
+ * we don't have to worry about some other piece of code
+ * having the old value of elts.
+ * 
+ * If we didn't hide our pointer that gets realloc'd behind
+ * another pointer, it is easy to have an old copy of the
+ * realloc'd pointer (which is now invalid) floating around.
+ * 
+ * But by putting it behind a pointer, new_stack() can
+ * create the single copy of the struct, which contains
+ * the elts pointer that changes. Since the sizeof the
+ * actual struct never changes, we never have to realloc
+ * that pointer, so we can ensure we only have one version
+ * of elts at all times. This is similar to how
+ * Java/Python/JS handle arrays internally.
+ * 
+ */
+
+// OK so Stack is pointer of struct stack NOT struct stack.
+typedef struct stack {
+    size_t size;
+    char ** elts;
+} * Stack;
+
+void show_stack(Stack stack) {
+    printf("Stack %p: %zu items starting at %p\n",
+           (void *) stack,
+           stack->size,
+           (void *) stack->elts
+    );
+}
+
+// This is a good style, new_object, or object_create
+Stack new_stack() {
+    /* Constructor */
+    Stack new = malloc(sizeof(*new));
+    new->size = 0;
+    new->elts = NULL;
+    show_stack(new);
+    return new;
+}
+
+/* this function deduplicates code from push and pop */
+void resize(Stack stack, size_t new_size) {
+    stack->elts = realloc(
+        stack->elts,
+        sizeof(char *) * new_size
+    );
+    
+    /* make sure any new elements are initialized */
+    size_t first_new_elt = stack->size;
+    for (size_t idx = first_new_elt;
+         idx < new_size;
+         idx++) {
+        stack->elts[idx] = NULL;
+    }
+    
+    stack->size = new_size;
+}
+
+void push(Stack stack, char * string) {
+    resize(stack, stack->size + 1);
+    stack->elts[stack->size-1] = string;
+    show_stack(stack);
+}
+
+char * pop(Stack stack) {
+    if (stack->size == 0) {
+        abort();
+    }
+    char * string = stack->elts[stack->size-1];
+    resize(stack, stack->size - 1);
+    show_stack(stack);
+    return string;
+}
+
+/* Destructor */
+void free_stack(Stack stack) {
+    resize(stack, 0);
+    free(stack);
+}
+
+char * checked_getline() {
+    char * line = NULL;
+    size_t alloc_len = 0;
+    ssize_t got = getline(&line, &alloc_len, stdin);
+    if (got < 0) {
+        if (line != NULL) {
+            free(line);
+        }
+        return NULL;
+    } else {
+        return line;
+    }
+}
+
+void push_input_lines(Stack stack) {
+    printf("Enter some lines. Press ctrl-d (EOF) to end.\n");
+    char * line = NULL;
+    while ((line = checked_getline()) != NULL) {
+        push(stack, line);
+    }
+}
+
+void pop_lines(Stack stack) {
+    while (stack->size > 0) {
+        char * line = pop(stack);
+        puts(line);
+        free(line);
+    }
+}
+
+int main() {
+    Stack stack1 = new_stack();
+    Stack stack2 = stack1;
+/* Because stack is a pointer, stack1 and stack2 are 
+ * actually the same stack!
+ * Because the actual struct doesn't need to change size,
+ * these pointers will be valid until we call free_stack()
+ */
+    push_input_lines(stack1);
+    pop_lines(stack2);
+    free_stack(stack1);
+    return 0;
+}
+#+END_SRC
+
+#+RESULTS:
+: Stack 0x55f01a3ba260: 0 items starting at (nil)
+: Enter some lines. Press ctrl-d (EOF) to end.
+
+*** Recommended stack example
+file:./new_stack.c
+#+BEGIN_SRC C :exports both  :tangle new_stack.c
+#define _POSIX_C_SOURCE 200809L // <-- needed for getline
+#include <stdint.h>
+#include <stdio.h>
+#include <stdlib.h>
+#include <string.h>
+
+/* Let's define Stack as a pointer to a struct,
+ * which itself contains the pointer to the actual
+ * data on the stack, which are pointers to chars (strings).
+ * 
+ * This is so that when we realloc() and update elts,
+ * we don't have to worry about some other piece of code
+ * having the old value of elts.
+ * 
+ * If we didn't hide our pointer that gets realloc'd behind
+ * another pointer, it is easy to have an old copy of the
+ * realloc'd pointer (which is now invalid) floating around.
+ * 
+ * But by putting it behind a pointer, new_stack() can
+ * create the single copy of the struct, which contains
+ * the elts pointer that changes. Since the sizeof the
+ * actual struct never changes, we never have to realloc
+ * that pointer, so we can ensure we only have one version
+ * of elts at all times. This is similar to how
+ * Java/Python/JS handle arrays internally.
+ * 
+ */
+
+// OK so Stack is pointer of struct stack NOT struct stack.
+typedef struct stack {
+    size_t size;
+    char ** elts;
+} * Stack;
+
+void show_stack(Stack stack) {
+    printf("Stack %p: %zu items starting at %p\n",
+           (void *) stack,
+           stack->size,
+           (void *) stack->elts
+    );
+}
+
+// This is a good style, new_object, or object_create
+Stack new_stack() {
+    /* Constructor */
+    Stack new = malloc(sizeof(*new));
+    new->size = 0;
+    new->elts = NULL;
+    show_stack(new);
+    return new;
+}
+
+/* this function deduplicates code from push and pop */
+void resize_stack(Stack stack, size_t new_size) {
+    stack->elts = realloc(
+        stack->elts,
+        sizeof(char *) * new_size
+    );
+    
+    /* make sure any new elements are initialized */
+    size_t first_new_elt = stack->size;
+    for (size_t idx = first_new_elt;
+         idx < new_size;
+         idx++) {
+        stack->elts[idx] = NULL;
+    }
+    
+    stack->size = new_size;
+}
+
+void push_stack(Stack stack, char * string) {
+    resize_stack(stack, stack->size + 1);
+    stack->elts[stack->size-1] = string;
+    show_stack(stack);
+}
+
+char * pop_stack(Stack stack) {
+    if (stack->size == 0) {
+        abort();
+    }
+    char * string = stack->elts[stack->size-1];
+    resize_stack(stack, stack->size - 1);
+    show_stack(stack);
+    return string;
+}
+
+/* Destructor */
+void free_stack(Stack stack) {
+    resize_stack(stack, 0);
+    free(stack);
+}
+
+char * checked_getline() {
+    char * line = NULL;
+    size_t alloc_len = 0;
+    ssize_t got = getline(&line, &alloc_len, stdin);
+    if (got < 0) {
+        if (line != NULL) {
+            free(line);
+        }
+        return NULL;
+    } else {
+        return line;
+    }
+}
+
+void push_input_lines_stack(Stack stack) {
+    printf("Enter some lines. Press ctrl-d (EOF) to end.\n");
+    char * line = NULL;
+    while ((line = checked_getline()) != NULL) {
+        push_stack(stack, line);
+    }
+}
+
+void pop_lines_stack(Stack stack) {
+    while (stack->size > 0) {
+        char * line = pop_stack(stack);
+        puts(line);
+        free(line);
+    }
+}
+
+int main() {
+    Stack stack1 = new_stack();
+    Stack stack2 = stack1;
+/* Because stack is a pointer, stack1 and stack2 are 
+ * actually the same stack!
+ * Because the actual struct doesn't need to change size,
+ * these pointers will be valid until we call free_stack()
+ */
+    push_input_lines_stack(stack1);
+    pop_lines_stack(stack2);
+    free_stack(stack1);
+    return 0;
+}
+#+END_SRC
+
+#+RESULTS:
+: Stack 0x55b4c76de260: 0 items starting at (nil)
+: Enter some lines. Press ctrl-d (EOF) to end.
+
+#+BEGIN_SRC sh :exports both  
+gcc -std=c99 -pedantic -Wall -Wextra -ftrapv -ggdb3 -o new_stack ./new_stack.c
+seq 9990 9999 | ./new_stack
+#+END_SRC
+
+#+RESULTS:
+#+begin_example
+Stack 0x56180d47c260: 0 items starting at (nil)
+Enter some lines. Press ctrl-d (EOF) to end.
+Stack 0x56180d47c260: 1 items starting at 0x56180d47e320
+Stack 0x56180d47c260: 2 items starting at 0x56180d47e320
+Stack 0x56180d47c260: 3 items starting at 0x56180d47e320
+Stack 0x56180d47c260: 4 items starting at 0x56180d47e4c0
+Stack 0x56180d47c260: 5 items starting at 0x56180d47e4c0
+Stack 0x56180d47c260: 6 items starting at 0x56180d47e5f0
+Stack 0x56180d47c260: 7 items starting at 0x56180d47e5f0
+Stack 0x56180d47c260: 8 items starting at 0x56180d47e730
+Stack 0x56180d47c260: 9 items starting at 0x56180d47e730
+Stack 0x56180d47c260: 10 items starting at 0x56180d47e880
+Stack 0x56180d47c260: 9 items starting at 0x56180d47e880
+9999
+
+Stack 0x56180d47c260: 8 items starting at 0x56180d47e880
+9998
+
+Stack 0x56180d47c260: 7 items starting at 0x56180d47e880
+9997
+
+Stack 0x56180d47c260: 6 items starting at 0x56180d47e880
+9996
+
+Stack 0x56180d47c260: 5 items starting at 0x56180d47e880
+9995
+
+Stack 0x56180d47c260: 4 items starting at 0x56180d47e880
+9994
+
+Stack 0x56180d47c260: 3 items starting at 0x56180d47e880
+9993
+
+Stack 0x56180d47c260: 2 items starting at 0x56180d47e880
+9992
+
+Stack 0x56180d47c260: 1 items starting at 0x56180d47e880
+9991
+
+Stack 0x56180d47c260: 0 items starting at (nil)
+9990
+
+#+end_example
+
+*** Test First Top Down Design
+
+** Recursive Definitions
+*** Mutually Recursive functions
+
+#+BEGIN_SRC C :exports both
+
+#+END_SRC
+
+*** Recursive Structs
+
+
 
 ** Debugging
 *** GDB
@@ -2474,394 +2876,4 @@ echo gnome-terminal -- gdb ./$exe
 echo \#+END_SRC
 done
 #+END_SRC
-
-** Objects and APIs
-
-When you make a new type you should follow some guidelines:
-
-- put the name of the type at the start or end of function names:
-  - For type dog:
-    - dog_create()
-    - dog_free(dog)
-    - dog_move(dog,x,y)
-    - dog_bark(dog, bark_spec)
-    - createDog()
-    - freeDog(dog)
-    - moveDog(dog,x,y)
-    - barkDog(dog, barkSpec)
-  - For type cat:
-    - createCat()
-    - freeCat(cat)
-    - moveCat(cat)
-    - meowCat(cat, meow_spec)
-    - cat_create()
-    - cat_free(cat)
-    - cat_move(cat)
-    - cat_meow(cat, meow_spec)
-- Should your type be a struct or a pointer to a struct?
-  - struct pros:
-    + functional
-    + easy to copy
-    + stay on the stack
-    + safe shallow copy of data
-    + don't have to free
-  - struct cons:
-    - if structs have pointers then copies of structs might have old pointers
-    - doesn't play well we malloc and realloc
-    - stale info
-    - hard to ensure consistency
-    - big
-  - pointer to struct pros:
-    + small to pass (1 pointer)
-    + can have multiple references
-    + more control
-    + can hide implementation better
-    + consistency
-    + malloc and realloc friendly.
-  - pointer to struct cons:
-    - malloc
-    - must free
-    - hard to copy
-    - deepcopy required
-    - awkward with arrays
-
-*** original stack example 
-
-file:./stack.c
-#+BEGIN_SRC C :exports both  :tangle stack.c
-#define _POSIX_C_SOURCE 200809L // <-- needed for getline
-#include <stdint.h>
-#include <stdio.h>
-#include <stdlib.h>
-#include <string.h>
-
-/* Let's define Stack as a pointer to a struct,
- * which itself contains the pointer to the actual
- * data on the stack, which are pointers to chars (strings).
- * 
- * This is so that when we realloc() and update elts,
- * we don't have to worry about some other piece of code
- * having the old value of elts.
- * 
- * If we didn't hide our pointer that gets realloc'd behind
- * another pointer, it is easy to have an old copy of the
- * realloc'd pointer (which is now invalid) floating around.
- * 
- * But by putting it behind a pointer, new_stack() can
- * create the single copy of the struct, which contains
- * the elts pointer that changes. Since the sizeof the
- * actual struct never changes, we never have to realloc
- * that pointer, so we can ensure we only have one version
- * of elts at all times. This is similar to how
- * Java/Python/JS handle arrays internally.
- * 
- */
-
-// OK so Stack is pointer of struct stack NOT struct stack.
-typedef struct stack {
-    size_t size;
-    char ** elts;
-} * Stack;
-
-void show_stack(Stack stack) {
-    printf("Stack %p: %zu items starting at %p\n",
-           (void *) stack,
-           stack->size,
-           (void *) stack->elts
-    );
-}
-
-// This is a good style, new_object, or object_create
-Stack new_stack() {
-    /* Constructor */
-    Stack new = malloc(sizeof(*new));
-    new->size = 0;
-    new->elts = NULL;
-    show_stack(new);
-    return new;
-}
-
-/* this function deduplicates code from push and pop */
-void resize(Stack stack, size_t new_size) {
-    stack->elts = realloc(
-        stack->elts,
-        sizeof(char *) * new_size
-    );
-    
-    /* make sure any new elements are initialized */
-    size_t first_new_elt = stack->size;
-    for (size_t idx = first_new_elt;
-         idx < new_size;
-         idx++) {
-        stack->elts[idx] = NULL;
-    }
-    
-    stack->size = new_size;
-}
-
-void push(Stack stack, char * string) {
-    resize(stack, stack->size + 1);
-    stack->elts[stack->size-1] = string;
-    show_stack(stack);
-}
-
-char * pop(Stack stack) {
-    if (stack->size == 0) {
-        abort();
-    }
-    char * string = stack->elts[stack->size-1];
-    resize(stack, stack->size - 1);
-    show_stack(stack);
-    return string;
-}
-
-/* Destructor */
-void free_stack(Stack stack) {
-    resize(stack, 0);
-    free(stack);
-}
-
-char * checked_getline() {
-    char * line = NULL;
-    size_t alloc_len = 0;
-    ssize_t got = getline(&line, &alloc_len, stdin);
-    if (got < 0) {
-        if (line != NULL) {
-            free(line);
-        }
-        return NULL;
-    } else {
-        return line;
-    }
-}
-
-void push_input_lines(Stack stack) {
-    printf("Enter some lines. Press ctrl-d (EOF) to end.\n");
-    char * line = NULL;
-    while ((line = checked_getline()) != NULL) {
-        push(stack, line);
-    }
-}
-
-void pop_lines(Stack stack) {
-    while (stack->size > 0) {
-        char * line = pop(stack);
-        puts(line);
-        free(line);
-    }
-}
-
-int main() {
-    Stack stack1 = new_stack();
-    Stack stack2 = stack1;
-/* Because stack is a pointer, stack1 and stack2 are 
- * actually the same stack!
- * Because the actual struct doesn't need to change size,
- * these pointers will be valid until we call free_stack()
- */
-    push_input_lines(stack1);
-    pop_lines(stack2);
-    free_stack(stack1);
-    return 0;
-}
-#+END_SRC
-
-#+RESULTS:
-: Stack 0x55f01a3ba260: 0 items starting at (nil)
-: Enter some lines. Press ctrl-d (EOF) to end.
-
-*** Recommended stack example
-file:./new_stack.c
-#+BEGIN_SRC C :exports both  :tangle new_stack.c
-#define _POSIX_C_SOURCE 200809L // <-- needed for getline
-#include <stdint.h>
-#include <stdio.h>
-#include <stdlib.h>
-#include <string.h>
-
-/* Let's define Stack as a pointer to a struct,
- * which itself contains the pointer to the actual
- * data on the stack, which are pointers to chars (strings).
- * 
- * This is so that when we realloc() and update elts,
- * we don't have to worry about some other piece of code
- * having the old value of elts.
- * 
- * If we didn't hide our pointer that gets realloc'd behind
- * another pointer, it is easy to have an old copy of the
- * realloc'd pointer (which is now invalid) floating around.
- * 
- * But by putting it behind a pointer, new_stack() can
- * create the single copy of the struct, which contains
- * the elts pointer that changes. Since the sizeof the
- * actual struct never changes, we never have to realloc
- * that pointer, so we can ensure we only have one version
- * of elts at all times. This is similar to how
- * Java/Python/JS handle arrays internally.
- * 
- */
-
-// OK so Stack is pointer of struct stack NOT struct stack.
-typedef struct stack {
-    size_t size;
-    char ** elts;
-} * Stack;
-
-void show_stack(Stack stack) {
-    printf("Stack %p: %zu items starting at %p\n",
-           (void *) stack,
-           stack->size,
-           (void *) stack->elts
-    );
-}
-
-// This is a good style, new_object, or object_create
-Stack new_stack() {
-    /* Constructor */
-    Stack new = malloc(sizeof(*new));
-    new->size = 0;
-    new->elts = NULL;
-    show_stack(new);
-    return new;
-}
-
-/* this function deduplicates code from push and pop */
-void resize_stack(Stack stack, size_t new_size) {
-    stack->elts = realloc(
-        stack->elts,
-        sizeof(char *) * new_size
-    );
-    
-    /* make sure any new elements are initialized */
-    size_t first_new_elt = stack->size;
-    for (size_t idx = first_new_elt;
-         idx < new_size;
-         idx++) {
-        stack->elts[idx] = NULL;
-    }
-    
-    stack->size = new_size;
-}
-
-void push_stack(Stack stack, char * string) {
-    resize_stack(stack, stack->size + 1);
-    stack->elts[stack->size-1] = string;
-    show_stack(stack);
-}
-
-char * pop_stack(Stack stack) {
-    if (stack->size == 0) {
-        abort();
-    }
-    char * string = stack->elts[stack->size-1];
-    resize_stack(stack, stack->size - 1);
-    show_stack(stack);
-    return string;
-}
-
-/* Destructor */
-void free_stack(Stack stack) {
-    resize_stack(stack, 0);
-    free(stack);
-}
-
-char * checked_getline() {
-    char * line = NULL;
-    size_t alloc_len = 0;
-    ssize_t got = getline(&line, &alloc_len, stdin);
-    if (got < 0) {
-        if (line != NULL) {
-            free(line);
-        }
-        return NULL;
-    } else {
-        return line;
-    }
-}
-
-void push_input_lines_stack(Stack stack) {
-    printf("Enter some lines. Press ctrl-d (EOF) to end.\n");
-    char * line = NULL;
-    while ((line = checked_getline()) != NULL) {
-        push_stack(stack, line);
-    }
-}
-
-void pop_lines_stack(Stack stack) {
-    while (stack->size > 0) {
-        char * line = pop_stack(stack);
-        puts(line);
-        free(line);
-    }
-}
-
-int main() {
-    Stack stack1 = new_stack();
-    Stack stack2 = stack1;
-/* Because stack is a pointer, stack1 and stack2 are 
- * actually the same stack!
- * Because the actual struct doesn't need to change size,
- * these pointers will be valid until we call free_stack()
- */
-    push_input_lines_stack(stack1);
-    pop_lines_stack(stack2);
-    free_stack(stack1);
-    return 0;
-}
-#+END_SRC
-
-#+RESULTS:
-: Stack 0x55b4c76de260: 0 items starting at (nil)
-: Enter some lines. Press ctrl-d (EOF) to end.
-
-#+BEGIN_SRC sh :exports both  
-gcc -std=c99 -pedantic -Wall -Wextra -ftrapv -ggdb3 -o new_stack ./new_stack.c
-seq 9990 9999 | ./new_stack
-#+END_SRC
-
-#+RESULTS:
-#+begin_example
-Stack 0x56180d47c260: 0 items starting at (nil)
-Enter some lines. Press ctrl-d (EOF) to end.
-Stack 0x56180d47c260: 1 items starting at 0x56180d47e320
-Stack 0x56180d47c260: 2 items starting at 0x56180d47e320
-Stack 0x56180d47c260: 3 items starting at 0x56180d47e320
-Stack 0x56180d47c260: 4 items starting at 0x56180d47e4c0
-Stack 0x56180d47c260: 5 items starting at 0x56180d47e4c0
-Stack 0x56180d47c260: 6 items starting at 0x56180d47e5f0
-Stack 0x56180d47c260: 7 items starting at 0x56180d47e5f0
-Stack 0x56180d47c260: 8 items starting at 0x56180d47e730
-Stack 0x56180d47c260: 9 items starting at 0x56180d47e730
-Stack 0x56180d47c260: 10 items starting at 0x56180d47e880
-Stack 0x56180d47c260: 9 items starting at 0x56180d47e880
-9999
-
-Stack 0x56180d47c260: 8 items starting at 0x56180d47e880
-9998
-
-Stack 0x56180d47c260: 7 items starting at 0x56180d47e880
-9997
-
-Stack 0x56180d47c260: 6 items starting at 0x56180d47e880
-9996
-
-Stack 0x56180d47c260: 5 items starting at 0x56180d47e880
-9995
-
-Stack 0x56180d47c260: 4 items starting at 0x56180d47e880
-9994
-
-Stack 0x56180d47c260: 3 items starting at 0x56180d47e880
-9993
-
-Stack 0x56180d47c260: 2 items starting at 0x56180d47e880
-9992
-
-Stack 0x56180d47c260: 1 items starting at 0x56180d47e880
-9991
-
-Stack 0x56180d47c260: 0 items starting at (nil)
-9990
-
-#+end_example
 
