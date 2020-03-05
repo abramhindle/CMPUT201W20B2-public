@@ -1,4 +1,3 @@
-
 #define _POSIX_C_SOURCE 200809L // <-- needed for getline
 #include <stdint.h>
 #include <stdio.h>
@@ -45,6 +44,9 @@ void show_stack(Stack stack) {
 Stack new_stack() {
     /* Constructor */
     Stack new = malloc(sizeof(*new));
+    if (new == NULL) {
+        abort();
+    }
     new->size = 0;
     new->elts = NULL;
     show_stack(new);
