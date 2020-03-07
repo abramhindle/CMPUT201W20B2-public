@@ -266,6 +266,9 @@ We found 3902 flushes out of 1000000 hands: 0.003902
 Please finish the prior section before you do this section. This
 section has answers for the prior section.
 
+This program is the program modified to use pointers to pointers
+rather than a flat 2D array in memory.
+
 #+BEGIN_SRC C :exports both  :tangle cards-aoa.c
   #include <stdbool.h> 
   #include <stdio.h>
@@ -458,4 +461,69 @@ Flush found at card 2509
 Suit 0
 We found 4003 flushes out of 1000000 hands: 0.004003
 #+end_example
+
+*** Bubblesort from Rosetta code
+
+GFDL licensed code.
+
+Please fix this bubblesort code.
+
+#+BEGIN_SRC C :exports both
+#include <stdio.h>
+
+/* QUESTION: what should the function declaration of bubble sort be?
+   1: nothing
+   2:  int * bubble_sort( int a[n], int n) {
+   3:  int bubble_sort( int a[n], int n) {
+   4:  void bubble_sort( char a[n], int n) {
+   5:  void bubble_sort( double a[n], int n) {
+   6:  void bubble_sort (int *a, int n) {
+   7:  void bubble_sort (int **a, int n) {
+   8:  void bubble_sort (int *a) {
+   9:  void bubble_sort (int (*)a[n],int n) {
+*/
+    int i, t, j = n, s = 1;
+    while (s) {
+        s = 0;
+        for (i = 1; i < j; i++) {
+            if (a[i] < a[i - 1]) {
+                t = a[i];
+                a[i] = a[i - 1];
+                a[i - 1] = t;
+                s = 1;
+            }
+        }
+        j--;
+    }
+}
+ 
+int main () {
+    int a[] = {4, 65, 2, -31, 0, 99, 2, 83, 782, 1};
+/* QUESTION: what should the variable n be defined and set to?
+    1: double n = 10.0
+    2: int n = sizeof(a) / sizeof(a[0]);
+    3: int n = sizeof(a);
+    4: int n = sizeof(a[0]);
+    5: int n = sizeof(a[0])/sizeof(double);
+    6: int n = 0;
+    7: int n;
+*/
+    int i;
+    // print input
+    for (i = 0; i < n; i++) {
+        printf("%d%s", a[i], i == n - 1 ? "\n" : " ");
+    }
+    bubble_sort(a, n);
+    // print output
+    for (i = 0; i < n; i++) {
+        printf("%d%s", a[i], i == n - 1 ? "\n" : " ");
+    }
+    return 0;
+}
+#+END_SRC
+
+#+RESULTS:
+: 4 65 2 -31 0 99 2 83 782 1
+: -31 0 1 2 2 4 65 83 99 782
+
 
