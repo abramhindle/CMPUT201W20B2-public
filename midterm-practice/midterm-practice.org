@@ -522,8 +522,8 @@ int main () {
 }
 #+END_SRC
 
-#+RESULTS:
+Example output
+#+begin_example
 : 4 65 2 -31 0 99 2 83 782 1
 : -31 0 1 2 2 4 65 83 99 782
-
-
+#+end_example
