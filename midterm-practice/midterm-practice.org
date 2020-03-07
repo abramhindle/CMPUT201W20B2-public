@@ -527,3 +527,120 @@ Example output
 : 4 65 2 -31 0 99 2 83 782 1
 : -31 0 1 2 2 4 65 83 99 782
 #+end_example
+
+*** N Queens Problem
+
+How do you N queens on a chessboard of width and height N?
+
+https://en.wikipedia.org/wiki/Eight_queens_puzzle
+
+
+This code is from Rosetta Code and is under the GFDL 1.2.
+
+#+BEGIN_SRC C :exports both
+  #include <stdio.h>
+  #include <stdlib.h>
+   
+  int count = 0;
+  void solve(int n, int col, int *hist)
+  {
+          // Print the solution if col == n
+          if (col == n) {
+                  printf("\nNo. %d\n-----\n", ++count);
+                  /* Question: Will the next line print a newline after every row?
+                       1: Yes
+                       2: No
+                       3: Yes, but this is bad style!
+                  */
+                  for (int i = 0; i < n; i++, putchar('\n')) {
+                          for (int j = 0; j < n; j++) {
+                                  putchar(j == hist[i] ? 'Q' : ((i + j) & 1) ? ' ' : '.');
+                          }
+                  }
+                  return;
+          }
+   
+          for (int i = 0, j = 0; i < n; i++) {
+                  // go through each column and see if another queen is there OR if another queen 
+                  // could diagonally attack in that position
+                  for (j = 0; j < col && !(hist[j] == i || abs(hist[j] - i) == col - j); j++);
+                  // if j is less than col it found a queen that attacks
+                  // this a queen at this position then try the next
+                  // loop iteration, otherwise we have a solution.
+  /* Question: which code implements the above comment
+               1: if (j < col) continue; 
+               2: if (j < col) break; 
+               3: if (j < col) return; 
+               4: if (j < col) next; 
+               5: if (j < col) i++; 
+  */
+                  hist[col] = i;
+                  // We're good for this column lets solve for the next column!
+  /* Question: which code implements the above comment
+               1: Nothing
+               2: continue;
+               3: break;
+               4: solve(col + 1);
+               5: solve(n, col, hist);
+               6: solve(n, col + 1, hist);
+               7: solve(n, 0, hist);
+               8: solve(n, col + 1, &hist);
+  */
+          }
+  }
+   
+  int main(int n, char **argv)
+  {
+          if (n <= 1 || (n = atoi(argv[1])) <= 0) n = 8;
+/* Question: how should we allocate an array of n ints on the stack?
+       1: Nothing
+       2: int * hist = malloc(n);
+       3: int * hist = malloc(n*sizeof(n));
+       4: int * hist = malloc(n*sizeof(int));
+       5: int hist[] = malloc(n*sizeof(int));
+       6: int hist[n];
+*/
+          solve(n, 0, hist);
+  }
+#+END_SRC
+
+
+Here's a sample of the output
+
+#+begin_example
+No. 1
+-----
+Q . . . 
+ . .Q. .
+. . . .Q
+ . . Q .
+. Q . . 
+ . . .Q.
+.Q. . . 
+ . Q . .
+
+No. 2
+-----
+Q . . . 
+ . . Q .
+. . . .Q
+ .Q. . .
+. . . Q 
+ . Q . .
+.Q. . . 
+ . .Q. .
+
+... # examples ommitted 
+
+No. 92
+-----
+. . . .Q
+ . Q . .
+Q . . . 
+ .Q. . .
+. . .Q. 
+ Q . . .
+. . . Q 
+ . .Q. .
+#+end_example
+
