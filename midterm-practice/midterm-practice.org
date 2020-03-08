@@ -644,3 +644,104 @@ Q . . .
  . .Q. .
 #+end_example
 
+
+*** Recursive Binary Search
+
+Finish this question about binary search.
+
+Binary search was taught in CMPUT 175 but if you need review here's the algorithm:
+
+https://en.wikipedia.org/wiki/Binary_search_algorithm
+
+From RosettaCode https://rosettacode.org/wiki/Binary_search#C licensed under GFDL 1.2
+
+Answer questions about this recursive binary search implementation:
+
+#+BEGIN_SRC C :exports both
+#include <stdio.h>
+
+// record the number of calls to bsearch_r
+static int calls = 0; 
+/* Question: What is the best function definition of bsearch_r?
+   bsearch_r has to take in a collection of ints, a query to search for, and upper and lower bounds.
+   1: int bsearch_r (int *a, int query, int lower, int upper) {
+   2: int bsearch_r (int a[lower][upper], int query, int lower, int upper) {
+   3: int bsearch_r (int *a, int x, int i, int j) {
+   4: int bsearch_r (float *a, float query, float lower, float upper) {
+   5: void bsearch_r (int *a, int query, int lower, int upper) {
+   6: int bsearch_r (int *a, int x, int i, int j) {
+*/
+    calls++;
+    if (upper < lower) {
+        return -1;
+    }
+    int middle = lower + ((upper - lower) / 2);
+    if (a[middle] == query) {
+        return middle;
+    }
+    else if (a[middle] < query) {
+/* Question: What is the best way to call bsearch_r when the query is larger than the 
+   current middle of the range?
+      1: return bsearch_r(query, a, middle, upper + 1);
+      2: return bsearch_r(query, a, lower, upper);
+      3: return bsearch_r(a, query, lower, upper);
+      4: return bsearch_r(a, query, middle + 1, upper);
+      5: return bsearch_r(a, query, middle - 1, upper - 1);
+      6: return bsearch_r(a, query, middle - 1, upper + 1);
+      7: return bsearch_r(a + middle, query, 0, upper - middle);
+      8: return bsearch_r(a + middle, query, 0, upper);
+      9: return bsearch_r(a + middle, query, lower, upper);
+*/
+    }
+    else {
+/* Question: What is the best way to call bsearch_r when the query is smaller than the 
+   current middle of the range?
+     1: return bsearch_r(a, query, lower, lower - 1);
+     2: return bsearch_r(a, x, i, k - 1);
+     3: return bsearch_r(a, query, lower, middle - 1);
+     4: return bsearch_r(a + lower - middle - 1, query, lower, upper);
+     5: return bsearch_r(a + lower, query, 0, middle);
+     6: return bsearch_r(a, query, lower, upper - 1);
+     7: return bsearch_r(a, query, 0, middle - 1);
+     8: return bsearch_r(a, query, lower, middle + 1);
+     9: return bsearch_r(a, query, lower, middle);
+*/
+    }
+}
+ 
+int main () {
+    int a[] = {-31, 0, 1, 2, 2, 4, 65, 83, 99, 782};
+/* Question: what is the best way to calculate the number of elements in a in a variable n?
+ 1: int n = sizeof(a) / sizeof(a[0]);
+ 2: int n = sizeof(a);
+ 3: int n = sizeof(a[0]);
+ 4: int n = sizeof(a / sizeof(a[0]));
+ 5: int n = sizeof((a /(sizeof a[0]));
+ 6: int n = sizeof(a) / sizeof(long);
+ 7: int n = sizeof(a) / sizeof(short);
+ 8: int n = sizeof(long) / sizeof(a);
+*/
+    for (int i = 0; i < n; i++) {
+        int query = a[i];
+        calls = 0;
+        int index = bsearch_r(a, query, 0, n - 1);
+        printf("%d is at index %d in %d calls\n", query, index, calls);        
+    }
+    return 0;
+}
+#+END_SRC
+
+#+RESULTS:
+#+begin_example
+-31 is at index 0 in 3 calls
+0 is at index 1 in 2 calls
+1 is at index 2 in 3 calls
+2 is at index 4 in 1 calls
+2 is at index 4 in 1 calls
+4 is at index 5 in 3 calls
+65 is at index 6 in 4 calls
+83 is at index 7 in 2 calls
+99 is at index 8 in 3 calls
+782 is at index 9 in 4 calls
+#+end_example
+
