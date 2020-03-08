@@ -731,7 +731,9 @@ int main () {
 }
 #+END_SRC
 
-#+RESULTS:
+
+This is the example output of the working program.
+
 #+begin_example
 -31 is at index 0 in 3 calls
 0 is at index 1 in 2 calls
