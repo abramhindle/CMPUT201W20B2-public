@@ -41,6 +41,16 @@ limitations under the License.
 (org-babel-do-load-languages 'org-babel-load-languages '((python . t)))
 (setq org-src-fontify-natively t)
 
+*** Org export
+#+BEGIN_SRC elisp
+(org-html-export-to-html)
+(org-latex-export-to-pdf)
+(org-ascii-export-to-ascii)
+#+END_SRC
+
+#+RESULTS:
+: presentation.txt
+
 ** Org Template
 Copy and paste this to demo C
 
