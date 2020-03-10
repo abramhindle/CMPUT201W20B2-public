@@ -3,23 +3,30 @@
 "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
 <head>
+<!-- 2020-03-10 Tue 10:14 -->
+<meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
 <title>CMPUT201W20B2 Week 8</title>
-<!-- 2020-03-05 Thu 11:32 -->
-<meta  http-equiv="Content-Type" content="text/html;charset=utf-8" />
-<meta  name="generator" content="Org-mode" />
-<meta  name="author" content="Abram Hindle" />
+<meta name="generator" content="Org mode" />
+<meta name="author" content="Abram Hindle" />
 <style type="text/css">
  <!--/*--><![CDATA[/*><!--*/
-  .title  { text-align: center; }
+  .title  { text-align: center;
+             margin-bottom: .2em; }
+  .subtitle { text-align: center;
+              font-size: medium;
+              font-weight: bold;
+              margin-top:0; }
   .todo   { font-family: monospace; color: red; }
-  .done   { color: green; }
+  .done   { font-family: monospace; color: green; }
+  .priority { font-family: monospace; color: orange; }
   .tag    { background-color: #eee; font-family: monospace;
             padding: 2px; font-size: 80%; font-weight: normal; }
   .timestamp { color: #bebebe; }
   .timestamp-kwd { color: #5f9ea0; }
-  .right  { margin-left: auto; margin-right: 0px;  text-align: right; }
-  .left   { margin-left: 0px;  margin-right: auto; text-align: left; }
-  .center { margin-left: auto; margin-right: auto; text-align: center; }
+  .org-right  { margin-left: auto; margin-right: 0px;  text-align: right; }
+  .org-left   { margin-left: 0px;  margin-right: auto; text-align: left; }
+  .org-center { margin-left: auto; margin-right: auto; text-align: center; }
   .underline { text-decoration: underline; }
   #postamble p, #preamble p { font-size: 90%; margin: .2em; }
   p.verse { margin-left: 3%; }
@@ -46,27 +53,111 @@
     border: 1px solid black;
   }
   pre.src:hover:before { display: inline;}
-  pre.src-sh:before    { content: 'sh'; }
-  pre.src-bash:before  { content: 'sh'; }
+  /* Languages per Org manual */
+  pre.src-asymptote:before { content: 'Asymptote'; }
+  pre.src-awk:before { content: 'Awk'; }
+  pre.src-C:before { content: 'C'; }
+  /* pre.src-C++ doesn't work in CSS */
+  pre.src-clojure:before { content: 'Clojure'; }
+  pre.src-css:before { content: 'CSS'; }
+  pre.src-D:before { content: 'D'; }
+  pre.src-ditaa:before { content: 'ditaa'; }
+  pre.src-dot:before { content: 'Graphviz'; }
+  pre.src-calc:before { content: 'Emacs Calc'; }
   pre.src-emacs-lisp:before { content: 'Emacs Lisp'; }
-  pre.src-R:before     { content: 'R'; }
-  pre.src-perl:before  { content: 'Perl'; }
-  pre.src-java:before  { content: 'Java'; }
-  pre.src-sql:before   { content: 'SQL'; }
+  pre.src-fortran:before { content: 'Fortran'; }
+  pre.src-gnuplot:before { content: 'gnuplot'; }
+  pre.src-haskell:before { content: 'Haskell'; }
+  pre.src-hledger:before { content: 'hledger'; }
+  pre.src-java:before { content: 'Java'; }
+  pre.src-js:before { content: 'Javascript'; }
+  pre.src-latex:before { content: 'LaTeX'; }
+  pre.src-ledger:before { content: 'Ledger'; }
+  pre.src-lisp:before { content: 'Lisp'; }
+  pre.src-lilypond:before { content: 'Lilypond'; }
+  pre.src-lua:before { content: 'Lua'; }
+  pre.src-matlab:before { content: 'MATLAB'; }
+  pre.src-mscgen:before { content: 'Mscgen'; }
+  pre.src-ocaml:before { content: 'Objective Caml'; }
+  pre.src-octave:before { content: 'Octave'; }
+  pre.src-org:before { content: 'Org mode'; }
+  pre.src-oz:before { content: 'OZ'; }
+  pre.src-plantuml:before { content: 'Plantuml'; }
+  pre.src-processing:before { content: 'Processing.js'; }
+  pre.src-python:before { content: 'Python'; }
+  pre.src-R:before { content: 'R'; }
+  pre.src-ruby:before { content: 'Ruby'; }
+  pre.src-sass:before { content: 'Sass'; }
+  pre.src-scheme:before { content: 'Scheme'; }
+  pre.src-screen:before { content: 'Gnu Screen'; }
+  pre.src-sed:before { content: 'Sed'; }
+  pre.src-sh:before { content: 'shell'; }
+  pre.src-sql:before { content: 'SQL'; }
+  pre.src-sqlite:before { content: 'SQLite'; }
+  /* additional languages in org.el's org-babel-load-languages alist */
+  pre.src-forth:before { content: 'Forth'; }
+  pre.src-io:before { content: 'IO'; }
+  pre.src-J:before { content: 'J'; }
+  pre.src-makefile:before { content: 'Makefile'; }
+  pre.src-maxima:before { content: 'Maxima'; }
+  pre.src-perl:before { content: 'Perl'; }
+  pre.src-picolisp:before { content: 'Pico Lisp'; }
+  pre.src-scala:before { content: 'Scala'; }
+  pre.src-shell:before { content: 'Shell Script'; }
+  pre.src-ebnf2ps:before { content: 'ebfn2ps'; }
+  /* additional language identifiers per "defun org-babel-execute"
+       in ob-*.el */
+  pre.src-cpp:before  { content: 'C++'; }
+  pre.src-abc:before  { content: 'ABC'; }
+  pre.src-coq:before  { content: 'Coq'; }
+  pre.src-groovy:before  { content: 'Groovy'; }
+  /* additional language identifiers from org-babel-shell-names in
+     ob-shell.el: ob-shell is the only babel language using a lambda to put
+     the execution function name together. */
+  pre.src-bash:before  { content: 'bash'; }
+  pre.src-csh:before  { content: 'csh'; }
+  pre.src-ash:before  { content: 'ash'; }
+  pre.src-dash:before  { content: 'dash'; }
+  pre.src-ksh:before  { content: 'ksh'; }
+  pre.src-mksh:before  { content: 'mksh'; }
+  pre.src-posh:before  { content: 'posh'; }
+  /* Additional Emacs modes also supported by the LaTeX listings package */
+  pre.src-ada:before { content: 'Ada'; }
+  pre.src-asm:before { content: 'Assembler'; }
+  pre.src-caml:before { content: 'Caml'; }
+  pre.src-delphi:before { content: 'Delphi'; }
+  pre.src-html:before { content: 'HTML'; }
+  pre.src-idl:before { content: 'IDL'; }
+  pre.src-mercury:before { content: 'Mercury'; }
+  pre.src-metapost:before { content: 'MetaPost'; }
+  pre.src-modula-2:before { content: 'Modula-2'; }
+  pre.src-pascal:before { content: 'Pascal'; }
+  pre.src-ps:before { content: 'PostScript'; }
+  pre.src-prolog:before { content: 'Prolog'; }
+  pre.src-simula:before { content: 'Simula'; }
+  pre.src-tcl:before { content: 'tcl'; }
+  pre.src-tex:before { content: 'TeX'; }
+  pre.src-plain-tex:before { content: 'Plain TeX'; }
+  pre.src-verilog:before { content: 'Verilog'; }
+  pre.src-vhdl:before { content: 'VHDL'; }
+  pre.src-xml:before { content: 'XML'; }
+  pre.src-nxml:before { content: 'XML'; }
+  /* add a generic configuration mode; LaTeX export needs an additional
+     (add-to-list 'org-latex-listings-langs '(conf " ")) in .emacs */
+  pre.src-conf:before { content: 'Configuration File'; }
 
   table { border-collapse:collapse; }
   caption.t-above { caption-side: top; }
   caption.t-bottom { caption-side: bottom; }
   td, th { vertical-align:top;  }
-  th.right  { text-align: center;  }
-  th.left   { text-align: center;   }
-  th.center { text-align: center; }
-  td.right  { text-align: right;  }
-  td.left   { text-align: left;   }
-  td.center { text-align: center; }
+  th.org-right  { text-align: center;  }
+  th.org-left   { text-align: center;   }
+  th.org-center { text-align: center; }
+  td.org-right  { text-align: right;  }
+  td.org-left   { text-align: left;   }
+  td.org-center { text-align: center; }
   dt { font-weight: bold; }
-  .footpara:nth-child(2) { display: inline; }
-  .footpara { display: block; }
+  .footpara { display: inline; }
   .footdef  { margin-bottom: 1em; }
   .figure { padding: 1em; }
   .figure p { text-align: center; }
@@ -86,6 +177,7 @@
     { font-size: 10px; font-weight: bold; white-space: nowrap; }
   .org-info-js_search-highlight
     { background-color: #ffff00; color: #000000; font-weight: bold; }
+  .org-svg { width: 90%; }
   /*]]>*/-->
 </style>
 <script type="text/javascript">
@@ -93,7 +185,7 @@
 @licstart  The following is the entire license notice for the
 JavaScript code in this tag.
 
-Copyright (C) 2012-2013 Free Software Foundation, Inc.
+Copyright (C) 2012-2017 Free Software Foundation, Inc.
 
 The JavaScript code in this tag is free software: you can
 redistribute it and/or modify it under the terms of the GNU
@@ -142,49 +234,49 @@ for the JavaScript code in this tag.
 <h2>Table of Contents</h2>
 <div id="text-table-of-contents">
 <ul>
-<li><a href="#sec-1">1. Week8</a>
+<li><a href="#orgd7c6937">1. Week8</a>
 <ul>
-<li><a href="#sec-1-1">1.1. Copyright Statement</a>
+<li><a href="#org365b871">1.1. Copyright Statement</a>
 <ul>
-<li><a href="#sec-1-1-1">1.1.1. License</a></li>
-<li><a href="#sec-1-1-2">1.1.2. Hazel Code is licensed under AGPL3.0+</a></li>
+<li><a href="#org191c4af">1.1.1. License</a></li>
+<li><a href="#orgc17184e">1.1.2. Hazel Code is licensed under AGPL3.0+</a></li>
 </ul>
 </li>
-<li><a href="#sec-1-2">1.2. Init ORG-MODE</a>
+<li><a href="#org32017a4">1.2. Init ORG-MODE</a>
 <ul>
-<li><a href="#sec-1-2-1">1.2.1. Org export</a></li>
+<li><a href="#org467edb2">1.2.1. Org export</a></li>
 </ul>
 </li>
-<li><a href="#sec-1-3">1.3. Org Template</a></li>
-<li><a href="#sec-1-4">1.4. Remember how to compile?</a></li>
-<li><a href="#sec-1-5">1.5. Malloc continued!</a>
+<li><a href="#orgef2f7f1">1.3. Org Template</a></li>
+<li><a href="#org104d47a">1.4. Remember how to compile?</a></li>
+<li><a href="#org5ad0596">1.5. Malloc continued!</a>
 <ul>
-<li><a href="#sec-1-5-1">1.5.1. free</a></li>
-<li><a href="#sec-1-5-2">1.5.2. Malloc and structs</a></li>
-<li><a href="#sec-1-5-3">1.5.3. Malloc Array of Array versus 2D</a></li>
-<li><a href="#sec-1-5-4">1.5.4. Malloc array of arrays structs?</a></li>
-<li><a href="#sec-1-5-5">1.5.5. Using pointers for protection</a></li>
+<li><a href="#org8db7022">1.5.1. free</a></li>
+<li><a href="#org2f3e6b6">1.5.2. Malloc and structs</a></li>
+<li><a href="#org8093288">1.5.3. Malloc Array of Array versus 2D</a></li>
+<li><a href="#orgfd83e99">1.5.4. Malloc array of arrays structs?</a></li>
+<li><a href="#orgb5283c9">1.5.5. Using pointers for protection</a></li>
 </ul>
 </li>
-<li><a href="#sec-1-6">1.6. Objects and APIs</a>
+<li><a href="#orgdf9b80c">1.6. Objects and APIs</a>
 <ul>
-<li><a href="#sec-1-6-1">1.6.1. original stack example</a></li>
-<li><a href="#sec-1-6-2">1.6.2. Recommended stack example</a></li>
-<li><a href="#sec-1-6-3">1.6.3. Test First Top Down Design</a></li>
+<li><a href="#org6c7a3ea">1.6.1. original stack example</a></li>
+<li><a href="#orge64e1bd">1.6.2. Recommended stack example</a></li>
+<li><a href="#org586c3d2">1.6.3. Test First Top Down Design</a></li>
 </ul>
 </li>
-<li><a href="#sec-1-7">1.7. Recursive Definitions</a>
+<li><a href="#org97a01fd">1.7. Recursive Definitions</a>
 <ul>
-<li><a href="#sec-1-7-1">1.7.1. Mutually Recursive functions</a></li>
-<li><a href="#sec-1-7-2">1.7.2. Recursive Structs</a></li>
-<li><a href="#sec-1-7-3">1.7.3. Mutually Recursive Structs</a></li>
+<li><a href="#org3024025">1.7.1. Mutually Recursive functions</a></li>
+<li><a href="#org6d2760b">1.7.2. Recursive Structs</a></li>
+<li><a href="#org7aef771">1.7.3. Mutually Recursive Structs</a></li>
 </ul>
 </li>
-<li><a href="#sec-1-8">1.8. Debugging</a>
+<li><a href="#org7226b43">1.8. Debugging</a>
 <ul>
-<li><a href="#sec-1-8-1">1.8.1. GDB</a></li>
-<li><a href="#sec-1-8-2">1.8.2. valgrind</a></li>
-<li><a href="#sec-1-8-3">1.8.3. More bad code</a></li>
+<li><a href="#org67dfee0">1.8.1. GDB</a></li>
+<li><a href="#orgedc0ee3">1.8.2. valgrind</a></li>
+<li><a href="#org994f210">1.8.3. More bad code</a></li>
 </ul>
 </li>
 </ul>
@@ -193,11 +285,12 @@ for the JavaScript code in this tag.
 </div>
 </div>
 
-<div id="outline-container-sec-1" class="outline-2">
-<h2 id="sec-1"><span class="section-number-2">1</span> Week8</h2>
+<div id="outline-container-orgd7c6937" class="outline-2">
+<h2 id="orgd7c6937"><span class="section-number-2">1</span> Week8</h2>
 <div class="outline-text-2" id="text-1">
-</div><div id="outline-container-sec-1-1" class="outline-3">
-<h3 id="sec-1-1"><span class="section-number-3">1.1</span> Copyright Statement</h3>
+</div>
+<div id="outline-container-org365b871" class="outline-3">
+<h3 id="org365b871"><span class="section-number-3">1.1</span> Copyright Statement</h3>
 <div class="outline-text-3" id="text-1-1">
 <p>
 If you are in CMPUT201 at UAlberta this code is released in the public
@@ -209,8 +302,8 @@ Otherwise it is (c) 2020 Abram Hindle, Hazel Campbell AGPL3.0+
 </p>
 </div>
 
-<div id="outline-container-sec-1-1-1" class="outline-4">
-<h4 id="sec-1-1-1"><span class="section-number-4">1.1.1</span> License</h4>
+<div id="outline-container-org191c4af" class="outline-4">
+<h4 id="org191c4af"><span class="section-number-4">1.1.1</span> License</h4>
 <div class="outline-text-4" id="text-1-1-1">
 <p>
 Week 3 notes
@@ -239,8 +332,8 @@ along with this program.  If not, see <a href="https://www.gnu.org/licenses/">ht
 </div>
 
 
-<div id="outline-container-sec-1-1-2" class="outline-4">
-<h4 id="sec-1-1-2"><span class="section-number-4">1.1.2</span> Hazel Code is licensed under AGPL3.0+</h4>
+<div id="outline-container-orgc17184e" class="outline-4">
+<h4 id="orgc17184e"><span class="section-number-4">1.1.2</span> Hazel Code is licensed under AGPL3.0+</h4>
 <div class="outline-text-4" id="text-1-1-2">
 <p>
 Hazel's code is also found here
@@ -255,36 +348,33 @@ license, unless otherwise noted.
 </div>
 </div>
 
-<div id="outline-container-sec-1-2" class="outline-3">
-<h3 id="sec-1-2"><span class="section-number-3">1.2</span> Init ORG-MODE</h3>
+<div id="outline-container-org32017a4" class="outline-3">
+<h3 id="org32017a4"><span class="section-number-3">1.2</span> Init ORG-MODE</h3>
 <div class="outline-text-3" id="text-1-2">
 <div class="org-src-container">
-
 <pre class="src src-elisp"><span style="color: #b22222;">;; </span><span style="color: #b22222;">I need this for org-mode to work well</span>
-
-(<span style="color: #a020f0;">require</span> '<span style="color: #008b8b;">ob-sh</span>)
-<span style="color: #b22222;">;</span><span style="color: #b22222;">(require 'ob-shell)</span>
- (org-babel-do-load-languages 'org-babel-load-languages '((sh . t)))
-<span style="color: #b22222;">;</span><span style="color: #b22222;">(org-babel-do-load-languages 'org-babel-load-languages '((shell . t)))</span>
+<span style="color: #b22222;">;; </span><span style="color: #b22222;">If we have a new org-mode use ob-shell</span>
+<span style="color: #b22222;">;; </span><span style="color: #b22222;">otherwise use ob-sh --- but not both!</span>
+(<span style="color: #a020f0;">if</span> (<span style="color: #a020f0;">require</span> '<span style="color: #008b8b;">ob-shell</span> nil 'noerror)
+  (<span style="color: #a020f0;">progn</span>
+    (org-babel-do-load-languages 'org-babel-load-languages '((shell . t))))
+  (<span style="color: #a020f0;">progn</span>
+    (<span style="color: #a020f0;">require</span> '<span style="color: #008b8b;">ob-sh</span>)
+    (org-babel-do-load-languages 'org-babel-load-languages '((sh . t)))))
 (org-babel-do-load-languages 'org-babel-load-languages '((C . t)))
 (org-babel-do-load-languages 'org-babel-load-languages '((python . t)))
 (<span style="color: #a020f0;">setq</span> org-src-fontify-natively t)
 (<span style="color: #a020f0;">setq</span> org-confirm-babel-evaluate nil) <span style="color: #b22222;">;; </span><span style="color: #b22222;">danger!</span>
 (custom-set-faces
- <span style="color: #b22222;">;; </span><span style="color: #b22222;">custom-set-faces was added by Custom.</span>
- <span style="color: #b22222;">;; </span><span style="color: #b22222;">If you edit it by hand, you could mess it up, so be careful.</span>
- <span style="color: #b22222;">;; </span><span style="color: #b22222;">Your init file should contain only one such instance.</span>
- <span style="color: #b22222;">;; </span><span style="color: #b22222;">If there is more than one, they won't work right.</span>
  '(org-block ((t (<span style="color: #483d8b;">:inherit</span> shadow <span style="color: #483d8b;">:foreground</span> <span style="color: #8b2252;">"black"</span>)))))
 </pre>
 </div>
 </div>
 
-<div id="outline-container-sec-1-2-1" class="outline-4">
-<h4 id="sec-1-2-1"><span class="section-number-4">1.2.1</span> Org export</h4>
+<div id="outline-container-org467edb2" class="outline-4">
+<h4 id="org467edb2"><span class="section-number-4">1.2.1</span> Org export</h4>
 <div class="outline-text-4" id="text-1-2-1">
 <div class="org-src-container">
-
 <pre class="src src-elisp">(org-html-export-to-html)
 (org-latex-export-to-pdf)
 (org-ascii-export-to-ascii)
@@ -294,16 +384,14 @@ license, unless otherwise noted.
 </div>
 </div>
 
-
-<div id="outline-container-sec-1-3" class="outline-3">
-<h3 id="sec-1-3"><span class="section-number-3">1.3</span> Org Template</h3>
+<div id="outline-container-orgef2f7f1" class="outline-3">
+<h3 id="orgef2f7f1"><span class="section-number-3">1.3</span> Org Template</h3>
 <div class="outline-text-3" id="text-1-3">
 <p>
 Copy and paste this to demo C
 </p>
 
 <div class="org-src-container">
-
 <pre class="src src-C"><span style="color: #483d8b;">#include</span> <span style="color: #8b2252;">&lt;stdio.h&gt;</span>
 
 <span style="color: #228b22;">int</span> <span style="color: #0000ff;">main</span>(<span style="color: #228b22;">int</span> <span style="color: #a0522d;">argc</span>, <span style="color: #228b22;">char</span>**<span style="color: #a0522d;">argv</span>) {
@@ -314,8 +402,8 @@ Copy and paste this to demo C
 </div>
 </div>
 
-<div id="outline-container-sec-1-4" class="outline-3">
-<h3 id="sec-1-4"><span class="section-number-3">1.4</span> Remember how to compile?</h3>
+<div id="outline-container-org104d47a" class="outline-3">
+<h3 id="org104d47a"><span class="section-number-3">1.4</span> Remember how to compile?</h3>
 <div class="outline-text-3" id="text-1-4">
 <p>
 gcc  -std=c99 -pedantic -Wall -Wextra -ftrapv -ggdb3 -o programname programname.c
@@ -323,16 +411,16 @@ gcc  -std=c99 -pedantic -Wall -Wextra -ftrapv -ggdb3 -o programname programname.
 </div>
 </div>
 
-<div id="outline-container-sec-1-5" class="outline-3">
-<h3 id="sec-1-5"><span class="section-number-3">1.5</span> Malloc continued!</h3>
+<div id="outline-container-org5ad0596" class="outline-3">
+<h3 id="org5ad0596"><span class="section-number-3">1.5</span> Malloc continued!</h3>
 <div class="outline-text-3" id="text-1-5">
 <p>
 Continued.
 </p>
 </div>
 
-<div id="outline-container-sec-1-5-1" class="outline-4">
-<h4 id="sec-1-5-1"><span class="section-number-4">1.5.1</span> free</h4>
+<div id="outline-container-org8db7022" class="outline-4">
+<h4 id="org8db7022"><span class="section-number-4">1.5.1</span> free</h4>
 <div class="outline-text-4" id="text-1-5-1">
 <p>
 What happens if we don't free?
@@ -345,7 +433,6 @@ Our program can get bigger!
 
 
 <div class="org-src-container">
-
 <pre class="src src-C"><span style="color: #483d8b;">#include</span> <span style="color: #8b2252;">&lt;assert.h&gt;</span>
 <span style="color: #483d8b;">#include</span> <span style="color: #8b2252;">&lt;stdio.h&gt;</span>
 <span style="color: #483d8b;">#include</span> <span style="color: #8b2252;">&lt;stdlib.h&gt;</span>
@@ -404,7 +491,6 @@ and not freeing it).
 </p>
 
 <div class="org-src-container">
-
 <pre class="src src-sh">gcc -std=c99 -Wall -pedantic -Werror -o nofree ./nofree.c
 valgrind ./nofree 2&gt;&amp;1
 <span style="color: #483d8b;">echo</span> now let<span style="color: #8b2252;">\'</span>s leak check
@@ -507,8 +593,8 @@ now let's leak check
 </div>
 </div>
 
-<div id="outline-container-sec-1-5-2" class="outline-4">
-<h4 id="sec-1-5-2"><span class="section-number-4">1.5.2</span> Malloc and structs</h4>
+<div id="outline-container-org2f3e6b6" class="outline-4">
+<h4 id="org2f3e6b6"><span class="section-number-4">1.5.2</span> Malloc and structs</h4>
 <div class="outline-text-4" id="text-1-5-2">
 <p>
 Mallocs are often used with arrays of structs. You need to get the
@@ -516,7 +602,6 @@ sizeof the struct.
 </p>
 
 <div class="org-src-container">
-
 <pre class="src src-C"><span style="color: #483d8b;">#include</span> <span style="color: #8b2252;">&lt;stdbool.h&gt;</span> 
 <span style="color: #483d8b;">#include</span> <span style="color: #8b2252;">&lt;stdio.h&gt;</span>
 <span style="color: #483d8b;">#include</span> <span style="color: #8b2252;">&lt;stdlib.h&gt;</span>
@@ -598,6 +683,8 @@ sizeof the struct.
     }
     printf(<span style="color: #8b2252;">"We found %d flushes out of %d hands: %f\n"</span>, flushes, N/HANDSIZE, flushes/(<span style="color: #228b22;">float</span>)(N/HANDSIZE));
 }
+
+
 </pre>
 </div>
 
@@ -628,8 +715,8 @@ We found 799 flushes out of 200000 hands: 0.003995
 </div>
 
 
-<div id="outline-container-sec-1-5-3" class="outline-4">
-<h4 id="sec-1-5-3"><span class="section-number-4">1.5.3</span> Malloc Array of Array versus 2D</h4>
+<div id="outline-container-org8093288" class="outline-4">
+<h4 id="org8093288"><span class="section-number-4">1.5.3</span> Malloc Array of Array versus 2D</h4>
 <div class="outline-text-4" id="text-1-5-3">
 <p>
 So instead of allocating a big block and carving a 2D array out of it
@@ -642,7 +729,6 @@ Try playing with the order of allocation of rows. Does it affect the result?
 
 
 <div class="org-src-container">
-
 <pre class="src src-C"><span style="color: #483d8b;">#include</span> <span style="color: #8b2252;">&lt;stdio.h&gt;</span>
 <span style="color: #483d8b;">#include</span> <span style="color: #8b2252;">&lt;stdlib.h&gt;</span>
 
@@ -807,8 +893,8 @@ aoa:
 </div>
 
 
-<div id="outline-container-sec-1-5-4" class="outline-4">
-<h4 id="sec-1-5-4"><span class="section-number-4">1.5.4</span> Malloc array of arrays structs?</h4>
+<div id="outline-container-orgfd83e99" class="outline-4">
+<h4 id="orgfd83e99"><span class="section-number-4">1.5.4</span> Malloc array of arrays structs?</h4>
 <div class="outline-text-4" id="text-1-5-4">
 <p>
 Arrays of Arrays? Pointers?
@@ -819,7 +905,6 @@ X ** x?
 </p>
 
 <div class="org-src-container">
-
 <pre class="src src-C"><span style="color: #483d8b;">#include</span> <span style="color: #8b2252;">&lt;stdbool.h&gt;</span> 
 <span style="color: #483d8b;">#include</span> <span style="color: #8b2252;">&lt;stdio.h&gt;</span>
 <span style="color: #483d8b;">#include</span> <span style="color: #8b2252;">&lt;stdlib.h&gt;</span>
@@ -901,6 +986,8 @@ X ** x?
     }
     printf(<span style="color: #8b2252;">"We found %d flushes out of %d hands: %f\n"</span>, flushes, HANDS, flushes/(<span style="color: #228b22;">float</span>)(HANDS));
 }
+
+
 </pre>
 </div>
 
@@ -933,7 +1020,6 @@ That's kind of gross, let's model our hands as arrays of 5 cards instead.
 </p>
 
 <div class="org-src-container">
-
 <pre class="src src-C"><span style="color: #483d8b;">#include</span> <span style="color: #8b2252;">&lt;stdbool.h&gt;</span> 
 <span style="color: #483d8b;">#include</span> <span style="color: #8b2252;">&lt;stdio.h&gt;</span>
 <span style="color: #483d8b;">#include</span> <span style="color: #8b2252;">&lt;stdlib.h&gt;</span>
@@ -1018,6 +1104,8 @@ That's kind of gross, let's model our hands as arrays of 5 cards instead.
     }
     printf(<span style="color: #8b2252;">"We found %d flushes out of %d hands: %f\n"</span>, flushes, HANDS, flushes/(<span style="color: #228b22;">float</span>)(HANDS));
 }
+
+
 </pre>
 </div>
 
@@ -1046,8 +1134,7 @@ We found 3855 flushes out of 1000000 hands: 0.003855
 </pre>
 
 <ul class="org-ul">
-<li>Remember to tangle this to write to disk
-</li>
+<li>Remember to tangle this to write to disk</li>
 </ul>
 
 <p>
@@ -1055,7 +1142,6 @@ We found 3855 flushes out of 1000000 hands: 0.003855
 </p>
 
 <div class="org-src-container">
-
 <pre class="src src-C"><span style="color: #483d8b;">#include</span> <span style="color: #8b2252;">&lt;stdbool.h&gt;</span> 
 <span style="color: #483d8b;">#include</span> <span style="color: #8b2252;">&lt;stdio.h&gt;</span>
 <span style="color: #483d8b;">#include</span> <span style="color: #8b2252;">&lt;stdlib.h&gt;</span>
@@ -1159,6 +1245,8 @@ We found 3855 flushes out of 1000000 hands: 0.003855
     <span style="color: #b22222;">// </span><span style="color: #b22222;">comment these out to try valgrind</span>
     free(hands);
 }
+
+
 </pre>
 </div>
 
@@ -1187,7 +1275,6 @@ We found 4003 flushes out of 1000000 hands: 0.004003
 </pre>
 
 <div class="org-src-container">
-
 <pre class="src src-sh">gcc -std=c99 -pedantic -Wall -Wextra -ftrapv -ggdb3 -o cards-aoa ./cards-aoa.c
 valgrind --leak-check=full ./cards-aoa 2&gt;&amp;1
 </pre>
@@ -1234,14 +1321,13 @@ We found 3845 flushes out of 1000000 hands: 0.003845
 </div>
 
 
-<div id="outline-container-sec-1-5-5" class="outline-4">
-<h4 id="sec-1-5-5"><span class="section-number-4">1.5.5</span> Using pointers for protection</h4>
+<div id="outline-container-orgb5283c9" class="outline-4">
+<h4 id="orgb5283c9"><span class="section-number-4">1.5.5</span> Using pointers for protection</h4>
 <div class="outline-text-4" id="text-1-5-5">
 <p>
 <a href="./stack.c">./stack.c</a>
 </p>
 <div class="org-src-container">
-
 <pre class="src src-C"><span style="color: #483d8b;">#define</span> <span style="color: #a0522d;">_POSIX_C_SOURCE</span> 200809L <span style="color: #b22222;">// </span><span style="color: #b22222;">&lt;-- needed for getline</span>
 <span style="color: #483d8b;">#include</span> <span style="color: #8b2252;">&lt;stdint.h&gt;</span>
 <span style="color: #483d8b;">#include</span> <span style="color: #8b2252;">&lt;stdio.h&gt;</span>
@@ -1386,10 +1472,10 @@ We found 3845 flushes out of 1000000 hands: 0.003845
 <pre class="example">
 Stack 0x56362ee8c260: 0 items starting at (nil)
 Enter some lines. Press ctrl-d (EOF) to end.
+
 </pre>
 
 <div class="org-src-container">
-
 <pre class="src src-sh">gcc -std=c99 -pedantic -Wall -Wextra -ftrapv -ggdb3 -o stack ./stack.c
 seq 9990 9999 | ./stack
 </pre>
@@ -1433,8 +1519,8 @@ Stack 0x55f488145260: 0 items starting at (nil)
 </div>
 </div>
 
-<div id="outline-container-sec-1-6" class="outline-3">
-<h3 id="sec-1-6"><span class="section-number-3">1.6</span> Objects and APIs</h3>
+<div id="outline-container-orgdf9b80c" class="outline-3">
+<h3 id="orgdf9b80c"><span class="section-number-3">1.6</span> Objects and APIs</h3>
 <div class="outline-text-3" id="text-1-6">
 <p>
 When you make a new type you should follow some guidelines:
@@ -1445,119 +1531,73 @@ When you make a new type you should follow some guidelines:
 <ul class="org-ul">
 <li>For type dog:
 <ul class="org-ul">
-<li>dog<sub>create</sub>()
-</li>
-<li>dog<sub>free</sub>(dog)
-</li>
-<li>dog<sub>move</sub>(dog,x,y)
-</li>
-<li>dog<sub>bark</sub>(dog, bark<sub>spec</sub>)
-</li>
-<li>createDog()
-</li>
-<li>freeDog(dog)
-</li>
-<li>moveDog(dog,x,y)
-</li>
-<li>barkDog(dog, barkSpec)
-</li>
-</ul>
-</li>
+<li>dog<sub>create</sub>()</li>
+<li>dog<sub>free</sub>(dog)</li>
+<li>dog<sub>move</sub>(dog,x,y)</li>
+<li>dog<sub>bark</sub>(dog, bark<sub>spec</sub>)</li>
+<li>createDog()</li>
+<li>freeDog(dog)</li>
+<li>moveDog(dog,x,y)</li>
+<li>barkDog(dog, barkSpec)</li>
+</ul></li>
 <li>For type cat:
 <ul class="org-ul">
-<li>createCat()
-</li>
-<li>freeCat(cat)
-</li>
-<li>moveCat(cat)
-</li>
-<li>meowCat(cat, meow<sub>spec</sub>)
-</li>
-<li>cat<sub>create</sub>()
-</li>
-<li>cat<sub>free</sub>(cat)
-</li>
-<li>cat<sub>move</sub>(cat)
-</li>
-<li>cat<sub>meow</sub>(cat, meow<sub>spec</sub>)
-</li>
-</ul>
-</li>
-</ul>
-</li>
+<li>createCat()</li>
+<li>freeCat(cat)</li>
+<li>moveCat(cat)</li>
+<li>meowCat(cat, meow<sub>spec</sub>)</li>
+<li>cat<sub>create</sub>()</li>
+<li>cat<sub>free</sub>(cat)</li>
+<li>cat<sub>move</sub>(cat)</li>
+<li>cat<sub>meow</sub>(cat, meow<sub>spec</sub>)</li>
+</ul></li>
+</ul></li>
 <li>Should your type be a struct or a pointer to a struct?
 <ul class="org-ul">
 <li>struct pros:
 <ul class="org-ul">
-<li>functional
-</li>
-<li>easy to copy
-</li>
-<li>stay on the stack
-</li>
-<li>safe shallow copy of data
-</li>
-<li>don't have to free
-</li>
-</ul>
-</li>
+<li>functional</li>
+<li>easy to copy</li>
+<li>stay on the stack</li>
+<li>safe shallow copy of data</li>
+<li>don't have to free</li>
+</ul></li>
 <li>struct cons:
 <ul class="org-ul">
-<li>if structs have pointers then copies of structs might have old pointers
-</li>
-<li>doesn't play well we malloc and realloc
-</li>
-<li>stale info
-</li>
-<li>hard to ensure consistency
-</li>
-<li>big
-</li>
-</ul>
-</li>
+<li>if structs have pointers then copies of structs might have old pointers</li>
+<li>doesn't play well we malloc and realloc</li>
+<li>stale info</li>
+<li>hard to ensure consistency</li>
+<li>big</li>
+</ul></li>
 <li>pointer to struct pros:
 <ul class="org-ul">
-<li>small to pass (1 pointer)
-</li>
-<li>can have multiple references
-</li>
-<li>more control
-</li>
-<li>can hide implementation better
-</li>
-<li>consistency
-</li>
-<li>malloc and realloc friendly.
-</li>
-</ul>
-</li>
+<li>small to pass (1 pointer)</li>
+<li>can have multiple references</li>
+<li>more control</li>
+<li>can hide implementation better</li>
+<li>consistency</li>
+<li>malloc and realloc friendly.</li>
+</ul></li>
 <li>pointer to struct cons:
 <ul class="org-ul">
-<li>malloc
-</li>
-<li>must free
-</li>
-<li>hard to copy
-</li>
-<li>deepcopy required
-</li>
-<li>awkward with arrays
-</li>
-</ul>
-</li>
-</ul>
-</li>
+<li>malloc</li>
+<li>must free</li>
+<li>hard to copy</li>
+<li>deepcopy required</li>
+<li>awkward with arrays</li>
+</ul></li>
+</ul></li>
 </ul>
 </div>
 
-<div id="outline-container-sec-1-6-1" class="outline-4">
-<h4 id="sec-1-6-1"><span class="section-number-4">1.6.1</span> original stack example</h4>
+<div id="outline-container-org6c7a3ea" class="outline-4">
+<h4 id="org6c7a3ea"><span class="section-number-4">1.6.1</span> original stack example</h4>
 <div class="outline-text-4" id="text-1-6-1">
 <p>
 <a href="./stack.c">./stack.c</a>
 </p>
 <div class="org-src-container">
-
 <pre class="src src-C"><span style="color: #483d8b;">#define</span> <span style="color: #a0522d;">_POSIX_C_SOURCE</span> 200809L <span style="color: #b22222;">// </span><span style="color: #b22222;">&lt;-- needed for getline</span>
 <span style="color: #483d8b;">#include</span> <span style="color: #8b2252;">&lt;stdint.h&gt;</span>
 <span style="color: #483d8b;">#include</span> <span style="color: #8b2252;">&lt;stdio.h&gt;</span>
@@ -1699,18 +1739,18 @@ When you make a new type you should follow some guidelines:
 <pre class="example">
 Stack 0x55f01a3ba260: 0 items starting at (nil)
 Enter some lines. Press ctrl-d (EOF) to end.
+
 </pre>
 </div>
 </div>
 
-<div id="outline-container-sec-1-6-2" class="outline-4">
-<h4 id="sec-1-6-2"><span class="section-number-4">1.6.2</span> Recommended stack example</h4>
+<div id="outline-container-orge64e1bd" class="outline-4">
+<h4 id="orge64e1bd"><span class="section-number-4">1.6.2</span> Recommended stack example</h4>
 <div class="outline-text-4" id="text-1-6-2">
 <p>
 <a href="./new_stack.c">./new_stack.c</a>
 </p>
 <div class="org-src-container">
-
 <pre class="src src-C"><span style="color: #483d8b;">#define</span> <span style="color: #a0522d;">_POSIX_C_SOURCE</span> 200809L <span style="color: #b22222;">// </span><span style="color: #b22222;">&lt;-- needed for getline</span>
 <span style="color: #483d8b;">#include</span> <span style="color: #8b2252;">&lt;stdint.h&gt;</span>
 <span style="color: #483d8b;">#include</span> <span style="color: #8b2252;">&lt;stdio.h&gt;</span>
@@ -1852,10 +1892,10 @@ Enter some lines. Press ctrl-d (EOF) to end.
 <pre class="example">
 Stack 0x55b4c76de260: 0 items starting at (nil)
 Enter some lines. Press ctrl-d (EOF) to end.
+
 </pre>
 
 <div class="org-src-container">
-
 <pre class="src src-sh">gcc -std=c99 -pedantic -Wall -Wextra -ftrapv -ggdb3 -o new_stack ./new_stack.c
 seq 9990 9999 | ./new_stack
 </pre>
@@ -1903,20 +1943,22 @@ Stack 0x56180d47c260: 1 items starting at 0x56180d47e880
 
 Stack 0x56180d47c260: 0 items starting at (nil)
 9990
+
 </pre>
 </div>
 </div>
 
-<div id="outline-container-sec-1-6-3" class="outline-4">
-<h4 id="sec-1-6-3"><span class="section-number-4">1.6.3</span> Test First Top Down Design</h4>
+<div id="outline-container-org586c3d2" class="outline-4">
+<h4 id="org586c3d2"><span class="section-number-4">1.6.3</span> Test First Top Down Design</h4>
 </div>
 </div>
 
-<div id="outline-container-sec-1-7" class="outline-3">
-<h3 id="sec-1-7"><span class="section-number-3">1.7</span> Recursive Definitions</h3>
+<div id="outline-container-org97a01fd" class="outline-3">
+<h3 id="org97a01fd"><span class="section-number-3">1.7</span> Recursive Definitions</h3>
 <div class="outline-text-3" id="text-1-7">
-</div><div id="outline-container-sec-1-7-1" class="outline-4">
-<h4 id="sec-1-7-1"><span class="section-number-4">1.7.1</span> Mutually Recursive functions</h4>
+</div>
+<div id="outline-container-org3024025" class="outline-4">
+<h4 id="org3024025"><span class="section-number-4">1.7.1</span> Mutually Recursive functions</h4>
 <div class="outline-text-4" id="text-1-7-1">
 <p>
 How do you get functions to call each other when they need each other
@@ -1928,13 +1970,11 @@ Function prototypes!
 </p>
 
 <div class="org-src-container">
-
 <pre class="src src-C"><span style="color: #483d8b;">#include</span> <span style="color: #8b2252;">&lt;stdio.h&gt;</span>
 <span style="color: #483d8b;">#include</span> <span style="color: #8b2252;">&lt;stdint.h&gt;</span>
 <span style="color: #483d8b;">#include</span> <span style="color: #8b2252;">&lt;stdlib.h&gt;</span>
 
 <span style="color: #228b22;">int64_t</span> <span style="color: #0000ff;">addThenDecrementThenMul</span>( <span style="color: #228b22;">int64_t</span> <span style="color: #a0522d;">current</span> );
-
 <span style="color: #228b22;">int64_t</span> <span style="color: #0000ff;">mulThenDecrementThenAdd</span>( <span style="color: #228b22;">int64_t</span> <span style="color: #a0522d;">current</span> );
 
 
@@ -1955,7 +1995,7 @@ Function prototypes!
 <span style="color: #228b22;">int</span> <span style="color: #0000ff;">main</span>() {
     <span style="color: #a020f0;">for</span> (<span style="color: #228b22;">int</span> <span style="color: #a0522d;">i</span> = 0 ; i &lt;  33 ; i++ ) {
         printf(<span style="color: #8b2252;">"addThenDecrementThenMul(%4d) ==%19ld\n"</span>, i, addThenDecrementThenMul( i ));
-        printf(<span style="color: #8b2252;">"mulThenDecrementThenAdd(%4d) ==%19ld\n"</span>, i, mulThenDecrementThenAdd( i ));   
+        <span style="color: #b22222;">//</span><span style="color: #b22222;">printf("mulThenDecrementThenAdd(%4d) ==%19ld\n", i, mulThenDecrementThenAdd( i ));   </span>
     }
 }
 </pre>
@@ -1963,71 +2003,38 @@ Function prototypes!
 
 <pre class="example">
 addThenDecrementThenMul(   0) ==                  0
-mulThenDecrementThenAdd(   0) ==                  0
 addThenDecrementThenMul(   1) ==                  1
-mulThenDecrementThenAdd(   1) ==                  0
 addThenDecrementThenMul(   2) ==                  2
-mulThenDecrementThenAdd(   2) ==                  2
 addThenDecrementThenMul(   3) ==                  5
-mulThenDecrementThenAdd(   3) ==                  6
 addThenDecrementThenMul(   4) ==                 10
-mulThenDecrementThenAdd(   4) ==                 20
 addThenDecrementThenMul(   5) ==                 25
-mulThenDecrementThenAdd(   5) ==                 50
 addThenDecrementThenMul(   6) ==                 56
-mulThenDecrementThenAdd(   6) ==                150
 addThenDecrementThenMul(   7) ==                157
-mulThenDecrementThenAdd(   7) ==                392
 addThenDecrementThenMul(   8) ==                400
-mulThenDecrementThenAdd(   8) ==               1256
 addThenDecrementThenMul(   9) ==               1265
-mulThenDecrementThenAdd(   9) ==               3600
 addThenDecrementThenMul(  10) ==               3610
-mulThenDecrementThenAdd(  10) ==              12650
 addThenDecrementThenMul(  11) ==              12661
-mulThenDecrementThenAdd(  11) ==              39710
 addThenDecrementThenMul(  12) ==              39722
-mulThenDecrementThenAdd(  12) ==             151932
 addThenDecrementThenMul(  13) ==             151945
-mulThenDecrementThenAdd(  13) ==             516386
 addThenDecrementThenMul(  14) ==             516400
-mulThenDecrementThenAdd(  14) ==            2127230
 addThenDecrementThenMul(  15) ==            2127245
-mulThenDecrementThenAdd(  15) ==            7746000
 addThenDecrementThenMul(  16) ==            7746016
-mulThenDecrementThenAdd(  16) ==           34035920
 addThenDecrementThenMul(  17) ==           34035937
-mulThenDecrementThenAdd(  17) ==          131682272
 addThenDecrementThenMul(  18) ==          131682290
-mulThenDecrementThenAdd(  18) ==          612646866
 addThenDecrementThenMul(  19) ==          612646885
-mulThenDecrementThenAdd(  19) ==         2501963510
 addThenDecrementThenMul(  20) ==         2501963530
-mulThenDecrementThenAdd(  20) ==        12252937700
 addThenDecrementThenMul(  21) ==        12252937721
-mulThenDecrementThenAdd(  21) ==        52541234130
 addThenDecrementThenMul(  22) ==        52541234152
-mulThenDecrementThenAdd(  22) ==       269564629862
 addThenDecrementThenMul(  23) ==       269564629885
-mulThenDecrementThenAdd(  23) ==      1208448385496
 addThenDecrementThenMul(  24) ==      1208448385520
-mulThenDecrementThenAdd(  24) ==      6469551117240
 addThenDecrementThenMul(  25) ==      6469551117265
-mulThenDecrementThenAdd(  25) ==     30211209638000
 addThenDecrementThenMul(  26) ==     30211209638026
-mulThenDecrementThenAdd(  26) ==    168208329048890
 addThenDecrementThenMul(  27) ==    168208329048917
-mulThenDecrementThenAdd(  27) ==    815702660226702
 addThenDecrementThenMul(  28) ==    815702660226730
-mulThenDecrementThenAdd(  28) ==   4709833213369676
 addThenDecrementThenMul(  29) ==   4709833213369705
-mulThenDecrementThenAdd(  29) ==  23655377146575170
 addThenDecrementThenMul(  30) ==  23655377146575200
-mulThenDecrementThenAdd(  30) == 141294996401091150
 addThenDecrementThenMul(  31) == 141294996401091181
-mulThenDecrementThenAdd(  31) == 733316691543831200
 addThenDecrementThenMul(  32) == 733316691543831232
-mulThenDecrementThenAdd(  32) ==4521439884834917792
 </pre>
 
 
@@ -2053,11 +2060,10 @@ If you don't use prototypes on your mutual recursive functions you will get erro
 </pre>
 </div>
 </div>
-<div id="outline-container-sec-1-7-2" class="outline-4">
-<h4 id="sec-1-7-2"><span class="section-number-4">1.7.2</span> Recursive Structs</h4>
+<div id="outline-container-org6d2760b" class="outline-4">
+<h4 id="org6d2760b"><span class="section-number-4">1.7.2</span> Recursive Structs</h4>
 <div class="outline-text-4" id="text-1-7-2">
 <div class="org-src-container">
-
 <pre class="src src-C"><span style="color: #483d8b;">#include</span> <span style="color: #8b2252;">&lt;stdio.h&gt;</span>
 <span style="color: #483d8b;">#include</span> <span style="color: #8b2252;">&lt;stdint.h&gt;</span>
 <span style="color: #483d8b;">#include</span> <span style="color: #8b2252;">&lt;stdlib.h&gt;</span>
@@ -2084,7 +2090,7 @@ If you don't use prototypes on your mutual recursive functions you will get erro
 <span style="color: #a020f0;">struct</span> <span style="color: #228b22;">linkedList</span> * <span style="color: #0000ff;">allocLinkedList</span>( <span style="color: #a020f0;">enum</span> <span style="color: #228b22;">atype</span> <span style="color: #a0522d;">type</span>, 
                                      <span style="color: #a020f0;">union</span> <span style="color: #228b22;">anything</span> <span style="color: #a0522d;">value</span>, 
                                      <span style="color: #a020f0;">struct</span> <span style="color: #228b22;">linkedList</span> * <span style="color: #a0522d;">next</span>) {
-    <span style="color: #a020f0;">struct</span> <span style="color: #228b22;">linkedList</span> * <span style="color: #a0522d;">node</span> = malloc(<span style="color: #a020f0;">sizeof</span>(<span style="color: #a020f0;">struct</span> <span style="color: #228b22;">linkedList</span>));
+    <span style="color: #a020f0;">struct</span> <span style="color: #228b22;">linkedList</span> * <span style="color: #a0522d;">node</span> = malloc(<span style="color: #a020f0;">sizeof</span>(*node));
     node-&gt;type  = type;
     node-&gt;value = value;
     node-&gt;next  = next;
@@ -2098,6 +2104,15 @@ If you don't use prototypes on your mutual recursive functions you will get erro
     freeLinkedList( list-&gt;next );
     free( list );
 }
+
+<span style="color: #228b22;">void</span> <span style="color: #0000ff;">freeLinkedListIterative</span>( <span style="color: #a020f0;">struct</span> <span style="color: #228b22;">linkedList</span> * <span style="color: #a0522d;">list</span>) {
+    <span style="color: #a020f0;">while</span>( list != <span style="color: #008b8b;">NULL</span> ) {
+        <span style="color: #a020f0;">struct</span> <span style="color: #228b22;">linkedList</span> * <span style="color: #a0522d;">freeMe</span> = list;
+        list = list-&gt;next;
+        free(freeMe);
+    }
+}
+
 
 <span style="color: #228b22;">int</span> <span style="color: #0000ff;">main</span>() {
     <span style="color: #a020f0;">union</span> <span style="color: #228b22;">anything</span> <span style="color: #a0522d;">v</span> = {.aDouble = 1.2 };
@@ -2115,29 +2130,30 @@ If you don't use prototypes on your mutual recursive functions you will get erro
             printf(<span style="color: #8b2252;">"Print node type:  %5d next: %p\n"</span>, iter-&gt;type, (<span style="color: #228b22;">void</span>*)iter-&gt;next);
         }
         iter = iter-&gt;next;
+        <span style="color: #b22222;">// </span><span style="color: #b22222;">iter-&gt;next ===&gt; iter</span>
     }    
-    freeLinkedList( head );
+    <span style="color: #b22222;">// </span><span style="color: #b22222;">freeLinkedList( head );</span>
+    <span style="color: #b22222;">// </span><span style="color: #b22222;">freeLinkedListIterative( head );</span>
     <span style="color: #a020f0;">return</span> 0;
 }
 </pre>
 </div>
 
 <pre class="example">
-Print node value:    18 next: 0x55dc0f440380
-Print node value:    16 next: 0x55dc0f440360
-Print node value:    14 next: 0x55dc0f440340
-Print node value:    12 next: 0x55dc0f440320
-Print node value:    10 next: 0x55dc0f440300
-Print node value:     8 next: 0x55dc0f4402e0
-Print node value:     6 next: 0x55dc0f4402c0
-Print node value:     4 next: 0x55dc0f4402a0
-Print node value:     2 next: 0x55dc0f440280
-Print node value:     0 next: 0x55dc0f440260
+Print node value:    18 next: 0x55e6b82b8380
+Print node value:    16 next: 0x55e6b82b8360
+Print node value:    14 next: 0x55e6b82b8340
+Print node value:    12 next: 0x55e6b82b8320
+Print node value:    10 next: 0x55e6b82b8300
+Print node value:     8 next: 0x55e6b82b82e0
+Print node value:     6 next: 0x55e6b82b82c0
+Print node value:     4 next: 0x55e6b82b82a0
+Print node value:     2 next: 0x55e6b82b8280
+Print node value:     0 next: 0x55e6b82b8260
 Print node type:      2 next: (nil)
 </pre>
 
 <div class="org-src-container">
-
 <pre class="src src-sh">gcc -std=c99 -Wall -pedantic -Werror -o linkedlist ./linkedlist.c
 valgrind ./linkedlist 2&gt;&amp;1
 <span style="color: #483d8b;">echo</span> now let<span style="color: #8b2252;">\'</span>s leak check
@@ -2146,11 +2162,11 @@ valgrind --leak-check=full ./linkedlist 2&gt;&amp;1
 </div>
 
 <pre class="example">
-==6272== Memcheck, a memory error detector
-==6272== Copyright (C) 2002-2017, and GNU GPL'd, by Julian Seward et al.
-==6272== Using Valgrind-3.13.0 and LibVEX; rerun with -h for copyright info
-==6272== Command: ./linkedlist
-==6272== 
+==19776== Memcheck, a memory error detector
+==19776== Copyright (C) 2002-2017, and GNU GPL'd, by Julian Seward et al.
+==19776== Using Valgrind-3.13.0 and LibVEX; rerun with -h for copyright info
+==19776== Command: ./linkedlist
+==19776== 
 Print node value:    18 next: 0x522d3a0
 Print node value:    16 next: 0x522d340
 Print node value:    14 next: 0x522d2e0
@@ -2161,22 +2177,28 @@ Print node value:     6 next: 0x522d160
 Print node value:     4 next: 0x522d100
 Print node value:     2 next: 0x522d0a0
 Print node value:     0 next: 0x522d040
-Print node value:    32 next: (nil)
-==6272== 
-==6272== HEAP SUMMARY:
-==6272==     in use at exit: 0 bytes in 0 blocks
-==6272==   total heap usage: 12 allocs, 12 frees, 4,360 bytes allocated
-==6272== 
-==6272== All heap blocks were freed -- no leaks are possible
-==6272== 
-==6272== For counts of detected and suppressed errors, rerun with: -v
-==6272== ERROR SUMMARY: 0 errors from 0 contexts (suppressed: 0 from 0)
+Print node type:      2 next: (nil)
+==19776== 
+==19776== HEAP SUMMARY:
+==19776==     in use at exit: 264 bytes in 11 blocks
+==19776==   total heap usage: 12 allocs, 1 frees, 4,360 bytes allocated
+==19776== 
+==19776== LEAK SUMMARY:
+==19776==    definitely lost: 24 bytes in 1 blocks
+==19776==    indirectly lost: 240 bytes in 10 blocks
+==19776==      possibly lost: 0 bytes in 0 blocks
+==19776==    still reachable: 0 bytes in 0 blocks
+==19776==         suppressed: 0 bytes in 0 blocks
+==19776== Rerun with --leak-check=full to see details of leaked memory
+==19776== 
+==19776== For counts of detected and suppressed errors, rerun with: -v
+==19776== ERROR SUMMARY: 0 errors from 0 contexts (suppressed: 0 from 0)
 now let's leak check
-==6276== Memcheck, a memory error detector
-==6276== Copyright (C) 2002-2017, and GNU GPL'd, by Julian Seward et al.
-==6276== Using Valgrind-3.13.0 and LibVEX; rerun with -h for copyright info
-==6276== Command: ./linkedlist
-==6276== 
+==19782== Memcheck, a memory error detector
+==19782== Copyright (C) 2002-2017, and GNU GPL'd, by Julian Seward et al.
+==19782== Using Valgrind-3.13.0 and LibVEX; rerun with -h for copyright info
+==19782== Command: ./linkedlist
+==19782== 
 Print node value:    18 next: 0x522d3a0
 Print node value:    16 next: 0x522d340
 Print node value:    14 next: 0x522d2e0
@@ -2187,16 +2209,26 @@ Print node value:     6 next: 0x522d160
 Print node value:     4 next: 0x522d100
 Print node value:     2 next: 0x522d0a0
 Print node value:     0 next: 0x522d040
-Print node value:    32 next: (nil)
-==6276== 
-==6276== HEAP SUMMARY:
-==6276==     in use at exit: 0 bytes in 0 blocks
-==6276==   total heap usage: 12 allocs, 12 frees, 4,360 bytes allocated
-==6276== 
-==6276== All heap blocks were freed -- no leaks are possible
-==6276== 
-==6276== For counts of detected and suppressed errors, rerun with: -v
-==6276== ERROR SUMMARY: 0 errors from 0 contexts (suppressed: 0 from 0)
+Print node type:      2 next: (nil)
+==19782== 
+==19782== HEAP SUMMARY:
+==19782==     in use at exit: 264 bytes in 11 blocks
+==19782==   total heap usage: 12 allocs, 1 frees, 4,360 bytes allocated
+==19782== 
+==19782== 264 (24 direct, 240 indirect) bytes in 1 blocks are definitely lost in loss record 3 of 3
+==19782==    at 0x4C2FB0F: malloc (in /usr/lib/valgrind/vgpreload_memcheck-amd64-linux.so)
+==19782==    by 0x1086F6: allocLinkedList (in /home/hindle1/projects/CMPUT201/CMPUT201W20B2-public/week08/linkedlist)
+==19782==    by 0x1087EA: main (in /home/hindle1/projects/CMPUT201/CMPUT201W20B2-public/week08/linkedlist)
+==19782== 
+==19782== LEAK SUMMARY:
+==19782==    definitely lost: 24 bytes in 1 blocks
+==19782==    indirectly lost: 240 bytes in 10 blocks
+==19782==      possibly lost: 0 bytes in 0 blocks
+==19782==    still reachable: 0 bytes in 0 blocks
+==19782==         suppressed: 0 bytes in 0 blocks
+==19782== 
+==19782== For counts of detected and suppressed errors, rerun with: -v
+==19782== ERROR SUMMARY: 1 errors from 1 contexts (suppressed: 0 from 0)
 </pre>
 
 
@@ -2281,11 +2313,10 @@ Print node value:    32 next: (nil)
 </div>
 
 
-<div id="outline-container-sec-1-7-3" class="outline-4">
-<h4 id="sec-1-7-3"><span class="section-number-4">1.7.3</span> Mutually Recursive Structs</h4>
+<div id="outline-container-org7aef771" class="outline-4">
+<h4 id="org7aef771"><span class="section-number-4">1.7.3</span> Mutually Recursive Structs</h4>
 <div class="outline-text-4" id="text-1-7-3">
 <div class="org-src-container">
-
 <pre class="src src-C"><span style="color: #483d8b;">#include</span> <span style="color: #8b2252;">&lt;stdio.h&gt;</span>
 <span style="color: #483d8b;">#include</span> <span style="color: #8b2252;">&lt;stdint.h&gt;</span>
 <span style="color: #483d8b;">#include</span> <span style="color: #8b2252;">&lt;stdlib.h&gt;</span>
@@ -2322,123 +2353,90 @@ Print node value:    32 next: (nil)
 sX:      8
 sY:      8
 sZ:     16
-sZ.X.yPtr:       0x7fff840b7d28
-sZ.Y.xPtr:       0x7fff840b7d20
-&amp;sX:             0x7fff840b7d20
-&amp;sY:             0x7fff840b7d28
-&amp;sZ.X:   0x7fff840b7d30
-&amp;sY.Y:   0x7fff840b7d38
+sZ.X.yPtr:	 0x7fff45c69d28
+sZ.Y.xPtr:	 0x7fff45c69d20
+&amp;sX:		 0x7fff45c69d20
+&amp;sY:		 0x7fff45c69d28
+&amp;sZ.X:	 0x7fff45c69d30
+&amp;sY.Y:	 0x7fff45c69d38
+
 </pre>
 </div>
 </div>
 </div>
 
 
-<div id="outline-container-sec-1-8" class="outline-3">
-<h3 id="sec-1-8"><span class="section-number-3">1.8</span> Debugging</h3>
+<div id="outline-container-org7226b43" class="outline-3">
+<h3 id="org7226b43"><span class="section-number-3">1.8</span> Debugging</h3>
 <div class="outline-text-3" id="text-1-8">
-</div><div id="outline-container-sec-1-8-1" class="outline-4">
-<h4 id="sec-1-8-1"><span class="section-number-4">1.8.1</span> GDB</h4>
+</div>
+<div id="outline-container-org67dfee0" class="outline-4">
+<h4 id="org67dfee0"><span class="section-number-4">1.8.1</span> GDB</h4>
 <div class="outline-text-4" id="text-1-8-1">
 <ul class="org-ul">
-<li>debuggers let us step through programs and observe variables.
-</li>
+<li>debuggers let us step through programs and observe variables.</li>
 <li>Compile a program with -g or -ggdb3 with gcc or clang
 <ul class="org-ul">
-<li>this adds debugging symbols (so you can read it!)
-</li>
-</ul>
-</li>
+<li>this adds debugging symbols (so you can read it!)</li>
+</ul></li>
 <li>tell gdb to use your program
 <ul class="org-ul">
-<li>gdb ./a.out
-</li>
-</ul>
-</li>
+<li>gdb ./a.out</li>
+</ul></li>
 <li>tell gdb to run your program 
 <ul class="org-ul">
-<li>run
-</li>
-</ul>
-</li>
+<li>run</li>
+</ul></li>
 <li>tell gbd to print a backtrace when something crashes
 <ul class="org-ul">
-<li>bt
-</li>
-</ul>
-</li>
+<li>bt</li>
+</ul></li>
 <li>tell gdb to print a variable name
 <ul class="org-ul">
-<li>p string
-</li>
-</ul>
-</li>
+<li>p string</li>
+</ul></li>
 <li>tell gdb to break at some point
 <ul class="org-ul">
-<li>b filename:function
-</li>
-<li>b filename:line
-</li>
-<li>b line
-</li>
-<li>b function
-</li>
-</ul>
-</li>
+<li>b filename:function</li>
+<li>b filename:line</li>
+<li>b line</li>
+<li>b function</li>
+</ul></li>
 <li>tell gdb to step into code (including into functions)
 <ul class="org-ul">
-<li>s
-</li>
-</ul>
-</li>
+<li>s</li>
+</ul></li>
 <li>tell gdb to eval the next line (run functions)
 <ul class="org-ul">
-<li>n
-</li>
-</ul>
-</li>
+<li>n</li>
+</ul></li>
 <li>keep running (continue)
 <ul class="org-ul">
-<li>c
-</li>
-</ul>
-</li>
+<li>c</li>
+</ul></li>
 <li>print source code (list)
 <ul class="org-ul">
-<li>l
-</li>
-</ul>
-</li>
+<li>l</li>
+</ul></li>
 <li>remove breakpoint
 <ul class="org-ul">
-<li>clear
-</li>
-<li>clear function
-</li>
-<li>clear line
-</li>
-</ul>
-</li>
+<li>clear</li>
+<li>clear function</li>
+<li>clear line</li>
+</ul></li>
 <li>quit
 <ul class="org-ul">
-<li>q
-</li>
-</ul>
-</li>
+<li>q</li>
+</ul></li>
 <li>man gdb to get more help
 <ul class="org-ul">
-<li>GDB manual <a href="http://sourceware.org/gdb/current/onlinedocs/gdb/">http://sourceware.org/gdb/current/onlinedocs/gdb/</a>
-</li>
-<li>ctrl-x a put gdb in curses semi-graphical mode
-</li>
+<li>GDB manual <a href="http://sourceware.org/gdb/current/onlinedocs/gdb/">http://sourceware.org/gdb/current/onlinedocs/gdb/</a></li>
+<li>ctrl-x a put gdb in curses semi-graphical mode</li>
 <li>ddd is a graphical wrapper for gdb (probably not in your VM)
 <ul class="org-ul">
-<li>I like ctrl-x a better
-</li>
-</ul>
-</li>
-</ul>
-</li>
+<li>I like ctrl-x a better</li>
+</ul></li>
+</ul></li>
 </ul>
 
 <pre class="example">
@@ -2494,7 +2492,7 @@ $4 = 0x555555757670 "100\n"
 56	}
 57	
 58	char * pop(Stack stack) {
-(gdb)
+(gdb) 
 </pre>
 
 <p>
@@ -2633,47 +2631,36 @@ We found 3857 flushes out of 1000000 hands: 0.003857
 </div>
 </div>
 
-<div id="outline-container-sec-1-8-2" class="outline-4">
-<h4 id="sec-1-8-2"><span class="section-number-4">1.8.2</span> valgrind</h4>
+<div id="outline-container-orgedc0ee3" class="outline-4">
+<h4 id="orgedc0ee3"><span class="section-number-4">1.8.2</span> valgrind</h4>
 <div class="outline-text-4" id="text-1-8-2">
 <ul class="org-ul">
 <li>Valgrind can debug memory issues like
 <ul class="org-ul">
-<li>unitialized values
-</li>
-<li>memory leaks
-</li>
-<li>reading/writing free'd memory
-</li>
-<li>bad use of the stack (not great)
-</li>
-</ul>
-</li>
+<li>unitialized values</li>
+<li>memory leaks</li>
+<li>reading/writing free'd memory</li>
+<li>bad use of the stack (not great)</li>
+</ul></li>
 
-<li>valgrind ./yourprogram
-</li>
-<li>valgrind &#x2013;tool=memcheck ./yourprogram
-</li>
+<li>valgrind ./yourprogram</li>
+<li>valgrind &#x2013;tool=memcheck ./yourprogram</li>
 <li>valgrind &#x2013;tool=exp-sgcheck ./yourprogram
 <ul class="org-ul">
-<li>for stack checks (not great)
-</li>
-</ul>
-</li>
-<li>There's always the manual <a href="https://valgrind.org/docs/manual/manual.html">https://valgrind.org/docs/manual/manual.html</a>
-</li>
+<li>for stack checks (not great)</li>
+</ul></li>
+<li>There's always the manual <a href="https://valgrind.org/docs/manual/manual.html">https://valgrind.org/docs/manual/manual.html</a></li>
 <li>do you want a lot of output?
 <ul class="org-ul">
-<li>valgrind &#x2013;leak-check=full &#x2013;show-leak-kinds=all &#x2013;track-origins=yes  &#x2013;verbose ./yourprgram
-</li>
-</ul>
-</li>
+<li>valgrind &#x2013;leak-check=full &#x2013;show-leak-kinds=all &#x2013;track-origins=yes  &#x2013;verbose ./yourprgram</li>
+</ul></li>
 </ul>
 </div>
 
-<ol class="org-ol"><li><a id="sec-1-8-2-1" name="sec-1-8-2-1"></a>Array Out of Bounds<br  /><div class="outline-text-5" id="text-1-8-2-1">
+<ol class="org-ol">
+<li><a id="org8557156"></a>Array Out of Bounds<br />
+<div class="outline-text-5" id="text-1-8-2-1">
 <div class="org-src-container">
-
 <pre class="src src-C"><span style="color: #483d8b;">#define</span> <span style="color: #a0522d;">_POSIX_C_SOURCE</span> 200809L
 <span style="color: #483d8b;">#include</span> <span style="color: #8b2252;">&lt;stdint.h&gt;</span>
 <span style="color: #483d8b;">#include</span> <span style="color: #8b2252;">&lt;stdio.h&gt;</span>
@@ -2708,7 +2695,6 @@ We found 3857 flushes out of 1000000 hands: 0.003857
 </div>
 
 <div class="org-src-container">
-
 <pre class="src src-sh">gcc -std=c99 -O0 -pedantic -Wall -Wextra -ftrapv -ggdb3 -o array_oob ./array_oob.c
 <span style="color: #483d8b;">echo</span> 32 | ./array_oob 
 <span style="color: #483d8b;">echo</span> $<span style="color: #a0522d;">?</span>
@@ -2720,94 +2706,35 @@ How big?
 0
 1
 0
+
 </pre>
 
 
 <div class="org-src-container">
-
 <pre class="src src-sh">gcc -std=c99 -O0 -pedantic -Wall -Wextra -ftrapv -ggdb3 -o array_oob ./array_oob.c
-<span style="color: #483d8b;">echo</span> 32 | valgrind --leak-check=full  ./array_oob 2&gt;&amp;1
+<span style="color: #483d8b;">echo</span> 6 | valgrind --leak-check=full  ./array_oob 2&gt;&amp;1
 <span style="color: #483d8b;">echo</span> $<span style="color: #a0522d;">?</span>
 </pre>
 </div>
 
 <pre class="example">
-==20124== Memcheck, a memory error detector
-==20124== Copyright (C) 2002-2017, and GNU GPL'd, by Julian Seward et al.
-==20124== Using Valgrind-3.13.0 and LibVEX; rerun with -h for copyright info
-==20124== Command: ./array_oob
-==20124== 
-==20124== Conditional jump or move depends on uninitialised value(s)
-==20124==    at 0x4E988DA: vfprintf (vfprintf.c:1642)
-==20124==    by 0x4EA0F25: printf (printf.c:33)
-==20124==    by 0x1088AE: main (array_oob.c:27)
-==20124== 
-==20124== Use of uninitialised value of size 8
-==20124==    at 0x4E9486B: _itoa_word (_itoa.c:179)
-==20124==    by 0x4E97F0D: vfprintf (vfprintf.c:1642)
-==20124==    by 0x4EA0F25: printf (printf.c:33)
-==20124==    by 0x1088AE: main (array_oob.c:27)
-==20124== 
-==20124== Conditional jump or move depends on uninitialised value(s)
-==20124==    at 0x4E94875: _itoa_word (_itoa.c:179)
-==20124==    by 0x4E97F0D: vfprintf (vfprintf.c:1642)
-==20124==    by 0x4EA0F25: printf (printf.c:33)
-==20124==    by 0x1088AE: main (array_oob.c:27)
-==20124== 
-==20124== Conditional jump or move depends on uninitialised value(s)
-==20124==    at 0x4E98014: vfprintf (vfprintf.c:1642)
-==20124==    by 0x4EA0F25: printf (printf.c:33)
-==20124==    by 0x1088AE: main (array_oob.c:27)
-==20124== 
-==20124== Conditional jump or move depends on uninitialised value(s)
-==20124==    at 0x4E98B4C: vfprintf (vfprintf.c:1642)
-==20124==    by 0x4EA0F25: printf (printf.c:33)
-==20124==    by 0x1088AE: main (array_oob.c:27)
-==20124== 
-==20124== Conditional jump or move depends on uninitialised value(s)
-==20124==    at 0x10895E: __addvsi3 (in /home/hindle1/projects/CMPUT201/CMPUT201W20B2-public/week08/array_oob)
-==20124==    by 0x1088C4: main (array_oob.c:28)
-==20124== 
-==20124== Conditional jump or move depends on uninitialised value(s)
-==20124==    at 0x4E988DA: vfprintf (vfprintf.c:1642)
-==20124==    by 0x4EA0F25: printf (printf.c:33)
-==20124==    by 0x1088ED: main (array_oob.c:29)
-==20124== 
-==20124== Use of uninitialised value of size 8
-==20124==    at 0x4E9486B: _itoa_word (_itoa.c:179)
-==20124==    by 0x4E97F0D: vfprintf (vfprintf.c:1642)
-==20124==    by 0x4EA0F25: printf (printf.c:33)
-==20124==    by 0x1088ED: main (array_oob.c:29)
-==20124== 
-==20124== Conditional jump or move depends on uninitialised value(s)
-==20124==    at 0x4E94875: _itoa_word (_itoa.c:179)
-==20124==    by 0x4E97F0D: vfprintf (vfprintf.c:1642)
-==20124==    by 0x4EA0F25: printf (printf.c:33)
-==20124==    by 0x1088ED: main (array_oob.c:29)
-==20124== 
-==20124== Conditional jump or move depends on uninitialised value(s)
-==20124==    at 0x4E98014: vfprintf (vfprintf.c:1642)
-==20124==    by 0x4EA0F25: printf (printf.c:33)
-==20124==    by 0x1088ED: main (array_oob.c:29)
-==20124== 
-==20124== Conditional jump or move depends on uninitialised value(s)
-==20124==    at 0x4E98B4C: vfprintf (vfprintf.c:1642)
-==20124==    by 0x4EA0F25: printf (printf.c:33)
-==20124==    by 0x1088ED: main (array_oob.c:29)
-==20124== 
+==21934== Memcheck, a memory error detector
+==21934== Copyright (C) 2002-2017, and GNU GPL'd, by Julian Seward et al.
+==21934== Using Valgrind-3.13.0 and LibVEX; rerun with -h for copyright info
+==21934== Command: ./array_oob
+==21934== 
 How big?
-0
-1
-==20124== 
-==20124== HEAP SUMMARY:
-==20124==     in use at exit: 0 bytes in 0 blocks
-==20124==   total heap usage: 2 allocs, 2 frees, 8,192 bytes allocated
-==20124== 
-==20124== All heap blocks were freed -- no leaks are possible
-==20124== 
-==20124== For counts of detected and suppressed errors, rerun with: -v
-==20124== Use --track-origins=yes to see where uninitialised values come from
-==20124== ERROR SUMMARY: 11 errors from 11 contexts (suppressed: 0 from 0)
+-16775049
+-16775048
+==21934== 
+==21934== HEAP SUMMARY:
+==21934==     in use at exit: 0 bytes in 0 blocks
+==21934==   total heap usage: 2 allocs, 2 frees, 8,192 bytes allocated
+==21934== 
+==21934== All heap blocks were freed -- no leaks are possible
+==21934== 
+==21934== For counts of detected and suppressed errors, rerun with: -v
+==21934== ERROR SUMMARY: 0 errors from 0 contexts (suppressed: 0 from 0)
 0
 </pre>
 
@@ -2816,7 +2743,6 @@ The output is dependent on your input
 </p>
 
 <div class="org-src-container">
-
 <pre class="src src-sh">gcc -std=c99 --stack-check -pedantic -Wall -Wextra -ftrapv -g3 -o array_oob ./array_oob.c || <span style="color: #483d8b;">echo</span> did not compile
 <span style="color: #483d8b;">echo</span> 32 | valgrind --tool=exp-sgcheck ./array_oob 2&gt;&amp;1
 <span style="color: #483d8b;">echo</span> $<span style="color: #a0522d;">?</span>
@@ -2824,40 +2750,39 @@ The output is dependent on your input
 </div>
 
 <pre class="example">
-==20317== exp-sgcheck, a stack and global array overrun detector
-==20317== NOTE: This is an Experimental-Class Valgrind Tool
-==20317== Copyright (C) 2003-2017, and GNU GPL'd, by OpenWorks Ltd et al.
-==20317== Using Valgrind-3.13.0 and LibVEX; rerun with -h for copyright info
-==20317== Command: ./array_oob
-==20317== 
---20317-- warning: evaluate_Dwarf3_Expr: unhandled DW_OP_ 0x93
---20317-- warning: evaluate_Dwarf3_Expr: unhandled DW_OP_ 0x93
---20317-- warning: evaluate_Dwarf3_Expr: unhandled DW_OP_ 0x93
---20317-- warning: evaluate_Dwarf3_Expr: unhandled DW_OP_ 0x93
---20317-- warning: evaluate_Dwarf3_Expr: unhandled DW_OP_ 0x93
---20317-- warning: evaluate_Dwarf3_Expr: unhandled DW_OP_ 0x93
---20317-- warning: evaluate_Dwarf3_Expr: unhandled DW_OP_ 0x93
---20317-- warning: evaluate_Dwarf3_Expr: unhandled DW_OP_ 0x93
---20317-- warning: evaluate_Dwarf3_Expr: unhandled DW_OP_ 0x93
---20317-- warning: evaluate_Dwarf3_Expr: unhandled DW_OP_ 0x93
---20317-- warning: evaluate_Dwarf3_Expr: unhandled DW_OP_ 0x93
---20317-- warning: evaluate_Dwarf3_Expr: unhandled DW_OP_ 0x93
---20317-- warning: evaluate_Dwarf3_Expr: unhandled DW_OP_ 0x93
---20317-- warning: evaluate_Dwarf3_Expr: unhandled DW_OP_ 0x93
---20317-- warning: evaluate_Dwarf3_Expr: unhandled DW_OP_ 0x93
---20317-- warning: evaluate_Dwarf3_Expr: unhandled DW_OP_ 0x93
+==21996== exp-sgcheck, a stack and global array overrun detector
+==21996== NOTE: This is an Experimental-Class Valgrind Tool
+==21996== Copyright (C) 2003-2017, and GNU GPL'd, by OpenWorks Ltd et al.
+==21996== Using Valgrind-3.13.0 and LibVEX; rerun with -h for copyright info
+==21996== Command: ./array_oob
+==21996== 
+--21996-- warning: evaluate_Dwarf3_Expr: unhandled DW_OP_ 0x93
+--21996-- warning: evaluate_Dwarf3_Expr: unhandled DW_OP_ 0x93
+--21996-- warning: evaluate_Dwarf3_Expr: unhandled DW_OP_ 0x93
+--21996-- warning: evaluate_Dwarf3_Expr: unhandled DW_OP_ 0x93
+--21996-- warning: evaluate_Dwarf3_Expr: unhandled DW_OP_ 0x93
+--21996-- warning: evaluate_Dwarf3_Expr: unhandled DW_OP_ 0x93
+--21996-- warning: evaluate_Dwarf3_Expr: unhandled DW_OP_ 0x93
+--21996-- warning: evaluate_Dwarf3_Expr: unhandled DW_OP_ 0x93
+--21996-- warning: evaluate_Dwarf3_Expr: unhandled DW_OP_ 0x93
+--21996-- warning: evaluate_Dwarf3_Expr: unhandled DW_OP_ 0x93
+--21996-- warning: evaluate_Dwarf3_Expr: unhandled DW_OP_ 0x93
+--21996-- warning: evaluate_Dwarf3_Expr: unhandled DW_OP_ 0x93
+--21996-- warning: evaluate_Dwarf3_Expr: unhandled DW_OP_ 0x93
+--21996-- warning: evaluate_Dwarf3_Expr: unhandled DW_OP_ 0x93
+--21996-- warning: evaluate_Dwarf3_Expr: unhandled DW_OP_ 0x93
+--21996-- warning: evaluate_Dwarf3_Expr: unhandled DW_OP_ 0x93
 How big?
 0
 1
-==20317== 
-==20317== ERROR SUMMARY: 0 errors from 0 contexts (suppressed: 2 from 2)
+==21996== 
+==21996== ERROR SUMMARY: 0 errors from 0 contexts (suppressed: 2 from 2)
 0
 </pre>
 
 
 
 <div class="org-src-container">
-
 <pre class="src src-sh">gcc -std=c99 -pedantic -Wall -Wextra -ftrapv -ggdb3 -o array_oob ./array_oob.c
 gnome-terminal -- gdb ./array_oob
 </pre>
@@ -2865,9 +2790,9 @@ gnome-terminal -- gdb ./array_oob
 </div>
 </li>
 
-<li><a id="sec-1-8-2-2" name="sec-1-8-2-2"></a>Array unitialized<br  /><div class="outline-text-5" id="text-1-8-2-2">
+<li><a id="orgcc3088a"></a>Array unitialized<br />
+<div class="outline-text-5" id="text-1-8-2-2">
 <div class="org-src-container">
-
 <pre class="src src-C"><span style="color: #483d8b;">#define</span> <span style="color: #a0522d;">_POSIX_C_SOURCE</span> 200809L
 <span style="color: #483d8b;">#include</span> <span style="color: #8b2252;">&lt;stdint.h&gt;</span>
 <span style="color: #483d8b;">#include</span> <span style="color: #8b2252;">&lt;stdio.h&gt;</span>
@@ -2898,7 +2823,6 @@ gnome-terminal -- gdb ./array_oob
 </div>
 
 <div class="org-src-container">
-
 <pre class="src src-sh">gcc -std=c99 -O0 -pedantic -Wall -Wextra -ftrapv -ggdb3 -o array_uninit ./array_uninit.c
 <span style="color: #483d8b;">echo</span> 10 | ./array_uninit 
 <span style="color: #483d8b;">echo</span> $<span style="color: #a0522d;">?</span>
@@ -2922,7 +2846,6 @@ How big?
 
 
 <div class="org-src-container">
-
 <pre class="src src-sh">gcc -std=c99 -O0 -pedantic -Wall -Wextra -ftrapv -ggdb3 -o array_uninit ./array_uninit.c
 <span style="color: #483d8b;">echo</span> 5 | valgrind --leak-check=full  ./array_uninit 2&gt;&amp;1
 <span style="color: #483d8b;">echo</span> $<span style="color: #a0522d;">?</span>
@@ -2985,12 +2908,13 @@ How big?
 Yeah valgrind did not like that. It complained about uninitiliazed values.
 </p>
 </div>
-</li></ol>
+</li>
+</ol>
 </div>
 
 
-<div id="outline-container-sec-1-8-3" class="outline-4">
-<h4 id="sec-1-8-3"><span class="section-number-4">1.8.3</span> More bad code</h4>
+<div id="outline-container-org994f210" class="outline-4">
+<h4 id="org994f210"><span class="section-number-4">1.8.3</span> More bad code</h4>
 <div class="outline-text-4" id="text-1-8-3">
 <p>
 These files are debugging examples where you should practice valgrind
@@ -2998,7 +2922,6 @@ and gcc.
 </p>
 
 <div class="org-src-container">
-
 <pre class="src src-sh"><span style="color: #b22222;"># </span><span style="color: #b22222;">look a bash for loop!</span>
 <span style="color: #483d8b;">echo</span> Compiling!
 <span style="color: #a020f0;">for</span> file<span style="color: #a020f0;"> in</span> ./array_oob.c ./array_uninit.c ./bad_realloc.c ./bad_str.c ./double_free.c ./huge_array.c ./infinite_recursion.c ./malloc.c ./malloc_oob.c ./malloc_uninit.c ./segv.c ./simple_uninit.c ./stack.c ./stack_limit.c ./use_after_free.c 
@@ -3010,10 +2933,13 @@ gcc -std=c99 -pedantic -Wall -Wextra -ftrapv -ggdb3 -o <span style="color: #ff00
 
 <pre class="example">
 Compiling!
+
 </pre>
 </div>
 
-<ol class="org-ol"><li><a id="sec-1-8-3-0-1" name="sec-1-8-3-0-1"></a>Files<br  /><div class="outline-text-6" id="text-1-8-3-0-1">
+<ol class="org-ol">
+<li><a id="orgd270618"></a>Files<br />
+<div class="outline-text-6" id="text-1-8-3-0-1">
 <p>
 <a href="./array_oob.c">./array_oob.c</a>
 <a href="./array_uninit.c">./array_uninit.c</a>
@@ -3033,103 +2959,44 @@ Compiling!
 </p>
 </div>
 </li>
+</ol>
 
-<li><a id="sec-1-8-3-1" name="sec-1-8-3-1"></a>./array<sub>oob</sub>.c<br  /><div class="outline-text-5" id="text-1-8-3-1">
+<li><a id="orgb85e186"></a>./array<sub>oob.c</sub><br />
+<div class="outline-text-5" id="text-1-8-3-1">
 <p>
 <a href="./array_oob.c">./array_oob.c</a>
 </p>
 
 <div class="org-src-container">
-
 <pre class="src src-sh">gcc -std=c99 -pedantic -Wall -Wextra -ftrapv -ggdb3 -o array_oob ./array_oob.c
-<span style="color: #483d8b;">echo</span> 33 | valgrind ./array_oob 2&gt;&amp;1
+<span style="color: #483d8b;">echo</span> 15 | valgrind ./array_oob 2&gt;&amp;1
 </pre>
 </div>
 
 <pre class="example">
-==27387== Memcheck, a memory error detector
-==27387== Copyright (C) 2002-2017, and GNU GPL'd, by Julian Seward et al.
-==27387== Using Valgrind-3.13.0 and LibVEX; rerun with -h for copyright info
-==27387== Command: ./array_oob
-==27387== 
-==27387== Conditional jump or move depends on uninitialised value(s)
-==27387==    at 0x4E988DA: vfprintf (vfprintf.c:1642)
-==27387==    by 0x4EA0F25: printf (printf.c:33)
-==27387==    by 0x1088AE: main (array_oob.c:27)
-==27387== 
-==27387== Use of uninitialised value of size 8
-==27387==    at 0x4E9486B: _itoa_word (_itoa.c:179)
-==27387==    by 0x4E97F0D: vfprintf (vfprintf.c:1642)
-==27387==    by 0x4EA0F25: printf (printf.c:33)
-==27387==    by 0x1088AE: main (array_oob.c:27)
-==27387== 
-==27387== Conditional jump or move depends on uninitialised value(s)
-==27387==    at 0x4E94875: _itoa_word (_itoa.c:179)
-==27387==    by 0x4E97F0D: vfprintf (vfprintf.c:1642)
-==27387==    by 0x4EA0F25: printf (printf.c:33)
-==27387==    by 0x1088AE: main (array_oob.c:27)
-==27387== 
-==27387== Conditional jump or move depends on uninitialised value(s)
-==27387==    at 0x4E98014: vfprintf (vfprintf.c:1642)
-==27387==    by 0x4EA0F25: printf (printf.c:33)
-==27387==    by 0x1088AE: main (array_oob.c:27)
-==27387== 
-==27387== Conditional jump or move depends on uninitialised value(s)
-==27387==    at 0x4E98B4C: vfprintf (vfprintf.c:1642)
-==27387==    by 0x4EA0F25: printf (printf.c:33)
-==27387==    by 0x1088AE: main (array_oob.c:27)
-==27387== 
-==27387== Conditional jump or move depends on uninitialised value(s)
-==27387==    at 0x10895E: __addvsi3 (in /home/hindle1/projects/CMPUT201/CMPUT201W20B2-public/week08/array_oob)
-==27387==    by 0x1088C4: main (array_oob.c:28)
-==27387== 
-==27387== Conditional jump or move depends on uninitialised value(s)
-==27387==    at 0x4E988DA: vfprintf (vfprintf.c:1642)
-==27387==    by 0x4EA0F25: printf (printf.c:33)
-==27387==    by 0x1088ED: main (array_oob.c:29)
-==27387== 
-==27387== Use of uninitialised value of size 8
-==27387==    at 0x4E9486B: _itoa_word (_itoa.c:179)
-==27387==    by 0x4E97F0D: vfprintf (vfprintf.c:1642)
-==27387==    by 0x4EA0F25: printf (printf.c:33)
-==27387==    by 0x1088ED: main (array_oob.c:29)
-==27387== 
-==27387== Conditional jump or move depends on uninitialised value(s)
-==27387==    at 0x4E94875: _itoa_word (_itoa.c:179)
-==27387==    by 0x4E97F0D: vfprintf (vfprintf.c:1642)
-==27387==    by 0x4EA0F25: printf (printf.c:33)
-==27387==    by 0x1088ED: main (array_oob.c:29)
-==27387== 
-==27387== Conditional jump or move depends on uninitialised value(s)
-==27387==    at 0x4E98014: vfprintf (vfprintf.c:1642)
-==27387==    by 0x4EA0F25: printf (printf.c:33)
-==27387==    by 0x1088ED: main (array_oob.c:29)
-==27387== 
-==27387== Conditional jump or move depends on uninitialised value(s)
-==27387==    at 0x4E98B4C: vfprintf (vfprintf.c:1642)
-==27387==    by 0x4EA0F25: printf (printf.c:33)
-==27387==    by 0x1088ED: main (array_oob.c:29)
-==27387== 
+==23630== Memcheck, a memory error detector
+==23630== Copyright (C) 2002-2017, and GNU GPL'd, by Julian Seward et al.
+==23630== Using Valgrind-3.13.0 and LibVEX; rerun with -h for copyright info
+==23630== Command: ./array_oob
+==23630== 
 How big?
 0
 1
-==27387== 
-==27387== HEAP SUMMARY:
-==27387==     in use at exit: 0 bytes in 0 blocks
-==27387==   total heap usage: 2 allocs, 2 frees, 8,192 bytes allocated
-==27387== 
-==27387== All heap blocks were freed -- no leaks are possible
-==27387== 
-==27387== For counts of detected and suppressed errors, rerun with: -v
-==27387== Use --track-origins=yes to see where uninitialised values come from
-==27387== ERROR SUMMARY: 11 errors from 11 contexts (suppressed: 0 from 0)
+==23630== 
+==23630== HEAP SUMMARY:
+==23630==     in use at exit: 0 bytes in 0 blocks
+==23630==   total heap usage: 2 allocs, 2 frees, 8,192 bytes allocated
+==23630== 
+==23630== All heap blocks were freed -- no leaks are possible
+==23630== 
+==23630== For counts of detected and suppressed errors, rerun with: -v
+==23630== ERROR SUMMARY: 0 errors from 0 contexts (suppressed: 0 from 0)
 </pre>
 
 <p>
 Run GDB
 </p>
 <div class="org-src-container">
-
 <pre class="src src-sh">gcc -std=c99 -pedantic -Wall -Wextra -ftrapv -ggdb3 -o array_oob ./array_oob.c
 gnome-terminal -- gdb ./array_oob
 </pre>
@@ -3137,102 +3004,75 @@ gnome-terminal -- gdb ./array_oob
 </div>
 </li>
 
-<li><a id="sec-1-8-3-2" name="sec-1-8-3-2"></a>./array<sub>uninit</sub>.c<br  /><div class="outline-text-5" id="text-1-8-3-2">
+<li><a id="org46a903b"></a>./array<sub>uninit.c</sub><br />
+<div class="outline-text-5" id="text-1-8-3-2">
 <p>
 <a href="./array_uninit.c">./array_uninit.c</a>
 </p>
 
 <div class="org-src-container">
-
 <pre class="src src-sh">gcc -std=c99 -pedantic -Wall -Wextra -ftrapv -ggdb3 -o array_uninit ./array_uninit.c
-<span style="color: #483d8b;">echo</span> 33 | valgrind ./array_uninit 2&gt;&amp;1
+<span style="color: #483d8b;">echo</span> 7 | valgrind ./array_uninit 2&gt;&amp;1
 </pre>
 </div>
 
 <pre class="example">
-==27379== Memcheck, a memory error detector
-==27379== Copyright (C) 2002-2017, and GNU GPL'd, by Julian Seward et al.
-==27379== Using Valgrind-3.13.0 and LibVEX; rerun with -h for copyright info
-==27379== Command: ./array_uninit
-==27379== 
-==27379== Conditional jump or move depends on uninitialised value(s)
-==27379==    at 0x4E988DA: vfprintf (vfprintf.c:1642)
-==27379==    by 0x4EA0F25: printf (printf.c:33)
-==27379==    by 0x108891: main (array_uninit.c:24)
-==27379== 
-==27379== Use of uninitialised value of size 8
-==27379==    at 0x4E9486B: _itoa_word (_itoa.c:179)
-==27379==    by 0x4E97F0D: vfprintf (vfprintf.c:1642)
-==27379==    by 0x4EA0F25: printf (printf.c:33)
-==27379==    by 0x108891: main (array_uninit.c:24)
-==27379== 
-==27379== Conditional jump or move depends on uninitialised value(s)
-==27379==    at 0x4E94875: _itoa_word (_itoa.c:179)
-==27379==    by 0x4E97F0D: vfprintf (vfprintf.c:1642)
-==27379==    by 0x4EA0F25: printf (printf.c:33)
-==27379==    by 0x108891: main (array_uninit.c:24)
-==27379== 
-==27379== Conditional jump or move depends on uninitialised value(s)
-==27379==    at 0x4E98014: vfprintf (vfprintf.c:1642)
-==27379==    by 0x4EA0F25: printf (printf.c:33)
-==27379==    by 0x108891: main (array_uninit.c:24)
-==27379== 
-==27379== Conditional jump or move depends on uninitialised value(s)
-==27379==    at 0x4E98B4C: vfprintf (vfprintf.c:1642)
-==27379==    by 0x4EA0F25: printf (printf.c:33)
-==27379==    by 0x108891: main (array_uninit.c:24)
-==27379== 
+==22170== Memcheck, a memory error detector
+==22170== Copyright (C) 2002-2017, and GNU GPL'd, by Julian Seward et al.
+==22170== Using Valgrind-3.13.0 and LibVEX; rerun with -h for copyright info
+==22170== Command: ./array_uninit
+==22170== 
+==22170== Conditional jump or move depends on uninitialised value(s)
+==22170==    at 0x4E988DA: vfprintf (vfprintf.c:1642)
+==22170==    by 0x4EA0F25: printf (printf.c:33)
+==22170==    by 0x108891: main (array_uninit.c:24)
+==22170== 
+==22170== Use of uninitialised value of size 8
+==22170==    at 0x4E9486B: _itoa_word (_itoa.c:179)
+==22170==    by 0x4E97F0D: vfprintf (vfprintf.c:1642)
+==22170==    by 0x4EA0F25: printf (printf.c:33)
+==22170==    by 0x108891: main (array_uninit.c:24)
+==22170== 
+==22170== Conditional jump or move depends on uninitialised value(s)
+==22170==    at 0x4E94875: _itoa_word (_itoa.c:179)
+==22170==    by 0x4E97F0D: vfprintf (vfprintf.c:1642)
+==22170==    by 0x4EA0F25: printf (printf.c:33)
+==22170==    by 0x108891: main (array_uninit.c:24)
+==22170== 
+==22170== Conditional jump or move depends on uninitialised value(s)
+==22170==    at 0x4E98014: vfprintf (vfprintf.c:1642)
+==22170==    by 0x4EA0F25: printf (printf.c:33)
+==22170==    by 0x108891: main (array_uninit.c:24)
+==22170== 
+==22170== Conditional jump or move depends on uninitialised value(s)
+==22170==    at 0x4E98B4C: vfprintf (vfprintf.c:1642)
+==22170==    by 0x4EA0F25: printf (printf.c:33)
+==22170==    by 0x108891: main (array_uninit.c:24)
+==22170== 
 How big?
-8
-0
-82606643
-0
-0
-0
-0
-0
-0
-0
-8
-0
-86148960
-0
-1083828
-0
-86131360
-0
-0
-0
-0
-0
-82561679
-0
-0
-0
-0
-0
 -16776224
 31
 -16776320
 31
 0
-==27379== 
-==27379== HEAP SUMMARY:
-==27379==     in use at exit: 0 bytes in 0 blocks
-==27379==   total heap usage: 2 allocs, 2 frees, 8,192 bytes allocated
-==27379== 
-==27379== All heap blocks were freed -- no leaks are possible
-==27379== 
-==27379== For counts of detected and suppressed errors, rerun with: -v
-==27379== Use --track-origins=yes to see where uninitialised values come from
-==27379== ERROR SUMMARY: 265 errors from 5 contexts (suppressed: 0 from 0)
+0
+1083410
+==22170== 
+==22170== HEAP SUMMARY:
+==22170==     in use at exit: 0 bytes in 0 blocks
+==22170==   total heap usage: 2 allocs, 2 frees, 8,192 bytes allocated
+==22170== 
+==22170== All heap blocks were freed -- no leaks are possible
+==22170== 
+==22170== For counts of detected and suppressed errors, rerun with: -v
+==22170== Use --track-origins=yes to see where uninitialised values come from
+==22170== ERROR SUMMARY: 79 errors from 5 contexts (suppressed: 0 from 0)
 </pre>
 
 <p>
 Run GDB
 </p>
 <div class="org-src-container">
-
 <pre class="src src-sh">gcc -std=c99 -pedantic -Wall -Wextra -ftrapv -ggdb3 -o array_uninit ./array_uninit.c
 gnome-terminal -- gdb ./array_uninit
 </pre>
@@ -3240,13 +3080,13 @@ gnome-terminal -- gdb ./array_uninit
 </div>
 </li>
 
-<li><a id="sec-1-8-3-3" name="sec-1-8-3-3"></a>./bad<sub>realloc</sub>.c<br  /><div class="outline-text-5" id="text-1-8-3-3">
+<li><a id="org7ba702c"></a>./bad<sub>realloc.c</sub><br />
+<div class="outline-text-5" id="text-1-8-3-3">
 <p>
 <a href="./bad_realloc.c">./bad_realloc.c</a>
 </p>
 
 <div class="org-src-container">
-
 <pre class="src src-sh">gcc -std=c99 -pedantic -Wall -Wextra -ftrapv -ggdb3 -o bad_realloc ./bad_realloc.c
 <span style="color: #483d8b;">echo</span> 33 | valgrind ./bad_realloc 2&gt;&amp;1
 </pre>
@@ -3256,7 +3096,6 @@ gnome-terminal -- gdb ./array_uninit
 Run GDB
 </p>
 <div class="org-src-container">
-
 <pre class="src src-sh">gcc -std=c99 -pedantic -Wall -Wextra -ftrapv -ggdb3 -o bad_realloc ./bad_realloc.c
 gnome-terminal -- gdb ./bad_realloc
 </pre>
@@ -3264,48 +3103,92 @@ gnome-terminal -- gdb ./bad_realloc
 </div>
 </li>
 
-<li><a id="sec-1-8-3-4" name="sec-1-8-3-4"></a>./bad<sub>str</sub>.c<br  /><div class="outline-text-5" id="text-1-8-3-4">
+<li><a id="orge559648"></a>./bad<sub>str.c</sub><br />
+<div class="outline-text-5" id="text-1-8-3-4">
 <p>
 <a href="./bad_str.c">./bad_str.c</a>
 </p>
 
 <div class="org-src-container">
-
 <pre class="src src-sh">gcc -std=c99 -pedantic -Wall -Wextra -ftrapv -ggdb3 -o bad_str ./bad_str.c
-<span style="color: #483d8b;">echo</span> 33 | valgrind ./bad_str 2&gt;&amp;1
+<span style="color: #483d8b;">echo</span> Coolbears | valgrind ./bad_str 2&gt;&amp;1
 </pre>
 </div>
 
 <pre class="example">
-==27350== Memcheck, a memory error detector
-==27350== Copyright (C) 2002-2017, and GNU GPL'd, by Julian Seward et al.
-==27350== Using Valgrind-3.13.0 and LibVEX; rerun with -h for copyright info
-==27350== Command: ./bad_str
-==27350== 
+==23374== Memcheck, a memory error detector
+==23374== Copyright (C) 2002-2017, and GNU GPL'd, by Julian Seward et al.
+==23374== Using Valgrind-3.13.0 and LibVEX; rerun with -h for copyright info
+==23374== Command: ./bad_str
+==23374== 
+==23374== Invalid write of size 1
+==23374==    at 0x4EA8FDD: _IO_vfscanf (vfscanf.c:1103)
+==23374==    by 0x4EB7FD7: __isoc99_scanf (isoc99_scanf.c:37)
+==23374==    by 0x108773: main (bad_str.c:17)
+==23374==  Address 0x522d045 is 0 bytes after a block of size 5 alloc'd
+==23374==    at 0x4C2FB0F: malloc (in /usr/lib/valgrind/vgpreload_memcheck-amd64-linux.so)
+==23374==    by 0x10874B: main (bad_str.c:15)
+==23374== 
+==23374== Invalid write of size 1
+==23374==    at 0x4EAA942: _IO_vfscanf (vfscanf.c:1188)
+==23374==    by 0x4EB7FD7: __isoc99_scanf (isoc99_scanf.c:37)
+==23374==    by 0x108773: main (bad_str.c:17)
+==23374==  Address 0x522d049 is 4 bytes after a block of size 5 alloc'd
+==23374==    at 0x4C2FB0F: malloc (in /usr/lib/valgrind/vgpreload_memcheck-amd64-linux.so)
+==23374==    by 0x10874B: main (bad_str.c:15)
+==23374== 
+==23374== Invalid read of size 1
+==23374==    at 0x4C32D04: strlen (in /usr/lib/valgrind/vgpreload_memcheck-amd64-linux.so)
+==23374==    by 0x4E994D2: vfprintf (vfprintf.c:1643)
+==23374==    by 0x4EA0F25: printf (printf.c:33)
+==23374==    by 0x10878B: main (bad_str.c:18)
+==23374==  Address 0x522d045 is 0 bytes after a block of size 5 alloc'd
+==23374==    at 0x4C2FB0F: malloc (in /usr/lib/valgrind/vgpreload_memcheck-amd64-linux.so)
+==23374==    by 0x10874B: main (bad_str.c:15)
+==23374== 
+==23374== Invalid read of size 1
+==23374==    at 0x4C371F8: mempcpy (in /usr/lib/valgrind/vgpreload_memcheck-amd64-linux.so)
+==23374==    by 0x4EC7993: _IO_file_xsputn@@GLIBC_2.2.5 (fileops.c:1258)
+==23374==    by 0x4E98FEA: vfprintf (vfprintf.c:1643)
+==23374==    by 0x4EA0F25: printf (printf.c:33)
+==23374==    by 0x10878B: main (bad_str.c:18)
+==23374==  Address 0x522d048 is 3 bytes after a block of size 5 alloc'd
+==23374==    at 0x4C2FB0F: malloc (in /usr/lib/valgrind/vgpreload_memcheck-amd64-linux.so)
+==23374==    by 0x10874B: main (bad_str.c:15)
+==23374== 
+==23374== Invalid read of size 1
+==23374==    at 0x4C3720A: mempcpy (in /usr/lib/valgrind/vgpreload_memcheck-amd64-linux.so)
+==23374==    by 0x4EC7993: _IO_file_xsputn@@GLIBC_2.2.5 (fileops.c:1258)
+==23374==    by 0x4E98FEA: vfprintf (vfprintf.c:1643)
+==23374==    by 0x4EA0F25: printf (printf.c:33)
+==23374==    by 0x10878B: main (bad_str.c:18)
+==23374==  Address 0x522d046 is 1 bytes after a block of size 5 alloc'd
+==23374==    at 0x4C2FB0F: malloc (in /usr/lib/valgrind/vgpreload_memcheck-amd64-linux.so)
+==23374==    by 0x10874B: main (bad_str.c:15)
+==23374== 
 Enter a message:
-You entered: 33
-==27350== 
-==27350== HEAP SUMMARY:
-==27350==     in use at exit: 5 bytes in 1 blocks
-==27350==   total heap usage: 3 allocs, 2 frees, 8,197 bytes allocated
-==27350== 
-==27350== LEAK SUMMARY:
-==27350==    definitely lost: 5 bytes in 1 blocks
-==27350==    indirectly lost: 0 bytes in 0 blocks
-==27350==      possibly lost: 0 bytes in 0 blocks
-==27350==    still reachable: 0 bytes in 0 blocks
-==27350==         suppressed: 0 bytes in 0 blocks
-==27350== Rerun with --leak-check=full to see details of leaked memory
-==27350== 
-==27350== For counts of detected and suppressed errors, rerun with: -v
-==27350== ERROR SUMMARY: 0 errors from 0 contexts (suppressed: 0 from 0)
+You entered: Coolbears
+==23374== 
+==23374== HEAP SUMMARY:
+==23374==     in use at exit: 5 bytes in 1 blocks
+==23374==   total heap usage: 3 allocs, 2 frees, 8,197 bytes allocated
+==23374== 
+==23374== LEAK SUMMARY:
+==23374==    definitely lost: 5 bytes in 1 blocks
+==23374==    indirectly lost: 0 bytes in 0 blocks
+==23374==      possibly lost: 0 bytes in 0 blocks
+==23374==    still reachable: 0 bytes in 0 blocks
+==23374==         suppressed: 0 bytes in 0 blocks
+==23374== Rerun with --leak-check=full to see details of leaked memory
+==23374== 
+==23374== For counts of detected and suppressed errors, rerun with: -v
+==23374== ERROR SUMMARY: 14 errors from 5 contexts (suppressed: 0 from 0)
 </pre>
 
 <p>
 Run GDB
 </p>
 <div class="org-src-container">
-
 <pre class="src src-sh">gcc -std=c99 -pedantic -Wall -Wextra -ftrapv -ggdb3 -o bad_str ./bad_str.c
 gnome-terminal -- gdb ./bad_str
 </pre>
@@ -3313,34 +3196,34 @@ gnome-terminal -- gdb ./bad_str
 </div>
 </li>
 
-<li><a id="sec-1-8-3-5" name="sec-1-8-3-5"></a>./double<sub>free</sub>.c<br  /><div class="outline-text-5" id="text-1-8-3-5">
+<li><a id="orgf9c9a00"></a>./double<sub>free.c</sub><br />
+<div class="outline-text-5" id="text-1-8-3-5">
 <p>
 <a href="./double_free.c">./double_free.c</a>
 </p>
 
 <div class="org-src-container">
-
 <pre class="src src-sh">gcc -std=c99 -pedantic -Wall -Wextra -ftrapv -ggdb3 -o double_free ./double_free.c
 <span style="color: #483d8b;">echo</span> 33 | valgrind ./double_free 2&gt;&amp;1
 </pre>
 </div>
 
 <pre class="example">
-==27337== Memcheck, a memory error detector
-==27337== Copyright (C) 2002-2017, and GNU GPL'd, by Julian Seward et al.
-==27337== Using Valgrind-3.13.0 and LibVEX; rerun with -h for copyright info
-==27337== Command: ./double_free
-==27337== 
-==27337== Invalid free() / delete / delete[] / realloc()
-==27337==    at 0x4C30D3B: free (in /usr/lib/valgrind/vgpreload_memcheck-amd64-linux.so)
-==27337==    by 0x108904: main (double_free.c:27)
-==27337==  Address 0x522f0c0 is 0 bytes inside a block of size 132 free'd
-==27337==    at 0x4C30D3B: free (in /usr/lib/valgrind/vgpreload_memcheck-amd64-linux.so)
-==27337==    by 0x1088F8: main (double_free.c:26)
-==27337==  Block was alloc'd at
-==27337==    at 0x4C2FB0F: malloc (in /usr/lib/valgrind/vgpreload_memcheck-amd64-linux.so)
-==27337==    by 0x10888E: main (double_free.c:21)
-==27337== 
+==23937== Memcheck, a memory error detector
+==23937== Copyright (C) 2002-2017, and GNU GPL'd, by Julian Seward et al.
+==23937== Using Valgrind-3.13.0 and LibVEX; rerun with -h for copyright info
+==23937== Command: ./double_free
+==23937== 
+==23937== Invalid free() / delete / delete[] / realloc()
+==23937==    at 0x4C30D3B: free (in /usr/lib/valgrind/vgpreload_memcheck-amd64-linux.so)
+==23937==    by 0x108904: main (double_free.c:27)
+==23937==  Address 0x522f0c0 is 0 bytes inside a block of size 132 free'd
+==23937==    at 0x4C30D3B: free (in /usr/lib/valgrind/vgpreload_memcheck-amd64-linux.so)
+==23937==    by 0x1088F8: main (double_free.c:26)
+==23937==  Block was alloc'd at
+==23937==    at 0x4C2FB0F: malloc (in /usr/lib/valgrind/vgpreload_memcheck-amd64-linux.so)
+==23937==    by 0x10888E: main (double_free.c:21)
+==23937== 
 How big?
 0
 1
@@ -3375,22 +3258,21 @@ How big?
 30
 31
 32
-==27337== 
-==27337== HEAP SUMMARY:
-==27337==     in use at exit: 0 bytes in 0 blocks
-==27337==   total heap usage: 3 allocs, 4 frees, 8,324 bytes allocated
-==27337== 
-==27337== All heap blocks were freed -- no leaks are possible
-==27337== 
-==27337== For counts of detected and suppressed errors, rerun with: -v
-==27337== ERROR SUMMARY: 1 errors from 1 contexts (suppressed: 0 from 0)
+==23937== 
+==23937== HEAP SUMMARY:
+==23937==     in use at exit: 0 bytes in 0 blocks
+==23937==   total heap usage: 3 allocs, 4 frees, 8,324 bytes allocated
+==23937== 
+==23937== All heap blocks were freed -- no leaks are possible
+==23937== 
+==23937== For counts of detected and suppressed errors, rerun with: -v
+==23937== ERROR SUMMARY: 1 errors from 1 contexts (suppressed: 0 from 0)
 </pre>
 
 <p>
 Run GDB
 </p>
 <div class="org-src-container">
-
 <pre class="src src-sh">gcc -std=c99 -pedantic -Wall -Wextra -ftrapv -ggdb3 -o double_free ./double_free.c
 gnome-terminal -- gdb ./double_free
 </pre>
@@ -3398,13 +3280,13 @@ gnome-terminal -- gdb ./double_free
 </div>
 </li>
 
-<li><a id="sec-1-8-3-6" name="sec-1-8-3-6"></a>./huge<sub>array</sub>.c<br  /><div class="outline-text-5" id="text-1-8-3-6">
+<li><a id="org9005fc8"></a>./huge<sub>array.c</sub><br />
+<div class="outline-text-5" id="text-1-8-3-6">
 <p>
 <a href="./huge_array.c">./huge_array.c</a>
 </p>
 
 <div class="org-src-container">
-
 <pre class="src src-sh">gcc -std=c99 -pedantic -Wall -Wextra -ftrapv -ggdb3 -o huge_array ./huge_array.c
 <span style="color: #483d8b;">echo</span> 33 | valgrind ./huge_array 2&gt;&amp;1
 </pre>
@@ -3476,7 +3358,6 @@ gnome-terminal -- gdb ./double_free
 Run GDB
 </p>
 <div class="org-src-container">
-
 <pre class="src src-sh">gcc -std=c99 -pedantic -Wall -Wextra -ftrapv -ggdb3 -o huge_array ./huge_array.c
 gnome-terminal -- gdb ./huge_array
 </pre>
@@ -3484,13 +3365,13 @@ gnome-terminal -- gdb ./huge_array
 </div>
 </li>
 
-<li><a id="sec-1-8-3-7" name="sec-1-8-3-7"></a>./malloc<sub>oob</sub>.c<br  /><div class="outline-text-5" id="text-1-8-3-7">
+<li><a id="orgd7f395e"></a>./malloc<sub>oob.c</sub><br />
+<div class="outline-text-5" id="text-1-8-3-7">
 <p>
 <a href="./malloc_oob.c">./malloc_oob.c</a>
 </p>
 
 <div class="org-src-container">
-
 <pre class="src src-sh">gcc -std=c99 -pedantic -Wall -Wextra -ftrapv -ggdb3 -o malloc_oob ./malloc_oob.c
 <span style="color: #483d8b;">echo</span> 33 | valgrind ./malloc_oob 2&gt;&amp;1
 </pre>
@@ -3523,7 +3404,6 @@ How big?
 Run GDB
 </p>
 <div class="org-src-container">
-
 <pre class="src src-sh">gcc -std=c99 -pedantic -Wall -Wextra -ftrapv -ggdb3 -o malloc_oob ./malloc_oob.c
 gnome-terminal -- gdb ./malloc_oob
 </pre>
@@ -3531,13 +3411,13 @@ gnome-terminal -- gdb ./malloc_oob
 </div>
 </li>
 
-<li><a id="sec-1-8-3-8" name="sec-1-8-3-8"></a>./malloc<sub>uninit</sub>.c<br  /><div class="outline-text-5" id="text-1-8-3-8">
+<li><a id="org4ddf6e8"></a>./malloc<sub>uninit.c</sub><br />
+<div class="outline-text-5" id="text-1-8-3-8">
 <p>
 <a href="./malloc_uninit.c">./malloc_uninit.c</a>
 </p>
 
 <div class="org-src-container">
-
 <pre class="src src-sh">gcc -std=c99 -pedantic -Wall -Wextra -ftrapv -ggdb3 -o malloc_uninit ./malloc_uninit.c
 <span style="color: #483d8b;">echo</span> 33 | valgrind ./malloc_uninit 2&gt;&amp;1
 </pre>
@@ -3632,7 +3512,6 @@ How big?
 Run GDB
 </p>
 <div class="org-src-container">
-
 <pre class="src src-sh">gcc -std=c99 -pedantic -Wall -Wextra -ftrapv -ggdb3 -o malloc_uninit ./malloc_uninit.c
 gnome-terminal -- gdb ./malloc_uninit
 </pre>
@@ -3640,13 +3519,13 @@ gnome-terminal -- gdb ./malloc_uninit
 </div>
 </li>
 
-<li><a id="sec-1-8-3-9" name="sec-1-8-3-9"></a>./segv.c<br  /><div class="outline-text-5" id="text-1-8-3-9">
+<li><a id="org125b2ad"></a>./segv.c<br />
+<div class="outline-text-5" id="text-1-8-3-9">
 <p>
 <a href="./segv.c">./segv.c</a>
 </p>
 
 <div class="org-src-container">
-
 <pre class="src src-sh">gcc -std=c99 -pedantic -Wall -Wextra -ftrapv -ggdb3 -o segv ./segv.c
 <span style="color: #483d8b;">echo</span> 33 | valgrind ./segv 2&gt;&amp;1
 </pre>
@@ -3679,7 +3558,6 @@ How big?
 Run GDB
 </p>
 <div class="org-src-container">
-
 <pre class="src src-sh">gcc -std=c99 -pedantic -Wall -Wextra -ftrapv -ggdb3 -o segv ./segv.c
 gnome-terminal -- gdb ./segv
 </pre>
@@ -3687,13 +3565,13 @@ gnome-terminal -- gdb ./segv
 </div>
 </li>
 
-<li><a id="sec-1-8-3-10" name="sec-1-8-3-10"></a>./simple<sub>uninit</sub>.c<br  /><div class="outline-text-5" id="text-1-8-3-10">
+<li><a id="orgbf1c8c8"></a>./simple<sub>uninit.c</sub><br />
+<div class="outline-text-5" id="text-1-8-3-10">
 <p>
 <a href="./simple_uninit.c">./simple_uninit.c</a>
 </p>
 
 <div class="org-src-container">
-
 <pre class="src src-sh">gcc -std=c99 -pedantic -Wall -Wextra -ftrapv -ggdb3 -o simple_uninit ./simple_uninit.c
 <span style="color: #483d8b;">echo</span> 33 | valgrind ./simple_uninit 2&gt;&amp;1
 </pre>
@@ -3722,7 +3600,6 @@ Enter an int:
 Run GDB
 </p>
 <div class="org-src-container">
-
 <pre class="src src-sh">gcc -std=c99 -pedantic -Wall -Wextra -ftrapv -ggdb3 -o simple_uninit ./simple_uninit.c
 gnome-terminal -- gdb ./simple_uninit
 </pre>
@@ -3730,13 +3607,13 @@ gnome-terminal -- gdb ./simple_uninit
 </div>
 </li>
 
-<li><a id="sec-1-8-3-11" name="sec-1-8-3-11"></a>./stack.c<br  /><div class="outline-text-5" id="text-1-8-3-11">
+<li><a id="org40eee0d"></a>./stack.c<br />
+<div class="outline-text-5" id="text-1-8-3-11">
 <p>
 <a href="./stack.c">./stack.c</a>
 </p>
 
 <div class="org-src-container">
-
 <pre class="src src-sh">gcc -std=c99 -pedantic -Wall -Wextra -ftrapv -ggdb3 -o stack ./stack.c
 <span style="color: #483d8b;">echo</span> 33 | valgrind ./stack 2&gt;&amp;1
 </pre>
@@ -3774,7 +3651,6 @@ Stack 0x522d040: 0 items starting at (nil)
 Run GDB
 </p>
 <div class="org-src-container">
-
 <pre class="src src-sh">gcc -std=c99 -pedantic -Wall -Wextra -ftrapv -ggdb3 -o stack ./stack.c
 gnome-terminal -- gdb ./stack
 </pre>
@@ -3782,13 +3658,13 @@ gnome-terminal -- gdb ./stack
 </div>
 </li>
 
-<li><a id="sec-1-8-3-12" name="sec-1-8-3-12"></a>./stack<sub>limit</sub>.c<br  /><div class="outline-text-5" id="text-1-8-3-12">
+<li><a id="org00b0836"></a>./stack<sub>limit.c</sub><br />
+<div class="outline-text-5" id="text-1-8-3-12">
 <p>
 <a href="./stack_limit.c">./stack_limit.c</a>
 </p>
 
 <div class="org-src-container">
-
 <pre class="src src-sh">gcc -std=c99 -pedantic -Wall -Wextra -ftrapv -ggdb3 -o stack_limit ./stack_limit.c
 <span style="color: #483d8b;">echo</span> 33 | valgrind ./stack_limit 2&gt;&amp;1
 </pre>
@@ -3798,7 +3674,6 @@ gnome-terminal -- gdb ./stack
 Run GDB
 </p>
 <div class="org-src-container">
-
 <pre class="src src-sh">gcc -std=c99 -pedantic -Wall -Wextra -ftrapv -ggdb3 -o stack_limit ./stack_limit.c
 gnome-terminal -- gdb ./stack_limit
 </pre>
@@ -3806,13 +3681,13 @@ gnome-terminal -- gdb ./stack_limit
 </div>
 </li>
 
-<li><a id="sec-1-8-3-13" name="sec-1-8-3-13"></a>./use<sub>after</sub><sub>free</sub>.c<br  /><div class="outline-text-5" id="text-1-8-3-13">
+<li><a id="org7c54c1b"></a>./use<sub>after</sub><sub>free.c</sub><br />
+<div class="outline-text-5" id="text-1-8-3-13">
 <p>
 <a href="./use_after_free.c">./use_after_free.c</a>
 </p>
 
 <div class="org-src-container">
-
 <pre class="src src-sh">gcc -std=c99 -pedantic -Wall -Wextra -ftrapv -ggdb3 -o use_after_free ./use_after_free.c
 <span style="color: #483d8b;">echo</span> 33 | valgrind ./use_after_free 2&gt;&amp;1
 </pre>
@@ -3822,7 +3697,6 @@ gnome-terminal -- gdb ./stack_limit
 Run GDB
 </p>
 <div class="org-src-container">
-
 <pre class="src src-sh">gcc -std=c99 -pedantic -Wall -Wextra -ftrapv -ggdb3 -o use_after_free ./use_after_free.c
 gnome-terminal -- gdb ./use_after_free
 </pre>
@@ -3832,7 +3706,8 @@ gnome-terminal -- gdb ./use_after_free
 
 
 
-<li><a id="sec-1-8-3-14" name="sec-1-8-3-14"></a>./infinite<sub>recursion</sub>.c<br  /><div class="outline-text-5" id="text-1-8-3-14">
+<li><a id="org0be1bf8"></a>./infinite<sub>recursion.c</sub><br />
+<div class="outline-text-5" id="text-1-8-3-14">
 <p>
 <a href="./infinite_recursion.c">./infinite_recursion.c</a>
 </p>
@@ -3841,7 +3716,6 @@ gnome-terminal -- gdb ./use_after_free
 Run GDB
 </p>
 <div class="org-src-container">
-
 <pre class="src src-sh">gcc -std=c99 -pedantic -Wall -Wextra -ftrapv -ggdb3 -o infinite_recursion ./infinite_recursion.c
 gnome-terminal -- gdb ./infinite_recursion
 </pre>
@@ -3851,10 +3725,9 @@ gnome-terminal -- gdb ./infinite_recursion
 Run valgrind
 </p>
 <div class="org-src-container">
-
 <pre class="src src-sh">gcc -std=c99 -pedantic -Wall -Wextra -ftrapv -ggdb3 -o infinite_recursion ./infinite_recursion.c
 <span style="color: #483d8b;">echo</span> <span style="color: #8b2252;">"valgrind ./infinite_recursion ; read"</span> &gt; infinite_recursion.sh
-gnome-terminal -- bash infinite_recursion.sh
+gnome-terminal -- bash infinite_recursion.sh 
 </pre>
 </div>
 
@@ -3877,9 +3750,10 @@ depth: 261799
 </div>
 
 
-<ol class="org-ol"><li><a id="sec-1-8-3-14-1" name="sec-1-8-3-14-1"></a>Generator (ignore)<br  /><div class="outline-text-6" id="text-1-8-3-14-1">
+<ol class="org-ol">
+<li><a id="orge31235d"></a>Generator (ignore)<br />
+<div class="outline-text-6" id="text-1-8-3-14-1">
 <div class="org-src-container">
-
 <pre class="src src-sh"><span style="color: #b22222;"># </span><span style="color: #b22222;">look a bash for loop!</span>
 <span style="color: #a020f0;">for</span> file<span style="color: #a020f0;"> in</span> ./array_oob.c ./array_uninit.c ./bad_realloc.c ./bad_str.c ./double_free.c ./huge_array.c ./malloc_oob.c ./malloc_uninit.c ./segv.c ./simple_uninit.c ./stack.c ./stack_limit.c ./use_after_free.c 
 <span style="color: #b22222;">#</span><span style="color: #b22222;">for file in ./array_oob.c ./array_uninit.c ./bad_realloc.c </span>
@@ -3903,16 +3777,17 @@ depth: 261799
 </pre>
 </div>
 </div>
-</li></ol>
-</li></ol>
+</li>
+</ol>
+</li>
+</ol>
 </div>
 </div>
 </div>
 </div>
 <div id="postamble" class="status">
 <p class="author">Author: Abram Hindle</p>
-<p class="date">Created: 2020-03-05 Thu 11:32</p>
-<p class="creator"><a href="http://www.gnu.org/software/emacs/">Emacs</a> 25.2.2 (<a href="http://orgmode.org">Org</a> mode 8.2.10)</p>
+<p class="date">Created: 2020-03-10 Tue 10:14</p>
 <p class="validation"><a href="http://validator.w3.org/check?uri=referer">Validate</a></p>
 </div>
 </body>

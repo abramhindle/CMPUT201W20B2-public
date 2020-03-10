@@ -1,46 +1,78 @@
-#+TITLE: CMPUT201W20B2 Week 8
-#+PROPERTY: header-args:C             :results output :exports no-export :flags -std=c99 -pedantic -Wall -Wextra -ftrapv -ggdb3 :eval yes :results value verbatim
-#+PROPERTY: header-args:sh            :results output :exports no-export :eval yes :results value verbatim
-#+PROPERTY: header-args:shell         :results output :exports no-export :eval yes :results value verbatim
+% Created 2020-03-10 Tue 10:14
+% Intended LaTeX compiler: pdflatex
+\documentclass[11pt]{article}
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage{graphicx}
+\usepackage{grffile}
+\usepackage{longtable}
+\usepackage{wrapfig}
+\usepackage{rotating}
+\usepackage[normalem]{ulem}
+\usepackage{amsmath}
+\usepackage{textcomp}
+\usepackage{amssymb}
+\usepackage{capt-of}
+\usepackage{hyperref}
+\author{Abram Hindle}
+\date{\today}
+\title{CMPUT201W20B2 Week 8}
+\hypersetup{
+ pdfauthor={Abram Hindle},
+ pdftitle={CMPUT201W20B2 Week 8},
+ pdfkeywords={},
+ pdfsubject={},
+ pdfcreator={Emacs 25.2.2 (Org mode 9.1.6)}, 
+ pdflang={English}}
+\begin{document}
 
-* Week8
-** Copyright Statement
+\maketitle
+\tableofcontents
+
+
+\section{Week8}
+\label{sec:org9991568}
+\subsection{Copyright Statement}
+\label{sec:orgc30d214}
 
 If you are in CMPUT201 at UAlberta this code is released in the public
 domain to you.
 
 Otherwise it is (c) 2020 Abram Hindle, Hazel Campbell AGPL3.0+
 
-*** License
+\subsubsection{License}
+\label{sec:orgca8d0fd}
 
-    Week 3 notes
-    Copyright (C) 2020 Abram Hindle, Hazel Campbell
+Week 3 notes
+Copyright (C) 2020 Abram Hindle, Hazel Campbell
 
-    This program is free software: you can redistribute it and/or modify
-    it under the terms of the GNU Affero General Public License as
-    published by the Free Software Foundation, either version 3 of the
-    License, or (at your option) any later version.
+This program is free software: you can redistribute it and/or modify
+it under the terms of the GNU Affero General Public License as
+published by the Free Software Foundation, either version 3 of the
+License, or (at your option) any later version.
 
-    This program is distributed in the hope that it will be useful,
-    but WITHOUT ANY WARRANTY; without even the implied warranty of
-    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-    GNU Affero General Public License for more details.
+This program is distributed in the hope that it will be useful,
+but WITHOUT ANY WARRANTY; without even the implied warranty of
+MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+GNU Affero General Public License for more details.
 
-    You should have received a copy of the GNU Affero General Public License
-    along with this program.  If not, see <https://www.gnu.org/licenses/>.
+You should have received a copy of the GNU Affero General Public License
+along with this program.  If not, see \url{https://www.gnu.org/licenses/}.
 
 
-*** Hazel Code is licensed under AGPL3.0+
+\subsubsection{Hazel Code is licensed under AGPL3.0+}
+\label{sec:org628a89a}
 
 Hazel's code is also found here
-https://github.com/hazelybell/examples/tree/C-2020-01
+\url{https://github.com/hazelybell/examples/tree/C-2020-01}
 
 Hazel code is licensed: The example code is licensed under the AGPL3+
 license, unless otherwise noted.
 
-** Init ORG-MODE
+\subsection{Init ORG-MODE}
+\label{sec:org57a8739}
 
-#+BEGIN_SRC elisp
+\begin{verbatim}
 ;; I need this for org-mode to work well
 ;; If we have a new org-mode use ob-shell
 ;; otherwise use ob-sh --- but not both!
@@ -56,39 +88,40 @@ license, unless otherwise noted.
 (setq org-confirm-babel-evaluate nil) ;; danger!
 (custom-set-faces
  '(org-block ((t (:inherit shadow :foreground "black")))))
-#+END_SRC
+\end{verbatim}
 
-#+RESULTS:
-
-*** Org export
-#+BEGIN_SRC elisp
+\subsubsection{Org export}
+\label{sec:orgb693fbe}
+\begin{verbatim}
 (org-html-export-to-html)
 (org-latex-export-to-pdf)
 (org-ascii-export-to-ascii)
-#+END_SRC
+\end{verbatim}
 
-** Org Template
+\subsection{Org Template}
+\label{sec:org84cd6a3}
 Copy and paste this to demo C
 
-#+BEGIN_SRC C :exports both
+\begin{verbatim}
 #include <stdio.h>
 
 int main(int argc, char**argv) {
     return 0;
 }
-#+END_SRC
+\end{verbatim}
 
-#+RESULTS:
-
-** Remember how to compile?
+\subsection{Remember how to compile?}
+\label{sec:org0d921ed}
 
 gcc  -std=c99 -pedantic -Wall -Wextra -ftrapv -ggdb3 -o programname programname.c
 
-** Malloc continued!
+\subsection{Malloc continued!}
+\label{sec:org9ba1fdf}
 
 Continued.
 
-*** free
+\subsubsection{free}
+\label{sec:orgc793e9e}
 
 What happens if we don't free?
 
@@ -96,7 +129,7 @@ Our program can get bigger!
 
 
 
-#+BEGIN_SRC C :exports both
+\begin{verbatim}
 #include <assert.h>
 #include <stdio.h>
 #include <stdlib.h>
@@ -118,10 +151,9 @@ int main() {
         // free(bigArray); // remember to free it when done!
     }
 }
-#+END_SRC
+\end{verbatim}
 
-#+RESULTS:
-#+begin_example
+\begin{verbatim}
 1 ints allocated!
 4 bytes!
 1048577 ints allocated!
@@ -142,7 +174,7 @@ int main() {
 33554436 bytes!
 9437185 ints allocated!
 37748740 bytes!
-#+end_example
+\end{verbatim}
 
 Valgrind is a memory leak detector. It analyzes memory allocations and
 warns us about mistakes.
@@ -150,15 +182,14 @@ warns us about mistakes.
 Valgrind will show us that we're leaking memory (losing track of it
 and not freeing it).
 
-#+BEGIN_SRC sh :exports both
+\begin{verbatim}
 gcc -std=c99 -Wall -pedantic -Werror -o nofree ./nofree.c
 valgrind ./nofree 2>&1
 echo now let\'s leak check
 valgrind --leak-check=full ./nofree 2>&1
-#+END_SRC
+\end{verbatim}
 
-#+RESULTS:
-#+begin_example
+\begin{verbatim}
 ==28799== Memcheck, a memory error detector
 ==28799== Copyright (C) 2002-2017, and GNU GPL'd, by Julian Seward et al.
 ==28799== Using Valgrind-3.13.0 and LibVEX; rerun with -h for copyright info
@@ -249,14 +280,15 @@ now let's leak check
 ==28801== 
 ==28801== For counts of detected and suppressed errors, rerun with: -v
 ==28801== ERROR SUMMARY: 2 errors from 2 contexts (suppressed: 0 from 0)
-#+end_example
+\end{verbatim}
 
-*** Malloc and structs
+\subsubsection{Malloc and structs}
+\label{sec:org5d8bc73}
 
 Mallocs are often used with arrays of structs. You need to get the
 sizeof the struct.
 
-#+BEGIN_SRC C :exports both
+\begin{verbatim}
 #include <stdbool.h> 
 #include <stdio.h>
 #include <stdlib.h>
@@ -340,10 +372,9 @@ int main() {
 }
 
 
-#+END_SRC
+\end{verbatim}
 
-#+RESULTS:
-#+begin_example
+\begin{verbatim}
 Flush found at card 225
 Suit 2
 Flush found at card 1370
@@ -365,10 +396,11 @@ Suit 3
 Flush found at card 15145
 Suit 2
 We found 799 flushes out of 200000 hands: 0.003995
-#+end_example
+\end{verbatim}
 
 
-*** Malloc Array of Array versus 2D
+\subsubsection{Malloc Array of Array versus 2D}
+\label{sec:org02adcbc}
 
 So instead of allocating a big block and carving a 2D array out of it
 we could just allocate each row and make an array of arrays.
@@ -376,7 +408,7 @@ we could just allocate each row and make an array of arrays.
 Try playing with the order of allocation of rows. Does it affect the result?
 
 
-#+BEGIN_SRC C
+\begin{verbatim}
 #include <stdio.h>
 #include <stdlib.h>
 
@@ -468,10 +500,9 @@ int main(int argc, char **argv) {
     free2d(p2d);
     free_aoa(n, aoa);
 }
-#+END_SRC
+\end{verbatim}
 
-#+RESULTS:
-#+begin_example
+\begin{verbatim}
 I'm going to make space for a big, square table in memory.
 How many rows and columns would you like to make space for? Sorry, I couldn't understand that :(
 2d:
@@ -536,16 +567,17 @@ aoa:
 0 3 8 8 2 6 6 0 7 2 0 3 0 3 4 4 3 1 3 5 1 3 7 4 9 7 1 1 7 6 
 9 0 1 8 4 4 7 7 5 0 2 9 0 7 9 2 8 5 6 6 0 0 4 3 1 7 7 8 0 8 
 3 0 6 3 2 5 3 2 5 0 6 3 7 3 1 9 4 0 9 7 6 9 2 1 1 8 2 5 0 1
-#+end_example
+\end{verbatim}
 
 
-*** Malloc array of arrays structs?
+\subsubsection{Malloc array of arrays structs?}
+\label{sec:org0d25e29}
 
 Arrays of Arrays? Pointers?
 
 X ** x?
 
-#+BEGIN_SRC C :exports both 
+\begin{verbatim}
 #include <stdbool.h> 
 #include <stdio.h>
 #include <stdlib.h>
@@ -629,10 +661,9 @@ int main() {
 }
 
 
-#+END_SRC
+\end{verbatim}
 
-#+RESULTS:
-#+begin_example
+\begin{verbatim}
 Flush found at card 19
 Suit 3
 Flush found at card 340
@@ -654,11 +685,11 @@ Suit 3
 Flush found at card 1631
 Suit 2
 We found 3902 flushes out of 1000000 hands: 0.003902
-#+end_example
+\end{verbatim}
 
 That's kind of gross, let's model our hands as arrays of 5 cards instead.
 
-#+BEGIN_SRC C :exports both 
+\begin{verbatim}
 #include <stdbool.h> 
 #include <stdio.h>
 #include <stdlib.h>
@@ -745,10 +776,9 @@ int main() {
 }
 
 
-#+END_SRC
+\end{verbatim}
 
-#+RESULTS:
-#+begin_example
+\begin{verbatim}
 Flush found at card 223
 Suit 0
 Flush found at card 323
@@ -770,13 +800,15 @@ Suit 0
 Flush found at card 1734
 Suit 3
 We found 3855 flushes out of 1000000 hands: 0.003855
-#+end_example
+\end{verbatim}
 
-- Remember to tangle this to write to disk
+\begin{itemize}
+\item Remember to tangle this to write to disk
+\end{itemize}
 
-file:./cards-aoa.c
+\url{./cards-aoa.c}
 
-#+BEGIN_SRC C :exports both  :tangle cards-aoa.c
+\begin{verbatim}
 #include <stdbool.h> 
 #include <stdio.h>
 #include <stdlib.h>
@@ -882,10 +914,9 @@ int main() {
 }
 
 
-#+END_SRC
+\end{verbatim}
 
-#+RESULTS:
-#+begin_example
+\begin{verbatim}
 Flush found at card 148
 Suit 0
 Flush found at card 792
@@ -907,15 +938,14 @@ Suit 0
 Flush found at card 2509
 Suit 0
 We found 4003 flushes out of 1000000 hands: 0.004003
-#+end_example
+\end{verbatim}
 
-#+BEGIN_SRC sh :exports both  
+\begin{verbatim}
 gcc -std=c99 -pedantic -Wall -Wextra -ftrapv -ggdb3 -o cards-aoa ./cards-aoa.c
 valgrind --leak-check=full ./cards-aoa 2>&1
-#+END_SRC
+\end{verbatim}
 
-#+RESULTS:
-#+begin_example
+\begin{verbatim}
 ==16946== Memcheck, a memory error detector
 ==16946== Copyright (C) 2002-2017, and GNU GPL'd, by Julian Seward et al.
 ==16946== Using Valgrind-3.13.0 and LibVEX; rerun with -h for copyright info
@@ -951,13 +981,14 @@ We found 3845 flushes out of 1000000 hands: 0.003845
 ==16946== 
 ==16946== For counts of detected and suppressed errors, rerun with: -v
 ==16946== ERROR SUMMARY: 0 errors from 0 contexts (suppressed: 0 from 0)
-#+end_example
+\end{verbatim}
 
 
-*** Using pointers for protection
+\subsubsection{Using pointers for protection}
+\label{sec:org326064a}
 
-file:./stack.c
-#+BEGIN_SRC C :exports both  :tangle stack.c
+\url{./stack.c}
+\begin{verbatim}
 #define _POSIX_C_SOURCE 200809L // <-- needed for getline
 #include <stdint.h>
 #include <stdio.h>
@@ -1096,19 +1127,19 @@ int main() {
     free_stack(stack1);
     return 0;
 }
-#+END_SRC
+\end{verbatim}
 
-#+RESULTS:
-: Stack 0x56362ee8c260: 0 items starting at (nil)
-: Enter some lines. Press ctrl-d (EOF) to end.
+\begin{verbatim}
+Stack 0x56362ee8c260: 0 items starting at (nil)
+Enter some lines. Press ctrl-d (EOF) to end.
+\end{verbatim}
 
-#+BEGIN_SRC sh :exports both  
+\begin{verbatim}
 gcc -std=c99 -pedantic -Wall -Wextra -ftrapv -ggdb3 -o stack ./stack.c
 seq 9990 9999 | ./stack
-#+END_SRC
+\end{verbatim}
 
-#+RESULTS:
-#+begin_example
+\begin{verbatim}
 Stack 0x55f488145260: 0 items starting at (nil)
 Enter some lines. Press ctrl-d (EOF) to end.
 Stack 0x55f488145260: 1 items starting at 0x55f488147320
@@ -1141,62 +1172,82 @@ Stack 0x55f488145260: 1 items starting at 0x55f488147880
 9991
 Stack 0x55f488145260: 0 items starting at (nil)
 9990
-#+end_example
+\end{verbatim}
 
-** Objects and APIs
+\subsection{Objects and APIs}
+\label{sec:org67236fa}
 
 When you make a new type you should follow some guidelines:
 
-- put the name of the type at the start or end of function names:
-  - For type dog:
-    - dog_create()
-    - dog_free(dog)
-    - dog_move(dog,x,y)
-    - dog_bark(dog, bark_spec)
-    - createDog()
-    - freeDog(dog)
-    - moveDog(dog,x,y)
-    - barkDog(dog, barkSpec)
-  - For type cat:
-    - createCat()
-    - freeCat(cat)
-    - moveCat(cat)
-    - meowCat(cat, meow_spec)
-    - cat_create()
-    - cat_free(cat)
-    - cat_move(cat)
-    - cat_meow(cat, meow_spec)
-- Should your type be a struct or a pointer to a struct?
-  - struct pros:
-    + functional
-    + easy to copy
-    + stay on the stack
-    + safe shallow copy of data
-    + don't have to free
-  - struct cons:
-    - if structs have pointers then copies of structs might have old pointers
-    - doesn't play well we malloc and realloc
-    - stale info
-    - hard to ensure consistency
-    - big
-  - pointer to struct pros:
-    + small to pass (1 pointer)
-    + can have multiple references
-    + more control
-    + can hide implementation better
-    + consistency
-    + malloc and realloc friendly.
-  - pointer to struct cons:
-    - malloc
-    - must free
-    - hard to copy
-    - deepcopy required
-    - awkward with arrays
+\begin{itemize}
+\item put the name of the type at the start or end of function names:
+\begin{itemize}
+\item For type dog:
+\begin{itemize}
+\item dog\(_{\text{create}}\)()
+\item dog\(_{\text{free}}\)(dog)
+\item dog\(_{\text{move}}\)(dog,x,y)
+\item dog\(_{\text{bark}}\)(dog, bark\(_{\text{spec}}\))
+\item createDog()
+\item freeDog(dog)
+\item moveDog(dog,x,y)
+\item barkDog(dog, barkSpec)
+\end{itemize}
+\item For type cat:
+\begin{itemize}
+\item createCat()
+\item freeCat(cat)
+\item moveCat(cat)
+\item meowCat(cat, meow\(_{\text{spec}}\))
+\item cat\(_{\text{create}}\)()
+\item cat\(_{\text{free}}\)(cat)
+\item cat\(_{\text{move}}\)(cat)
+\item cat\(_{\text{meow}}\)(cat, meow\(_{\text{spec}}\))
+\end{itemize}
+\end{itemize}
+\item Should your type be a struct or a pointer to a struct?
+\begin{itemize}
+\item struct pros:
+\begin{itemize}
+\item functional
+\item easy to copy
+\item stay on the stack
+\item safe shallow copy of data
+\item don't have to free
+\end{itemize}
+\item struct cons:
+\begin{itemize}
+\item if structs have pointers then copies of structs might have old pointers
+\item doesn't play well we malloc and realloc
+\item stale info
+\item hard to ensure consistency
+\item big
+\end{itemize}
+\item pointer to struct pros:
+\begin{itemize}
+\item small to pass (1 pointer)
+\item can have multiple references
+\item more control
+\item can hide implementation better
+\item consistency
+\item malloc and realloc friendly.
+\end{itemize}
+\item pointer to struct cons:
+\begin{itemize}
+\item malloc
+\item must free
+\item hard to copy
+\item deepcopy required
+\item awkward with arrays
+\end{itemize}
+\end{itemize}
+\end{itemize}
 
-*** original stack example 
+\subsubsection{original stack example}
+\label{sec:orgfceaffd}
 
-file:./stack.c
-#+BEGIN_SRC C :exports both  :tangle stack.c
+\url{./stack.c}
+\begin{verbatim}
 #define _POSIX_C_SOURCE 200809L // <-- needed for getline
 #include <stdint.h>
 #include <stdio.h>
@@ -1332,15 +1383,17 @@ int main() {
     free_stack(stack1);
     return 0;
 }
-#+END_SRC
+\end{verbatim}
 
-#+RESULTS:
-: Stack 0x55f01a3ba260: 0 items starting at (nil)
-: Enter some lines. Press ctrl-d (EOF) to end.
+\begin{verbatim}
+Stack 0x55f01a3ba260: 0 items starting at (nil)
+Enter some lines. Press ctrl-d (EOF) to end.
+\end{verbatim}
 
-*** Recommended stack example
-file:./new_stack.c
-#+BEGIN_SRC C :exports both  :tangle new_stack.c
+\subsubsection{Recommended stack example}
+\label{sec:org4a3cec6}
+\url{./new\_stack.c}
+\begin{verbatim}
 #define _POSIX_C_SOURCE 200809L // <-- needed for getline
 #include <stdint.h>
 #include <stdio.h>
@@ -1476,19 +1529,19 @@ int main() {
     free_stack(stack1);
     return 0;
 }
-#+END_SRC
+\end{verbatim}
 
-#+RESULTS:
-: Stack 0x55b4c76de260: 0 items starting at (nil)
-: Enter some lines. Press ctrl-d (EOF) to end.
+\begin{verbatim}
+Stack 0x55b4c76de260: 0 items starting at (nil)
+Enter some lines. Press ctrl-d (EOF) to end.
+\end{verbatim}
 
-#+BEGIN_SRC sh :exports both  
+\begin{verbatim}
 gcc -std=c99 -pedantic -Wall -Wextra -ftrapv -ggdb3 -o new_stack ./new_stack.c
 seq 9990 9999 | ./new_stack
-#+END_SRC
+\end{verbatim}
 
-#+RESULTS:
-#+begin_example
+\begin{verbatim}
 Stack 0x56180d47c260: 0 items starting at (nil)
 Enter some lines. Press ctrl-d (EOF) to end.
 Stack 0x56180d47c260: 1 items starting at 0x56180d47e320
@@ -1531,19 +1584,22 @@ Stack 0x56180d47c260: 1 items starting at 0x56180d47e880
 Stack 0x56180d47c260: 0 items starting at (nil)
 9990
 
-#+end_example
+\end{verbatim}
 
-*** Test First Top Down Design
+\subsubsection{Test First Top Down Design}
+\label{sec:orgf192eb3}
 
-** Recursive Definitions
-*** Mutually Recursive functions
+\subsection{Recursive Definitions}
+\label{sec:orge0d011b}
+\subsubsection{Mutually Recursive functions}
+\label{sec:org9a22d89}
 
 How do you get functions to call each other when they need each other
 to be defined?
 
 Function prototypes!
 
-#+BEGIN_SRC C :exports both
+\begin{verbatim}
 #include <stdio.h>
 #include <stdint.h>
 #include <stdlib.h>
@@ -1572,10 +1628,9 @@ int main() {
         //printf("mulThenDecrementThenAdd(%4d) ==%19ld\n", i, mulThenDecrementThenAdd( i ));   
     }
 }
-#+END_SRC
+\end{verbatim}
 
-#+RESULTS:
-#+begin_example
+\begin{verbatim}
 addThenDecrementThenMul(   0) ==                  0
 addThenDecrementThenMul(   1) ==                  1
 addThenDecrementThenMul(   2) ==                  2
@@ -1609,13 +1664,13 @@ addThenDecrementThenMul(  29) ==   4709833213369705
 addThenDecrementThenMul(  30) ==  23655377146575200
 addThenDecrementThenMul(  31) == 141294996401091181
 addThenDecrementThenMul(  32) == 733316691543831232
-#+end_example
+\end{verbatim}
 
 
 
 If you don't use prototypes on your mutual recursive functions you will get errors like
 
-#+begin_example
+\begin{verbatim}
 /tmp/babel-25087Va_/C-src-25087Eoy.c: In function ‘addThenDecrementThenMul’:
 /tmp/babel-25087Va_/C-src-25087Eoy.c:21:22: warning: implicit declaration of function ‘mulThenDecrementThenAdd’; did you mean ‘addThenDecrementThenMul’? [-Wimplicit-function-declaration]
      return current + mulThenDecrementThenAdd( current - 1 );
@@ -1629,10 +1684,11 @@ If you don't use prototypes on your mutual recursive functions you will get erro
      return current + mulThenDecrementThenAdd( current - 1 );
                       ^~~~~~~~~~~~~~~~~~~~~~~
 /bin/bash: /tmp/babel-25087Va_/C-bin-250872xB: Permission denied
-#+end_example
-*** Recursive Structs
+\end{verbatim}
+\subsubsection{Recursive Structs}
+\label{sec:org4d87e1e}
 
-#+BEGIN_SRC C :exports both :tangle linkedlist.c
+\begin{verbatim}
 #include <stdio.h>
 #include <stdint.h>
 #include <stdlib.h>
@@ -1705,10 +1761,9 @@ int main() {
     // freeLinkedListIterative( head );
     return 0;
 }
-#+END_SRC 
+\end{verbatim}
 
-#+RESULTS:
-#+begin_example
+\begin{verbatim}
 Print node value:    18 next: 0x55e6b82b8380
 Print node value:    16 next: 0x55e6b82b8360
 Print node value:    14 next: 0x55e6b82b8340
@@ -1720,17 +1775,16 @@ Print node value:     4 next: 0x55e6b82b82a0
 Print node value:     2 next: 0x55e6b82b8280
 Print node value:     0 next: 0x55e6b82b8260
 Print node type:      2 next: (nil)
-#+end_example
+\end{verbatim}
 
-#+BEGIN_SRC sh :exports both
+\begin{verbatim}
 gcc -std=c99 -Wall -pedantic -Werror -o linkedlist ./linkedlist.c
 valgrind ./linkedlist 2>&1
 echo now let\'s leak check
 valgrind --leak-check=full ./linkedlist 2>&1
-#+END_SRC
+\end{verbatim}
 
-#+RESULTS:
-#+begin_example
+\begin{verbatim}
 ==19776== Memcheck, a memory error detector
 ==19776== Copyright (C) 2002-2017, and GNU GPL'd, by Julian Seward et al.
 ==19776== Using Valgrind-3.13.0 and LibVEX; rerun with -h for copyright info
@@ -1798,7 +1852,7 @@ Print node type:      2 next: (nil)
 ==19782== 
 ==19782== For counts of detected and suppressed errors, rerun with: -v
 ==19782== ERROR SUMMARY: 1 errors from 1 contexts (suppressed: 0 from 0)
-#+end_example
+\end{verbatim}
 
 
 
@@ -1807,7 +1861,7 @@ Print node type:      2 next: (nil)
 
 This is what happens when we don't free
 
-#+begin_example
+\begin{verbatim}
 ==6238== Memcheck, a memory error detector
 ==6238== Copyright (C) 2002-2017, and GNU GPL'd, by Julian Seward et al.
 ==6238== Using Valgrind-3.13.0 and LibVEX; rerun with -h for copyright info
@@ -1875,12 +1929,13 @@ Print node value:    32 next: (nil)
 ==6239== 
 ==6239== For counts of detected and suppressed errors, rerun with: -v
 ==6239== ERROR SUMMARY: 1 errors from 1 contexts (suppressed: 0 from 0)
-#+end_example
+\end{verbatim}
 
 
-*** Mutually Recursive Structs
+\subsubsection{Mutually Recursive Structs}
+\label{sec:org9603bd0}
 
-#+BEGIN_SRC C :exports both
+\begin{verbatim}
 #include <stdio.h>
 #include <stdint.h>
 #include <stdlib.h>
@@ -1910,59 +1965,92 @@ int main() {
     printf("&sY.Y:\t %p\n", (void*)&(sZ.Y));
     return 0;
 }
-#+END_SRC 
+\end{verbatim}
 
-#+RESULTS:
-: sX:      8
-: sY:      8
-: sZ:     16
-: sZ.X.yPtr:	 0x7fff45c69d28
-: sZ.Y.xPtr:	 0x7fff45c69d20
-: &sX:		 0x7fff45c69d20
-: &sY:		 0x7fff45c69d28
-: &sZ.X:	 0x7fff45c69d30
-: &sY.Y:	 0x7fff45c69d38
+\begin{verbatim}
+sX:      8
+sY:      8
+sZ:     16
+sZ.X.yPtr:	 0x7fff45c69d28
+sZ.Y.xPtr:	 0x7fff45c69d20
+&sX:		 0x7fff45c69d20
+&sY:		 0x7fff45c69d28
+&sZ.X:	 0x7fff45c69d30
+&sY.Y:	 0x7fff45c69d38
+\end{verbatim}
 
 
-** Debugging
-*** GDB
-     - debuggers let us step through programs and observe variables.
-     - Compile a program with -g or -ggdb3 with gcc or clang
-       - this adds debugging symbols (so you can read it!)
-     - tell gdb to use your program
-       - gdb ./a.out
-     - tell gdb to run your program 
-       - run
-     - tell gbd to print a backtrace when something crashes
-       - bt
-     - tell gdb to print a variable name
-       - p string
-     - tell gdb to break at some point
-       - b filename:function
-       - b filename:line
-       - b line
-       - b function
-     - tell gdb to step into code (including into functions)
-       - s
-     - tell gdb to eval the next line (run functions)
-       - n
-     - keep running (continue)
-       - c
-     - print source code (list)
-       - l
-     - remove breakpoint
-       - clear
-       - clear function
-       - clear line
-     - quit
-       - q
-     - man gdb to get more help
-       - GDB manual http://sourceware.org/gdb/current/onlinedocs/gdb/
-       - ctrl-x a put gdb in curses semi-graphical mode
-       - ddd is a graphical wrapper for gdb (probably not in your VM)
-         - I like ctrl-x a better
+\subsection{Debugging}
+\label{sec:org977676c}
+\subsubsection{GDB}
+\label{sec:orgcde5e70}
+\begin{itemize}
+\item debuggers let us step through programs and observe variables.
+\item Compile a program with -g or -ggdb3 with gcc or clang
+\begin{itemize}
+\item this adds debugging symbols (so you can read it!)
+\end{itemize}
+\item tell gdb to use your program
+\begin{itemize}
+\item gdb ./a.out
+\end{itemize}
+\item tell gdb to run your program 
+\begin{itemize}
+\item run
+\end{itemize}
+\item tell gbd to print a backtrace when something crashes
+\begin{itemize}
+\item bt
+\end{itemize}
+\item tell gdb to print a variable name
+\begin{itemize}
+\item p string
+\end{itemize}
+\item tell gdb to break at some point
+\begin{itemize}
+\item b filename:function
+\item b filename:line
+\item b line
+\item b function
+\end{itemize}
+\item tell gdb to step into code (including into functions)
+\begin{itemize}
+\item s
+\end{itemize}
+\item tell gdb to eval the next line (run functions)
+\begin{itemize}
+\item n
+\end{itemize}
+\item keep running (continue)
+\begin{itemize}
+\item c
+\end{itemize}
+\item print source code (list)
+\begin{itemize}
+\item l
+\end{itemize}
+\item remove breakpoint
+\begin{itemize}
+\item clear
+\item clear function
+\item clear line
+\end{itemize}
+\item quit
+\begin{itemize}
+\item q
+\end{itemize}
+\item man gdb to get more help
+\begin{itemize}
+\item GDB manual \url{http://sourceware.org/gdb/current/onlinedocs/gdb/}
+\item ctrl-x a put gdb in curses semi-graphical mode
+\item ddd is a graphical wrapper for gdb (probably not in your VM)
+\begin{itemize}
+\item I like ctrl-x a better
+\end{itemize}
+\end{itemize}
+\end{itemize}
 
-#+begin_example
+\begin{verbatim}
 hindle1@frail:~/projects/CMPUT201/CMPUT201W20B2-public/week08$ gdb ./bad_realloc 
 GNU gdb (Ubuntu 8.1-0ubuntu3.2) 8.1.0.20180409-git
 Copyright (C) 2018 Free Software Foundation, Inc.
@@ -2016,11 +2104,11 @@ $4 = 0x555555757670 "100\n"
 57	
 58	char * pop(Stack stack) {
 (gdb) 
-#+end_example
+\end{verbatim}
 
 Here's a longer example of GDB
 
-#+begin_example
+\begin{verbatim}
 hindle1@frail:~/projects/CMPUT201/CMPUT201W20B2-public/week08$ gdb ./cards-aoa 
 GNU gdb (Ubuntu 8.1-0ubuntu3.2) 8.1.0.20180409-git
 Copyright (C) 2018 Free Software Foundation, Inc.
@@ -2148,27 +2236,38 @@ Suit 2
 We found 3857 flushes out of 1000000 hands: 0.003857
 [Inferior 1 (process 18051) exited normally]
 (gdb) q
-#+end_example
+\end{verbatim}
 
-*** valgrind
+\subsubsection{valgrind}
+\label{sec:org56b9302}
 
-    - Valgrind can debug memory issues like
-      - unitialized values
-      - memory leaks
-      - reading/writing free'd memory
-      - bad use of the stack (not great)
+\begin{itemize}
+\item Valgrind can debug memory issues like
+\begin{itemize}
+\item unitialized values
+\item memory leaks
+\item reading/writing free'd memory
+\item bad use of the stack (not great)
+\end{itemize}
 
-    - valgrind ./yourprogram
-    - valgrind --tool=memcheck ./yourprogram
-    - valgrind --tool=exp-sgcheck ./yourprogram
-      - for stack checks (not great)
-    - There's always the manual https://valgrind.org/docs/manual/manual.html
-    - do you want a lot of output?
-      - valgrind --leak-check=full --show-leak-kinds=all --track-origins=yes  --verbose ./yourprgram
+\item valgrind ./yourprogram
+\item valgrind --tool=memcheck ./yourprogram
+\item valgrind --tool=exp-sgcheck ./yourprogram
+\begin{itemize}
+\item for stack checks (not great)
+\end{itemize}
+\item There's always the manual \url{https://valgrind.org/docs/manual/manual.html}
+\item do you want a lot of output?
+\begin{itemize}
+\item valgrind --leak-check=full --show-leak-kinds=all --track-origins=yes  --verbose ./yourprgram
+\end{itemize}
+\end{itemize}
 
-**** Array Out of Bounds
+\begin{enumerate}
+\item Array Out of Bounds
+\label{sec:org17b1dc2}
 
-#+BEGIN_SRC C :exports both  :eval no :tangle array_oob.c
+\begin{verbatim}
 #define _POSIX_C_SOURCE 200809L
 #include <stdint.h>
 #include <stdio.h>
@@ -2199,31 +2298,29 @@ int main() {
     printf("%d\n", array[100]);
     return 0;
 }
-#+END_SRC
+\end{verbatim}
 
-#+RESULTS:
-
-#+BEGIN_SRC sh :exports both  
+\begin{verbatim}
 gcc -std=c99 -O0 -pedantic -Wall -Wextra -ftrapv -ggdb3 -o array_oob ./array_oob.c
 echo 32 | ./array_oob 
 echo $?
-#+END_SRC
+\end{verbatim}
 
-#+RESULTS:
-: How big?
-: 0
-: 1
-: 0
+\begin{verbatim}
+How big?
+0
+1
+0
+\end{verbatim}
 
 
-#+BEGIN_SRC sh :exports both  
+\begin{verbatim}
 gcc -std=c99 -O0 -pedantic -Wall -Wextra -ftrapv -ggdb3 -o array_oob ./array_oob.c
 echo 6 | valgrind --leak-check=full  ./array_oob 2>&1
 echo $?
-#+END_SRC
+\end{verbatim}
 
-#+RESULTS:
-#+begin_example
+\begin{verbatim}
 ==21934== Memcheck, a memory error detector
 ==21934== Copyright (C) 2002-2017, and GNU GPL'd, by Julian Seward et al.
 ==21934== Using Valgrind-3.13.0 and LibVEX; rerun with -h for copyright info
@@ -2242,18 +2339,17 @@ How big?
 ==21934== For counts of detected and suppressed errors, rerun with: -v
 ==21934== ERROR SUMMARY: 0 errors from 0 contexts (suppressed: 0 from 0)
 0
-#+end_example
+\end{verbatim}
 
 The output is dependent on your input
 
-#+BEGIN_SRC sh :exports both  
+\begin{verbatim}
 gcc -std=c99 --stack-check -pedantic -Wall -Wextra -ftrapv -g3 -o array_oob ./array_oob.c || echo did not compile
 echo 32 | valgrind --tool=exp-sgcheck ./array_oob 2>&1
 echo $?
-#+END_SRC
+\end{verbatim}
 
-#+RESULTS:
-#+begin_example
+\begin{verbatim}
 ==21996== exp-sgcheck, a stack and global array overrun detector
 ==21996== NOTE: This is an Experimental-Class Valgrind Tool
 ==21996== Copyright (C) 2003-2017, and GNU GPL'd, by OpenWorks Ltd et al.
@@ -2282,20 +2378,19 @@ How big?
 ==21996== 
 ==21996== ERROR SUMMARY: 0 errors from 0 contexts (suppressed: 2 from 2)
 0
-#+end_example
+\end{verbatim}
 
 
 
-#+BEGIN_SRC sh :comment gdb :exports no-export 
+\begin{verbatim}
 gcc -std=c99 -pedantic -Wall -Wextra -ftrapv -ggdb3 -o array_oob ./array_oob.c
 gnome-terminal -- gdb ./array_oob
-#+END_SRC
+\end{verbatim}
 
-#+RESULTS:
+\item Array unitialized
+\label{sec:orge9e22e8}
 
-**** Array unitialized
-
-#+BEGIN_SRC C :exports both  :eval no :tangle array_uninit.c
+\begin{verbatim}
 #define _POSIX_C_SOURCE 200809L
 #include <stdint.h>
 #include <stdio.h>
@@ -2322,16 +2417,15 @@ int main() {
     }
     return 0;
 }
-#+END_SRC
+\end{verbatim}
 
-#+BEGIN_SRC sh :exports both  
+\begin{verbatim}
 gcc -std=c99 -O0 -pedantic -Wall -Wextra -ftrapv -ggdb3 -o array_uninit ./array_uninit.c
 echo 10 | ./array_uninit 
 echo $?
-#+END_SRC
+\end{verbatim}
 
-#+RESULTS:
-#+begin_example
+\begin{verbatim}
 How big?
 -782409112
 32764
@@ -2344,17 +2438,16 @@ How big?
 0
 0
 0
-#+end_example
+\end{verbatim}
 
 
-#+BEGIN_SRC sh :exports both  
+\begin{verbatim}
 gcc -std=c99 -O0 -pedantic -Wall -Wextra -ftrapv -ggdb3 -o array_uninit ./array_uninit.c
 echo 5 | valgrind --leak-check=full  ./array_uninit 2>&1
 echo $?
-#+END_SRC
+\end{verbatim}
 
-#+RESULTS:
-#+begin_example
+\begin{verbatim}
 ==16458== Memcheck, a memory error detector
 ==16458== Copyright (C) 2002-2017, and GNU GPL'd, by Julian Seward et al.
 ==16458== Using Valgrind-3.13.0 and LibVEX; rerun with -h for copyright info
@@ -2404,55 +2497,61 @@ How big?
 ==16458== Use --track-origins=yes to see where uninitialised values come from
 ==16458== ERROR SUMMARY: 57 errors from 5 contexts (suppressed: 0 from 0)
 0
-#+end_example
+\end{verbatim}
 
 Yeah valgrind did not like that. It complained about uninitiliazed values.
+\end{enumerate}
 
 
-*** More bad code 
+\subsubsection{More bad code}
+\label{sec:org0448708}
 
 These files are debugging examples where you should practice valgrind
 and gcc.
 
-#+BEGIN_SRC sh :exports both  
+\begin{verbatim}
 # look a bash for loop!
 echo Compiling!
 for file in ./array_oob.c ./array_uninit.c ./bad_realloc.c ./bad_str.c ./double_free.c ./huge_array.c ./infinite_recursion.c ./malloc.c ./malloc_oob.c ./malloc_uninit.c ./segv.c ./simple_uninit.c ./stack.c ./stack_limit.c ./use_after_free.c 
 do
 gcc -std=c99 -pedantic -Wall -Wextra -ftrapv -ggdb3 -o `basename -s .c $file` $file
 done
-#+END_SRC
+\end{verbatim}
 
-#+RESULTS:
-: Compiling!
+\begin{verbatim}
+Compiling!
+\end{verbatim}
 
-***** Files
-file:./array_oob.c
-file:./array_uninit.c
-file:./bad_realloc.c
-file:./bad_str.c
-file:./double_free.c
-file:./huge_array.c
-file:./infinite_recursion.c
-file:./malloc.c
-file:./malloc_oob.c
-file:./malloc_uninit.c
-file:./segv.c
-file:./simple_uninit.c
-file:./stack.c
-file:./stack_limit.c
-file:./use_after_free.c
+\begin{enumerate}
+\item Files
+\label{sec:org51acad1}
+\url{./array\_oob.c}
+\url{./array\_uninit.c}
+\url{./bad\_realloc.c}
+\url{./bad\_str.c}
+\url{./double\_free.c}
+\url{./huge\_array.c}
+\url{./infinite\_recursion.c}
+\url{./malloc.c}
+\url{./malloc\_oob.c}
+\url{./malloc\_uninit.c}
+\url{./segv.c}
+\url{./simple\_uninit.c}
+\url{./stack.c}
+\url{./stack\_limit.c}
+\url{./use\_after\_free.c}
+\end{enumerate}
 
-**** ./array_oob.c
-file:./array_oob.c
+\item ./array\(_{\text{oob.c}}\)
+\label{sec:orgd28f426}
+\url{./array\_oob.c}
 
-#+BEGIN_SRC sh :exports both  
+\begin{verbatim}
 gcc -std=c99 -pedantic -Wall -Wextra -ftrapv -ggdb3 -o array_oob ./array_oob.c
 echo 15 | valgrind ./array_oob 2>&1
-#+END_SRC
+\end{verbatim}
 
-#+RESULTS:
-#+begin_example
+\begin{verbatim}
 ==23630== Memcheck, a memory error detector
 ==23630== Copyright (C) 2002-2017, and GNU GPL'd, by Julian Seward et al.
 ==23630== Using Valgrind-3.13.0 and LibVEX; rerun with -h for copyright info
@@ -2470,26 +2569,24 @@ How big?
 ==23630== 
 ==23630== For counts of detected and suppressed errors, rerun with: -v
 ==23630== ERROR SUMMARY: 0 errors from 0 contexts (suppressed: 0 from 0)
-#+end_example
+\end{verbatim}
 
 Run GDB
-#+BEGIN_SRC sh :comment gdb :exports no-export  
+\begin{verbatim}
 gcc -std=c99 -pedantic -Wall -Wextra -ftrapv -ggdb3 -o array_oob ./array_oob.c
 gnome-terminal -- gdb ./array_oob
-#+END_SRC
+\end{verbatim}
 
-#+RESULTS:
+\item ./array\(_{\text{uninit.c}}\)
+\label{sec:org278f548}
+\url{./array\_uninit.c}
 
-**** ./array_uninit.c
-file:./array_uninit.c
-
-#+BEGIN_SRC sh :exports both  
+\begin{verbatim}
 gcc -std=c99 -pedantic -Wall -Wextra -ftrapv -ggdb3 -o array_uninit ./array_uninit.c
 echo 7 | valgrind ./array_uninit 2>&1
-#+END_SRC
+\end{verbatim}
 
-#+RESULTS:
-#+begin_example
+\begin{verbatim}
 ==22170== Memcheck, a memory error detector
 ==22170== Copyright (C) 2002-2017, and GNU GPL'd, by Julian Seward et al.
 ==22170== Using Valgrind-3.13.0 and LibVEX; rerun with -h for copyright info
@@ -2540,44 +2637,39 @@ How big?
 ==22170== For counts of detected and suppressed errors, rerun with: -v
 ==22170== Use --track-origins=yes to see where uninitialised values come from
 ==22170== ERROR SUMMARY: 79 errors from 5 contexts (suppressed: 0 from 0)
-#+end_example
+\end{verbatim}
 
 Run GDB
-#+BEGIN_SRC sh :comment gdb :exports no-export  
+\begin{verbatim}
 gcc -std=c99 -pedantic -Wall -Wextra -ftrapv -ggdb3 -o array_uninit ./array_uninit.c
 gnome-terminal -- gdb ./array_uninit
-#+END_SRC
+\end{verbatim}
 
-#+RESULTS:
+\item ./bad\(_{\text{realloc.c}}\)
+\label{sec:orgb40d71f}
+\url{./bad\_realloc.c}
 
-**** ./bad_realloc.c
-file:./bad_realloc.c
-
-#+BEGIN_SRC sh :exports both  
+\begin{verbatim}
 gcc -std=c99 -pedantic -Wall -Wextra -ftrapv -ggdb3 -o bad_realloc ./bad_realloc.c
 echo 33 | valgrind ./bad_realloc 2>&1
-#+END_SRC
-
-#+RESULTS:
+\end{verbatim}
 
 Run GDB
-#+BEGIN_SRC sh :comment gdb :exports no-export  
+\begin{verbatim}
 gcc -std=c99 -pedantic -Wall -Wextra -ftrapv -ggdb3 -o bad_realloc ./bad_realloc.c
 gnome-terminal -- gdb ./bad_realloc
-#+END_SRC
+\end{verbatim}
 
-#+RESULTS:
+\item ./bad\(_{\text{str.c}}\)
+\label{sec:org9721dd1}
+\url{./bad\_str.c}
 
-**** ./bad_str.c
-file:./bad_str.c
-
-#+BEGIN_SRC sh :exports both  
+\begin{verbatim}
 gcc -std=c99 -pedantic -Wall -Wextra -ftrapv -ggdb3 -o bad_str ./bad_str.c
 echo Coolbears | valgrind ./bad_str 2>&1
-#+END_SRC
+\end{verbatim}
 
-#+RESULTS:
-#+begin_example
+\begin{verbatim}
 ==23374== Memcheck, a memory error detector
 ==23374== Copyright (C) 2002-2017, and GNU GPL'd, by Julian Seward et al.
 ==23374== Using Valgrind-3.13.0 and LibVEX; rerun with -h for copyright info
@@ -2645,24 +2737,24 @@ You entered: Coolbears
 ==23374== 
 ==23374== For counts of detected and suppressed errors, rerun with: -v
 ==23374== ERROR SUMMARY: 14 errors from 5 contexts (suppressed: 0 from 0)
-#+end_example
+\end{verbatim}
 
 Run GDB
-#+BEGIN_SRC sh :comment gdb :exports no-export  
+\begin{verbatim}
 gcc -std=c99 -pedantic -Wall -Wextra -ftrapv -ggdb3 -o bad_str ./bad_str.c
 gnome-terminal -- gdb ./bad_str
-#+END_SRC
+\end{verbatim}
 
-**** ./double_free.c
-file:./double_free.c
+\item ./double\(_{\text{free.c}}\)
+\label{sec:orga58c68e}
+\url{./double\_free.c}
 
-#+BEGIN_SRC sh :exports both  
+\begin{verbatim}
 gcc -std=c99 -pedantic -Wall -Wextra -ftrapv -ggdb3 -o double_free ./double_free.c
 echo 33 | valgrind ./double_free 2>&1
-#+END_SRC
+\end{verbatim}
 
-#+RESULTS:
-#+begin_example
+\begin{verbatim}
 ==23937== Memcheck, a memory error detector
 ==23937== Copyright (C) 2002-2017, and GNU GPL'd, by Julian Seward et al.
 ==23937== Using Valgrind-3.13.0 and LibVEX; rerun with -h for copyright info
@@ -2721,26 +2813,24 @@ How big?
 ==23937== 
 ==23937== For counts of detected and suppressed errors, rerun with: -v
 ==23937== ERROR SUMMARY: 1 errors from 1 contexts (suppressed: 0 from 0)
-#+end_example
+\end{verbatim}
 
 Run GDB
-#+BEGIN_SRC sh :comment gdb :exports no-export  
+\begin{verbatim}
 gcc -std=c99 -pedantic -Wall -Wextra -ftrapv -ggdb3 -o double_free ./double_free.c
 gnome-terminal -- gdb ./double_free
-#+END_SRC
+\end{verbatim}
 
-#+RESULTS:
+\item ./huge\(_{\text{array.c}}\)
+\label{sec:orgc351a52}
+\url{./huge\_array.c}
 
-**** ./huge_array.c
-file:./huge_array.c
-
-#+BEGIN_SRC sh :exports both  
+\begin{verbatim}
 gcc -std=c99 -pedantic -Wall -Wextra -ftrapv -ggdb3 -o huge_array ./huge_array.c
 echo 33 | valgrind ./huge_array 2>&1
-#+END_SRC
+\end{verbatim}
 
-#+RESULTS:
-#+begin_example
+\begin{verbatim}
 ==27323== Memcheck, a memory error detector
 ==27323== Copyright (C) 2002-2017, and GNU GPL'd, by Julian Seward et al.
 ==27323== Using Valgrind-3.13.0 and LibVEX; rerun with -h for copyright info
@@ -2800,24 +2890,24 @@ echo 33 | valgrind ./huge_array 2>&1
 ==27323== 
 ==27323== For counts of detected and suppressed errors, rerun with: -v
 ==27323== ERROR SUMMARY: 1048565 errors from 7 contexts (suppressed: 0 from 0)
-#+end_example
+\end{verbatim}
 
 Run GDB
-#+BEGIN_SRC sh :comment gdb :exports no-export  
+\begin{verbatim}
 gcc -std=c99 -pedantic -Wall -Wextra -ftrapv -ggdb3 -o huge_array ./huge_array.c
 gnome-terminal -- gdb ./huge_array
-#+END_SRC
+\end{verbatim}
 
-**** ./malloc_oob.c
-file:./malloc_oob.c
+\item ./malloc\(_{\text{oob.c}}\)
+\label{sec:org49dd09a}
+\url{./malloc\_oob.c}
 
-#+BEGIN_SRC sh :exports both  
+\begin{verbatim}
 gcc -std=c99 -pedantic -Wall -Wextra -ftrapv -ggdb3 -o malloc_oob ./malloc_oob.c
 echo 33 | valgrind ./malloc_oob 2>&1
-#+END_SRC
+\end{verbatim}
 
-#+RESULTS:
-#+begin_example
+\begin{verbatim}
 ==27315== Memcheck, a memory error detector
 ==27315== Copyright (C) 2002-2017, and GNU GPL'd, by Julian Seward et al.
 ==27315== Using Valgrind-3.13.0 and LibVEX; rerun with -h for copyright info
@@ -2838,24 +2928,24 @@ How big?
 ==27315== 
 ==27315== For counts of detected and suppressed errors, rerun with: -v
 ==27315== ERROR SUMMARY: 1 errors from 1 contexts (suppressed: 0 from 0)
-#+end_example
+\end{verbatim}
 
 Run GDB
-#+BEGIN_SRC sh :comment gdb :exports no-export  
+\begin{verbatim}
 gcc -std=c99 -pedantic -Wall -Wextra -ftrapv -ggdb3 -o malloc_oob ./malloc_oob.c
 gnome-terminal -- gdb ./malloc_oob
-#+END_SRC
+\end{verbatim}
 
-**** ./malloc_uninit.c
-file:./malloc_uninit.c
+\item ./malloc\(_{\text{uninit.c}}\)
+\label{sec:orgef47aae}
+\url{./malloc\_uninit.c}
 
-#+BEGIN_SRC sh :exports both  
+\begin{verbatim}
 gcc -std=c99 -pedantic -Wall -Wextra -ftrapv -ggdb3 -o malloc_uninit ./malloc_uninit.c
 echo 33 | valgrind ./malloc_uninit 2>&1
-#+END_SRC
+\end{verbatim}
 
-#+RESULTS:
-#+begin_example
+\begin{verbatim}
 ==27303== Memcheck, a memory error detector
 ==27303== Copyright (C) 2002-2017, and GNU GPL'd, by Julian Seward et al.
 ==27303== Using Valgrind-3.13.0 and LibVEX; rerun with -h for copyright info
@@ -2938,24 +3028,24 @@ How big?
 ==27303== For counts of detected and suppressed errors, rerun with: -v
 ==27303== Use --track-origins=yes to see where uninitialised values come from
 ==27303== ERROR SUMMARY: 165 errors from 5 contexts (suppressed: 0 from 0)
-#+end_example
+\end{verbatim}
 
 Run GDB
-#+BEGIN_SRC sh :comment gdb :exports no-export  
+\begin{verbatim}
 gcc -std=c99 -pedantic -Wall -Wextra -ftrapv -ggdb3 -o malloc_uninit ./malloc_uninit.c
 gnome-terminal -- gdb ./malloc_uninit
-#+END_SRC
+\end{verbatim}
 
-**** ./segv.c
-file:./segv.c
+\item ./segv.c
+\label{sec:org406f6ca}
+\url{./segv.c}
 
-#+BEGIN_SRC sh :exports both  
+\begin{verbatim}
 gcc -std=c99 -pedantic -Wall -Wextra -ftrapv -ggdb3 -o segv ./segv.c
 echo 33 | valgrind ./segv 2>&1
-#+END_SRC
+\end{verbatim}
 
-#+RESULTS:
-#+begin_example
+\begin{verbatim}
 ==27291== Memcheck, a memory error detector
 ==27291== Copyright (C) 2002-2017, and GNU GPL'd, by Julian Seward et al.
 ==27291== Using Valgrind-3.13.0 and LibVEX; rerun with -h for copyright info
@@ -2976,24 +3066,24 @@ How big?
 ==27291== 
 ==27291== For counts of detected and suppressed errors, rerun with: -v
 ==27291== ERROR SUMMARY: 1 errors from 1 contexts (suppressed: 0 from 0)
-#+end_example
+\end{verbatim}
 
 Run GDB
-#+BEGIN_SRC sh :comment gdb :exports no-export  
+\begin{verbatim}
 gcc -std=c99 -pedantic -Wall -Wextra -ftrapv -ggdb3 -o segv ./segv.c
 gnome-terminal -- gdb ./segv
-#+END_SRC
+\end{verbatim}
 
-**** ./simple_uninit.c
-file:./simple_uninit.c
+\item ./simple\(_{\text{uninit.c}}\)
+\label{sec:org95daea4}
+\url{./simple\_uninit.c}
 
-#+BEGIN_SRC sh :exports both  
+\begin{verbatim}
 gcc -std=c99 -pedantic -Wall -Wextra -ftrapv -ggdb3 -o simple_uninit ./simple_uninit.c
 echo 33 | valgrind ./simple_uninit 2>&1
-#+END_SRC
+\end{verbatim}
 
-#+RESULTS:
-#+begin_example
+\begin{verbatim}
 ==27279== Memcheck, a memory error detector
 ==27279== Copyright (C) 2002-2017, and GNU GPL'd, by Julian Seward et al.
 ==27279== Using Valgrind-3.13.0 and LibVEX; rerun with -h for copyright info
@@ -3010,24 +3100,24 @@ Enter an int:
 ==27279== 
 ==27279== For counts of detected and suppressed errors, rerun with: -v
 ==27279== ERROR SUMMARY: 0 errors from 0 contexts (suppressed: 0 from 0)
-#+end_example
+\end{verbatim}
 
 Run GDB
-#+BEGIN_SRC sh :comment gdb :exports no-export  
+\begin{verbatim}
 gcc -std=c99 -pedantic -Wall -Wextra -ftrapv -ggdb3 -o simple_uninit ./simple_uninit.c
 gnome-terminal -- gdb ./simple_uninit
-#+END_SRC
+\end{verbatim}
 
-**** ./stack.c
-file:./stack.c
+\item ./stack.c
+\label{sec:orga98d6f7}
+\url{./stack.c}
 
-#+BEGIN_SRC sh :exports both  
+\begin{verbatim}
 gcc -std=c99 -pedantic -Wall -Wextra -ftrapv -ggdb3 -o stack ./stack.c
 echo 33 | valgrind ./stack 2>&1
-#+END_SRC
+\end{verbatim}
 
-#+RESULTS:
-#+begin_example
+\begin{verbatim}
 ==27253== Memcheck, a memory error detector
 ==27253== Copyright (C) 2002-2017, and GNU GPL'd, by Julian Seward et al.
 ==27253== Using Valgrind-3.13.0 and LibVEX; rerun with -h for copyright info
@@ -3053,72 +3143,66 @@ Stack 0x522d040: 0 items starting at (nil)
 ==27253== 
 ==27253== For counts of detected and suppressed errors, rerun with: -v
 ==27253== ERROR SUMMARY: 0 errors from 0 contexts (suppressed: 0 from 0)
-#+end_example
+\end{verbatim}
 
 Run GDB
-#+BEGIN_SRC sh :comment gdb :exports no-export  
+\begin{verbatim}
 gcc -std=c99 -pedantic -Wall -Wextra -ftrapv -ggdb3 -o stack ./stack.c
 gnome-terminal -- gdb ./stack
-#+END_SRC
+\end{verbatim}
 
-**** ./stack_limit.c
-file:./stack_limit.c
+\item ./stack\(_{\text{limit.c}}\)
+\label{sec:org0531140}
+\url{./stack\_limit.c}
 
-#+BEGIN_SRC sh :exports both  
+\begin{verbatim}
 gcc -std=c99 -pedantic -Wall -Wextra -ftrapv -ggdb3 -o stack_limit ./stack_limit.c
 echo 33 | valgrind ./stack_limit 2>&1
-#+END_SRC
-
-#+RESULTS:
+\end{verbatim}
 
 Run GDB
-#+BEGIN_SRC sh :comment gdb :exports no-export
+\begin{verbatim}
 gcc -std=c99 -pedantic -Wall -Wextra -ftrapv -ggdb3 -o stack_limit ./stack_limit.c
 gnome-terminal -- gdb ./stack_limit
-#+END_SRC
+\end{verbatim}
 
-#+RESULTS:
+\item ./use\(_{\text{after}}\)\(_{\text{free.c}}\)
+\label{sec:orga5e4916}
+\url{./use\_after\_free.c}
 
-**** ./use_after_free.c
-file:./use_after_free.c
-
-#+BEGIN_SRC sh :exports both  
+\begin{verbatim}
 gcc -std=c99 -pedantic -Wall -Wextra -ftrapv -ggdb3 -o use_after_free ./use_after_free.c
 echo 33 | valgrind ./use_after_free 2>&1
-#+END_SRC
+\end{verbatim}
 
 Run GDB
-#+BEGIN_SRC sh :exports both  
+\begin{verbatim}
 gcc -std=c99 -pedantic -Wall -Wextra -ftrapv -ggdb3 -o use_after_free ./use_after_free.c
 gnome-terminal -- gdb ./use_after_free
-#+END_SRC
-
-#+RESULTS:
+\end{verbatim}
 
 
 
-**** ./infinite_recursion.c
-file:./infinite_recursion.c
+\item ./infinite\(_{\text{recursion.c}}\)
+\label{sec:orgdb4381d}
+\url{./infinite\_recursion.c}
 
 Run GDB
-#+BEGIN_SRC sh :exports code  
+\begin{verbatim}
 gcc -std=c99 -pedantic -Wall -Wextra -ftrapv -ggdb3 -o infinite_recursion ./infinite_recursion.c
 gnome-terminal -- gdb ./infinite_recursion
-#+END_SRC
+\end{verbatim}
 
 Run valgrind
-#+BEGIN_SRC sh :exports code
+\begin{verbatim}
 gcc -std=c99 -pedantic -Wall -Wextra -ftrapv -ggdb3 -o infinite_recursion ./infinite_recursion.c
 echo "valgrind ./infinite_recursion ; read" > infinite_recursion.sh
 gnome-terminal -- bash infinite_recursion.sh 
-#+END_SRC
-
-#+RESULTS:
-
+\end{verbatim}
 
 Valgrind results
 
-#+begin_example
+\begin{verbatim}
 depth: 261795
 ==6818== Stack overflow in thread #1: can't grow stack to 0x1ffe801000
 depth: 261796
@@ -3129,12 +3213,14 @@ depth: 261798
 ==6818== Stack overflow in thread #1: can't grow stack to 0x1ffe801000
 depth: 261799
 ==6818== Stack overflow in thread #1: can't grow stack to 0x1ffe801000
-#+end_example
+\end{verbatim}
 
 
-***** Generator (ignore)
+\begin{enumerate}
+\item Generator (ignore)
+\label{sec:orgc655142}
 
-#+BEGIN_SRC sh :exports none :eval no
+\begin{verbatim}
 # look a bash for loop!
 for file in ./array_oob.c ./array_uninit.c ./bad_realloc.c ./bad_str.c ./double_free.c ./huge_array.c ./malloc_oob.c ./malloc_uninit.c ./segv.c ./simple_uninit.c ./stack.c ./stack_limit.c ./use_after_free.c 
 #for file in ./array_oob.c ./array_uninit.c ./bad_realloc.c 
@@ -3155,5 +3241,7 @@ echo gcc -std=c99 -pedantic -Wall -Wextra -ftrapv -ggdb3 -o $exe $file
 echo gnome-terminal -- gdb ./$exe
 echo \#+END_SRC
 done
-#+END_SRC
-
+\end{verbatim}
+\end{enumerate}
+\end{enumerate}
+\end{document}
