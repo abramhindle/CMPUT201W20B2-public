@@ -1,0 +1,453 @@
+#+TITLE: CMPUT201W20B2 Week 9
+#+PROPERTY: header-args:C             :results output :exports no-export :flags -std=c99 -pedantic -Wall -Wextra -ftrapv -ggdb3 :eval yes :results value verbatim
+#+PROPERTY: header-args:sh            :results output :exports no-export :eval yes :results value verbatim
+#+PROPERTY: header-args:shell         :results output :exports no-export :eval yes :results value verbatim
+
+* Week9
+** Copyright Statement
+
+If you are in CMPUT201 at UAlberta this code is released in the public
+domain to you.
+
+Otherwise it is (c) 2020 Abram Hindle, Hazel Campbell AGPL3.0+
+
+*** License
+
+    Week 3 notes
+    Copyright (C) 2020 Abram Hindle, Hazel Campbell
+
+    This program is free software: you can redistribute it and/or modify
+    it under the terms of the GNU Affero General Public License as
+    published by the Free Software Foundation, either version 3 of the
+    License, or (at your option) any later version.
+
+    This program is distributed in the hope that it will be useful,
+    but WITHOUT ANY WARRANTY; without even the implied warranty of
+    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+    GNU Affero General Public License for more details.
+
+    You should have received a copy of the GNU Affero General Public License
+    along with this program.  If not, see <https://www.gnu.org/licenses/>.
+
+
+*** Hazel Code is licensed under AGPL3.0+
+
+Hazel's code is also found here
+https://github.com/hazelybell/examples/tree/C-2020-01
+
+Hazel code is licensed: The example code is licensed under the AGPL3+
+license, unless otherwise noted.
+
+** Init ORG-MODE
+
+#+BEGIN_SRC elisp
+;; I need this for org-mode to work well
+;; If we have a new org-mode use ob-shell
+;; otherwise use ob-sh --- but not both!
+(if (require 'ob-shell nil 'noerror)
+  (progn
+    (org-babel-do-load-languages 'org-babel-load-languages '((shell . t))))
+  (progn
+    (require 'ob-sh)
+    (org-babel-do-load-languages 'org-babel-load-languages '((sh . t)))))
+; (org-babel-do-load-languages 'org-babel-load-languages '((sh . t)))
+;(org-babel-do-load-languages 'org-babel-load-languages '((shell . t)))
+(org-babel-do-load-languages 'org-babel-load-languages '((C . t)))
+(org-babel-do-load-languages 'org-babel-load-languages '((python . t)))
+(setq org-src-fontify-natively t)
+(setq org-confirm-babel-evaluate nil) ;; danger!
+(custom-set-faces
+ ;; custom-set-faces was added by Custom.
+ ;; If you edit it by hand, you could mess it up, so be careful.
+ ;; Your init file should contain only one such instance.
+ ;; If there is more than one, they won't work right.
+ '(org-block ((t (:inherit shadow :foreground "black")))))
+#+END_SRC
+
+#+RESULTS:
+
+*** Org export
+#+BEGIN_SRC elisp
+(org-html-export-to-html)
+(org-latex-export-to-pdf)
+(org-ascii-export-to-ascii)
+#+END_SRC
+
+#+RESULTS:
+: ./presentation.txt
+
+
+*** Org Template
+Copy and paste this to demo C
+
+#+BEGIN_SRC C :exports both
+#include <stdio.h>
+
+int main(int argc, char**argv) {
+    return 0;
+}
+#+END_SRC
+
+#+RESULTS:
+
+** Remember how to compile?
+
+gcc  -std=c99 -pedantic -Wall -Wextra -ftrapv -ggdb3 -o programname programname.c
+
+
+** How C uses memory
+
+https://docs.google.com/document/d/1wcBnHZEaW4ukcZNlMNZJdbxkyPOQFGQhtANpqW5tx_8/edit?usp=sharing
+
+*** C's memory types
+
+    - File memory (code or text) 
+      - handled by the compiler, the linker, the loader, and the OS
+      - contains code, string literals, constants
+      - read only
+      - big
+    - static 
+      - your globals and static vars
+      - static or auto
+      - big
+    - Call stack or stack
+      - fast local memory for a function
+      - auto 
+      - small amount
+    - Heap
+      - general storage / memory for everything
+      - auto / static/ whatever
+      - huge
+    - registers
+      - not actually CPU registers -- but you hope!
+      - meant to be moved around for optimization reasons
+      - compiler dictated
+      - 'register' variables -- don't make pointers to these
+      - meant to be fast, might be in stack might be in actual registers
+        - no guarantees
+        - your compiler w/ optimizer is typically better.
+*** Type qualifiers
+
+Add these to types to communicate to other programmers and the
+compiler.
+
+- const - don't change it and I promise not to change it (but it might
+  change because I messed up with malloc)
+- volatile - this value could change so if you need it read it
+  immediately and use it. It could even change while you use it. Don't
+  rely on it staying the same. Something external could be changing it.
+- restrict - I promise that this pointer is the only pointer to the
+  thing it is pointing to. Speed hacks that rarely work.
+
+** Preprocessor stuff like if-def
+   The preprocessor deals with all the lines that you start with an
+   octalthrope or hash mark: #
+  
+   The preprocessor lets you define symbols, macros, and include
+   files.
+
+*** #ifdef
+
+#+BEGIN_SRC C :exports both 
+/* #ifdef   IF DEFined
+ * 
+ * If whatever comes after the #ifdef IS
+ * defined, then all the code until the #endif
+ * be treated normally.
+ * 
+ * If whatever comes afer the #ifdef is NOT
+ * defined, then all the code until the #endif
+ * will be SKIPPED, and not compiled at all.
+ * 
+ * #else    
+ * Similar to else but in the preprocessor
+ */
+
+#include <stdio.h>
+#include <stdio.h>
+
+#ifdef ENABLE_NONSENSE
+this is not even real c code!
+
+all of this gets skipped
+#endif
+
+// Try commenting/uncommenting the following:
+#define TURBO
+#define DEBUG
+
+
+
+int main() {
+    
+#ifdef TURBO
+    int value = 27;
+#else
+    int value = 32;
+#endif /* def TURBO */
+
+    printf("Value is %d!\n", value);
+    
+#ifdef TURBO
+    printf("Turbo is on!\n");
+#endif /* def TURBO */
+    
+#ifdef DEBUG
+    printf("Reached end of main, quitting!\n");
+#endif
+    
+    return 0;
+}
+#+END_SRC
+
+#+RESULTS:
+: Value is 27!
+: Turbo is on!
+: Reached end of main, quitting!
+
+*** #ifndef
+
+#+BEGIN_SRC C :exports both
+/* #ifndef   IF Not DEFined
+ * 
+ * If whatever comes after the #ifndef is NOT
+ * defined, then all the code until the #endif
+ * be treated normally.
+ * 
+ * If whatever comes afer the #ifndef IS
+ * defined, then all the code until the #endif
+ * will be SKIPPED, and not compiled at all.
+ */
+
+#include <stdio.h>
+
+#ifdef THING
+order matters here
+#ifdef OTHER_THING
+this will only appear in the compiled program if both things are defined
+
+order doesnt matter here
+#endif
+order matters here too
+#endif
+
+#ifndef MAIN_DEFINED
+#define MAIN_DEFINED
+int main() {
+    printf("Main 1!\n");
+    return 0;
+}
+#endif
+
+#ifndef MAIN_DEFINED
+#define MAIN_DEFINED
+int main() {
+    printf("Main 2!\n");
+    return 0;
+}
+#endif
+#+END_SRC
+
+#+RESULTS:
+: Main 1!
+
+*** Guards
+
+#+BEGIN_SRC C :exports both
+/* Guards:
+ * 
+ * The purpose of the guard is to ensure that
+ * IF the header is included more than once,
+ * everything in it will be SKIPPED the second,
+ * third, fourth, etc. time the header is
+ * included.
+ * 
+ * For example, we might have main.c which
+ * includes io.h which includes data.h,
+ * as well as incuding data.h directly.
+ * 
+ * In such a situation, data.h gets included
+ * TWICE in main.c, which would produce errors
+ * without guards!
+ */
+
+/* #ifndef   IF Not DEFined
+ * 
+ * If whatever comes after the #ifndef is NOT
+ * defined, then all the code until the #endif
+ * be treated normally.
+ * 
+ * If whatever comes afer the #ifndef IS
+ * defined, then all the code until the #endif
+ * will be SKIPPED, and not compiled at all.
+ */
+
+#ifndef _GUARDS_H_
+
+#define _GUARDS_H_
+
+
+// # ends if
+#endif /* ndef _GUARDS_H_ */
+#+END_SRC
+
+
+**** No Guards
+
+What if we don't have a guard?
+
+We could redefine functions. Make conflicting types. Get in infinite
+include loops.
+
+#+BEGIN_SRC C :exports both
+#include <stdio.h>
+/* No Guards:
+ * 
+ */
+#define GUARDS "cool"
+
+#define GUARDS "awesome"
+
+int main() {
+    puts(GUARDS);
+}
+#+END_SRC
+
+#+RESULTS:
+: awesome
+
+**** W/ Guards
+
+What if we have a guard?
+
+We only define once :)
+
+#+BEGIN_SRC C :exports both
+#include <stdio.h>
+/* No Guards:
+ * 
+ */
+#ifndef GUARDS
+#define GUARDS "cool"
+#endif
+
+#ifndef GUARDS
+#define GUARDS "awesome"
+#endif
+
+int main() {
+    puts(GUARDS);
+}
+#+END_SRC
+
+#+RESULTS:
+: cool
+
+*** Multiple Files?
+
+How does stdio.h work?
+
+file:/usr/include/stdio.h
+
+It defines definitions, macros, and prototypes for the stdio library.
+The linker will link your executable to that library that was already
+compiled.
+
+.h files help us organize C programs by including definitions for the
+object files and libraries that we will create.
+
+Typically if I make a library I will make a .h file so the definitions
+can be shared with other .c files. But the implementation of the functions
+will go into a .c file that includes that .h as well.
+
+- main.c
+  - #include "library.h"
+  - relies on library.o 
+- library.c
+  - #include "library.h"
+  - makes library.o
+- library.h
+  - defines functions and definitions from library.c
+  
+*** Example
+
+This is a useful function to check if scanf read 1 or more elements
+and didn't read EOF.
+
+file:./checkinput.c
+
+#+BEGIN_SRC C :exports both :tangle checkinput.c
+#include "checkinput.h"
+#include <stdio.h>
+#include <stdlib.h>
+/* checkInput: given the result of scanf check if it 
+ * 0 elements read or EOF. If so exit(1) with a warning.
+ *
+ */
+void checkInput(int err) {
+  if (!err || err == EOF) {
+    printf("\nInvalid input!\n");
+    exit(1);
+  }
+}
+#+END_SRC 
+
+#+RESULTS:
+
+file:./checkinput.h
+
+#+BEGIN_SRC C :exports both :tangle checkinput.h
+// Have a guard to ensure that we don't include it multiple times.
+#ifndef _CHECKINPUT_H_
+/* checkInput: given the result of scanf check if it 
+ * 0 elements read or EOF. If so exit(1) with a warning.
+ *
+ */
+#define _CHECKINPUT_H_
+void checkInput(int err); // a prototype!
+#endif
+#+END_SRC 
+
+file:./checkinput-driver.c
+
+#+BEGIN_SRC C :exports both :tangle checkinput-driver.c
+#include "checkinput.h"
+#include <stdio.h>
+#include "checkinput.h"
+
+int main() {
+  int input;
+  checkInput(scanf("%d", &input));  
+  puts("Good Input!");
+}
+#+END_SRC 
+
+#+BEGIN_SRC sh :exports both :tangle build-checkinput.sh
+# build checkinput.o
+gcc  -std=c99 -pedantic -Wall -Wextra -ftrapv -ggdb3 \
+       -c checkinput.c
+# build checkinput-driver and link it to checkinput.o
+gcc  -std=c99 -pedantic -Wall -Wextra -ftrapv -ggdb3 \
+       -o checkinput-driver checkinput-driver.c \
+       checkinput.o
+#+END_SRC
+
+#+RESULTS:
+
+Test drive it
+
+#+BEGIN_SRC sh :exports both
+echo   | ./checkinput-driver
+echo X | ./checkinput-driver
+echo 1 | ./checkinput-driver
+echo 1 | ./checkinput-driver
+#+END_SRC
+
+#+RESULTS:
+: 
+: Invalid input!
+: 
+: Invalid input!
+: Good Input!
+: Good Input!
+
