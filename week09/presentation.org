@@ -69,7 +69,7 @@ license, unless otherwise noted.
 #+END_SRC
 
 #+RESULTS:
-: ./presentation.txt
+: presentation.txt
 
 
 *** Org Template
@@ -388,107 +388,132 @@ will go into a .c file that includes that .h as well.
 This is a useful function to check if scanf read 1 or more elements
 and didn't read EOF.
 
-file:./checkinput.c
+file:./coolbears.c
 
-#+BEGIN_SRC C :exports both :tangle checkinput.c
-#include "checkinput.h"
+#+BEGIN_SRC C :exports both :tangle coolbears.c :main no
+#define _POSIX_C_SOURCE 200809L // <-- needed for strdup
+#include "coolbears.h"
 #include <stdio.h>
 #include <stdlib.h>
-/* checkInput: given the result of scanf check if it 
- * 0 elements read or EOF. If so exit(1) with a warning.
- *
- */
-void checkInput(int err) {
-  if (!err || err == EOF) {
-    printf("\nInvalid input!\n");
-    exit(1);
-  }
+#include <string.h>
+// hiding struct details from other programmers
+// I DONT TRUST THEM. Especially Hazel ;-) (don't tell hazel)
+struct coolbear_t {
+    char * name;
+    float temperature;
+};
+
+CoolBear createCoolBear(char * name, float temperature) {
+    CoolBear coolbear = malloc(sizeof(*coolbear));
+    coolbear->name = strdup(name);
+    coolbear->temperature = temperature;
+    return coolbear;
 }
+void freeCoolBear(CoolBear coolBear) {
+    if (coolBear == NULL) {
+        abort();
+    }
+    if (coolBear->name != NULL) {
+        free(coolBear->name);
+    }
+    free(coolBear);
+}
+char * getNameCoolBear(CoolBear coolbear) {
+    return coolbear->name;
+}
+float    getTemperatureCoolBear(CoolBear coolbear) {
+   return coolbear->temperature;
+}
+// NO MAIN!
 #+END_SRC 
+
+
 
 #+RESULTS:
 
-file:./checkinput.h
+file:./coolbears.h
 
-#+BEGIN_SRC C :exports both :tangle checkinput.h
+#+BEGIN_SRC C :exports both :tangle coolbears.h :main no
 // Have a guard to ensure that we don't include it multiple times.
-#ifndef _CHECKINPUT_H_
+#ifndef _COOLBEARS_H_
 /* checkInput: given the result of scanf check if it 
  * 0 elements read or EOF. If so exit(1) with a warning.
  *
  */
-#define _CHECKINPUT_H_
-void checkInput(int err); // a prototype!
+#define _COOLBEARS_H_
+struct coolbear_t; // Forward declaration -- I am not sharing details!
+typedef struct coolbear_t * CoolBear; // Struct point as type
+
+CoolBear createCoolBear(char * name, float temperature); // a prototype!
+void     freeCoolBear(CoolBear coolBear); // a prototype!
+char *   getNameCoolBear(CoolBear coolbear); // a prototype!
+float    getTemperatureCoolBear(CoolBear coolbear); // a prototype!
+
 #endif
 #+END_SRC 
 
-file:./checkinput-driver.c
+#+RESULTS:
 
-#+BEGIN_SRC C :exports both :tangle checkinput-driver.c
-#include "checkinput.h"
+file:./coolbears-driver.c
+
+#+BEGIN_SRC C :exports both :tangle coolbears-driver.c
+#include "coolbears.h"
 #include <stdio.h>
-#include "checkinput.h"
+
 
 int main() {
-  int input;
-  checkInput(scanf("%d", &input));  
-  puts("Good Input!");
+  CoolBear ziggy = createCoolBear("Ziggy",-23.0 /* C */);
+  CoolBear kevin = createCoolBear("Kevin",-32.0 /* C */);
+  CoolBear coolest = (getTemperatureCoolBear(ziggy) < 
+                      getTemperatureCoolBear(kevin))? ziggy : kevin;
+  printf("The coolest bear is %s\n", getNameCoolBear( coolest ));
+  // // we actually don't know about name so we can't reference it below
+  // printf("The coolest bear is %s\n", getNameCoolBear( coolest->name ));
+  freeCoolBear(ziggy);
+  freeCoolBear(kevin);
 }
 #+END_SRC 
 
-**** Compiling Multiple Files
+#+RESULTS:
 
-OK now we compile it. The main is the last to compile and it needs all the .o files.
+Compile it. -c the coolbears.c to make coolbears.o and then 
+compile coolbears-driver.c
 
-All the .c files that don't contain main need to be compiled to object
-files. Use the -c flags to do this.
+coolbears-driver.c has no clue how to access 
 
-#+BEGIN_SRC sh :exports both :tangle build-checkinput.sh
-# build checkinput.o
+#+BEGIN_SRC sh :exports both :tangle build-coolbears.sh
+# build coolbears.o
 gcc  -std=c99 -pedantic -Wall -Wextra -ftrapv -ggdb3 \
-       -c checkinput.c
-# build checkinput-driver and link it to checkinput.o
+       -c coolbears.c
+# build coolbears-driver and link it to coolbears.o
 gcc  -std=c99 -pedantic -Wall -Wextra -ftrapv -ggdb3 \
-       -o checkinput-driver checkinput-driver.c \
-       checkinput.o
+       -o coolbears-driver coolbears-driver.c \
+       coolbears.o 
+./coolbears-driver
 #+END_SRC
 
 #+RESULTS:
+: The coolest bear is Kevin
 
-Test drive it
+If we access coolest->name we get:
 
-#+BEGIN_SRC sh :exports both
-echo   | ./checkinput-driver
-echo X | ./checkinput-driver
-echo 1 | ./checkinput-driver
-echo 1 | ./checkinput-driver
-#+END_SRC
-
-#+RESULTS:
-: 
-: Invalid input!
-: 
-: Invalid input!
-: Good Input!
-: Good Input!
+#+begin_example
+coolbears-driver.c: In function ‘main’:
+coolbears-driver.c:11:62: error: dereferencing pointer to incomplete type ‘struct coolbear_t’
+   printf("The coolest bear is %s\n", getNameCoolBear( coolest->name ));
+#+end_example
 
 
-#+BEGIN_SRC sh
-ldd ./checkinput-driver
-#+END_SRC
-
-#+RESULTS:
-: 	linux-vdso.so.1 (0x00007ffe85be0000)
-: 	libc.so.6 => /lib/x86_64-linux-gnu/libc.so.6 (0x00007f919f994000)
-: 	/lib64/ld-linux-x86-64.so.2 (0x00007f919ff87000)
-
-
-**** What is the preprocessor doing?
+*** What is the preprocessor doing?
 
 Let's use the -E flag to see what checkinput.c becomes
 
 This output contains glibc headers for stdio.h and stdlib.h these
 should be under the GPLV3 (c) the Glibc project and GNU project.
+
+If you want more preprocessor options checkout:
+
+https://gcc.gnu.org/onlinedocs/gcc-5.2.0/gcc/Preprocessor-Options.html
 
 #+BEGIN_SRC sh :eval no :exports both :results value drawer code
 # build checkinput.o
@@ -2518,3 +2543,104 @@ void checkInput(int err) {
   }
 }
 #+END_SRC
+
+*** Example Datastructure
+
+This is a useful function to check if scanf read 1 or more elements
+and didn't read EOF.
+
+file:./checkinput.c
+
+#+BEGIN_SRC C :exports both :tangle checkinput.c
+#include "checkinput.h"
+#include <stdio.h>
+#include <stdlib.h>
+/* checkInput: given the result of scanf check if it 
+ * 0 elements read or EOF. If so exit(1) with a warning.
+ *
+ */
+void checkInput(int err) {
+  if (!err || err == EOF) {
+    printf("\nInvalid input!\n");
+    exit(1);
+  }
+}
+#+END_SRC 
+
+#+RESULTS:
+
+file:./checkinput.h
+
+#+BEGIN_SRC C :exports both :tangle checkinput.h
+// Have a guard to ensure that we don't include it multiple times.
+#ifndef _CHECKINPUT_H_
+/* checkInput: given the result of scanf check if it 
+ * 0 elements read or EOF. If so exit(1) with a warning.
+ *
+ */
+#define _CHECKINPUT_H_
+void checkInput(int err); // a prototype!
+#endif
+#+END_SRC 
+
+file:./checkinput-driver.c
+
+#+BEGIN_SRC C :exports both :tangle checkinput-driver.c
+#include "checkinput.h"
+#include <stdio.h>
+#include "checkinput.h"
+
+int main() {
+  int input;
+  checkInput(scanf("%d", &input));  
+  puts("Good Input!");
+}
+#+END_SRC 
+
+**** Compiling Multiple Files
+
+OK now we compile it. The main is the last to compile and it needs all the .o files.
+
+All the .c files that don't contain main need to be compiled to object
+files. Use the -c flags to do this.
+
+#+BEGIN_SRC sh :exports both :tangle build-checkinput.sh
+# build checkinput.o
+gcc  -std=c99 -pedantic -Wall -Wextra -ftrapv -ggdb3 \
+       -c checkinput.c
+# build checkinput-driver and link it to checkinput.o
+gcc  -std=c99 -pedantic -Wall -Wextra -ftrapv -ggdb3 \
+       -o checkinput-driver checkinput-driver.c \
+       checkinput.o
+#+END_SRC
+
+#+RESULTS:
+
+Test drive it
+
+#+BEGIN_SRC sh :exports both
+echo   | ./checkinput-driver
+echo X | ./checkinput-driver
+echo 1 | ./checkinput-driver
+echo 1 | ./checkinput-driver
+#+END_SRC
+
+#+RESULTS:
+: 
+: Invalid input!
+: 
+: Invalid input!
+: Good Input!
+: Good Input!
+
+
+#+BEGIN_SRC sh
+ldd ./checkinput-driver
+#+END_SRC
+
+#+RESULTS:
+: 	linux-vdso.so.1 (0x00007ffe85be0000)
+: 	libc.so.6 => /lib/x86_64-linux-gnu/libc.so.6 (0x00007f919f994000)
+: 	/lib64/ld-linux-x86-64.so.2 (0x00007f919ff87000)
+
+
