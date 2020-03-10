@@ -1,4 +1,4 @@
-
+int main() {
 #include "checkinput.h"
 #include <stdio.h>
 #include <stdlib.h>
@@ -11,4 +11,6 @@ void checkInput(int err) {
     printf("\nInvalid input!\n");
     exit(1);
   }
+}
+return 0;
 }

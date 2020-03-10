@@ -1,4 +1,3 @@
-
 #include "checkinput.h"
 #include <stdio.h>
 #include "checkinput.h"

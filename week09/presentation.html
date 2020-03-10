@@ -3,7 +3,7 @@
 "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
 <head>
-<!-- 2020-03-10 Tue 10:57 -->
+<!-- 2020-03-10 Tue 11:30 -->
 <meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <title>CMPUT201W20B2 Week 9</title>
@@ -234,35 +234,37 @@ for the JavaScript code in this tag.
 <h2>Table of Contents</h2>
 <div id="text-table-of-contents">
 <ul>
-<li><a href="#org265aeb8">1. Week9</a>
+<li><a href="#orga1a84ab">1. Week9</a>
 <ul>
-<li><a href="#org40d7e85">1.1. Copyright Statement</a>
+<li><a href="#org0d02e1f">1.1. Copyright Statement</a>
 <ul>
-<li><a href="#orgc4b2e15">1.1.1. License</a></li>
-<li><a href="#org17f084d">1.1.2. Hazel Code is licensed under AGPL3.0+</a></li>
+<li><a href="#org2001e92">1.1.1. License</a></li>
+<li><a href="#org06aa13f">1.1.2. Hazel Code is licensed under AGPL3.0+</a></li>
 </ul>
 </li>
-<li><a href="#org09fe02d">1.2. Init ORG-MODE</a>
+<li><a href="#org7f594b1">1.2. Init ORG-MODE</a>
 <ul>
-<li><a href="#org29f0396">1.2.1. Org export</a></li>
-<li><a href="#orgf09a0e7">1.2.2. Org Template</a></li>
+<li><a href="#org9c43287">1.2.1. Org export</a></li>
+<li><a href="#org5a1c368">1.2.2. Org Template</a></li>
 </ul>
 </li>
-<li><a href="#org9edd310">1.3. Remember how to compile?</a></li>
-<li><a href="#orgdc37892">1.4. How C uses memory</a>
+<li><a href="#orge34186f">1.3. Remember how to compile?</a></li>
+<li><a href="#orgc1e2baf">1.4. How C uses memory</a>
 <ul>
-<li><a href="#orgb270317">1.4.1. C's memory types</a></li>
-<li><a href="#org5a58180">1.4.2. Type qualifiers</a></li>
-<li><a href="#org1bcf3d9">1.4.3. Extern</a></li>
+<li><a href="#org10bd7b8">1.4.1. C's memory types</a></li>
+<li><a href="#org05fc04a">1.4.2. Type qualifiers</a></li>
+<li><a href="#orge99fa1c">1.4.3. Extern</a></li>
 </ul>
 </li>
-<li><a href="#org1a6214b">1.5. Preprocessor stuff like if-def</a>
+<li><a href="#org05a34cb">1.5. Preprocessor stuff like if-def</a>
 <ul>
-<li><a href="#org8d531c2">1.5.1. #ifdef</a></li>
-<li><a href="#org9cb036b">1.5.2. #ifndef</a></li>
-<li><a href="#org280a0d9">1.5.3. Guards</a></li>
-<li><a href="#org6d27332">1.5.4. Multiple Files?</a></li>
-<li><a href="#orgf78dce8">1.5.5. Example</a></li>
+<li><a href="#orgb5c97af">1.5.1. #ifdef</a></li>
+<li><a href="#org21ac62a">1.5.2. #ifndef</a></li>
+<li><a href="#org1450acb">1.5.3. Guards</a></li>
+<li><a href="#org089f3f1">1.5.4. Multiple Files?</a></li>
+<li><a href="#org624fa90">1.5.5. Example</a></li>
+<li><a href="#orgcbb7966">1.5.6. Example Datastructure</a></li>
+<li><a href="#org02ec540">1.5.7. What is the preprocessor doing?</a></li>
 </ul>
 </li>
 </ul>
@@ -271,12 +273,12 @@ for the JavaScript code in this tag.
 </div>
 </div>
 
-<div id="outline-container-org265aeb8" class="outline-2">
-<h2 id="org265aeb8"><span class="section-number-2">1</span> Week9</h2>
+<div id="outline-container-orga1a84ab" class="outline-2">
+<h2 id="orga1a84ab"><span class="section-number-2">1</span> Week9</h2>
 <div class="outline-text-2" id="text-1">
 </div>
-<div id="outline-container-org40d7e85" class="outline-3">
-<h3 id="org40d7e85"><span class="section-number-3">1.1</span> Copyright Statement</h3>
+<div id="outline-container-org0d02e1f" class="outline-3">
+<h3 id="org0d02e1f"><span class="section-number-3">1.1</span> Copyright Statement</h3>
 <div class="outline-text-3" id="text-1-1">
 <p>
 If you are in CMPUT201 at UAlberta this code is released in the public
@@ -288,8 +290,8 @@ Otherwise it is (c) 2020 Abram Hindle, Hazel Campbell AGPL3.0+
 </p>
 </div>
 
-<div id="outline-container-orgc4b2e15" class="outline-4">
-<h4 id="orgc4b2e15"><span class="section-number-4">1.1.1</span> License</h4>
+<div id="outline-container-org2001e92" class="outline-4">
+<h4 id="org2001e92"><span class="section-number-4">1.1.1</span> License</h4>
 <div class="outline-text-4" id="text-1-1-1">
 <p>
 Week 3 notes
@@ -318,8 +320,8 @@ along with this program.  If not, see <a href="https://www.gnu.org/licenses/">ht
 </div>
 
 
-<div id="outline-container-org17f084d" class="outline-4">
-<h4 id="org17f084d"><span class="section-number-4">1.1.2</span> Hazel Code is licensed under AGPL3.0+</h4>
+<div id="outline-container-org06aa13f" class="outline-4">
+<h4 id="org06aa13f"><span class="section-number-4">1.1.2</span> Hazel Code is licensed under AGPL3.0+</h4>
 <div class="outline-text-4" id="text-1-1-2">
 <p>
 Hazel's code is also found here
@@ -334,8 +336,8 @@ license, unless otherwise noted.
 </div>
 </div>
 
-<div id="outline-container-org09fe02d" class="outline-3">
-<h3 id="org09fe02d"><span class="section-number-3">1.2</span> Init ORG-MODE</h3>
+<div id="outline-container-org7f594b1" class="outline-3">
+<h3 id="org7f594b1"><span class="section-number-3">1.2</span> Init ORG-MODE</h3>
 <div class="outline-text-3" id="text-1-2">
 <div class="org-src-container">
 <pre class="src src-elisp"><span style="color: #b22222;">;; </span><span style="color: #b22222;">I need this for org-mode to work well</span>
@@ -358,8 +360,8 @@ license, unless otherwise noted.
 </div>
 </div>
 
-<div id="outline-container-org29f0396" class="outline-4">
-<h4 id="org29f0396"><span class="section-number-4">1.2.1</span> Org export</h4>
+<div id="outline-container-org9c43287" class="outline-4">
+<h4 id="org9c43287"><span class="section-number-4">1.2.1</span> Org export</h4>
 <div class="outline-text-4" id="text-1-2-1">
 <div class="org-src-container">
 <pre class="src src-elisp">(org-html-export-to-html)
@@ -371,8 +373,8 @@ license, unless otherwise noted.
 </div>
 
 
-<div id="outline-container-orgf09a0e7" class="outline-4">
-<h4 id="orgf09a0e7"><span class="section-number-4">1.2.2</span> Org Template</h4>
+<div id="outline-container-org5a1c368" class="outline-4">
+<h4 id="org5a1c368"><span class="section-number-4">1.2.2</span> Org Template</h4>
 <div class="outline-text-4" id="text-1-2-2">
 <p>
 Copy and paste this to demo C
@@ -390,8 +392,8 @@ Copy and paste this to demo C
 </div>
 </div>
 
-<div id="outline-container-org9edd310" class="outline-3">
-<h3 id="org9edd310"><span class="section-number-3">1.3</span> Remember how to compile?</h3>
+<div id="outline-container-orge34186f" class="outline-3">
+<h3 id="orge34186f"><span class="section-number-3">1.3</span> Remember how to compile?</h3>
 <div class="outline-text-3" id="text-1-3">
 <p>
 gcc  -std=c99 -pedantic -Wall -Wextra -ftrapv -ggdb3 -o programname programname.c
@@ -400,16 +402,16 @@ gcc  -std=c99 -pedantic -Wall -Wextra -ftrapv -ggdb3 -o programname programname.
 </div>
 
 
-<div id="outline-container-orgdc37892" class="outline-3">
-<h3 id="orgdc37892"><span class="section-number-3">1.4</span> How C uses memory</h3>
+<div id="outline-container-orgc1e2baf" class="outline-3">
+<h3 id="orgc1e2baf"><span class="section-number-3">1.4</span> How C uses memory</h3>
 <div class="outline-text-3" id="text-1-4">
 <p>
 <a href="https://docs.google.com/document/d/1wcBnHZEaW4ukcZNlMNZJdbxkyPOQFGQhtANpqW5tx_8/edit?usp=sharing">https://docs.google.com/document/d/1wcBnHZEaW4ukcZNlMNZJdbxkyPOQFGQhtANpqW5tx_8/edit?usp=sharing</a>
 </p>
 </div>
 
-<div id="outline-container-orgb270317" class="outline-4">
-<h4 id="orgb270317"><span class="section-number-4">1.4.1</span> C's memory types</h4>
+<div id="outline-container-org10bd7b8" class="outline-4">
+<h4 id="org10bd7b8"><span class="section-number-4">1.4.1</span> C's memory types</h4>
 <div class="outline-text-4" id="text-1-4-1">
 <ul class="org-ul">
 <li>File memory (code or text) 
@@ -452,8 +454,8 @@ gcc  -std=c99 -pedantic -Wall -Wextra -ftrapv -ggdb3 -o programname programname.
 </ul>
 </div>
 </div>
-<div id="outline-container-org5a58180" class="outline-4">
-<h4 id="org5a58180"><span class="section-number-4">1.4.2</span> Type qualifiers</h4>
+<div id="outline-container-org05fc04a" class="outline-4">
+<h4 id="org05fc04a"><span class="section-number-4">1.4.2</span> Type qualifiers</h4>
 <div class="outline-text-4" id="text-1-4-2">
 <p>
 Add these to types to communicate to other programmers and the
@@ -472,8 +474,8 @@ thing it is pointing to. Speed hacks that rarely work.</li>
 </div>
 </div>
 
-<div id="outline-container-org1bcf3d9" class="outline-4">
-<h4 id="org1bcf3d9"><span class="section-number-4">1.4.3</span> Extern</h4>
+<div id="outline-container-orge99fa1c" class="outline-4">
+<h4 id="orge99fa1c"><span class="section-number-4">1.4.3</span> Extern</h4>
 <div class="outline-text-4" id="text-1-4-3">
 <p>
 Extern says that we have an external implementation or allocation for
@@ -485,8 +487,8 @@ implementation with other source files.
 </div>
 </div>
 
-<div id="outline-container-org1a6214b" class="outline-3">
-<h3 id="org1a6214b"><span class="section-number-3">1.5</span> Preprocessor stuff like if-def</h3>
+<div id="outline-container-org05a34cb" class="outline-3">
+<h3 id="org05a34cb"><span class="section-number-3">1.5</span> Preprocessor stuff like if-def</h3>
 <div class="outline-text-3" id="text-1-5">
 <p>
 The preprocessor deals with all the lines that you start with an
@@ -499,8 +501,8 @@ files.
 </p>
 </div>
 
-<div id="outline-container-org8d531c2" class="outline-4">
-<h4 id="org8d531c2"><span class="section-number-4">1.5.1</span> #ifdef</h4>
+<div id="outline-container-orgb5c97af" class="outline-4">
+<h4 id="orgb5c97af"><span class="section-number-4">1.5.1</span> #ifdef</h4>
 <div class="outline-text-4" id="text-1-5-1">
 <div class="org-src-container">
 <pre class="src src-C"><span style="color: #b22222;">/* </span><span style="color: #b22222;">#ifdef   IF DEFined</span>
@@ -566,8 +568,8 @@ Reached end of main, quitting!
 
 
 
-<div id="outline-container-org9cb036b" class="outline-4">
-<h4 id="org9cb036b"><span class="section-number-4">1.5.2</span> #ifndef</h4>
+<div id="outline-container-org21ac62a" class="outline-4">
+<h4 id="org21ac62a"><span class="section-number-4">1.5.2</span> #ifndef</h4>
 <div class="outline-text-4" id="text-1-5-2">
 <div class="org-src-container">
 <pre class="src src-C"><span style="color: #b22222;">/* </span><span style="color: #b22222;">#ifndef   IF Not DEFined</span>
@@ -618,8 +620,8 @@ Main 1!
 </div>
 </div>
 
-<div id="outline-container-org280a0d9" class="outline-4">
-<h4 id="org280a0d9"><span class="section-number-4">1.5.3</span> Guards</h4>
+<div id="outline-container-org1450acb" class="outline-4">
+<h4 id="org1450acb"><span class="section-number-4">1.5.3</span> Guards</h4>
 <div class="outline-text-4" id="text-1-5-3">
 <div class="org-src-container">
 <pre class="src src-C"><span style="color: #b22222;">/* </span><span style="color: #b22222;">Guards:</span>
@@ -663,7 +665,7 @@ Main 1!
 
 
 <ol class="org-ol">
-<li><a id="orgb68da9b"></a>No Guards<br />
+<li><a id="org79d3440"></a>No Guards<br />
 <div class="outline-text-5" id="text-1-5-3-1">
 <p>
 What if we don't have a guard?
@@ -696,7 +698,7 @@ awesome
 </div>
 </li>
 
-<li><a id="org9f7435e"></a>W/ Guards<br />
+<li><a id="orgb96b32e"></a>W/ Guards<br />
 <div class="outline-text-5" id="text-1-5-3-2">
 <p>
 What if we have a guard?
@@ -734,8 +736,8 @@ cool
 </ol>
 </div>
 
-<div id="outline-container-org6d27332" class="outline-4">
-<h4 id="org6d27332"><span class="section-number-4">1.5.4</span> Multiple Files?</h4>
+<div id="outline-container-org089f3f1" class="outline-4">
+<h4 id="org089f3f1"><span class="section-number-4">1.5.4</span> Multiple Files?</h4>
 <div class="outline-text-4" id="text-1-5-4">
 <p>
 How does stdio.h work?
@@ -793,8 +795,8 @@ will go into a .c file that includes that .h as well.
 </div>
 </div>
 
-<div id="outline-container-orgf78dce8" class="outline-4">
-<h4 id="orgf78dce8"><span class="section-number-4">1.5.5</span> Example</h4>
+<div id="outline-container-org624fa90" class="outline-4">
+<h4 id="org624fa90"><span class="section-number-4">1.5.5</span> Example</h4>
 <div class="outline-text-4" id="text-1-5-5">
 <p>
 This is a useful function to check if scanf read 1 or more elements
@@ -858,7 +860,7 @@ and didn't read EOF.
 </div>
 
 <ol class="org-ol">
-<li><a id="org86a1b27"></a>Compiling Multiple Files<br />
+<li><a id="orga44cb2a"></a>Compiling Multiple Files<br />
 <div class="outline-text-5" id="text-1-5-5-1">
 <p>
 OK now we compile it. The main is the last to compile and it needs all the .o files.
@@ -916,10 +918,150 @@ libc.so.6 =&gt; /lib/x86_64-linux-gnu/libc.so.6 (0x00007f919f994000)
 </pre>
 </div>
 </li>
+</ol>
+</div>
+
+<div id="outline-container-orgcbb7966" class="outline-4">
+<h4 id="orgcbb7966"><span class="section-number-4">1.5.6</span> Example Datastructure</h4>
+<div class="outline-text-4" id="text-1-5-6">
+<p>
+This is a useful function to check if scanf read 1 or more elements
+and didn't read EOF.
+</p>
+
+<p>
+<a href="./coolbears.c">./coolbears.c</a>
+</p>
+
+<div class="org-src-container">
+<pre class="src src-C"><span style="color: #483d8b;">#define</span> <span style="color: #a0522d;">_POSIX_C_SOURCE</span> 200809L <span style="color: #b22222;">// </span><span style="color: #b22222;">&lt;-- needed for strdup</span>
+<span style="color: #483d8b;">#include</span> <span style="color: #8b2252;">"coolbears.h"</span>
+<span style="color: #483d8b;">#include</span> <span style="color: #8b2252;">&lt;stdio.h&gt;</span>
+<span style="color: #483d8b;">#include</span> <span style="color: #8b2252;">&lt;stdlib.h&gt;</span>
+<span style="color: #483d8b;">#include</span> <span style="color: #8b2252;">&lt;string.h&gt;</span>
+<span style="color: #b22222;">// </span><span style="color: #b22222;">hiding struct details from other programmers</span>
+<span style="color: #b22222;">// </span><span style="color: #b22222;">I DONT TRUST THEM. Especially Hazel ;-) (don't tell hazel)</span>
+<span style="color: #a020f0;">struct</span> <span style="color: #228b22;">coolbear_t</span> {
+    <span style="color: #228b22;">char</span> * <span style="color: #a0522d;">name</span>;
+    <span style="color: #228b22;">float</span> <span style="color: #a0522d;">temperature</span>;
+};
+
+<span style="color: #228b22;">CoolBear</span> <span style="color: #0000ff;">createCoolBear</span>(<span style="color: #228b22;">char</span> * <span style="color: #a0522d;">name</span>, <span style="color: #228b22;">float</span> <span style="color: #a0522d;">temperature</span>) {
+    <span style="color: #228b22;">CoolBear</span> <span style="color: #a0522d;">coolbear</span> = malloc(<span style="color: #a020f0;">sizeof</span>(*coolbear));
+    coolbear-&gt;name = strdup(name);
+    coolbear-&gt;temperature = temperature;
+    <span style="color: #a020f0;">return</span> coolbear;
+}
+<span style="color: #228b22;">void</span> <span style="color: #0000ff;">freeCoolBear</span>(<span style="color: #228b22;">CoolBear</span> <span style="color: #a0522d;">coolBear</span>) {
+    <span style="color: #a020f0;">if</span> (coolBear == <span style="color: #008b8b;">NULL</span>) {
+        abort();
+    }
+    <span style="color: #a020f0;">if</span> (coolBear-&gt;name != <span style="color: #008b8b;">NULL</span>) {
+        free(coolBear-&gt;name);
+    }
+    free(coolBear);
+}
+<span style="color: #228b22;">char</span> * <span style="color: #0000ff;">getNameCoolBear</span>(<span style="color: #228b22;">CoolBear</span> <span style="color: #a0522d;">coolbear</span>) {
+    <span style="color: #a020f0;">return</span> coolbear-&gt;name;
+}
+<span style="color: #228b22;">float</span>    <span style="color: #0000ff;">getTemperatureCoolBear</span>(<span style="color: #228b22;">CoolBear</span> <span style="color: #a0522d;">coolbear</span>) {
+   <span style="color: #a020f0;">return</span> coolbear-&gt;temperature;
+}
+<span style="color: #b22222;">// </span><span style="color: #b22222;">NO MAIN!</span>
+</pre>
+</div>
 
 
-<li><a id="org32f2bf1"></a>What is the preprocessor doing?<br />
-<div class="outline-text-5" id="text-1-5-5-2">
+
+<p>
+<a href="./coolbears.h">./coolbears.h</a>
+</p>
+
+<div class="org-src-container">
+<pre class="src src-C"><span style="color: #b22222;">// </span><span style="color: #b22222;">Have a guard to ensure that we don't include it multiple times.</span>
+<span style="color: #483d8b;">#if</span><span style="color: #483d8b;">n</span><span style="color: #483d8b;">def</span> _COOLBEARS_H_
+<span style="color: #b22222;">/* </span><span style="color: #b22222;">checkInput: given the result of scanf check if it </span>
+<span style="color: #b22222;"> * 0 elements read or EOF. If so exit(1) with a warning.</span>
+<span style="color: #b22222;"> *</span>
+<span style="color: #b22222;"> </span><span style="color: #b22222;">*/</span>
+<span style="color: #483d8b;">#define</span> <span style="color: #a0522d;">_COOLBEARS_H_</span>
+<span style="color: #a020f0;">struct</span> <span style="color: #228b22;">coolbear_t</span>; <span style="color: #b22222;">// </span><span style="color: #b22222;">Forward declaration -- I am not sharing details!</span>
+<span style="color: #a020f0;">typedef</span> <span style="color: #a020f0;">struct</span> <span style="color: #228b22;">coolbear_t</span> * <span style="color: #228b22;">CoolBear</span>; <span style="color: #b22222;">// </span><span style="color: #b22222;">Struct point as type</span>
+
+<span style="color: #228b22;">CoolBear</span> <span style="color: #0000ff;">createCoolBear</span>(<span style="color: #228b22;">char</span> * <span style="color: #a0522d;">name</span>, <span style="color: #228b22;">float</span> <span style="color: #a0522d;">temperature</span>); <span style="color: #b22222;">// </span><span style="color: #b22222;">a prototype!</span>
+<span style="color: #228b22;">void</span>     <span style="color: #0000ff;">freeCoolBear</span>(<span style="color: #228b22;">CoolBear</span> <span style="color: #a0522d;">coolBear</span>); <span style="color: #b22222;">// </span><span style="color: #b22222;">a prototype!</span>
+<span style="color: #228b22;">char</span> *   <span style="color: #0000ff;">getNameCoolBear</span>(<span style="color: #228b22;">CoolBear</span> <span style="color: #a0522d;">coolbear</span>); <span style="color: #b22222;">// </span><span style="color: #b22222;">a prototype!</span>
+<span style="color: #228b22;">float</span>    <span style="color: #0000ff;">getTemperatureCoolBear</span>(<span style="color: #228b22;">CoolBear</span> <span style="color: #a0522d;">coolbear</span>); <span style="color: #b22222;">// </span><span style="color: #b22222;">a prototype!</span>
+
+<span style="color: #483d8b;">#endif</span>
+</pre>
+</div>
+
+<p>
+<a href="./coolbears-driver.c">./coolbears-driver.c</a>
+</p>
+
+<div class="org-src-container">
+<pre class="src src-C"><span style="color: #483d8b;">#include</span> <span style="color: #8b2252;">"coolbears.h"</span>
+<span style="color: #483d8b;">#include</span> <span style="color: #8b2252;">&lt;stdio.h&gt;</span>
+
+
+<span style="color: #228b22;">int</span> <span style="color: #0000ff;">main</span>() {
+  <span style="color: #228b22;">CoolBear</span> <span style="color: #a0522d;">ziggy</span> = createCoolBear(<span style="color: #8b2252;">"Ziggy"</span>,-23.0 <span style="color: #b22222;">/* </span><span style="color: #b22222;">C </span><span style="color: #b22222;">*/</span>);
+  <span style="color: #228b22;">CoolBear</span> <span style="color: #a0522d;">kevin</span> = createCoolBear(<span style="color: #8b2252;">"Kevin"</span>,-32.0 <span style="color: #b22222;">/* </span><span style="color: #b22222;">C </span><span style="color: #b22222;">*/</span>);
+  <span style="color: #228b22;">CoolBear</span> <span style="color: #a0522d;">coolest</span> = (getTemperatureCoolBear(ziggy) &lt; 
+                      getTemperatureCoolBear(kevin))? ziggy : kevin;
+  printf(<span style="color: #8b2252;">"The coolest bear is %s\n"</span>, getNameCoolBear( coolest ));
+  <span style="color: #b22222;">// </span><span style="color: #b22222;">// we actually don't know about name so we can't reference it below</span>
+  <span style="color: #b22222;">// </span><span style="color: #b22222;">printf("The coolest bear is %s\n", getNameCoolBear( coolest-&gt;name ));</span>
+  freeCoolBear(ziggy);
+  freeCoolBear(kevin);
+}
+</pre>
+</div>
+
+<p>
+Compile it. -c the coolbears.c to make coolbears.o and then 
+compile coolbears-driver.c
+</p>
+
+<p>
+coolbears-driver.c has no clue how to access 
+</p>
+
+<div class="org-src-container">
+<pre class="src src-sh"><span style="color: #b22222;"># </span><span style="color: #b22222;">build coolbears.o</span>
+gcc  -std=c99 -pedantic -Wall -Wextra -ftrapv -ggdb3 <span style="color: #8b2252;">\</span>
+       -c coolbears.c
+<span style="color: #b22222;"># </span><span style="color: #b22222;">build coolbears-driver and link it to coolbears.o</span>
+gcc  -std=c99 -pedantic -Wall -Wextra -ftrapv -ggdb3 <span style="color: #8b2252;">\</span>
+       -o coolbears-driver coolbears-driver.c <span style="color: #8b2252;">\</span>
+       coolbears.o 
+./coolbears-driver
+</pre>
+</div>
+
+<pre class="example">
+The coolest bear is Kevin
+
+</pre>
+
+<p>
+If we access coolest-&gt;name we get:
+</p>
+
+<pre class="example">
+coolbears-driver.c: In function ‘main’:
+coolbears-driver.c:11:62: error: dereferencing pointer to incomplete type ‘struct coolbear_t’
+   printf("The coolest bear is %s\n", getNameCoolBear( coolest-&gt;name ));
+</pre>
+</div>
+</div>
+
+
+<div id="outline-container-org02ec540" class="outline-4">
+<h4 id="org02ec540"><span class="section-number-4">1.5.7</span> What is the preprocessor doing?</h4>
+<div class="outline-text-4" id="text-1-5-7">
 <p>
 Let's use the -E flag to see what checkinput.c becomes
 </p>
@@ -927,6 +1069,14 @@ Let's use the -E flag to see what checkinput.c becomes
 <p>
 This output contains glibc headers for stdio.h and stdlib.h these
 should be under the GPLV3 (c) the Glibc project and GNU project.
+</p>
+
+<p>
+If you want more preprocessor options checkout:
+</p>
+
+<p>
+<a href="https://gcc.gnu.org/onlinedocs/gcc-5.2.0/gcc/Preprocessor-Options.html">https://gcc.gnu.org/onlinedocs/gcc-5.2.0/gcc/Preprocessor-Options.html</a>
 </p>
 
 <div class="org-src-container">
@@ -2959,15 +3109,13 @@ __extension__ <span style="color: #a020f0;">extern</span> <span style="color: #2
 </pre>
 </div>
 </div>
-</li>
-</ol>
 </div>
 </div>
 </div>
 </div>
 <div id="postamble" class="status">
 <p class="author">Author: Abram Hindle</p>
-<p class="date">Created: 2020-03-10 Tue 10:57</p>
+<p class="date">Created: 2020-03-10 Tue 11:30</p>
 <p class="validation"><a href="http://validator.w3.org/check?uri=referer">Validate</a></p>
 </div>
 </body>

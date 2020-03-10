@@ -1,4 +1,4 @@
-% Created 2020-03-10 Tue 10:57
+% Created 2020-03-10 Tue 11:30
 % Intended LaTeX compiler: pdflatex
 \documentclass[11pt]{article}
 \usepackage[utf8]{inputenc}
@@ -31,9 +31,9 @@
 
 
 \section{Week9}
-\label{sec:orga425aa3}
+\label{sec:orgc4a2973}
 \subsection{Copyright Statement}
-\label{sec:org5bfc844}
+\label{sec:org30925d6}
 
 If you are in CMPUT201 at UAlberta this code is released in the public
 domain to you.
@@ -41,7 +41,7 @@ domain to you.
 Otherwise it is (c) 2020 Abram Hindle, Hazel Campbell AGPL3.0+
 
 \subsubsection{License}
-\label{sec:org8c75d65}
+\label{sec:org28647cd}
 
 Week 3 notes
 Copyright (C) 2020 Abram Hindle, Hazel Campbell
@@ -61,7 +61,7 @@ along with this program.  If not, see \url{https://www.gnu.org/licenses/}.
 
 
 \subsubsection{Hazel Code is licensed under AGPL3.0+}
-\label{sec:org3a4fca2}
+\label{sec:org3d0fff1}
 
 Hazel's code is also found here
 \url{https://github.com/hazelybell/examples/tree/C-2020-01}
@@ -70,7 +70,7 @@ Hazel code is licensed: The example code is licensed under the AGPL3+
 license, unless otherwise noted.
 
 \subsection{Init ORG-MODE}
-\label{sec:orge88e681}
+\label{sec:orgef3028d}
 
 \begin{verbatim}
 ;; I need this for org-mode to work well
@@ -92,7 +92,7 @@ license, unless otherwise noted.
 \end{verbatim}
 
 \subsubsection{Org export}
-\label{sec:org583544c}
+\label{sec:org2da4716}
 \begin{verbatim}
 (org-html-export-to-html)
 (org-latex-export-to-pdf)
@@ -101,7 +101,7 @@ license, unless otherwise noted.
 
 
 \subsubsection{Org Template}
-\label{sec:orgac0b513}
+\label{sec:orge1fe7d2}
 Copy and paste this to demo C
 
 \begin{verbatim}
@@ -113,18 +113,18 @@ int main(int argc, char**argv) {
 \end{verbatim}
 
 \subsection{Remember how to compile?}
-\label{sec:org7296b47}
+\label{sec:orgccfc772}
 
 gcc  -std=c99 -pedantic -Wall -Wextra -ftrapv -ggdb3 -o programname programname.c
 
 
 \subsection{How C uses memory}
-\label{sec:orgd456d69}
+\label{sec:orgdab645e}
 
 \url{https://docs.google.com/document/d/1wcBnHZEaW4ukcZNlMNZJdbxkyPOQFGQhtANpqW5tx\_8/edit?usp=sharing}
 
 \subsubsection{C's memory types}
-\label{sec:org99b2324}
+\label{sec:org908b849}
 
 \begin{itemize}
 \item File memory (code or text) 
@@ -166,7 +166,7 @@ gcc  -std=c99 -pedantic -Wall -Wextra -ftrapv -ggdb3 -o programname programname.
 \end{itemize}
 \end{itemize}
 \subsubsection{Type qualifiers}
-\label{sec:orgaafff7d}
+\label{sec:org36426c9}
 
 Add these to types to communicate to other programmers and the
 compiler.
@@ -182,7 +182,7 @@ thing it is pointing to. Speed hacks that rarely work.
 \end{itemize}
 
 \subsubsection{Extern}
-\label{sec:org5135e89}
+\label{sec:orgefb5f53}
 
 Extern says that we have an external implementation or allocation for
 a variable or function. But if you define the body then you've gone
@@ -190,7 +190,7 @@ and done it. It is fine. Extern means you plan to share your
 implementation with other source files.
 
 \subsection{Preprocessor stuff like if-def}
-\label{sec:org45fd33c}
+\label{sec:org0ca5430}
 The preprocessor deals with all the lines that you start with an
 octalthrope or hash mark: \#
 
@@ -198,7 +198,7 @@ The preprocessor lets you define symbols, macros, and include
 files.
 
 \subsubsection{\#ifdef}
-\label{sec:org8577782}
+\label{sec:orgb69ab94}
 
 \begin{verbatim}
 /* #ifdef   IF DEFined
@@ -261,7 +261,7 @@ Reached end of main, quitting!
 
 
 \subsubsection{\#ifndef}
-\label{sec:orgc5ed1d8}
+\label{sec:org1008e6a}
 
 \begin{verbatim}
 /* #ifndef   IF Not DEFined
@@ -309,7 +309,7 @@ Main 1!
 \end{verbatim}
 
 \subsubsection{Guards}
-\label{sec:org9dce65e}
+\label{sec:org1fe58b6}
 
 \begin{verbatim}
 /* Guards:
@@ -352,7 +352,7 @@ Main 1!
 
 \begin{enumerate}
 \item No Guards
-\label{sec:org695766c}
+\label{sec:org7cd7f39}
 
 What if we don't have a guard?
 
@@ -378,7 +378,7 @@ awesome
 \end{verbatim}
 
 \item W/ Guards
-\label{sec:orga31a47a}
+\label{sec:orgbea1419}
 
 What if we have a guard?
 
@@ -408,7 +408,7 @@ cool
 \end{enumerate}
 
 \subsubsection{Multiple Files?}
-\label{sec:org8374010}
+\label{sec:org67d71ae}
 
 How does stdio.h work?
 
@@ -451,7 +451,7 @@ will go into a .c file that includes that .h as well.
 \end{itemize}
 
 \subsubsection{Example}
-\label{sec:org6f39f1b}
+\label{sec:org054ba95}
 
 This is a useful function to check if scanf read 1 or more elements
 and didn't read EOF.
@@ -504,7 +504,7 @@ int main() {
 
 \begin{enumerate}
 \item Compiling Multiple Files
-\label{sec:orgc6f47e2}
+\label{sec:org2f354ab}
 
 OK now we compile it. The main is the last to compile and it needs all the .o files.
 
@@ -549,15 +549,136 @@ linux-vdso.so.1 (0x00007ffe85be0000)
 libc.so.6 => /lib/x86_64-linux-gnu/libc.so.6 (0x00007f919f994000)
 /lib64/ld-linux-x86-64.so.2 (0x00007f919ff87000)
 \end{verbatim}
+\end{enumerate}
+
+\subsubsection{Example Datastructure}
+\label{sec:org566a4ef}
+
+This is a useful function to check if scanf read 1 or more elements
+and didn't read EOF.
+
+\url{./coolbears.c}
+
+\begin{verbatim}
+#define _POSIX_C_SOURCE 200809L // <-- needed for strdup
+#include "coolbears.h"
+#include <stdio.h>
+#include <stdlib.h>
+#include <string.h>
+// hiding struct details from other programmers
+// I DONT TRUST THEM. Especially Hazel ;-) (don't tell hazel)
+struct coolbear_t {
+    char * name;
+    float temperature;
+};
+
+CoolBear createCoolBear(char * name, float temperature) {
+    CoolBear coolbear = malloc(sizeof(*coolbear));
+    coolbear->name = strdup(name);
+    coolbear->temperature = temperature;
+    return coolbear;
+}
+void freeCoolBear(CoolBear coolBear) {
+    if (coolBear == NULL) {
+        abort();
+    }
+    if (coolBear->name != NULL) {
+        free(coolBear->name);
+    }
+    free(coolBear);
+}
+char * getNameCoolBear(CoolBear coolbear) {
+    return coolbear->name;
+}
+float    getTemperatureCoolBear(CoolBear coolbear) {
+   return coolbear->temperature;
+}
+// NO MAIN!
+\end{verbatim}
 
 
-\item What is the preprocessor doing?
-\label{sec:org489d320}
+
+\url{./coolbears.h}
+
+\begin{verbatim}
+// Have a guard to ensure that we don't include it multiple times.
+#ifndef _COOLBEARS_H_
+/* checkInput: given the result of scanf check if it 
+ * 0 elements read or EOF. If so exit(1) with a warning.
+ *
+ */
+#define _COOLBEARS_H_
+struct coolbear_t; // Forward declaration -- I am not sharing details!
+typedef struct coolbear_t * CoolBear; // Struct point as type
+
+CoolBear createCoolBear(char * name, float temperature); // a prototype!
+void     freeCoolBear(CoolBear coolBear); // a prototype!
+char *   getNameCoolBear(CoolBear coolbear); // a prototype!
+float    getTemperatureCoolBear(CoolBear coolbear); // a prototype!
+
+#endif
+\end{verbatim}
+
+\url{./coolbears-driver.c}
+
+\begin{verbatim}
+#include "coolbears.h"
+#include <stdio.h>
+
+
+int main() {
+  CoolBear ziggy = createCoolBear("Ziggy",-23.0 /* C */);
+  CoolBear kevin = createCoolBear("Kevin",-32.0 /* C */);
+  CoolBear coolest = (getTemperatureCoolBear(ziggy) < 
+                      getTemperatureCoolBear(kevin))? ziggy : kevin;
+  printf("The coolest bear is %s\n", getNameCoolBear( coolest ));
+  // // we actually don't know about name so we can't reference it below
+  // printf("The coolest bear is %s\n", getNameCoolBear( coolest->name ));
+  freeCoolBear(ziggy);
+  freeCoolBear(kevin);
+}
+\end{verbatim}
+
+Compile it. -c the coolbears.c to make coolbears.o and then 
+compile coolbears-driver.c
+
+coolbears-driver.c has no clue how to access 
+
+\begin{verbatim}
+# build coolbears.o
+gcc  -std=c99 -pedantic -Wall -Wextra -ftrapv -ggdb3 \
+       -c coolbears.c
+# build coolbears-driver and link it to coolbears.o
+gcc  -std=c99 -pedantic -Wall -Wextra -ftrapv -ggdb3 \
+       -o coolbears-driver coolbears-driver.c \
+       coolbears.o 
+./coolbears-driver
+\end{verbatim}
+
+\begin{verbatim}
+The coolest bear is Kevin
+\end{verbatim}
+
+If we access coolest->name we get:
+
+\begin{verbatim}
+coolbears-driver.c: In function ‘main’:
+coolbears-driver.c:11:62: error: dereferencing pointer to incomplete type ‘struct coolbear_t’
+   printf("The coolest bear is %s\n", getNameCoolBear( coolest->name ));
+\end{verbatim}
+
+
+\subsubsection{What is the preprocessor doing?}
+\label{sec:org03a0ca8}
 
 Let's use the -E flag to see what checkinput.c becomes
 
 This output contains glibc headers for stdio.h and stdlib.h these
 should be under the GPLV3 (c) the Glibc project and GNU project.
+
+If you want more preprocessor options checkout:
+
+\url{https://gcc.gnu.org/onlinedocs/gcc-5.2.0/gcc/Preprocessor-Options.html}
 
 \begin{verbatim}
 # build checkinput.o
@@ -2586,5 +2707,4 @@ void checkInput(int err) {
   }
 }
 \end{verbatim}
-\end{enumerate}
 \end{document}

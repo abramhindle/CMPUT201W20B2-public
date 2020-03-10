@@ -27,6 +27,8 @@ _________________
 ..... 1.5.3 Guards
 ..... 1.5.4 Multiple Files?
 ..... 1.5.5 Example
+..... 1.5.6 Example Datastructure
+..... 1.5.7 What is the preprocessor doing?
 
 
 
@@ -543,12 +545,134 @@ _________________
   `----
 
 
-* 1.5.5.2 What is the preprocessor doing?
+1.5.6 Example Datastructure
+---------------------------
+
+  This is a useful function to check if scanf read 1 or more elements
+  and didn't read EOF.
+
+  [file:./coolbears.c]
+
+  ,----
+  | #define _POSIX_C_SOURCE 200809L // <-- needed for strdup
+  | #include "coolbears.h"
+  | #include <stdio.h>
+  | #include <stdlib.h>
+  | #include <string.h>
+  | // hiding struct details from other programmers
+  | // I DONT TRUST THEM. Especially Hazel ;-) (don't tell hazel)
+  | struct coolbear_t {
+  |     char * name;
+  |     float temperature;
+  | };
+  | 
+  | CoolBear createCoolBear(char * name, float temperature) {
+  |     CoolBear coolbear = malloc(sizeof(*coolbear));
+  |     coolbear->name = strdup(name);
+  |     coolbear->temperature = temperature;
+  |     return coolbear;
+  | }
+  | void freeCoolBear(CoolBear coolBear) {
+  |     if (coolBear == NULL) {
+  |         abort();
+  |     }
+  |     if (coolBear->name != NULL) {
+  |         free(coolBear->name);
+  |     }
+  |     free(coolBear);
+  | }
+  | char * getNameCoolBear(CoolBear coolbear) {
+  |     return coolbear->name;
+  | }
+  | float    getTemperatureCoolBear(CoolBear coolbear) {
+  |    return coolbear->temperature;
+  | }
+  | // NO MAIN!
+  `----
+
+
+
+  [file:./coolbears.h]
+
+  ,----
+  | // Have a guard to ensure that we don't include it multiple times.
+  | #ifndef _COOLBEARS_H_
+  | /* checkInput: given the result of scanf check if it 
+  |  * 0 elements read or EOF. If so exit(1) with a warning.
+  |  *
+  |  */
+  | #define _COOLBEARS_H_
+  | struct coolbear_t; // Forward declaration -- I am not sharing details!
+  | typedef struct coolbear_t * CoolBear; // Struct point as type
+  | 
+  | CoolBear createCoolBear(char * name, float temperature); // a prototype!
+  | void     freeCoolBear(CoolBear coolBear); // a prototype!
+  | char *   getNameCoolBear(CoolBear coolbear); // a prototype!
+  | float    getTemperatureCoolBear(CoolBear coolbear); // a prototype!
+  | 
+  | #endif
+  `----
+
+  [file:./coolbears-driver.c]
+
+  ,----
+  | #include "coolbears.h"
+  | #include <stdio.h>
+  | 
+  | 
+  | int main() {
+  |   CoolBear ziggy = createCoolBear("Ziggy",-23.0 /* C */);
+  |   CoolBear kevin = createCoolBear("Kevin",-32.0 /* C */);
+  |   CoolBear coolest = (getTemperatureCoolBear(ziggy) < 
+  |                       getTemperatureCoolBear(kevin))? ziggy : kevin;
+  |   printf("The coolest bear is %s\n", getNameCoolBear( coolest ));
+  |   // // we actually don't know about name so we can't reference it below
+  |   // printf("The coolest bear is %s\n", getNameCoolBear( coolest->name ));
+  |   freeCoolBear(ziggy);
+  |   freeCoolBear(kevin);
+  | }
+  `----
+
+  Compile it. -c the coolbears.c to make coolbears.o and then compile
+  coolbears-driver.c
+
+  coolbears-driver.c has no clue how to access
+
+  ,----
+  | # build coolbears.o
+  | gcc  -std=c99 -pedantic -Wall -Wextra -ftrapv -ggdb3 \
+  |        -c coolbears.c
+  | # build coolbears-driver and link it to coolbears.o
+  | gcc  -std=c99 -pedantic -Wall -Wextra -ftrapv -ggdb3 \
+  |        -o coolbears-driver coolbears-driver.c \
+  |        coolbears.o 
+  | ./coolbears-driver
+  `----
+
+  ,----
+  | The coolest bear is Kevin
+  `----
+
+  If we access coolest->name we get:
+
+  ,----
+  | coolbears-driver.c: In function ‘main’:
+  | coolbears-driver.c:11:62: error: dereferencing pointer to incomplete type ‘struct coolbear_t’
+  |    printf("The coolest bear is %s\n", getNameCoolBear( coolest->name ));
+  `----
+
+
+1.5.7 What is the preprocessor doing?
+-------------------------------------
 
   Let's use the -E flag to see what checkinput.c becomes
 
   This output contains glibc headers for stdio.h and stdlib.h these
   should be under the GPLV3 (c) the Glibc project and GNU project.
+
+  If you want more preprocessor options checkout:
+
+  [https://gcc.gnu.org/onlinedocs/gcc-5.2.0/gcc/Preprocessor-Options.html]
 
   ,----
   | # build checkinput.o
