@@ -382,8 +382,107 @@ will go into a .c file that includes that .h as well.
   - makes library.o
 - library.h
   - defines functions and definitions from library.c
-  
-*** Example
+
+*** Example 
+
+This is a useful function to check if scanf read 1 or more elements
+and didn't read EOF.
+
+file:./checkinput.c
+
+#+BEGIN_SRC C :exports both :tangle checkinput.c
+#include "checkinput.h"
+#include <stdio.h>
+#include <stdlib.h>
+/* checkInput: given the result of scanf check if it 
+ * 0 elements read or EOF. If so exit(1) with a warning.
+ *
+ */
+void checkInput(int err) {
+  if (!err || err == EOF) {
+    printf("\nInvalid input!\n");
+    exit(1);
+  }
+}
+#+END_SRC 
+
+#+RESULTS:
+
+file:./checkinput.h
+
+#+BEGIN_SRC C :exports both :tangle checkinput.h
+// Have a guard to ensure that we don't include it multiple times.
+#ifndef _CHECKINPUT_H_
+/* checkInput: given the result of scanf check if it 
+ * 0 elements read or EOF. If so exit(1) with a warning.
+ *
+ */
+#define _CHECKINPUT_H_
+void checkInput(int err); // a prototype!
+#endif
+#+END_SRC 
+
+file:./checkinput-driver.c
+
+#+BEGIN_SRC C :exports both :tangle checkinput-driver.c
+#include "checkinput.h"
+#include <stdio.h>
+#include "checkinput.h"
+
+int main() {
+  int input;
+  checkInput(scanf("%d", &input));  
+  puts("Good Input!");
+}
+#+END_SRC 
+
+**** Compiling Multiple Files
+
+OK now we compile it. The main is the last to compile and it needs all the .o files.
+
+All the .c files that don't contain main need to be compiled to object
+files. Use the -c flags to do this.
+
+#+BEGIN_SRC sh :exports both :tangle build-checkinput.sh
+# build checkinput.o
+gcc  -std=c99 -pedantic -Wall -Wextra -ftrapv -ggdb3 \
+       -c checkinput.c
+# build checkinput-driver and link it to checkinput.o
+gcc  -std=c99 -pedantic -Wall -Wextra -ftrapv -ggdb3 \
+       -o checkinput-driver checkinput-driver.c \
+       checkinput.o
+#+END_SRC
+
+#+RESULTS:
+
+Test drive it
+
+#+BEGIN_SRC sh :exports both
+echo   | ./checkinput-driver
+echo X | ./checkinput-driver
+echo 1 | ./checkinput-driver
+echo 1 | ./checkinput-driver
+#+END_SRC
+
+#+RESULTS:
+: 
+: Invalid input!
+: 
+: Invalid input!
+: Good Input!
+: Good Input!
+
+
+#+BEGIN_SRC sh
+ldd ./checkinput-driver
+#+END_SRC
+
+#+RESULTS:
+: 	linux-vdso.so.1 (0x00007ffe85be0000)
+: 	libc.so.6 => /lib/x86_64-linux-gnu/libc.so.6 (0x00007f919f994000)
+: 	/lib64/ld-linux-x86-64.so.2 (0x00007f919ff87000)
+
+*** Example Datastructure
 
 This is a useful function to check if scanf read 1 or more elements
 and didn't read EOF.
@@ -2543,104 +2642,5 @@ void checkInput(int err) {
   }
 }
 #+END_SRC
-
-*** Example Datastructure
-
-This is a useful function to check if scanf read 1 or more elements
-and didn't read EOF.
-
-file:./checkinput.c
-
-#+BEGIN_SRC C :exports both :tangle checkinput.c
-#include "checkinput.h"
-#include <stdio.h>
-#include <stdlib.h>
-/* checkInput: given the result of scanf check if it 
- * 0 elements read or EOF. If so exit(1) with a warning.
- *
- */
-void checkInput(int err) {
-  if (!err || err == EOF) {
-    printf("\nInvalid input!\n");
-    exit(1);
-  }
-}
-#+END_SRC 
-
-#+RESULTS:
-
-file:./checkinput.h
-
-#+BEGIN_SRC C :exports both :tangle checkinput.h
-// Have a guard to ensure that we don't include it multiple times.
-#ifndef _CHECKINPUT_H_
-/* checkInput: given the result of scanf check if it 
- * 0 elements read or EOF. If so exit(1) with a warning.
- *
- */
-#define _CHECKINPUT_H_
-void checkInput(int err); // a prototype!
-#endif
-#+END_SRC 
-
-file:./checkinput-driver.c
-
-#+BEGIN_SRC C :exports both :tangle checkinput-driver.c
-#include "checkinput.h"
-#include <stdio.h>
-#include "checkinput.h"
-
-int main() {
-  int input;
-  checkInput(scanf("%d", &input));  
-  puts("Good Input!");
-}
-#+END_SRC 
-
-**** Compiling Multiple Files
-
-OK now we compile it. The main is the last to compile and it needs all the .o files.
-
-All the .c files that don't contain main need to be compiled to object
-files. Use the -c flags to do this.
-
-#+BEGIN_SRC sh :exports both :tangle build-checkinput.sh
-# build checkinput.o
-gcc  -std=c99 -pedantic -Wall -Wextra -ftrapv -ggdb3 \
-       -c checkinput.c
-# build checkinput-driver and link it to checkinput.o
-gcc  -std=c99 -pedantic -Wall -Wextra -ftrapv -ggdb3 \
-       -o checkinput-driver checkinput-driver.c \
-       checkinput.o
-#+END_SRC
-
-#+RESULTS:
-
-Test drive it
-
-#+BEGIN_SRC sh :exports both
-echo   | ./checkinput-driver
-echo X | ./checkinput-driver
-echo 1 | ./checkinput-driver
-echo 1 | ./checkinput-driver
-#+END_SRC
-
-#+RESULTS:
-: 
-: Invalid input!
-: 
-: Invalid input!
-: Good Input!
-: Good Input!
-
-
-#+BEGIN_SRC sh
-ldd ./checkinput-driver
-#+END_SRC
-
-#+RESULTS:
-: 	linux-vdso.so.1 (0x00007ffe85be0000)
-: 	libc.so.6 => /lib/x86_64-linux-gnu/libc.so.6 (0x00007f919f994000)
-: 	/lib64/ld-linux-x86-64.so.2 (0x00007f919ff87000)
 
 
