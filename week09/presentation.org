@@ -142,7 +142,7 @@ compiler.
 
 *** #ifdef
 
-#+BEGIN_SRC C :exports both :results value verbatim drawer
+#+BEGIN_SRC C :exports both 
 /* #ifdef   IF DEFined
  * 
  * If whatever comes after the #ifdef IS
@@ -195,11 +195,9 @@ int main() {
 #+END_SRC
 
 #+RESULTS:
-:RESULTS:
-Value is 27!
-Turbo is on!
-Reached end of main, quitting!
-:END:
+: Value is 27!
+: Turbo is on!
+: Reached end of main, quitting!
 
 
 
