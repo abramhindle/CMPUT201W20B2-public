@@ -142,7 +142,7 @@ compiler.
 
 *** #ifdef
 
-#+BEGIN_SRC C :exports both 
+#+BEGIN_SRC C :exports both :results value verbatim drawer
 /* #ifdef   IF DEFined
  * 
  * If whatever comes after the #ifdef IS
@@ -195,9 +195,13 @@ int main() {
 #+END_SRC
 
 #+RESULTS:
-: Value is 27!
-: Turbo is on!
-: Reached end of main, quitting!
+:RESULTS:
+Value is 27!
+Turbo is on!
+Reached end of main, quitting!
+:END:
+
+
 
 *** #ifndef
 
@@ -285,6 +289,8 @@ int main() {
 #endif /* ndef _GUARDS_H_ */
 #+END_SRC
 
+#+RESULTS:
+
 
 **** No Guards
 
@@ -349,6 +355,14 @@ compiled.
 
 .h files help us organize C programs by including definitions for the
 object files and libraries that we will create.
+
+Libc or glibc contains the implemention of those definitions.
+libc.so.6 => /lib/x86_64-linux-gnu/libc.so.6 (0x00007f919f994000)
+
+libc is composed of many .c files compiled into .o object files and
+then combined into a library. A library is like an executable that
+other executables rely on for code. malloc is defined in malloc.c and
+has a malloc.h file!
 
 Typically if I make a library I will make a .h file so the definitions
 can be shared with other .c files. But the implementation of the functions
@@ -445,3 +459,12 @@ echo 1 | ./checkinput-driver
 : Good Input!
 : Good Input!
 
+
+#+BEGIN_SRC sh
+ldd ./checkinput-driver
+#+END_SRC
+
+#+RESULTS:
+: 	linux-vdso.so.1 (0x00007ffe85be0000)
+: 	libc.so.6 => /lib/x86_64-linux-gnu/libc.so.6 (0x00007f919f994000)
+: 	/lib64/ld-linux-x86-64.so.2 (0x00007f919ff87000)
