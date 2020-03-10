@@ -3,7 +3,7 @@
 "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
 <head>
-<!-- 2020-02-27 Thu 11:34 -->
+<!-- 2020-03-10 Tue 10:12 -->
 <meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <title>CMPUT201W20B2 Week 7</title>
@@ -234,49 +234,53 @@ for the JavaScript code in this tag.
 <h2>Table of Contents</h2>
 <div id="text-table-of-contents">
 <ul>
-<li><a href="#org185054c">1. Week7</a>
+<li><a href="#org1ae2c14">1. Week7</a>
 <ul>
-<li><a href="#org8e7fb06">1.1. Copyright Statement</a>
+<li><a href="#orgf0e1500">1.1. Copyright Statement</a>
 <ul>
-<li><a href="#org66bff0a">1.1.1. License</a></li>
-<li><a href="#org17a4fdf">1.1.2. Hazel Code is licensed under AGPL3.0+</a></li>
+<li><a href="#org14f7c62">1.1.1. License</a></li>
+<li><a href="#orgb5c7ea9">1.1.2. Hazel Code is licensed under AGPL3.0+</a></li>
 </ul>
 </li>
-<li><a href="#org3efaf2b">1.2. Init ORG-MODE</a></li>
-<li><a href="#org834f4ea">1.3. Org Template</a></li>
-<li><a href="#orgdd09923">1.4. Remember how to compile?</a></li>
-<li><a href="#org5139fd7">1.5. Enums!</a>
+<li><a href="#org4d7e4a6">1.2. Init ORG-MODE</a>
 <ul>
-<li><a href="#org0276f77">1.5.1. Enum Example</a></li>
-<li><a href="#orgd818c9b">1.5.2. enum<sub>typedef.c</sub></a></li>
-<li><a href="#org20adc4b">1.5.3. EnumStart</a></li>
-<li><a href="#org4a7ae7d">1.5.4. Enumassign</a></li>
-<li><a href="#org60b11b3">1.5.5. Enum<sub>loop</sub><sub>trick.c</sub></a></li>
-<li><a href="#orgc14056f">1.5.6. Enum Int</a></li>
-<li><a href="#org7b88e2a">1.5.7. Another motivating ENUM Example</a></li>
+<li><a href="#org014fff5">1.2.1. Org export</a></li>
 </ul>
 </li>
-<li><a href="#org2d4e8f8">1.6. Unions</a>
+<li><a href="#org4058bb0">1.3. Org Template</a></li>
+<li><a href="#org558f861">1.4. Remember how to compile?</a></li>
+<li><a href="#org4a5e327">1.5. Enums!</a>
 <ul>
-<li><a href="#orgcc8debe">1.6.1. Structs versus Unions</a></li>
-<li><a href="#org5455fdf">1.6.2. Union considerations</a></li>
-<li><a href="#orgf72751f">1.6.3. Type Punning</a></li>
-<li><a href="#orgab047e8">1.6.4. Unions with type tags</a></li>
+<li><a href="#org8a46bd6">1.5.1. Enum Example</a></li>
+<li><a href="#orge2c5a5b">1.5.2. enum<sub>typedef.c</sub></a></li>
+<li><a href="#orgbc29b8e">1.5.3. EnumStart</a></li>
+<li><a href="#orgc30797d">1.5.4. Enumassign</a></li>
+<li><a href="#orgf4a386b">1.5.5. Enum<sub>loop</sub><sub>trick.c</sub></a></li>
+<li><a href="#org77c0549">1.5.6. Enum Int</a></li>
+<li><a href="#org6f8d676">1.5.7. Another motivating ENUM Example</a></li>
 </ul>
 </li>
-<li><a href="#org1070be1">1.7. Malloc! The Heap!</a>
+<li><a href="#org7c7ab54">1.6. Unions</a>
 <ul>
-<li><a href="#org8ad14c4">1.7.1. On my computer</a></li>
-<li><a href="#org46291f3">1.7.2. Malloc</a></li>
-<li><a href="#orgbe3b70c">1.7.3. Malloc2</a></li>
-<li><a href="#org395c784">1.7.4. Calloc</a></li>
-<li><a href="#orgf631b7a">1.7.5. strdup</a></li>
-<li><a href="#org0c20255">1.7.6. free</a></li>
-<li><a href="#org8ba35ef">1.7.7. realloc!</a></li>
-<li><a href="#org4f10e94">1.7.8. Malloc and structs</a></li>
-<li><a href="#org4416697">1.7.9. Malloc 2D arrays</a></li>
-<li><a href="#org4c81331">1.7.10. Malloc Array of Array versus 2D</a></li>
-<li><a href="#org952a85a">1.7.11. Malloc array of arrays structs?</a></li>
+<li><a href="#orgdae52bd">1.6.1. Structs versus Unions</a></li>
+<li><a href="#org0379559">1.6.2. Union considerations</a></li>
+<li><a href="#org4ac27df">1.6.3. Type Punning</a></li>
+<li><a href="#org7ce2337">1.6.4. Unions with type tags</a></li>
+</ul>
+</li>
+<li><a href="#orga8b0c05">1.7. Malloc! The Heap!</a>
+<ul>
+<li><a href="#org256ac38">1.7.1. On my computer</a></li>
+<li><a href="#org4ace2d9">1.7.2. Malloc</a></li>
+<li><a href="#orgcb814c6">1.7.3. Malloc2</a></li>
+<li><a href="#orgfe16526">1.7.4. Calloc</a></li>
+<li><a href="#orgea663f4">1.7.5. strdup</a></li>
+<li><a href="#org7ecdcb8">1.7.6. free</a></li>
+<li><a href="#org230c414">1.7.7. realloc!</a></li>
+<li><a href="#org687e8ff">1.7.8. Malloc and structs</a></li>
+<li><a href="#org28f167a">1.7.9. Malloc 2D arrays</a></li>
+<li><a href="#org4eaf736">1.7.10. Malloc Array of Array versus 2D</a></li>
+<li><a href="#orgbd7c833">1.7.11. Malloc array of arrays structs?</a></li>
 </ul>
 </li>
 </ul>
@@ -285,12 +289,12 @@ for the JavaScript code in this tag.
 </div>
 </div>
 
-<div id="outline-container-org185054c" class="outline-2">
-<h2 id="org185054c"><span class="section-number-2">1</span> Week7</h2>
+<div id="outline-container-org1ae2c14" class="outline-2">
+<h2 id="org1ae2c14"><span class="section-number-2">1</span> Week7</h2>
 <div class="outline-text-2" id="text-1">
 </div>
-<div id="outline-container-org8e7fb06" class="outline-3">
-<h3 id="org8e7fb06"><span class="section-number-3">1.1</span> Copyright Statement</h3>
+<div id="outline-container-orgf0e1500" class="outline-3">
+<h3 id="orgf0e1500"><span class="section-number-3">1.1</span> Copyright Statement</h3>
 <div class="outline-text-3" id="text-1-1">
 <p>
 If you are in CMPUT201 at UAlberta this code is released in the public
@@ -302,8 +306,8 @@ Otherwise it is (c) 2020 Abram Hindle, Hazel Campbell AGPL3.0+
 </p>
 </div>
 
-<div id="outline-container-org66bff0a" class="outline-4">
-<h4 id="org66bff0a"><span class="section-number-4">1.1.1</span> License</h4>
+<div id="outline-container-org14f7c62" class="outline-4">
+<h4 id="org14f7c62"><span class="section-number-4">1.1.1</span> License</h4>
 <div class="outline-text-4" id="text-1-1-1">
 <p>
 Week 3 notes
@@ -332,8 +336,8 @@ along with this program.  If not, see <a href="https://www.gnu.org/licenses/">ht
 </div>
 
 
-<div id="outline-container-org17a4fdf" class="outline-4">
-<h4 id="org17a4fdf"><span class="section-number-4">1.1.2</span> Hazel Code is licensed under AGPL3.0+</h4>
+<div id="outline-container-orgb5c7ea9" class="outline-4">
+<h4 id="orgb5c7ea9"><span class="section-number-4">1.1.2</span> Hazel Code is licensed under AGPL3.0+</h4>
 <div class="outline-text-4" id="text-1-1-2">
 <p>
 Hazel's code is also found here
@@ -348,33 +352,44 @@ license, unless otherwise noted.
 </div>
 </div>
 
-<div id="outline-container-org3efaf2b" class="outline-3">
-<h3 id="org3efaf2b"><span class="section-number-3">1.2</span> Init ORG-MODE</h3>
+<div id="outline-container-org4d7e4a6" class="outline-3">
+<h3 id="org4d7e4a6"><span class="section-number-3">1.2</span> Init ORG-MODE</h3>
 <div class="outline-text-3" id="text-1-2">
 <div class="org-src-container">
 <pre class="src src-elisp"><span style="color: #b22222;">;; </span><span style="color: #b22222;">I need this for org-mode to work well</span>
-
-<span style="color: #b22222;">;</span><span style="color: #b22222;">(require 'ob-sh)</span>
-(<span style="color: #a020f0;">require</span> '<span style="color: #008b8b;">ob-shell</span>)
-<span style="color: #b22222;">; </span><span style="color: #b22222;">(org-babel-do-load-languages 'org-babel-load-languages '((sh . t)))</span>
-(org-babel-do-load-languages 'org-babel-load-languages '((shell . t)))
+<span style="color: #b22222;">;; </span><span style="color: #b22222;">If we have a new org-mode use ob-shell</span>
+<span style="color: #b22222;">;; </span><span style="color: #b22222;">otherwise use ob-sh --- but not both!</span>
+(<span style="color: #a020f0;">if</span> (<span style="color: #a020f0;">require</span> '<span style="color: #008b8b;">ob-shell</span> nil 'noerror)
+  (<span style="color: #a020f0;">progn</span>
+    (org-babel-do-load-languages 'org-babel-load-languages '((shell . t))))
+  (<span style="color: #a020f0;">progn</span>
+    (<span style="color: #a020f0;">require</span> '<span style="color: #008b8b;">ob-sh</span>)
+    (org-babel-do-load-languages 'org-babel-load-languages '((sh . t)))))
 (org-babel-do-load-languages 'org-babel-load-languages '((C . t)))
 (org-babel-do-load-languages 'org-babel-load-languages '((python . t)))
 (<span style="color: #a020f0;">setq</span> org-src-fontify-natively t)
 (<span style="color: #a020f0;">setq</span> org-confirm-babel-evaluate nil) <span style="color: #b22222;">;; </span><span style="color: #b22222;">danger!</span>
 (custom-set-faces
- <span style="color: #b22222;">;; </span><span style="color: #b22222;">custom-set-faces was added by Custom.</span>
- <span style="color: #b22222;">;; </span><span style="color: #b22222;">If you edit it by hand, you could mess it up, so be careful.</span>
- <span style="color: #b22222;">;; </span><span style="color: #b22222;">Your init file should contain only one such instance.</span>
- <span style="color: #b22222;">;; </span><span style="color: #b22222;">If there is more than one, they won't work right.</span>
  '(org-block ((t (<span style="color: #483d8b;">:inherit</span> shadow <span style="color: #483d8b;">:foreground</span> <span style="color: #8b2252;">"black"</span>)))))
 </pre>
 </div>
 </div>
+
+<div id="outline-container-org014fff5" class="outline-4">
+<h4 id="org014fff5"><span class="section-number-4">1.2.1</span> Org export</h4>
+<div class="outline-text-4" id="text-1-2-1">
+<div class="org-src-container">
+<pre class="src src-elisp">(org-html-export-to-html)
+(org-latex-export-to-pdf)
+(org-ascii-export-to-ascii)
+</pre>
+</div>
+</div>
+</div>
 </div>
 
-<div id="outline-container-org834f4ea" class="outline-3">
-<h3 id="org834f4ea"><span class="section-number-3">1.3</span> Org Template</h3>
+<div id="outline-container-org4058bb0" class="outline-3">
+<h3 id="org4058bb0"><span class="section-number-3">1.3</span> Org Template</h3>
 <div class="outline-text-3" id="text-1-3">
 <p>
 Copy and paste this to demo C
@@ -391,8 +406,8 @@ Copy and paste this to demo C
 </div>
 </div>
 
-<div id="outline-container-orgdd09923" class="outline-3">
-<h3 id="orgdd09923"><span class="section-number-3">1.4</span> Remember how to compile?</h3>
+<div id="outline-container-org558f861" class="outline-3">
+<h3 id="org558f861"><span class="section-number-3">1.4</span> Remember how to compile?</h3>
 <div class="outline-text-3" id="text-1-4">
 <p>
 gcc -std=c99 -Wall -pedantic -Werror -o programname programname.c
@@ -401,8 +416,8 @@ gcc -std=c99 -Wall -pedantic -Werror -o programname programname.c
 </div>
 
 
-<div id="outline-container-org5139fd7" class="outline-3">
-<h3 id="org5139fd7"><span class="section-number-3">1.5</span> Enums!</h3>
+<div id="outline-container-org4a5e327" class="outline-3">
+<h3 id="org4a5e327"><span class="section-number-3">1.5</span> Enums!</h3>
 <div class="outline-text-3" id="text-1-5">
 <p>
 Enums are enumerations, which is just a convienant way to make symbols
@@ -423,8 +438,8 @@ Enums are good for representing the type of something or a category.
 </p>
 </div>
 
-<div id="outline-container-org0276f77" class="outline-4">
-<h4 id="org0276f77"><span class="section-number-4">1.5.1</span> Enum Example</h4>
+<div id="outline-container-org8a46bd6" class="outline-4">
+<h4 id="org8a46bd6"><span class="section-number-4">1.5.1</span> Enum Example</h4>
 <div class="outline-text-4" id="text-1-5-1">
 <p>
 Enums are good for representing states, symbols, simple values, etc.
@@ -487,8 +502,8 @@ Enums are good for representing states, symbols, simple values, etc.
 </div>
 </div>
 
-<div id="outline-container-orgd818c9b" class="outline-4">
-<h4 id="orgd818c9b"><span class="section-number-4">1.5.2</span> enum<sub>typedef.c</sub></h4>
+<div id="outline-container-orge2c5a5b" class="outline-4">
+<h4 id="orge2c5a5b"><span class="section-number-4">1.5.2</span> enum<sub>typedef.c</sub></h4>
 <div class="outline-text-4" id="text-1-5-2">
 <p>
 Enums are annoying to type. Typing enum enumname all the time is
@@ -558,8 +573,8 @@ favourite=VANILLA
 
 
 
-<div id="outline-container-org20adc4b" class="outline-4">
-<h4 id="org20adc4b"><span class="section-number-4">1.5.3</span> EnumStart</h4>
+<div id="outline-container-orgbc29b8e" class="outline-4">
+<h4 id="orgbc29b8e"><span class="section-number-4">1.5.3</span> EnumStart</h4>
 <div class="outline-text-4" id="text-1-5-3">
 <div class="org-src-container">
 <pre class="src src-C"><span style="color: #483d8b;">#include</span> <span style="color: #8b2252;">&lt;stdio.h&gt;</span>
@@ -610,8 +625,8 @@ Vanilla
 </div>
 </div>
 
-<div id="outline-container-org4a7ae7d" class="outline-4">
-<h4 id="org4a7ae7d"><span class="section-number-4">1.5.4</span> Enumassign</h4>
+<div id="outline-container-orgc30797d" class="outline-4">
+<h4 id="orgc30797d"><span class="section-number-4">1.5.4</span> Enumassign</h4>
 <div class="outline-text-4" id="text-1-5-4">
 <div class="org-src-container">
 <pre class="src src-C"><span style="color: #483d8b;">#include</span> <span style="color: #8b2252;">&lt;stdio.h&gt;</span>
@@ -645,8 +660,8 @@ sizeof(Flavor)=4
 </div>
 </div>
 
-<div id="outline-container-org60b11b3" class="outline-4">
-<h4 id="org60b11b3"><span class="section-number-4">1.5.5</span> Enum<sub>loop</sub><sub>trick.c</sub></h4>
+<div id="outline-container-orgf4a386b" class="outline-4">
+<h4 id="orgf4a386b"><span class="section-number-4">1.5.5</span> Enum<sub>loop</sub><sub>trick.c</sub></h4>
 <div class="outline-text-4" id="text-1-5-5">
 <p>
 This is a fun trick to set a maximum value for your enum by using
@@ -716,8 +731,8 @@ flavor=STRAWBERRY
 </div>
 </div>
 
-<div id="outline-container-orgc14056f" class="outline-4">
-<h4 id="orgc14056f"><span class="section-number-4">1.5.6</span> Enum Int</h4>
+<div id="outline-container-org77c0549" class="outline-4">
+<h4 id="org77c0549"><span class="section-number-4">1.5.6</span> Enum Int</h4>
 <div class="outline-text-4" id="text-1-5-6">
 <p>
 Enum are just integers. And you can treat them as such.
@@ -779,17 +794,17 @@ Enum are just integers. And you can treat them as such.
 </div>
 
 <pre class="example">
+flavor 0 = Raspberry
 flavor 2 = Those packets that come in the ramen
-flavor 0 = Raspberry
-flavor 0 = Raspberry
-flavor 0 = Raspberry
+flavor 2 = Those packets that come in the ramen
+flavor 2 = Those packets that come in the ramen
 
 </pre>
 </div>
 </div>
 
-<div id="outline-container-org7b88e2a" class="outline-4">
-<h4 id="org7b88e2a"><span class="section-number-4">1.5.7</span> Another motivating ENUM Example</h4>
+<div id="outline-container-org6f8d676" class="outline-4">
+<h4 id="org6f8d676"><span class="section-number-4">1.5.7</span> Another motivating ENUM Example</h4>
 <div class="outline-text-4" id="text-1-5-7">
 <div class="org-src-container">
 <pre class="src src-C"><span style="color: #483d8b;">#include</span> <span style="color: #8b2252;">&lt;stdbool.h&gt;</span> 
@@ -879,8 +894,8 @@ isFlush? 0
 
 
 
-<div id="outline-container-org2d4e8f8" class="outline-3">
-<h3 id="org2d4e8f8"><span class="section-number-3">1.6</span> Unions</h3>
+<div id="outline-container-org7c7ab54" class="outline-3">
+<h3 id="org7c7ab54"><span class="section-number-3">1.6</span> Unions</h3>
 <div class="outline-text-3" id="text-1-6">
 <ul class="org-ul">
 <li>Unions are a way to all the same types to share the same memory.</li>
@@ -994,8 +1009,8 @@ Overflow kept local	 18446744073709551360
 </pre>
 </div>
 
-<div id="outline-container-orgcc8debe" class="outline-4">
-<h4 id="orgcc8debe"><span class="section-number-4">1.6.1</span> Structs versus Unions</h4>
+<div id="outline-container-orgdae52bd" class="outline-4">
+<h4 id="orgdae52bd"><span class="section-number-4">1.6.1</span> Structs versus Unions</h4>
 <div class="outline-text-4" id="text-1-6-1">
 <div class="org-src-container">
 <pre class="src src-C"><span style="color: #483d8b;">#include</span> <span style="color: #8b2252;">&lt;stdio.h&gt;</span>
@@ -1033,11 +1048,11 @@ sizeof(uints.a_char)=1
 sizeof(uints.a_short)=2
 sizeof(uints.an_int)=4
 sizeof(uints.a_long)=8
-&amp;uints=        0x7ffc6a631fb0
-&amp;uints.a_char= 0x7ffc6a631fb0
-&amp;uints.a_short=0x7ffc6a631fb2
-&amp;uints.an_int= 0x7ffc6a631fb4
-&amp;uints.a_long= 0x7ffc6a631fb8
+&amp;uints=        0x7ffc353dd120
+&amp;uints.a_char= 0x7ffc353dd120
+&amp;uints.a_short=0x7ffc353dd122
+&amp;uints.an_int= 0x7ffc353dd124
+&amp;uints.a_long= 0x7ffc353dd128
 </pre>
 
 <div class="org-src-container">
@@ -1076,18 +1091,18 @@ sizeof(uints.a_char)=1
 sizeof(uints.a_short)=2
 sizeof(uints.an_int)=4
 sizeof(uints.a_long)=8
-&amp;uints=        0x7ffd8beb4160
-&amp;uints.a_char= 0x7ffd8beb4160
-&amp;uints.a_short=0x7ffd8beb4160
-&amp;uints.an_int= 0x7ffd8beb4160
-&amp;uints.a_long= 0x7ffd8beb4160
+&amp;uints=        0x7ffdd66a1ae0
+&amp;uints.a_char= 0x7ffdd66a1ae0
+&amp;uints.a_short=0x7ffdd66a1ae0
+&amp;uints.an_int= 0x7ffdd66a1ae0
+&amp;uints.a_long= 0x7ffdd66a1ae0
 </pre>
 </div>
 </div>
 
 
-<div id="outline-container-org5455fdf" class="outline-4">
-<h4 id="org5455fdf"><span class="section-number-4">1.6.2</span> Union considerations</h4>
+<div id="outline-container-org0379559" class="outline-4">
+<h4 id="org0379559"><span class="section-number-4">1.6.2</span> Union considerations</h4>
 <div class="outline-text-4" id="text-1-6-2">
 <ul class="org-ul">
 <li>they are aligned at the starting byte of each member.</li>
@@ -1096,8 +1111,8 @@ sizeof(uints.a_long)=8
 </div>
 </div>
 
-<div id="outline-container-orgf72751f" class="outline-4">
-<h4 id="orgf72751f"><span class="section-number-4">1.6.3</span> Type Punning</h4>
+<div id="outline-container-org4ac27df" class="outline-4">
+<h4 id="org4ac27df"><span class="section-number-4">1.6.3</span> Type Punning</h4>
 <div class="outline-text-4" id="text-1-6-3">
 <ul class="org-ul">
 <li>Type punning is breaking the type system to achieve a goal</li>
@@ -1190,8 +1205,8 @@ cc1: all warnings being treated as errors
 </div>
 
 
-<div id="outline-container-orgab047e8" class="outline-4">
-<h4 id="orgab047e8"><span class="section-number-4">1.6.4</span> Unions with type tags</h4>
+<div id="outline-container-org7ce2337" class="outline-4">
+<h4 id="org7ce2337"><span class="section-number-4">1.6.4</span> Unions with type tags</h4>
 <div class="outline-text-4" id="text-1-6-4">
 <p>
 It is common practice to treat unions like "dynamic types". But it is
@@ -1272,8 +1287,8 @@ nothing 10 1.000000e-01 nothing 9.990000e+01 99 -1027093299
 </div>
 </div>
 
-<div id="outline-container-org1070be1" class="outline-3">
-<h3 id="org1070be1"><span class="section-number-3">1.7</span> Malloc! The Heap!</h3>
+<div id="outline-container-orga8b0c05" class="outline-3">
+<h3 id="orga8b0c05"><span class="section-number-3">1.7</span> Malloc! The Heap!</h3>
 <div class="outline-text-3" id="text-1-7">
 <p>
 Memory!
@@ -1302,8 +1317,8 @@ What memory does our program use? (OS and compiler specific)
 </ul>
 </div>
 
-<div id="outline-container-org8ad14c4" class="outline-4">
-<h4 id="org8ad14c4"><span class="section-number-4">1.7.1</span> On my computer</h4>
+<div id="outline-container-org256ac38" class="outline-4">
+<h4 id="org256ac38"><span class="section-number-4">1.7.1</span> On my computer</h4>
 <div class="outline-text-4" id="text-1-7-1">
 <p>
 Here's what emacs is using
@@ -1407,8 +1422,8 @@ Sure.
 </div>
 </div>
 
-<div id="outline-container-org46291f3" class="outline-4">
-<h4 id="org46291f3"><span class="section-number-4">1.7.2</span> Malloc</h4>
+<div id="outline-container-org4ace2d9" class="outline-4">
+<h4 id="org4ace2d9"><span class="section-number-4">1.7.2</span> Malloc</h4>
 <div class="outline-text-4" id="text-1-7-2">
 <p>
 Just stack allocation
@@ -1426,10 +1441,11 @@ Just stack allocation
         }
         printf(<span style="color: #8b2252;">"%u ints allocated!\n"</span>,1+bigArray[len-1]);
         printf(<span style="color: #8b2252;">"%lu bytes!\n"</span>, <span style="color: #a020f0;">sizeof</span>(<span style="color: #228b22;">int</span>)*len);
+        printf(<span style="color: #8b2252;">"%p\n"</span>, (<span style="color: #228b22;">void</span>*)bigArray);
 }
 <span style="color: #228b22;">int</span> <span style="color: #0000ff;">main</span>() {
     <span style="color: #b22222;">// </span><span style="color: #b22222;">let's find the max of the stack.</span>
-    <span style="color: #a020f0;">for</span> (<span style="color: #228b22;">int</span> <span style="color: #a0522d;">i</span> = 1; i &lt; 900000; i+=256*1024) {
+    <span style="color: #a020f0;">for</span> (<span style="color: #228b22;">int</span> <span style="color: #a0522d;">i</span> = 1; i &lt; 2*900000; i+=256*1024) {
         allocAndGo(i);
     }
 }
@@ -1439,13 +1455,25 @@ Just stack allocation
 <pre class="example">
 1 ints allocated!
 4 bytes!
+0x7fffa4505db0
 262145 ints allocated!
 1048580 bytes!
+0x7fffa4405db0
 524289 ints allocated!
 2097156 bytes!
+0x7fffa4305db0
 786433 ints allocated!
 3145732 bytes!
-
+0x7fffa4205db0
+1048577 ints allocated!
+4194308 bytes!
+0x7fffa4105db0
+1310721 ints allocated!
+5242884 bytes!
+0x7fffa4005db0
+1572865 ints allocated!
+6291460 bytes!
+0x7fffa3f05db0
 </pre>
 
 
@@ -1460,9 +1488,11 @@ Just stack allocation
   <span style="color: #228b22;">int</span>* <span style="color: #a0522d;">array</span> = malloc( size );
   assert(array!=<span style="color: #008b8b;">NULL</span>);
   memset((<span style="color: #228b22;">void</span>*)array, 0, size);
-  <span style="color: #a020f0;">for</span>(<span style="color: #228b22;">int</span> <span style="color: #a0522d;">idx</span>=0; idx&lt;arrLen; idx++) {
-    array[idx] = idx;
-  }
+  <span style="color: #b22222;">/* </span><span style="color: #b22222;">for(int idx=0; idx&lt;arrLen; idx++) {</span>
+<span style="color: #b22222;">    array[idx] = idx;</span>
+<span style="color: #b22222;">  } </span><span style="color: #b22222;">*/</span>
+  printf(<span style="color: #8b2252;">"%p\n"</span>, (<span style="color: #228b22;">void</span>*)array);
+  printf(<span style="color: #8b2252;">"%p\n"</span>, (<span style="color: #228b22;">void</span>*)&amp;arrLen);
   <span style="color: #a020f0;">return</span> array;
 }
 <span style="color: #228b22;">int</span> <span style="color: #0000ff;">main</span>() {
@@ -1477,48 +1507,84 @@ Just stack allocation
 </div>
 
 <pre class="example">
+0x55914cc51260
+0x7fff329765dc
 1 ints allocated!
 4 bytes!
-5242881 ints allocated!
+0x7f4f73239010
+0x7fff329765dc
+1 ints allocated!
 20971524 bytes!
-10485761 ints allocated!
+0x7f4f71e39010
+0x7fff329765dc
+1 ints allocated!
 41943044 bytes!
-15728641 ints allocated!
+0x7f4f70a39010
+0x7fff329765dc
+1 ints allocated!
 62914564 bytes!
-20971521 ints allocated!
+0x7f4f6f639010
+0x7fff329765dc
+1 ints allocated!
 83886084 bytes!
-26214401 ints allocated!
+0x7f4f6e239010
+0x7fff329765dc
+1 ints allocated!
 104857604 bytes!
-31457281 ints allocated!
+0x7f4f6ce39010
+0x7fff329765dc
+1 ints allocated!
 125829124 bytes!
-36700161 ints allocated!
+0x7f4f6ba39010
+0x7fff329765dc
+1 ints allocated!
 146800644 bytes!
-41943041 ints allocated!
+0x7f4f6a639010
+0x7fff329765dc
+1 ints allocated!
 167772164 bytes!
-47185921 ints allocated!
+0x7f4f69239010
+0x7fff329765dc
+1 ints allocated!
 188743684 bytes!
-52428801 ints allocated!
+0x7f4f67e39010
+0x7fff329765dc
+1 ints allocated!
 209715204 bytes!
-57671681 ints allocated!
+0x7f4f66a39010
+0x7fff329765dc
+1 ints allocated!
 230686724 bytes!
-62914561 ints allocated!
+0x7f4f65639010
+0x7fff329765dc
+1 ints allocated!
 251658244 bytes!
-68157441 ints allocated!
+0x7f4f64239010
+0x7fff329765dc
+1 ints allocated!
 272629764 bytes!
-73400321 ints allocated!
+0x7f4f62e39010
+0x7fff329765dc
+1 ints allocated!
 293601284 bytes!
-78643201 ints allocated!
+0x7f4f61a39010
+0x7fff329765dc
+1 ints allocated!
 314572804 bytes!
-83886081 ints allocated!
+0x7f4f60639010
+0x7fff329765dc
+1 ints allocated!
 335544324 bytes!
-89128961 ints allocated!
+0x7f4f5f239010
+0x7fff329765dc
+1 ints allocated!
 356515844 bytes!
 </pre>
 </div>
 </div>
 
-<div id="outline-container-orgbe3b70c" class="outline-4">
-<h4 id="orgbe3b70c"><span class="section-number-4">1.7.3</span> Malloc2</h4>
+<div id="outline-container-orgcb814c6" class="outline-4">
+<h4 id="orgcb814c6"><span class="section-number-4">1.7.3</span> Malloc2</h4>
 <div class="outline-text-4" id="text-1-7-3">
 <p>
 Big allocation!
@@ -1580,6 +1646,8 @@ Big allocation!
     }
     printf(<span style="color: #8b2252;">"board is %zu mebibytes!\n"</span>, total_size/MEGA);
     free(board);
+    <span style="color: #228b22;">int</span> * <span style="color: #a0522d;">ptr</span> = (<span style="color: #228b22;">int</span>*)<span style="color: #008b8b;">NULL</span>;
+    *ptr;
     <span style="color: #a020f0;">for</span> (<span style="color: #228b22;">size_t</span> <span style="color: #a0522d;">row</span> = 0; row &lt; SIZE; row++) {
         <span style="color: #a020f0;">for</span> (<span style="color: #228b22;">size_t</span> <span style="color: #a0522d;">col</span> = 0; col &lt; SIZE; col++) {
             printf(<span style="color: #8b2252;">"%c"</span>, (<span style="color: #228b22;">char</span>) board[row][col]);
@@ -1592,8 +1660,8 @@ Big allocation!
 </div>
 </div>
 
-<div id="outline-container-org395c784" class="outline-4">
-<h4 id="org395c784"><span class="section-number-4">1.7.4</span> Calloc</h4>
+<div id="outline-container-orgfe16526" class="outline-4">
+<h4 id="orgfe16526"><span class="section-number-4">1.7.4</span> Calloc</h4>
 <div class="outline-text-4" id="text-1-7-4">
 <p>
 Calloc is like malloc except it will initialize the memory for you!
@@ -1682,8 +1750,8 @@ It's not void, it's void * so you have to cast.
 </div>
 </div>
 
-<div id="outline-container-orgf631b7a" class="outline-4">
-<h4 id="orgf631b7a"><span class="section-number-4">1.7.5</span> strdup</h4>
+<div id="outline-container-orgea663f4" class="outline-4">
+<h4 id="orgea663f4"><span class="section-number-4">1.7.5</span> strdup</h4>
 <div class="outline-text-4" id="text-1-7-5">
 <p>
 strdup duplicates a string into newly malloc'd memory.
@@ -1696,6 +1764,14 @@ Very handy.
 <p>
 Very dangerous.
 </p>
+
+<p>
+strlen's your input string
+malloc's your input string size + 1
+strcpy's your input to the malloc'd location
+</p>
+
+
 
 <div class="org-src-container">
 <pre class="src src-C"><span style="color: #483d8b;">#define</span> <span style="color: #a0522d;">_POSIX_C_SOURCE</span> 200809L <span style="color: #b22222;">// </span><span style="color: #b22222;">&lt;-- needed for strdup</span>
@@ -1710,13 +1786,16 @@ Very dangerous.
 
 <span style="color: #228b22;">int</span> <span style="color: #0000ff;">main</span>() {
     <span style="color: #a020f0;">const</span> <span style="color: #228b22;">char</span> * <span style="color: #a0522d;">message</span> = <span style="color: #8b2252;">"hello, world!"</span>;
-    <span style="color: #b22222;">// </span><span style="color: #b22222;">char buffer[14];</span>
-    <span style="color: #b22222;">// </span><span style="color: #b22222;">strncpy(buffer, message, 14);    </span>
+    <span style="color: #228b22;">char</span> <span style="color: #a0522d;">buffer</span>[14];
+    strncpy(buffer, message, 14);    
     printf(<span style="color: #8b2252;">"%p %s\n"</span>, (<span style="color: #228b22;">void</span>*)message, message);    
+    printf(<span style="color: #8b2252;">"%p %s\n"</span>, (<span style="color: #228b22;">void</span>*)buffer, buffer);    
+
     <span style="color: #b22222;">// </span><span style="color: #b22222;">hi this code is basically strdup</span>
     <span style="color: #228b22;">char</span> * <span style="color: #a0522d;">copyMalloc</span> = malloc((strlen(message) + 1) * <span style="color: #a020f0;">sizeof</span>(<span style="color: #228b22;">char</span>));
     strcpy(copyMalloc, message);
     <span style="color: #b22222;">// </span><span style="color: #b22222;">^^^^ that was basically strdup</span>
+
     printf(<span style="color: #8b2252;">"%p %s\n"</span>, (<span style="color: #228b22;">void</span>*)copyMalloc, copyMalloc);    
     <span style="color: #228b22;">char</span> * <span style="color: #a0522d;">copyDup</span> = strdup(message);
     printf(<span style="color: #8b2252;">"%p %s\n"</span>, (<span style="color: #228b22;">void</span>*)copyDup, copyDup);
@@ -1735,9 +1814,10 @@ Very dangerous.
 </div>
 
 <pre class="example">
-0x55c8c5d66984 hello, world!
-0x55c8c75a3270 hello, world!
-0x55c8c75a3290 hello, world!
+0x557a2ab42a84 hello, world!
+0x7ffe2cc658da hello, world!
+0x557a2c3f3270 hello, world!
+0x557a2c3f3290 hello, world!
 hello, world!
 Mello, world!
 Jello, world!
@@ -1746,8 +1826,8 @@ Jello, world!
 </div>
 </div>
 
-<div id="outline-container-org0c20255" class="outline-4">
-<h4 id="org0c20255"><span class="section-number-4">1.7.6</span> free</h4>
+<div id="outline-container-org7ecdcb8" class="outline-4">
+<h4 id="org7ecdcb8"><span class="section-number-4">1.7.6</span> free</h4>
 <div class="outline-text-4" id="text-1-7-6">
 <p>
 What happens if we don't free?
@@ -1826,11 +1906,11 @@ valgrind --leak-check=full ./nofree 2&gt;&amp;1
 </div>
 
 <pre class="example">
-==31794== Memcheck, a memory error detector
-==31794== Copyright (C) 2002-2017, and GNU GPL'd, by Julian Seward et al.
-==31794== Using Valgrind-3.13.0 and LibVEX; rerun with -h for copyright info
-==31794== Command: ./nofree
-==31794== 
+==29269== Memcheck, a memory error detector
+==29269== Copyright (C) 2002-2017, and GNU GPL'd, by Julian Seward et al.
+==29269== Using Valgrind-3.13.0 and LibVEX; rerun with -h for copyright info
+==29269== Command: ./nofree
+==29269== 
 1 ints allocated!
 4 bytes!
 1048577 ints allocated!
@@ -1851,27 +1931,27 @@ valgrind --leak-check=full ./nofree 2&gt;&amp;1
 33554436 bytes!
 9437185 ints allocated!
 37748740 bytes!
-==31794== 
-==31794== HEAP SUMMARY:
-==31794==     in use at exit: 188,743,720 bytes in 10 blocks
-==31794==   total heap usage: 11 allocs, 1 frees, 188,747,816 bytes allocated
-==31794== 
-==31794== LEAK SUMMARY:
-==31794==    definitely lost: 100,663,320 bytes in 6 blocks
-==31794==    indirectly lost: 0 bytes in 0 blocks
-==31794==      possibly lost: 88,080,400 bytes in 4 blocks
-==31794==    still reachable: 0 bytes in 0 blocks
-==31794==         suppressed: 0 bytes in 0 blocks
-==31794== Rerun with --leak-check=full to see details of leaked memory
-==31794== 
-==31794== For counts of detected and suppressed errors, rerun with: -v
-==31794== ERROR SUMMARY: 0 errors from 0 contexts (suppressed: 0 from 0)
+==29269== 
+==29269== HEAP SUMMARY:
+==29269==     in use at exit: 188,743,720 bytes in 10 blocks
+==29269==   total heap usage: 11 allocs, 1 frees, 188,747,816 bytes allocated
+==29269== 
+==29269== LEAK SUMMARY:
+==29269==    definitely lost: 100,663,320 bytes in 6 blocks
+==29269==    indirectly lost: 0 bytes in 0 blocks
+==29269==      possibly lost: 88,080,400 bytes in 4 blocks
+==29269==    still reachable: 0 bytes in 0 blocks
+==29269==         suppressed: 0 bytes in 0 blocks
+==29269== Rerun with --leak-check=full to see details of leaked memory
+==29269== 
+==29269== For counts of detected and suppressed errors, rerun with: -v
+==29269== ERROR SUMMARY: 0 errors from 0 contexts (suppressed: 0 from 0)
 now let's leak check
-==31803== Memcheck, a memory error detector
-==31803== Copyright (C) 2002-2017, and GNU GPL'd, by Julian Seward et al.
-==31803== Using Valgrind-3.13.0 and LibVEX; rerun with -h for copyright info
-==31803== Command: ./nofree
-==31803== 
+==29271== Memcheck, a memory error detector
+==29271== Copyright (C) 2002-2017, and GNU GPL'd, by Julian Seward et al.
+==29271== Using Valgrind-3.13.0 and LibVEX; rerun with -h for copyright info
+==29271== Command: ./nofree
+==29271== 
 1 ints allocated!
 4 bytes!
 1048577 ints allocated!
@@ -1892,36 +1972,36 @@ now let's leak check
 33554436 bytes!
 9437185 ints allocated!
 37748740 bytes!
-==31803== 
-==31803== HEAP SUMMARY:
-==31803==     in use at exit: 188,743,720 bytes in 10 blocks
-==31803==   total heap usage: 11 allocs, 1 frees, 188,747,816 bytes allocated
-==31803== 
-==31803== 88,080,400 bytes in 4 blocks are possibly lost in loss record 1 of 2
-==31803==    at 0x4C31B25: calloc (in /usr/lib/valgrind/vgpreload_memcheck-amd64-linux.so)
-==31803==    by 0x1086F6: testAllocArray (in /home/hindle1/projects/CMPUT201W20/2020-01/CMPUT201W20B2-public/week07/nofree)
-==31803==    by 0x10876F: main (in /home/hindle1/projects/CMPUT201W20/2020-01/CMPUT201W20B2-public/week07/nofree)
-==31803== 
-==31803== 100,663,320 bytes in 6 blocks are definitely lost in loss record 2 of 2
-==31803==    at 0x4C31B25: calloc (in /usr/lib/valgrind/vgpreload_memcheck-amd64-linux.so)
-==31803==    by 0x1086F6: testAllocArray (in /home/hindle1/projects/CMPUT201W20/2020-01/CMPUT201W20B2-public/week07/nofree)
-==31803==    by 0x10876F: main (in /home/hindle1/projects/CMPUT201W20/2020-01/CMPUT201W20B2-public/week07/nofree)
-==31803== 
-==31803== LEAK SUMMARY:
-==31803==    definitely lost: 100,663,320 bytes in 6 blocks
-==31803==    indirectly lost: 0 bytes in 0 blocks
-==31803==      possibly lost: 88,080,400 bytes in 4 blocks
-==31803==    still reachable: 0 bytes in 0 blocks
-==31803==         suppressed: 0 bytes in 0 blocks
-==31803== 
-==31803== For counts of detected and suppressed errors, rerun with: -v
-==31803== ERROR SUMMARY: 2 errors from 2 contexts (suppressed: 0 from 0)
+==29271== 
+==29271== HEAP SUMMARY:
+==29271==     in use at exit: 188,743,720 bytes in 10 blocks
+==29271==   total heap usage: 11 allocs, 1 frees, 188,747,816 bytes allocated
+==29271== 
+==29271== 88,080,400 bytes in 4 blocks are possibly lost in loss record 1 of 2
+==29271==    at 0x4C31B25: calloc (in /usr/lib/valgrind/vgpreload_memcheck-amd64-linux.so)
+==29271==    by 0x1086F6: testAllocArray (in /home/hindle1/projects/CMPUT201W20/2020-01/CMPUT201W20B2-public/week07/nofree)
+==29271==    by 0x10876F: main (in /home/hindle1/projects/CMPUT201W20/2020-01/CMPUT201W20B2-public/week07/nofree)
+==29271== 
+==29271== 100,663,320 bytes in 6 blocks are definitely lost in loss record 2 of 2
+==29271==    at 0x4C31B25: calloc (in /usr/lib/valgrind/vgpreload_memcheck-amd64-linux.so)
+==29271==    by 0x1086F6: testAllocArray (in /home/hindle1/projects/CMPUT201W20/2020-01/CMPUT201W20B2-public/week07/nofree)
+==29271==    by 0x10876F: main (in /home/hindle1/projects/CMPUT201W20/2020-01/CMPUT201W20B2-public/week07/nofree)
+==29271== 
+==29271== LEAK SUMMARY:
+==29271==    definitely lost: 100,663,320 bytes in 6 blocks
+==29271==    indirectly lost: 0 bytes in 0 blocks
+==29271==      possibly lost: 88,080,400 bytes in 4 blocks
+==29271==    still reachable: 0 bytes in 0 blocks
+==29271==         suppressed: 0 bytes in 0 blocks
+==29271== 
+==29271== For counts of detected and suppressed errors, rerun with: -v
+==29271== ERROR SUMMARY: 2 errors from 2 contexts (suppressed: 0 from 0)
 </pre>
 </div>
 </div>
 
-<div id="outline-container-org8ba35ef" class="outline-4">
-<h4 id="org8ba35ef"><span class="section-number-4">1.7.7</span> realloc!</h4>
+<div id="outline-container-org230c414" class="outline-4">
+<h4 id="org230c414"><span class="section-number-4">1.7.7</span> realloc!</h4>
 <div class="outline-text-4" id="text-1-7-7">
 <p>
 realloc does a lot of work for you!
@@ -1992,43 +2072,43 @@ There's no guarantee that you pointer stays in the same spot!
 </div>
 
 <pre class="example">
-size: 00030 array1: old: 0x559564e1b260 new: 0x559564e1b2d0
-size: 00045 array1: old: 0x559564e1b2d0 new: 0x559564e1c340
-size: 00060 array1: old: 0x559564e1c340 new: 0x559564e1c400
-size: 00075 array1: old: 0x559564e1c400 new: 0x559564e1c4f0
-size: 00090 array1: old: 0x559564e1c4f0 new: 0x559564e1c610
-size: 00105 array1: old: 0x559564e1c610 new: 0x559564e1c760
-size: 00125 array1: old: 0x559564e1c760 new: 0x559564e1c8e0
-size: 00140 array1: old: 0x559564e1c8e0 new: 0x559564e1ca90
-size: 00155 array1: old: 0x559564e1ca90 new: 0x559564e1cc70
-size: 00170 array1: old: 0x559564e1cc70 new: 0x559564e1ce80
-size: 00185 array1: old: 0x559564e1ce80 new: 0x559564e1d0c0
-size: 00205 array1: old: 0x559564e1d0c0 new: 0x559564e1d330
-size: 00220 array1: old: 0x559564e1d330 new: 0x559564e1d5d0
-size: 00235 array1: old: 0x559564e1d5d0 new: 0x559564e1d8a0
-size: 00250 array1: old: 0x559564e1d8a0 new: 0x559564e1dba0
-size: 00265 array1: old: 0x559564e1dba0 new: 0x559564e1ded0
-size: 00285 array1: old: 0x559564e1ded0 new: 0x559564e1e230
-size: 00300 array1: old: 0x559564e1e230 new: 0x559564e1e5c0
-size: 00315 array1: old: 0x559564e1e5c0 new: 0x559564e1e980
-size: 00330 array1: old: 0x559564e1e980 new: 0x559564e1ed70
-size: 00345 array1: old: 0x559564e1ed70 new: 0x559564e1f190
-size: 00365 array1: old: 0x559564e1f190 new: 0x559564e1f5e0
-size: 00380 array1: old: 0x559564e1f5e0 new: 0x559564e1fa60
-size: 00395 array1: old: 0x559564e1fa60 new: 0x559564e1ff10
-size: 00410 array1: old: 0x559564e1ff10 new: 0x559564e203f0
-size: 00425 array1: old: 0x559564e203f0 new: 0x559564e20900
-size: 00445 array1: old: 0x559564e20900 new: 0x559564e20e40
-size: 00460 array1: old: 0x559564e20e40 new: 0x559564e213b0
-size: 00475 array1: old: 0x559564e213b0 new: 0x559564e21950
-size: 00490 array1: old: 0x559564e21950 new: 0x559564e21f20
+size: 00030 array1: old: 0x558cc266b260 new: 0x558cc266b2d0
+size: 00045 array1: old: 0x558cc266b2d0 new: 0x558cc266c340
+size: 00060 array1: old: 0x558cc266c340 new: 0x558cc266c400
+size: 00075 array1: old: 0x558cc266c400 new: 0x558cc266c4f0
+size: 00090 array1: old: 0x558cc266c4f0 new: 0x558cc266c610
+size: 00105 array1: old: 0x558cc266c610 new: 0x558cc266c760
+size: 00125 array1: old: 0x558cc266c760 new: 0x558cc266c8e0
+size: 00140 array1: old: 0x558cc266c8e0 new: 0x558cc266ca90
+size: 00155 array1: old: 0x558cc266ca90 new: 0x558cc266cc70
+size: 00170 array1: old: 0x558cc266cc70 new: 0x558cc266ce80
+size: 00185 array1: old: 0x558cc266ce80 new: 0x558cc266d0c0
+size: 00205 array1: old: 0x558cc266d0c0 new: 0x558cc266d330
+size: 00220 array1: old: 0x558cc266d330 new: 0x558cc266d5d0
+size: 00235 array1: old: 0x558cc266d5d0 new: 0x558cc266d8a0
+size: 00250 array1: old: 0x558cc266d8a0 new: 0x558cc266dba0
+size: 00265 array1: old: 0x558cc266dba0 new: 0x558cc266ded0
+size: 00285 array1: old: 0x558cc266ded0 new: 0x558cc266e230
+size: 00300 array1: old: 0x558cc266e230 new: 0x558cc266e5c0
+size: 00315 array1: old: 0x558cc266e5c0 new: 0x558cc266e980
+size: 00330 array1: old: 0x558cc266e980 new: 0x558cc266ed70
+size: 00345 array1: old: 0x558cc266ed70 new: 0x558cc266f190
+size: 00365 array1: old: 0x558cc266f190 new: 0x558cc266f5e0
+size: 00380 array1: old: 0x558cc266f5e0 new: 0x558cc266fa60
+size: 00395 array1: old: 0x558cc266fa60 new: 0x558cc266ff10
+size: 00410 array1: old: 0x558cc266ff10 new: 0x558cc26703f0
+size: 00425 array1: old: 0x558cc26703f0 new: 0x558cc2670900
+size: 00445 array1: old: 0x558cc2670900 new: 0x558cc2670e40
+size: 00460 array1: old: 0x558cc2670e40 new: 0x558cc26713b0
+size: 00475 array1: old: 0x558cc26713b0 new: 0x558cc2671950
+size: 00490 array1: old: 0x558cc2671950 new: 0x558cc2671f20
 </pre>
 </div>
 </div>
 
 
-<div id="outline-container-org4f10e94" class="outline-4">
-<h4 id="org4f10e94"><span class="section-number-4">1.7.8</span> Malloc and structs</h4>
+<div id="outline-container-org687e8ff" class="outline-4">
+<h4 id="org687e8ff"><span class="section-number-4">1.7.8</span> Malloc and structs</h4>
 <div class="outline-text-4" id="text-1-7-8">
 <p>
 Mallocs are often used with arrays of structs. You need to get the
@@ -2123,33 +2203,33 @@ sizeof the struct.
 </div>
 
 <pre class="example">
-Flush found at card 1065
-Suit 3
-Flush found at card 3045
-Suit 3
-Flush found at card 3780
-Suit 1
-Flush found at card 3795
+Flush found at card 1935
 Suit 0
-Flush found at card 3980
+Flush found at card 3285
 Suit 1
-Flush found at card 5400
-Suit 1
-Flush found at card 7510
+Flush found at card 3410
 Suit 3
-Flush found at card 7695
+Flush found at card 3450
+Suit 3
+Flush found at card 4040
 Suit 1
-Flush found at card 14055
+Flush found at card 4605
+Suit 1
+Flush found at card 4990
 Suit 0
-Flush found at card 15530
+Flush found at card 5230
+Suit 1
+Flush found at card 7590
 Suit 3
-We found 798 flushes out of 200000 hands: 0.003990
+Flush found at card 9110
+Suit 0
+We found 777 flushes out of 200000 hands: 0.003885
 </pre>
 </div>
 </div>
 
-<div id="outline-container-org4416697" class="outline-4">
-<h4 id="org4416697"><span class="section-number-4">1.7.9</span> Malloc 2D arrays</h4>
+<div id="outline-container-org28f167a" class="outline-4">
+<h4 id="org28f167a"><span class="section-number-4">1.7.9</span> Malloc 2D arrays</h4>
 <div class="outline-text-4" id="text-1-7-9">
 <p>
 How does Malloc work with 2D arrays? Well 2D arrays are tightly packed
@@ -2236,8 +2316,8 @@ Printing Option3
 </div>
 </div>
 
-<div id="outline-container-org4c81331" class="outline-4">
-<h4 id="org4c81331"><span class="section-number-4">1.7.10</span> Malloc Array of Array versus 2D</h4>
+<div id="outline-container-org4eaf736" class="outline-4">
+<h4 id="org4eaf736"><span class="section-number-4">1.7.10</span> Malloc Array of Array versus 2D</h4>
 <div class="outline-text-4" id="text-1-7-10">
 <p>
 So instead of allocating a big block and carving a 2D array out of it
@@ -2413,8 +2493,8 @@ aoa:
 </div>
 
 
-<div id="outline-container-org952a85a" class="outline-4">
-<h4 id="org952a85a"><span class="section-number-4">1.7.11</span> Malloc array of arrays structs?</h4>
+<div id="outline-container-orgbd7c833" class="outline-4">
+<h4 id="orgbd7c833"><span class="section-number-4">1.7.11</span> Malloc array of arrays structs?</h4>
 <div class="outline-text-4" id="text-1-7-11">
 <div class="org-src-container">
 <pre class="src src-C"><span style="color: #483d8b;">#include</span> <span style="color: #8b2252;">&lt;stdbool.h&gt;</span> 
@@ -2504,27 +2584,27 @@ aoa:
 </div>
 
 <pre class="example">
-Flush found at card 141
-Suit 0
-Flush found at card 247
+Flush found at card 2
 Suit 1
-Flush found at card 502
-Suit 1
-Flush found at card 902
-Suit 3
-Flush found at card 1013
-Suit 3
-Flush found at card 1113
-Suit 3
-Flush found at card 1162
-Suit 1
-Flush found at card 1180
-Suit 1
-Flush found at card 1296
+Flush found at card 109
 Suit 2
-Flush found at card 1553
-Suit 3
-We found 3975 flushes out of 1000000 hands: 0.003975
+Flush found at card 162
+Suit 1
+Flush found at card 286
+Suit 1
+Flush found at card 296
+Suit 0
+Flush found at card 418
+Suit 1
+Flush found at card 423
+Suit 1
+Flush found at card 829
+Suit 0
+Flush found at card 849
+Suit 0
+Flush found at card 1042
+Suit 0
+We found 3881 flushes out of 1000000 hands: 0.003881
 </pre>
 
 <p>
@@ -2622,27 +2702,27 @@ That's kind of gross, let's model our hands as arrays of 5 cards instead.
 </div>
 
 <pre class="example">
-Flush found at card 22
-Suit 0
-Flush found at card 456
-Suit 1
-Flush found at card 641
-Suit 1
-Flush found at card 668
+Flush found at card 2
 Suit 3
-Flush found at card 709
-Suit 0
-Flush found at card 999
+Flush found at card 109
 Suit 2
-Flush found at card 1243
+Flush found at card 162
 Suit 3
-Flush found at card 1261
+Flush found at card 286
+Suit 1
+Flush found at card 296
+Suit 0
+Flush found at card 418
+Suit 1
+Flush found at card 423
+Suit 0
+Flush found at card 829
+Suit 1
+Flush found at card 849
+Suit 1
+Flush found at card 1042
 Suit 3
-Flush found at card 1322
-Suit 3
-Flush found at card 1417
-Suit 2
-We found 3994 flushes out of 1000000 hands: 0.003994
+We found 3881 flushes out of 1000000 hands: 0.003881
 </pre>
 </div>
 </div>
@@ -2651,7 +2731,7 @@ We found 3994 flushes out of 1000000 hands: 0.003994
 </div>
 <div id="postamble" class="status">
 <p class="author">Author: Abram Hindle</p>
-<p class="date">Created: 2020-02-27 Thu 11:34</p>
+<p class="date">Created: 2020-03-10 Tue 10:12</p>
 <p class="validation"><a href="http://validator.w3.org/check?uri=referer">Validate</a></p>
 </div>
 </body>

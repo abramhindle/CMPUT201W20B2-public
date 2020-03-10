@@ -1,46 +1,78 @@
-#+TITLE: CMPUT201W20B2 Week 7
-#+PROPERTY: header-args:C             :results output :exports both :flags -std=c99 -Wall -pedantic -Werror -g :eval yes :results value verbatim
-#+PROPERTY: header-args:sh            :results output :exports both :eval yes :results value verbatim
-#+PROPERTY: header-args:shell         :results output :exports both :eval yes :results value verbatim
+% Created 2020-03-10 Tue 10:12
+% Intended LaTeX compiler: pdflatex
+\documentclass[11pt]{article}
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage{graphicx}
+\usepackage{grffile}
+\usepackage{longtable}
+\usepackage{wrapfig}
+\usepackage{rotating}
+\usepackage[normalem]{ulem}
+\usepackage{amsmath}
+\usepackage{textcomp}
+\usepackage{amssymb}
+\usepackage{capt-of}
+\usepackage{hyperref}
+\author{Abram Hindle}
+\date{\today}
+\title{CMPUT201W20B2 Week 7}
+\hypersetup{
+ pdfauthor={Abram Hindle},
+ pdftitle={CMPUT201W20B2 Week 7},
+ pdfkeywords={},
+ pdfsubject={},
+ pdfcreator={Emacs 25.2.2 (Org mode 9.1.6)}, 
+ pdflang={English}}
+\begin{document}
 
-* Week7
-** Copyright Statement
+\maketitle
+\tableofcontents
+
+
+\section{Week7}
+\label{sec:org590fb24}
+\subsection{Copyright Statement}
+\label{sec:org4590e31}
 
 If you are in CMPUT201 at UAlberta this code is released in the public
 domain to you.
 
 Otherwise it is (c) 2020 Abram Hindle, Hazel Campbell AGPL3.0+
 
-*** License
+\subsubsection{License}
+\label{sec:org33592e7}
 
-    Week 3 notes
-    Copyright (C) 2020 Abram Hindle, Hazel Campbell
+Week 3 notes
+Copyright (C) 2020 Abram Hindle, Hazel Campbell
 
-    This program is free software: you can redistribute it and/or modify
-    it under the terms of the GNU Affero General Public License as
-    published by the Free Software Foundation, either version 3 of the
-    License, or (at your option) any later version.
+This program is free software: you can redistribute it and/or modify
+it under the terms of the GNU Affero General Public License as
+published by the Free Software Foundation, either version 3 of the
+License, or (at your option) any later version.
 
-    This program is distributed in the hope that it will be useful,
-    but WITHOUT ANY WARRANTY; without even the implied warranty of
-    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-    GNU Affero General Public License for more details.
+This program is distributed in the hope that it will be useful,
+but WITHOUT ANY WARRANTY; without even the implied warranty of
+MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+GNU Affero General Public License for more details.
 
-    You should have received a copy of the GNU Affero General Public License
-    along with this program.  If not, see <https://www.gnu.org/licenses/>.
+You should have received a copy of the GNU Affero General Public License
+along with this program.  If not, see \url{https://www.gnu.org/licenses/}.
 
 
-*** Hazel Code is licensed under AGPL3.0+
+\subsubsection{Hazel Code is licensed under AGPL3.0+}
+\label{sec:orge753ce9}
 
 Hazel's code is also found here
-https://github.com/hazelybell/examples/tree/C-2020-01
+\url{https://github.com/hazelybell/examples/tree/C-2020-01}
 
 Hazel code is licensed: The example code is licensed under the AGPL3+
 license, unless otherwise noted.
 
-** Init ORG-MODE
+\subsection{Init ORG-MODE}
+\label{sec:orge61dc2a}
 
-#+BEGIN_SRC elisp
+\begin{verbatim}
 ;; I need this for org-mode to work well
 ;; If we have a new org-mode use ob-shell
 ;; otherwise use ob-sh --- but not both!
@@ -56,39 +88,36 @@ license, unless otherwise noted.
 (setq org-confirm-babel-evaluate nil) ;; danger!
 (custom-set-faces
  '(org-block ((t (:inherit shadow :foreground "black")))))
-#+END_SRC
+\end{verbatim}
 
-#+RESULTS:
-
-*** Org export
-#+BEGIN_SRC elisp
+\subsubsection{Org export}
+\label{sec:org2a87fcf}
+\begin{verbatim}
 (org-html-export-to-html)
 (org-latex-export-to-pdf)
 (org-ascii-export-to-ascii)
-#+END_SRC
+\end{verbatim}
 
-#+RESULTS:
-: presentation.txt
-
-** Org Template
+\subsection{Org Template}
+\label{sec:org5a42856}
 Copy and paste this to demo C
 
-#+BEGIN_SRC C :exports both
+\begin{verbatim}
 #include <stdio.h>
 
 int main(int argc, char**argv) {
     return 0;
 }
-#+END_SRC
+\end{verbatim}
 
-#+RESULTS:
-
-** Remember how to compile?
+\subsection{Remember how to compile?}
+\label{sec:org9943a28}
 
 gcc -std=c99 -Wall -pedantic -Werror -o programname programname.c
 
 
-** Enums!
+\subsection{Enums!}
+\label{sec:org3550201}
 
 Enums are enumerations, which is just a convienant way to make symbols
 that have different values of the same type. Enums allow us to read
@@ -100,11 +129,12 @@ Enum work good for switch cases, if statements, for loops.
 
 Enums are good for representing the type of something or a category.
 
-*** Enum Example
+\subsubsection{Enum Example}
+\label{sec:orgb252f6a}
 
 Enums are good for representing states, symbols, simple values, etc.
 
-#+BEGIN_SRC C :exports both
+\begin{verbatim}
 #include <stdio.h>
 #include <stdlib.h>
 
@@ -143,10 +173,9 @@ int main() {
         printf("%d %s\t[%d]\n", i, direction_names[d], d);
     }
 }
-#+END_SRC
+\end{verbatim}
 
-#+RESULTS:
-#+begin_example
+\begin{verbatim}
 0 Right	[0]
 1 Down	[2]
 2 Left	[3]
@@ -157,23 +186,24 @@ int main() {
 7 Up	[1]
 8 Right	[0]
 9 Down	[2]
-#+end_example
+\end{verbatim}
 
-*** enum_typedef.c
+\subsubsection{enum\(_{\text{typedef.c}}\)}
+\label{sec:org49061be}
 
 Enums are annoying to type. Typing enum enumname all the time is
 repetitive. Typedefs allow us to label enum types with 1 word.
 
 Typedef this 
 
-enum enumname { ... } ;
+enum enumname \{ \ldots{} \} ;
 
 with:
 
 typedef enum enunumae Enumename ;
 
 
-#+BEGIN_SRC C :exports both
+\begin{verbatim}
 #include <stdio.h>
 #include <stdlib.h>
 
@@ -190,7 +220,7 @@ int main() {
     printf("favourite=%d\n", favourite);
     printf("sizeof(favourite)=%zu\n",
            sizeof(favourite));
-    
+
     switch (favourite) {
         case VANILLA:
             printf("favourite=VANILLA\n");
@@ -205,18 +235,20 @@ int main() {
             abort();
     }
 }
-#+END_SRC
+\end{verbatim}
 
-#+RESULTS:
-: favourite=0
-: sizeof(favourite)=4
-: favourite=VANILLA
+\begin{verbatim}
+favourite=0
+sizeof(favourite)=4
+favourite=VANILLA
+\end{verbatim}
 
 
 
-*** EnumStart
+\subsubsection{EnumStart}
+\label{sec:orga01b68e}
 
-#+BEGIN_SRC C :exports both
+\begin{verbatim}
 #include <stdio.h>
 #include <stdlib.h>
 
@@ -250,19 +282,21 @@ int main() {
     puts(flavorString(100));
 
 }
-#+END_SRC
+\end{verbatim}
 
-#+RESULTS:
-: VANILLA=100
-: CHOCOLATE=101
-: STRAWBERRY=102
-: sizeof(Flavor)=4
-: Vanilla
-: Vanilla
+\begin{verbatim}
+VANILLA=100
+CHOCOLATE=101
+STRAWBERRY=102
+sizeof(Flavor)=4
+Vanilla
+Vanilla
+\end{verbatim}
 
-*** Enumassign 
+\subsubsection{Enumassign}
+\label{sec:org43ffccb}
 
-#+BEGIN_SRC C :exports both
+\begin{verbatim}
 #include <stdio.h>
 #include <stdlib.h>
 
@@ -281,21 +315,23 @@ int main() {
     printf("sizeof(Flavor)=%zu\n",
            sizeof(Flavor));
 }
-#+END_SRC
+\end{verbatim}
 
-#+RESULTS:
-: VANILLA=100
-: CHOCOLATE=200
-: STRAWBERRY=300
-: sizeof(Flavor)=4
+\begin{verbatim}
+VANILLA=100
+CHOCOLATE=200
+STRAWBERRY=300
+sizeof(Flavor)=4
+\end{verbatim}
 
-*** Enum_loop_trick.c
+\subsubsection{Enum\(_{\text{loop}}\)\(_{\text{trick.c}}\)}
+\label{sec:org2bc22c6}
 
 This is a fun trick to set a maximum value for your enum by using
 another symbol
 
 
-#+BEGIN_SRC C :exports both
+\begin{verbatim}
 #include <stdio.h>
 #include <stdlib.h>
 
@@ -319,7 +355,7 @@ int main() {
     printf("N_FLAVORS=%d\n", N_FLAVORS);
     printf("sizeof(Flavor)=%zu\n",
            sizeof(Flavor));
-    
+
     for (Flavor flavor = 0; flavor < N_FLAVORS; flavor++) {
         switch (flavor) {
             case VANILLA:
@@ -339,24 +375,26 @@ int main() {
         }
     }
 }
-#+END_SRC
+\end{verbatim}
 
-#+RESULTS:
-: VANILLA=0
-: CHOCOLATE=2
-: STRAWBERRY=3
-: N_FLAVORS=4
-: sizeof(Flavor)=4
-: flavor=VANILLA
-: flavor=RHUBARB
-: flavor=CHOCOLATE
-: flavor=STRAWBERRY
+\begin{verbatim}
+VANILLA=0
+CHOCOLATE=2
+STRAWBERRY=3
+N_FLAVORS=4
+sizeof(Flavor)=4
+flavor=VANILLA
+flavor=RHUBARB
+flavor=CHOCOLATE
+flavor=STRAWBERRY
+\end{verbatim}
 
-*** Enum Int
+\subsubsection{Enum Int}
+\label{sec:orgbb973ad}
 
 Enum are just integers. And you can treat them as such.
 
-#+BEGIN_SRC C :exports both
+\begin{verbatim}
 #include <stdio.h>
 #include <stdlib.h>
 #include <time.h>
@@ -408,17 +446,19 @@ int main() {
        );
     }
 }
-#+END_SRC
+\end{verbatim}
 
-#+RESULTS:
-: flavor 0 = Raspberry
-: flavor 0 = Raspberry
-: flavor 0 = Raspberry
-: flavor 2 = Those packets that come in the ramen
+\begin{verbatim}
+flavor 1 = Hamburger flavor
+flavor 2 = Those packets that come in the ramen
+flavor 2 = Those packets that come in the ramen
+flavor 2 = Those packets that come in the ramen
+\end{verbatim}
 
-*** Another motivating ENUM Example
+\subsubsection{Another motivating ENUM Example}
+\label{sec:orgb479f83}
 
-#+BEGIN_SRC C :exports both
+\begin{verbatim}
 #include <stdbool.h> 
 #include <stdio.h>
 #include <stdlib.h>
@@ -492,20 +532,24 @@ int main() {
     printf("isFlush? %u\n", isFlush(secondHand));
 
 }
-#+END_SRC
+\end{verbatim}
 
-#+RESULTS:
-: isFlush? 1
-: isFlush? 0
+\begin{verbatim}
+isFlush? 1
+isFlush? 0
+\end{verbatim}
 
 
 
-** Unions
+\subsection{Unions}
+\label{sec:org40b1862}
 
-- Unions are a way to all the same types to share the same memory.
-- Some types like unsigned integers have different sizes:
-  
-#+BEGIN_SRC C :exports both 
+\begin{itemize}
+\item Unions are a way to all the same types to share the same memory.
+\item Some types like unsigned integers have different sizes:
+\end{itemize}
+
+\begin{verbatim}
 #include <stdio.h>
 int main() {
     printf("sizeof(unsigned char):\t\t%ld\n", 
@@ -522,17 +566,18 @@ int main() {
         sizeof(unsigned long long int));
 
 }
-#+END_SRC
+\end{verbatim}
 
-#+RESULTS:
-: sizeof(unsigned char):		1
-: sizeof(unsigned short):		2
-: sizeof(unsigned int):		4
-: sizeof(unsigned long):		8
-: sizeof(unsigned long long):	8
-: sizeof(unsigned long long int):	8
+\begin{verbatim}
+sizeof(unsigned char):		1
+sizeof(unsigned short):		2
+sizeof(unsigned int):		4
+sizeof(unsigned long):		8
+sizeof(unsigned long long):	8
+sizeof(unsigned long long int):	8
+\end{verbatim}
 
-#+BEGIN_SRC C :exports both 
+\begin{verbatim}
 #include <stdio.h>
 /*
 [C][S][I][I][L][L][L][L]
@@ -566,10 +611,9 @@ int main() {
     uints.a_char++;
     printf("Overflow kept local\t %lu\n", uints.a_long);
 }
-#+END_SRC
+\end{verbatim}
 
-#+RESULTS:
-#+begin_example
+\begin{verbatim}
 For the long 0:
 	char	 0
 	short	 0
@@ -606,11 +650,12 @@ For the long 18446744073709551615:
 	int	 4294967295
 	long	 18446744073709551615
 Overflow kept local	 18446744073709551360
-#+end_example
+\end{verbatim}
 
-*** Structs versus Unions
+\subsubsection{Structs versus Unions}
+\label{sec:orgd111913}
 
-#+BEGIN_SRC C
+\begin{verbatim}
 #include <stdio.h>
 
 struct uints {
@@ -636,24 +681,23 @@ int main() {
     printf("&uints.an_int= %p\n", (void *) &(uints.an_int));
     printf("&uints.a_long= %p\n", (void *) &(uints.a_long));
 }
-#+END_SRC
+\end{verbatim}
 
-#+RESULTS:
-#+begin_example
+\begin{verbatim}
 Hi I'm a struct!
 sizeof(uints)=16
 sizeof(uints.a_char)=1
 sizeof(uints.a_short)=2
 sizeof(uints.an_int)=4
 sizeof(uints.a_long)=8
-&uints=        0x7ffddf8dfaa0
-&uints.a_char= 0x7ffddf8dfaa0
-&uints.a_short=0x7ffddf8dfaa2
-&uints.an_int= 0x7ffddf8dfaa4
-&uints.a_long= 0x7ffddf8dfaa8
-#+end_example
+&uints=        0x7ffddf5be350
+&uints.a_char= 0x7ffddf5be350
+&uints.a_short=0x7ffddf5be352
+&uints.an_int= 0x7ffddf5be354
+&uints.a_long= 0x7ffddf5be358
+\end{verbatim}
 
-#+BEGIN_SRC C
+\begin{verbatim}
 #include <stdio.h>
 
 union uints {
@@ -679,37 +723,42 @@ int main() {
     printf("&uints.an_int= %p\n", (void *) &(uints.an_int));
     printf("&uints.a_long= %p\n", (void *) &(uints.a_long));
 }
-#+END_SRC
+\end{verbatim}
 
-#+RESULTS:
-#+begin_example
+\begin{verbatim}
 Hi I'm a Union!
 sizeof(uints)=8
 sizeof(uints.a_char)=1
 sizeof(uints.a_short)=2
 sizeof(uints.an_int)=4
 sizeof(uints.a_long)=8
-&uints=        0x7ffdf782b730
-&uints.a_char= 0x7ffdf782b730
-&uints.a_short=0x7ffdf782b730
-&uints.an_int= 0x7ffdf782b730
-&uints.a_long= 0x7ffdf782b730
-#+end_example
+&uints=        0x7ffe14f8b080
+&uints.a_char= 0x7ffe14f8b080
+&uints.a_short=0x7ffe14f8b080
+&uints.an_int= 0x7ffe14f8b080
+&uints.a_long= 0x7ffe14f8b080
+\end{verbatim}
 
 
-*** Union considerations
+\subsubsection{Union considerations}
+\label{sec:org94686e8}
 
-    - they are aligned at the starting byte of each member.
-    - overflows are kept local to the member being addressed
+\begin{itemize}
+\item they are aligned at the starting byte of each member.
+\item overflows are kept local to the member being addressed
+\end{itemize}
 
-*** Type Punning      
-    - Type punning is breaking the type system to achieve a goal
-    - in C it is undefined behaviour to write to 1 part of the union
-      and then read from that data using a different overlapping
-      member. Yet it pretty common practice.
-    - GCC and others typically allow it.
+\subsubsection{Type Punning}
+\label{sec:orgaff9497}
+\begin{itemize}
+\item Type punning is breaking the type system to achieve a goal
+\item in C it is undefined behaviour to write to 1 part of the union
+and then read from that data using a different overlapping
+member. Yet it pretty common practice.
+\item GCC and others typically allow it.
+\end{itemize}
 
-#+BEGIN_SRC C :eval yes :flags -std=c89
+\begin{verbatim}
 #include <stdio.h>
 #include <stdint.h>
 #include <limits.h>
@@ -774,28 +823,25 @@ int main() {
     printf("\n");
     print_mt_array(mt_array, 4);
 }
-#+END_SRC
-
-#+RESULTS:
+\end{verbatim}
 
 The error message:
 
-:RESULTS:
 /tmp/babel-27627ARt/C-src-27627FnU.c:24:6: error: ISO C99 doesn’t support unnamed structs/unions [-Werror=pedantic]
-     };
-      ^
+     \};
+      \^{}
 cc1: all warnings being treated as errors
 /bin/bash: /tmp/babel-27627ARt/C-bin-27627Sxa: Permission denied
-:END:
 
 
-*** Unions with type tags
+\subsubsection{Unions with type tags}
+\label{sec:orgc4f4dae}
 
 It is common practice to treat unions like "dynamic types". But it is
 common practice to leave a hint in a tag to what type is actually
 being stored in that union.
 
-#+BEGIN_SRC C
+\begin{verbatim}
 #include <stdio.h>
 #include <stdint.h>
 #include <limits.h>
@@ -853,38 +899,45 @@ int main() {
     printf("sizeof(mt_array[2]) == %lu\n",sizeof(mt_array[2]));
     print_mt_array(mt_array, EXAMPLES);
 }
-#+END_SRC
+\end{verbatim}
 
-#+RESULTS:
-: sizeof(mt_array)    == 56
-: sizeof(mt_array[0]) == 8
-: sizeof(mt_array[1]) == 8
-: sizeof(mt_array[2]) == 8
-: nothing 10 1.000000e-01 nothing 9.990000e+01 99 -1027093299
+\begin{verbatim}
+sizeof(mt_array)    == 56
+sizeof(mt_array[0]) == 8
+sizeof(mt_array[1]) == 8
+sizeof(mt_array[2]) == 8
+nothing 10 1.000000e-01 nothing 9.990000e+01 99 -1027093299
+\end{verbatim}
 
-** Malloc! The Heap!
+\subsection{Malloc! The Heap!}
+\label{sec:orgf6a2669}
 
 Memory!
 
 Your programs use the following kinds of memory:
-- Code: this is for constants and compiled code for the CPU to run
-- Data: this is for strings, literals, and other values you predefine
-  in your program.
-- Stack: this is where the data for your function locals goes
-- Heap: this is where dynamically allocated memory goes. It is the largest pool.
+\begin{itemize}
+\item Code: this is for constants and compiled code for the CPU to run
+\item Data: this is for strings, literals, and other values you predefine
+in your program.
+\item Stack: this is where the data for your function locals goes
+\item Heap: this is where dynamically allocated memory goes. It is the largest pool.
+\end{itemize}
 
 What memory does our program use? (OS and compiler specific)
-- Globals? Data.
-- Static variables? Data.
-- Constants? Code and or Data
-- Local variables? stack
-- Dynamic allocation? heap
+\begin{itemize}
+\item Globals? Data.
+\item Static variables? Data.
+\item Constants? Code and or Data
+\item Local variables? stack
+\item Dynamic allocation? heap
+\end{itemize}
 
-*** On my computer
+\subsubsection{On my computer}
+\label{sec:org6d2fd6d}
 
 Here's what emacs is using
 
-#+begin_example
+\begin{verbatim}
 root@st-francis:/proc/27627# cat maps
 00400000-00641000 r-xp 00000000 09:00 116130283                          /usr/bin/emacs25-x
 00841000-00848000 r--p 00241000 09:00 116130283                          /usr/bin/emacs25-x
@@ -902,20 +955,20 @@ root@st-francis:/proc/27627# cat maps
 7fffcfb29000-7fffcfb2c000 r--p 00000000 00:00 0                          [vvar]
 7fffcfb2c000-7fffcfb2e000 r-xp 00000000 00:00 0                          [vdso]
 ffffffffff600000-ffffffffff601000 r-xp 00000000 00:00 0                  [vsyscall]
-#+end_example
+\end{verbatim}
 
 Here's the important lines
-#+begin_example
+\begin{verbatim}
 code        00400000-00641000 r-xp 00000000 09:00 116130283                          /usr/bin/emacs25-x
 data?       00841000-00848000 r--p 00241000 09:00 116130283                          /usr/bin/emacs25-x
 data?       00848000-01615000 rw-p 00248000 09:00 116130283                          /usr/bin/emacs25-x
 heap        03155000-0d208000 rw-p 00000000 00:00 0                                  [heap]
 stack       7fffcf9ad000-7fffcfa6d000 rw-p 00000000 00:00 0                          [stack]
-#+end_example
+\end{verbatim}
 
 So stack is limited
 
-#+begin_example
+\begin{verbatim}
 hindle1@st-francis:~$ ulimit -a
 core file size          (blocks, -c) 0
 data seg size           (kbytes, -d) unlimited
@@ -933,12 +986,12 @@ cpu time               (seconds, -t) unlimited
 max user processes              (-u) 273535
 virtual memory          (kbytes, -v) unlimited
 file locks                      (-x) unlimited
-#+end_example
+\end{verbatim}
 
 
-#+begin_example
+\begin{verbatim}
 stack size              (kbytes, -s) 8192
-#+end_example
+\end{verbatim}
 
 8megs of stack.
 
@@ -958,10 +1011,11 @@ Can I get it any time.
 
 Sure.
 
-*** Malloc
+\subsubsection{Malloc}
+\label{sec:orgc993982}
 
 Just stack allocation
-#+BEGIN_SRC C
+\begin{verbatim}
 #include <assert.h>
 #include <stdio.h>
 #include <stdlib.h>
@@ -982,35 +1036,34 @@ int main() {
         allocAndGo(i);
     }
 }
-#+END_SRC
+\end{verbatim}
 
-#+RESULTS:
-#+begin_example
+\begin{verbatim}
 1 ints allocated!
 4 bytes!
-0x7ffcf94dd740
+0x7ffe30690e80
 262145 ints allocated!
 1048580 bytes!
-0x7ffcf93dd740
+0x7ffe30590e80
 524289 ints allocated!
 2097156 bytes!
-0x7ffcf92dd740
+0x7ffe30490e80
 786433 ints allocated!
 3145732 bytes!
-0x7ffcf91dd740
+0x7ffe30390e80
 1048577 ints allocated!
 4194308 bytes!
-0x7ffcf90dd740
+0x7ffe30290e80
 1310721 ints allocated!
 5242884 bytes!
-0x7ffcf8fdd740
+0x7ffe30190e80
 1572865 ints allocated!
 6291460 bytes!
-0x7ffcf8edd740
-#+end_example
+0x7ffe30090e80
+\end{verbatim}
 
 
-#+BEGIN_SRC C
+\begin{verbatim}
 #include <assert.h>
 #include <stdio.h>
 #include <stdlib.h>
@@ -1036,97 +1089,98 @@ int main() {
         free(bigArray); // remember to free it when done!
     }
 }
-#+END_SRC
+\end{verbatim}
 
-#+RESULTS:
-#+begin_example
-0x55c7f25d5260
-0x7ffd46e44c5c
+\begin{verbatim}
+0x55a5b13ef260
+0x7ffde9443eec
 1 ints allocated!
 4 bytes!
-0x7efeca536010
-0x7ffd46e44c5c
+0x7f6e5ae4f010
+0x7ffde9443eec
 1 ints allocated!
 20971524 bytes!
-0x7efec9136010
-0x7ffd46e44c5c
+0x7f6e59a4f010
+0x7ffde9443eec
 1 ints allocated!
 41943044 bytes!
-0x7efec7d36010
-0x7ffd46e44c5c
+0x7f6e5864f010
+0x7ffde9443eec
 1 ints allocated!
 62914564 bytes!
-0x7efec6936010
-0x7ffd46e44c5c
+0x7f6e5724f010
+0x7ffde9443eec
 1 ints allocated!
 83886084 bytes!
-0x7efec5536010
-0x7ffd46e44c5c
+0x7f6e55e4f010
+0x7ffde9443eec
 1 ints allocated!
 104857604 bytes!
-0x7efec4136010
-0x7ffd46e44c5c
+0x7f6e54a4f010
+0x7ffde9443eec
 1 ints allocated!
 125829124 bytes!
-0x7efec2d36010
-0x7ffd46e44c5c
+0x7f6e5364f010
+0x7ffde9443eec
 1 ints allocated!
 146800644 bytes!
-0x7efec1936010
-0x7ffd46e44c5c
+0x7f6e5224f010
+0x7ffde9443eec
 1 ints allocated!
 167772164 bytes!
-0x7efec0536010
-0x7ffd46e44c5c
+0x7f6e50e4f010
+0x7ffde9443eec
 1 ints allocated!
 188743684 bytes!
-0x7efebf136010
-0x7ffd46e44c5c
+0x7f6e4fa4f010
+0x7ffde9443eec
 1 ints allocated!
 209715204 bytes!
-0x7efebdd36010
-0x7ffd46e44c5c
+0x7f6e4e64f010
+0x7ffde9443eec
 1 ints allocated!
 230686724 bytes!
-0x7efebc936010
-0x7ffd46e44c5c
+0x7f6e4d24f010
+0x7ffde9443eec
 1 ints allocated!
 251658244 bytes!
-0x7efebb536010
-0x7ffd46e44c5c
+0x7f6e4be4f010
+0x7ffde9443eec
 1 ints allocated!
 272629764 bytes!
-0x7efeba136010
-0x7ffd46e44c5c
+0x7f6e4aa4f010
+0x7ffde9443eec
 1 ints allocated!
 293601284 bytes!
-0x7efeb8d36010
-0x7ffd46e44c5c
+0x7f6e4964f010
+0x7ffde9443eec
 1 ints allocated!
 314572804 bytes!
-0x7efeb7936010
-0x7ffd46e44c5c
+0x7f6e4824f010
+0x7ffde9443eec
 1 ints allocated!
 335544324 bytes!
-0x7efeb6536010
-0x7ffd46e44c5c
+0x7f6e46e4f010
+0x7ffde9443eec
 1 ints allocated!
 356515844 bytes!
-#+end_example
+\end{verbatim}
 
-*** Malloc2
+\subsubsection{Malloc2}
+\label{sec:org46d183d}
 
 Big allocation!
 
-#+BEGIN_SRC sh :exports both
+\begin{verbatim}
 gcc -std=c99 -Wall -pedantic -Werror -o board ./board.c
 ./board | wc
-#+END_SRC
+\end{verbatim}
 
-#+RESULTS:
-:    8192    8192 67117056
+\begin{verbatim}
+8192    8192 67117056
+\end{verbatim}
 
-#+BEGIN_SRC C :eval no
+\begin{verbatim}
 #include <stdint.h>
 #include <stdio.h>
 #include <stdlib.h> // <-- malloc is in stdlib.h
@@ -1162,7 +1216,7 @@ int main() {
             board[row][col] = rand() % 26 + 'A';
         }
     }
-    
+
     for (size_t row = 0; row < SIZE; row++) {
         for (size_t col = 0; col < SIZE; col++) {
             printf("%c", (char) board[row][col]);
@@ -1180,12 +1234,10 @@ int main() {
         printf("\n");
     }
 }
-#+END_SRC
+\end{verbatim}
 
-
-#+RESULTS:
-
-*** Calloc 
+\subsubsection{Calloc}
+\label{sec:org3ca05e3}
 
 Calloc is like malloc except it will initialize the memory for you!
 Just to 0 though. Which is good enough.
@@ -1194,11 +1246,11 @@ Calloc looks different
 
 man calloc says
 
-       void *calloc(size_t nmemb, size_t size);
+void *calloc(size\(_{\text{t}}\) nmemb, size\(_{\text{t}}\) size);
 
 It's not void, it's void * so you have to cast.
 
-#+BEGIN_SRC C
+\begin{verbatim}
 #include <assert.h>
 #include <stdio.h>
 #include <stdlib.h>
@@ -1220,10 +1272,9 @@ int main() {
         free(bigArray); // remember to free it when done!
     }
 }
-#+END_SRC
+\end{verbatim}
 
-#+RESULTS:
-#+begin_example
+\begin{verbatim}
 1 ints allocated!
 4 bytes!
 5242881 ints allocated!
@@ -1260,9 +1311,10 @@ int main() {
 335544324 bytes!
 89128961 ints allocated!
 356515844 bytes!
-#+end_example
+\end{verbatim}
 
-*** strdup
+\subsubsection{strdup}
+\label{sec:orgc1f86c2}
 
 strdup duplicates a string into newly malloc'd memory.
 
@@ -1276,7 +1328,7 @@ strcpy's your input to the malloc'd location
 
 
 
-#+BEGIN_SRC C
+\begin{verbatim}
 #define _POSIX_C_SOURCE 200809L // <-- needed for strdup
 #include <stdint.h>
 #include <stdio.h>
@@ -1313,18 +1365,20 @@ int main() {
     free(copyDup);
     free(copyMalloc);
 }
-#+END_SRC
+\end{verbatim}
 
-#+RESULTS:
-: 0x561c3e62ba84 hello, world!
-: 0x7ffcdbf9f6ca hello, world!
-: 0x561c3f856270 hello, world!
-: 0x561c3f856290 hello, world!
-: hello, world!
-: Mello, world!
-: Jello, world!
+\begin{verbatim}
+0x5641ca73ba84 hello, world!
+0x7ffe49df38da hello, world!
+0x5641cc91d270 hello, world!
+0x5641cc91d290 hello, world!
+hello, world!
+Mello, world!
+Jello, world!
+\end{verbatim}
 
-*** free
+\subsubsection{free}
+\label{sec:orgb7c91be}
 
 What happens if we don't free?
 
@@ -1332,7 +1386,7 @@ Our program can get bigger!
 
 
 
-#+BEGIN_SRC C
+\begin{verbatim}
 #include <assert.h>
 #include <stdio.h>
 #include <stdlib.h>
@@ -1354,10 +1408,9 @@ int main() {
         // free(bigArray); // remember to free it when done!
     }
 }
-#+END_SRC
+\end{verbatim}
 
-#+RESULTS:
-#+begin_example
+\begin{verbatim}
 1 ints allocated!
 4 bytes!
 1048577 ints allocated!
@@ -1378,7 +1431,7 @@ int main() {
 33554436 bytes!
 9437185 ints allocated!
 37748740 bytes!
-#+end_example
+\end{verbatim}
 
 Valgrind is a memory leak detector. It analyzes memory allocations and
 warns us about mistakes.
@@ -1386,20 +1439,19 @@ warns us about mistakes.
 Valgrind will show us that we're leaking memory (losing track of it
 and not freeing it).
 
-#+BEGIN_SRC sh :exportys both
+\begin{verbatim}
 gcc -std=c99 -Wall -pedantic -Werror -o nofree ./nofree.c
 valgrind ./nofree 2>&1
 echo now let\'s leak check
 valgrind --leak-check=full ./nofree 2>&1
-#+END_SRC
+\end{verbatim}
 
-#+RESULTS:
-#+begin_example
-==28799== Memcheck, a memory error detector
-==28799== Copyright (C) 2002-2017, and GNU GPL'd, by Julian Seward et al.
-==28799== Using Valgrind-3.13.0 and LibVEX; rerun with -h for copyright info
-==28799== Command: ./nofree
-==28799== 
+\begin{verbatim}
+==29507== Memcheck, a memory error detector
+==29507== Copyright (C) 2002-2017, and GNU GPL'd, by Julian Seward et al.
+==29507== Using Valgrind-3.13.0 and LibVEX; rerun with -h for copyright info
+==29507== Command: ./nofree
+==29507== 
 1 ints allocated!
 4 bytes!
 1048577 ints allocated!
@@ -1420,27 +1472,27 @@ valgrind --leak-check=full ./nofree 2>&1
 33554436 bytes!
 9437185 ints allocated!
 37748740 bytes!
-==28799== 
-==28799== HEAP SUMMARY:
-==28799==     in use at exit: 188,743,720 bytes in 10 blocks
-==28799==   total heap usage: 11 allocs, 1 frees, 188,747,816 bytes allocated
-==28799== 
-==28799== LEAK SUMMARY:
-==28799==    definitely lost: 100,663,320 bytes in 6 blocks
-==28799==    indirectly lost: 0 bytes in 0 blocks
-==28799==      possibly lost: 88,080,400 bytes in 4 blocks
-==28799==    still reachable: 0 bytes in 0 blocks
-==28799==         suppressed: 0 bytes in 0 blocks
-==28799== Rerun with --leak-check=full to see details of leaked memory
-==28799== 
-==28799== For counts of detected and suppressed errors, rerun with: -v
-==28799== ERROR SUMMARY: 0 errors from 0 contexts (suppressed: 0 from 0)
+==29507== 
+==29507== HEAP SUMMARY:
+==29507==     in use at exit: 188,743,720 bytes in 10 blocks
+==29507==   total heap usage: 11 allocs, 1 frees, 188,747,816 bytes allocated
+==29507== 
+==29507== LEAK SUMMARY:
+==29507==    definitely lost: 100,663,320 bytes in 6 blocks
+==29507==    indirectly lost: 0 bytes in 0 blocks
+==29507==      possibly lost: 88,080,400 bytes in 4 blocks
+==29507==    still reachable: 0 bytes in 0 blocks
+==29507==         suppressed: 0 bytes in 0 blocks
+==29507== Rerun with --leak-check=full to see details of leaked memory
+==29507== 
+==29507== For counts of detected and suppressed errors, rerun with: -v
+==29507== ERROR SUMMARY: 0 errors from 0 contexts (suppressed: 0 from 0)
 now let's leak check
-==28801== Memcheck, a memory error detector
-==28801== Copyright (C) 2002-2017, and GNU GPL'd, by Julian Seward et al.
-==28801== Using Valgrind-3.13.0 and LibVEX; rerun with -h for copyright info
-==28801== Command: ./nofree
-==28801== 
+==29508== Memcheck, a memory error detector
+==29508== Copyright (C) 2002-2017, and GNU GPL'd, by Julian Seward et al.
+==29508== Using Valgrind-3.13.0 and LibVEX; rerun with -h for copyright info
+==29508== Command: ./nofree
+==29508== 
 1 ints allocated!
 4 bytes!
 1048577 ints allocated!
@@ -1461,33 +1513,34 @@ now let's leak check
 33554436 bytes!
 9437185 ints allocated!
 37748740 bytes!
-==28801== 
-==28801== HEAP SUMMARY:
-==28801==     in use at exit: 188,743,720 bytes in 10 blocks
-==28801==   total heap usage: 11 allocs, 1 frees, 188,747,816 bytes allocated
-==28801== 
-==28801== 88,080,400 bytes in 4 blocks are possibly lost in loss record 1 of 2
-==28801==    at 0x4C31B25: calloc (in /usr/lib/valgrind/vgpreload_memcheck-amd64-linux.so)
-==28801==    by 0x1086F6: testAllocArray (in /home/hindle1/projects/CMPUT201W20/2020-01/CMPUT201W20B2-public/week07/nofree)
-==28801==    by 0x10876F: main (in /home/hindle1/projects/CMPUT201W20/2020-01/CMPUT201W20B2-public/week07/nofree)
-==28801== 
-==28801== 100,663,320 bytes in 6 blocks are definitely lost in loss record 2 of 2
-==28801==    at 0x4C31B25: calloc (in /usr/lib/valgrind/vgpreload_memcheck-amd64-linux.so)
-==28801==    by 0x1086F6: testAllocArray (in /home/hindle1/projects/CMPUT201W20/2020-01/CMPUT201W20B2-public/week07/nofree)
-==28801==    by 0x10876F: main (in /home/hindle1/projects/CMPUT201W20/2020-01/CMPUT201W20B2-public/week07/nofree)
-==28801== 
-==28801== LEAK SUMMARY:
-==28801==    definitely lost: 100,663,320 bytes in 6 blocks
-==28801==    indirectly lost: 0 bytes in 0 blocks
-==28801==      possibly lost: 88,080,400 bytes in 4 blocks
-==28801==    still reachable: 0 bytes in 0 blocks
-==28801==         suppressed: 0 bytes in 0 blocks
-==28801== 
-==28801== For counts of detected and suppressed errors, rerun with: -v
-==28801== ERROR SUMMARY: 2 errors from 2 contexts (suppressed: 0 from 0)
-#+end_example
+==29508== 
+==29508== HEAP SUMMARY:
+==29508==     in use at exit: 188,743,720 bytes in 10 blocks
+==29508==   total heap usage: 11 allocs, 1 frees, 188,747,816 bytes allocated
+==29508== 
+==29508== 88,080,400 bytes in 4 blocks are possibly lost in loss record 1 of 2
+==29508==    at 0x4C31B25: calloc (in /usr/lib/valgrind/vgpreload_memcheck-amd64-linux.so)
+==29508==    by 0x1086F6: testAllocArray (in /home/hindle1/projects/CMPUT201W20/2020-01/CMPUT201W20B2-public/week07/nofree)
+==29508==    by 0x10876F: main (in /home/hindle1/projects/CMPUT201W20/2020-01/CMPUT201W20B2-public/week07/nofree)
+==29508== 
+==29508== 100,663,320 bytes in 6 blocks are definitely lost in loss record 2 of 2
+==29508==    at 0x4C31B25: calloc (in /usr/lib/valgrind/vgpreload_memcheck-amd64-linux.so)
+==29508==    by 0x1086F6: testAllocArray (in /home/hindle1/projects/CMPUT201W20/2020-01/CMPUT201W20B2-public/week07/nofree)
+==29508==    by 0x10876F: main (in /home/hindle1/projects/CMPUT201W20/2020-01/CMPUT201W20B2-public/week07/nofree)
+==29508== 
+==29508== LEAK SUMMARY:
+==29508==    definitely lost: 100,663,320 bytes in 6 blocks
+==29508==    indirectly lost: 0 bytes in 0 blocks
+==29508==      possibly lost: 88,080,400 bytes in 4 blocks
+==29508==    still reachable: 0 bytes in 0 blocks
+==29508==         suppressed: 0 bytes in 0 blocks
+==29508== 
+==29508== For counts of detected and suppressed errors, rerun with: -v
+==29508== ERROR SUMMARY: 2 errors from 2 contexts (suppressed: 0 from 0)
+\end{verbatim}
 
-*** realloc!
+\subsubsection{realloc!}
+\label{sec:org55edc0b}
 
 realloc does a lot of work for you!
 
@@ -1500,12 +1553,16 @@ the case.
 
 There's no guarantee that you pointer stays in the same spot!
 
- - With realloc, you must replace the old pointer with the new one!
- - With realloc you must check if there was enough memory to do it!
-   - check return value!
+\begin{itemize}
+\item With realloc, you must replace the old pointer with the new one!
+\item With realloc you must check if there was enough memory to do it!
+\begin{itemize}
+\item check return value!
+\end{itemize}
+\end{itemize}
 
 
-#+BEGIN_SRC C
+\begin{verbatim}
 #include <assert.h>
 #include <stdio.h>
 #include <stdlib.h>
@@ -1542,49 +1599,49 @@ int main() {
     free(array2);
     free(array3);
 }
-#+END_SRC
+\end{verbatim}
 
-#+RESULTS:
-#+begin_example
-size: 00030 array1: old: 0x55c219c6f260 new: 0x55c219c6f2d0
-size: 00045 array1: old: 0x55c219c6f2d0 new: 0x55c219c70340
-size: 00060 array1: old: 0x55c219c70340 new: 0x55c219c70400
-size: 00075 array1: old: 0x55c219c70400 new: 0x55c219c704f0
-size: 00090 array1: old: 0x55c219c704f0 new: 0x55c219c70610
-size: 00105 array1: old: 0x55c219c70610 new: 0x55c219c70760
-size: 00125 array1: old: 0x55c219c70760 new: 0x55c219c708e0
-size: 00140 array1: old: 0x55c219c708e0 new: 0x55c219c70a90
-size: 00155 array1: old: 0x55c219c70a90 new: 0x55c219c70c70
-size: 00170 array1: old: 0x55c219c70c70 new: 0x55c219c70e80
-size: 00185 array1: old: 0x55c219c70e80 new: 0x55c219c710c0
-size: 00205 array1: old: 0x55c219c710c0 new: 0x55c219c71330
-size: 00220 array1: old: 0x55c219c71330 new: 0x55c219c715d0
-size: 00235 array1: old: 0x55c219c715d0 new: 0x55c219c718a0
-size: 00250 array1: old: 0x55c219c718a0 new: 0x55c219c71ba0
-size: 00265 array1: old: 0x55c219c71ba0 new: 0x55c219c71ed0
-size: 00285 array1: old: 0x55c219c71ed0 new: 0x55c219c72230
-size: 00300 array1: old: 0x55c219c72230 new: 0x55c219c725c0
-size: 00315 array1: old: 0x55c219c725c0 new: 0x55c219c72980
-size: 00330 array1: old: 0x55c219c72980 new: 0x55c219c72d70
-size: 00345 array1: old: 0x55c219c72d70 new: 0x55c219c73190
-size: 00365 array1: old: 0x55c219c73190 new: 0x55c219c735e0
-size: 00380 array1: old: 0x55c219c735e0 new: 0x55c219c73a60
-size: 00395 array1: old: 0x55c219c73a60 new: 0x55c219c73f10
-size: 00410 array1: old: 0x55c219c73f10 new: 0x55c219c743f0
-size: 00425 array1: old: 0x55c219c743f0 new: 0x55c219c74900
-size: 00445 array1: old: 0x55c219c74900 new: 0x55c219c74e40
-size: 00460 array1: old: 0x55c219c74e40 new: 0x55c219c753b0
-size: 00475 array1: old: 0x55c219c753b0 new: 0x55c219c75950
-size: 00490 array1: old: 0x55c219c75950 new: 0x55c219c75f20
-#+end_example
+\begin{verbatim}
+size: 00030 array1: old: 0x55a6033c2260 new: 0x55a6033c22d0
+size: 00045 array1: old: 0x55a6033c22d0 new: 0x55a6033c3340
+size: 00060 array1: old: 0x55a6033c3340 new: 0x55a6033c3400
+size: 00075 array1: old: 0x55a6033c3400 new: 0x55a6033c34f0
+size: 00090 array1: old: 0x55a6033c34f0 new: 0x55a6033c3610
+size: 00105 array1: old: 0x55a6033c3610 new: 0x55a6033c3760
+size: 00125 array1: old: 0x55a6033c3760 new: 0x55a6033c38e0
+size: 00140 array1: old: 0x55a6033c38e0 new: 0x55a6033c3a90
+size: 00155 array1: old: 0x55a6033c3a90 new: 0x55a6033c3c70
+size: 00170 array1: old: 0x55a6033c3c70 new: 0x55a6033c3e80
+size: 00185 array1: old: 0x55a6033c3e80 new: 0x55a6033c40c0
+size: 00205 array1: old: 0x55a6033c40c0 new: 0x55a6033c4330
+size: 00220 array1: old: 0x55a6033c4330 new: 0x55a6033c45d0
+size: 00235 array1: old: 0x55a6033c45d0 new: 0x55a6033c48a0
+size: 00250 array1: old: 0x55a6033c48a0 new: 0x55a6033c4ba0
+size: 00265 array1: old: 0x55a6033c4ba0 new: 0x55a6033c4ed0
+size: 00285 array1: old: 0x55a6033c4ed0 new: 0x55a6033c5230
+size: 00300 array1: old: 0x55a6033c5230 new: 0x55a6033c55c0
+size: 00315 array1: old: 0x55a6033c55c0 new: 0x55a6033c5980
+size: 00330 array1: old: 0x55a6033c5980 new: 0x55a6033c5d70
+size: 00345 array1: old: 0x55a6033c5d70 new: 0x55a6033c6190
+size: 00365 array1: old: 0x55a6033c6190 new: 0x55a6033c65e0
+size: 00380 array1: old: 0x55a6033c65e0 new: 0x55a6033c6a60
+size: 00395 array1: old: 0x55a6033c6a60 new: 0x55a6033c6f10
+size: 00410 array1: old: 0x55a6033c6f10 new: 0x55a6033c73f0
+size: 00425 array1: old: 0x55a6033c73f0 new: 0x55a6033c7900
+size: 00445 array1: old: 0x55a6033c7900 new: 0x55a6033c7e40
+size: 00460 array1: old: 0x55a6033c7e40 new: 0x55a6033c83b0
+size: 00475 array1: old: 0x55a6033c83b0 new: 0x55a6033c8950
+size: 00490 array1: old: 0x55a6033c8950 new: 0x55a6033c8f20
+\end{verbatim}
 
 
-*** Malloc and structs
+\subsubsection{Malloc and structs}
+\label{sec:org0734acb}
 
 Mallocs are often used with arrays of structs. You need to get the
 sizeof the struct.
 
-#+BEGIN_SRC C :exports both
+\begin{verbatim}
 #include <stdbool.h> 
 #include <stdio.h>
 #include <stdlib.h>
@@ -1668,39 +1725,39 @@ int main() {
 }
 
 
-#+END_SRC
+\end{verbatim}
 
-#+RESULTS:
-#+begin_example
-Flush found at card 225
+\begin{verbatim}
+Flush found at card 10
 Suit 2
-Flush found at card 1370
+Flush found at card 1720
 Suit 1
-Flush found at card 4095
-Suit 1
-Flush found at card 8160
-Suit 1
-Flush found at card 8665
-Suit 0
-Flush found at card 10025
-Suit 1
-Flush found at card 12900
-Suit 0
-Flush found at card 13085
-Suit 0
-Flush found at card 14855
+Flush found at card 1940
+Suit 2
+Flush found at card 3200
 Suit 3
-Flush found at card 15145
-Suit 2
-We found 799 flushes out of 200000 hands: 0.003995
-#+end_example
+Flush found at card 3380
+Suit 0
+Flush found at card 3950
+Suit 0
+Flush found at card 5170
+Suit 1
+Flush found at card 5510
+Suit 1
+Flush found at card 6480
+Suit 1
+Flush found at card 8080
+Suit 1
+We found 773 flushes out of 200000 hands: 0.003865
+\end{verbatim}
 
-*** Malloc 2D arrays
+\subsubsection{Malloc 2D arrays}
+\label{sec:org5de8d0d}
 
 How does Malloc work with 2D arrays? Well 2D arrays are tightly packed
 so it is pretty easy to determine their size in memory.
 
-#+BEGIN_SRC C
+\begin{verbatim}
 // READ man 3 malloc
 
 #include <stdio.h>
@@ -1747,10 +1804,9 @@ int main(int argc, char **argv) {
     free(array); // deallocates or "frees" the memory we were using for array
     // Now ALL pointers to or into the array are invalid!
 }
-#+END_SRC
+\end{verbatim}
 
-#+RESULTS:
-#+begin_example
+\begin{verbatim}
 Printing Option2
 
  0  1  2  3  4  5  6  7  8  9 
@@ -1776,9 +1832,10 @@ Printing Option3
 70 71 72 73 74 75 76 77 78 79 
 80 81 82 83 84 85 86 87 88 89 
 90 91 92 93 94 95 96 97 98 99
-#+end_example
+\end{verbatim}
 
-*** Malloc Array of Array versus 2D
+\subsubsection{Malloc Array of Array versus 2D}
+\label{sec:org3477dea}
 
 So instead of allocating a big block and carving a 2D array out of it
 we could just allocate each row and make an array of arrays.
@@ -1786,7 +1843,7 @@ we could just allocate each row and make an array of arrays.
 Try playing with the order of allocation of rows. Does it affect the result?
 
 
-#+BEGIN_SRC C
+\begin{verbatim}
 #include <stdio.h>
 #include <stdlib.h>
 
@@ -1877,10 +1934,9 @@ int main(int argc, char **argv) {
     free2d(p2d);
     free_aoa(n, aoa);
 }
-#+END_SRC
+\end{verbatim}
 
-#+RESULTS:
-#+begin_example
+\begin{verbatim}
 I'm going to make space for a big, square table in memory.
 How many rows and columns would you like to make space for? Sorry, I couldn't understand that :(
 2d:
@@ -1945,12 +2001,13 @@ aoa:
 0 3 8 8 2 6 6 0 7 2 0 3 0 3 4 4 3 1 3 5 1 3 7 4 9 7 1 1 7 6 
 9 0 1 8 4 4 7 7 5 0 2 9 0 7 9 2 8 5 6 6 0 0 4 3 1 7 7 8 0 8 
 3 0 6 3 2 5 3 2 5 0 6 3 7 3 1 9 4 0 9 7 6 9 2 1 1 8 2 5 0 1
-#+end_example
+\end{verbatim}
 
 
-*** Malloc array of arrays structs?
+\subsubsection{Malloc array of arrays structs?}
+\label{sec:orgc2c774e}
 
-#+BEGIN_SRC C :exports both
+\begin{verbatim}
 #include <stdbool.h> 
 #include <stdio.h>
 #include <stdlib.h>
@@ -2034,36 +2091,35 @@ int main() {
 }
 
 
-#+END_SRC
+\end{verbatim}
 
-#+RESULTS:
-#+begin_example
-Flush found at card 19
+\begin{verbatim}
+Flush found at card 404
+Suit 2
+Flush found at card 432
 Suit 3
-Flush found at card 340
+Flush found at card 657
 Suit 1
-Flush found at card 450
-Suit 0
-Flush found at card 870
-Suit 0
-Flush found at card 918
+Flush found at card 678
 Suit 1
-Flush found at card 932
-Suit 2
-Flush found at card 970
-Suit 2
-Flush found at card 1375
+Flush found at card 1611
 Suit 0
-Flush found at card 1438
+Flush found at card 1671
+Suit 2
+Flush found at card 1728
 Suit 3
-Flush found at card 1631
-Suit 2
-We found 3902 flushes out of 1000000 hands: 0.003902
-#+end_example
+Flush found at card 1940
+Suit 0
+Flush found at card 1982
+Suit 1
+Flush found at card 2123
+Suit 0
+We found 3900 flushes out of 1000000 hands: 0.003900
+\end{verbatim}
 
 That's kind of gross, let's model our hands as arrays of 5 cards instead.
 
-#+BEGIN_SRC C :exports both
+\begin{verbatim}
 #include <stdbool.h> 
 #include <stdio.h>
 #include <stdlib.h>
@@ -2150,29 +2206,29 @@ int main() {
 }
 
 
-#+END_SRC
+\end{verbatim}
 
-#+RESULTS:
-#+begin_example
-Flush found at card 85
-Suit 0
-Flush found at card 640
-Suit 0
-Flush found at card 728
-Suit 0
-Flush found at card 815
+\begin{verbatim}
+Flush found at card 463
 Suit 1
-Flush found at card 914
-Suit 2
-Flush found at card 1253
+Flush found at card 1192
 Suit 3
-Flush found at card 2527
+Flush found at card 1282
 Suit 1
-Flush found at card 2540
+Flush found at card 1900
+Suit 0
+Flush found at card 2093
+Suit 1
+Flush found at card 2234
+Suit 3
+Flush found at card 2263
 Suit 2
-Flush found at card 2574
-Suit 1
-Flush found at card 2757
-Suit 1
-We found 3838 flushes out of 1000000 hands: 0.003838
-#+end_example
+Flush found at card 2291
+Suit 2
+Flush found at card 2503
+Suit 2
+Flush found at card 2551
+Suit 2
+We found 3906 flushes out of 1000000 hands: 0.003906
+\end{verbatim}
+\end{document}
