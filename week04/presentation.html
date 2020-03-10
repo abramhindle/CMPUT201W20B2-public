@@ -1,0 +1,2269 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
+<head>
+<!-- 2020-03-10 Tue 10:06 -->
+<meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>CMPUT201W20B2 Week 4</title>
+<meta name="generator" content="Org mode" />
+<meta name="author" content="Abram Hindle" />
+<style type="text/css">
+ <!--/*--><![CDATA[/*><!--*/
+  .title  { text-align: center;
+             margin-bottom: .2em; }
+  .subtitle { text-align: center;
+              font-size: medium;
+              font-weight: bold;
+              margin-top:0; }
+  .todo   { font-family: monospace; color: red; }
+  .done   { font-family: monospace; color: green; }
+  .priority { font-family: monospace; color: orange; }
+  .tag    { background-color: #eee; font-family: monospace;
+            padding: 2px; font-size: 80%; font-weight: normal; }
+  .timestamp { color: #bebebe; }
+  .timestamp-kwd { color: #5f9ea0; }
+  .org-right  { margin-left: auto; margin-right: 0px;  text-align: right; }
+  .org-left   { margin-left: 0px;  margin-right: auto; text-align: left; }
+  .org-center { margin-left: auto; margin-right: auto; text-align: center; }
+  .underline { text-decoration: underline; }
+  #postamble p, #preamble p { font-size: 90%; margin: .2em; }
+  p.verse { margin-left: 3%; }
+  pre {
+    border: 1px solid #ccc;
+    box-shadow: 3px 3px 3px #eee;
+    padding: 8pt;
+    font-family: monospace;
+    overflow: auto;
+    margin: 1.2em;
+  }
+  pre.src {
+    position: relative;
+    overflow: visible;
+    padding-top: 1.2em;
+  }
+  pre.src:before {
+    display: none;
+    position: absolute;
+    background-color: white;
+    top: -10px;
+    right: 10px;
+    padding: 3px;
+    border: 1px solid black;
+  }
+  pre.src:hover:before { display: inline;}
+  /* Languages per Org manual */
+  pre.src-asymptote:before { content: 'Asymptote'; }
+  pre.src-awk:before { content: 'Awk'; }
+  pre.src-C:before { content: 'C'; }
+  /* pre.src-C++ doesn't work in CSS */
+  pre.src-clojure:before { content: 'Clojure'; }
+  pre.src-css:before { content: 'CSS'; }
+  pre.src-D:before { content: 'D'; }
+  pre.src-ditaa:before { content: 'ditaa'; }
+  pre.src-dot:before { content: 'Graphviz'; }
+  pre.src-calc:before { content: 'Emacs Calc'; }
+  pre.src-emacs-lisp:before { content: 'Emacs Lisp'; }
+  pre.src-fortran:before { content: 'Fortran'; }
+  pre.src-gnuplot:before { content: 'gnuplot'; }
+  pre.src-haskell:before { content: 'Haskell'; }
+  pre.src-hledger:before { content: 'hledger'; }
+  pre.src-java:before { content: 'Java'; }
+  pre.src-js:before { content: 'Javascript'; }
+  pre.src-latex:before { content: 'LaTeX'; }
+  pre.src-ledger:before { content: 'Ledger'; }
+  pre.src-lisp:before { content: 'Lisp'; }
+  pre.src-lilypond:before { content: 'Lilypond'; }
+  pre.src-lua:before { content: 'Lua'; }
+  pre.src-matlab:before { content: 'MATLAB'; }
+  pre.src-mscgen:before { content: 'Mscgen'; }
+  pre.src-ocaml:before { content: 'Objective Caml'; }
+  pre.src-octave:before { content: 'Octave'; }
+  pre.src-org:before { content: 'Org mode'; }
+  pre.src-oz:before { content: 'OZ'; }
+  pre.src-plantuml:before { content: 'Plantuml'; }
+  pre.src-processing:before { content: 'Processing.js'; }
+  pre.src-python:before { content: 'Python'; }
+  pre.src-R:before { content: 'R'; }
+  pre.src-ruby:before { content: 'Ruby'; }
+  pre.src-sass:before { content: 'Sass'; }
+  pre.src-scheme:before { content: 'Scheme'; }
+  pre.src-screen:before { content: 'Gnu Screen'; }
+  pre.src-sed:before { content: 'Sed'; }
+  pre.src-sh:before { content: 'shell'; }
+  pre.src-sql:before { content: 'SQL'; }
+  pre.src-sqlite:before { content: 'SQLite'; }
+  /* additional languages in org.el's org-babel-load-languages alist */
+  pre.src-forth:before { content: 'Forth'; }
+  pre.src-io:before { content: 'IO'; }
+  pre.src-J:before { content: 'J'; }
+  pre.src-makefile:before { content: 'Makefile'; }
+  pre.src-maxima:before { content: 'Maxima'; }
+  pre.src-perl:before { content: 'Perl'; }
+  pre.src-picolisp:before { content: 'Pico Lisp'; }
+  pre.src-scala:before { content: 'Scala'; }
+  pre.src-shell:before { content: 'Shell Script'; }
+  pre.src-ebnf2ps:before { content: 'ebfn2ps'; }
+  /* additional language identifiers per "defun org-babel-execute"
+       in ob-*.el */
+  pre.src-cpp:before  { content: 'C++'; }
+  pre.src-abc:before  { content: 'ABC'; }
+  pre.src-coq:before  { content: 'Coq'; }
+  pre.src-groovy:before  { content: 'Groovy'; }
+  /* additional language identifiers from org-babel-shell-names in
+     ob-shell.el: ob-shell is the only babel language using a lambda to put
+     the execution function name together. */
+  pre.src-bash:before  { content: 'bash'; }
+  pre.src-csh:before  { content: 'csh'; }
+  pre.src-ash:before  { content: 'ash'; }
+  pre.src-dash:before  { content: 'dash'; }
+  pre.src-ksh:before  { content: 'ksh'; }
+  pre.src-mksh:before  { content: 'mksh'; }
+  pre.src-posh:before  { content: 'posh'; }
+  /* Additional Emacs modes also supported by the LaTeX listings package */
+  pre.src-ada:before { content: 'Ada'; }
+  pre.src-asm:before { content: 'Assembler'; }
+  pre.src-caml:before { content: 'Caml'; }
+  pre.src-delphi:before { content: 'Delphi'; }
+  pre.src-html:before { content: 'HTML'; }
+  pre.src-idl:before { content: 'IDL'; }
+  pre.src-mercury:before { content: 'Mercury'; }
+  pre.src-metapost:before { content: 'MetaPost'; }
+  pre.src-modula-2:before { content: 'Modula-2'; }
+  pre.src-pascal:before { content: 'Pascal'; }
+  pre.src-ps:before { content: 'PostScript'; }
+  pre.src-prolog:before { content: 'Prolog'; }
+  pre.src-simula:before { content: 'Simula'; }
+  pre.src-tcl:before { content: 'tcl'; }
+  pre.src-tex:before { content: 'TeX'; }
+  pre.src-plain-tex:before { content: 'Plain TeX'; }
+  pre.src-verilog:before { content: 'Verilog'; }
+  pre.src-vhdl:before { content: 'VHDL'; }
+  pre.src-xml:before { content: 'XML'; }
+  pre.src-nxml:before { content: 'XML'; }
+  /* add a generic configuration mode; LaTeX export needs an additional
+     (add-to-list 'org-latex-listings-langs '(conf " ")) in .emacs */
+  pre.src-conf:before { content: 'Configuration File'; }
+
+  table { border-collapse:collapse; }
+  caption.t-above { caption-side: top; }
+  caption.t-bottom { caption-side: bottom; }
+  td, th { vertical-align:top;  }
+  th.org-right  { text-align: center;  }
+  th.org-left   { text-align: center;   }
+  th.org-center { text-align: center; }
+  td.org-right  { text-align: right;  }
+  td.org-left   { text-align: left;   }
+  td.org-center { text-align: center; }
+  dt { font-weight: bold; }
+  .footpara { display: inline; }
+  .footdef  { margin-bottom: 1em; }
+  .figure { padding: 1em; }
+  .figure p { text-align: center; }
+  .inlinetask {
+    padding: 10px;
+    border: 2px solid gray;
+    margin: 10px;
+    background: #ffffcc;
+  }
+  #org-div-home-and-up
+   { text-align: right; font-size: 70%; white-space: nowrap; }
+  textarea { overflow-x: auto; }
+  .linenr { font-size: smaller }
+  .code-highlighted { background-color: #ffff00; }
+  .org-info-js_info-navigation { border-style: none; }
+  #org-info-js_console-label
+    { font-size: 10px; font-weight: bold; white-space: nowrap; }
+  .org-info-js_search-highlight
+    { background-color: #ffff00; color: #000000; font-weight: bold; }
+  .org-svg { width: 90%; }
+  /*]]>*/-->
+</style>
+<script type="text/javascript">
+/*
+@licstart  The following is the entire license notice for the
+JavaScript code in this tag.
+
+Copyright (C) 2012-2017 Free Software Foundation, Inc.
+
+The JavaScript code in this tag is free software: you can
+redistribute it and/or modify it under the terms of the GNU
+General Public License (GNU GPL) as published by the Free Software
+Foundation, either version 3 of the License, or (at your option)
+any later version.  The code is distributed WITHOUT ANY WARRANTY;
+without even the implied warranty of MERCHANTABILITY or FITNESS
+FOR A PARTICULAR PURPOSE.  See the GNU GPL for more details.
+
+As additional permission under GNU GPL version 3 section 7, you
+may distribute non-source (e.g., minimized or compacted) forms of
+that code without the copy of the GNU GPL normally required by
+section 4, provided you include this license notice and a URL
+through which recipients can access the Corresponding Source.
+
+
+@licend  The above is the entire license notice
+for the JavaScript code in this tag.
+*/
+<!--/*--><![CDATA[/*><!--*/
+ function CodeHighlightOn(elem, id)
+ {
+   var target = document.getElementById(id);
+   if(null != target) {
+     elem.cacheClassElem = elem.className;
+     elem.cacheClassTarget = target.className;
+     target.className = "code-highlighted";
+     elem.className   = "code-highlighted";
+   }
+ }
+ function CodeHighlightOff(elem, id)
+ {
+   var target = document.getElementById(id);
+   if(elem.cacheClassElem)
+     elem.className = elem.cacheClassElem;
+   if(elem.cacheClassTarget)
+     target.className = elem.cacheClassTarget;
+ }
+/*]]>*///-->
+</script>
+</head>
+<body>
+<div id="content">
+<h1 class="title">CMPUT201W20B2 Week 4</h1>
+<div id="table-of-contents">
+<h2>Table of Contents</h2>
+<div id="text-table-of-contents">
+<ul>
+<li><a href="#orgad71e5b">1. Week4</a>
+<ul>
+<li><a href="#org1de7b62">1.1. Copyright Statement</a>
+<ul>
+<li><a href="#org6659854">1.1.1. License</a></li>
+<li><a href="#org94b4012">1.1.2. Hazel Code is licensed under AGPL3.0+</a></li>
+</ul>
+</li>
+<li><a href="#org54ed130">1.2. Init ORG-MODE</a>
+<ul>
+<li><a href="#orgd58227c">1.2.1. Org export</a></li>
+</ul>
+</li>
+<li><a href="#org78affbc">1.3. Org Template</a></li>
+<li><a href="#orgdd5ed02">1.4. Remember how to compile?</a></li>
+<li><a href="#org892dfc7">1.5. Functions</a>
+<ul>
+<li><a href="#orgc81b67e">1.5.1. return<sub>types</sub></a></li>
+<li><a href="#orgde6d711">1.5.2. Example</a></li>
+<li><a href="#orgb0e54b5">1.5.3. Pass by Value</a></li>
+<li><a href="#orgbf068db">1.5.4. Arrays again</a></li>
+<li><a href="#orgcccb4f8">1.5.5. Don't trust sizeof inside of functions!</a></li>
+<li><a href="#org9ee325f">1.5.6. Returns</a></li>
+<li><a href="#org8284c73">1.5.7. Recursion</a></li>
+<li><a href="#org87bebc7">1.5.8. Prototypes</a></li>
+<li><a href="#orge8ec211">1.5.9. Exercise</a></li>
+</ul>
+</li>
+<li><a href="#org9dfa117">1.6. Scope</a>
+<ul>
+<li><a href="#orgc1d4249">1.6.1. const</a></li>
+<li><a href="#org98783bb">1.6.2. Local variables</a></li>
+</ul>
+</li>
+<li><a href="#org8334ce2">1.7. Global Variables (BAD) / External Variables / File-level variables</a></li>
+<li><a href="#orgbd27384">1.8. Static Function Scope</a></li>
+<li><a href="#orge231bae">1.9. Pointers!</a>
+<ul>
+<li><a href="#org1aade89">1.9.1. Operators</a></li>
+<li><a href="#org5d9a694">1.9.2. Character Arrays and Pointers</a></li>
+<li><a href="#org772b2f8">1.9.3. Int arrays</a></li>
+<li><a href="#org1230376">1.9.4. Arrays as pointers</a></li>
+<li><a href="#orgdff917f">1.9.5. Pointer arthimetic again</a></li>
+<li><a href="#org25e27a0">1.9.6. Hazel's ptrs.c</a></li>
+<li><a href="#orgf9feb30">1.9.7. Hazel's ptr<sub>const.c</sub></a></li>
+<li><a href="#org319fb66">1.9.8. Hazel's Pointer No No's</a></li>
+<li><a href="#org40b3053">1.9.9. Multidimensional Arrays and Pointers</a></li>
+<li><a href="#org37f8745">1.9.10. Arrays of Pointers or Pointers of Pointers</a></li>
+<li><a href="#orgbbce8a7">1.9.11. Confusing Array Pointer interactions and syntax</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</div>
+</div>
+
+<div id="outline-container-orgad71e5b" class="outline-2">
+<h2 id="orgad71e5b"><span class="section-number-2">1</span> Week4</h2>
+<div class="outline-text-2" id="text-1">
+</div>
+<div id="outline-container-org1de7b62" class="outline-3">
+<h3 id="org1de7b62"><span class="section-number-3">1.1</span> Copyright Statement</h3>
+<div class="outline-text-3" id="text-1-1">
+<p>
+If you are in CMPUT201 at UAlberta this code is released in the public
+domain to you.
+</p>
+
+<p>
+Otherwise it is (c) 2020 Abram Hindle, Hazel Campbell AGPL3.0+
+</p>
+</div>
+
+<div id="outline-container-org6659854" class="outline-4">
+<h4 id="org6659854"><span class="section-number-4">1.1.1</span> License</h4>
+<div class="outline-text-4" id="text-1-1-1">
+<p>
+Week 3 notes
+Copyright (C) 2020 Abram Hindle, Hazel Campbell
+</p>
+
+<p>
+This program is free software: you can redistribute it and/or modify
+it under the terms of the GNU Affero General Public License as
+published by the Free Software Foundation, either version 3 of the
+License, or (at your option) any later version.
+</p>
+
+<p>
+This program is distributed in the hope that it will be useful,
+but WITHOUT ANY WARRANTY; without even the implied warranty of
+MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+GNU Affero General Public License for more details.
+</p>
+
+<p>
+You should have received a copy of the GNU Affero General Public License
+along with this program.  If not, see <a href="https://www.gnu.org/licenses/">https://www.gnu.org/licenses/</a>.
+</p>
+</div>
+</div>
+
+
+<div id="outline-container-org94b4012" class="outline-4">
+<h4 id="org94b4012"><span class="section-number-4">1.1.2</span> Hazel Code is licensed under AGPL3.0+</h4>
+<div class="outline-text-4" id="text-1-1-2">
+<p>
+Hazel's code is also found here
+<a href="https://github.com/hazelybell/examples/tree/C-2020-01">https://github.com/hazelybell/examples/tree/C-2020-01</a>
+</p>
+
+<p>
+Hazel code is licensed: The example code is licensed under the AGPL3+
+license, unless otherwise noted.
+</p>
+</div>
+</div>
+</div>
+
+<div id="outline-container-org54ed130" class="outline-3">
+<h3 id="org54ed130"><span class="section-number-3">1.2</span> Init ORG-MODE</h3>
+<div class="outline-text-3" id="text-1-2">
+<div class="org-src-container">
+<pre class="src src-elisp"><span style="color: #b22222;">;; </span><span style="color: #b22222;">I need this for org-mode to work well</span>
+
+(<span style="color: #a020f0;">require</span> '<span style="color: #008b8b;">ob-sh</span>)
+<span style="color: #b22222;">;</span><span style="color: #b22222;">(require 'ob-shell)</span>
+(org-babel-do-load-languages 'org-babel-load-languages '((sh . t)))
+(org-babel-do-load-languages 'org-babel-load-languages '((C . t)))
+(org-babel-do-load-languages 'org-babel-load-languages '((python . t)))
+(<span style="color: #a020f0;">setq</span> org-src-fontify-natively t)
+</pre>
+</div>
+</div>
+
+<div id="outline-container-orgd58227c" class="outline-4">
+<h4 id="orgd58227c"><span class="section-number-4">1.2.1</span> Org export</h4>
+<div class="outline-text-4" id="text-1-2-1">
+<div class="org-src-container">
+<pre class="src src-elisp">(org-html-export-to-html)
+(org-latex-export-to-pdf)
+(org-ascii-export-to-ascii)
+</pre>
+</div>
+</div>
+</div>
+</div>
+
+
+<div id="outline-container-org78affbc" class="outline-3">
+<h3 id="org78affbc"><span class="section-number-3">1.3</span> Org Template</h3>
+<div class="outline-text-3" id="text-1-3">
+<p>
+Copy and paste this to demo C
+</p>
+
+<div class="org-src-container">
+<pre class="src src-C"><span style="color: #483d8b;">#include</span> <span style="color: #8b2252;">&lt;stdio.h&gt;</span>
+
+<span style="color: #228b22;">int</span> <span style="color: #0000ff;">main</span>(<span style="color: #228b22;">int</span> <span style="color: #a0522d;">argc</span>, <span style="color: #228b22;">char</span>**<span style="color: #a0522d;">argv</span>) {
+    <span style="color: #a020f0;">return</span> 0;
+}
+</pre>
+</div>
+</div>
+</div>
+
+<div id="outline-container-orgdd5ed02" class="outline-3">
+<h3 id="orgdd5ed02"><span class="section-number-3">1.4</span> Remember how to compile?</h3>
+<div class="outline-text-3" id="text-1-4">
+<p>
+gcc -std=c99 -Wall -pedantic -Werror -o programname programname.c
+</p>
+</div>
+</div>
+
+<div id="outline-container-org892dfc7" class="outline-3">
+<h3 id="org892dfc7"><span class="section-number-3">1.5</span> Functions</h3>
+<div class="outline-text-3" id="text-1-5">
+<p>
+Functions replicate functions in mathematics. They allocate space on
+the stack and have local variables.
+</p>
+
+<p>
+Very similar to python functions
+</p>
+
+<p>
+Define a function:
+</p>
+
+<p>
+return<sub>type</sub> functionName(ArgType1 arg1, ArgType2 arg2, ArgType3 arg3 ) {
+    &#x2026;
+}
+</p>
+
+<p>
+Call a function:
+</p>
+
+<p>
+functionName( arg1, arg2, arg3 );
+</p>
+
+<p>
+return<sub>type</sub> returnValue = functionName( arg1, arg2, arg3) ;
+</p>
+
+<p>
+IN C89 all variable declarations are at the top of the function.
+</p>
+</div>
+
+<div id="outline-container-orgc81b67e" class="outline-4">
+<h4 id="orgc81b67e"><span class="section-number-4">1.5.1</span> return<sub>types</sub></h4>
+<div class="outline-text-4" id="text-1-5-1">
+<ul class="org-ul">
+<li>void &#x2013; nothing</li>
+<li>int</li>
+<li>char</li>
+<li>float</li>
+<li>double</li>
+<li>&#x2026;</li>
+<li>pointer (array or string)</li>
+</ul>
+</div>
+</div>
+
+<div id="outline-container-orgde6d711" class="outline-4">
+<h4 id="orgde6d711"><span class="section-number-4">1.5.2</span> Example</h4>
+<div class="outline-text-4" id="text-1-5-2">
+<div class="org-src-container">
+<pre class="src src-C"><span style="color: #483d8b;">#include</span> <span style="color: #8b2252;">&lt;stdio.h&gt;</span>
+<span style="color: #483d8b;">#include</span> <span style="color: #8b2252;">&lt;stdlib.h&gt;</span>
+
+<span style="color: #228b22;">void</span> <span style="color: #0000ff;">example</span>() {
+    printf(<span style="color: #8b2252;">"I have been made an example of\n"</span>);
+    <span style="color: #b22222;">// </span><span style="color: #b22222;">return; // void return</span>
+}
+
+<span style="color: #228b22;">int</span> <span style="color: #0000ff;">main</span>() {
+    example();
+    <span style="color: #a020f0;">return</span> 0;
+}
+</pre>
+</div>
+
+<pre class="example">
+I have been made an example of
+
+</pre>
+</div>
+</div>
+
+
+<div id="outline-container-orgb0e54b5" class="outline-4">
+<h4 id="orgb0e54b5"><span class="section-number-4">1.5.3</span> Pass by Value</h4>
+<div class="outline-text-4" id="text-1-5-3">
+<p>
+The value of parameters are COPIED into registers and sometimes the
+stack. Thus the original variables that the parameters come from are
+safe.
+</p>
+
+<p>
+Except pointers are not safe because given a pointer the called
+function can manipulate the data the pointer points to, but they
+cannot modify the original pointer.
+</p>
+
+<div class="org-src-container">
+<pre class="src src-C"><span style="color: #483d8b;">#include</span> <span style="color: #8b2252;">&lt;stdio.h&gt;</span>
+<span style="color: #483d8b;">#include</span> <span style="color: #8b2252;">&lt;stdlib.h&gt;</span>
+
+<span style="color: #228b22;">int</span> <span style="color: #0000ff;">example</span>(<span style="color: #228b22;">int</span> <span style="color: #a0522d;">x</span>) {
+    x++;
+    printf(<span style="color: #8b2252;">"example x:\t%p\n"</span>, (<span style="color: #228b22;">void</span>*)&amp;x);
+    <span style="color: #a020f0;">return</span> x;
+}
+
+<span style="color: #228b22;">int</span> <span style="color: #0000ff;">main</span>() {
+    <span style="color: #228b22;">int</span> <span style="color: #a0522d;">x</span> = 10;
+    printf(<span style="color: #8b2252;">"main x :\t%p\n"</span>, (<span style="color: #228b22;">void</span>*)&amp;x);
+    printf(<span style="color: #8b2252;">"x: %d\n"</span>, x);
+    <span style="color: #228b22;">int</span> <span style="color: #a0522d;">rx</span> = example(x);
+    printf(<span style="color: #8b2252;">"x: %d\n"</span>, x);
+    printf(<span style="color: #8b2252;">"returned x vs x: %d vs %d\n"</span>, rx, x);
+}
+</pre>
+</div>
+
+<pre class="example">
+main x :	0x7fff242ed010
+x: 10
+example x:	0x7fff242ecffc
+x: 10
+returned x vs x: 11 vs 10
+
+</pre>
+</div>
+</div>
+
+<div id="outline-container-orgbf068db" class="outline-4">
+<h4 id="orgbf068db"><span class="section-number-4">1.5.4</span> Arrays again</h4>
+<div class="outline-text-4" id="text-1-5-4">
+<ul class="org-ul">
+<li>void initArray(int cols, int values[cols]) {</li>
+<li>void initArray(int cols, int values[]) {</li>
+</ul>
+
+<p>
+You can specify array sizes in C99 but the size has to come earlier
+</p>
+
+<ul class="org-ul">
+<li>void init2D(int rows, int cols, int values[rows][cols]) {</li>
+<li>void init2D(int rows, int cols, int values[][cols]){</li>
+<li>void init3D(int planes, int rows, int cols, int values[planes][rows][cols]) {</li>
+<li>void init3D(int planes, int rows, int cols, int values[][rows][cols]) {</li>
+</ul>
+</div>
+</div>
+
+
+<div id="outline-container-orgcccb4f8" class="outline-4">
+<h4 id="orgcccb4f8"><span class="section-number-4">1.5.5</span> Don't trust sizeof inside of functions!</h4>
+<div class="outline-text-4" id="text-1-5-5">
+<p>
+sizeof is only trustable if you declared the variable in your scope
+</p>
+
+<div class="org-src-container">
+<pre class="src src-C"><span style="color: #483d8b;">#include</span> <span style="color: #8b2252;">&lt;stdio.h&gt;</span>
+<span style="color: #483d8b;">#include</span> <span style="color: #8b2252;">&lt;stdlib.h&gt;</span>
+<span style="color: #483d8b;">#include</span> <span style="color: #8b2252;">&lt;time.h&gt;</span>
+
+<span style="color: #228b22;">void</span> <span style="color: #0000ff;">init2D</span>(<span style="color: #228b22;">int</span> <span style="color: #a0522d;">rows</span>, <span style="color: #228b22;">int</span> <span style="color: #a0522d;">cols</span>, <span style="color: #228b22;">int</span> <span style="color: #a0522d;">values</span>[][cols]) {
+    <span style="color: #228b22;">int</span> <span style="color: #a0522d;">i</span> = 0;
+    printf(<span style="color: #8b2252;">"init2D: sizeof(values)=%lu\n"</span>, <span style="color: #a020f0;">sizeof</span>(values));
+    printf(<span style="color: #8b2252;">"init2D: sizeof(values[0])=%lu\n"</span>, <span style="color: #a020f0;">sizeof</span>(values[0]));
+
+    <span style="color: #a020f0;">for</span> (<span style="color: #228b22;">int</span> <span style="color: #a0522d;">row</span> = 0; row &lt; rows; row++) {
+        <span style="color: #a020f0;">for</span> (<span style="color: #228b22;">int</span> <span style="color: #a0522d;">col</span> = 0; col &lt; cols; col++) {
+            values[row][col] = i++;
+        }
+    }
+}
+<span style="color: #228b22;">void</span> <span style="color: #0000ff;">example</span>() {
+    <span style="color: #228b22;">unsigned</span> <span style="color: #228b22;">int</span> <span style="color: #a0522d;">n</span> = 1 + rand() % 10;
+    <span style="color: #228b22;">unsigned</span> <span style="color: #228b22;">int</span> <span style="color: #a0522d;">m</span> = 1 + rand() % 10;
+    printf(<span style="color: #8b2252;">"%d X %d was chosen!\n"</span>, m, n);
+    <span style="color: #228b22;">int</span> <span style="color: #a0522d;">values</span>[m][n]; <span style="color: #b22222;">// </span><span style="color: #b22222;">SO the compiler can't predict this allocation ahead of time</span>
+    printf(<span style="color: #8b2252;">"sizeof(values) = %ld\n"</span>, <span style="color: #a020f0;">sizeof</span>(values));
+    printf(<span style="color: #8b2252;">"sizeof(&amp;values) = %ld\n"</span>, <span style="color: #a020f0;">sizeof</span>(&amp;values));
+    printf(<span style="color: #8b2252;">"sizeof(values[0]) = %ld\n"</span>, <span style="color: #a020f0;">sizeof</span>(values[0]));
+    init2D(  m, n, values );
+}
+<span style="color: #228b22;">int</span> <span style="color: #0000ff;">main</span>() {
+    srand(time(<span style="color: #008b8b;">NULL</span>)); <span style="color: #b22222;">//</span><span style="color: #b22222;">initialze based on the clock </span>
+    example();
+    example();
+    example();
+}
+</pre>
+</div>
+
+<pre class="example">
+10 X 4 was chosen!
+sizeof(values) = 160
+sizeof(&amp;values) = 8
+sizeof(values[0]) = 16
+init2D: sizeof(values)=8
+init2D: sizeof(values[0])=16
+4 X 3 was chosen!
+sizeof(values) = 48
+sizeof(&amp;values) = 8
+sizeof(values[0]) = 12
+init2D: sizeof(values)=8
+init2D: sizeof(values[0])=12
+5 X 5 was chosen!
+sizeof(values) = 100
+sizeof(&amp;values) = 8
+sizeof(values[0]) = 20
+init2D: sizeof(values)=8
+init2D: sizeof(values[0])=20
+</pre>
+</div>
+</div>
+
+<div id="outline-container-org9ee325f" class="outline-4">
+<h4 id="org9ee325f"><span class="section-number-4">1.5.6</span> Returns</h4>
+<div class="outline-text-4" id="text-1-5-6">
+<p>
+Don't return arrays in general.
+</p>
+
+<p>
+To return a value and exit the function immediately run:
+</p>
+
+<p>
+return expr 
+</p>
+
+<div class="org-src-container">
+<pre class="src src-C"><span style="color: #483d8b;">#include</span> <span style="color: #8b2252;">&lt;stdio.h&gt;</span>
+<span style="color: #483d8b;">#include</span> <span style="color: #8b2252;">&lt;stdlib.h&gt;</span>
+
+<span style="color: #228b22;">int</span> <span style="color: #0000ff;">squareInt</span>(<span style="color: #228b22;">int</span> <span style="color: #a0522d;">x</span>) {
+    <span style="color: #a020f0;">return</span> x*x;
+}
+
+<span style="color: #228b22;">float</span> <span style="color: #0000ff;">squareFloat</span>(<span style="color: #228b22;">float</span> <span style="color: #a0522d;">x</span>) {
+    <span style="color: #a020f0;">return</span> x*x;
+}
+<span style="color: #228b22;">int</span> <span style="color: #0000ff;">intDiv</span>(<span style="color: #228b22;">int</span> <span style="color: #a0522d;">x</span>, <span style="color: #228b22;">int</span> <span style="color: #a0522d;">y</span>) {
+    <span style="color: #a020f0;">return</span> x/y;
+}
+<span style="color: #228b22;">float</span> <span style="color: #0000ff;">floatDiv</span>(<span style="color: #228b22;">float</span> <span style="color: #a0522d;">x</span>, <span style="color: #228b22;">float</span> <span style="color: #a0522d;">y</span>) {
+    <span style="color: #a020f0;">return</span> x/y;
+}
+<span style="color: #228b22;">char</span> <span style="color: #0000ff;">returnChar</span>( <span style="color: #228b22;">int</span> <span style="color: #a0522d;">i</span> ) {
+    <span style="color: #a020f0;">return</span> i;
+}
+
+<span style="color: #228b22;">int</span> <span style="color: #0000ff;">main</span>() {
+    printf(<span style="color: #8b2252;">"squareInt\t %d\n"</span>, squareInt(25));
+    printf(<span style="color: #8b2252;">"squareInt\t %d\n"</span>, squareInt(1.47));
+    printf(<span style="color: #8b2252;">"squareFloat\t %f\n"</span>, squareFloat(1.47));
+    printf(<span style="color: #8b2252;">"squareFloat\t %f\n"</span>, squareFloat(25));
+    printf(<span style="color: #8b2252;">"intDiv\t %d\n"</span>, intDiv(64,31));
+    printf(<span style="color: #8b2252;">"intDiv\t %d\n"</span>, intDiv(64.2,31));
+    printf(<span style="color: #8b2252;">"floatDiv\t %f\n"</span>, floatDiv(64,31));
+    printf(<span style="color: #8b2252;">"floatDiv\t %f\n"</span>, floatDiv(64.2,31));
+    printf(<span style="color: #8b2252;">"returnChar\t %hhu\n"</span>, returnChar( 578 ) );
+    printf(<span style="color: #8b2252;">"returnChar\t %hhu\n"</span>, returnChar( <span style="color: #8b2252;">'a'</span> ) );
+    printf(<span style="color: #8b2252;">"returnChar\t %hhu\n"</span>, returnChar( 66.1 ) );
+    printf(<span style="color: #8b2252;">"returnChar\t %c\n"</span>, returnChar( 578 ) );
+    printf(<span style="color: #8b2252;">"returnChar\t %c\n"</span>, returnChar( <span style="color: #8b2252;">'a'</span> ) );
+    printf(<span style="color: #8b2252;">"returnChar\t %c\n"</span>, returnChar( 66.1 ) );
+
+}
+</pre>
+</div>
+
+<pre class="example">
+squareInt	 625
+squareInt	 1
+squareFloat	 2.160900
+squareFloat	 625.000000
+intDiv	 2
+intDiv	 2
+floatDiv	 2.064516
+floatDiv	 2.070968
+returnChar	 66
+returnChar	 97
+returnChar	 66
+returnChar	 B
+returnChar	 a
+returnChar	 B
+</pre>
+</div>
+</div>
+
+<div id="outline-container-org8284c73" class="outline-4">
+<h4 id="org8284c73"><span class="section-number-4">1.5.7</span> Recursion</h4>
+<div class="outline-text-4" id="text-1-5-7">
+</div>
+<ol class="org-ol">
+<li><a id="org294c218"></a>Recursion<br />
+<ol class="org-ol">
+<li><a id="org30ffdb4"></a>Recursion<br />
+<ol class="org-ol">
+<li><a id="orgff497c1"></a>Recursion<br />
+<div class="outline-text-7" id="text-1-5-7-1-1-1">
+<div class="org-src-container">
+<pre class="src src-C"><span style="color: #483d8b;">#include</span> <span style="color: #8b2252;">&lt;stdio.h&gt;</span>
+<span style="color: #483d8b;">#include</span> <span style="color: #8b2252;">&lt;stdlib.h&gt;</span>
+
+<span style="color: #228b22;">int</span> <span style="color: #0000ff;">divisibleBy</span>(<span style="color: #228b22;">int</span> <span style="color: #a0522d;">x</span>, <span style="color: #228b22;">int</span> <span style="color: #a0522d;">y</span>);
+
+<span style="color: #228b22;">int</span> <span style="color: #0000ff;">main</span>() {
+    printf(<span style="color: #8b2252;">"%d\n"</span>,divisibleBy(33,32));
+}
+
+<span style="color: #228b22;">int</span> <span style="color: #0000ff;">divisibleBy</span>(<span style="color: #228b22;">int</span> <span style="color: #a0522d;">x</span>, <span style="color: #228b22;">int</span> <span style="color: #a0522d;">y</span>) {
+    printf(<span style="color: #8b2252;">"%d %d\n"</span>, x,y);
+    <span style="color: #a020f0;">if</span> (x == 0) { <span style="color: #a020f0;">return</span> 0; }
+    <span style="color: #a020f0;">if</span> (y &lt;= 0) { <span style="color: #a020f0;">return</span> 0; }
+    <span style="color: #a020f0;">if</span> (x % y == 0) { <span style="color: #a020f0;">return</span> y; }
+    <span style="color: #a020f0;">return</span> divisibleBy(x, y - 1);
+}
+</pre>
+</div>
+
+
+<pre class="example">
+33 32
+33 31
+33 30
+33 29
+33 28
+33 27
+33 26
+33 25
+33 24
+33 23
+33 22
+33 21
+33 20
+33 19
+33 18
+33 17
+33 16
+33 15
+33 14
+33 13
+33 12
+33 11
+11
+</pre>
+</div>
+</li>
+</ol>
+</li>
+</ol>
+</li>
+</ol>
+</div>
+
+
+<div id="outline-container-org87bebc7" class="outline-4">
+<h4 id="org87bebc7"><span class="section-number-4">1.5.8</span> Prototypes</h4>
+<div class="outline-text-4" id="text-1-5-8">
+<div class="org-src-container">
+<pre class="src src-C"><span style="color: #483d8b;">#include</span> <span style="color: #8b2252;">&lt;stdio.h&gt;</span>
+<span style="color: #483d8b;">#include</span> <span style="color: #8b2252;">&lt;stdlib.h&gt;</span>
+
+<span style="color: #b22222;">/* </span><span style="color: #b22222;">this is a prototype</span>
+<span style="color: #b22222;">   it predeclares that a function with this</span>
+<span style="color: #b22222;">   name will be available.</span>
+<span style="color: #b22222;">*/</span>
+<span style="color: #b22222;">// </span><span style="color: #b22222;">This program will not compile in C99 without this line:</span>
+<span style="color: #b22222;">// </span>
+<span style="color: #228b22;">int</span> <span style="color: #0000ff;">divisibleBy</span>(<span style="color: #228b22;">int</span> <span style="color: #a0522d;">x</span>, <span style="color: #228b22;">int</span> <span style="color: #a0522d;">y</span>);
+
+<span style="color: #228b22;">int</span> <span style="color: #0000ff;">main</span>() {
+    printf(<span style="color: #8b2252;">"%d\n"</span>,divisibleBy(16,15));
+}
+
+<span style="color: #228b22;">int</span> <span style="color: #0000ff;">divisibleBy</span>(<span style="color: #228b22;">int</span> <span style="color: #a0522d;">x</span>, <span style="color: #228b22;">int</span> <span style="color: #a0522d;">y</span>) {
+    printf(<span style="color: #8b2252;">"%d %d\n"</span>, x,y);
+    <span style="color: #a020f0;">if</span> (x == 0) { <span style="color: #a020f0;">return</span> 0; }
+    <span style="color: #a020f0;">if</span> (y &lt;= 0) { <span style="color: #a020f0;">return</span> 0; }
+    <span style="color: #a020f0;">if</span> (x % y == 0) { <span style="color: #a020f0;">return</span> y; }
+    <span style="color: #a020f0;">return</span> divisibleBy(x, y - 1);
+}
+
+
+</pre>
+</div>
+
+<pre class="example">
+16 15
+16 14
+16 13
+16 12
+16 11
+16 10
+16 9
+16 8
+8
+
+</pre>
+</div>
+
+<ol class="org-ol">
+<li><a id="org6298021"></a>Prototypes and corecursive routines<br />
+<div class="outline-text-5" id="text-1-5-8-1">
+<div class="org-src-container">
+<pre class="src src-C"><span style="color: #483d8b;">#include</span> <span style="color: #8b2252;">&lt;stdio.h&gt;</span>
+<span style="color: #483d8b;">#include</span> <span style="color: #8b2252;">&lt;stdlib.h&gt;</span>
+
+<span style="color: #b22222;">/* </span><span style="color: #b22222;">this is a prototype</span>
+<span style="color: #b22222;">   it predeclares that a function with this</span>
+<span style="color: #b22222;">   name will be available.</span>
+<span style="color: #b22222;">   This is useful for co-recursive functions.</span>
+<span style="color: #b22222;">*/</span>
+<span style="color: #b22222;">// </span><span style="color: #b22222;">This program will not compile in C99 without this line:</span>
+<span style="color: #b22222;">// </span>
+<span style="color: #228b22;">int</span> <span style="color: #0000ff;">aReliesOnB</span>(<span style="color: #228b22;">int</span> <span style="color: #a0522d;">x</span>, <span style="color: #228b22;">int</span> <span style="color: #a0522d;">y</span>);
+<span style="color: #228b22;">int</span> <span style="color: #0000ff;">bReliesOnA</span>(<span style="color: #228b22;">int</span> <span style="color: #a0522d;">x</span>, <span style="color: #228b22;">int</span> <span style="color: #a0522d;">y</span>);
+<span style="color: #b22222;">// </span>
+
+
+<span style="color: #228b22;">int</span> <span style="color: #0000ff;">main</span>() {
+    printf(<span style="color: #8b2252;">"%d\n"</span>,aReliesOnB(0,100));
+}
+
+<span style="color: #228b22;">int</span> <span style="color: #0000ff;">aReliesOnB</span>(<span style="color: #228b22;">int</span> <span style="color: #a0522d;">x</span>, <span style="color: #228b22;">int</span> <span style="color: #a0522d;">y</span>) {
+    printf(<span style="color: #8b2252;">"&gt; aReliesOnB( %d, %d)\n"</span>, x, y);
+    <span style="color: #a020f0;">if</span> (x &gt;= y) {
+        <span style="color: #a020f0;">return</span> y;
+    }
+    <span style="color: #a020f0;">return</span> bReliesOnA(x+x+1, y);
+}
+<span style="color: #228b22;">int</span> <span style="color: #0000ff;">bReliesOnA</span>(<span style="color: #228b22;">int</span> <span style="color: #a0522d;">x</span>, <span style="color: #228b22;">int</span> <span style="color: #a0522d;">y</span>) {
+    printf(<span style="color: #8b2252;">"&gt; bReliesOnA( %d, %d)\n"</span>, x, y);
+    <span style="color: #a020f0;">if</span> (x &gt;= y) {
+        <span style="color: #a020f0;">return</span> y;
+    }
+    <span style="color: #a020f0;">return</span> aReliesOnB(x * x + 1, y);
+}
+
+
+</pre>
+</div>
+
+<pre class="example">
+&gt; aReliesOnB( 0, 100)
+&gt; bReliesOnA( 1, 100)
+&gt; aReliesOnB( 2, 100)
+&gt; bReliesOnA( 5, 100)
+&gt; aReliesOnB( 26, 100)
+&gt; bReliesOnA( 53, 100)
+&gt; aReliesOnB( 2810, 100)
+100
+
+</pre>
+</div>
+</li>
+</ol>
+</div>
+
+<div id="outline-container-orge8ec211" class="outline-4">
+<h4 id="orge8ec211"><span class="section-number-4">1.5.9</span> Exercise</h4>
+<div class="outline-text-4" id="text-1-5-9">
+</div>
+<ol class="org-ol">
+<li><a id="org2570ad5"></a>- make a recursive countdown function, printing each number until 0 is met.<br />
+<div class="outline-text-5" id="text-1-5-9-1">
+<div class="org-src-container">
+<pre class="src src-C"><span style="color: #483d8b;">#include</span> <span style="color: #8b2252;">&lt;stdio.h&gt;</span>
+
+<span style="color: #228b22;">void</span> <span style="color: #0000ff;">countDown</span>(<span style="color: #228b22;">int</span> <span style="color: #a0522d;">n</span>) {
+    printf(<span style="color: #8b2252;">"%d\n"</span>,n);
+    <span style="color: #a020f0;">if</span> (n &gt; 0) {
+        countDown(n-1);
+    }
+}
+
+<span style="color: #228b22;">int</span> <span style="color: #0000ff;">main</span>() {
+    countDown(10);
+    <span style="color: #a020f0;">return</span> 0;
+}
+
+</pre>
+</div>
+
+<pre class="example">
+10
+9
+8
+7
+6
+5
+4
+3
+2
+1
+0
+</pre>
+</div>
+</li>
+
+<li><a id="org54acd1a"></a>- make a recursive fibonacci<br />
+<div class="outline-text-5" id="text-1-5-9-2">
+<p>
+fib(0) = 1
+fib(1) = 1
+fib(n) = fib(n-1) + fib(n-2)
+</p>
+<div class="org-src-container">
+<pre class="src src-C"><span style="color: #483d8b;">#include</span> <span style="color: #8b2252;">&lt;stdio.h&gt;</span>
+
+<span style="color: #228b22;">int</span> <span style="color: #0000ff;">fibonacci</span>(<span style="color: #228b22;">int</span> <span style="color: #a0522d;">n</span>) {
+   <span style="color: #a020f0;">if</span> (n == 0 || n == 1) {
+       <span style="color: #a020f0;">return</span> 1;
+   } <span style="color: #a020f0;">else</span> {
+       <span style="color: #a020f0;">return</span> fibonacci(n-1) + fibonacci(n-2);
+   }
+}
+<span style="color: #228b22;">int</span> <span style="color: #0000ff;">main</span>() {
+    printf(<span style="color: #8b2252;">"%d\n"</span>,fibonacci(45));
+    <span style="color: #a020f0;">return</span> 0;
+}
+</pre>
+</div>
+
+<pre class="example">
+1836311903
+
+</pre>
+</div>
+</li>
+</ol>
+</div>
+</div>
+
+<div id="outline-container-org9dfa117" class="outline-3">
+<h3 id="org9dfa117"><span class="section-number-3">1.6</span> Scope</h3>
+<div class="outline-text-3" id="text-1-6">
+</div>
+<div id="outline-container-orgc1d4249" class="outline-4">
+<h4 id="orgc1d4249"><span class="section-number-4">1.6.1</span> const</h4>
+<div class="outline-text-4" id="text-1-6-1">
+<p>
+Instead of define you can use const for constants.
+</p>
+
+<div class="org-src-container">
+<pre class="src src-C"><span style="color: #483d8b;">#include</span> <span style="color: #8b2252;">&lt;stdio.h&gt;</span>
+<span style="color: #483d8b;">#include</span> <span style="color: #8b2252;">&lt;stdlib.h&gt;</span>
+
+<span style="color: #a020f0;">const</span> <span style="color: #228b22;">int</span> <span style="color: #a0522d;">nine</span> = 9;
+
+<span style="color: #228b22;">int</span> <span style="color: #0000ff;">catLives</span>(<span style="color: #228b22;">int</span> <span style="color: #a0522d;">ncats</span>) {
+    <span style="color: #a020f0;">return</span> nine * ncats;
+}
+<span style="color: #228b22;">int</span> <span style="color: #0000ff;">main</span>() {    
+    printf(<span style="color: #8b2252;">"10 cats %d lives\n"</span>, catLives( 10 ));
+    <span style="color: #b22222;">// </span><span style="color: #b22222;">you can't modify nine</span>
+    <span style="color: #b22222;">// </span><span style="color: #b22222;">nine++;</span>
+    <span style="color: #b22222;">// </span><span style="color: #b22222;">*(&amp;nine) = 10;</span>
+    <span style="color: #228b22;">void</span> * <span style="color: #a0522d;">totally_not_nine</span> = (<span style="color: #228b22;">void</span>*)&amp;nine;
+    <span style="color: #228b22;">int</span> * <span style="color: #a0522d;">not_nine</span> = (<span style="color: #228b22;">int</span> *)totally_not_nine;
+    *not_nine = 10;
+    printf(<span style="color: #8b2252;">"%d\n"</span>,*not_nine);
+}
+</pre>
+</div>
+</div>
+</div>
+
+
+<div id="outline-container-org98783bb" class="outline-4">
+<h4 id="org98783bb"><span class="section-number-4">1.6.2</span> Local variables</h4>
+<div class="outline-text-4" id="text-1-6-2">
+<div class="org-src-container">
+<pre class="src src-C"><span style="color: #483d8b;">#include</span> <span style="color: #8b2252;">&lt;stdio.h&gt;</span>
+<span style="color: #483d8b;">#include</span> <span style="color: #8b2252;">&lt;stdlib.h&gt;</span>
+<span style="color: #b22222;">// </span><span style="color: #b22222;">no x here</span>
+<span style="color: #228b22;">int</span> <span style="color: #0000ff;">example</span>(<span style="color: #228b22;">int</span> <span style="color: #a0522d;">x</span>) { <span style="color: #b22222;">// </span><span style="color: #b22222;">&lt; this x is visible -- main's x is NOT visible here</span>
+    x++;             <span style="color: #b22222;">// </span><span style="color: #b22222;">&lt; within</span>
+    <span style="color: #a020f0;">return</span> x;        <span style="color: #b22222;">// </span><span style="color: #b22222;">&lt; this scope</span>
+}
+<span style="color: #b22222;">// </span><span style="color: #b22222;">no x here</span>
+<span style="color: #228b22;">int</span> <span style="color: #0000ff;">main</span>() {
+    <span style="color: #228b22;">int</span> <span style="color: #a0522d;">x</span> = 10;           <span style="color: #b22222;">// </span><span style="color: #b22222;">&lt; this x is visible within all of main</span>
+    printf(<span style="color: #8b2252;">"x: %d\n"</span>, x);
+    <span style="color: #228b22;">int</span> <span style="color: #a0522d;">rx</span> = example(x);
+    printf(<span style="color: #8b2252;">"x: %d\n"</span>, x);
+    printf(<span style="color: #8b2252;">"returned x vs x: %d vs %d\n"</span>, rx, x);
+}
+</pre>
+</div>
+
+<pre class="example">
+x: 10
+x: 10
+returned x vs x: 11 vs 10
+
+</pre>
+</div>
+</div>
+</div>
+
+<div id="outline-container-org8334ce2" class="outline-3">
+<h3 id="org8334ce2"><span class="section-number-3">1.7</span> Global Variables (BAD) / External Variables / File-level variables</h3>
+<div class="outline-text-3" id="text-1-7">
+<p>
+Too common. Too error prone. You will usually cause lots of bugs by
+making top-level variables. They will only be available within the
+file you declare.
+</p>
+
+<p>
+Global constants are fine. They are safe.
+</p>
+
+<p>
+If you make a global in a file, explicitly limit it to the current
+file with the static keyword.
+</p>
+
+<p>
+If static is not used and the variable is in included files then it
+will be visible across all files.
+</p>
+
+<div class="org-src-container">
+<pre class="src src-C"><span style="color: #483d8b;">#include</span> <span style="color: #8b2252;">&lt;stdio.h&gt;</span>
+<span style="color: #483d8b;">#include</span> <span style="color: #8b2252;">&lt;stdlib.h&gt;</span>
+<span style="color: #b22222;">// </span><span style="color: #b22222;">BAD</span>
+<span style="color: #b22222;">// </span><span style="color: #b22222;">int x = 111; // visible in all lines below unless occluded by local definitions</span>
+
+<span style="color: #b22222;">// </span><span style="color: #b22222;">BADISH</span>
+<span style="color: #a020f0;">const</span> <span style="color: #228b22;">int</span> <span style="color: #a0522d;">x</span> = 111; <span style="color: #b22222;">// </span><span style="color: #b22222;">visible in all lines below unless occluded by local definitions</span>
+
+
+<span style="color: #b22222;">// </span><span style="color: #b22222;">BETTER but still not OK </span>
+<span style="color: #b22222;">//</span><span style="color: #b22222;">static int x = 111;</span>
+
+<span style="color: #b22222;">// </span><span style="color: #b22222;">BEST and allowed</span>
+<span style="color: #a020f0;">static</span> <span style="color: #a020f0;">const</span> <span style="color: #228b22;">int</span> <span style="color: #a0522d;">x</span> = 111;
+
+<span style="color: #228b22;">int</span> <span style="color: #0000ff;">globalX</span>() {
+    <span style="color: #a020f0;">return</span> x; <span style="color: #b22222;">// </span><span style="color: #b22222;">returns the static global x</span>
+}
+
+<span style="color: #228b22;">int</span> <span style="color: #0000ff;">example</span>(<span style="color: #228b22;">int</span> <span style="color: #a0522d;">x</span>) { <span style="color: #b22222;">// </span><span style="color: #b22222;">&lt;x_2 this x, x_2 is visible -- main's x is NOT visible here nor is the global</span>
+    x++;             <span style="color: #b22222;">// </span><span style="color: #b22222;">&lt;x_2 within</span>
+    <span style="color: #a020f0;">return</span> x;        <span style="color: #b22222;">// </span><span style="color: #b22222;">&lt;x_2 this scope</span>
+}
+<span style="color: #228b22;">int</span> <span style="color: #0000ff;">main</span>() {
+    printf(<span style="color: #8b2252;">"Global x %d\n"</span>, globalX());
+    <span style="color: #228b22;">int</span> <span style="color: #a0522d;">x</span> = 10;           <span style="color: #b22222;">// </span><span style="color: #b22222;">&lt; this x, x_3 is visible within all of main</span>
+    <span style="color: #a020f0;">const</span> <span style="color: #228b22;">int</span> <span style="color: #a0522d;">y</span> = globalX() * globalX();
+    printf(<span style="color: #8b2252;">"y: %d\n"</span>, y); <span style="color: #b22222;">// </span><span style="color: #b22222;">x_3    </span>
+    printf(<span style="color: #8b2252;">"x: %d\n"</span>, x); <span style="color: #b22222;">// </span><span style="color: #b22222;">x_3</span>
+    <span style="color: #228b22;">int</span> <span style="color: #a0522d;">rx</span> = example(x);  <span style="color: #b22222;">// </span><span style="color: #b22222;">x_3</span>
+    printf(<span style="color: #8b2252;">"x: %d\n"</span>, x); <span style="color: #b22222;">// </span><span style="color: #b22222;">x_3</span>
+    printf(<span style="color: #8b2252;">"returned x vs x: %d vs %d\n"</span>, rx, x); <span style="color: #b22222;">// </span><span style="color: #b22222;">x_3</span>
+}
+</pre>
+</div>
+</div>
+</div>
+
+<div id="outline-container-orgbd27384" class="outline-3">
+<h3 id="orgbd27384"><span class="section-number-3">1.8</span> Static Function Scope</h3>
+<div class="outline-text-3" id="text-1-8">
+<p>
+Static function local variables keep their old values. It is similar
+to defining a global per function
+</p>
+
+<div class="org-src-container">
+<pre class="src src-C"><span style="color: #483d8b;">#include</span> <span style="color: #8b2252;">&lt;stdio.h&gt;</span>
+<span style="color: #483d8b;">#include</span> <span style="color: #8b2252;">&lt;stdlib.h&gt;</span>
+<span style="color: #483d8b;">#include</span> <span style="color: #8b2252;">&lt;time.h&gt;</span>
+
+<span style="color: #228b22;">unsigned</span> <span style="color: #228b22;">int</span> <span style="color: #0000ff;">counter</span>() {
+    <span style="color: #a020f0;">static</span> <span style="color: #228b22;">unsigned</span> <span style="color: #228b22;">int</span> <span style="color: #a0522d;">counter</span> = 0; <span style="color: #b22222;">// </span><span style="color: #b22222;">this keeps its value</span>
+    printf(<span style="color: #8b2252;">"%u\n"</span>, counter);
+    <span style="color: #a020f0;">return</span> ++counter;
+}
+
+<span style="color: #a020f0;">static</span> <span style="color: #228b22;">unsigned</span> <span style="color: #228b22;">int</span> <span style="color: #a0522d;">__worseCounter__</span> = 0; <span style="color: #b22222;">// </span><span style="color: #b22222;">whoo don't touch this AKA DONT DO IT</span>
+<span style="color: #228b22;">unsigned</span> <span style="color: #228b22;">int</span> <span style="color: #0000ff;">worseCounter</span>() {
+    <span style="color: #a020f0;">return</span> ++__worseCounter__;
+}
+
+
+<span style="color: #483d8b;">#define</span> <span style="color: #a0522d;">N</span> 10
+<span style="color: #228b22;">int</span> <span style="color: #0000ff;">main</span>() {
+    srand(time(<span style="color: #008b8b;">NULL</span>));
+    <span style="color: #228b22;">unsigned</span> <span style="color: #228b22;">int</span> <span style="color: #a0522d;">count</span> = 0;
+    <span style="color: #228b22;">unsigned</span> <span style="color: #228b22;">int</span> <span style="color: #a0522d;">wCount</span> = 0;
+    <span style="color: #a020f0;">for</span> (<span style="color: #228b22;">int</span> <span style="color: #a0522d;">i</span> = 0 ; i &lt; N; i++) {
+        <span style="color: #a020f0;">if</span> (rand() % 3 == 0) {
+            count = counter();
+            wCount = worseCounter();
+        }
+    }
+    printf(<span style="color: #8b2252;">"Counted %u / %u numbers divisible by 3 generated by rand\n"</span>, count, N);
+    printf(<span style="color: #8b2252;">"Worse: Counted %u / %u numbers divisible by 3 generated by rand\n"</span>, wCount, N);
+}
+</pre>
+</div>
+
+<pre class="example">
+0
+1
+2
+3
+4
+5
+Counted 6 / 10 numbers divisible by 3 generated by rand
+Worse: Counted 6 / 10 numbers divisible by 3 generated by rand
+
+</pre>
+</div>
+</div>
+
+<div id="outline-container-orge231bae" class="outline-3">
+<h3 id="orge231bae"><span class="section-number-3">1.9</span> Pointers!</h3>
+<div class="outline-text-3" id="text-1-9">
+<ul class="org-ul">
+<li>What is a pointer? A number that is a memory address.</li>
+
+<li>What's at that memory address? the type of the pointer.
+
+<ul class="org-ul">
+<li>char * str;</li>
+</ul></li>
+
+<li>Why?
+
+<ul class="org-ul">
+<li>you want to know the address so you can manipulate a value or
+manipulate a shared value.</li>
+<li>you want to return multiple values from a function.</li>
+<li>your computer deals with memory as location and offsets the entire time</li>
+<li>the local variables is the current base pointer + an offset</li>
+</ul></li>
+
+<li>What is str? A integer that is a memory address.</li>
+<li>What does str point to? A character, but many an array of characters!</li>
+<li>Can I tell if it is an array of characters? No.</li>
+<li>How can I get the first element of a character array at str?
+
+<ul class="org-ul">
+<li>str[0]</li>
+<li>*str</li>
+</ul></li>
+
+<li>How can I make a pointer to:
+<ul class="org-ul">
+<li>char myChar = 'a';</li>
+<li>char * ptrToMyChar = &amp;myChar;</li>
+</ul></li>
+
+<li>Can I manipulate pointers?
+<ul class="org-ul">
+<li>char * ptrToChar = &amp;myChar;</li>
+<li>ptrToChar++; // &lt;&#x2014; goes to the following character in a character array</li>
+<li>*ptrToChar = 'b'; // Dereference ptrToChar and chance myChar to the value of 'b'</li>
+</ul></li>
+</ul>
+</div>
+
+<div id="outline-container-org1aade89" class="outline-4">
+<h4 id="org1aade89"><span class="section-number-4">1.9.1</span> Operators</h4>
+<div class="outline-text-4" id="text-1-9-1">
+<ul class="org-ul">
+<li>&amp; unary operator means "address of"</li>
+<li>* unary operator means "dereference pointer" &#x2013; that is return
+the value it points to</li>
+<li>don't confuse declaration of a variable int * x with
+dereferencing a variable in an expression: *x</li>
+</ul>
+
+<div class="org-src-container">
+<pre class="src src-C"><span style="color: #483d8b;">#include</span> <span style="color: #8b2252;">&lt;stdio.h&gt;</span>
+<span style="color: #483d8b;">#include</span> <span style="color: #8b2252;">&lt;stdlib.h&gt;</span>
+
+<span style="color: #b22222;">// </span><span style="color: #b22222;">These are macros they cover up syntax</span>
+<span style="color: #b22222;">// </span><span style="color: #b22222;">Return the address of X</span>
+<span style="color: #483d8b;">#define</span> <span style="color: #0000ff;">ADDRESSOF</span>(<span style="color: #a0522d;">X</span>) (&amp;X)
+<span style="color: #b22222;">// </span><span style="color: #b22222;">Dereference X</span>
+<span style="color: #483d8b;">#define</span> <span style="color: #0000ff;">DEREF</span>(<span style="color: #a0522d;">X</span>)     (*X)
+<span style="color: #a020f0;">typedef</span> <span style="color: #228b22;">int</span> * <span style="color: #228b22;">intptr_t</span>;
+
+<span style="color: #228b22;">int</span> <span style="color: #0000ff;">main</span>() {
+    <span style="color: #228b22;">int</span> <span style="color: #a0522d;">i</span> = 99;
+    <span style="color: #228b22;">intptr_t</span> <span style="color: #a0522d;">ptrToI1</span> = ADDRESSOF(i); <span style="color: #b22222;">// </span><span style="color: #b22222;">these 2 lines</span>
+    <span style="color: #228b22;">int</span> * <span style="color: #a0522d;">ptrToI2</span> = &amp;i;              <span style="color: #b22222;">// </span><span style="color: #b22222;">are the same</span>
+    printf(<span style="color: #8b2252;">"i: %4d,\naddress of i:  %p\n\tptrToI1: %p, *ptrToI1: %d\n\tptrToI2: %p, *ptrToI2: %d\n"</span>,
+           i,
+           (<span style="color: #228b22;">void</span>*)&amp;i,
+           (<span style="color: #228b22;">void</span>*)ptrToI1,
+           DEREF(ptrToI1),
+           (<span style="color: #228b22;">void</span>*)ptrToI2,
+           *ptrToI2
+    );
+    printf(<span style="color: #8b2252;">"addressof i: %p,\naddress of ptrToI1:  %p\n\tptrToI2: %p\n"</span>,
+           (<span style="color: #228b22;">void</span>*)&amp;i,
+           (<span style="color: #228b22;">void</span>*)&amp;ptrToI1,
+           (<span style="color: #228b22;">void</span>*)&amp;ptrToI2
+    );
+
+    <span style="color: #a020f0;">return</span> 0;
+}
+</pre>
+</div>
+
+<pre class="example">
+i:   99,
+address of i:  0x7ffc7de54d64
+	ptrToI1: 0x7ffc7de54d64, *ptrToI1: 99
+	ptrToI2: 0x7ffc7de54d64, *ptrToI2: 99
+addressof i: 0x7ffc7de54d64,
+address of ptrToI1:  0x7ffc7de54d68
+	ptrToI2: 0x7ffc7de54d70
+
+</pre>
+</div>
+</div>
+
+
+
+<div id="outline-container-org5d9a694" class="outline-4">
+<h4 id="org5d9a694"><span class="section-number-4">1.9.2</span> Character Arrays and Pointers</h4>
+<div class="outline-text-4" id="text-1-9-2">
+<div class="org-src-container">
+<pre class="src src-C"><span style="color: #483d8b;">#include</span> <span style="color: #8b2252;">&lt;stdio.h&gt;</span>
+<span style="color: #483d8b;">#include</span> <span style="color: #8b2252;">&lt;stdlib.h&gt;</span>
+<span style="color: #483d8b;">#include</span> <span style="color: #8b2252;">&lt;string.h&gt;</span>
+
+<span style="color: #228b22;">int</span> <span style="color: #0000ff;">main</span>() {
+    <span style="color: #228b22;">char</span> <span style="color: #a0522d;">myChars</span>[] = <span style="color: #8b2252;">"Abram believes he is a benevolent professor"</span>;
+    <span style="color: #b22222;">// </span><span style="color: #b22222;">char * strnstr(const char *big, const char *little, size_t len); from string.h</span>
+    <span style="color: #228b22;">char</span> * <span style="color: #a0522d;">professor</span> = strstr(myChars, <span style="color: #8b2252;">"professor"</span>);
+    <span style="color: #228b22;">char</span> * <span style="color: #a0522d;">believes</span>  = strstr(myChars, <span style="color: #8b2252;">"believes"</span>);
+    printf(<span style="color: #8b2252;">"Size of a pointer %lu\n"</span>, <span style="color: #a020f0;">sizeof</span>(professor));
+    printf(<span style="color: #8b2252;">"Location pointed to %p\n"</span>, professor);
+    printf(<span style="color: #8b2252;">"full representation %016lX\n"</span>, (<span style="color: #228b22;">long</span> <span style="color: #228b22;">unsigned</span> <span style="color: #228b22;">int</span>)professor); <span style="color: #b22222;">// </span><span style="color: #b22222;">look how many bits are used</span>
+    printf(<span style="color: #8b2252;">"myChars: %s\n"</span>, myChars);
+    printf(<span style="color: #8b2252;">"myChars location: %p\n"</span>, myChars);
+    printf(<span style="color: #8b2252;">"professor: %s\n"</span>, professor);
+    printf(<span style="color: #8b2252;">"professor location: %p\n"</span>, professor);
+    printf(<span style="color: #8b2252;">"believes: %s\n"</span>, believes);
+    printf(<span style="color: #8b2252;">"believes location: %p\n"</span>, believes);
+    printf(<span style="color: #8b2252;">"believes - myChars location: %llu\n"</span>, (<span style="color: #228b22;">long</span> <span style="color: #228b22;">long</span> <span style="color: #228b22;">unsigned</span> <span style="color: #228b22;">int</span>)believes - (<span style="color: #228b22;">long</span> <span style="color: #228b22;">long</span> <span style="color: #228b22;">unsigned</span> <span style="color: #228b22;">int</span>)myChars);
+    printf(<span style="color: #8b2252;">"professor - myChars location: %llu\n"</span>, (<span style="color: #228b22;">long</span> <span style="color: #228b22;">long</span> <span style="color: #228b22;">unsigned</span> <span style="color: #228b22;">int</span>)professor - (<span style="color: #228b22;">long</span> <span style="color: #228b22;">long</span> <span style="color: #228b22;">unsigned</span> <span style="color: #228b22;">int</span>)myChars);
+
+    printf(<span style="color: #8b2252;">"\nBut where are myChars and professor and believes?\n"</span>);
+    printf(<span style="color: #8b2252;">"myChars location:   %p\t ptr address: %p \t*ptr %c\n"</span>, (<span style="color: #228b22;">void</span>*)&amp;myChars, myChars, *myChars);
+    printf(<span style="color: #8b2252;">"professor location: %p\t ptr address: %p \t*ptr %c\n"</span>, (<span style="color: #228b22;">void</span>*)&amp;professor, professor, *professor);
+    printf(<span style="color: #8b2252;">"believes location:  %p\t ptr address: %p \t*ptr %c\n"</span>, (<span style="color: #228b22;">void</span>*)&amp;believes, believes, *believes);
+}
+</pre>
+</div>
+
+<pre class="example">
+Size of a pointer 8
+Location pointed to 0x7ffcd335c462
+full representation 00007FFCD335C462
+myChars: Abram believes he is a benevolent professor
+myChars location: 0x7ffcd335c440
+professor: professor
+professor location: 0x7ffcd335c462
+believes: believes he is a benevolent professor
+believes location: 0x7ffcd335c446
+believes - myChars location: 6
+professor - myChars location: 34
+
+But where are myChars and professor and believes?
+myChars location:   0x7ffcd335c440	 ptr address: 0x7ffcd335c440 	*ptr A
+professor location: 0x7ffcd335c430	 ptr address: 0x7ffcd335c462 	*ptr p
+believes location:  0x7ffcd335c438	 ptr address: 0x7ffcd335c446 	*ptr b
+</pre>
+</div>
+</div>
+
+<div id="outline-container-org772b2f8" class="outline-4">
+<h4 id="org772b2f8"><span class="section-number-4">1.9.3</span> Int arrays</h4>
+<div class="outline-text-4" id="text-1-9-3">
+<p>
+Now character arrays are easy because the size is 1 for a character
+but what about arrays of larger size datatypes?
+</p>
+
+<div class="org-src-container">
+<pre class="src src-C"><span style="color: #483d8b;">#include</span> <span style="color: #8b2252;">&lt;stdio.h&gt;</span>
+<span style="color: #483d8b;">#include</span> <span style="color: #8b2252;">&lt;stdlib.h&gt;</span>
+<span style="color: #483d8b;">#include</span> <span style="color: #8b2252;">&lt;string.h&gt;</span>
+<span style="color: #483d8b;">#define</span> <span style="color: #a0522d;">N</span> 1000
+
+<span style="color: #228b22;">int</span> <span style="color: #0000ff;">main</span>() {
+    <span style="color: #228b22;">int</span> <span style="color: #a0522d;">myInts</span>[] = { 0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10 };
+    <span style="color: #b22222;">// </span><span style="color: #b22222;">char * strnstr(const char *big, const char *little, size_t len); from string.h</span>
+    <span style="color: #228b22;">int</span> * <span style="color: #a0522d;">ptrToMyInts</span> = &amp;myInts[0];
+    <span style="color: #228b22;">int</span> * <span style="color: #a0522d;">five</span>       = &amp;myInts[5];
+    <span style="color: #228b22;">int</span> * <span style="color: #a0522d;">fiveAgain</span>  = myInts + 5;
+    printf(<span style="color: #8b2252;">"myInts: %p\n"</span>, (<span style="color: #228b22;">void</span>*)myInts);
+    printf(<span style="color: #8b2252;">"ptrToMyInts: %p\n"</span>, (<span style="color: #228b22;">void</span>*)ptrToMyInts);
+    printf(<span style="color: #8b2252;">"five location:      %p five value:      %d\n"</span>, (<span style="color: #228b22;">void</span>*)five, *five);
+    printf(<span style="color: #8b2252;">"fiveAgain location: %p fiveAgain value: %d\n"</span>, (<span style="color: #228b22;">void</span>*)fiveAgain, *fiveAgain);
+    printf(<span style="color: #8b2252;">"five - myInts location: %llu\n"</span>, 
+           (<span style="color: #228b22;">long</span> <span style="color: #228b22;">long</span> <span style="color: #228b22;">unsigned</span> <span style="color: #228b22;">int</span>)five - (<span style="color: #228b22;">long</span> <span style="color: #228b22;">long</span> <span style="color: #228b22;">unsigned</span> <span style="color: #228b22;">int</span>)myInts);
+    printf(<span style="color: #8b2252;">"five - myInts location / sizeof(int): %llu\n"</span>, 
+           ((<span style="color: #228b22;">long</span> <span style="color: #228b22;">long</span> <span style="color: #228b22;">unsigned</span> <span style="color: #228b22;">int</span>)five - (<span style="color: #228b22;">long</span> <span style="color: #228b22;">long</span> <span style="color: #228b22;">unsigned</span> <span style="color: #228b22;">int</span>)myInts)/(<span style="color: #a020f0;">sizeof</span>(<span style="color: #228b22;">int</span>)));
+
+    printf(<span style="color: #8b2252;">"\n OK... Where are they?\n"</span>);
+    printf(<span style="color: #8b2252;">"myInts     Location: %p\t ptr address: %p \t*ptr %d\n"</span>, (<span style="color: #228b22;">void</span>*)&amp;myInts, (<span style="color: #228b22;">void</span>*)myInts, *myInts);
+    printf(<span style="color: #8b2252;">"ptrToMyIntsLocation: %p\t ptr address: %p \t*ptr %d\n"</span>, (<span style="color: #228b22;">void</span>*)&amp;ptrToMyInts, (<span style="color: #228b22;">void</span>*)ptrToMyInts, *ptrToMyInts);
+    printf(<span style="color: #8b2252;">"five       Location: %p\t ptr address: %p \t*ptr %d\n"</span>, (<span style="color: #228b22;">void</span>*)&amp;five, (<span style="color: #228b22;">void</span>*)five, *five);
+    printf(<span style="color: #8b2252;">"fiveAgain  Location: %p\t ptr address: %p \t*ptr %d\n"</span>, (<span style="color: #228b22;">void</span>*)&amp;fiveAgain, (<span style="color: #228b22;">void</span>*)fiveAgain, *fiveAgain);
+
+    printf(<span style="color: #8b2252;">"\nLet's add 1 to five\n"</span>);
+    <span style="color: #228b22;">int</span> * <span style="color: #a0522d;">six</span> = five + 1;
+    printf(<span style="color: #8b2252;">"five       Location: %p\t ptr address: %p \t*ptr %d\n"</span>, (<span style="color: #228b22;">void</span>*)&amp;five, (<span style="color: #228b22;">void</span>*)five, *five);
+    printf(<span style="color: #8b2252;">"six        Location: %p\t ptr address: %p \t*ptr %d\n"</span>, (<span style="color: #228b22;">void</span>*)&amp;six, (<span style="color: #228b22;">void</span>*)six, *six);
+
+
+}
+</pre>
+</div>
+
+<pre class="example">
+myInts: 0x7ffcecb13b10
+ptrToMyInts: 0x7ffcecb13b10
+five location:      0x7ffcecb13b24 five value:      5
+fiveAgain location: 0x7ffcecb13b24 fiveAgain value: 5
+five - myInts location: 20
+five - myInts location / sizeof(int): 5
+
+ OK... Where are they?
+myInts     Location: 0x7ffcecb13b10	 ptr address: 0x7ffcecb13b10 	*ptr 0
+ptrToMyIntsLocation: 0x7ffcecb13af0	 ptr address: 0x7ffcecb13b10 	*ptr 0
+five       Location: 0x7ffcecb13af8	 ptr address: 0x7ffcecb13b24 	*ptr 5
+fiveAgain  Location: 0x7ffcecb13b00	 ptr address: 0x7ffcecb13b24 	*ptr 5
+
+Let's add 1 to five
+five       Location: 0x7ffcecb13af8	 ptr address: 0x7ffcecb13b24 	*ptr 5
+six        Location: 0x7ffcecb13b08	 ptr address: 0x7ffcecb13b28 	*ptr 6
+</pre>
+<p>
+myInts: 0x7ffd0bdc3f40
+ptrToMyInts: 0x7ffd0bdc3f40
+five location:      0x7ffd0bdc3f54 five value:      5
+fiveAgain location: 0x7ffd0bdc3f54 fiveAgain value: 5
+five - myInts location: 20
+five - myInts location / sizeof(int): 5
+</p>
+
+<p>
+ OK&#x2026; Where are they?
+myInts     Location: 0x7ffd0bdc3f40	 ptr address: 0x7ffd0bdc3f40 	*ptr 0
+ptrToMyIntsLocation: 0x7ffd0bdc3f20	 ptr address: 0x7ffd0bdc3f40 	*ptr 0
+five       Location: 0x7ffd0bdc3f28	 ptr address: 0x7ffd0bdc3f54 	*ptr 5
+fiveAgain  Location: 0x7ffd0bdc3f30	 ptr address: 0x7ffd0bdc3f54 	*ptr 5
+</p>
+
+<p>
+Let's add 1 to five
+five       Location: 0x7ffd0bdc3f28	 ptr address: 0x7ffd0bdc3f54 	*ptr 5
+six        Location: 0x7ffd0bdc3f38	 ptr address: 0x7ffd0bdc3f58 	*ptr 6
+</p>
+</div>
+</div>
+
+<div id="outline-container-org1230376" class="outline-4">
+<h4 id="org1230376"><span class="section-number-4">1.9.4</span> Arrays as pointers</h4>
+<div class="outline-text-4" id="text-1-9-4">
+<div class="org-src-container">
+<pre class="src src-C"><span style="color: #483d8b;">#include</span> <span style="color: #8b2252;">&lt;stdio.h&gt;</span>
+<span style="color: #483d8b;">#include</span> <span style="color: #8b2252;">&lt;stdlib.h&gt;</span>
+<span style="color: #483d8b;">#include</span> <span style="color: #8b2252;">&lt;string.h&gt;</span>
+<span style="color: #483d8b;">#define</span> <span style="color: #a0522d;">N</span> 1000
+
+<span style="color: #228b22;">int</span> <span style="color: #0000ff;">main</span>() {
+    <span style="color: #228b22;">int</span> <span style="color: #a0522d;">myInts</span>[] = { 99, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10 };
+    <span style="color: #228b22;">int</span> * <span style="color: #a0522d;">ptrToMyInts</span> = myInts;
+    <span style="color: #228b22;">int</span> * <span style="color: #a0522d;">ptrToMyInts2</span> = &amp;myInts[0];
+    printf(<span style="color: #8b2252;">"myInts:\t%p\n"</span>, (<span style="color: #228b22;">void</span>*)myInts);
+    printf(<span style="color: #8b2252;">"ptrToMyInts:\t%p\n"</span>, (<span style="color: #228b22;">void</span>*)ptrToMyInts);
+    printf(<span style="color: #8b2252;">"ptrToMyInts2:\t%p\n"</span>, (<span style="color: #228b22;">void</span>*)ptrToMyInts2);
+    printf(<span style="color: #8b2252;">"deref myInts:\t%d\n"</span>, *myInts);
+    printf(<span style="color: #8b2252;">"deref ptrToMyInts:\t%d\n"</span>, *ptrToMyInts);
+    printf(<span style="color: #8b2252;">"deref ptrToMyInts2:\t%d\n"</span>, *ptrToMyInts2);
+    <span style="color: #a020f0;">return</span> 0;
+}
+</pre>
+</div>
+
+<pre class="example">
+myInts:	0x7fff16b47c70
+ptrToMyInts:	0x7fff16b47c70
+ptrToMyInts2:	0x7fff16b47c70
+deref myInts:	99
+deref ptrToMyInts:	99
+deref ptrToMyInts2:	99
+
+</pre>
+</div>
+</div>
+
+<div id="outline-container-orgdff917f" class="outline-4">
+<h4 id="orgdff917f"><span class="section-number-4">1.9.5</span> Pointer arthimetic again</h4>
+<div class="outline-text-4" id="text-1-9-5">
+<p>
+When you add to pointers you add not just an integer but your
+n*sizeof(*p) + p where p is a pointer.
+</p>
+
+<p>
+*ptr++ is a common idiom, it means give me the current value and
+transition to the next memory location.
+</p>
+
+<div class="org-src-container">
+<pre class="src src-C"><span style="color: #483d8b;">#include</span> <span style="color: #8b2252;">&lt;stdio.h&gt;</span>
+<span style="color: #483d8b;">#include</span> <span style="color: #8b2252;">&lt;stdlib.h&gt;</span>
+<span style="color: #483d8b;">#include</span> <span style="color: #8b2252;">&lt;string.h&gt;</span>
+<span style="color: #483d8b;">#define</span> <span style="color: #a0522d;">N</span> 1000
+
+<span style="color: #228b22;">int</span> <span style="color: #0000ff;">main</span>() {
+    <span style="color: #228b22;">long</span> <span style="color: #228b22;">int</span> <span style="color: #a0522d;">myInts</span>[] = { 0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10 };
+    <span style="color: #228b22;">long</span> <span style="color: #228b22;">int</span> * <span style="color: #a0522d;">ptr</span> = &amp;myInts[0];
+    <span style="color: #228b22;">size_t</span> <span style="color: #a0522d;">count</span> = <span style="color: #a020f0;">sizeof</span>(myInts) / <span style="color: #a020f0;">sizeof</span>(myInts[0]);
+    <span style="color: #a020f0;">while</span>(count &gt; 0) {
+       printf(<span style="color: #8b2252;">"%ld \t %p\n"</span>, *ptr, (<span style="color: #228b22;">void</span>*)ptr);
+       ptr++;
+       count--;
+    }
+    ptr = &amp;myInts[10];
+    count = <span style="color: #a020f0;">sizeof</span>(myInts) / <span style="color: #a020f0;">sizeof</span>(myInts[0]);
+    <span style="color: #a020f0;">while</span>( count-- &gt; 0) {
+       <span style="color: #228b22;">void</span> * <span style="color: #a0522d;">oldptr</span> = (<span style="color: #228b22;">void</span>*) ptr;
+       printf(<span style="color: #8b2252;">"%ld \t %p\t"</span>, *ptr--, oldptr); <span style="color: #b22222;">// </span><span style="color: #b22222;">this *ptr++ is</span>
+                                             <span style="color: #b22222;">// </span><span style="color: #b22222;">idiomatic in C and</span>
+                                             <span style="color: #b22222;">// </span><span style="color: #b22222;">confusing but you must</span>
+                                             <span style="color: #b22222;">// </span><span style="color: #b22222;">learn it</span>
+       printf(<span style="color: #8b2252;">"ptr - oldptr %ld\n"</span>, (<span style="color: #228b22;">unsigned</span> <span style="color: #228b22;">long</span> <span style="color: #228b22;">int</span>)ptr - (<span style="color: #228b22;">unsigned</span> <span style="color: #228b22;">long</span> <span style="color: #228b22;">int</span>)oldptr);
+    }
+    printf(<span style="color: #8b2252;">"%p %ld\n"</span>, (<span style="color: #228b22;">void</span>*)ptr, *ptr);
+    <span style="color: #a020f0;">return</span> 0;
+}
+</pre>
+</div>
+
+<pre class="example">
+0 	 0x7ffcdb9b1720
+1 	 0x7ffcdb9b1728
+2 	 0x7ffcdb9b1730
+3 	 0x7ffcdb9b1738
+4 	 0x7ffcdb9b1740
+5 	 0x7ffcdb9b1748
+6 	 0x7ffcdb9b1750
+7 	 0x7ffcdb9b1758
+8 	 0x7ffcdb9b1760
+9 	 0x7ffcdb9b1768
+10 	 0x7ffcdb9b1770
+10 	 0x7ffcdb9b1770	ptr - oldptr -8
+9 	 0x7ffcdb9b1768	ptr - oldptr -8
+8 	 0x7ffcdb9b1760	ptr - oldptr -8
+7 	 0x7ffcdb9b1758	ptr - oldptr -8
+6 	 0x7ffcdb9b1750	ptr - oldptr -8
+5 	 0x7ffcdb9b1748	ptr - oldptr -8
+4 	 0x7ffcdb9b1740	ptr - oldptr -8
+3 	 0x7ffcdb9b1738	ptr - oldptr -8
+2 	 0x7ffcdb9b1730	ptr - oldptr -8
+1 	 0x7ffcdb9b1728	ptr - oldptr -8
+0 	 0x7ffcdb9b1720	ptr - oldptr -8
+0x7ffcdb9b1718 140723992860448
+</pre>
+</div>
+
+<ol class="org-ol">
+<li><a id="orgb68618e"></a>Now with Chars<br />
+<div class="outline-text-5" id="text-1-9-5-1">
+<div class="org-src-container">
+<pre class="src src-C"><span style="color: #483d8b;">#include</span> <span style="color: #8b2252;">&lt;stdio.h&gt;</span>
+<span style="color: #483d8b;">#include</span> <span style="color: #8b2252;">&lt;stdlib.h&gt;</span>
+<span style="color: #483d8b;">#include</span> <span style="color: #8b2252;">&lt;string.h&gt;</span>
+<span style="color: #483d8b;">#define</span> <span style="color: #a0522d;">N</span> 1000
+
+<span style="color: #228b22;">int</span> <span style="color: #0000ff;">main</span>() {
+    <span style="color: #228b22;">char</span> <span style="color: #a0522d;">str</span>[] = <span style="color: #8b2252;">"Polar bears are cool bears"</span>;
+    <span style="color: #228b22;">char</span> * <span style="color: #a0522d;">strLiteral</span> = <span style="color: #8b2252;">"Polar bears are cool bears"</span>;
+    <span style="color: #228b22;">char</span> * <span style="color: #a0522d;">ptr</span> = str;
+    <span style="color: #228b22;">char</span> <span style="color: #a0522d;">tmp</span> = 0;
+    <span style="color: #a020f0;">while</span>( (tmp = *ptr++) ) {
+       putchar(tmp);
+    }
+    putchar(<span style="color: #8b2252;">'\n'</span>);
+    ptr = str;
+    tmp = 0;
+    <span style="color: #a020f0;">while</span>( (tmp = *ptr++) ) {
+       printf(<span style="color: #8b2252;">"%c %p %20lu\n"</span>, tmp, (<span style="color: #228b22;">void</span>*)ptr, (<span style="color: #228b22;">unsigned</span> <span style="color: #228b22;">long</span> <span style="color: #228b22;">int</span>)ptr);
+    }
+    <span style="color: #b22222;">// </span><span style="color: #b22222;">now watch the addresses</span>
+    ptr = strLiteral;
+    printf(<span style="color: #8b2252;">"The start of this function's stack frame is pretty close to %p\n"</span>, (<span style="color: #228b22;">void</span>*)&amp;str);
+    <span style="color: #a020f0;">while</span>( (tmp = *ptr++) ) {
+       printf(<span style="color: #8b2252;">"%c %p %20lu\n"</span>, tmp, (<span style="color: #228b22;">void</span>*)ptr, (<span style="color: #228b22;">unsigned</span> <span style="color: #228b22;">long</span> <span style="color: #228b22;">int</span>)ptr);
+    }
+    <span style="color: #b22222;">// </span><span style="color: #b22222;">wow that's super far away in memory</span>
+    printf(<span style="color: #8b2252;">"str - strLiteral in bytes: %lu\n"</span>, (<span style="color: #228b22;">unsigned</span> <span style="color: #228b22;">long</span> <span style="color: #228b22;">int</span>)str - (<span style="color: #228b22;">unsigned</span> <span style="color: #228b22;">long</span> <span style="color: #228b22;">int</span>)strLiteral);
+    printf(<span style="color: #8b2252;">"&amp;str - &amp;strLiteral in bytes: %lu\n"</span>, (<span style="color: #228b22;">unsigned</span> <span style="color: #228b22;">long</span> <span style="color: #228b22;">int</span>)&amp;str - (<span style="color: #228b22;">unsigned</span> <span style="color: #228b22;">long</span> <span style="color: #228b22;">int</span>)&amp;strLiteral);
+    <span style="color: #a020f0;">return</span> 0;
+}
+</pre>
+</div>
+
+<pre class="example">
+Polar bears are cool bears
+P 0x7ffdd87de9c1      140728235583937
+o 0x7ffdd87de9c2      140728235583938
+l 0x7ffdd87de9c3      140728235583939
+a 0x7ffdd87de9c4      140728235583940
+r 0x7ffdd87de9c5      140728235583941
+  0x7ffdd87de9c6      140728235583942
+b 0x7ffdd87de9c7      140728235583943
+e 0x7ffdd87de9c8      140728235583944
+a 0x7ffdd87de9c9      140728235583945
+r 0x7ffdd87de9ca      140728235583946
+s 0x7ffdd87de9cb      140728235583947
+  0x7ffdd87de9cc      140728235583948
+a 0x7ffdd87de9cd      140728235583949
+r 0x7ffdd87de9ce      140728235583950
+e 0x7ffdd87de9cf      140728235583951
+  0x7ffdd87de9d0      140728235583952
+c 0x7ffdd87de9d1      140728235583953
+o 0x7ffdd87de9d2      140728235583954
+o 0x7ffdd87de9d3      140728235583955
+l 0x7ffdd87de9d4      140728235583956
+  0x7ffdd87de9d5      140728235583957
+b 0x7ffdd87de9d6      140728235583958
+e 0x7ffdd87de9d7      140728235583959
+a 0x7ffdd87de9d8      140728235583960
+r 0x7ffdd87de9d9      140728235583961
+s 0x7ffdd87de9da      140728235583962
+The start of this function's stack frame is pretty close to 0x7ffdd87de9c0
+P 0x555820b03919       93836993902873
+o 0x555820b0391a       93836993902874
+l 0x555820b0391b       93836993902875
+a 0x555820b0391c       93836993902876
+r 0x555820b0391d       93836993902877
+  0x555820b0391e       93836993902878
+b 0x555820b0391f       93836993902879
+e 0x555820b03920       93836993902880
+a 0x555820b03921       93836993902881
+r 0x555820b03922       93836993902882
+s 0x555820b03923       93836993902883
+  0x555820b03924       93836993902884
+a 0x555820b03925       93836993902885
+r 0x555820b03926       93836993902886
+e 0x555820b03927       93836993902887
+  0x555820b03928       93836993902888
+c 0x555820b03929       93836993902889
+o 0x555820b0392a       93836993902890
+o 0x555820b0392b       93836993902891
+l 0x555820b0392c       93836993902892
+  0x555820b0392d       93836993902893
+b 0x555820b0392e       93836993902894
+e 0x555820b0392f       93836993902895
+a 0x555820b03930       93836993902896
+r 0x555820b03931       93836993902897
+s 0x555820b03932       93836993902898
+str - strLiteral in bytes: 46891241681064
+&amp;str - &amp;strLiteral in bytes: 16
+</pre>
+</div>
+</li>
+</ol>
+</div>
+
+
+
+<div id="outline-container-org25e27a0" class="outline-4">
+<h4 id="org25e27a0"><span class="section-number-4">1.9.6</span> Hazel's ptrs.c</h4>
+<div class="outline-text-4" id="text-1-9-6">
+<p>
+The intent here is to demonstrate the use and features of pointers and
+how to manipulate values via pointers within functions.
+</p>
+
+<div class="org-src-container">
+<pre class="src src-C"><span style="color: #483d8b;">#include</span> <span style="color: #8b2252;">&lt;stdio.h&gt;</span>
+
+<span style="color: #228b22;">int</span> <span style="color: #0000ff;">pbv</span>(<span style="color: #228b22;">int</span> <span style="color: #a0522d;">passed</span>) {
+    passed++;
+    printf(<span style="color: #8b2252;">"   passed = %d\n"</span>, passed);
+    printf(<span style="color: #8b2252;">"  &amp;passed = %p\n"</span>, (<span style="color: #228b22;">void</span> *) &amp;passed);
+    <span style="color: #a020f0;">return</span> passed;
+}
+
+<span style="color: #228b22;">void</span> <span style="color: #0000ff;">pbr</span>(<span style="color: #228b22;">int</span> *<span style="color: #a0522d;">passed</span>) {
+    printf(<span style="color: #8b2252;">"   passed = %p\n"</span>, (<span style="color: #228b22;">void</span> *) passed);
+    printf(<span style="color: #8b2252;">"  *passed = %d\n"</span>, *passed);
+    printf(<span style="color: #8b2252;">"  &amp;passed = %p\n"</span>, (<span style="color: #228b22;">void</span> *) &amp;passed);
+    (*passed)++;
+}
+
+<span style="color: #b22222;">/*</span>
+<span style="color: #b22222;"> * 4 byte integer (32-bit PC)</span>
+<span style="color: #b22222;"> * Example: our integer uses these 4 bytes</span>
+<span style="color: #b22222;"> * byte 4287409512 (0xff8cad68)</span>
+<span style="color: #b22222;"> * byte 4287409513 (0xff8cad69)</span>
+<span style="color: #b22222;"> * byte 4287409514 (0xff8cad6a)</span>
+<span style="color: #b22222;"> * byte 4287409515 (0xff8cad6b)</span>
+<span style="color: #b22222;"> </span><span style="color: #b22222;">*/</span>
+
+<span style="color: #228b22;">int</span> <span style="color: #0000ff;">main</span>() {
+    <span style="color: #228b22;">int</span> <span style="color: #a0522d;">thing_1</span> = 100;
+    <span style="color: #228b22;">int</span> <span style="color: #a0522d;">thing_2</span> = 200;
+
+    <span style="color: #b22222;">// </span><span style="color: #b22222;">type: define a_pointer as a pointer to an int</span>
+    <span style="color: #228b22;">int</span> *<span style="color: #a0522d;">a_pointer</span> = <span style="color: #008b8b;">NULL</span>;
+    <span style="color: #b22222;">// </span><span style="color: #b22222;">type of a_pointer is "int *"</span>
+    <span style="color: #b22222;">// </span><span style="color: #b22222;">NULL: the NULL pointer, gives the pointer the value 0</span>
+    <span style="color: #b22222;">// </span><span style="color: #b22222;">used to indicate that the pointer doesn't point to anything</span>
+
+    printf(<span style="color: #8b2252;">"thing_1 = %d\n"</span>, thing_1);
+    printf(<span style="color: #8b2252;">"thing_2 = %d\n"</span>, thing_2);
+    <span style="color: #b22222;">// </span><span style="color: #b22222;">error: &#8216;a_pointer&#8217; is used uninitialized in this function [-Werror=uninitialized]</span>
+    <span style="color: #b22222;">//</span><span style="color: #b22222;">printf("a_pointer = %p\n", (void *) a_pointer);</span>
+    <span style="color: #b22222;">//</span><span style="color: #b22222;">printf("a_pointer = %zu\n", (size_t) a_pointer);</span>
+
+    printf(<span style="color: #8b2252;">"\nsizes:\n"</span>);
+    printf(<span style="color: #8b2252;">"sizeof(thing_1) = %zu\n"</span>, <span style="color: #a020f0;">sizeof</span>(thing_1));
+    printf(<span style="color: #8b2252;">"sizeof(thing_2) = %zu\n"</span>, <span style="color: #a020f0;">sizeof</span>(thing_2));
+    printf(<span style="color: #8b2252;">"sizeof(a_pointer) = %zu (%zu bits)\n"</span>, <span style="color: #a020f0;">sizeof</span>(a_pointer), <span style="color: #a020f0;">sizeof</span>(a_pointer) * 8);
+
+    <span style="color: #b22222;">// </span><span style="color: #b22222;">unary &amp; operator: get address of (reference)</span>
+    a_pointer = &amp;thing_1;
+
+    printf(<span style="color: #8b2252;">"\na_pointer = &amp;thing_1;\n"</span>);
+    printf(<span style="color: #8b2252;">" &amp;thing_1 = %p\n"</span>, (<span style="color: #228b22;">void</span> *) &amp;thing_1);
+    printf(<span style="color: #8b2252;">" &amp;thing_2 = %p\n"</span>, (<span style="color: #228b22;">void</span> *) &amp;thing_2);
+    printf(<span style="color: #8b2252;">"a_pointer = %p\n"</span>, (<span style="color: #228b22;">void</span> *) a_pointer);
+    printf(<span style="color: #8b2252;">"a_pointer = %zu\n"</span>, (<span style="color: #228b22;">size_t</span>) a_pointer);
+    <span style="color: #b22222;">// </span><span style="color: #b22222;">unary * operator: get value at (dereference)</span>
+    printf(<span style="color: #8b2252;">"*a_pointer = %d\n"</span>, *a_pointer);
+
+    a_pointer = &amp;thing_2;
+    printf(<span style="color: #8b2252;">"\na_pointer = &amp;thing_2;\n"</span>);
+    printf(<span style="color: #8b2252;">"a_pointer = %p\n"</span>, (<span style="color: #228b22;">void</span> *) a_pointer);
+
+    <span style="color: #b22222;">// </span><span style="color: #b22222;">unary * operator: get value at (dereference)</span>
+    printf(<span style="color: #8b2252;">"*a_pointer = %d\n"</span>, *a_pointer);
+
+    <span style="color: #b22222;">// </span><span style="color: #b22222;">We're going to copy thing_1 and take a look</span>
+    printf(<span style="color: #8b2252;">"\ncopy value:\n"</span>);
+    printf(<span style="color: #8b2252;">"\nint value = thing_1;\n"</span>);
+    <span style="color: #228b22;">int</span> <span style="color: #a0522d;">value</span> = thing_1;
+    printf(<span style="color: #8b2252;">"thing_1 = %d\n"</span>, thing_1);
+    printf(<span style="color: #8b2252;">"  value = %d\n"</span>, value);
+    printf(<span style="color: #8b2252;">" &amp;thing_1 = %p\n"</span>, (<span style="color: #228b22;">void</span> *) &amp;thing_1);
+    printf(<span style="color: #8b2252;">"   &amp;value = %p\n"</span>, (<span style="color: #228b22;">void</span> *) &amp;value);
+
+    printf(<span style="color: #8b2252;">"\ncopy value using pointer:\n"</span>);
+    printf(<span style="color: #8b2252;">"\nvalue = *(&amp;thing_2);\n"</span>);
+    value = *(&amp;thing_2);
+    printf(<span style="color: #8b2252;">"thing_2 = %d\n"</span>, thing_2);
+    printf(<span style="color: #8b2252;">"  value = %d\n"</span>, value);
+    printf(<span style="color: #8b2252;">" &amp;thing_2 = %p\n"</span>, (<span style="color: #228b22;">void</span> *) &amp;thing_2);
+    printf(<span style="color: #8b2252;">"   &amp;value = %p\n"</span>, (<span style="color: #228b22;">void</span> *) &amp;value);
+
+    printf(<span style="color: #8b2252;">"\ncopy value using pointer:\n"</span>);
+    a_pointer = &amp;thing_2;
+    printf(<span style="color: #8b2252;">"\na_pointer = &amp;thing_2;\n"</span>);
+    printf(<span style="color: #8b2252;">"a_pointer = %p\n"</span>, (<span style="color: #228b22;">void</span> *) a_pointer);
+    <span style="color: #b22222;">// </span><span style="color: #b22222;">unary * operator: get value at (dereference)</span>
+    printf(<span style="color: #8b2252;">"*a_pointer = %d\n"</span>, *a_pointer);
+    printf(<span style="color: #8b2252;">"value = *a_pointer;\n"</span>);
+    value = *a_pointer;
+    printf(<span style="color: #8b2252;">"thing_2 = %d\n"</span>, thing_2);
+    printf(<span style="color: #8b2252;">"  value = %d\n"</span>, value);
+    printf(<span style="color: #8b2252;">" &amp;thing_2 = %p\n"</span>, (<span style="color: #228b22;">void</span> *) &amp;thing_2);
+    printf(<span style="color: #8b2252;">"   &amp;value = %p\n"</span>, (<span style="color: #228b22;">void</span> *) &amp;value);
+
+    printf(<span style="color: #8b2252;">"\npass-by-value (copy):\n"</span>);
+    printf(<span style="color: #8b2252;">"\npbv(thing_1);\n"</span>);
+    printf(<span style="color: #8b2252;">"  thing_1 = %d\n"</span>, thing_1);
+    printf(<span style="color: #8b2252;">" &amp;thing_1 = %p\n"</span>, (<span style="color: #228b22;">void</span> *) &amp;thing_1);
+    pbv(thing_1);
+    printf(<span style="color: #8b2252;">"  thing_1 = %d\n"</span>, thing_1);
+    printf(<span style="color: #8b2252;">" &amp;thing_1 = %p\n"</span>, (<span style="color: #228b22;">void</span> *) &amp;thing_1);
+
+    printf(<span style="color: #8b2252;">"\npass-by-reference (no copy):\n"</span>);
+    printf(<span style="color: #8b2252;">"\npbr(&amp;thing_1);\n"</span>);
+    printf(<span style="color: #8b2252;">"  thing_1 = %d\n"</span>, thing_1);
+    printf(<span style="color: #8b2252;">" &amp;thing_1 = %p\n"</span>, (<span style="color: #228b22;">void</span> *) &amp;thing_1);
+    pbr(&amp;thing_1);
+    printf(<span style="color: #8b2252;">"  thing_1 = %d\n"</span>, thing_1);
+    printf(<span style="color: #8b2252;">" &amp;thing_1 = %p\n"</span>, (<span style="color: #228b22;">void</span> *) &amp;thing_1);
+
+    <span style="color: #a020f0;">return</span> 0;
+}
+</pre>
+</div>
+
+<pre class="example">
+thing_1 = 100
+thing_2 = 200
+
+sizes:
+sizeof(thing_1) = 4
+sizeof(thing_2) = 4
+sizeof(a_pointer) = 8 (64 bits)
+
+a_pointer = &amp;thing_1;
+ &amp;thing_1 = 0x7ffdca6654f4
+ &amp;thing_2 = 0x7ffdca6654f8
+a_pointer = 0x7ffdca6654f4
+a_pointer = 140727999157492
+*a_pointer = 100
+
+a_pointer = &amp;thing_2;
+a_pointer = 0x7ffdca6654f8
+*a_pointer = 200
+
+copy value:
+
+int value = thing_1;
+thing_1 = 100
+  value = 100
+ &amp;thing_1 = 0x7ffdca6654f4
+   &amp;value = 0x7ffdca6654fc
+
+copy value using pointer:
+
+value = *(&amp;thing_2);
+thing_2 = 200
+  value = 200
+ &amp;thing_2 = 0x7ffdca6654f8
+   &amp;value = 0x7ffdca6654fc
+
+copy value using pointer:
+
+a_pointer = &amp;thing_2;
+a_pointer = 0x7ffdca6654f8
+*a_pointer = 200
+value = *a_pointer;
+thing_2 = 200
+  value = 200
+ &amp;thing_2 = 0x7ffdca6654f8
+   &amp;value = 0x7ffdca6654fc
+
+pass-by-value (copy):
+
+pbv(thing_1);
+  thing_1 = 100
+ &amp;thing_1 = 0x7ffdca6654f4
+   passed = 101
+  &amp;passed = 0x7ffdca6654dc
+  thing_1 = 100
+ &amp;thing_1 = 0x7ffdca6654f4
+
+pass-by-reference (no copy):
+
+pbr(&amp;thing_1);
+  thing_1 = 100
+ &amp;thing_1 = 0x7ffdca6654f4
+   passed = 0x7ffdca6654f4
+  *passed = 100
+  &amp;passed = 0x7ffdca6654d8
+  thing_1 = 101
+ &amp;thing_1 = 0x7ffdca6654f4
+</pre>
+</div>
+</div>
+
+<div id="outline-container-orgf9feb30" class="outline-4">
+<h4 id="orgf9feb30"><span class="section-number-4">1.9.7</span> Hazel's ptr<sub>const.c</sub></h4>
+<div class="outline-text-4" id="text-1-9-7">
+<p>
+The intent here is to show that you shouldn't mess with const vars but
+you can eventually mutate them with pointers.
+</p>
+
+<div class="org-src-container">
+<pre class="src src-C"><span style="color: #483d8b;">#include</span> <span style="color: #8b2252;">&lt;stdio.h&gt;</span>
+
+
+<span style="color: #228b22;">int</span> <span style="color: #0000ff;">main</span>() {
+    <span style="color: #228b22;">int</span> <span style="color: #a0522d;">mut_i</span> = 100; <span style="color: #b22222;">// </span><span style="color: #b22222;">mutable integer</span>
+    printf(<span style="color: #8b2252;">"mut_i = %d\n"</span>, mut_i);
+    <span style="color: #a020f0;">const</span> <span style="color: #228b22;">int</span> <span style="color: #a0522d;">const_i</span> = 200; <span style="color: #b22222;">// </span><span style="color: #b22222;">constant integer</span>
+    printf(<span style="color: #8b2252;">"const_i = %d\n"</span>, const_i);
+
+    <span style="color: #b22222;">// </span><span style="color: #b22222;">mutable pointer to mutable integer</span>
+    <span style="color: #228b22;">int</span> * <span style="color: #a0522d;">mut_p</span> = &amp;mut_i;
+    printf(<span style="color: #8b2252;">"mut_p = %p\n"</span>, (<span style="color: #228b22;">void</span> *) mut_p);
+    printf(<span style="color: #8b2252;">"*mut_p = %d\n"</span>, *mut_p);
+    <span style="color: #b22222;">// </span><span style="color: #b22222;">constant pointer to mutable integer</span>
+    <span style="color: #228b22;">int</span> * <span style="color: #a020f0;">const</span> <span style="color: #a0522d;">const_p</span> = &amp;mut_i;
+    printf(<span style="color: #8b2252;">"const_p = %p\n"</span>, (<span style="color: #228b22;">void</span> *) const_p);
+    printf(<span style="color: #8b2252;">"*const_p = %d\n"</span>, *const_p);
+    <span style="color: #b22222;">// </span><span style="color: #b22222;">mutable pointer to constant integer</span>
+    <span style="color: #a020f0;">const</span> <span style="color: #228b22;">int</span> * <span style="color: #a0522d;">p_to_const</span> = &amp;const_i;
+    printf(<span style="color: #8b2252;">"p_to_const = %p\n"</span>, (<span style="color: #228b22;">void</span> *) p_to_const);
+    printf(<span style="color: #8b2252;">"*p_to_const = %d\n"</span>, *p_to_const);
+    <span style="color: #b22222;">// </span><span style="color: #b22222;">constant pointer to constant integer</span>
+    <span style="color: #a020f0;">const</span> <span style="color: #228b22;">int</span> * <span style="color: #a020f0;">const</span> <span style="color: #a0522d;">const_p_to_const</span> = &amp;const_i;
+    printf(<span style="color: #8b2252;">"const_p_to_const = %p\n"</span>, (<span style="color: #228b22;">void</span> *) const_p_to_const);
+    printf(<span style="color: #8b2252;">"*const_p_to_const = %d\n"</span>, *const_p_to_const);
+
+    <span style="color: #b22222;">/*</span>
+<span style="color: #b22222;">    // Don't do this!</span>
+<span style="color: #b22222;">    // "warning: assignment discards &#8216;const&#8217; qualifier from pointer target type"</span>
+<span style="color: #b22222;">    mut_p = &amp;const_i;</span>
+
+<span style="color: #b22222;">    const char *str_lit = "String literals are const char *";</span>
+<span style="color: #b22222;">    printf("%s\n", str_lit);</span>
+<span style="color: #b22222;">    // but remember this means we can change str_lit to point to a different string!</span>
+<span style="color: #b22222;">    str_lit = "String literal #2";</span>
+<span style="color: #b22222;">    printf("%s\n", str_lit);</span>
+
+<span style="color: #b22222;">    // This protects us from:</span>
+<span style="color: #b22222;">    // str_lit[0] = 'D';</span>
+
+<span style="color: #b22222;">    // this is wrong:</span>
+<span style="color: #b22222;">    char *wrong = "We will try to change this string literal";</span>
+<span style="color: #b22222;">    printf("%s\n", wrong);</span>
+
+<span style="color: #b22222;">    // Because it doesn't protect us from:</span>
+<span style="color: #b22222;">    // wrong[0] = 'D';</span>
+<span style="color: #b22222;">    // what happens if you uncomment the above line?</span>
+
+<span style="color: #b22222;">    // This might be better:</span>
+<span style="color: #b22222;">    const char * const RIGHT = "Don't go changing on me!";</span>
+<span style="color: #b22222;">    printf("%s\n", RIGHT);</span>
+<span style="color: #b22222;">    // Because it protects us from:</span>
+<span style="color: #b22222;">    // RIGHT[0] = 'L';</span>
+<span style="color: #b22222;">    // and</span>
+<span style="color: #b22222;">    // RIGHT = wrong;</span>
+<span style="color: #b22222;">    </span><span style="color: #b22222;">*/</span>
+}
+</pre>
+</div>
+
+<pre class="example">
+mut_i = 100
+const_i = 200
+mut_p = 0x7ffc5e85f080
+*mut_p = 100
+const_p = 0x7ffc5e85f080
+*const_p = 100
+p_to_const = 0x7ffc5e85f084
+*p_to_const = 200
+const_p_to_const = 0x7ffc5e85f084
+*const_p_to_const = 200
+</pre>
+</div>
+</div>
+
+<div id="outline-container-org319fb66" class="outline-4">
+<h4 id="org319fb66"><span class="section-number-4">1.9.8</span> Hazel's Pointer No No's</h4>
+<div class="outline-text-4" id="text-1-9-8">
+<p>
+<a href="ptr_nonos.c">ptr_nonos.c</a>
+</p>
+
+<p>
+Note the lack of flags below.
+</p>
+
+<div class="org-src-container">
+<pre class="src src-sh">gcc -std=c99 -Wall -pedantic  -o ptr_nonos ptr_nonos.c &amp;&amp; <span style="color: #8b2252;">\</span>
+./ptr_nonos
+</pre>
+</div>
+
+<pre class="example">
+*pointer = 100
+    Three fives is 15
+*pointer = 22036
+    Three fives is 15
+  result  = 15
+  &amp;result = 0x7ffef1c15854
+&amp;result_p = 0x7ffef1c15858
+
+</pre>
+
+<div class="org-src-container">
+<pre class="src src-C"><span style="color: #483d8b;">#include</span> <span style="color: #8b2252;">&lt;stdio.h&gt;</span>
+
+<span style="color: #483d8b;">#define</span> <span style="color: #a0522d;">SIZE</span> 10
+
+<span style="color: #b22222;">// </span><span style="color: #b22222;">This function tries to print out the int which is at address 0 in memory...</span>
+<span style="color: #b22222;">// </span><span style="color: #b22222;">Don't do this!</span>
+<span style="color: #228b22;">void</span> <span style="color: #0000ff;">dereference_null</span>() {
+    printf(<span style="color: #8b2252;">"\ndereference null\n"</span>);
+    <span style="color: #228b22;">int</span> *<span style="color: #a0522d;">a_pointer</span> = <span style="color: #008b8b;">NULL</span>;
+    printf(<span style="color: #8b2252;">" a_pointer = %p\n"</span>, (<span style="color: #228b22;">void</span> *) a_pointer);
+    printf(<span style="color: #8b2252;">"*a_pointer = %d\n"</span>, *a_pointer);
+}
+
+<span style="color: #b22222;">// </span><span style="color: #b22222;">This function tries to print out the int which is at some address we don't know in memory...</span>
+<span style="color: #b22222;">// </span><span style="color: #b22222;">Don't do this!</span>
+<span style="color: #228b22;">void</span> <span style="color: #0000ff;">dereference_uninit</span>() {
+    printf(<span style="color: #8b2252;">"\ndereference unitialized pointer\n"</span>);
+    <span style="color: #228b22;">int</span> *<span style="color: #a0522d;">a_pointer</span>;
+    printf(<span style="color: #8b2252;">" a_pointer = %p\n"</span>, (<span style="color: #228b22;">void</span> *) a_pointer);
+    printf(<span style="color: #8b2252;">"*a_pointer = %d\n"</span>, *a_pointer);
+}
+
+<span style="color: #b22222;">// </span><span style="color: #b22222;">This function returns a pointer to an "automatic" local variable...</span>
+<span style="color: #b22222;">// </span><span style="color: #b22222;">Don't do this!</span>
+<span style="color: #228b22;">int</span> *<span style="color: #0000ff;">return_pointer_to_local</span>() {
+    <span style="color: #228b22;">int</span> <span style="color: #a0522d;">local_int</span> = 100;
+    <span style="color: #228b22;">int</span> *<span style="color: #a0522d;">pointer</span> = &amp;local_int;
+    <span style="color: #b22222;">// </span><span style="color: #b22222;">when we return we give up the memory we allocated for "local_int"!</span>
+    <span style="color: #a020f0;">return</span> pointer;
+}
+
+<span style="color: #b22222;">// </span><span style="color: #b22222;">This function just does some things...</span>
+<span style="color: #228b22;">int</span> <span style="color: #0000ff;">do_things</span>() {
+    <span style="color: #228b22;">int</span> <span style="color: #a0522d;">three</span> = 3;
+    <span style="color: #228b22;">int</span> <span style="color: #a0522d;">five</span> = 5;
+    <span style="color: #228b22;">int</span> <span style="color: #a0522d;">three_fives</span> = three * five;
+    printf(<span style="color: #8b2252;">"    Three fives is %d\n"</span>, three_fives);
+    <span style="color: #a020f0;">return</span> three_fives;
+}
+
+<span style="color: #228b22;">int</span> <span style="color: #0000ff;">main</span>() {
+<span style="color: #b22222;">//     </span><span style="color: #b22222;">dereference_null();</span>
+    <span style="color: #228b22;">int</span> * <span style="color: #a0522d;">pointer</span> = return_pointer_to_local();
+    printf(<span style="color: #8b2252;">"*pointer = %d\n"</span>, *pointer);
+    do_things();
+    printf(<span style="color: #8b2252;">"*pointer = %d\n"</span>, *pointer);
+
+    <span style="color: #b22222;">// </span><span style="color: #b22222;">You can't get a pointer to some things...</span>
+    <span style="color: #b22222;">// </span><span style="color: #b22222;">This won't compile:</span>
+    <span style="color: #b22222;">// </span><span style="color: #b22222;">&amp;(do_things());</span>
+
+    <span style="color: #b22222;">// </span><span style="color: #b22222;">We can't do this for the same reason...</span>
+    <span style="color: #b22222;">// </span><span style="color: #b22222;">&amp;10;</span>
+
+    <span style="color: #b22222;">// </span><span style="color: #b22222;">This one is actually exactly the same as the one above...</span>
+    <span style="color: #b22222;">// </span><span style="color: #b22222;">&amp;SIZE;</span>
+
+    <span style="color: #b22222;">// </span><span style="color: #b22222;">You have to make memory to store the value to get a pointer to it!</span>
+    <span style="color: #228b22;">int</span> <span style="color: #a0522d;">result</span> = do_things();
+    printf(<span style="color: #8b2252;">"  result  = %d\n"</span>,           result);
+    printf(<span style="color: #8b2252;">"  &amp;result = %p\n"</span>, (<span style="color: #228b22;">void</span> *) &amp;result);
+
+    <span style="color: #b22222;">// </span><span style="color: #b22222;">This won't compile either. Same reason.</span>
+    <span style="color: #b22222;">//     </span><span style="color: #b22222;">&amp;(&amp;result);</span>
+    <span style="color: #b22222;">// </span><span style="color: #b22222;">You have to make memory to store the pointer to get a pointer to it!</span>
+    <span style="color: #228b22;">int</span> * <span style="color: #a0522d;">result_p</span> = &amp;result;
+    printf(<span style="color: #8b2252;">"&amp;result_p = %p\n"</span>, (<span style="color: #228b22;">void</span> *) &amp;result_p);
+    <span style="color: #228b22;">int</span> **<span style="color: #a0522d;">result_pp</span> = &amp;result_p;
+    <span style="color: #228b22;">int</span> ***<span style="color: #a0522d;">result_ppp</span> = &amp;result_pp;
+    printf(<span style="color: #8b2252;">"result_ppp = %p\n"</span>, (<span style="color: #228b22;">void</span> *) result_ppp);
+    printf(<span style="color: #8b2252;">"&amp;result_ppp = %p\n"</span>, (<span style="color: #228b22;">void</span> *) &amp;result_ppp);
+    printf(<span style="color: #8b2252;">"***result_ppp = %d\n"</span>, ***result_ppp);
+    <span style="color: #a020f0;">return</span> 0;
+}
+</pre>
+</div>
+
+<pre class="example">
+*pointer = 100
+    Three fives is 15
+*pointer = 21991
+    Three fives is 15
+  result  = 15
+  &amp;result = 0x7ffd6d9af944
+&amp;result_p = 0x7ffd6d9af948
+result_ppp = 0x7ffd6d9af950
+&amp;result_ppp = 0x7ffd6d9af958
+***result_ppp = 15
+</pre>
+</div>
+</div>
+<div id="outline-container-org40b3053" class="outline-4">
+<h4 id="org40b3053"><span class="section-number-4">1.9.9</span> Multidimensional Arrays and Pointers</h4>
+<div class="outline-text-4" id="text-1-9-9">
+<div class="org-src-container">
+<pre class="src src-C"><span style="color: #483d8b;">#include</span> <span style="color: #8b2252;">&lt;stdio.h&gt;</span>
+<span style="color: #483d8b;">#include</span> <span style="color: #8b2252;">&lt;stdlib.h&gt;</span>
+<span style="color: #483d8b;">#include</span> <span style="color: #8b2252;">&lt;string.h&gt;</span>
+<span style="color: #483d8b;">#define</span> <span style="color: #a0522d;">N</span> 10
+
+<span style="color: #228b22;">void</span> <span style="color: #0000ff;">init2D</span>(<span style="color: #228b22;">int</span> <span style="color: #a0522d;">rows</span>, <span style="color: #228b22;">int</span> <span style="color: #a0522d;">cols</span>, <span style="color: #228b22;">int</span> <span style="color: #a0522d;">values</span>[][cols]) {
+    <span style="color: #228b22;">int</span> <span style="color: #a0522d;">i</span> = 0;
+    <span style="color: #a020f0;">for</span> (<span style="color: #228b22;">int</span> <span style="color: #a0522d;">row</span> = 0; row &lt; rows; row++) {
+        <span style="color: #a020f0;">for</span> (<span style="color: #228b22;">int</span> <span style="color: #a0522d;">col</span> = 0; col &lt; cols; col++) {
+            values[row][col] = i++;
+        }
+    }
+}
+
+<span style="color: #228b22;">int</span> <span style="color: #0000ff;">main</span>() {
+    <span style="color: #228b22;">int</span> <span style="color: #a0522d;">myInts</span>[N][N];
+    init2D(N, N, myInts);
+    <span style="color: #b22222;">// </span><span style="color: #b22222;">int * ptrToMyInts = myInts; // THIS WILL NOT WORK</span>
+    <span style="color: #228b22;">int</span> (* <span style="color: #a0522d;">ptrToMyInts</span>)[N][N] = &amp;myInts;
+    <span style="color: #228b22;">int</span> (* <span style="color: #a0522d;">secondRow</span>)[N] = &amp;myInts[1];
+    printf(<span style="color: #8b2252;">"myInts:\t%p\n"</span>, (<span style="color: #228b22;">void</span>*)myInts);
+    printf(<span style="color: #8b2252;">"ptrToMyInts:\t%p\n"</span>, (<span style="color: #228b22;">void</span>*)ptrToMyInts);
+    printf(<span style="color: #8b2252;">"deref myInts:\t%d\n"</span>, **myInts); 
+    printf(<span style="color: #8b2252;">"deref myInts + 1:\t%d\n"</span>, **(myInts + 1) ); <span style="color: #b22222;">// </span><span style="color: #b22222;">this hops a row!</span>
+    printf(<span style="color: #8b2252;">"deref secondRow:\t%d\n"</span>, *secondRow[0]);
+    printf(<span style="color: #8b2252;">"deref *myInts + 1:\t%d\n"</span>, *(*myInts + 1) ); <span style="color: #b22222;">// </span><span style="color: #b22222;">this hops a col!</span>
+    <span style="color: #b22222;">//</span><span style="color: #b22222;">printf("deref ptrToMyInts:\t%d\n", *ptrToMyInts);    </span>
+    <span style="color: #a020f0;">return</span> 0;
+}
+</pre>
+</div>
+
+<pre class="example">
+myInts:	0x7ffe03eea450
+ptrToMyInts:	0x7ffe03eea450
+deref myInts:	0
+deref myInts + 1:	10
+deref secondRow:	10
+deref *myInts + 1:	1
+
+</pre>
+</div>
+</div>
+
+
+<div id="outline-container-org37f8745" class="outline-4">
+<h4 id="org37f8745"><span class="section-number-4">1.9.10</span> Arrays of Pointers or Pointers of Pointers</h4>
+<div class="outline-text-4" id="text-1-9-10">
+<p>
+Be aware that when declaring arrays there are arrays of pointers and
+pointers to arrays.
+</p>
+
+<p>
+They are different.
+</p>
+
+<div class="org-src-container">
+<pre class="src src-C"><span style="color: #483d8b;">#include</span> <span style="color: #8b2252;">&lt;stdio.h&gt;</span>
+<span style="color: #483d8b;">#include</span> <span style="color: #8b2252;">&lt;stdlib.h&gt;</span>
+<span style="color: #483d8b;">#include</span> <span style="color: #8b2252;">&lt;string.h&gt;</span>
+<span style="color: #483d8b;">#define</span> <span style="color: #a0522d;">N</span> 4
+<span style="color: #228b22;">int</span> <span style="color: #0000ff;">main</span>() {
+   <span style="color: #228b22;">char</span> * <span style="color: #a0522d;">ptrs</span>[4]; <span style="color: #b22222;">// </span><span style="color: #b22222;">an array of character poiunters!</span>
+   <span style="color: #228b22;">char</span> <span style="color: #a0522d;">stringOnStack</span>[] = <span style="color: #8b2252;">"ON STACK"</span>;
+   <span style="color: #b22222;">// </span><span style="color: #b22222;">these literals will not be on the stack</span>
+   ptrs[0] = <span style="color: #8b2252;">"Anaxagoras"</span>;
+   ptrs[1] = <span style="color: #8b2252;">"mummifies"</span>;
+   ptrs[2] = <span style="color: #8b2252;">"shackles"</span>;
+   ptrs[3] = stringOnStack;
+   printf(<span style="color: #8b2252;">"sizeof(ptrs)=%lu sizeof(ptrs[0])=%lu\n"</span>,<span style="color: #a020f0;">sizeof</span>(ptrs), <span style="color: #a020f0;">sizeof</span>(ptrs[0]));
+   printf(<span style="color: #8b2252;">"sizeof(stringOnStack)=%lu sizeof(stringOnStack[0])=%lu\n"</span>,
+          <span style="color: #a020f0;">sizeof</span>(stringOnStack), 
+          <span style="color: #a020f0;">sizeof</span>(stringOnStack[0]));
+   printf(<span style="color: #8b2252;">"sizeof(&amp;stringOnStack)=%lu sizeof(&amp;stringOnStack[0])=%lu\n"</span>,
+          <span style="color: #a020f0;">sizeof</span>(&amp;stringOnStack), 
+          <span style="color: #a020f0;">sizeof</span>(&amp;stringOnStack[0]));
+   <span style="color: #a020f0;">for</span> (<span style="color: #228b22;">int</span> <span style="color: #a0522d;">i</span> = 0; i &lt; N; i++) {
+       printf(<span style="color: #8b2252;">"S:%s\t"</span>, ptrs[i]);
+       printf(<span style="color: #8b2252;">"P:%p\t"</span>, (<span style="color: #228b22;">void</span>*)ptrs[i]);
+       printf(<span style="color: #8b2252;">"L:%p\n"</span>, (<span style="color: #228b22;">void</span>*)&amp;ptrs[i]);
+   } 
+
+   <span style="color: #228b22;">char</span> ** <span style="color: #a0522d;">pointsToPointers</span> = ptrs; <span style="color: #b22222;">// </span><span style="color: #b22222;">it is pointers to pointers (like an array!)</span>
+   printf(<span style="color: #8b2252;">"sizeof(pointsToPointers)=%lu sizeof(pointsToPointers[0])=%lu\n"</span>,
+          <span style="color: #a020f0;">sizeof</span>(pointsToPointers), 
+          <span style="color: #a020f0;">sizeof</span>(pointsToPointers[0]));
+   puts(*(pointsToPointers + 0));
+   puts(pointsToPointers[0]);
+   putchar(<span style="color: #8b2252;">'\n'</span>);
+   puts(*(pointsToPointers + 2));
+   puts(pointsToPointers[2]);
+   putchar(<span style="color: #8b2252;">'\n'</span>);
+
+   <span style="color: #a020f0;">return</span> 0;
+}
+</pre>
+</div>
+
+<pre class="example">
+sizeof(ptrs)=32 sizeof(ptrs[0])=8
+sizeof(stringOnStack)=9 sizeof(stringOnStack[0])=1
+sizeof(&amp;stringOnStack)=8 sizeof(&amp;stringOnStack[0])=8
+S:Anaxagoras	P:0x5652a1951978	L:0x7ffd48863760
+S:mummifies	P:0x5652a1951983	L:0x7ffd48863768
+S:shackles	P:0x5652a195198d	L:0x7ffd48863770
+S:ON STACK	P:0x7ffd4886378f	L:0x7ffd48863778
+sizeof(pointsToPointers)=8 sizeof(pointsToPointers[0])=8
+Anaxagoras
+Anaxagoras
+
+shackles
+shackles
+</pre>
+</div>
+</div>
+
+
+<div id="outline-container-orgbbce8a7" class="outline-4">
+<h4 id="orgbbce8a7"><span class="section-number-4">1.9.11</span> Confusing Array Pointer interactions and syntax</h4>
+<div class="outline-text-4" id="text-1-9-11">
+<ul class="org-ul">
+<li>int * myInts != int (* myInts)[]</li>
+<li></li>
+</ul>
+</div>
+
+<ol class="org-ol">
+<li><a id="org1a74078"></a>Make a pointer to the first element<br />
+<div class="outline-text-5" id="text-1-9-11-1">
+<div class="org-src-container">
+<pre class="src src-C"><span style="color: #483d8b;">#include</span> <span style="color: #8b2252;">&lt;stdio.h&gt;</span>
+<span style="color: #483d8b;">#include</span> <span style="color: #8b2252;">&lt;stdlib.h&gt;</span>
+<span style="color: #483d8b;">#include</span> <span style="color: #8b2252;">&lt;string.h&gt;</span>
+
+<span style="color: #483d8b;">#define</span> <span style="color: #a0522d;">N</span> 5
+
+<span style="color: #228b22;">void</span> <span style="color: #0000ff;">init2D</span>(<span style="color: #228b22;">int</span> <span style="color: #a0522d;">rows</span>, <span style="color: #228b22;">int</span> <span style="color: #a0522d;">cols</span>, <span style="color: #228b22;">int</span> <span style="color: #a0522d;">values</span>[][cols]) {
+    <span style="color: #228b22;">int</span> <span style="color: #a0522d;">i</span> = 0;
+    <span style="color: #a020f0;">for</span> (<span style="color: #228b22;">int</span> <span style="color: #a0522d;">row</span> = 0; row &lt; rows; row++) {
+        <span style="color: #a020f0;">for</span> (<span style="color: #228b22;">int</span> <span style="color: #a0522d;">col</span> = 0; col &lt; cols; col++) {
+            values[row][col] = i++;
+        }
+    }
+}
+
+<span style="color: #228b22;">int</span> <span style="color: #0000ff;">main</span>() {
+    <span style="color: #228b22;">int</span> <span style="color: #a0522d;">matrix</span>[N][N];
+    init2D( N, N, matrix );
+    <span style="color: #228b22;">int</span> * <span style="color: #a0522d;">pointToMatrix</span> = &amp;matrix[0][0];
+    <span style="color: #a020f0;">for</span> (<span style="color: #228b22;">int</span> <span style="color: #a0522d;">i</span> = 0; i &lt; N*N; i++) {
+        printf(<span style="color: #8b2252;">"%c"</span>, (i%N==0)?<span style="color: #8b2252;">'\n'</span>:<span style="color: #8b2252;">'\t'</span>);
+        printf(<span style="color: #8b2252;">"%d"</span>, pointToMatrix[i]);
+
+    }
+    <span style="color: #a020f0;">return</span> 0;   
+}
+</pre>
+</div>
+
+<pre class="example">
+0	1	2	3	4
+5	6	7	8	9
+10	11	12	13	14
+15	16	17	18	19
+20	21	22	23	24
+
+</pre>
+</div>
+</li>
+
+<li><a id="org17d8075"></a>Make a pointer to the first row<br />
+<div class="outline-text-5" id="text-1-9-11-2">
+<div class="org-src-container">
+<pre class="src src-C"><span style="color: #483d8b;">#include</span> <span style="color: #8b2252;">&lt;stdio.h&gt;</span>
+<span style="color: #483d8b;">#include</span> <span style="color: #8b2252;">&lt;stdlib.h&gt;</span>
+<span style="color: #483d8b;">#include</span> <span style="color: #8b2252;">&lt;string.h&gt;</span>
+
+<span style="color: #483d8b;">#define</span> <span style="color: #a0522d;">N</span> 5
+<span style="color: #483d8b;">#define</span> <span style="color: #a0522d;">M</span> 3
+
+<span style="color: #228b22;">void</span> <span style="color: #0000ff;">init2D</span>(<span style="color: #228b22;">int</span> <span style="color: #a0522d;">rows</span>, <span style="color: #228b22;">int</span> <span style="color: #a0522d;">cols</span>, <span style="color: #228b22;">int</span> <span style="color: #a0522d;">values</span>[][cols]) {
+    <span style="color: #228b22;">int</span> <span style="color: #a0522d;">i</span> = 0;
+    <span style="color: #a020f0;">for</span> (<span style="color: #228b22;">int</span> <span style="color: #a0522d;">row</span> = 0; row &lt; rows; row++) {
+        <span style="color: #a020f0;">for</span> (<span style="color: #228b22;">int</span> <span style="color: #a0522d;">col</span> = 0; col &lt; cols; col++) {
+            values[row][col] = i++;
+        }
+    }
+}
+
+<span style="color: #228b22;">int</span> <span style="color: #0000ff;">main</span>() {
+    <span style="color: #228b22;">int</span> <span style="color: #a0522d;">matrix</span>[M][N];
+    init2D( M, N, matrix );
+    <span style="color: #b22222;">// </span><span style="color: #b22222;">a pointer to an int array of size [N]</span>
+    <span style="color: #228b22;">int</span> (* <span style="color: #a0522d;">pointToRow</span>)[N] = &amp;matrix[0];
+    printf(<span style="color: #8b2252;">"sizeof(pointToRow)=%lu\n"</span>, <span style="color: #a020f0;">sizeof</span>(pointToRow));
+    printf(<span style="color: #8b2252;">"sizeof(pointToRow[0])=%lu\n"</span>, <span style="color: #a020f0;">sizeof</span>(pointToRow[0]));
+    printf(<span style="color: #8b2252;">"Take a ref to row\n"</span>);
+    <span style="color: #a020f0;">for</span> (<span style="color: #228b22;">int</span> <span style="color: #a0522d;">i</span> = 0; i &lt; M; i++) {
+        <span style="color: #228b22;">int</span> * <span style="color: #a0522d;">row</span> = pointToRow[i];
+        <span style="color: #a020f0;">for</span> (<span style="color: #228b22;">int</span> <span style="color: #a0522d;">j</span> = 0 ; j &lt; N; j++) {
+            printf(<span style="color: #8b2252;">"%d\t"</span>, row[j]);
+        }
+        printf(<span style="color: #8b2252;">"\n"</span>);
+    }
+    printf(<span style="color: #8b2252;">"Take a ref to row w/ pointer arithmetic\n"</span>);
+    pointToRow = &amp;matrix[0];
+    <span style="color: #a020f0;">for</span> (<span style="color: #228b22;">int</span> <span style="color: #a0522d;">i</span> = 0; i &lt; M; i++) {
+        <span style="color: #228b22;">int</span> * <span style="color: #a0522d;">row</span> = *pointToRow; <span style="color: #b22222;">//</span><span style="color: #b22222;">deref that row</span>
+        pointToRow++; <span style="color: #b22222;">// </span><span style="color: #b22222;">go to next row </span>
+        <span style="color: #a020f0;">for</span> (<span style="color: #228b22;">int</span> <span style="color: #a0522d;">j</span> = 0 ; j &lt; N; j++) {
+            printf(<span style="color: #8b2252;">"%d\t"</span>, row[j]);
+        }
+        printf(<span style="color: #8b2252;">"\n"</span>);
+    }
+    printf(<span style="color: #8b2252;">"Direct index\n"</span>);
+    pointToRow = &amp;matrix[0];
+    <span style="color: #b22222;">// </span><span style="color: #b22222;">direct index</span>
+    <span style="color: #a020f0;">for</span> (<span style="color: #228b22;">int</span> <span style="color: #a0522d;">i</span> = 0; i &lt; M; i++) {
+        <span style="color: #a020f0;">for</span> (<span style="color: #228b22;">int</span> <span style="color: #a0522d;">j</span> = 0 ; j &lt; N; j++) {
+            printf(<span style="color: #8b2252;">"%d\t"</span>, pointToRow[i][j]);
+        }
+        printf(<span style="color: #8b2252;">"\n"</span>);
+    }
+    printf(<span style="color: #8b2252;">"Skip a row\n"</span>);
+    <span style="color: #b22222;">// </span><span style="color: #b22222;">skip a row</span>
+    pointToRow = &amp;matrix[1];
+    <span style="color: #a020f0;">for</span> (<span style="color: #228b22;">int</span> <span style="color: #a0522d;">i</span> = 1; i &lt; M; i++) { <span style="color: #b22222;">// </span><span style="color: #b22222;">try not to go over our bounds</span>
+        <span style="color: #228b22;">int</span> * <span style="color: #a0522d;">row</span> = *pointToRow; <span style="color: #b22222;">//</span><span style="color: #b22222;">deref that row</span>
+        pointToRow++; <span style="color: #b22222;">// </span><span style="color: #b22222;">go to next row </span>
+        <span style="color: #a020f0;">for</span> (<span style="color: #228b22;">int</span> <span style="color: #a0522d;">j</span> = 0 ; j &lt; N; j++) {
+            printf(<span style="color: #8b2252;">"%d\t"</span>, row[j]);
+        }
+        printf(<span style="color: #8b2252;">"\n"</span>);
+    }
+
+    <span style="color: #a020f0;">return</span> 0;   
+}
+</pre>
+</div>
+
+<pre class="example">
+sizeof(pointToRow)=8
+sizeof(pointToRow[0])=20
+Take a ref to row
+0	1	2	3	4	
+5	6	7	8	9	
+10	11	12	13	14	
+Take a ref to row w/ pointer arithmetic
+0	1	2	3	4	
+5	6	7	8	9	
+10	11	12	13	14	
+Direct index
+0	1	2	3	4	
+5	6	7	8	9	
+10	11	12	13	14	
+Skip a row
+5	6	7	8	9	
+10	11	12	13	14
+</pre>
+</div>
+</li>
+</ol>
+</div>
+</div>
+</div>
+</div>
+<div id="postamble" class="status">
+<p class="author">Author: Abram Hindle</p>
+<p class="date">Created: 2020-03-10 Tue 10:06</p>
+<p class="validation"><a href="http://validator.w3.org/check?uri=referer">Validate</a></p>
+</div>
+</body>
+</html>

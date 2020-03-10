@@ -1,45 +1,78 @@
-#+TITLE: CMPUT201W20B2 Week 4
-#+PROPERTY: header-args:C             :results output :exports both :flags -std=c99 -Wall -pedantic -Werror -g 
-#+PROPERTY: header-args:sh            :results output :exports both
+% Created 2020-03-10 Tue 10:06
+% Intended LaTeX compiler: pdflatex
+\documentclass[11pt]{article}
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage{graphicx}
+\usepackage{grffile}
+\usepackage{longtable}
+\usepackage{wrapfig}
+\usepackage{rotating}
+\usepackage[normalem]{ulem}
+\usepackage{amsmath}
+\usepackage{textcomp}
+\usepackage{amssymb}
+\usepackage{capt-of}
+\usepackage{hyperref}
+\author{Abram Hindle}
+\date{\today}
+\title{CMPUT201W20B2 Week 4}
+\hypersetup{
+ pdfauthor={Abram Hindle},
+ pdftitle={CMPUT201W20B2 Week 4},
+ pdfkeywords={},
+ pdfsubject={},
+ pdfcreator={Emacs 25.2.2 (Org mode 9.1.6)}, 
+ pdflang={English}}
+\begin{document}
 
-* Week4
-** Copyright Statement
+\maketitle
+\tableofcontents
+
+
+\section{Week4}
+\label{sec:orgf0f9dc3}
+\subsection{Copyright Statement}
+\label{sec:org6309117}
 
 If you are in CMPUT201 at UAlberta this code is released in the public
 domain to you.
 
 Otherwise it is (c) 2020 Abram Hindle, Hazel Campbell AGPL3.0+
 
-*** License
+\subsubsection{License}
+\label{sec:org3ec3419}
 
-    Week 3 notes
-    Copyright (C) 2020 Abram Hindle, Hazel Campbell
+Week 3 notes
+Copyright (C) 2020 Abram Hindle, Hazel Campbell
 
-    This program is free software: you can redistribute it and/or modify
-    it under the terms of the GNU Affero General Public License as
-    published by the Free Software Foundation, either version 3 of the
-    License, or (at your option) any later version.
+This program is free software: you can redistribute it and/or modify
+it under the terms of the GNU Affero General Public License as
+published by the Free Software Foundation, either version 3 of the
+License, or (at your option) any later version.
 
-    This program is distributed in the hope that it will be useful,
-    but WITHOUT ANY WARRANTY; without even the implied warranty of
-    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-    GNU Affero General Public License for more details.
+This program is distributed in the hope that it will be useful,
+but WITHOUT ANY WARRANTY; without even the implied warranty of
+MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+GNU Affero General Public License for more details.
 
-    You should have received a copy of the GNU Affero General Public License
-    along with this program.  If not, see <https://www.gnu.org/licenses/>.
+You should have received a copy of the GNU Affero General Public License
+along with this program.  If not, see \url{https://www.gnu.org/licenses/}.
 
 
-*** Hazel Code is licensed under AGPL3.0+
+\subsubsection{Hazel Code is licensed under AGPL3.0+}
+\label{sec:orgedf10b4}
 
 Hazel's code is also found here
-https://github.com/hazelybell/examples/tree/C-2020-01
+\url{https://github.com/hazelybell/examples/tree/C-2020-01}
 
 Hazel code is licensed: The example code is licensed under the AGPL3+
 license, unless otherwise noted.
 
-** Init ORG-MODE
+\subsection{Init ORG-MODE}
+\label{sec:org63caef3}
 
-#+BEGIN_SRC elisp
+\begin{verbatim}
 ;; I need this for org-mode to work well
 
 (require 'ob-sh)
@@ -48,37 +81,36 @@ license, unless otherwise noted.
 (org-babel-do-load-languages 'org-babel-load-languages '((C . t)))
 (org-babel-do-load-languages 'org-babel-load-languages '((python . t)))
 (setq org-src-fontify-natively t)
-#+END_SRC
+\end{verbatim}
 
-#+RESULTS:
-: t
-
-*** Org export
-#+BEGIN_SRC elisp
+\subsubsection{Org export}
+\label{sec:orgcabf44d}
+\begin{verbatim}
 (org-html-export-to-html)
 (org-latex-export-to-pdf)
 (org-ascii-export-to-ascii)
-#+END_SRC
+\end{verbatim}
 
 
-** Org Template
+\subsection{Org Template}
+\label{sec:org09a5ccc}
 Copy and paste this to demo C
 
-#+BEGIN_SRC C :exports both
+\begin{verbatim}
 #include <stdio.h>
 
 int main(int argc, char**argv) {
     return 0;
 }
-#+END_SRC
+\end{verbatim}
 
-#+RESULTS:
-
-** Remember how to compile?
+\subsection{Remember how to compile?}
+\label{sec:org3050ba6}
 
 gcc -std=c99 -Wall -pedantic -Werror -o programname programname.c
 
-** Functions
+\subsection{Functions}
+\label{sec:org90f3e3d}
 
 Functions replicate functions in mathematics. They allocate space on
 the stack and have local variables.
@@ -87,31 +119,35 @@ Very similar to python functions
 
 Define a function:
 
-return_type functionName(ArgType1 arg1, ArgType2 arg2, ArgType3 arg3 ) {
-    ...
-}
+return\(_{\text{type}}\) functionName(ArgType1 arg1, ArgType2 arg2, ArgType3 arg3 ) \{
+    \ldots{}
+\}
 
 Call a function:
 
 functionName( arg1, arg2, arg3 );
 
-return_type returnValue = functionName( arg1, arg2, arg3) ;
+return\(_{\text{type}}\) returnValue = functionName( arg1, arg2, arg3) ;
 
 IN C89 all variable declarations are at the top of the function.
 
-*** return_types
-    
-    - void -- nothing
-    - int
-    - char
-    - float
-    - double
-    - ...
-    - pointer (array or string)
+\subsubsection{return\(_{\text{types}}\)}
+\label{sec:org576aa6d}
 
-*** Example
+\begin{itemize}
+\item void -- nothing
+\item int
+\item char
+\item float
+\item double
+\item \ldots{}
+\item pointer (array or string)
+\end{itemize}
 
-#+BEGIN_SRC C :exports both :flags -std=c99 -Wall -pedantic -Werror -g 
+\subsubsection{Example}
+\label{sec:org8f54b94}
+
+\begin{verbatim}
 #include <stdio.h>
 #include <stdlib.h>
 
@@ -124,13 +160,15 @@ int main() {
     example();
     return 0;
 }
-#+END_SRC
+\end{verbatim}
 
-#+RESULTS:
-: I have been made an example of
+\begin{verbatim}
+I have been made an example of
+\end{verbatim}
 
 
-*** Pass by Value
+\subsubsection{Pass by Value}
+\label{sec:org1c2102f}
 
 The value of parameters are COPIED into registers and sometimes the
 stack. Thus the original variables that the parameters come from are
@@ -140,7 +178,7 @@ Except pointers are not safe because given a pointer the called
 function can manipulate the data the pointer points to, but they
 cannot modify the original pointer.
 
-#+BEGIN_SRC C :exports both
+\begin{verbatim}
 #include <stdio.h>
 #include <stdlib.h>
 
@@ -158,33 +196,40 @@ int main() {
     printf("x: %d\n", x);
     printf("returned x vs x: %d vs %d\n", rx, x);
 }
-#+END_SRC
+\end{verbatim}
 
-#+RESULTS:
-: main x :	0x7ffcb783ed60
-: x: 10
-: example x:	0x7ffcb783ed4c
-: x: 10
-: returned x vs x: 11 vs 10
+\begin{verbatim}
+main x :	0x7ffe19cd7700
+x: 10
+example x:	0x7ffe19cd76ec
+x: 10
+returned x vs x: 11 vs 10
+\end{verbatim}
 
-*** Arrays again
+\subsubsection{Arrays again}
+\label{sec:org3a5478a}
 
-    - void initArray(int cols, int values[cols]) {
-    - void initArray(int cols, int values[]) {
+\begin{itemize}
+\item void initArray(int cols, int values[cols]) \{
+\item void initArray(int cols, int values[]) \{
+\end{itemize}
 
 You can specify array sizes in C99 but the size has to come earlier
 
-    - void init2D(int rows, int cols, int values[rows][cols]) {
-    - void init2D(int rows, int cols, int values[][cols]){ 
-    - void init3D(int planes, int rows, int cols, int values[planes][rows][cols]) {
-    - void init3D(int planes, int rows, int cols, int values[][rows][cols]) {
+\begin{itemize}
+\item void init2D(int rows, int cols, int values[rows][cols]) \{
+\item void init2D(int rows, int cols, int values[][cols])\{
+\item void init3D(int planes, int rows, int cols, int values[planes][rows][cols]) \{
+\item void init3D(int planes, int rows, int cols, int values[][rows][cols]) \{
+\end{itemize}
 
 
-*** Don't trust sizeof inside of functions!
+\subsubsection{Don't trust sizeof inside of functions!}
+\label{sec:org222cf4c}
 
 sizeof is only trustable if you declared the variable in your scope
 
-#+BEGIN_SRC C :exports both :flags -std=c99
+\begin{verbatim}
 #include <stdio.h>
 #include <stdlib.h>
 #include <time.h>
@@ -216,39 +261,39 @@ int main() {
     example();
     example();
 }
-#+END_SRC
+\end{verbatim}
 
-#+RESULTS:
-#+begin_example
-4 X 3 was chosen!
-sizeof(values) = 48
-sizeof(&values) = 8
-sizeof(values[0]) = 12
-init2D: sizeof(values)=8
-init2D: sizeof(values[0])=12
-2 X 7 was chosen!
-sizeof(values) = 56
+\begin{verbatim}
+10 X 7 was chosen!
+sizeof(values) = 280
 sizeof(&values) = 8
 sizeof(values[0]) = 28
 init2D: sizeof(values)=8
 init2D: sizeof(values[0])=28
-10 X 1 was chosen!
+5 X 8 was chosen!
+sizeof(values) = 160
+sizeof(&values) = 8
+sizeof(values[0]) = 32
+init2D: sizeof(values)=8
+init2D: sizeof(values[0])=32
+5 X 2 was chosen!
 sizeof(values) = 40
 sizeof(&values) = 8
-sizeof(values[0]) = 4
+sizeof(values[0]) = 8
 init2D: sizeof(values)=8
-init2D: sizeof(values[0])=4
-#+end_example
+init2D: sizeof(values[0])=8
+\end{verbatim}
 
-*** Returns
+\subsubsection{Returns}
+\label{sec:org859313e}
 
 Don't return arrays in general.
 
 To return a value and exit the function immediately run:
 
-   return expr 
+return expr 
 
-#+BEGIN_SRC C :exports both
+\begin{verbatim}
 #include <stdio.h>
 #include <stdlib.h>
 
@@ -286,10 +331,9 @@ int main() {
     printf("returnChar\t %c\n", returnChar( 66.1 ) );
 
 }
-#+END_SRC
+\end{verbatim}
 
-#+RESULTS:
-#+begin_example
+\begin{verbatim}
 squareInt	 625
 squareInt	 1
 squareFloat	 2.160900
@@ -304,14 +348,21 @@ returnChar	 66
 returnChar	 B
 returnChar	 a
 returnChar	 B
-#+end_example
+\end{verbatim}
 
-*** Recursion
-**** Recursion
-***** Recursion
-****** Recursion
+\subsubsection{Recursion}
+\label{sec:orgd3ea940}
+\begin{enumerate}
+\item Recursion
+\label{sec:org73fda68}
+\begin{enumerate}
+\item Recursion
+\label{sec:org1d7db1a}
+\begin{enumerate}
+\item Recursion
+\label{sec:org643393a}
 
-#+BEGIN_SRC C :exports both
+\begin{verbatim}
 #include <stdio.h>
 #include <stdlib.h>
 
@@ -328,11 +379,10 @@ int divisibleBy(int x, int y) {
     if (x % y == 0) { return y; }
     return divisibleBy(x, y - 1);
 }
-#+END_SRC
+\end{verbatim}
 
 
-#+RESULTS:
-#+begin_example
+\begin{verbatim}
 33 32
 33 31
 33 30
@@ -356,12 +406,16 @@ int divisibleBy(int x, int y) {
 33 12
 33 11
 11
-#+end_example
+\end{verbatim}
+\end{enumerate}
+\end{enumerate}
+\end{enumerate}
 
 
-*** Prototypes
+\subsubsection{Prototypes}
+\label{sec:org7869f02}
 
-#+BEGIN_SRC C :exports both
+\begin{verbatim}
 #include <stdio.h>
 #include <stdlib.h>
 
@@ -386,22 +440,25 @@ int divisibleBy(int x, int y) {
 }
 
 
-#+END_SRC
+\end{verbatim}
 
-#+RESULTS:
-: 16 15
-: 16 14
-: 16 13
-: 16 12
-: 16 11
-: 16 10
-: 16 9
-: 16 8
-: 8
+\begin{verbatim}
+16 15
+16 14
+16 13
+16 12
+16 11
+16 10
+16 9
+16 8
+8
+\end{verbatim}
 
-**** Prototypes and corecursive routines
+\begin{enumerate}
+\item Prototypes and corecursive routines
+\label{sec:orgd77611f}
 
-#+BEGIN_SRC C :exports both
+\begin{verbatim}
 #include <stdio.h>
 #include <stdlib.h>
 
@@ -437,22 +494,27 @@ int bReliesOnA(int x, int y) {
 }
 
 
-#+END_SRC
+\end{verbatim}
 
-#+RESULTS:
-: > aReliesOnB( 0, 100)
-: > bReliesOnA( 1, 100)
-: > aReliesOnB( 2, 100)
-: > bReliesOnA( 5, 100)
-: > aReliesOnB( 26, 100)
-: > bReliesOnA( 53, 100)
-: > aReliesOnB( 2810, 100)
-: 100
+\begin{verbatim}
+> aReliesOnB( 0, 100)
+> bReliesOnA( 1, 100)
+> aReliesOnB( 2, 100)
+> bReliesOnA( 5, 100)
+> aReliesOnB( 26, 100)
+> bReliesOnA( 53, 100)
+> aReliesOnB( 2810, 100)
+100
+\end{verbatim}
+\end{enumerate}
 
-*** Exercise
-****    - make a recursive countdown function, printing each number until 0 is met.
+\subsubsection{Exercise}
+\label{sec:org70085cf}
+\begin{enumerate}
+\item - make a recursive countdown function, printing each number until 0 is met.
+\label{sec:org1c7e9d4}
 
-#+BEGIN_SRC C
+\begin{verbatim}
 #include <stdio.h>
 
 void countDown(int n) {
@@ -467,10 +529,9 @@ int main() {
     return 0;
 }
 
-#+END_SRC
+\end{verbatim}
 
-#+RESULTS:
-#+begin_example
+\begin{verbatim}
 10
 9
 8
@@ -482,13 +543,14 @@ int main() {
 2
 1
 0
-#+end_example
-      
-****    - make a recursive fibonacci
-      fib(0) = 1
-      fib(1) = 1
-      fib(n) = fib(n-1) + fib(n-2)
-#+BEGIN_SRC C
+\end{verbatim}
+
+\item - make a recursive fibonacci
+\label{sec:org92f1873}
+fib(0) = 1
+fib(1) = 1
+fib(n) = fib(n-1) + fib(n-2)
+\begin{verbatim}
 #include <stdio.h>
 
 int fibonacci(int n) {
@@ -502,17 +564,21 @@ int main() {
     printf("%d\n",fibonacci(45));
     return 0;
 }
-#+END_SRC
+\end{verbatim}
 
-#+RESULTS:
-: 1836311903
+\begin{verbatim}
+1836311903
+\end{verbatim}
+\end{enumerate}
 
-** Scope
-*** const
+\subsection{Scope}
+\label{sec:orge9a2ef1}
+\subsubsection{const}
+\label{sec:org0fcc271}
 
 Instead of define you can use const for constants.
 
-#+BEGIN_SRC C :exports both
+\begin{verbatim}
 #include <stdio.h>
 #include <stdlib.h>
 
@@ -531,15 +597,14 @@ int main() {
     *not_nine = 10;
     printf("%d\n",*not_nine);
 }
-#+END_SRC
-
-#+RESULTS:
+\end{verbatim}
 
 
-*** Local variables
+\subsubsection{Local variables}
+\label{sec:org46022dd}
 
 
-#+BEGIN_SRC C :exports both
+\begin{verbatim}
 #include <stdio.h>
 #include <stdlib.h>
 // no x here
@@ -555,14 +620,16 @@ int main() {
     printf("x: %d\n", x);
     printf("returned x vs x: %d vs %d\n", rx, x);
 }
-#+END_SRC
+\end{verbatim}
 
-#+RESULTS:
-: x: 10
-: x: 10
-: returned x vs x: 11 vs 10
+\begin{verbatim}
+x: 10
+x: 10
+returned x vs x: 11 vs 10
+\end{verbatim}
 
-** Global Variables (BAD) / External Variables / File-level variables
+\subsection{Global Variables (BAD) / External Variables / File-level variables}
+\label{sec:org11aa2aa}
 
 Too common. Too error prone. You will usually cause lots of bugs by
 making top-level variables. They will only be available within the
@@ -576,7 +643,7 @@ file with the static keyword.
 If static is not used and the variable is in included files then it
 will be visible across all files.
 
-#+BEGIN_SRC C :exports both
+\begin{verbatim}
 #include <stdio.h>
 #include <stdlib.h>
 // BAD
@@ -610,21 +677,15 @@ int main() {
     printf("x: %d\n", x); // x_3
     printf("returned x vs x: %d vs %d\n", rx, x); // x_3
 }
-#+END_SRC
+\end{verbatim}
 
-#+RESULTS:
-: Global x 111
-: y: 12321
-: x: 10
-: x: 10
-: returned x vs x: 11 vs 10
-
-** Static Function Scope
+\subsection{Static Function Scope}
+\label{sec:org18c383b}
 
 Static function local variables keep their old values. It is similar
 to defining a global per function
 
-#+BEGIN_SRC C :exports both
+\begin{verbatim}
 #include <stdio.h>
 #include <stdlib.h>
 #include <time.h>
@@ -655,59 +716,74 @@ int main() {
     printf("Counted %u / %u numbers divisible by 3 generated by rand\n", count, N);
     printf("Worse: Counted %u / %u numbers divisible by 3 generated by rand\n", wCount, N);
 }
-#+END_SRC
+\end{verbatim}
 
-#+RESULTS:
-: 0
-: 1
-: 2
-: 3
-: 4
-: Counted 5 / 10 numbers divisible by 3 generated by rand
-: Worse: Counted 5 / 10 numbers divisible by 3 generated by rand
+\begin{verbatim}
+0
+1
+2
+Counted 3 / 10 numbers divisible by 3 generated by rand
+Worse: Counted 3 / 10 numbers divisible by 3 generated by rand
+\end{verbatim}
 
-** Pointers!
+\subsection{Pointers!}
+\label{sec:org99b7042}
 
-- What is a pointer? A number that is a memory address. 
+\begin{itemize}
+\item What is a pointer? A number that is a memory address.
 
-- What's at that memory address? the type of the pointer.
+\item What's at that memory address? the type of the pointer.
 
-   - char * str;
+\begin{itemize}
+\item char * str;
+\end{itemize}
 
-- Why?
+\item Why?
 
-   - you want to know the address so you can manipulate a value or
-     manipulate a shared value.
-   - you want to return multiple values from a function.
-   - your computer deals with memory as location and offsets the entire time
-   - the local variables is the current base pointer + an offset
+\begin{itemize}
+\item you want to know the address so you can manipulate a value or
+manipulate a shared value.
+\item you want to return multiple values from a function.
+\item your computer deals with memory as location and offsets the entire time
+\item the local variables is the current base pointer + an offset
+\end{itemize}
 
-- What is str? A integer that is a memory address.
-- What does str point to? A character, but many an array of characters!
-- Can I tell if it is an array of characters? No.
-- How can I get the first element of a character array at str?
- 
-   - str[0]
-   - *str
+\item What is str? A integer that is a memory address.
+\item What does str point to? A character, but many an array of characters!
+\item Can I tell if it is an array of characters? No.
+\item How can I get the first element of a character array at str?
 
-- How can I make a pointer to:
-   - char myChar = 'a';
-   - char * ptrToMyChar = &myChar;
+\begin{itemize}
+\item str[0]
+\item *str
+\end{itemize}
 
-- Can I manipulate pointers?
-  - char * ptrToChar = &myChar;
-  - ptrToChar++; // <--- goes to the following character in a character array
-  - *ptrToChar = 'b'; // Dereference ptrToChar and chance myChar to the value of 'b'
+\item How can I make a pointer to:
+\begin{itemize}
+\item char myChar = 'a';
+\item char * ptrToMyChar = \&myChar;
+\end{itemize}
 
-*** Operators
+\item Can I manipulate pointers?
+\begin{itemize}
+\item char * ptrToChar = \&myChar;
+\item ptrToChar++; // <--- goes to the following character in a character array
+\item *ptrToChar = 'b'; // Dereference ptrToChar and chance myChar to the value of 'b'
+\end{itemize}
+\end{itemize}
 
-    - & unary operator means "address of" 
-    - * unary operator means "dereference pointer" -- that is return
-      the value it points to
-    - don't confuse declaration of a variable int * x with
-      dereferencing a variable in an expression: *x
+\subsubsection{Operators}
+\label{sec:org8cbbc68}
 
-#+BEGIN_SRC C :exports both
+\begin{itemize}
+\item \& unary operator means "address of"
+\item * unary operator means "dereference pointer" -- that is return
+the value it points to
+\item don't confuse declaration of a variable int * x with
+dereferencing a variable in an expression: *x
+\end{itemize}
+
+\begin{verbatim}
 #include <stdio.h>
 #include <stdlib.h>
 
@@ -738,22 +814,24 @@ int main() {
 
     return 0;
 }
-#+END_SRC
+\end{verbatim}
 
-#+RESULTS:
-: i:   99,
-: address of i:  0x7ffd2caf7bf4
-: 	ptrToI1: 0x7ffd2caf7bf4, *ptrToI1: 99
-: 	ptrToI2: 0x7ffd2caf7bf4, *ptrToI2: 99
-: addressof i: 0x7ffd2caf7bf4,
-: address of ptrToI1:  0x7ffd2caf7bf8
-: 	ptrToI2: 0x7ffd2caf7c00
+\begin{verbatim}
+i:   99,
+address of i:  0x7ffef7f5a274
+	ptrToI1: 0x7ffef7f5a274, *ptrToI1: 99
+	ptrToI2: 0x7ffef7f5a274, *ptrToI2: 99
+addressof i: 0x7ffef7f5a274,
+address of ptrToI1:  0x7ffef7f5a278
+	ptrToI2: 0x7ffef7f5a280
+\end{verbatim}
 
 
 
-*** Character Arrays and Pointers
+\subsubsection{Character Arrays and Pointers}
+\label{sec:orgabd2b67}
 
-#+BEGIN_SRC C :exports both
+\begin{verbatim}
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
@@ -780,34 +858,34 @@ int main() {
     printf("professor location: %p\t ptr address: %p \t*ptr %c\n", (void*)&professor, professor, *professor);
     printf("believes location:  %p\t ptr address: %p \t*ptr %c\n", (void*)&believes, believes, *believes);
 }
-#+END_SRC
+\end{verbatim}
 
-#+RESULTS:
-#+begin_example
+\begin{verbatim}
 Size of a pointer 8
-Location pointed to 0x7ffe4bdef902
-full representation 00007FFE4BDEF902
+Location pointed to 0x7ffc5301a2d2
+full representation 00007FFC5301A2D2
 myChars: Abram believes he is a benevolent professor
-myChars location: 0x7ffe4bdef8e0
+myChars location: 0x7ffc5301a2b0
 professor: professor
-professor location: 0x7ffe4bdef902
+professor location: 0x7ffc5301a2d2
 believes: believes he is a benevolent professor
-believes location: 0x7ffe4bdef8e6
+believes location: 0x7ffc5301a2b6
 believes - myChars location: 6
 professor - myChars location: 34
 
 But where are myChars and professor and believes?
-myChars location:   0x7ffe4bdef8e0	 ptr address: 0x7ffe4bdef8e0 	*ptr A
-professor location: 0x7ffe4bdef8d0	 ptr address: 0x7ffe4bdef902 	*ptr p
-believes location:  0x7ffe4bdef8d8	 ptr address: 0x7ffe4bdef8e6 	*ptr b
-#+end_example
+myChars location:   0x7ffc5301a2b0	 ptr address: 0x7ffc5301a2b0 	*ptr A
+professor location: 0x7ffc5301a2a0	 ptr address: 0x7ffc5301a2d2 	*ptr p
+believes location:  0x7ffc5301a2a8	 ptr address: 0x7ffc5301a2b6 	*ptr b
+\end{verbatim}
 
-*** Int arrays
+\subsubsection{Int arrays}
+\label{sec:org5435415}
 
 Now character arrays are easy because the size is 1 for a character
 but what about arrays of larger size datatypes?
 
-#+BEGIN_SRC C :exports both
+\begin{verbatim}
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
@@ -838,12 +916,29 @@ int main() {
     int * six = five + 1;
     printf("five       Location: %p\t ptr address: %p \t*ptr %d\n", (void*)&five, (void*)five, *five);
     printf("six        Location: %p\t ptr address: %p \t*ptr %d\n", (void*)&six, (void*)six, *six);
-    
+
 
 }
-#+END_SRC
+\end{verbatim}
 
-#+RESULTS:
+\begin{verbatim}
+myInts: 0x7ffe80918f50
+ptrToMyInts: 0x7ffe80918f50
+five location:      0x7ffe80918f64 five value:      5
+fiveAgain location: 0x7ffe80918f64 fiveAgain value: 5
+five - myInts location: 20
+five - myInts location / sizeof(int): 5
+
+ OK... Where are they?
+myInts     Location: 0x7ffe80918f50	 ptr address: 0x7ffe80918f50 	*ptr 0
+ptrToMyIntsLocation: 0x7ffe80918f30	 ptr address: 0x7ffe80918f50 	*ptr 0
+five       Location: 0x7ffe80918f38	 ptr address: 0x7ffe80918f64 	*ptr 5
+fiveAgain  Location: 0x7ffe80918f40	 ptr address: 0x7ffe80918f64 	*ptr 5
+
+Let's add 1 to five
+five       Location: 0x7ffe80918f38	 ptr address: 0x7ffe80918f64 	*ptr 5
+six        Location: 0x7ffe80918f48	 ptr address: 0x7ffe80918f68 	*ptr 6
+\end{verbatim}
 myInts: 0x7ffd0bdc3f40
 ptrToMyInts: 0x7ffd0bdc3f40
 five location:      0x7ffd0bdc3f54 five value:      5
@@ -851,7 +946,7 @@ fiveAgain location: 0x7ffd0bdc3f54 fiveAgain value: 5
 five - myInts location: 20
 five - myInts location / sizeof(int): 5
 
- OK... Where are they?
+ OK\ldots{} Where are they?
 myInts     Location: 0x7ffd0bdc3f40	 ptr address: 0x7ffd0bdc3f40 	*ptr 0
 ptrToMyIntsLocation: 0x7ffd0bdc3f20	 ptr address: 0x7ffd0bdc3f40 	*ptr 0
 five       Location: 0x7ffd0bdc3f28	 ptr address: 0x7ffd0bdc3f54 	*ptr 5
@@ -861,8 +956,9 @@ Let's add 1 to five
 five       Location: 0x7ffd0bdc3f28	 ptr address: 0x7ffd0bdc3f54 	*ptr 5
 six        Location: 0x7ffd0bdc3f38	 ptr address: 0x7ffd0bdc3f58 	*ptr 6
 
-*** Arrays as pointers
-#+BEGIN_SRC C :exports both
+\subsubsection{Arrays as pointers}
+\label{sec:orge6cceb4}
+\begin{verbatim}
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
@@ -880,17 +976,19 @@ int main() {
     printf("deref ptrToMyInts2:\t%d\n", *ptrToMyInts2);
     return 0;
 }
-#+END_SRC
+\end{verbatim}
 
-#+RESULTS:
-: myInts:	0x7ffe0aae9c50
-: ptrToMyInts:	0x7ffe0aae9c50
-: ptrToMyInts2:	0x7ffe0aae9c50
-: deref myInts:	99
-: deref ptrToMyInts:	99
-: deref ptrToMyInts2:	99
+\begin{verbatim}
+myInts:	0x7ffe24475770
+ptrToMyInts:	0x7ffe24475770
+ptrToMyInts2:	0x7ffe24475770
+deref myInts:	99
+deref ptrToMyInts:	99
+deref ptrToMyInts2:	99
+\end{verbatim}
 
-*** Pointer arthimetic again
+\subsubsection{Pointer arthimetic again}
+\label{sec:org888f4f8}
 
 When you add to pointers you add not just an integer but your
 n*sizeof(*p) + p where p is a pointer.
@@ -898,7 +996,7 @@ n*sizeof(*p) + p where p is a pointer.
 *ptr++ is a common idiom, it means give me the current value and
 transition to the next memory location.
 
-#+BEGIN_SRC C
+\begin{verbatim}
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
@@ -926,38 +1024,39 @@ int main() {
     printf("%p %ld\n", (void*)ptr, *ptr);
     return 0;
 }
-#+END_SRC
+\end{verbatim}
 
-#+RESULTS:
-#+begin_example
-0 	 0x7ffe397be8e0
-1 	 0x7ffe397be8e8
-2 	 0x7ffe397be8f0
-3 	 0x7ffe397be8f8
-4 	 0x7ffe397be900
-5 	 0x7ffe397be908
-6 	 0x7ffe397be910
-7 	 0x7ffe397be918
-8 	 0x7ffe397be920
-9 	 0x7ffe397be928
-10 	 0x7ffe397be930
-10 	 0x7ffe397be930	ptr - oldptr -8
-9 	 0x7ffe397be928	ptr - oldptr -8
-8 	 0x7ffe397be920	ptr - oldptr -8
-7 	 0x7ffe397be918	ptr - oldptr -8
-6 	 0x7ffe397be910	ptr - oldptr -8
-5 	 0x7ffe397be908	ptr - oldptr -8
-4 	 0x7ffe397be900	ptr - oldptr -8
-3 	 0x7ffe397be8f8	ptr - oldptr -8
-2 	 0x7ffe397be8f0	ptr - oldptr -8
-1 	 0x7ffe397be8e8	ptr - oldptr -8
-0 	 0x7ffe397be8e0	ptr - oldptr -8
-0x7ffe397be8d8 140729862842592
-#+end_example
+\begin{verbatim}
+0 	 0x7fff0c5ec000
+1 	 0x7fff0c5ec008
+2 	 0x7fff0c5ec010
+3 	 0x7fff0c5ec018
+4 	 0x7fff0c5ec020
+5 	 0x7fff0c5ec028
+6 	 0x7fff0c5ec030
+7 	 0x7fff0c5ec038
+8 	 0x7fff0c5ec040
+9 	 0x7fff0c5ec048
+10 	 0x7fff0c5ec050
+10 	 0x7fff0c5ec050	ptr - oldptr -8
+9 	 0x7fff0c5ec048	ptr - oldptr -8
+8 	 0x7fff0c5ec040	ptr - oldptr -8
+7 	 0x7fff0c5ec038	ptr - oldptr -8
+6 	 0x7fff0c5ec030	ptr - oldptr -8
+5 	 0x7fff0c5ec028	ptr - oldptr -8
+4 	 0x7fff0c5ec020	ptr - oldptr -8
+3 	 0x7fff0c5ec018	ptr - oldptr -8
+2 	 0x7fff0c5ec010	ptr - oldptr -8
+1 	 0x7fff0c5ec008	ptr - oldptr -8
+0 	 0x7fff0c5ec000	ptr - oldptr -8
+0x7fff0c5ebff8 140733400924160
+\end{verbatim}
 
-**** Now with Chars
+\begin{enumerate}
+\item Now with Chars
+\label{sec:orga1d8d86}
 
-#+BEGIN_SRC C
+\begin{verbatim}
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
@@ -988,76 +1087,77 @@ int main() {
     printf("&str - &strLiteral in bytes: %lu\n", (unsigned long int)&str - (unsigned long int)&strLiteral);
     return 0;
 }
-#+END_SRC
+\end{verbatim}
 
-#+RESULTS:
-#+begin_example
+\begin{verbatim}
 Polar bears are cool bears
-P 0x7fffc7f4ed51      140736548105553
-o 0x7fffc7f4ed52      140736548105554
-l 0x7fffc7f4ed53      140736548105555
-a 0x7fffc7f4ed54      140736548105556
-r 0x7fffc7f4ed55      140736548105557
-  0x7fffc7f4ed56      140736548105558
-b 0x7fffc7f4ed57      140736548105559
-e 0x7fffc7f4ed58      140736548105560
-a 0x7fffc7f4ed59      140736548105561
-r 0x7fffc7f4ed5a      140736548105562
-s 0x7fffc7f4ed5b      140736548105563
-  0x7fffc7f4ed5c      140736548105564
-a 0x7fffc7f4ed5d      140736548105565
-r 0x7fffc7f4ed5e      140736548105566
-e 0x7fffc7f4ed5f      140736548105567
-  0x7fffc7f4ed60      140736548105568
-c 0x7fffc7f4ed61      140736548105569
-o 0x7fffc7f4ed62      140736548105570
-o 0x7fffc7f4ed63      140736548105571
-l 0x7fffc7f4ed64      140736548105572
-  0x7fffc7f4ed65      140736548105573
-b 0x7fffc7f4ed66      140736548105574
-e 0x7fffc7f4ed67      140736548105575
-a 0x7fffc7f4ed68      140736548105576
-r 0x7fffc7f4ed69      140736548105577
-s 0x7fffc7f4ed6a      140736548105578
-The start of this function's stack frame is pretty close to 0x7fffc7f4ed50
-P 0x562ca2571919       94749702166809
-o 0x562ca257191a       94749702166810
-l 0x562ca257191b       94749702166811
-a 0x562ca257191c       94749702166812
-r 0x562ca257191d       94749702166813
-  0x562ca257191e       94749702166814
-b 0x562ca257191f       94749702166815
-e 0x562ca2571920       94749702166816
-a 0x562ca2571921       94749702166817
-r 0x562ca2571922       94749702166818
-s 0x562ca2571923       94749702166819
-  0x562ca2571924       94749702166820
-a 0x562ca2571925       94749702166821
-r 0x562ca2571926       94749702166822
-e 0x562ca2571927       94749702166823
-  0x562ca2571928       94749702166824
-c 0x562ca2571929       94749702166825
-o 0x562ca257192a       94749702166826
-o 0x562ca257192b       94749702166827
-l 0x562ca257192c       94749702166828
-  0x562ca257192d       94749702166829
-b 0x562ca257192e       94749702166830
-e 0x562ca257192f       94749702166831
-a 0x562ca2571930       94749702166832
-r 0x562ca2571931       94749702166833
-s 0x562ca2571932       94749702166834
-str - strLiteral in bytes: 45986845938744
+P 0x7ffc89491f51      140722611756881
+o 0x7ffc89491f52      140722611756882
+l 0x7ffc89491f53      140722611756883
+a 0x7ffc89491f54      140722611756884
+r 0x7ffc89491f55      140722611756885
+  0x7ffc89491f56      140722611756886
+b 0x7ffc89491f57      140722611756887
+e 0x7ffc89491f58      140722611756888
+a 0x7ffc89491f59      140722611756889
+r 0x7ffc89491f5a      140722611756890
+s 0x7ffc89491f5b      140722611756891
+  0x7ffc89491f5c      140722611756892
+a 0x7ffc89491f5d      140722611756893
+r 0x7ffc89491f5e      140722611756894
+e 0x7ffc89491f5f      140722611756895
+  0x7ffc89491f60      140722611756896
+c 0x7ffc89491f61      140722611756897
+o 0x7ffc89491f62      140722611756898
+o 0x7ffc89491f63      140722611756899
+l 0x7ffc89491f64      140722611756900
+  0x7ffc89491f65      140722611756901
+b 0x7ffc89491f66      140722611756902
+e 0x7ffc89491f67      140722611756903
+a 0x7ffc89491f68      140722611756904
+r 0x7ffc89491f69      140722611756905
+s 0x7ffc89491f6a      140722611756906
+The start of this function's stack frame is pretty close to 0x7ffc89491f50
+P 0x563ee77aa919       94828171536665
+o 0x563ee77aa91a       94828171536666
+l 0x563ee77aa91b       94828171536667
+a 0x563ee77aa91c       94828171536668
+r 0x563ee77aa91d       94828171536669
+  0x563ee77aa91e       94828171536670
+b 0x563ee77aa91f       94828171536671
+e 0x563ee77aa920       94828171536672
+a 0x563ee77aa921       94828171536673
+r 0x563ee77aa922       94828171536674
+s 0x563ee77aa923       94828171536675
+  0x563ee77aa924       94828171536676
+a 0x563ee77aa925       94828171536677
+r 0x563ee77aa926       94828171536678
+e 0x563ee77aa927       94828171536679
+  0x563ee77aa928       94828171536680
+c 0x563ee77aa929       94828171536681
+o 0x563ee77aa92a       94828171536682
+o 0x563ee77aa92b       94828171536683
+l 0x563ee77aa92c       94828171536684
+  0x563ee77aa92d       94828171536685
+b 0x563ee77aa92e       94828171536686
+e 0x563ee77aa92f       94828171536687
+a 0x563ee77aa930       94828171536688
+r 0x563ee77aa931       94828171536689
+s 0x563ee77aa932       94828171536690
+str - strLiteral in bytes: 45894440220216
 &str - &strLiteral in bytes: 16
-#+end_example
+\end{verbatim}
+\end{enumerate}
 
 
 
-*** Hazel's ptrs.c
-    
+\subsubsection{Hazel's ptrs.c}
+\label{sec:org8cfd7c1}
+
 The intent here is to demonstrate the use and features of pointers and
 how to manipulate values via pointers within functions.
 
-#+BEGIN_SRC C
+\begin{verbatim}
 #include <stdio.h>
 
 int pbv(int passed) {
@@ -1092,13 +1192,13 @@ int main() {
     // type of a_pointer is "int *"
     // NULL: the NULL pointer, gives the pointer the value 0
     // used to indicate that the pointer doesn't point to anything
-    
+
     printf("thing_1 = %d\n", thing_1);
     printf("thing_2 = %d\n", thing_2);
     // error: ‘a_pointer’ is used uninitialized in this function [-Werror=uninitialized]
     //printf("a_pointer = %p\n", (void *) a_pointer);
     //printf("a_pointer = %zu\n", (size_t) a_pointer);
-    
+
     printf("\nsizes:\n");
     printf("sizeof(thing_1) = %zu\n", sizeof(thing_1));
     printf("sizeof(thing_2) = %zu\n", sizeof(thing_2));
@@ -1106,7 +1206,7 @@ int main() {
 
     // unary & operator: get address of (reference)
     a_pointer = &thing_1;
-    
+
     printf("\na_pointer = &thing_1;\n");
     printf(" &thing_1 = %p\n", (void *) &thing_1);
     printf(" &thing_2 = %p\n", (void *) &thing_2);
@@ -1138,7 +1238,7 @@ int main() {
     printf("  value = %d\n", value);
     printf(" &thing_2 = %p\n", (void *) &thing_2);
     printf("   &value = %p\n", (void *) &value);
-    
+
     printf("\ncopy value using pointer:\n");
     a_pointer = &thing_2;
     printf("\na_pointer = &thing_2;\n");
@@ -1159,7 +1259,7 @@ int main() {
     pbv(thing_1);
     printf("  thing_1 = %d\n", thing_1);
     printf(" &thing_1 = %p\n", (void *) &thing_1);
-    
+
     printf("\npass-by-reference (no copy):\n");
     printf("\npbr(&thing_1);\n");
     printf("  thing_1 = %d\n", thing_1);
@@ -1170,10 +1270,9 @@ int main() {
 
     return 0;
 }
-#+END_SRC
+\end{verbatim}
 
-#+RESULTS:
-#+begin_example
+\begin{verbatim}
 thing_1 = 100
 thing_2 = 200
 
@@ -1183,14 +1282,14 @@ sizeof(thing_2) = 4
 sizeof(a_pointer) = 8 (64 bits)
 
 a_pointer = &thing_1;
- &thing_1 = 0x7ffc2bed14d4
- &thing_2 = 0x7ffc2bed14d8
-a_pointer = 0x7ffc2bed14d4
-a_pointer = 140721045443796
+ &thing_1 = 0x7ffe8deb9864
+ &thing_2 = 0x7ffe8deb9868
+a_pointer = 0x7ffe8deb9864
+a_pointer = 140731279448164
 *a_pointer = 100
 
 a_pointer = &thing_2;
-a_pointer = 0x7ffc2bed14d8
+a_pointer = 0x7ffe8deb9868
 *a_pointer = 200
 
 copy value:
@@ -1198,56 +1297,57 @@ copy value:
 int value = thing_1;
 thing_1 = 100
   value = 100
- &thing_1 = 0x7ffc2bed14d4
-   &value = 0x7ffc2bed14dc
+ &thing_1 = 0x7ffe8deb9864
+   &value = 0x7ffe8deb986c
 
 copy value using pointer:
 
 value = *(&thing_2);
 thing_2 = 200
   value = 200
- &thing_2 = 0x7ffc2bed14d8
-   &value = 0x7ffc2bed14dc
+ &thing_2 = 0x7ffe8deb9868
+   &value = 0x7ffe8deb986c
 
 copy value using pointer:
 
 a_pointer = &thing_2;
-a_pointer = 0x7ffc2bed14d8
+a_pointer = 0x7ffe8deb9868
 *a_pointer = 200
 value = *a_pointer;
 thing_2 = 200
   value = 200
- &thing_2 = 0x7ffc2bed14d8
-   &value = 0x7ffc2bed14dc
+ &thing_2 = 0x7ffe8deb9868
+   &value = 0x7ffe8deb986c
 
 pass-by-value (copy):
 
 pbv(thing_1);
   thing_1 = 100
- &thing_1 = 0x7ffc2bed14d4
+ &thing_1 = 0x7ffe8deb9864
    passed = 101
-  &passed = 0x7ffc2bed14bc
+  &passed = 0x7ffe8deb984c
   thing_1 = 100
- &thing_1 = 0x7ffc2bed14d4
+ &thing_1 = 0x7ffe8deb9864
 
 pass-by-reference (no copy):
 
 pbr(&thing_1);
   thing_1 = 100
- &thing_1 = 0x7ffc2bed14d4
-   passed = 0x7ffc2bed14d4
+ &thing_1 = 0x7ffe8deb9864
+   passed = 0x7ffe8deb9864
   *passed = 100
-  &passed = 0x7ffc2bed14b8
+  &passed = 0x7ffe8deb9848
   thing_1 = 101
- &thing_1 = 0x7ffc2bed14d4
-#+end_example
+ &thing_1 = 0x7ffe8deb9864
+\end{verbatim}
 
-*** Hazel's ptr_const.c
+\subsubsection{Hazel's ptr\(_{\text{const.c}}\)}
+\label{sec:org1e71eb3}
 
 The intent here is to show that you shouldn't mess with const vars but
 you can eventually mutate them with pointers.
 
-#+BEGIN_SRC C
+\begin{verbatim}
 #include <stdio.h>
 
 
@@ -1256,7 +1356,7 @@ int main() {
     printf("mut_i = %d\n", mut_i);
     const int const_i = 200; // constant integer
     printf("const_i = %d\n", const_i);
-        
+
     // mutable pointer to mutable integer
     int * mut_p = &mut_i;
     printf("mut_p = %p\n", (void *) mut_p);
@@ -1273,29 +1373,29 @@ int main() {
     const int * const const_p_to_const = &const_i;
     printf("const_p_to_const = %p\n", (void *) const_p_to_const);
     printf("*const_p_to_const = %d\n", *const_p_to_const);
-    
+
     /*
     // Don't do this!
     // "warning: assignment discards ‘const’ qualifier from pointer target type"
     mut_p = &const_i;
-    
+
     const char *str_lit = "String literals are const char *";
     printf("%s\n", str_lit);
     // but remember this means we can change str_lit to point to a different string!
     str_lit = "String literal #2";
     printf("%s\n", str_lit);
-    
+
     // This protects us from:
     // str_lit[0] = 'D';
 
     // this is wrong:
     char *wrong = "We will try to change this string literal";
     printf("%s\n", wrong);
-    
+
     // Because it doesn't protect us from:
     // wrong[0] = 'D';
     // what happens if you uncomment the above line?
-    
+
     // This might be better:
     const char * const RIGHT = "Don't go changing on me!";
     printf("%s\n", RIGHT);
@@ -1305,43 +1405,44 @@ int main() {
     // RIGHT = wrong;
     */
 }
-#+END_SRC
+\end{verbatim}
 
-#+RESULTS:
-#+begin_example
+\begin{verbatim}
 mut_i = 100
 const_i = 200
-mut_p = 0x7ffec05d6940
+mut_p = 0x7ffd165d3e50
 *mut_p = 100
-const_p = 0x7ffec05d6940
+const_p = 0x7ffd165d3e50
 *const_p = 100
-p_to_const = 0x7ffec05d6944
+p_to_const = 0x7ffd165d3e54
 *p_to_const = 200
-const_p_to_const = 0x7ffec05d6944
+const_p_to_const = 0x7ffd165d3e54
 *const_p_to_const = 200
-#+end_example
+\end{verbatim}
 
-*** Hazel's Pointer No No's
+\subsubsection{Hazel's Pointer No No's}
+\label{sec:org8b96fb5}
 
-file:ptr_nonos.c
+\url{ptr\_nonos.c}
 
 Note the lack of flags below.
 
-#+BEGIN_SRC sh
+\begin{verbatim}
 gcc -std=c99 -Wall -pedantic  -o ptr_nonos ptr_nonos.c && \
 ./ptr_nonos
-#+END_SRC
+\end{verbatim}
 
-#+RESULTS:
-: *pointer = 100
-:     Three fives is 15
-: *pointer = 21860
-:     Three fives is 15
-:   result  = 15
-:   &result = 0x7ffcaa9e1db4
-: &result_p = 0x7ffcaa9e1db8
+\begin{verbatim}
+*pointer = 100
+    Three fives is 15
+*pointer = 22089
+    Three fives is 15
+  result  = 15
+  &result = 0x7ffee57fce84
+&result_p = 0x7ffee57fce88
+\end{verbatim}
 
-#+BEGIN_SRC C :flags -std=c99 -Wall -pedantic
+\begin{verbatim}
 #include <stdio.h>
 
 #define SIZE 10
@@ -1388,22 +1489,22 @@ int main() {
     printf("*pointer = %d\n", *pointer);
     do_things();
     printf("*pointer = %d\n", *pointer);
-    
+
     // You can't get a pointer to some things...
     // This won't compile:
     // &(do_things());
-    
+
     // We can't do this for the same reason...
     // &10;
-    
+
     // This one is actually exactly the same as the one above...
     // &SIZE;
-    
+
     // You have to make memory to store the value to get a pointer to it!
     int result = do_things();
     printf("  result  = %d\n",           result);
     printf("  &result = %p\n", (void *) &result);
-    
+
     // This won't compile either. Same reason.
     //     &(&result);
     // You have to make memory to store the pointer to get a pointer to it!
@@ -1416,23 +1517,23 @@ int main() {
     printf("***result_ppp = %d\n", ***result_ppp);
     return 0;
 }
-#+END_SRC
+\end{verbatim}
 
-#+RESULTS:
-#+begin_example
+\begin{verbatim}
 *pointer = 100
     Three fives is 15
-*pointer = 22000
+*pointer = 21920
     Three fives is 15
   result  = 15
-  &result = 0x7ffcf264af84
-&result_p = 0x7ffcf264af88
-result_ppp = 0x7ffcf264af90
-&result_ppp = 0x7ffcf264af98
+  &result = 0x7ffd1638f9f4
+&result_p = 0x7ffd1638f9f8
+result_ppp = 0x7ffd1638fa00
+&result_ppp = 0x7ffd1638fa08
 ***result_ppp = 15
-#+end_example
-*** Multidimensional Arrays and Pointers
-#+BEGIN_SRC C :exports both
+\end{verbatim}
+\subsubsection{Multidimensional Arrays and Pointers}
+\label{sec:org9b694c7}
+\begin{verbatim}
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
@@ -1462,25 +1563,27 @@ int main() {
     //printf("deref ptrToMyInts:\t%d\n", *ptrToMyInts);    
     return 0;
 }
-#+END_SRC
+\end{verbatim}
 
-#+RESULTS:
-: myInts:	0x7fffe871d490
-: ptrToMyInts:	0x7fffe871d490
-: deref myInts:	0
-: deref myInts + 1:	10
-: deref secondRow:	10
-: deref *myInts + 1:	1
+\begin{verbatim}
+myInts:	0x7ffc32f5f8f0
+ptrToMyInts:	0x7ffc32f5f8f0
+deref myInts:	0
+deref myInts + 1:	10
+deref secondRow:	10
+deref *myInts + 1:	1
+\end{verbatim}
 
 
-*** Arrays of Pointers or Pointers of Pointers
+\subsubsection{Arrays of Pointers or Pointers of Pointers}
+\label{sec:orga889717}
 
 Be aware that when declaring arrays there are arrays of pointers and
 pointers to arrays.
 
 They are different.
 
-#+BEGIN_SRC C
+\begin{verbatim}
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
@@ -1519,34 +1622,38 @@ int main() {
 
    return 0;
 }
-#+END_SRC
+\end{verbatim}
 
-#+RESULTS:
-#+begin_example
+\begin{verbatim}
 sizeof(ptrs)=32 sizeof(ptrs[0])=8
 sizeof(stringOnStack)=9 sizeof(stringOnStack[0])=1
 sizeof(&stringOnStack)=8 sizeof(&stringOnStack[0])=8
-S:Anaxagoras	P:0x557698087978	L:0x7fffcdb625f0
-S:mummifies	P:0x557698087983	L:0x7fffcdb625f8
-S:shackles	P:0x55769808798d	L:0x7fffcdb62600
-S:ON STACK	P:0x7fffcdb6261f	L:0x7fffcdb62608
+S:Anaxagoras	P:0x55cb7601d978	L:0x7fffba6e7380
+S:mummifies	P:0x55cb7601d983	L:0x7fffba6e7388
+S:shackles	P:0x55cb7601d98d	L:0x7fffba6e7390
+S:ON STACK	P:0x7fffba6e73af	L:0x7fffba6e7398
 sizeof(pointsToPointers)=8 sizeof(pointsToPointers[0])=8
 Anaxagoras
 Anaxagoras
 
 shackles
 shackles
-#+end_example
+\end{verbatim}
 
 
-*** Confusing Array Pointer interactions and syntax
+\subsubsection{Confusing Array Pointer interactions and syntax}
+\label{sec:orgf76931c}
 
-    - int * myInts != int (* myInts)[]
-    - 
+\begin{itemize}
+\item int * myInts != int (* myInts)[]
+\item 
+\end{itemize}
 
-**** Make a pointer to the first element
+\begin{enumerate}
+\item Make a pointer to the first element
+\label{sec:org2465e2f}
 
-#+BEGIN_SRC C
+\begin{verbatim}
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
@@ -1573,18 +1680,20 @@ int main() {
     }
     return 0;   
 }
-#+END_SRC
+\end{verbatim}
 
-#+RESULTS:
-: 0	1	2	3	4
-: 5	6	7	8	9
-: 10	11	12	13	14
-: 15	16	17	18	19
-: 20	21	22	23	24
+\begin{verbatim}
+0	1	2	3	4
+5	6	7	8	9
+10	11	12	13	14
+15	16	17	18	19
+20	21	22	23	24
+\end{verbatim}
 
-**** Make a pointer to the first row
+\item Make a pointer to the first row
+\label{sec:org9990005}
 
-#+BEGIN_SRC C
+\begin{verbatim}
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
@@ -1649,10 +1758,9 @@ int main() {
 
     return 0;   
 }
-#+END_SRC
+\end{verbatim}
 
-#+RESULTS:
-#+begin_example
+\begin{verbatim}
 sizeof(pointToRow)=8
 sizeof(pointToRow[0])=20
 Take a ref to row
@@ -1670,5 +1778,6 @@ Direct index
 Skip a row
 5	6	7	8	9	
 10	11	12	13	14
-#+end_example
-     
+\end{verbatim}
+\end{enumerate}
+\end{document}
