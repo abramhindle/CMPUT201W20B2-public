@@ -1,45 +1,78 @@
-#+TITLE: CMPUT201W20B2 Week 6
-#+PROPERTY: header-args:C             :results output :exports both :flags -std=c99 -Wall -pedantic -Werror -g 
-#+PROPERTY: header-args:sh            :results output :exports both
+% Created 2020-03-10 Tue 10:09
+% Intended LaTeX compiler: pdflatex
+\documentclass[11pt]{article}
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage{graphicx}
+\usepackage{grffile}
+\usepackage{longtable}
+\usepackage{wrapfig}
+\usepackage{rotating}
+\usepackage[normalem]{ulem}
+\usepackage{amsmath}
+\usepackage{textcomp}
+\usepackage{amssymb}
+\usepackage{capt-of}
+\usepackage{hyperref}
+\author{Abram Hindle}
+\date{\today}
+\title{CMPUT201W20B2 Week 6}
+\hypersetup{
+ pdfauthor={Abram Hindle},
+ pdftitle={CMPUT201W20B2 Week 6},
+ pdfkeywords={},
+ pdfsubject={},
+ pdfcreator={Emacs 25.2.2 (Org mode 9.1.6)}, 
+ pdflang={English}}
+\begin{document}
 
-* Week6
-** Copyright Statement
+\maketitle
+\tableofcontents
+
+
+\section{Week6}
+\label{sec:org4cd44cd}
+\subsection{Copyright Statement}
+\label{sec:orgb88ea63}
 
 If you are in CMPUT201 at UAlberta this code is released in the public
 domain to you.
 
 Otherwise it is (c) 2020 Abram Hindle, Hazel Campbell AGPL3.0+
 
-*** License
+\subsubsection{License}
+\label{sec:org96177b1}
 
-    Week 3 notes
-    Copyright (C) 2020 Abram Hindle, Hazel Campbell
+Week 3 notes
+Copyright (C) 2020 Abram Hindle, Hazel Campbell
 
-    This program is free software: you can redistribute it and/or modify
-    it under the terms of the GNU Affero General Public License as
-    published by the Free Software Foundation, either version 3 of the
-    License, or (at your option) any later version.
+This program is free software: you can redistribute it and/or modify
+it under the terms of the GNU Affero General Public License as
+published by the Free Software Foundation, either version 3 of the
+License, or (at your option) any later version.
 
-    This program is distributed in the hope that it will be useful,
-    but WITHOUT ANY WARRANTY; without even the implied warranty of
-    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-    GNU Affero General Public License for more details.
+This program is distributed in the hope that it will be useful,
+but WITHOUT ANY WARRANTY; without even the implied warranty of
+MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+GNU Affero General Public License for more details.
 
-    You should have received a copy of the GNU Affero General Public License
-    along with this program.  If not, see <https://www.gnu.org/licenses/>.
+You should have received a copy of the GNU Affero General Public License
+along with this program.  If not, see \url{https://www.gnu.org/licenses/}.
 
 
-*** Hazel Code is licensed under AGPL3.0+
+\subsubsection{Hazel Code is licensed under AGPL3.0+}
+\label{sec:org10c893b}
 
 Hazel's code is also found here
-https://github.com/hazelybell/examples/tree/C-2020-01
+\url{https://github.com/hazelybell/examples/tree/C-2020-01}
 
 Hazel code is licensed: The example code is licensed under the AGPL3+
 license, unless otherwise noted.
 
-** Init ORG-MODE
+\subsection{Init ORG-MODE}
+\label{sec:org7628c41}
 
-#+BEGIN_SRC elisp
+\begin{verbatim}
 ;; I need this for org-mode to work well
 ;; If we have a new org-mode use ob-shell
 ;; otherwise use ob-sh --- but not both!
@@ -55,61 +88,60 @@ license, unless otherwise noted.
 (setq org-confirm-babel-evaluate nil) ;; danger!
 (custom-set-faces
  '(org-block ((t (:inherit shadow :foreground "black")))))
-#+END_SRC
+\end{verbatim}
 
-#+RESULTS:
-
-*** Org export
-#+BEGIN_SRC elisp
+\subsubsection{Org export}
+\label{sec:orgf65fbea}
+\begin{verbatim}
 (org-html-export-to-html)
 (org-latex-export-to-pdf)
 (org-ascii-export-to-ascii)
-#+END_SRC
-
-#+RESULTS:
-: presentation.txt
+\end{verbatim}
 
 
-** Org Template
+\subsection{Org Template}
+\label{sec:orgce362ee}
 Copy and paste this to demo C
 
-#+BEGIN_SRC C :exports both
+\begin{verbatim}
 #include <stdio.h>
 
 int main(int argc, char**argv) {
     return 0;
 }
-#+END_SRC
+\end{verbatim}
 
-#+RESULTS:
-
-** Remember how to compile?
+\subsection{Remember how to compile?}
+\label{sec:org688b202}
 
 gcc -std=c99 -Wall -pedantic -Werror -o programname programname.c
 
-** Structs!
-*** A pointer is not a l value
+\subsection{Structs!}
+\label{sec:org842a97e}
+\subsubsection{A pointer is not a l value}
+\label{sec:orgb420adb}
 
-    p = string
-    p++
-    tmp = p
-    p = (char*)p + 1*sizeof(void)
-    
+p = string
+p++
+tmp = p
+p = (char*)p + 1*sizeof(void)
 
-*** Struct Intro
+
+\subsubsection{Struct Intro}
+\label{sec:org17b78ea}
 How do you store a record?
 
 In python you typically use a dictionary and store key value pairs
 within a dictionary.
 
-#+BEGIN_SRC python
+\begin{verbatim}
 my_pet = {"name":"Dan", "type":"dog", "age":6 }
-#+END_SRC
+\end{verbatim}
 
 In C structures allow you to group relevant information together such
 that you can access fields (properties).
 
-#+BEGIN_SRC C :eval no
+\begin{verbatim}
 #define NAME_LEN 17
 #define TYPE_LEN 9
 struct {
@@ -117,29 +149,29 @@ struct {
     char type[TYPE_LEN];
     int  age;
 } my_pet;
-#+END_SRC
+\end{verbatim}
 
 In python you access the dictionary or object with:
-#+BEGIN_SRC python :eval no
+\begin{verbatim}
 my_pet = {"name":"Dan", "type":"dog", "age":6 }
 my_pet["name"]
 # or if it was an object
 my_pet = Pet("Dan","dog",6)
 my_pet.name
-#+END_SRC
+\end{verbatim}
 
-(&my_pet)->name
-my_pet.name
+(\&my\(_{\text{pet}}\))->name
+my\(_{\text{pet.name}}\)
 
 In C with structs you use the dot operator to access fields or members
 of the structs
 
-names = { "Darren", "Dan" }
-ages  = { 3       , 6 }
-type  = {"cat",     "dog" }
+names = \{ "Darren", "Dan" \}
+ages  = \{ 3       , 6 \}
+type  = \{"cat",     "dog" \}
           0           1
 
-#define DARREN 0
+\#define DARREN 0
 names[DARREN]
 ages[DARREN]
 type[DARREN]
@@ -149,7 +181,7 @@ darren.age
 darren.type
 
 
-#+BEGIN_SRC C 
+\begin{verbatim}
 #include <stdio.h>
 #define NAME_LEN 17
 #define TYPE_LEN 9
@@ -169,31 +201,36 @@ int main() {
    printf("%s, %s, %d\n", my_pet.name, my_pet.type, my_pet.age);
    printf("sizeof(my_pet)=%lu\n",sizeof(my_pet));
 }
-#+END_SRC
+\end{verbatim}
 
-#+RESULTS:
-: Dan, dog, 6
-: sizeof(my_pet)=48
-
-*** Structs in memory
+\subsubsection{Structs in memory}
+\label{sec:orge315619}
 
 Structs are very compact. They are all their field datatypes stacked
 together.
 
 It will be mixed datatypes in memory:
 
-| name | offset | value   |
-|------+--------+---------|
-| name |      0 | "Dan\0" |
-| type |     17 | "dog\0" |
-| age  |     26 | 6       |
+\begin{center}
+\begin{tabular}{lrl}
+name & offset & value\\
+\hline
+name & 0 & "Dan$\backslash$0"\\
+type & 17 & "dog$\backslash$0"\\
+age & 26 & 6\\
+\end{tabular}
+\end{center}
 
-|   0 |     |     |      | 4 |   |   |   | 8 |   |   |   | 12 |   |   |   | 16 |     |     |     |   20 |   |   |   | 24 |   | 26 |    |    |    |
-|-----+-----+-----+------+---+---+---+---+---+---+---+---+----+---+---+---+----+-----+-----+-----+------+---+---+---+----+---+----+----+----+----|
-| 'D' | 'a' | 'n' | '\0' |   |   |   |   |   |   |   |   |    |   |   |   |    | 'd' | 'o' | 'g' | '\0' |   |   |   |    |   | 00 | 00 | 00 | 06 |
+\begin{center}
+\begin{tabular}{rlllrlllrlllrlllrlllrlllrlrrrr}
+0 &  &  &  & 4 &  &  &  & 8 &  &  &  & 12 &  &  &  & 16 &  &  &  & 20 &  &  &  & 24 &  & 26 &  &  & \\
+\hline
+'D' & 'a' & 'n' & '$\backslash$0' &  &  &  &  &  &  &  &  &  &  &  &  &  & 'd' & 'o' & 'g' & '$\backslash$0' &  &  &  &  &  & 00 & 00 & 00 & 06\\
+\end{tabular}
+\end{center}
 
 
-#+BEGIN_SRC C 
+\begin{verbatim}
 #include <stdio.h>
 #define NAME_LEN 17
 #define TYPE_LEN 9
@@ -215,22 +252,24 @@ int main() {
    printf("sizeof(my_pet)=%lu\n",sizeof(my_pet));
 
 }
-#+END_SRC
+\end{verbatim}
 
-#+RESULTS:
-: Dan, dog, 6
-: struct      location:	 0x7ffe2d7e85e0
-: my_pet.name location:	 0x7ffe2d7e85e0
-: my_pet.type location:	 0x7ffe2d7e85f1
-: my_pet.age  location:	 0x7ffe2d7e85fc
-: my_pet.name size:	 17
-: my_pet.type size:	 9
-: my_pet.age  size:	 4
-: sizeof(my_pet)=32
+\begin{verbatim}
+Dan, dog, 6
+struct      location:	 0x7ffcbdf3e0b0
+my_pet.name location:	 0x7ffcbdf3e0b0
+my_pet.type location:	 0x7ffcbdf3e0c1
+my_pet.age  location:	 0x7ffcbdf3e0cc
+my_pet.name size:	 17
+my_pet.type size:	 9
+my_pet.age  size:	 4
+sizeof(my_pet)=32
+\end{verbatim}
 
-*** Initializing
+\subsubsection{Initializing}
+\label{sec:org9f72d5c}
 
-#+BEGIN_SRC C 
+\begin{verbatim}
 #include <stdio.h>
 #define NAME_LEN 17
 #define TYPE_LEN 9
@@ -244,17 +283,19 @@ int main() {
      my_pet2 = { .name = "Darren", .type = "cat", .age = 3 }; // designated initializer
    printf("%s and %s get along just fine.\n", my_pet1.name, my_pet2.name);
 }
-#+END_SRC
+\end{verbatim}
 
-#+RESULTS:
-: Dan and Darren get along just fine.
+\begin{verbatim}
+Dan and Darren get along just fine.
+\end{verbatim}
 
 
-*** Structure Types
+\subsubsection{Structure Types}
+\label{sec:org90e16a5}
 
 You can predeclare structure "tags" ahead of time so you can reuse your type.
 
-#+BEGIN_SRC C 
+\begin{verbatim}
 #include <stdio.h>
 #define NAME_LEN 17
 #define TYPE_LEN 9
@@ -270,16 +311,19 @@ int main() {
     struct my_pet my_pet2 = { .name = "Darren", .type = "cat", .age = 3 }; // designated initializer
     printf("%s and %s get along just fine.\n", my_pet1.name, my_pet2.name);
 }
-#+END_SRC
+\end{verbatim}
 
-#+RESULTS:
-: Dan and Darren get along just fine.
+\begin{verbatim}
+Dan and Darren get along just fine.
+\end{verbatim}
 
-**** Typedef instead of struct tag
+\begin{enumerate}
+\item Typedef instead of struct tag
+\label{sec:orgb9de3b5}
 
 You can also typedef it away but it causes issues later.
 
-#+BEGIN_SRC C 
+\begin{verbatim}
 #include <stdio.h>
 #define NAME_LEN 17
 #define TYPE_LEN 9
@@ -295,14 +339,16 @@ int main() {
     MyPet my_pet2 = { .name = "Darren", .type = "cat", .age = 3 }; // designated initializer
     printf("%s and %s get along just fine.\n", my_pet1.name, my_pet2.name);
 }
-#+END_SRC
+\end{verbatim}
 
-#+RESULTS:
-: Dan and Darren get along just fine.
+\begin{verbatim}
+Dan and Darren get along just fine.
+\end{verbatim}
 
-**** Or combine both typedef and struct tags
+\item Or combine both typedef and struct tags
+\label{sec:orga9ba282}
 
-#+BEGIN_SRC C 
+\begin{verbatim}
 #include <stdio.h>
 #define NAME_LEN 17
 #define TYPE_LEN 9
@@ -325,14 +371,16 @@ int main() {
     MyPet my_pet2 = { .name = "Darren", .type = "cat", .age = 3 }; // designated initializer
     printf("%s and %s get along just fine.\n", my_pet1.name, my_pet2.name);
 }
-#+END_SRC
+\end{verbatim}
 
-#+RESULTS:
-: Dan and Darren get along just fine.
+\begin{verbatim}
+Dan and Darren get along just fine.
+\end{verbatim}
 
-**** Hazel's example of typedef and style
+\item Hazel's example of typedef and style
+\label{sec:org2ab375a}
 
-#+BEGIN_SRC C
+\begin{verbatim}
 #include <stdio.h>
 
 /* A common thing to do is to typedef a struct
@@ -378,18 +426,20 @@ int main() {
            position.y
     );
 }
-#+END_SRC
+\end{verbatim}
 
-#+RESULTS:
-: position=(0,0)
-: position=(0,0)
-: new_position=(-1,0)
-: position=(-2,0)
+\begin{verbatim}
+position=(0,0)
+position=(0,0)
+new_position=(-1,0)
+position=(-2,0)
+\end{verbatim}
 
 
-**** Pass by Value Gotcha
+\item Pass by Value Gotcha
+\label{sec:org0757427}
 
-#+BEGIN_SRC C
+\begin{verbatim}
 #include <stdio.h>
 #include <string.h>
 
@@ -456,34 +506,35 @@ int main() {
     printf("new_position.name  %s\n", new_position.name); // but they point to the same thing
 
 }
-#+END_SRC
+\end{verbatim}
 
-#+RESULTS:
-#+begin_example
-my_string_literal pointer is at 0x7ffc034aeb68
+\begin{verbatim}
+my_string_literal pointer is at 0x7ffdfbeeaa68
 position=(0,0)
-I am moving position.name: YoloStringLiteral!-X-X-X-X-X-X [0x5567c2ff4a98] LEFT
+I am moving position.name: YoloStringLiteral!-X-X-X-X-X-X [0x55afc2588a98] LEFT
 position=(0,0)
 new_position=(-1,0)
-I am moving position.name: YoloStringLiteral!-X-X-X-X-X-X [0x5567c2ff4a98] LEFT
-I am moving position.name: YoloStringLiteral!-X-X-X-X-X-X [0x5567c2ff4a98] LEFT
+I am moving position.name: YoloStringLiteral!-X-X-X-X-X-X [0x55afc2588a98] LEFT
+I am moving position.name: YoloStringLiteral!-X-X-X-X-X-X [0x55afc2588a98] LEFT
 position=(-2,0)
 Size of named_coordinate: 16
 Size of coordinate: 8
 Size of my_string_literal: 8
 strlen of my_string_literal: 30
-&position.name     0x7ffc034aeb78
-&new_position.name 0x7ffc034aeb88
-position.name      0x5567c2ff4a98
-new_position.name  0x5567c2ff4a98
+&position.name     0x7ffdfbeeaa78
+&new_position.name 0x7ffdfbeeaa88
+position.name      0x55afc2588a98
+new_position.name  0x55afc2588a98
 position.name      YoloStringLiteral!-X-X-X-X-X-X
 new_position.name  YoloStringLiteral!-X-X-X-X-X-X
-#+end_example
+\end{verbatim}
+\end{enumerate}
 
 
-*** Pointers and Structs
+\subsubsection{Pointers and Structs}
+\label{sec:org626617a}
 
-#+BEGIN_SRC C
+\begin{verbatim}
 #include <stdio.h>
 
 /* Using pointers to structs is very common.
@@ -530,120 +581,124 @@ int main() {
            position.y
     );
 }
-#+END_SRC
+\end{verbatim}
 
-#+RESULTS:
-: position=(0,0)
-: position=(-1,-1)
+\begin{verbatim}
+position=(0,0)
+position=(-1,-1)
+\end{verbatim}
 
-*** Elaborate Matrix Example
+\subsubsection{Elaborate Matrix Example}
+\label{sec:org9a95703}
 
-#+BEGIN_SRC C
-  #include <stdio.h>
-  #include <stdlib.h>
+\begin{verbatim}
+#include <stdio.h>
+#include <stdlib.h>
 
-  /* But we don't just want to avoid duplicate function
-   ,* parameters, we want to avoid duplicate code too!
-   ,* Noticing that our bounds checking code appears
-   ,* twice, let's refactor...
-   ,*/
+/* But we don't just want to avoid duplicate function
+ * parameters, we want to avoid duplicate code too!
+ * Noticing that our bounds checking code appears
+ * twice, let's refactor...
+ */
 
-  struct matrix {
-      int *elements;
-      size_t rows;
-      size_t cols;
-  };
+struct matrix {
+    int *elements;
+    size_t rows;
+    size_t cols;
+};
 
-  typedef struct matrix Matrix;
+typedef struct matrix Matrix;
 
-  struct matrix_element {
-      Matrix matrix;
-      size_t row;
-      size_t col;
-  };
+struct matrix_element {
+    Matrix matrix;
+    size_t row;
+    size_t col;
+};
 
-  typedef struct matrix_element MatrixElement;
+typedef struct matrix_element MatrixElement;
 
-  /* We can add our own bounds-checking to C!
-   ,*/
+/* We can add our own bounds-checking to C!
+ */
 
-  void bounds_check(MatrixElement elt) {
-      if (elt.row >= elt.matrix.rows) {
-          printf("Error: row index out of bounds!\n");
-          abort();
-      }
-      if (elt.col >= elt.matrix.cols) {
-          printf("Error: col index out of bounds!\n");
-          abort();
-      }
-  }
+void bounds_check(MatrixElement elt) {
+    if (elt.row >= elt.matrix.rows) {
+        printf("Error: row index out of bounds!\n");
+        abort();
+    }
+    if (elt.col >= elt.matrix.cols) {
+        printf("Error: col index out of bounds!\n");
+        abort();
+    }
+}
 
-  int get_element(MatrixElement elt) {
-      bounds_check(elt);
-      return elt.matrix.elements[
-          elt.row * elt.matrix.cols + elt.col
-      ];
-  }
+int get_element(MatrixElement elt) {
+    bounds_check(elt);
+    return elt.matrix.elements[
+        elt.row * elt.matrix.cols + elt.col
+    ];
+}
 
-  void set_element(
-      MatrixElement elt,
-      int value
-  ) {
-      bounds_check(elt);
-      elt.matrix.elements[
-          elt.row * elt.matrix.cols + elt.col
-      ] = value;
-  }
+void set_element(
+    MatrixElement elt,
+    int value
+) {
+    bounds_check(elt);
+    elt.matrix.elements[
+        elt.row * elt.matrix.cols + elt.col
+    ] = value;
+}
 
-  void init_matrix(Matrix matrix) {
-      // Note we don't have to keep reallocating memory because 
-      // structs are COPIED
-      MatrixElement elt = {matrix, 0, 0};
-      for (elt.row = 0; elt.row < matrix.rows; elt.row++) {
-          for (elt.col = 0; elt.col < matrix.cols; elt.col++) {
-              set_element(elt, 0);
-          }
-      }
-  }
+void init_matrix(Matrix matrix) {
+    // Note we don't have to keep reallocating memory because 
+    // structs are COPIED
+    MatrixElement elt = {matrix, 0, 0};
+    for (elt.row = 0; elt.row < matrix.rows; elt.row++) {
+        for (elt.col = 0; elt.col < matrix.cols; elt.col++) {
+            set_element(elt, 0);
+        }
+    }
+}
 
-  void print_matrix(Matrix matrix) {
-      MatrixElement elt = {matrix, 0, 0};
-      for (elt.row = 0; elt.row < matrix.rows; elt.row++) {
-          for (elt.col = 0; elt.col < matrix.cols; elt.col++) {
-              int value = get_element(elt);
-              printf("%d ", value);
-          }
-          printf("\n");
-      }
-  }
+void print_matrix(Matrix matrix) {
+    MatrixElement elt = {matrix, 0, 0};
+    for (elt.row = 0; elt.row < matrix.rows; elt.row++) {
+        for (elt.col = 0; elt.col < matrix.cols; elt.col++) {
+            int value = get_element(elt);
+            printf("%d ", value);
+        }
+        printf("\n");
+    }
+}
 
-  int main() {
-      size_t rows = 3;
-      size_t cols = 3;
-      // we will use our init_matrix function to initialize insead of an
-      // initializer. That way we don't have know the size of
-      // matrix_memory at compile time.
-      int matrix_memory[rows * cols];
-      Matrix matrix = { matrix_memory, rows, cols };
-      init_matrix(matrix);
-      print_matrix(matrix);
-      printf("\n");
-      MatrixElement elt = {matrix, 1, 1};
-      set_element(elt, 2);
-      print_matrix(matrix);
-  }
-#+END_SRC
+int main() {
+    size_t rows = 3;
+    size_t cols = 3;
+    // we will use our init_matrix function to initialize insead of an
+    // initializer. That way we don't have know the size of
+    // matrix_memory at compile time.
+    int matrix_memory[rows * cols];
+    Matrix matrix = { matrix_memory, rows, cols };
+    init_matrix(matrix);
+    print_matrix(matrix);
+    printf("\n");
+    MatrixElement elt = {matrix, 1, 1};
+    set_element(elt, 2);
+    print_matrix(matrix);
+}
+\end{verbatim}
 
-#+RESULTS:
-: 0 0 0 
-: 0 0 0 
-: 0 0 0 
-: 
-: 0 0 0 
-: 0 2 0 
-: 0 0 0
+\begin{verbatim}
+0 0 0 
+0 0 0 
+0 0 0 
 
-** Enum
+0 0 0 
+0 2 0 
+0 0 0
+\end{verbatim}
+
+\subsection{Enum}
+\label{sec:org807d889}
 
 Enums are enumerations, which is just a convienant way to make symbols
 that have different values of the same type. Enums allow us to read
@@ -655,11 +710,12 @@ Enum work good for switch cases, if statements, for loops.
 
 Enums are good for representing the type of something or a category.
 
-*** Enum Example
+\subsubsection{Enum Example}
+\label{sec:org4bcb964}
 
 Enums are good for representing states, symbols, simple values, etc.
 
-#+BEGIN_SRC C
+\begin{verbatim}
 #include <stdio.h>
 #include <stdlib.h>
 
@@ -698,10 +754,9 @@ int main() {
         printf("%d %s\t[%d]\n", i, direction_names[d], d);
     }
 }
-#+END_SRC
+\end{verbatim}
 
-#+RESULTS:
-#+begin_example
+\begin{verbatim}
 0 Right	[3]
 1 Down	[1]
 2 Left	[2]
@@ -712,23 +767,24 @@ int main() {
 7 Up	[0]
 8 Right	[3]
 9 Down	[1]
-#+end_example
+\end{verbatim}
 
-*** enum_typedef.c
+\subsubsection{enum\(_{\text{typedef.c}}\)}
+\label{sec:org8825129}
 
 Enums are annoying to type. Typing enum enumname all the time is repetitive.
 Typedefs allow us to label enum types with 1 word.
 
 Typedef this 
 
-enum enumname { ... } ;
+enum enumname \{ \ldots{} \} ;
 
 with:
 
 typedef enum enunumae Enumename ;
 
 
-#+BEGIN_SRC C
+\begin{verbatim}
 #include <stdio.h>
 #include <stdlib.h>
 
@@ -745,7 +801,7 @@ int main() {
     printf("favourite=%d\n", favourite);
     printf("sizeof(favourite)=%zu\n",
            sizeof(favourite));
-    
+
     switch (favourite) {
         case VANILLA:
             printf("favourite=VANILLA\n");
@@ -760,18 +816,20 @@ int main() {
             abort();
     }
 }
-#+END_SRC
+\end{verbatim}
 
-#+RESULTS:
-| favourite=0         |
-| sizeof(favourite)=4 |
-| favourite=VANILLA   |
+\begin{verbatim}
+favourite=0
+sizeof(favourite)=4
+favourite=VANILLA
+\end{verbatim}
 
 
 
-*** EnumStart
+\subsubsection{EnumStart}
+\label{sec:org90c2f99}
 
-#+BEGIN_SRC C
+\begin{verbatim}
 #include <stdio.h>
 #include <stdlib.h>
 
@@ -790,11 +848,19 @@ int main() {
     printf("sizeof(Flavor)=%zu\n",
            sizeof(Flavor));
 }
-#+END_SRC
+\end{verbatim}
 
-*** Enumassign 
+\begin{verbatim}
+VANILLA=100
+CHOCOLATE=101
+STRAWBERRY=102
+sizeof(Flavor)=4
+\end{verbatim}
 
-#+BEGIN_SRC C
+\subsubsection{Enumassign}
+\label{sec:orgaf42ecd}
+
+\begin{verbatim}
 #include <stdio.h>
 #include <stdlib.h>
 
@@ -813,17 +879,19 @@ int main() {
     printf("sizeof(Flavor)=%zu\n",
            sizeof(Flavor));
 }
-#+END_SRC
+\end{verbatim}
 
-#+RESULTS:
-| VANILLA=100      |
-| CHOCOLATE=200    |
-| STRAWBERRY=300   |
-| sizeof(Flavor)=4 |
+\begin{verbatim}
+VANILLA=100
+CHOCOLATE=200
+STRAWBERRY=300
+sizeof(Flavor)=4
+\end{verbatim}
 
-*** Enum_loop_trick.c
+\subsubsection{Enum\(_{\text{loop}}\)\(_{\text{trick.c}}\)}
+\label{sec:org8cc79ec}
 
-#+BEGIN_SRC C
+\begin{verbatim}
 #include <stdio.h>
 #include <stdlib.h>
 
@@ -846,7 +914,7 @@ int main() {
     printf("N_FLAVORS=%d\n", N_FLAVORS);
     printf("sizeof(Flavor)=%zu\n",
            sizeof(Flavor));
-    
+
     for (Flavor flavor = 0; flavor < N_FLAVORS; flavor++) {
         switch (flavor) {
             case VANILLA:
@@ -863,24 +931,26 @@ int main() {
         }
     }
 }
-#+END_SRC
+\end{verbatim}
 
-#+RESULTS:
-| VANILLA=0         |
-| CHOCOLATE=1       |
-| STRAWBERRY=2      |
-| N_FLAVORS=3       |
-| sizeof(Flavor)=4  |
-| flavor=VANILLA    |
-| flavor=CHOCOLATE  |
-| flavor=STRAWBERRY |
+\begin{verbatim}
+VANILLA=0
+CHOCOLATE=1
+STRAWBERRY=2
+N_FLAVORS=3
+sizeof(Flavor)=4
+flavor=VANILLA
+flavor=CHOCOLATE
+flavor=STRAWBERRY
+\end{verbatim}
 
-*** Enum Int
+\subsubsection{Enum Int}
+\label{sec:org36ac2e4}
 
 This is a fun trick to set a maximum value for your enum by using
 another symbol
 
-#+BEGIN_SRC C
+\begin{verbatim}
 #include <stdio.h>
 #include <stdlib.h>
 
@@ -935,8 +1005,5 @@ int main() {
         get_flavor_name(flavor)
     );
 }
-#+END_SRC
-
-#+RESULTS:
-: flavor 2 = Those packets that come in the ramen
-
+\end{verbatim}
+\end{document}
