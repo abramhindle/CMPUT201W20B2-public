@@ -67,6 +67,9 @@ license, unless otherwise noted.
 (org-ascii-export-to-ascii)
 #+END_SRC
 
+#+RESULTS:
+: presentation.txt
+
 ** Org Template
 Copy and paste this to demo C
 

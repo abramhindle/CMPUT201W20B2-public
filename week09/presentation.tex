@@ -1,46 +1,78 @@
-#+TITLE: CMPUT201W20B2 Week 9
-#+PROPERTY: header-args:C             :results output :exports no-export :flags -std=c99 -pedantic -Wall -Wextra -ftrapv -ggdb3 :eval yes :results value verbatim
-#+PROPERTY: header-args:sh            :results output :exports no-export :eval yes :results value verbatim
-#+PROPERTY: header-args:shell         :results output :exports no-export :eval yes :results value verbatim
+% Created 2020-03-10 Tue 10:57
+% Intended LaTeX compiler: pdflatex
+\documentclass[11pt]{article}
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage{graphicx}
+\usepackage{grffile}
+\usepackage{longtable}
+\usepackage{wrapfig}
+\usepackage{rotating}
+\usepackage[normalem]{ulem}
+\usepackage{amsmath}
+\usepackage{textcomp}
+\usepackage{amssymb}
+\usepackage{capt-of}
+\usepackage{hyperref}
+\author{Abram Hindle}
+\date{\today}
+\title{CMPUT201W20B2 Week 9}
+\hypersetup{
+ pdfauthor={Abram Hindle},
+ pdftitle={CMPUT201W20B2 Week 9},
+ pdfkeywords={},
+ pdfsubject={},
+ pdfcreator={Emacs 25.2.2 (Org mode 9.1.6)}, 
+ pdflang={English}}
+\begin{document}
 
-* Week9
-** Copyright Statement
+\maketitle
+\tableofcontents
+
+
+\section{Week9}
+\label{sec:orga425aa3}
+\subsection{Copyright Statement}
+\label{sec:org5bfc844}
 
 If you are in CMPUT201 at UAlberta this code is released in the public
 domain to you.
 
 Otherwise it is (c) 2020 Abram Hindle, Hazel Campbell AGPL3.0+
 
-*** License
+\subsubsection{License}
+\label{sec:org8c75d65}
 
-    Week 3 notes
-    Copyright (C) 2020 Abram Hindle, Hazel Campbell
+Week 3 notes
+Copyright (C) 2020 Abram Hindle, Hazel Campbell
 
-    This program is free software: you can redistribute it and/or modify
-    it under the terms of the GNU Affero General Public License as
-    published by the Free Software Foundation, either version 3 of the
-    License, or (at your option) any later version.
+This program is free software: you can redistribute it and/or modify
+it under the terms of the GNU Affero General Public License as
+published by the Free Software Foundation, either version 3 of the
+License, or (at your option) any later version.
 
-    This program is distributed in the hope that it will be useful,
-    but WITHOUT ANY WARRANTY; without even the implied warranty of
-    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-    GNU Affero General Public License for more details.
+This program is distributed in the hope that it will be useful,
+but WITHOUT ANY WARRANTY; without even the implied warranty of
+MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+GNU Affero General Public License for more details.
 
-    You should have received a copy of the GNU Affero General Public License
-    along with this program.  If not, see <https://www.gnu.org/licenses/>.
+You should have received a copy of the GNU Affero General Public License
+along with this program.  If not, see \url{https://www.gnu.org/licenses/}.
 
 
-*** Hazel Code is licensed under AGPL3.0+
+\subsubsection{Hazel Code is licensed under AGPL3.0+}
+\label{sec:org3a4fca2}
 
 Hazel's code is also found here
-https://github.com/hazelybell/examples/tree/C-2020-01
+\url{https://github.com/hazelybell/examples/tree/C-2020-01}
 
 Hazel code is licensed: The example code is licensed under the AGPL3+
 license, unless otherwise noted.
 
-** Init ORG-MODE
+\subsection{Init ORG-MODE}
+\label{sec:orge88e681}
 
-#+BEGIN_SRC elisp
+\begin{verbatim}
 ;; I need this for org-mode to work well
 ;; If we have a new org-mode use ob-shell
 ;; otherwise use ob-sh --- but not both!
@@ -57,100 +89,118 @@ license, unless otherwise noted.
 (custom-set-faces
  '(org-block ((t (:inherit shadow :foreground "black"))))
  '(org-code ((t (:inherit shadow :foreground "black")))))
-#+END_SRC
+\end{verbatim}
 
-#+RESULTS:
-
-*** Org export
-#+BEGIN_SRC elisp
+\subsubsection{Org export}
+\label{sec:org583544c}
+\begin{verbatim}
 (org-html-export-to-html)
 (org-latex-export-to-pdf)
 (org-ascii-export-to-ascii)
-#+END_SRC
-
-#+RESULTS:
-: ./presentation.txt
+\end{verbatim}
 
 
-*** Org Template
+\subsubsection{Org Template}
+\label{sec:orgac0b513}
 Copy and paste this to demo C
 
-#+BEGIN_SRC C :exports both
+\begin{verbatim}
 #include <stdio.h>
 
 int main(int argc, char**argv) {
     return 0;
 }
-#+END_SRC
+\end{verbatim}
 
-#+RESULTS:
-
-** Remember how to compile?
+\subsection{Remember how to compile?}
+\label{sec:org7296b47}
 
 gcc  -std=c99 -pedantic -Wall -Wextra -ftrapv -ggdb3 -o programname programname.c
 
 
-** How C uses memory
+\subsection{How C uses memory}
+\label{sec:orgd456d69}
 
-https://docs.google.com/document/d/1wcBnHZEaW4ukcZNlMNZJdbxkyPOQFGQhtANpqW5tx_8/edit?usp=sharing
+\url{https://docs.google.com/document/d/1wcBnHZEaW4ukcZNlMNZJdbxkyPOQFGQhtANpqW5tx\_8/edit?usp=sharing}
 
-*** C's memory types
+\subsubsection{C's memory types}
+\label{sec:org99b2324}
 
-    - File memory (code or text) 
-      - handled by the compiler, the linker, the loader, and the OS
-      - contains code, string literals, constants
-      - read only
-      - big
-    - static 
-      - your globals and static vars
-      - static or auto
-      - big
-    - Call stack or stack
-      - fast local memory for a function
-      - auto 
-      - small amount
-    - Heap
-      - general storage / memory for everything
-      - auto / static/ whatever
-      - huge
-    - registers
-      - not actually CPU registers -- but you hope!
-      - meant to be moved around for optimization reasons
-      - compiler dictated
-      - 'register' variables -- don't make pointers to these
-      - meant to be fast, might be in stack might be in actual registers
-        - no guarantees
-        - your compiler w/ optimizer is typically better.
-*** Type qualifiers
+\begin{itemize}
+\item File memory (code or text) 
+\begin{itemize}
+\item handled by the compiler, the linker, the loader, and the OS
+\item contains code, string literals, constants
+\item read only
+\item big
+\end{itemize}
+\item static 
+\begin{itemize}
+\item your globals and static vars
+\item static or auto
+\item big
+\end{itemize}
+\item Call stack or stack
+\begin{itemize}
+\item fast local memory for a function
+\item auto
+\item small amount
+\end{itemize}
+\item Heap
+\begin{itemize}
+\item general storage / memory for everything
+\item auto / static/ whatever
+\item huge
+\end{itemize}
+\item registers
+\begin{itemize}
+\item not actually CPU registers -- but you hope!
+\item meant to be moved around for optimization reasons
+\item compiler dictated
+\item 'register' variables -- don't make pointers to these
+\item meant to be fast, might be in stack might be in actual registers
+\begin{itemize}
+\item no guarantees
+\item your compiler w/ optimizer is typically better.
+\end{itemize}
+\end{itemize}
+\end{itemize}
+\subsubsection{Type qualifiers}
+\label{sec:orgaafff7d}
 
 Add these to types to communicate to other programmers and the
 compiler.
 
-- const - don't change it and I promise not to change it (but it might
-  change because I messed up with malloc)
-- volatile - this value could change so if you need it read it
-  immediately and use it. It could even change while you use it. Don't
-  rely on it staying the same. Something external could be changing it.
-- restrict - I promise that this pointer is the only pointer to the
-  thing it is pointing to. Speed hacks that rarely work.
+\begin{itemize}
+\item const - don't change it and I promise not to change it (but it might
+change because I messed up with malloc)
+\item volatile - this value could change so if you need it read it
+immediately and use it. It could even change while you use it. Don't
+rely on it staying the same. Something external could be changing it.
+\item restrict - I promise that this pointer is the only pointer to the
+thing it is pointing to. Speed hacks that rarely work.
+\end{itemize}
 
-*** Extern
+\subsubsection{Extern}
+\label{sec:org5135e89}
 
 Extern says that we have an external implementation or allocation for
 a variable or function. But if you define the body then you've gone
 and done it. It is fine. Extern means you plan to share your
 implementation with other source files.
 
-** Preprocessor stuff like if-def
-   The preprocessor deals with all the lines that you start with an
-   octalthrope or hash mark: #
-  
-   The preprocessor lets you define symbols, macros, and include
-   files.
+\subsection{Preprocessor stuff like if-def}
+\label{sec:org45fd33c}
+The preprocessor deals with all the lines that you start with an
+octalthrope or hash mark: \#
 
-*** #ifdef
+The preprocessor lets you define symbols, macros, and include
+files.
 
-#+BEGIN_SRC C :exports both 
+\subsubsection{\#ifdef}
+\label{sec:org8577782}
+
+\begin{verbatim}
 /* #ifdef   IF DEFined
  * 
  * If whatever comes after the #ifdef IS
@@ -200,18 +250,20 @@ int main() {
     
     return 0;
 }
-#+END_SRC
+\end{verbatim}
 
-#+RESULTS:
-: Value is 27!
-: Turbo is on!
-: Reached end of main, quitting!
+\begin{verbatim}
+Value is 27!
+Turbo is on!
+Reached end of main, quitting!
+\end{verbatim}
 
 
 
-*** #ifndef
+\subsubsection{\#ifndef}
+\label{sec:orgc5ed1d8}
 
-#+BEGIN_SRC C :exports both
+\begin{verbatim}
 /* #ifndef   IF Not DEFined
  * 
  * If whatever comes after the #ifndef is NOT
@@ -250,14 +302,16 @@ int main() {
     return 0;
 }
 #endif
-#+END_SRC
+\end{verbatim}
 
-#+RESULTS:
-: Main 1!
+\begin{verbatim}
+Main 1!
+\end{verbatim}
 
-*** Guards
+\subsubsection{Guards}
+\label{sec:org9dce65e}
 
-#+BEGIN_SRC C :exports both
+\begin{verbatim}
 /* Guards:
  * 
  * The purpose of the guard is to ensure that
@@ -293,19 +347,19 @@ int main() {
 
 // # ends if
 #endif /* ndef _GUARDS_H_ */
-#+END_SRC
-
-#+RESULTS:
+\end{verbatim}
 
 
-**** No Guards
+\begin{enumerate}
+\item No Guards
+\label{sec:org695766c}
 
 What if we don't have a guard?
 
 We could redefine functions. Make conflicting types. Get in infinite
 include loops.
 
-#+BEGIN_SRC C :exports both
+\begin{verbatim}
 #include <stdio.h>
 /* No Guards:
  * 
@@ -317,18 +371,20 @@ include loops.
 int main() {
     puts(GUARDS);
 }
-#+END_SRC
+\end{verbatim}
 
-#+RESULTS:
-: awesome
+\begin{verbatim}
+awesome
+\end{verbatim}
 
-**** W/ Guards
+\item W/ Guards
+\label{sec:orga31a47a}
 
 What if we have a guard?
 
 We only define once :)
 
-#+BEGIN_SRC C :exports both
+\begin{verbatim}
 #include <stdio.h>
 /* No Guards:
  * 
@@ -344,16 +400,19 @@ We only define once :)
 int main() {
     puts(GUARDS);
 }
-#+END_SRC
+\end{verbatim}
 
-#+RESULTS:
-: cool
+\begin{verbatim}
+cool
+\end{verbatim}
+\end{enumerate}
 
-*** Multiple Files?
+\subsubsection{Multiple Files?}
+\label{sec:org8374010}
 
 How does stdio.h work?
 
-file:/usr/include/stdio.h
+\url{file:///usr/include/stdio.h}
 
 It defines definitions, macros, and prototypes for the stdio library.
 The linker will link your executable to that library that was already
@@ -363,7 +422,7 @@ compiled.
 object files and libraries that we will create.
 
 Libc or glibc contains the implemention of those definitions.
-libc.so.6 => /lib/x86_64-linux-gnu/libc.so.6 (0x00007f919f994000)
+libc.so.6 => /lib/x86\(_{\text{64}}\)-linux-gnu/libc.so.6 (0x00007f919f994000)
 
 libc is composed of many .c files compiled into .o object files and
 then combined into a library. A library is like an executable that
@@ -374,23 +433,32 @@ Typically if I make a library I will make a .h file so the definitions
 can be shared with other .c files. But the implementation of the functions
 will go into a .c file that includes that .h as well.
 
-- main.c
-  - #include "library.h"
-  - relies on library.o 
-- library.c
-  - #include "library.h"
-  - makes library.o
-- library.h
-  - defines functions and definitions from library.c
-  
-*** Example
+\begin{itemize}
+\item main.c
+\begin{itemize}
+\item \#include "library.h"
+\item relies on library.o
+\end{itemize}
+\item library.c
+\begin{itemize}
+\item \#include "library.h"
+\item makes library.o
+\end{itemize}
+\item library.h
+\begin{itemize}
+\item defines functions and definitions from library.c
+\end{itemize}
+\end{itemize}
+
+\subsubsection{Example}
+\label{sec:org6f39f1b}
 
 This is a useful function to check if scanf read 1 or more elements
 and didn't read EOF.
 
-file:./checkinput.c
+\url{./checkinput.c}
 
-#+BEGIN_SRC C :exports both :tangle checkinput.c
+\begin{verbatim}
 #include "checkinput.h"
 #include <stdio.h>
 #include <stdlib.h>
@@ -404,13 +472,11 @@ void checkInput(int err) {
     exit(1);
   }
 }
-#+END_SRC 
+\end{verbatim}
 
-#+RESULTS:
+\url{./checkinput.h}
 
-file:./checkinput.h
-
-#+BEGIN_SRC C :exports both :tangle checkinput.h
+\begin{verbatim}
 // Have a guard to ensure that we don't include it multiple times.
 #ifndef _CHECKINPUT_H_
 /* checkInput: given the result of scanf check if it 
@@ -420,11 +486,11 @@ file:./checkinput.h
 #define _CHECKINPUT_H_
 void checkInput(int err); // a prototype!
 #endif
-#+END_SRC 
+\end{verbatim}
 
-file:./checkinput-driver.c
+\url{./checkinput-driver.c}
 
-#+BEGIN_SRC C :exports both :tangle checkinput-driver.c
+\begin{verbatim}
 #include "checkinput.h"
 #include <stdio.h>
 #include "checkinput.h"
@@ -434,16 +500,18 @@ int main() {
   checkInput(scanf("%d", &input));  
   puts("Good Input!");
 }
-#+END_SRC 
+\end{verbatim}
 
-**** Compiling Multiple Files
+\begin{enumerate}
+\item Compiling Multiple Files
+\label{sec:orgc6f47e2}
 
 OK now we compile it. The main is the last to compile and it needs all the .o files.
 
 All the .c files that don't contain main need to be compiled to object
 files. Use the -c flags to do this.
 
-#+BEGIN_SRC sh :exports both :tangle build-checkinput.sh
+\begin{verbatim}
 # build checkinput.o
 gcc  -std=c99 -pedantic -Wall -Wextra -ftrapv -ggdb3 \
        -c checkinput.c
@@ -451,53 +519,53 @@ gcc  -std=c99 -pedantic -Wall -Wextra -ftrapv -ggdb3 \
 gcc  -std=c99 -pedantic -Wall -Wextra -ftrapv -ggdb3 \
        -o checkinput-driver checkinput-driver.c \
        checkinput.o
-#+END_SRC
-
-#+RESULTS:
+\end{verbatim}
 
 Test drive it
 
-#+BEGIN_SRC sh :exports both
+\begin{verbatim}
 echo   | ./checkinput-driver
 echo X | ./checkinput-driver
 echo 1 | ./checkinput-driver
 echo 1 | ./checkinput-driver
-#+END_SRC
+\end{verbatim}
 
-#+RESULTS:
-: 
-: Invalid input!
-: 
-: Invalid input!
-: Good Input!
-: Good Input!
+\begin{verbatim}
+
+Invalid input!
+
+Invalid input!
+Good Input!
+Good Input!
+\end{verbatim}
 
 
-#+BEGIN_SRC sh
+\begin{verbatim}
 ldd ./checkinput-driver
-#+END_SRC
+\end{verbatim}
 
-#+RESULTS:
-: 	linux-vdso.so.1 (0x00007ffe85be0000)
-: 	libc.so.6 => /lib/x86_64-linux-gnu/libc.so.6 (0x00007f919f994000)
-: 	/lib64/ld-linux-x86-64.so.2 (0x00007f919ff87000)
+\begin{verbatim}
+linux-vdso.so.1 (0x00007ffe85be0000)
+libc.so.6 => /lib/x86_64-linux-gnu/libc.so.6 (0x00007f919f994000)
+/lib64/ld-linux-x86-64.so.2 (0x00007f919ff87000)
+\end{verbatim}
 
 
-**** What is the preprocessor doing?
+\item What is the preprocessor doing?
+\label{sec:org489d320}
 
 Let's use the -E flag to see what checkinput.c becomes
 
 This output contains glibc headers for stdio.h and stdlib.h these
 should be under the GPLV3 (c) the Glibc project and GNU project.
 
-#+BEGIN_SRC sh :eval no :exports both :results value drawer code
+\begin{verbatim}
 # build checkinput.o
 gcc -E -std=c99 -pedantic -Wall -Wextra -ftrapv -ggdb3 \
        checkinput.c
-#+END_SRC
+\end{verbatim}
 
-#+RESULTS:
-#+BEGIN_SRC C
+\begin{verbatim}
 # 1 "checkinput.c"
 # 1 "/home/hindle1/projects/CMPUT201W20/2020-01/CMPUT201W20B2-public/week09//"
 # 1 "<built-in>"
@@ -2517,4 +2585,6 @@ void checkInput(int err) {
     exit(1);
   }
 }
-#+END_SRC
+\end{verbatim}
+\end{enumerate}
+\end{document}
