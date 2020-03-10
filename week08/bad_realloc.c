@@ -95,7 +95,7 @@ void push_input_lines(Stack stack) {
 void pop_lines(Stack stack) {
     while (stack.size > 0) {
         char * line = pop(stack);
-        printf(line);
+        puts(line);
         free(line);
     }
 }

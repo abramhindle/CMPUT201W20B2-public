@@ -1,3 +1,4 @@
+
 #include <stdio.h>
 #include <stdint.h>
 #include <stdlib.h>
@@ -24,7 +25,7 @@ struct linkedList {
 struct linkedList * allocLinkedList( enum atype type, 
                                      union anything value, 
                                      struct linkedList * next) {
-    struct linkedList * node = malloc(sizeof(struct linkedList));
+    struct linkedList * node = malloc(sizeof(*node));
     node->type  = type;
     node->value = value;
     node->next  = next;
@@ -39,9 +40,18 @@ void freeLinkedList( struct linkedList * list) {
     free( list );
 }
 
+void freeLinkedListIterative( struct linkedList * list) {
+    while( list != NULL ) {
+        struct linkedList * freeMe = list;
+        list = list->next;
+        free(freeMe);
+    }
+}
+
+
 int main() {
-    union anything v = {.anInt = 32 };
-    struct linkedList * tail = allocLinkedList( INT, v, NULL);
+    union anything v = {.aDouble = 1.2 };
+    struct linkedList * tail = allocLinkedList( DOUBLE, v, NULL);
     struct linkedList * head = tail;
     for (int i = 0 ; i < 10; i++) {
         v.anInt = i*2;
@@ -51,9 +61,13 @@ int main() {
     while(iter!=NULL) {
         if (iter->type == INT) {
             printf("Print node value: %5d next: %p\n", iter->value.anInt, (void*)iter->next);
+        } else {
+            printf("Print node type:  %5d next: %p\n", iter->type, (void*)iter->next);
         }
         iter = iter->next;
+        // iter->next ===> iter
     }    
-    freeLinkedList( head );
+    // freeLinkedList( head );
+    // freeLinkedListIterative( head );
     return 0;
 }
