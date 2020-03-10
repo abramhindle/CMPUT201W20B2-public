@@ -50,17 +50,11 @@ license, unless otherwise noted.
   (progn
     (require 'ob-sh)
     (org-babel-do-load-languages 'org-babel-load-languages '((sh . t)))))
-; (org-babel-do-load-languages 'org-babel-load-languages '((sh . t)))
-;(org-babel-do-load-languages 'org-babel-load-languages '((shell . t)))
 (org-babel-do-load-languages 'org-babel-load-languages '((C . t)))
 (org-babel-do-load-languages 'org-babel-load-languages '((python . t)))
 (setq org-src-fontify-natively t)
 (setq org-confirm-babel-evaluate nil) ;; danger!
 (custom-set-faces
- ;; custom-set-faces was added by Custom.
- ;; If you edit it by hand, you could mess it up, so be careful.
- ;; Your init file should contain only one such instance.
- ;; If there is more than one, they won't work right.
  '(org-block ((t (:inherit shadow :foreground "black")))))
 #+END_SRC
 
