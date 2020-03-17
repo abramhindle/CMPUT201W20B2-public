@@ -626,7 +626,7 @@ void checkInput(int err) {
 }
 return 0;
 }
-#+end_C
+#+end_src
 
 file:checkinput-preprocessor.c
 
@@ -634,3 +634,308 @@ file:checkinput-preprocessor.c
 
 
 
+
+*** Parameterized Macros
+
+As we just demonstrated Macros generate code. So we can make compile
+functions that generate code. These functions run at compile time and
+generate code that is compiled by C.
+
+#+BEGIN_SRC C :tangle relu.c
+#include <stdio.h>
+#include <stdlib.h>
+#include <stdbool.h>
+
+// RELU is a rectified linear unit. These are popular in convolutional neural networks
+// they are 0 for 0 and negative numbers and they are the identity for positive numbers.
+// RELU(-100) = RELU(-1) = 0 && RELU(1) = 1 && RELU(100) = 100
+#define RELU(x)  (( x < 0 )?0:x)
+
+int main() {
+    // ints
+    for (int i = -10; i < 10; i++) {
+        printf("RELU(%d)=%d\n", i, RELU(i));
+    }
+    puts("\n");
+    // more in the range of neural networks
+    for (double i = -1; i < 1; i+=0.1) {
+        printf("RELU(%f)=%f\n", i, RELU(i));
+    }
+    puts("\n");
+}
+#+END_SRC
+
+#+RESULTS:
+#+begin_example
+RELU(-10)=0
+RELU(-9)=0
+RELU(-8)=0
+RELU(-7)=0
+RELU(-6)=0
+RELU(-5)=0
+RELU(-4)=0
+RELU(-3)=0
+RELU(-2)=0
+RELU(-1)=0
+RELU(0)=0
+RELU(1)=1
+RELU(2)=2
+RELU(3)=3
+RELU(4)=4
+RELU(5)=5
+RELU(6)=6
+RELU(7)=7
+RELU(8)=8
+RELU(9)=9
+
+
+RELU(-1.000000)=0.000000
+RELU(-0.900000)=0.000000
+RELU(-0.800000)=0.000000
+RELU(-0.700000)=0.000000
+RELU(-0.600000)=0.000000
+RELU(-0.500000)=0.000000
+RELU(-0.400000)=0.000000
+RELU(-0.300000)=0.000000
+RELU(-0.200000)=0.000000
+RELU(-0.100000)=0.000000
+RELU(-0.000000)=0.000000
+RELU(0.100000)=0.100000
+RELU(0.200000)=0.200000
+RELU(0.300000)=0.300000
+RELU(0.400000)=0.400000
+RELU(0.500000)=0.500000
+RELU(0.600000)=0.600000
+RELU(0.700000)=0.700000
+RELU(0.800000)=0.800000
+RELU(0.900000)=0.900000
+RELU(1.000000)=1.000000
+#+end_example
+
+#+BEGIN_SRC sh :exports both
+gcc -E -std=c99 -pedantic -Wall -Wextra -ftrapv -ggdb3 \
+       relu.c > \
+       relu-expanded.c
+#+END_SRC
+
+#+RESULTS:
+
+file:relu-expanded.c
+
+#+BEGIN_SRC C :eval no
+#define RELU(x) (( x < 0 )?0:x)
+
+
+# 10 "relu.c"
+int main() {
+
+    for (int i = -10; i < 10; i++) {
+        printf("RELU(%d)=%d\n", i, (( i < 0 )?0:i));
+    }
+    puts("\n");
+
+    for (double i = -1; i < 1; i+=0.1) {
+        printf("RELU(%f)=%f\n", i, (( i < 0 )?0:i));
+    }
+    puts("\n");
+}
+#+END_SRC 
+
+That's interesting, but be aware that x is not a value. It is a set of tokens.
+
+#+BEGIN_SRC C :tangle relu2.c :libs -lm
+#include <math.h>
+#include <stdio.h>
+#include <stdlib.h>
+#include <stdbool.h>
+
+// RELU is a rectified linear unit. These are popular in convolutional neural networks
+// they are 0 for 0 and negative numbers and they are the identity for positive numbers.
+// RELU(-100) = RELU(-1) = 0 && RELU(1) = 1 && RELU(100) = 100
+#define RELU(x)  (( x < 0 )?0:x)
+
+int main() {
+    double x = 2.0;
+    double y = 127.1;
+    // How many times will pow(x,y) run?
+    printf("%f\n", RELU(pow(x,y)));
+
+}
+#+END_SRC
+
+#+RESULTS:
+: 1.8235280531744908e+38
+
+#+BEGIN_SRC sh :exports both
+gcc -E -std=c99 -pedantic -Wall -Wextra -ftrapv -ggdb3 \
+       relu2.c > \
+       relu2-expanded.c
+#+END_SRC
+
+#+RESULTS:
+
+file:relu2-expanded.c
+
+#+BEGIN_SRC C :eval no
+#define RELU(x) (( x < 0 )?0:x)
+
+
+# 11 "relu2.c"
+int main() {
+    double x = 2.0;
+    double y = 127.1;
+    // Uh oh how many pows?
+    printf("%f\n", (( pow(x,y) < 0 )?0:pow(x,y)));
+
+}
+#+END_SRC
+
+**** Easy bugs!
+
+So why doesn't this work?
+
+#+BEGIN_SRC C :exports both :tangle checkinputmacro.c :main no
+#include <stdio.h>
+#include <stdlib.h>
+#include <stdbool.h>
+
+// if checkinput is true then you have an error
+#define CHECKINPUT(scanfReturn)  ( scanfReturn == EOF || !scanfReturn )
+
+int main() {
+    int myInt = 0;
+    if (CHECKINPUT(scanf("%d", &myInt))) {
+        printf("Invalid input!");
+        exit(1);
+    }
+    printf("My int: %d\n", myInt);
+}
+#+END_SRC
+
+#+RESULTS:
+
+#+BEGIN_SRC sh
+gcc  -std=c99 -pedantic -Wall -Wextra -ftrapv -ggdb3 \
+       -o checkinputmacro checkinputmacro.c
+echo   | ./checkinputmacro
+echo X | ./checkinputmacro
+echo 6 | ./checkinputmacro
+#+END_SRC
+
+#+RESULTS:
+
+#+BEGIN_SRC sh :exports both
+gcc -E -std=c99 -pedantic -Wall -Wextra -ftrapv -ggdb3 \
+       checkinputmacro.c > \
+       checkinputmacro-expanded.c
+#+END_SRC
+
+#+RESULTS:
+
+file:checkinputmacro-expanded.c
+
+Let's look at the output:
+
+#+BEGIN_SRC C :eval no
+#define CHECKINPUT(scanfReturn) ( scanfReturn == false || scanfReturn == EOF)
+
+# 8 "checkinputmacro.c"
+int main() {
+    int myInt = 0;
+    if (( scanf("%d", &myInt) == 
+# 10 "checkinputmacro.c" 3 4
+       0 
+# 10 "checkinputmacro.c"
+       || scanf("%d", &myInt) == 
+# 10 "checkinputmacro.c" 3 4
+       (-1)
+# 10 "checkinputmacro.c"
+       )) {
+        printf("Invalid input!");
+        exit(1);
+    }
+    printf("My int: %d\n", myInt);
+}
+#+END_SRC
+
+I'll clear it up for you
+
+#+BEGIN_SRC C :eval no
+#define CHECKINPUT(scanfReturn) ( scanfReturn == false || scanfReturn == EOF)
+
+int main() {
+    int myInt = 0;
+    if (( scanf("%d", &myInt) ==  0 || scanf("%d", &myInt) == (-1))) {
+        printf("Invalid input!");
+        exit(1);
+    }
+    printf("My int: %d\n", myInt);
+}
+#+END_SRC
+
+See? 2 scanfs instead of 1. Great. So macros will copy your tokens,
+not your values. They are meta-functions and not real functions.
+
+How do we fix? We assign the result once
+
+#+BEGIN_SRC C :exports both :tangle checkinputmacro-fixed.c :main no
+#include <stdio.h>
+#include <stdlib.h>
+#include <stdbool.h>
+
+// if checkinput is true then you have an error
+// horrible and bad style don't do this at home!
+static int __ret;
+#define CHECKINPUT(scanfReturn)  (__ret = scanfReturn, (__ret== EOF || !__ret ))
+
+int main() {
+    int myInt = 0;
+    if (CHECKINPUT(scanf("%d", &myInt))) {
+        printf("Invalid input!\n");
+        exit(1);
+    }
+    printf("My int: %d\n", myInt);
+}
+#+END_SRC
+
+#+RESULTS:
+
+#+BEGIN_SRC sh
+gcc  -std=c99 -pedantic -Wall -Wextra -ftrapv -ggdb3 \
+       -o checkinputmacro-fixed checkinputmacro-fixed.c
+echo   | ./checkinputmacro-fixed
+echo X | ./checkinputmacro-fixed
+echo 6 | ./checkinputmacro-fixed
+#+END_SRC
+
+#+RESULTS:
+: Invalid input!
+: Invalid input!
+: My int: 6
+
+#+BEGIN_SRC sh :exports both
+gcc -E -std=c99 -pedantic -Wall -Wextra -ftrapv -ggdb3 \
+       checkinputmacro-fixed.c > \
+       checkinputmacro-fixed-expanded.c
+#+END_SRC
+
+file:checkinputmacro-fixed-expanded.c
+
+#+BEGIN_SRC C :eval no
+# 7 "checkinputmacro-fixed.c"
+static int __ret;
+#define CHECKINPUT(scanfReturn) (__ret = scanfReturn, (__ret== EOF || !__ret ))
+
+int main() {
+    int myInt = 0;
+    if ((__ret = scanf("%d", &myInt), (__ret== 
+# 12 "checkinputmacro-fixed.c" 3 4
+       (-1) 
+# 12 "checkinputmacro-fixed.c"
+       || !__ret ))) {
+        printf("Invalid input!\n");
+        exit(1);
+    }
+    printf("My int: %d\n", myInt);
+}
+#+END_SRC
