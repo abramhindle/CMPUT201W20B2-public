@@ -559,15 +559,15 @@ If you want more preprocessor options checkout:
 
 https://gcc.gnu.org/onlinedocs/gcc-5.2.0/gcc/Preprocessor-Options.html
 
-#+BEGIN_SRC sh :eval yes :exports both :results value drawer code
+#+BEGIN_SRC sh :eval yes :results value drawer code
 # build checkinput.o
 gcc -E -std=c99 -pedantic -Wall -Wextra -ftrapv -ggdb3 \
        checkinput.c > checkinput-preprocessor.c
 #+END_SRC
 
-#+RESULTS:
-#+begin_src sh
-#+end_src
+It produces this file:
+
+file:checkinput-preprocessor.c
 
 
 #+begin_src C :eval no
