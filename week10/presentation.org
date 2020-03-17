@@ -1,7 +1,7 @@
 #+TITLE: CMPUT201W20B2 Week 10
-#+PROPERTY: header-args:C             :results output :exports both :flags -std=c99 -pedantic -Wall -Wextra -ftrapv -ggdb3 :eval yes :results value verbatim
-#+PROPERTY: header-args:sh            :results output :exports both :eval yes :results value verbatim
-#+PROPERTY: header-args:shell         :results output :exports both :eval yes :results value verbatim
+#+PROPERTY: header-args:C             :exports both :flags -std=c99 -pedantic -Wall -Wextra -ftrapv -ggdb3 :eval yes :results value verbatim
+#+PROPERTY: header-args:sh            :exports both :eval yes :results value verbatim
+#+PROPERTY: header-args:shell         :exports both :eval yes :results value verbatim
 
 * Week10
 ** Copyright Statement
@@ -37,6 +37,12 @@ https://github.com/hazelybell/examples/tree/C-2020-01
 
 Hazel code is licensed: The example code is licensed under the AGPL3+
 license, unless otherwise noted.
+
+** Alternative version
+
+file:presentation.txt
+file:presentation.pdf
+file:presentation.html
 
 ** Init ORG-MODE
 
@@ -290,7 +296,7 @@ gnome-terminal --window-with-profile Big \
 #+RESULTS:
 
 I add the flag -lm so we get our math library :-)
-#+begin_src C :libs -lm :tangle poor-tanh-example.c 
+#+begin_src C :libs -lm :tangle poor-tanh-example.c :exports both
 #include <stdio.h>
 #include <math.h>
 
@@ -350,6 +356,14 @@ tanh(1.900000e+01) == 1.000000e+00
 tanh(1.950000e+01) == 1.000000e+00
 tanh(2.000000e+01) == 1.000000e+00
 #+end_example
+
+
+
+
+
+
+
+
 
 OK so how does this work, how do link to math?
 
