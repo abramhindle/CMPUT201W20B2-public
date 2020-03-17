@@ -1,0 +1,1985 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
+<head>
+<!-- 2020-03-17 Tue 11:20 -->
+<meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>CMPUT201W20B2 Week 10</title>
+<meta name="generator" content="Org mode" />
+<meta name="author" content="Abram Hindle" />
+<style type="text/css">
+ <!--/*--><![CDATA[/*><!--*/
+  .title  { text-align: center;
+             margin-bottom: .2em; }
+  .subtitle { text-align: center;
+              font-size: medium;
+              font-weight: bold;
+              margin-top:0; }
+  .todo   { font-family: monospace; color: red; }
+  .done   { font-family: monospace; color: green; }
+  .priority { font-family: monospace; color: orange; }
+  .tag    { background-color: #eee; font-family: monospace;
+            padding: 2px; font-size: 80%; font-weight: normal; }
+  .timestamp { color: #bebebe; }
+  .timestamp-kwd { color: #5f9ea0; }
+  .org-right  { margin-left: auto; margin-right: 0px;  text-align: right; }
+  .org-left   { margin-left: 0px;  margin-right: auto; text-align: left; }
+  .org-center { margin-left: auto; margin-right: auto; text-align: center; }
+  .underline { text-decoration: underline; }
+  #postamble p, #preamble p { font-size: 90%; margin: .2em; }
+  p.verse { margin-left: 3%; }
+  pre {
+    border: 1px solid #ccc;
+    box-shadow: 3px 3px 3px #eee;
+    padding: 8pt;
+    font-family: monospace;
+    overflow: auto;
+    margin: 1.2em;
+  }
+  pre.src {
+    position: relative;
+    overflow: visible;
+    padding-top: 1.2em;
+  }
+  pre.src:before {
+    display: none;
+    position: absolute;
+    background-color: white;
+    top: -10px;
+    right: 10px;
+    padding: 3px;
+    border: 1px solid black;
+  }
+  pre.src:hover:before { display: inline;}
+  /* Languages per Org manual */
+  pre.src-asymptote:before { content: 'Asymptote'; }
+  pre.src-awk:before { content: 'Awk'; }
+  pre.src-C:before { content: 'C'; }
+  /* pre.src-C++ doesn't work in CSS */
+  pre.src-clojure:before { content: 'Clojure'; }
+  pre.src-css:before { content: 'CSS'; }
+  pre.src-D:before { content: 'D'; }
+  pre.src-ditaa:before { content: 'ditaa'; }
+  pre.src-dot:before { content: 'Graphviz'; }
+  pre.src-calc:before { content: 'Emacs Calc'; }
+  pre.src-emacs-lisp:before { content: 'Emacs Lisp'; }
+  pre.src-fortran:before { content: 'Fortran'; }
+  pre.src-gnuplot:before { content: 'gnuplot'; }
+  pre.src-haskell:before { content: 'Haskell'; }
+  pre.src-hledger:before { content: 'hledger'; }
+  pre.src-java:before { content: 'Java'; }
+  pre.src-js:before { content: 'Javascript'; }
+  pre.src-latex:before { content: 'LaTeX'; }
+  pre.src-ledger:before { content: 'Ledger'; }
+  pre.src-lisp:before { content: 'Lisp'; }
+  pre.src-lilypond:before { content: 'Lilypond'; }
+  pre.src-lua:before { content: 'Lua'; }
+  pre.src-matlab:before { content: 'MATLAB'; }
+  pre.src-mscgen:before { content: 'Mscgen'; }
+  pre.src-ocaml:before { content: 'Objective Caml'; }
+  pre.src-octave:before { content: 'Octave'; }
+  pre.src-org:before { content: 'Org mode'; }
+  pre.src-oz:before { content: 'OZ'; }
+  pre.src-plantuml:before { content: 'Plantuml'; }
+  pre.src-processing:before { content: 'Processing.js'; }
+  pre.src-python:before { content: 'Python'; }
+  pre.src-R:before { content: 'R'; }
+  pre.src-ruby:before { content: 'Ruby'; }
+  pre.src-sass:before { content: 'Sass'; }
+  pre.src-scheme:before { content: 'Scheme'; }
+  pre.src-screen:before { content: 'Gnu Screen'; }
+  pre.src-sed:before { content: 'Sed'; }
+  pre.src-sh:before { content: 'shell'; }
+  pre.src-sql:before { content: 'SQL'; }
+  pre.src-sqlite:before { content: 'SQLite'; }
+  /* additional languages in org.el's org-babel-load-languages alist */
+  pre.src-forth:before { content: 'Forth'; }
+  pre.src-io:before { content: 'IO'; }
+  pre.src-J:before { content: 'J'; }
+  pre.src-makefile:before { content: 'Makefile'; }
+  pre.src-maxima:before { content: 'Maxima'; }
+  pre.src-perl:before { content: 'Perl'; }
+  pre.src-picolisp:before { content: 'Pico Lisp'; }
+  pre.src-scala:before { content: 'Scala'; }
+  pre.src-shell:before { content: 'Shell Script'; }
+  pre.src-ebnf2ps:before { content: 'ebfn2ps'; }
+  /* additional language identifiers per "defun org-babel-execute"
+       in ob-*.el */
+  pre.src-cpp:before  { content: 'C++'; }
+  pre.src-abc:before  { content: 'ABC'; }
+  pre.src-coq:before  { content: 'Coq'; }
+  pre.src-groovy:before  { content: 'Groovy'; }
+  /* additional language identifiers from org-babel-shell-names in
+     ob-shell.el: ob-shell is the only babel language using a lambda to put
+     the execution function name together. */
+  pre.src-bash:before  { content: 'bash'; }
+  pre.src-csh:before  { content: 'csh'; }
+  pre.src-ash:before  { content: 'ash'; }
+  pre.src-dash:before  { content: 'dash'; }
+  pre.src-ksh:before  { content: 'ksh'; }
+  pre.src-mksh:before  { content: 'mksh'; }
+  pre.src-posh:before  { content: 'posh'; }
+  /* Additional Emacs modes also supported by the LaTeX listings package */
+  pre.src-ada:before { content: 'Ada'; }
+  pre.src-asm:before { content: 'Assembler'; }
+  pre.src-caml:before { content: 'Caml'; }
+  pre.src-delphi:before { content: 'Delphi'; }
+  pre.src-html:before { content: 'HTML'; }
+  pre.src-idl:before { content: 'IDL'; }
+  pre.src-mercury:before { content: 'Mercury'; }
+  pre.src-metapost:before { content: 'MetaPost'; }
+  pre.src-modula-2:before { content: 'Modula-2'; }
+  pre.src-pascal:before { content: 'Pascal'; }
+  pre.src-ps:before { content: 'PostScript'; }
+  pre.src-prolog:before { content: 'Prolog'; }
+  pre.src-simula:before { content: 'Simula'; }
+  pre.src-tcl:before { content: 'tcl'; }
+  pre.src-tex:before { content: 'TeX'; }
+  pre.src-plain-tex:before { content: 'Plain TeX'; }
+  pre.src-verilog:before { content: 'Verilog'; }
+  pre.src-vhdl:before { content: 'VHDL'; }
+  pre.src-xml:before { content: 'XML'; }
+  pre.src-nxml:before { content: 'XML'; }
+  /* add a generic configuration mode; LaTeX export needs an additional
+     (add-to-list 'org-latex-listings-langs '(conf " ")) in .emacs */
+  pre.src-conf:before { content: 'Configuration File'; }
+
+  table { border-collapse:collapse; }
+  caption.t-above { caption-side: top; }
+  caption.t-bottom { caption-side: bottom; }
+  td, th { vertical-align:top;  }
+  th.org-right  { text-align: center;  }
+  th.org-left   { text-align: center;   }
+  th.org-center { text-align: center; }
+  td.org-right  { text-align: right;  }
+  td.org-left   { text-align: left;   }
+  td.org-center { text-align: center; }
+  dt { font-weight: bold; }
+  .footpara { display: inline; }
+  .footdef  { margin-bottom: 1em; }
+  .figure { padding: 1em; }
+  .figure p { text-align: center; }
+  .equation-container {
+    display: table;
+    text-align: center;
+    width: 100%;
+  }
+  .equation {
+    vertical-align: middle;
+  }
+  .equation-label {
+    display: table-cell;
+    text-align: right;
+    vertical-align: middle;
+  }
+  .inlinetask {
+    padding: 10px;
+    border: 2px solid gray;
+    margin: 10px;
+    background: #ffffcc;
+  }
+  #org-div-home-and-up
+   { text-align: right; font-size: 70%; white-space: nowrap; }
+  textarea { overflow-x: auto; }
+  .linenr { font-size: smaller }
+  .code-highlighted { background-color: #ffff00; }
+  .org-info-js_info-navigation { border-style: none; }
+  #org-info-js_console-label
+    { font-size: 10px; font-weight: bold; white-space: nowrap; }
+  .org-info-js_search-highlight
+    { background-color: #ffff00; color: #000000; font-weight: bold; }
+  .org-svg { width: 90%; }
+  /*]]>*/-->
+</style>
+<script type="text/javascript">
+/*
+@licstart  The following is the entire license notice for the
+JavaScript code in this tag.
+
+Copyright (C) 2012-2019 Free Software Foundation, Inc.
+
+The JavaScript code in this tag is free software: you can
+redistribute it and/or modify it under the terms of the GNU
+General Public License (GNU GPL) as published by the Free Software
+Foundation, either version 3 of the License, or (at your option)
+any later version.  The code is distributed WITHOUT ANY WARRANTY;
+without even the implied warranty of MERCHANTABILITY or FITNESS
+FOR A PARTICULAR PURPOSE.  See the GNU GPL for more details.
+
+As additional permission under GNU GPL version 3 section 7, you
+may distribute non-source (e.g., minimized or compacted) forms of
+that code without the copy of the GNU GPL normally required by
+section 4, provided you include this license notice and a URL
+through which recipients can access the Corresponding Source.
+
+
+@licend  The above is the entire license notice
+for the JavaScript code in this tag.
+*/
+<!--/*--><![CDATA[/*><!--*/
+ function CodeHighlightOn(elem, id)
+ {
+   var target = document.getElementById(id);
+   if(null != target) {
+     elem.cacheClassElem = elem.className;
+     elem.cacheClassTarget = target.className;
+     target.className = "code-highlighted";
+     elem.className   = "code-highlighted";
+   }
+ }
+ function CodeHighlightOff(elem, id)
+ {
+   var target = document.getElementById(id);
+   if(elem.cacheClassElem)
+     elem.className = elem.cacheClassElem;
+   if(elem.cacheClassTarget)
+     target.className = elem.cacheClassTarget;
+ }
+/*]]>*///-->
+</script>
+</head>
+<body>
+<div id="content">
+<h1 class="title">CMPUT201W20B2 Week 10</h1>
+<div id="table-of-contents">
+<h2>Table of Contents</h2>
+<div id="text-table-of-contents">
+<ul>
+<li><a href="#org972dd6c">1. Week10</a>
+<ul>
+<li><a href="#orgbcb6262">1.1. Copyright Statement</a>
+<ul>
+<li><a href="#org03250e2">1.1.1. License</a></li>
+<li><a href="#orge3e35e7">1.1.2. Hazel Code is licensed under AGPL3.0+</a></li>
+</ul>
+</li>
+<li><a href="#orga0d9136">1.2. Init ORG-MODE</a>
+<ul>
+<li><a href="#orgc7abf94">1.2.1. Org export</a></li>
+<li><a href="#org8921097">1.2.2. Org Template</a></li>
+</ul>
+</li>
+<li><a href="#org1b31c30">1.3. Remember how to compile?</a></li>
+<li><a href="#org9498126">1.4. Preprocessor stuff like if-def</a>
+<ul>
+<li><a href="#orgacf5754">1.4.1. Multiple Files?</a></li>
+<li><a href="#org35df772">1.4.2. Example</a></li>
+<li><a href="#orgf29a547">1.4.3. Linking to libraries</a></li>
+<li><a href="#orga6dea13">1.4.4. Example Datastructure</a></li>
+<li><a href="#orge19a59d">1.4.5. What is the preprocessor doing?</a></li>
+<li><a href="#org94c7d4c">1.4.6. Parameterized Macros</a></li>
+</ul>
+</li>
+<li><a href="#org6b906da">1.5. Makefiles</a>
+<ul>
+<li><a href="#org7ea78d5">1.5.1. Basic Makefile</a></li>
+<li><a href="#orgfdc0309">1.5.2. DRY Makefile</a></li>
+<li><a href="#org687ce56">1.5.3. Idiomatic GCC Makefile</a></li>
+<li><a href="#org2d82ba4">1.5.4. Special Macro Vars</a></li>
+<li><a href="#orgfd8c903">1.5.5. Makefile help</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</div>
+</div>
+
+<div id="outline-container-org972dd6c" class="outline-2">
+<h2 id="org972dd6c"><span class="section-number-2">1</span> Week10</h2>
+<div class="outline-text-2" id="text-1">
+</div>
+<div id="outline-container-orgbcb6262" class="outline-3">
+<h3 id="orgbcb6262"><span class="section-number-3">1.1</span> Copyright Statement</h3>
+<div class="outline-text-3" id="text-1-1">
+<p>
+If you are in CMPUT201 at UAlberta this code is released in the public
+domain to you.
+</p>
+
+<p>
+Otherwise it is (c) 2020 Abram Hindle, Hazel Campbell AGPL3.0+
+</p>
+</div>
+
+<div id="outline-container-org03250e2" class="outline-4">
+<h4 id="org03250e2"><span class="section-number-4">1.1.1</span> License</h4>
+<div class="outline-text-4" id="text-1-1-1">
+<p>
+CMPUT 201 C Notes
+Copyright (C) 2020 Abram Hindle, Hazel Campbell
+</p>
+
+<p>
+This program is free software: you can redistribute it and/or modify
+it under the terms of the GNU Affero General Public License as
+published by the Free Software Foundation, either version 3 of the
+License, or (at your option) any later version.
+</p>
+
+<p>
+This program is distributed in the hope that it will be useful,
+but WITHOUT ANY WARRANTY; without even the implied warranty of
+MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+GNU Affero General Public License for more details.
+</p>
+
+<p>
+You should have received a copy of the GNU Affero General Public License
+along with this program.  If not, see <a href="https://www.gnu.org/licenses/">https://www.gnu.org/licenses/</a>.
+</p>
+</div>
+</div>
+
+
+<div id="outline-container-orge3e35e7" class="outline-4">
+<h4 id="orge3e35e7"><span class="section-number-4">1.1.2</span> Hazel Code is licensed under AGPL3.0+</h4>
+<div class="outline-text-4" id="text-1-1-2">
+<p>
+Hazel's code is also found here
+<a href="https://github.com/hazelybell/examples/tree/C-2020-01">https://github.com/hazelybell/examples/tree/C-2020-01</a>
+</p>
+
+<p>
+Hazel code is licensed: The example code is licensed under the AGPL3+
+license, unless otherwise noted.
+</p>
+</div>
+</div>
+</div>
+
+<div id="outline-container-orga0d9136" class="outline-3">
+<h3 id="orga0d9136"><span class="section-number-3">1.2</span> Init ORG-MODE</h3>
+<div class="outline-text-3" id="text-1-2">
+<div class="org-src-container">
+<pre class="src src-elisp"><span style="color: #b22222;">;; </span><span style="color: #b22222;">I need this for org-mode to work well</span>
+<span style="color: #b22222;">;; </span><span style="color: #b22222;">If we have a new org-mode use ob-shell</span>
+<span style="color: #b22222;">;; </span><span style="color: #b22222;">otherwise use ob-sh --- but not both!</span>
+(<span style="color: #a020f0;">if</span> (<span style="color: #a020f0;">require</span> '<span style="color: #008b8b;">ob-shell</span> nil 'noerror)
+  (<span style="color: #a020f0;">progn</span>
+    (org-babel-do-load-languages 'org-babel-load-languages '((shell . t))))
+  (<span style="color: #a020f0;">progn</span>
+    (<span style="color: #a020f0;">require</span> '<span style="color: #008b8b;">ob-sh</span>)
+    (org-babel-do-load-languages 'org-babel-load-languages '((sh . t)))))
+(org-babel-do-load-languages 'org-babel-load-languages '((C . t)))
+(org-babel-do-load-languages 'org-babel-load-languages '((python . t)))
+(<span style="color: #a020f0;">setq</span> org-src-fontify-natively t)
+(<span style="color: #a020f0;">setq</span> org-confirm-babel-evaluate nil) <span style="color: #b22222;">;; </span><span style="color: #b22222;">danger!</span>
+(custom-set-faces
+ '(org-block ((t (<span style="color: #483d8b;">:inherit</span> shadow <span style="color: #483d8b;">:foreground</span> <span style="color: #8b2252;">"black"</span>))))
+ '(org-code ((t (<span style="color: #483d8b;">:inherit</span> shadow <span style="color: #483d8b;">:foreground</span> <span style="color: #8b2252;">"black"</span>)))))
+</pre>
+</div>
+</div>
+
+<div id="outline-container-orgc7abf94" class="outline-4">
+<h4 id="orgc7abf94"><span class="section-number-4">1.2.1</span> Org export</h4>
+<div class="outline-text-4" id="text-1-2-1">
+<div class="org-src-container">
+<pre class="src src-elisp">(org-html-export-to-html)
+(org-latex-export-to-pdf)
+(org-ascii-export-to-ascii)
+</pre>
+</div>
+</div>
+</div>
+
+
+<div id="outline-container-org8921097" class="outline-4">
+<h4 id="org8921097"><span class="section-number-4">1.2.2</span> Org Template</h4>
+<div class="outline-text-4" id="text-1-2-2">
+<p>
+Copy and paste this to demo C
+</p>
+
+<div class="org-src-container">
+<pre class="src src-C"><span style="color: #483d8b;">#include</span> <span style="color: #8b2252;">&lt;stdio.h&gt;</span>
+
+<span style="color: #228b22;">int</span> <span style="color: #0000ff;">main</span>(<span style="color: #228b22;">int</span> <span style="color: #a0522d;">argc</span>, <span style="color: #228b22;">char</span>**<span style="color: #a0522d;">argv</span>) {
+    <span style="color: #a020f0;">return</span> 0;
+}
+</pre>
+</div>
+</div>
+</div>
+</div>
+
+<div id="outline-container-org1b31c30" class="outline-3">
+<h3 id="org1b31c30"><span class="section-number-3">1.3</span> Remember how to compile?</h3>
+<div class="outline-text-3" id="text-1-3">
+<p>
+gcc  -std=c99 -pedantic -Wall -Wextra -ftrapv -ggdb3 -o programname programname.c
+</p>
+</div>
+</div>
+
+<div id="outline-container-org9498126" class="outline-3">
+<h3 id="org9498126"><span class="section-number-3">1.4</span> Preprocessor stuff like if-def</h3>
+<div class="outline-text-3" id="text-1-4">
+<p>
+The preprocessor deals with all the lines that you start with an
+octalthrope or hash mark: #
+</p>
+
+<p>
+The preprocessor lets you define symbols, macros, and include
+files.
+</p>
+</div>
+
+<div id="outline-container-orgacf5754" class="outline-4">
+<h4 id="orgacf5754"><span class="section-number-4">1.4.1</span> Multiple Files?</h4>
+<div class="outline-text-4" id="text-1-4-1">
+<p>
+How does stdio.h work?
+</p>
+
+<p>
+<a href="file:///usr/include/stdio.h">file:///usr/include/stdio.h</a>
+</p>
+
+<p>
+It defines definitions, macros, and prototypes for the stdio library.
+The linker will link your executable to that library that was already
+compiled.
+</p>
+
+<p>
+.h files help us organize C programs by including definitions for the
+object files and libraries that we will create.
+</p>
+
+<p>
+Libc or glibc contains the implemention of those definitions.
+libc.so.6 =&gt; /lib/x86<sub>64</sub>-linux-gnu/libc.so.6 (0x00007f919f994000)
+</p>
+
+<p>
+libc is composed of many .c files compiled into .o object files and
+then combined into a library. A library is like an executable that
+other executables rely on for code. malloc is defined in malloc.c and
+has a malloc.h file!
+</p>
+
+<p>
+Typically if I make a library I will make a .h file so the definitions
+can be shared with other .c files. But the implementation of the functions
+will go into a .c file that includes that .h as well.
+</p>
+
+<ul class="org-ul">
+<li>main.c
+<ul class="org-ul">
+<li>#include "library.h"</li>
+<li>relies on library.o</li>
+</ul></li>
+<li>library.c
+<ul class="org-ul">
+<li>#include "library.h"</li>
+<li>makes library.o</li>
+</ul></li>
+<li>library.h
+<ul class="org-ul">
+<li>defines functions and definitions from library.c</li>
+</ul></li>
+</ul>
+</div>
+</div>
+
+<div id="outline-container-org35df772" class="outline-4">
+<h4 id="org35df772"><span class="section-number-4">1.4.2</span> Example</h4>
+<div class="outline-text-4" id="text-1-4-2">
+<p>
+This is a useful function to check if scanf read 1 or more elements
+and didn't read EOF.
+</p>
+
+<p>
+<a href="./checkinput.c">./checkinput.c</a>
+</p>
+
+<div class="org-src-container">
+<pre class="src src-C"><span style="color: #483d8b;">#include</span> <span style="color: #8b2252;">"checkinput.h"</span>
+<span style="color: #483d8b;">#include</span> <span style="color: #8b2252;">&lt;stdio.h&gt;</span>
+<span style="color: #483d8b;">#include</span> <span style="color: #8b2252;">&lt;stdlib.h&gt;</span>
+<span style="color: #b22222;">/* </span><span style="color: #b22222;">checkInput: given the result of scanf check if it </span>
+<span style="color: #b22222;"> * 0 elements read or EOF. If so exit(1) with a warning.</span>
+<span style="color: #b22222;"> *</span>
+<span style="color: #b22222;"> </span><span style="color: #b22222;">*/</span>
+<span style="color: #228b22;">void</span> <span style="color: #0000ff;">checkInput</span>(<span style="color: #228b22;">int</span> <span style="color: #a0522d;">err</span>) {
+  <span style="color: #a020f0;">if</span> (!err || err == EOF) {
+    printf(<span style="color: #8b2252;">"\nInvalid input!\n"</span>);
+    exit(1);
+  }
+}
+</pre>
+</div>
+
+<p>
+<a href="./checkinput.h">./checkinput.h</a>
+</p>
+
+<div class="org-src-container">
+<pre class="src src-C"><span style="color: #b22222;">// </span><span style="color: #b22222;">Have a guard to ensure that we don't include it multiple times.</span>
+<span style="color: #483d8b;">#if</span><span style="color: #483d8b;">n</span><span style="color: #483d8b;">def</span> _CHECKINPUT_H_
+<span style="color: #b22222;">/* </span><span style="color: #b22222;">checkInput: given the result of scanf check if it </span>
+<span style="color: #b22222;"> * 0 elements read or EOF. If so exit(1) with a warning.</span>
+<span style="color: #b22222;"> *</span>
+<span style="color: #b22222;"> </span><span style="color: #b22222;">*/</span>
+<span style="color: #483d8b;">#define</span> <span style="color: #a0522d;">_CHECKINPUT_H_</span>
+<span style="color: #228b22;">void</span> <span style="color: #0000ff;">checkInput</span>(<span style="color: #228b22;">int</span> <span style="color: #a0522d;">err</span>); <span style="color: #b22222;">// </span><span style="color: #b22222;">a prototype!</span>
+<span style="color: #483d8b;">#endif</span>
+</pre>
+</div>
+
+<p>
+<a href="./checkinput-driver.c">./checkinput-driver.c</a>
+</p>
+
+<div class="org-src-container">
+<pre class="src src-C"><span style="color: #483d8b;">#include</span> <span style="color: #8b2252;">"checkinput.h"</span>
+<span style="color: #483d8b;">#include</span> <span style="color: #8b2252;">&lt;stdio.h&gt;</span>
+<span style="color: #483d8b;">#include</span> <span style="color: #8b2252;">"checkinput.h"</span>
+
+<span style="color: #228b22;">int</span> <span style="color: #0000ff;">main</span>() {
+  <span style="color: #228b22;">int</span> <span style="color: #a0522d;">input</span>;
+  checkInput(scanf(<span style="color: #8b2252;">"%d"</span>, &amp;input));  
+  puts(<span style="color: #8b2252;">"Good Input!"</span>);
+}
+</pre>
+</div>
+</div>
+
+<ol class="org-ol">
+<li><a id="orgf53e29a"></a>Compiling Multiple Files Easy Mode<br />
+<div class="outline-text-5" id="text-1-4-2-1">
+<p>
+We can put all our .c files on the same line and compile them all at
+once! This is handy. But quite limiting.
+</p>
+
+<p>
+We can't parallel compile. We can't use all our cores. We can't
+interupt compilation.
+</p>
+
+<div class="org-src-container">
+<pre class="src src-sh"><span style="color: #b22222;"># </span><span style="color: #b22222;">build checkinput-driver</span>
+gcc  -std=c99 -pedantic -Wall -Wextra -ftrapv -ggdb3 <span style="color: #8b2252;">\</span>
+       -o checkinput-driver checkinput-driver.c <span style="color: #8b2252;">\</span>
+       checkinput.c &amp;&amp; <span style="color: #8b2252;">\</span>
+( <span style="color: #483d8b;">echo</span> YES | ./checkinput-driver  || <span style="color: #8b2252;">\</span>
+  <span style="color: #483d8b;">echo</span> 100 | ./checkinput-driver )
+</pre>
+</div>
+
+<pre class="example">
+
+Invalid input!
+Good Input!
+</pre>
+</div>
+</li>
+
+
+<li><a id="org457e5b7"></a>Compiling Multiple Files with Linking<br />
+<div class="outline-text-5" id="text-1-4-2-2">
+<p>
+OK now we compile it. The main is the last to compile and it needs all
+the .o files.
+</p>
+
+<p>
+All the .c files that don't contain main need to be compiled to object
+files. Use the -c flags to do this.
+</p>
+
+<div class="org-src-container">
+<pre class="src src-sh"><span style="color: #b22222;"># </span><span style="color: #b22222;">build checkinput.o</span>
+gcc  -std=c99 -pedantic -Wall -Wextra -ftrapv -ggdb3 <span style="color: #8b2252;">\</span>
+       -c checkinput.c
+file checkinput.o
+<span style="color: #b22222;"># </span><span style="color: #b22222;">build checkinput-driver and link it to checkinput.o</span>
+gcc  -std=c99 -pedantic -Wall -Wextra -ftrapv -ggdb3 <span style="color: #8b2252;">\</span>
+       -o checkinput-driver checkinput-driver.c <span style="color: #8b2252;">\</span>
+       checkinput.o
+file checkinput-driver
+</pre>
+</div>
+
+<pre class="example">
+checkinput.o: ELF 64-bit LSB relocatable, x86-64, version 1 (SYSV), with debug_info, not stripped
+checkinput-driver: ELF 64-bit LSB shared object, x86-64, version 1 (SYSV), dynamically linked, interpreter /lib64/l, for GNU/Linux 3.2.0, BuildID[sha1]=2df2006fd89c9d9dbc9655f59e4cf90c6d3f6017, with debug_info, not stripped
+</pre>
+
+
+<ul class="org-ul">
+<li>If you want some translation :-)
+<ul class="org-ul">
+<li>ELF - Executable and Linking format</li>
+<li>relocatable - you can link it</li>
+<li>shared object - relocatable and executable</li>
+<li>LSB - little endian/least significant bit</li>
+<li>x86-64 - 64 bit x86 processor</li>
+<li>version 1 (SYSV) - version 1 of ELF System V Unix spec.</li>
+</ul></li>
+</ul>
+
+<p>
+Test drive it
+</p>
+
+<div class="org-src-container">
+<pre class="src src-sh"><span style="color: #483d8b;">echo</span>    | ./checkinput-driver <span style="color: #b22222;"># </span><span style="color: #b22222;">bad</span>
+<span style="color: #483d8b;">echo</span> X  | ./checkinput-driver <span style="color: #b22222;"># </span><span style="color: #b22222;">bad</span>
+<span style="color: #483d8b;">echo</span> 1  | ./checkinput-driver <span style="color: #b22222;"># </span><span style="color: #b22222;">good</span>
+<span style="color: #483d8b;">echo</span> -1 | ./checkinput-driver <span style="color: #b22222;"># </span><span style="color: #b22222;">good</span>
+</pre>
+</div>
+
+<pre class="example">
+
+Invalid input!
+
+Invalid input!
+Good Input!
+Good Input!
+</pre>
+
+
+<p>
+Now let's see how it is linked!
+</p>
+
+<div class="org-src-container">
+<pre class="src src-sh">ldd ./checkinput-driver
+</pre>
+</div>
+
+<pre class="example">
+linux-vdso.so.1 (0x00007ffe85be0000)
+libc.so.6 =&gt; /lib/x86_64-linux-gnu/libc.so.6 (0x00007f919f994000)
+/lib64/ld-linux-x86-64.so.2 (0x00007f919ff87000)
+</pre>
+
+
+<ul class="org-ul">
+<li>syscalls (read, write, gettimeofday) and libc (libc is stuff like stdio.h)</li>
+</ul>
+</div>
+</li>
+</ol>
+</div>
+
+<div id="outline-container-orgf29a547" class="outline-4">
+<h4 id="orgf29a547"><span class="section-number-4">1.4.3</span> Linking to libraries</h4>
+<div class="outline-text-4" id="text-1-4-3">
+<p>
+`math.h` includes fun functions like cos and tanh.
+</p>
+
+<p>
+Math.h, part of the C stdlib, is distributed as a seperate library.
+Not all computers have floating point numbers so why bother compiling
+floating code for them?
+</p>
+
+<p>
+<a href="file:///usr/include/math.h">file:///usr/include/math.h</a>
+</p>
+
+<div class="org-src-container">
+<pre class="src src-sh">gnome-terminal --window-with-profile Big <span style="color: #8b2252;">\</span>
+               -- man math.h
+</pre>
+</div>
+
+<p>
+I add the flag -lm so we get our math library :-)
+</p>
+<div class="org-src-container">
+<pre class="src src-C"><span style="color: #483d8b;">#include</span> <span style="color: #8b2252;">&lt;stdio.h&gt;</span>
+<span style="color: #483d8b;">#include</span> <span style="color: #8b2252;">&lt;math.h&gt;</span>
+
+<span style="color: #228b22;">int</span> <span style="color: #0000ff;">main</span>() {
+    <span style="color: #228b22;">double</span> <span style="color: #a0522d;">x</span> = 0.0;
+    <span style="color: #228b22;">double</span> <span style="color: #a0522d;">th</span> = tanh(x);
+    <span style="color: #228b22;">double</span> <span style="color: #a0522d;">lh</span> = th;
+    <span style="color: #a020f0;">do</span> {
+        lh = th;
+        x += 0.5;
+        th = tanh(x);
+        printf(<span style="color: #8b2252;">"tanh(%e) == %e\n"</span>, x, th);
+    } <span style="color: #a020f0;">while</span>( lh != th );
+}
+</pre>
+</div>
+
+<pre class="example">
+tanh(5.000000e-01) == 4.621172e-01
+tanh(1.000000e+00) == 7.615942e-01
+tanh(1.500000e+00) == 9.051483e-01
+tanh(2.000000e+00) == 9.640276e-01
+tanh(2.500000e+00) == 9.866143e-01
+tanh(3.000000e+00) == 9.950548e-01
+tanh(3.500000e+00) == 9.981779e-01
+tanh(4.000000e+00) == 9.993293e-01
+tanh(4.500000e+00) == 9.997532e-01
+tanh(5.000000e+00) == 9.999092e-01
+tanh(5.500000e+00) == 9.999666e-01
+tanh(6.000000e+00) == 9.999877e-01
+tanh(6.500000e+00) == 9.999955e-01
+tanh(7.000000e+00) == 9.999983e-01
+tanh(7.500000e+00) == 9.999994e-01
+tanh(8.000000e+00) == 9.999998e-01
+tanh(8.500000e+00) == 9.999999e-01
+tanh(9.000000e+00) == 1.000000e+00
+tanh(9.500000e+00) == 1.000000e+00
+tanh(1.000000e+01) == 1.000000e+00
+tanh(1.050000e+01) == 1.000000e+00
+tanh(1.100000e+01) == 1.000000e+00
+tanh(1.150000e+01) == 1.000000e+00
+tanh(1.200000e+01) == 1.000000e+00
+tanh(1.250000e+01) == 1.000000e+00
+tanh(1.300000e+01) == 1.000000e+00
+tanh(1.350000e+01) == 1.000000e+00
+tanh(1.400000e+01) == 1.000000e+00
+tanh(1.450000e+01) == 1.000000e+00
+tanh(1.500000e+01) == 1.000000e+00
+tanh(1.550000e+01) == 1.000000e+00
+tanh(1.600000e+01) == 1.000000e+00
+tanh(1.650000e+01) == 1.000000e+00
+tanh(1.700000e+01) == 1.000000e+00
+tanh(1.750000e+01) == 1.000000e+00
+tanh(1.800000e+01) == 1.000000e+00
+tanh(1.850000e+01) == 1.000000e+00
+tanh(1.900000e+01) == 1.000000e+00
+tanh(1.950000e+01) == 1.000000e+00
+tanh(2.000000e+01) == 1.000000e+00
+</pre>
+
+<p>
+OK so how does this work, how do link to math?
+</p>
+
+<div class="org-src-container">
+<pre class="src src-sh"><span style="color: #b22222;"># </span><span style="color: #b22222;">build checkinput-driver and link it to checkinput.o</span>
+gcc  -std=c99 -pedantic -Wall -Wextra -ftrapv -ggdb3 <span style="color: #8b2252;">\</span>
+       -o poor-tanh-example poor-tanh-example.c <span style="color: #8b2252;">\</span>
+       -lm
+file poor-tanh-example
+./poor-tanh-example | wc
+ldd ./poor-tanh-example
+</pre>
+</div>
+
+<pre class="example">
+poor-tanh-example: ELF 64-bit LSB shared object, x86-64, version 1 (SYSV), dynamically linked, interpreter /lib64/l, for GNU/Linux 3.2.0, BuildID[sha1]=fdd28691d4637c2a9b9a76b129ea7585894e4378, with debug_info, not stripped
+     40     120    1400
+	linux-vdso.so.1 (0x00007ffdd1570000)
+	libm.so.6 =&gt; /lib/x86_64-linux-gnu/libm.so.6 (0x00007f4ed467b000)
+	libc.so.6 =&gt; /lib/x86_64-linux-gnu/libc.so.6 (0x00007f4ed428a000)
+	/lib64/ld-linux-x86-64.so.2 (0x00007f4ed4c1b000)
+</pre>
+
+
+<p>
+See that? libm.so.6 is in there.
+</p>
+
+<p>
+Larger programs link to lots of libraries.
+</p>
+
+<div class="org-src-container">
+<pre class="src src-sh">ldd <span style="color: #ff00ff;">`which xterm`</span>
+</pre>
+</div>
+
+<pre class="example">
+linux-vdso.so.1 (0x00007ffdabcea000)
+libXft.so.2 =&gt; /usr/lib/x86_64-linux-gnu/libXft.so.2 (0x00007fc90b414000)
+libfontconfig.so.1 =&gt; /usr/lib/x86_64-linux-gnu/libfontconfig.so.1 (0x00007fc90b1cf000)
+libXaw.so.7 =&gt; /usr/lib/x86_64-linux-gnu/libXaw.so.7 (0x00007fc90af5b000)
+libXmu.so.6 =&gt; /usr/lib/x86_64-linux-gnu/libXmu.so.6 (0x00007fc90ad42000)
+libXt.so.6 =&gt; /usr/lib/x86_64-linux-gnu/libXt.so.6 (0x00007fc90aad9000)
+libX11.so.6 =&gt; /usr/lib/x86_64-linux-gnu/libX11.so.6 (0x00007fc90a7a1000)
+libXinerama.so.1 =&gt; /usr/lib/x86_64-linux-gnu/libXinerama.so.1 (0x00007fc90a59e000)
+libXpm.so.4 =&gt; /usr/lib/x86_64-linux-gnu/libXpm.so.4 (0x00007fc90a38c000)
+libICE.so.6 =&gt; /usr/lib/x86_64-linux-gnu/libICE.so.6 (0x00007fc90a171000)
+libutempter.so.0 =&gt; /usr/lib/x86_64-linux-gnu/libutempter.so.0 (0x00007fc909f6e000)
+libtinfo.so.5 =&gt; /lib/x86_64-linux-gnu/libtinfo.so.5 (0x00007fc909d44000)
+libc.so.6 =&gt; /lib/x86_64-linux-gnu/libc.so.6 (0x00007fc909953000)
+libfreetype.so.6 =&gt; /usr/lib/x86_64-linux-gnu/libfreetype.so.6 (0x00007fc90969f000)
+libXrender.so.1 =&gt; /usr/lib/x86_64-linux-gnu/libXrender.so.1 (0x00007fc909495000)
+libexpat.so.1 =&gt; /lib/x86_64-linux-gnu/libexpat.so.1 (0x00007fc909263000)
+libpthread.so.0 =&gt; /lib/x86_64-linux-gnu/libpthread.so.0 (0x00007fc909044000)
+libXext.so.6 =&gt; /usr/lib/x86_64-linux-gnu/libXext.so.6 (0x00007fc908e32000)
+libSM.so.6 =&gt; /usr/lib/x86_64-linux-gnu/libSM.so.6 (0x00007fc908c2a000)
+libxcb.so.1 =&gt; /usr/lib/x86_64-linux-gnu/libxcb.so.1 (0x00007fc908a02000)
+libdl.so.2 =&gt; /lib/x86_64-linux-gnu/libdl.so.2 (0x00007fc9087fe000)
+libbsd.so.0 =&gt; /lib/x86_64-linux-gnu/libbsd.so.0 (0x00007fc9085e9000)
+/lib64/ld-linux-x86-64.so.2 (0x00007fc90b8d9000)
+libpng16.so.16 =&gt; /usr/lib/x86_64-linux-gnu/libpng16.so.16 (0x00007fc9083b7000)
+libz.so.1 =&gt; /lib/x86_64-linux-gnu/libz.so.1 (0x00007fc90819a000)
+libuuid.so.1 =&gt; /lib/x86_64-linux-gnu/libuuid.so.1 (0x00007fc907f93000)
+libXau.so.6 =&gt; /usr/lib/x86_64-linux-gnu/libXau.so.6 (0x00007fc907d8f000)
+libXdmcp.so.6 =&gt; /usr/lib/x86_64-linux-gnu/libXdmcp.so.6 (0x00007fc907b89000)
+librt.so.1 =&gt; /lib/x86_64-linux-gnu/librt.so.1 (0x00007fc907981000)
+libm.so.6 =&gt; /lib/x86_64-linux-gnu/libm.so.6 (0x00007fc9075e3000)
+</pre>
+
+<p>
+See! Lots of libraries!
+</p>
+</div>
+
+<ol class="org-ol">
+<li><a id="org7252522"></a>Summary<br />
+<div class="outline-text-5" id="text-1-4-3-1">
+<p>
+To link to a shared library with gcc or clang use the:
+  -l flag
+  -llibraryyouwant
+</p>
+
+<p>
+For libm use -lm for librt use -lrt
+</p>
+
+<p>
+If your library is not in the current lib path you will need to
+specify a library path use -L/path/to/library
+</p>
+
+<p>
+OK let's see how it affects you.
+</p>
+</div>
+</li>
+</ol>
+</div>
+
+<div id="outline-container-orga6dea13" class="outline-4">
+<h4 id="orga6dea13"><span class="section-number-4">1.4.4</span> Example Datastructure</h4>
+<div class="outline-text-4" id="text-1-4-4">
+<p>
+Let's make a brief data structure about one of my favourite topics:
+cool bears.
+</p>
+
+<p>
+<a href="./coolbears.c">./coolbears.c</a>
+</p>
+
+<div class="org-src-container">
+<pre class="src src-C"><span style="color: #483d8b;">#define</span> <span style="color: #a0522d;">_POSIX_C_SOURCE</span> 200809L <span style="color: #b22222;">// </span><span style="color: #b22222;">&lt;-- needed for strdup</span>
+<span style="color: #483d8b;">#include</span> <span style="color: #8b2252;">"coolbears.h"</span>
+<span style="color: #483d8b;">#include</span> <span style="color: #8b2252;">&lt;stdio.h&gt;</span>
+<span style="color: #483d8b;">#include</span> <span style="color: #8b2252;">&lt;stdlib.h&gt;</span>
+<span style="color: #483d8b;">#include</span> <span style="color: #8b2252;">&lt;string.h&gt;</span>
+<span style="color: #b22222;">// </span><span style="color: #b22222;">hiding struct details from other programmers</span>
+<span style="color: #b22222;">// </span><span style="color: #b22222;">I DONT TRUST THEM. Especially Hazel ;-) (don't tell hazel)</span>
+<span style="color: #a020f0;">struct</span> <span style="color: #228b22;">coolbear_t</span> {
+    <span style="color: #228b22;">char</span> * <span style="color: #a0522d;">name</span>;
+    <span style="color: #228b22;">float</span> <span style="color: #a0522d;">temperature</span>;
+};
+
+<span style="color: #228b22;">CoolBear</span> <span style="color: #0000ff;">createCoolBear</span>(<span style="color: #228b22;">char</span> * <span style="color: #a0522d;">name</span>, <span style="color: #228b22;">float</span> <span style="color: #a0522d;">temperature</span>) {
+    <span style="color: #228b22;">CoolBear</span> <span style="color: #a0522d;">coolbear</span> = malloc(<span style="color: #a020f0;">sizeof</span>(*coolbear));
+    coolbear-&gt;name = strdup(name);
+    coolbear-&gt;temperature = temperature;
+    <span style="color: #a020f0;">return</span> coolbear;
+}
+<span style="color: #228b22;">void</span> <span style="color: #0000ff;">freeCoolBear</span>(<span style="color: #228b22;">CoolBear</span> <span style="color: #a0522d;">coolBear</span>) {
+    <span style="color: #a020f0;">if</span> (coolBear == <span style="color: #008b8b;">NULL</span>) {
+        abort();
+    }
+    <span style="color: #a020f0;">if</span> (coolBear-&gt;name != <span style="color: #008b8b;">NULL</span>) {
+        free(coolBear-&gt;name);
+    }
+    free(coolBear);
+}
+<span style="color: #228b22;">char</span> * <span style="color: #0000ff;">getNameCoolBear</span>(<span style="color: #228b22;">CoolBear</span> <span style="color: #a0522d;">coolbear</span>) {
+    <span style="color: #a020f0;">return</span> coolbear-&gt;name;
+}
+<span style="color: #228b22;">float</span>    <span style="color: #0000ff;">getTemperatureCoolBear</span>(<span style="color: #228b22;">CoolBear</span> <span style="color: #a0522d;">coolbear</span>) {
+   <span style="color: #a020f0;">return</span> coolbear-&gt;temperature;
+}
+<span style="color: #b22222;">// </span><span style="color: #b22222;">NO MAIN!</span>
+</pre>
+</div>
+
+
+
+<p>
+<a href="./coolbears.h">./coolbears.h</a>
+</p>
+
+<div class="org-src-container">
+<pre class="src src-C"><span style="color: #b22222;">// </span><span style="color: #b22222;">Have a guard to ensure that we don't include it multiple times.</span>
+<span style="color: #483d8b;">#if</span><span style="color: #483d8b;">n</span><span style="color: #483d8b;">def</span> _COOLBEARS_H_
+<span style="color: #b22222;">/* </span><span style="color: #b22222;">checkInput: given the result of scanf check if it </span>
+<span style="color: #b22222;"> * 0 elements read or EOF. If so exit(1) with a warning.</span>
+<span style="color: #b22222;"> *</span>
+<span style="color: #b22222;"> </span><span style="color: #b22222;">*/</span>
+<span style="color: #483d8b;">#define</span> <span style="color: #a0522d;">_COOLBEARS_H_</span>
+<span style="color: #a020f0;">struct</span> <span style="color: #228b22;">coolbear_t</span>; <span style="color: #b22222;">// </span><span style="color: #b22222;">Forward declaration -- I am not sharing details!</span>
+<span style="color: #a020f0;">typedef</span> <span style="color: #a020f0;">struct</span> <span style="color: #228b22;">coolbear_t</span> * <span style="color: #228b22;">CoolBear</span>; <span style="color: #b22222;">// </span><span style="color: #b22222;">Struct point as type</span>
+
+<span style="color: #228b22;">CoolBear</span> <span style="color: #0000ff;">createCoolBear</span>(<span style="color: #228b22;">char</span> * <span style="color: #a0522d;">name</span>, <span style="color: #228b22;">float</span> <span style="color: #a0522d;">temperature</span>); <span style="color: #b22222;">// </span><span style="color: #b22222;">a prototype!</span>
+<span style="color: #228b22;">void</span>     <span style="color: #0000ff;">freeCoolBear</span>(<span style="color: #228b22;">CoolBear</span> <span style="color: #a0522d;">coolBear</span>); <span style="color: #b22222;">// </span><span style="color: #b22222;">a prototype!</span>
+<span style="color: #228b22;">char</span> *   <span style="color: #0000ff;">getNameCoolBear</span>(<span style="color: #228b22;">CoolBear</span> <span style="color: #a0522d;">coolbear</span>); <span style="color: #b22222;">// </span><span style="color: #b22222;">a prototype!</span>
+<span style="color: #228b22;">float</span>    <span style="color: #0000ff;">getTemperatureCoolBear</span>(<span style="color: #228b22;">CoolBear</span> <span style="color: #a0522d;">coolbear</span>); <span style="color: #b22222;">// </span><span style="color: #b22222;">a prototype!</span>
+
+<span style="color: #483d8b;">#endif</span>
+</pre>
+</div>
+
+<p>
+<a href="./coolbears-driver.c">./coolbears-driver.c</a>
+</p>
+
+<div class="org-src-container">
+<pre class="src src-C"><span style="color: #483d8b;">#include</span> <span style="color: #8b2252;">"coolbears.h"</span>
+<span style="color: #483d8b;">#include</span> <span style="color: #8b2252;">&lt;stdio.h&gt;</span>
+
+<span style="color: #228b22;">int</span> <span style="color: #0000ff;">main</span>() {
+  <span style="color: #228b22;">CoolBear</span> <span style="color: #a0522d;">ziggy</span> = createCoolBear(<span style="color: #8b2252;">"Ziggy"</span>,-23.0 <span style="color: #b22222;">/* </span><span style="color: #b22222;">C </span><span style="color: #b22222;">*/</span>);
+  <span style="color: #228b22;">CoolBear</span> <span style="color: #a0522d;">kevin</span> = createCoolBear(<span style="color: #8b2252;">"Kevin"</span>,-32.0 <span style="color: #b22222;">/* </span><span style="color: #b22222;">C </span><span style="color: #b22222;">*/</span>);
+  <span style="color: #228b22;">CoolBear</span> <span style="color: #a0522d;">coolest</span> = (getTemperatureCoolBear(ziggy) &lt; 
+                      getTemperatureCoolBear(kevin))? ziggy : kevin;
+  printf(<span style="color: #8b2252;">"The coolest bear is %s\n"</span>, getNameCoolBear( coolest ));
+  <span style="color: #b22222;">// </span><span style="color: #b22222;">// we actually don't know about name so we can't reference it below</span>
+  <span style="color: #b22222;">// </span><span style="color: #b22222;">printf("The coolest bear is %s\n", getNameCoolBear( coolest-&gt;name ));</span>
+  freeCoolBear(ziggy);
+  freeCoolBear(kevin);
+}
+</pre>
+</div>
+
+<p>
+Compile it. -c the coolbears.c to make coolbears.o and then 
+compile coolbears-driver.c
+</p>
+
+<p>
+coolbears-driver.c has no clue how to access 
+</p>
+
+<div class="org-src-container">
+<pre class="src src-sh"><span style="color: #b22222;"># </span><span style="color: #b22222;">build coolbears.o</span>
+gcc  -std=c99 -pedantic -Wall -Wextra -ftrapv -ggdb3 <span style="color: #8b2252;">\</span>
+       -c coolbears.c
+<span style="color: #b22222;"># </span><span style="color: #b22222;">build coolbears-driver and link it to coolbears.o</span>
+gcc  -std=c99 -pedantic -Wall -Wextra -ftrapv -ggdb3 <span style="color: #8b2252;">\</span>
+       -o coolbears-driver coolbears-driver.c <span style="color: #8b2252;">\</span>
+       coolbears.o 
+./coolbears-driver
+</pre>
+</div>
+
+<pre class="example">
+The coolest bear is Kevin
+</pre>
+
+
+<p>
+If we access coolest-&gt;name we get:
+</p>
+
+<pre class="example">
+coolbears-driver.c: In function ‘main’:
+coolbears-driver.c:11:62: error: dereferencing pointer to incomplete type ‘struct coolbear_t’
+   printf("The coolest bear is %s\n", getNameCoolBear( coolest-&gt;name ));
+</pre>
+</div>
+</div>
+
+
+<div id="outline-container-orge19a59d" class="outline-4">
+<h4 id="orge19a59d"><span class="section-number-4">1.4.5</span> What is the preprocessor doing?</h4>
+<div class="outline-text-4" id="text-1-4-5">
+<p>
+Let's use the -E flag to see what checkinput.c becomes
+</p>
+
+<p>
+This output contains glibc headers for stdio.h and stdlib.h these
+should be under the GPLV3 (c) the Glibc project and GNU project.
+</p>
+
+<p>
+If you want more preprocessor options checkout:
+</p>
+
+<p>
+<a href="https://gcc.gnu.org/onlinedocs/gcc-5.2.0/gcc/Preprocessor-Options.html">https://gcc.gnu.org/onlinedocs/gcc-5.2.0/gcc/Preprocessor-Options.html</a>
+</p>
+
+<div class="org-src-container">
+<pre class="src src-sh"><span style="color: #b22222;"># </span><span style="color: #b22222;">build checkinput.o</span>
+gcc -E -std=c99 -pedantic -Wall -Wextra -ftrapv -ggdb3 <span style="color: #8b2252;">\</span>
+       checkinput.c &gt; checkinput-preprocessor.c
+</pre>
+</div>
+
+<p>
+It produces this file:
+</p>
+
+<p>
+<a href="checkinput-preprocessor.c">checkinput-preprocessor.c</a>
+</p>
+
+
+<div class="org-src-container">
+<pre class="src src-C"><span style="color: #483d8b;"># 1</span> <span style="color: #8b2252;">"checkinput.c"</span>
+<span style="color: #483d8b;"># 1</span> <span style="color: #8b2252;">"/home/hindle1/projects/CMPUT201W20/2020-01/CMPUT201W20B2-public/week10//"</span>
+<span style="color: #483d8b;"># 1</span> <span style="color: #8b2252;">"&lt;built-in&gt;"</span>
+<span style="color: #483d8b;">#define</span> <span style="color: #a0522d;">__STDC__</span> 1
+<span style="color: #483d8b;">#define</span> <span style="color: #a0522d;">__STDC_VERSION__</span> 199901L
+<span style="color: #483d8b;">#define</span> <span style="color: #a0522d;">__STDC_HOSTED__</span> 1
+<span style="color: #483d8b;">#define</span> <span style="color: #a0522d;">__GNUC__</span> 7
+<span style="color: #483d8b;">#define</span> <span style="color: #a0522d;">__GNUC_MINOR__</span> 5
+<span style="color: #483d8b;">#define</span> <span style="color: #a0522d;">__GNUC_PATCHLEVEL__</span> 0
+
+<span style="color: #b22222;">// </span><span style="color: #b22222;">lots of definitions</span>
+
+<span style="color: #483d8b;"># 1</span> <span style="color: #8b2252;">"/usr/include/stdio.h"</span> 1 3 4
+<span style="color: #483d8b;"># 24</span> <span style="color: #8b2252;">"/usr/include/stdio.h"</span> 3 4
+<span style="color: #483d8b;">#define</span> <span style="color: #a0522d;">_STDIO_H</span> 1
+
+<span style="color: #b22222;">// </span><span style="color: #b22222;">Start of STDIO_H</span>
+
+<span style="color: #b22222;">// </span><span style="color: #b22222;">...</span>
+
+<span style="color: #a020f0;">extern</span> <span style="color: #228b22;">int</span> <span style="color: #0000ff;">printf</span> (<span style="color: #a020f0;">const</span> <span style="color: #228b22;">char</span> *<span style="color: #a0522d;">__restrict</span> __format, ...);
+
+<span style="color: #a020f0;">extern</span> <span style="color: #228b22;">int</span> <span style="color: #0000ff;">sprintf</span> (<span style="color: #228b22;">char</span> *<span style="color: #a0522d;">__restrict</span> __s,
+      <span style="color: #a020f0;">const</span> <span style="color: #228b22;">char</span> *<span style="color: #a0522d;">__restrict</span> __format, ...) <span style="color: #a020f0;">__attribute__</span> ((__nothrow__));
+
+
+<span style="color: #b22222;">// </span><span style="color: #b22222;">LOTS OF STDIO.H</span>
+
+
+<span style="color: #b22222;">// </span><span style="color: #b22222;">LOTS OF STDLIB.H</span>
+
+<span style="color: #483d8b;"># 1016</span> <span style="color: #8b2252;">"/usr/include/stdlib.h"</span> 3 4
+<span style="color: #483d8b;"># 1</span> <span style="color: #8b2252;">"/usr/include/x86_64-linux-gnu/bits/stdlib-float.h"</span> 1 3 4
+<span style="color: #483d8b;"># 1017</span> <span style="color: #8b2252;">"/usr/include/stdlib.h"</span> 2 3 4
+<span style="color: #483d8b;"># 1026</span> <span style="color: #8b2252;">"/usr/include/stdlib.h"</span> 3 4
+
+<span style="color: #483d8b;"># 5</span> <span style="color: #8b2252;">"checkinput.c"</span> 2
+
+
+
+
+
+<span style="color: #483d8b;"># 9</span> <span style="color: #8b2252;">"checkinput.c"</span>
+<span style="color: #228b22;">void</span> <span style="color: #0000ff;">checkInput</span>(<span style="color: #228b22;">int</span> <span style="color: #a0522d;">err</span>) {
+  <span style="color: #a020f0;">if</span> (!err || err == 
+<span style="color: #483d8b;"># 10</span> <span style="color: #8b2252;">"checkinput.c"</span> 3 4
+                    (-1)
+<span style="color: #483d8b;"># 10</span> <span style="color: #8b2252;">"checkinput.c"</span>
+                       ) {
+    printf(<span style="color: #8b2252;">"\nInvalid input!\n"</span>);
+    exit(1);
+  }
+}
+<span style="color: #a020f0;">return</span> 0;
+}
+</pre>
+</div>
+
+<p>
+<a href="checkinput-preprocessor.c">checkinput-preprocessor.c</a>
+</p>
+</div>
+</div>
+
+
+<div id="outline-container-org94c7d4c" class="outline-4">
+<h4 id="org94c7d4c"><span class="section-number-4">1.4.6</span> Parameterized Macros</h4>
+<div class="outline-text-4" id="text-1-4-6">
+<p>
+As we just demonstrated Macros generate code. So we can make compile
+functions that generate code. These functions run at compile time and
+generate code that is compiled by C.
+</p>
+
+<div class="org-src-container">
+<pre class="src src-C"><span style="color: #483d8b;">#include</span> <span style="color: #8b2252;">&lt;stdio.h&gt;</span>
+<span style="color: #483d8b;">#include</span> <span style="color: #8b2252;">&lt;stdlib.h&gt;</span>
+<span style="color: #483d8b;">#include</span> <span style="color: #8b2252;">&lt;stdbool.h&gt;</span>
+
+<span style="color: #b22222;">// </span><span style="color: #b22222;">RELU is a rectified linear unit. These are popular in convolutional neural networks</span>
+<span style="color: #b22222;">// </span><span style="color: #b22222;">they are 0 for 0 and negative numbers and they are the identity for positive numbers.</span>
+<span style="color: #b22222;">// </span><span style="color: #b22222;">RELU(-100) = RELU(-1) = 0 &amp;&amp; RELU(1) = 1 &amp;&amp; RELU(100) = 100</span>
+<span style="color: #483d8b;">#define</span> <span style="color: #0000ff;">RELU</span>(<span style="color: #a0522d;">x</span>)  (( x &lt; 0 )?0:x)
+
+<span style="color: #228b22;">int</span> <span style="color: #0000ff;">main</span>() {
+    <span style="color: #b22222;">// </span><span style="color: #b22222;">ints</span>
+    <span style="color: #a020f0;">for</span> (<span style="color: #228b22;">int</span> <span style="color: #a0522d;">i</span> = -10; i &lt; 10; i++) {
+        printf(<span style="color: #8b2252;">"RELU(%d)=%d\n"</span>, i, RELU(i));
+    }
+    puts(<span style="color: #8b2252;">"\n"</span>);
+    <span style="color: #b22222;">// </span><span style="color: #b22222;">more in the range of neural networks</span>
+    <span style="color: #a020f0;">for</span> (<span style="color: #228b22;">double</span> <span style="color: #a0522d;">i</span> = -1; i &lt; 1; i+=0.1) {
+        printf(<span style="color: #8b2252;">"RELU(%f)=%f\n"</span>, i, RELU(i));
+    }
+    puts(<span style="color: #8b2252;">"\n"</span>);
+}
+</pre>
+</div>
+
+<pre class="example">
+RELU(-10)=0
+RELU(-9)=0
+RELU(-8)=0
+RELU(-7)=0
+RELU(-6)=0
+RELU(-5)=0
+RELU(-4)=0
+RELU(-3)=0
+RELU(-2)=0
+RELU(-1)=0
+RELU(0)=0
+RELU(1)=1
+RELU(2)=2
+RELU(3)=3
+RELU(4)=4
+RELU(5)=5
+RELU(6)=6
+RELU(7)=7
+RELU(8)=8
+RELU(9)=9
+
+
+RELU(-1.000000)=0.000000
+RELU(-0.900000)=0.000000
+RELU(-0.800000)=0.000000
+RELU(-0.700000)=0.000000
+RELU(-0.600000)=0.000000
+RELU(-0.500000)=0.000000
+RELU(-0.400000)=0.000000
+RELU(-0.300000)=0.000000
+RELU(-0.200000)=0.000000
+RELU(-0.100000)=0.000000
+RELU(-0.000000)=0.000000
+RELU(0.100000)=0.100000
+RELU(0.200000)=0.200000
+RELU(0.300000)=0.300000
+RELU(0.400000)=0.400000
+RELU(0.500000)=0.500000
+RELU(0.600000)=0.600000
+RELU(0.700000)=0.700000
+RELU(0.800000)=0.800000
+RELU(0.900000)=0.900000
+RELU(1.000000)=1.000000
+</pre>
+
+<div class="org-src-container">
+<pre class="src src-sh">gcc -E -std=c99 -pedantic -Wall -Wextra -ftrapv -ggdb3 <span style="color: #8b2252;">\</span>
+       relu.c &gt; <span style="color: #8b2252;">\</span>
+       relu-expanded.c
+</pre>
+</div>
+
+<p>
+<a href="relu-expanded.c">relu-expanded.c</a>
+</p>
+
+<div class="org-src-container">
+<pre class="src src-C"><span style="color: #483d8b;">#define</span> <span style="color: #0000ff;">RELU</span>(<span style="color: #a0522d;">x</span>) (( x &lt; 0 )?0:x)
+
+
+<span style="color: #483d8b;"># 10</span> <span style="color: #8b2252;">"relu.c"</span>
+<span style="color: #228b22;">int</span> <span style="color: #0000ff;">main</span>() {
+
+    <span style="color: #a020f0;">for</span> (<span style="color: #228b22;">int</span> <span style="color: #a0522d;">i</span> = -10; i &lt; 10; i++) {
+        printf(<span style="color: #8b2252;">"RELU(%d)=%d\n"</span>, i, (( i &lt; 0 )?0:i));
+    }
+    puts(<span style="color: #8b2252;">"\n"</span>);
+
+    <span style="color: #a020f0;">for</span> (<span style="color: #228b22;">double</span> <span style="color: #a0522d;">i</span> = -1; i &lt; 1; i+=0.1) {
+        printf(<span style="color: #8b2252;">"RELU(%f)=%f\n"</span>, i, (( i &lt; 0 )?0:i));
+    }
+    puts(<span style="color: #8b2252;">"\n"</span>);
+}
+</pre>
+</div>
+
+<p>
+That's interesting, but be aware that x is not a value. It is a set of tokens.
+</p>
+
+<div class="org-src-container">
+<pre class="src src-C"><span style="color: #483d8b;">#include</span> <span style="color: #8b2252;">&lt;math.h&gt;</span>
+<span style="color: #483d8b;">#include</span> <span style="color: #8b2252;">&lt;stdio.h&gt;</span>
+<span style="color: #483d8b;">#include</span> <span style="color: #8b2252;">&lt;stdlib.h&gt;</span>
+<span style="color: #483d8b;">#include</span> <span style="color: #8b2252;">&lt;stdbool.h&gt;</span>
+
+<span style="color: #b22222;">// </span><span style="color: #b22222;">RELU is a rectified linear unit. These are popular in convolutional neural networks</span>
+<span style="color: #b22222;">// </span><span style="color: #b22222;">they are 0 for 0 and negative numbers and they are the identity for positive numbers.</span>
+<span style="color: #b22222;">// </span><span style="color: #b22222;">RELU(-100) = RELU(-1) = 0 &amp;&amp; RELU(1) = 1 &amp;&amp; RELU(100) = 100</span>
+<span style="color: #483d8b;">#define</span> <span style="color: #0000ff;">RELU</span>(<span style="color: #a0522d;">x</span>)  (( x &lt; 0 )?0:x)
+
+<span style="color: #228b22;">int</span> <span style="color: #0000ff;">main</span>() {
+    <span style="color: #228b22;">double</span> <span style="color: #a0522d;">x</span> = 2.0;
+    <span style="color: #228b22;">double</span> <span style="color: #a0522d;">y</span> = 127.1;
+    <span style="color: #b22222;">// </span><span style="color: #b22222;">How many times will pow(x,y) run?</span>
+    printf(<span style="color: #8b2252;">"%f\n"</span>, RELU(pow(x,y)));
+
+}
+</pre>
+</div>
+
+<pre class="example">
+1.8235280531744908e+38
+</pre>
+
+
+<div class="org-src-container">
+<pre class="src src-sh">gcc -E -std=c99 -pedantic -Wall -Wextra -ftrapv -ggdb3 <span style="color: #8b2252;">\</span>
+       relu2.c &gt; <span style="color: #8b2252;">\</span>
+       relu2-expanded.c
+</pre>
+</div>
+
+<p>
+<a href="relu2-expanded.c">relu2-expanded.c</a>
+</p>
+
+<div class="org-src-container">
+<pre class="src src-C"><span style="color: #483d8b;">#define</span> <span style="color: #0000ff;">RELU</span>(<span style="color: #a0522d;">x</span>) (( x &lt; 0 )?0:x)
+
+
+<span style="color: #483d8b;"># 11</span> <span style="color: #8b2252;">"relu2.c"</span>
+<span style="color: #228b22;">int</span> <span style="color: #0000ff;">main</span>() {
+    <span style="color: #228b22;">double</span> <span style="color: #a0522d;">x</span> = 2.0;
+    <span style="color: #228b22;">double</span> <span style="color: #a0522d;">y</span> = 127.1;
+    <span style="color: #b22222;">// </span><span style="color: #b22222;">Uh oh how many pows?</span>
+    printf(<span style="color: #8b2252;">"%f\n"</span>, (( pow(x,y) &lt; 0 )?0:pow(x,y)));
+
+}
+</pre>
+</div>
+</div>
+
+<ol class="org-ol">
+<li><a id="orgdd46a80"></a>Easy bugs!<br />
+<div class="outline-text-5" id="text-1-4-6-1">
+<p>
+So why doesn't this work?
+</p>
+
+<div class="org-src-container">
+<pre class="src src-C"><span style="color: #483d8b;">#include</span> <span style="color: #8b2252;">&lt;stdio.h&gt;</span>
+<span style="color: #483d8b;">#include</span> <span style="color: #8b2252;">&lt;stdlib.h&gt;</span>
+<span style="color: #483d8b;">#include</span> <span style="color: #8b2252;">&lt;stdbool.h&gt;</span>
+
+<span style="color: #b22222;">// </span><span style="color: #b22222;">if checkinput is true then you have an error</span>
+<span style="color: #483d8b;">#define</span> <span style="color: #0000ff;">CHECKINPUT</span>(<span style="color: #a0522d;">scanfReturn</span>)  ( scanfReturn == EOF || !scanfReturn )
+
+<span style="color: #228b22;">int</span> <span style="color: #0000ff;">main</span>() {
+    <span style="color: #228b22;">int</span> <span style="color: #a0522d;">myInt</span> = 0;
+    <span style="color: #a020f0;">if</span> (CHECKINPUT(scanf(<span style="color: #8b2252;">"%d"</span>, &amp;myInt))) {
+        printf(<span style="color: #8b2252;">"Invalid input!"</span>);
+        exit(1);
+    }
+    printf(<span style="color: #8b2252;">"My int: %d\n"</span>, myInt);
+}
+</pre>
+</div>
+
+<div class="org-src-container">
+<pre class="src src-sh">gcc  -std=c99 -pedantic -Wall -Wextra -ftrapv -ggdb3 <span style="color: #8b2252;">\</span>
+       -o checkinputmacro checkinputmacro.c
+<span style="color: #483d8b;">echo</span>   | ./checkinputmacro
+<span style="color: #483d8b;">echo</span> X | ./checkinputmacro
+<span style="color: #483d8b;">echo</span> 6 | ./checkinputmacro
+</pre>
+</div>
+
+<div class="org-src-container">
+<pre class="src src-sh">gcc -E -std=c99 -pedantic -Wall -Wextra -ftrapv -ggdb3 <span style="color: #8b2252;">\</span>
+       checkinputmacro.c &gt; <span style="color: #8b2252;">\</span>
+       checkinputmacro-expanded.c
+</pre>
+</div>
+
+<p>
+<a href="checkinputmacro-expanded.c">checkinputmacro-expanded.c</a>
+</p>
+
+<p>
+Let's look at the output:
+</p>
+
+<div class="org-src-container">
+<pre class="src src-C"><span style="color: #483d8b;">#define</span> <span style="color: #0000ff;">CHECKINPUT</span>(<span style="color: #a0522d;">scanfReturn</span>) ( scanfReturn == <span style="color: #008b8b;">false</span> || scanfReturn == EOF)
+
+<span style="color: #483d8b;"># 8</span> <span style="color: #8b2252;">"checkinputmacro.c"</span>
+<span style="color: #228b22;">int</span> <span style="color: #0000ff;">main</span>() {
+    <span style="color: #228b22;">int</span> <span style="color: #a0522d;">myInt</span> = 0;
+    <span style="color: #a020f0;">if</span> (( scanf(<span style="color: #8b2252;">"%d"</span>, &amp;myInt) == 
+<span style="color: #483d8b;"># 10</span> <span style="color: #8b2252;">"checkinputmacro.c"</span> 3 4
+       0 
+<span style="color: #483d8b;"># 10</span> <span style="color: #8b2252;">"checkinputmacro.c"</span>
+       || scanf(<span style="color: #8b2252;">"%d"</span>, &amp;myInt) == 
+<span style="color: #483d8b;"># 10</span> <span style="color: #8b2252;">"checkinputmacro.c"</span> 3 4
+       (-1)
+<span style="color: #483d8b;"># 10</span> <span style="color: #8b2252;">"checkinputmacro.c"</span>
+       )) {
+        printf(<span style="color: #8b2252;">"Invalid input!"</span>);
+        exit(1);
+    }
+    printf(<span style="color: #8b2252;">"My int: %d\n"</span>, myInt);
+}
+</pre>
+</div>
+
+<p>
+I'll clear it up for you
+</p>
+
+<div class="org-src-container">
+<pre class="src src-C"><span style="color: #483d8b;">#define</span> <span style="color: #0000ff;">CHECKINPUT</span>(<span style="color: #a0522d;">scanfReturn</span>) ( scanfReturn == <span style="color: #008b8b;">false</span> || scanfReturn == EOF)
+
+<span style="color: #228b22;">int</span> <span style="color: #0000ff;">main</span>() {
+    <span style="color: #228b22;">int</span> <span style="color: #a0522d;">myInt</span> = 0;
+    <span style="color: #a020f0;">if</span> (( scanf(<span style="color: #8b2252;">"%d"</span>, &amp;myInt) ==  0 || scanf(<span style="color: #8b2252;">"%d"</span>, &amp;myInt) == (-1))) {
+        printf(<span style="color: #8b2252;">"Invalid input!"</span>);
+        exit(1);
+    }
+    printf(<span style="color: #8b2252;">"My int: %d\n"</span>, myInt);
+}
+</pre>
+</div>
+
+<p>
+See? 2 scanfs instead of 1. Great. So macros will copy your tokens,
+not your values. They are meta-functions and not real functions.
+</p>
+
+<p>
+How do we fix? We assign the result once
+</p>
+
+<div class="org-src-container">
+<pre class="src src-C"><span style="color: #483d8b;">#include</span> <span style="color: #8b2252;">&lt;stdio.h&gt;</span>
+<span style="color: #483d8b;">#include</span> <span style="color: #8b2252;">&lt;stdlib.h&gt;</span>
+<span style="color: #483d8b;">#include</span> <span style="color: #8b2252;">&lt;stdbool.h&gt;</span>
+
+<span style="color: #b22222;">// </span><span style="color: #b22222;">if checkinput is true then you have an error</span>
+<span style="color: #b22222;">// </span><span style="color: #b22222;">horrible and bad style don't do this at home!</span>
+<span style="color: #a020f0;">static</span> <span style="color: #228b22;">int</span> <span style="color: #a0522d;">__ret</span>;
+<span style="color: #483d8b;">#define</span> <span style="color: #0000ff;">CHECKINPUT</span>(<span style="color: #a0522d;">scanfReturn</span>)  (__ret = scanfReturn, (__ret== EOF || !__ret ))
+
+<span style="color: #228b22;">int</span> <span style="color: #0000ff;">main</span>() {
+    <span style="color: #228b22;">int</span> <span style="color: #a0522d;">myInt</span> = 0;
+    <span style="color: #a020f0;">if</span> (CHECKINPUT(scanf(<span style="color: #8b2252;">"%d"</span>, &amp;myInt))) {
+        printf(<span style="color: #8b2252;">"Invalid input!\n"</span>);
+        exit(1);
+    }
+    printf(<span style="color: #8b2252;">"My int: %d\n"</span>, myInt);
+}
+</pre>
+</div>
+
+<div class="org-src-container">
+<pre class="src src-sh">gcc  -std=c99 -pedantic -Wall -Wextra -ftrapv -ggdb3 <span style="color: #8b2252;">\</span>
+       -o checkinputmacro-fixed checkinputmacro-fixed.c
+<span style="color: #483d8b;">echo</span>   | ./checkinputmacro-fixed
+<span style="color: #483d8b;">echo</span> X | ./checkinputmacro-fixed
+<span style="color: #483d8b;">echo</span> 6 | ./checkinputmacro-fixed
+</pre>
+</div>
+
+<pre class="example">
+Invalid input!
+Invalid input!
+My int: 6
+</pre>
+
+
+<div class="org-src-container">
+<pre class="src src-sh">gcc -E -std=c99 -pedantic -Wall -Wextra -ftrapv -ggdb3 <span style="color: #8b2252;">\</span>
+       checkinputmacro-fixed.c &gt; <span style="color: #8b2252;">\</span>
+       checkinputmacro-fixed-expanded.c
+</pre>
+</div>
+
+<p>
+<a href="checkinputmacro-fixed-expanded.c">checkinputmacro-fixed-expanded.c</a>
+</p>
+
+<div class="org-src-container">
+<pre class="src src-C"><span style="color: #483d8b;"># 7</span> <span style="color: #8b2252;">"checkinputmacro-fixed.c"</span>
+<span style="color: #a020f0;">static</span> <span style="color: #228b22;">int</span> <span style="color: #a0522d;">__ret</span>;
+<span style="color: #483d8b;">#define</span> <span style="color: #0000ff;">CHECKINPUT</span>(<span style="color: #a0522d;">scanfReturn</span>) (__ret = scanfReturn, (__ret== EOF || !__ret ))
+
+<span style="color: #228b22;">int</span> <span style="color: #0000ff;">main</span>() {
+    <span style="color: #228b22;">int</span> <span style="color: #a0522d;">myInt</span> = 0;
+    <span style="color: #a020f0;">if</span> ((__ret = scanf(<span style="color: #8b2252;">"%d"</span>, &amp;myInt), (__ret== 
+<span style="color: #483d8b;"># 12</span> <span style="color: #8b2252;">"checkinputmacro-fixed.c"</span> 3 4
+       (-1) 
+<span style="color: #483d8b;"># 12</span> <span style="color: #8b2252;">"checkinputmacro-fixed.c"</span>
+       || !__ret ))) {
+        printf(<span style="color: #8b2252;">"Invalid input!\n"</span>);
+        exit(1);
+    }
+    printf(<span style="color: #8b2252;">"My int: %d\n"</span>, myInt);
+}
+</pre>
+</div>
+</div>
+</li>
+</ol>
+</div>
+</div>
+
+<div id="outline-container-org6b906da" class="outline-3">
+<h3 id="org6b906da"><span class="section-number-3">1.5</span> Makefiles</h3>
+<div class="outline-text-3" id="text-1-5">
+<p>
+I am sick to death of all these shell scripts!
+</p>
+
+<p>
+Look at the assignments 1 shell script per question and they mostly
+say the same things.
+</p>
+
+<p>
+Programmers uses build systems to manage compiling and linking large
+programs. They often do not use shell scripts or batch files directly.
+</p>
+
+<p>
+Makefiles allow you to use make to build your program. Make is
+declarative, dependency based build system.
+</p>
+
+<p>
+Makefiles are full of rules for building files.
+</p>
+
+<div class="org-src-container">
+<pre class="src src-makefile"><span style="color: #0000ff;">file-you-want-to-build</span>: dependency1.c dependency2.o dependency3.o
+        gcc -o file-you-want-to-build dependency1.c dependency2.o dependency3.o
+</pre>
+</div>
+
+<p>
+^^^ There is a tab character before the gcc 
+</p>
+
+<p>
+To build file-you-want-to-build you type:
+</p>
+
+<p>
+make file-you-want-to-build
+</p>
+
+<p>
+make
+</p>
+</div>
+
+<div id="outline-container-org7ea78d5" class="outline-4">
+<h4 id="org7ea78d5"><span class="section-number-4">1.5.1</span> Basic Makefile</h4>
+<div class="outline-text-4" id="text-1-5-1">
+<p>
+We're going to use the coolbears source code from before.
+</p>
+
+<p>
+Instead of this:
+</p>
+
+<div class="org-src-container">
+<pre class="src src-sh"><span style="color: #b22222;"># </span><span style="color: #b22222;">build coolbears.o</span>
+gcc  -std=c99 -pedantic -Wall -Wextra -ftrapv -ggdb3 <span style="color: #8b2252;">\</span>
+       -c coolbears.c
+<span style="color: #b22222;"># </span><span style="color: #b22222;">build coolbears-driver and link it to coolbears.o</span>
+gcc  -std=c99 -pedantic -Wall -Wextra -ftrapv -ggdb3 <span style="color: #8b2252;">\</span>
+       -o coolbears-driver coolbears-driver.c <span style="color: #8b2252;">\</span>
+       coolbears.o 
+./coolbears-driver
+</pre>
+</div>
+
+<div class="org-src-container">
+<pre class="src src-makefile"><span style="color: #b22222;"># </span><span style="color: #b22222;">this just runs a command but ensures it is built</span>
+<span style="color: #b22222;"># </span><span style="color: #b22222;">first directive runs by default</span>
+<span style="color: #b22222;"># </span><span style="color: #b22222;">usually you should but put the top level build directive here</span>
+<span style="color: #0000ff;">run</span>: coolbears-driver
+        ./coolbears-driver <span style="color: #b22222;"># </span><span style="color: #b22222;">just a shell command</span>
+
+<span style="color: #b22222;"># </span><span style="color: #b22222;">build an object file</span>
+<span style="color: #0000ff;">coolbears.o</span>: coolbears.c
+        gcc  -std=c99 -pedantic -Wall -Wextra -ftrapv -ggdb3 \
+        -c coolbears.c
+
+<span style="color: #b22222;"># </span><span style="color: #b22222;">build an executable</span>
+<span style="color: #0000ff;">coolbears-driver</span>: coolbears-driver.c coolbears.o
+        gcc  -std=c99 -pedantic -Wall -Wextra -ftrapv -ggdb3 \
+        -o coolbears-driver coolbears-driver.c \
+        coolbears.o 
+
+<span style="color: #b22222;"># </span><span style="color: #b22222;">clean is idiomatic for remove object files and executables</span>
+<span style="color: #0000ff;">clean</span>: 
+        rm coolbears.o coolbears-driver || echo nothing to delete
+
+</pre>
+</div>
+
+<p>
+let's run it. Normally make just runs Makefile. But if you have your
+own makefiles you should use the -f option with make.
+</p>
+
+<div class="org-src-container">
+<pre class="src src-sh">make -f Makefile.coolbears clean
+make -f Makefile.coolbears coolbears.o
+make -f Makefile.coolbears coolbears-driver
+make -f Makefile.coolbears run
+</pre>
+</div>
+
+<pre class="example">
+rm coolbears.o coolbears-driver || echo nothing to delete
+gcc  -std=c99 -pedantic -Wall -Wextra -ftrapv -ggdb3 \
+        -c coolbears.c
+gcc  -std=c99 -pedantic -Wall -Wextra -ftrapv -ggdb3 \
+-o coolbears-driver coolbears-driver.c \
+coolbears.o 
+./coolbears-driver # just a shell command
+The coolest bear is Kevin
+</pre>
+
+
+<p>
+Or we could just do this:
+</p>
+<div class="org-src-container">
+<pre class="src src-sh"><span style="color: #b22222;"># </span><span style="color: #b22222;">I am making clean just to clear out the executables and object files</span>
+make -f Makefile.coolbears clean
+make -f Makefile.coolbears run
+</pre>
+</div>
+
+<pre class="example">
+rm coolbears.o coolbears-driver || echo nothing to delete
+gcc  -std=c99 -pedantic -Wall -Wextra -ftrapv -ggdb3 \
+        -c coolbears.c
+gcc  -std=c99 -pedantic -Wall -Wextra -ftrapv -ggdb3 \
+-o coolbears-driver coolbears-driver.c \
+coolbears.o 
+./coolbears-driver # just a shell command
+The coolest bear is Kevin
+</pre>
+
+
+<p>
+OR we could do this!
+</p>
+
+<div class="org-src-container">
+<pre class="src src-sh"><span style="color: #b22222;"># </span><span style="color: #b22222;">I am making clean just to clear out the executables and object files</span>
+make -f Makefile.coolbears clean
+make -f Makefile.coolbears
+</pre>
+</div>
+
+<pre class="example">
+rm coolbears.o coolbears-driver || echo nothing to delete
+gcc  -std=c99 -pedantic -Wall -Wextra -ftrapv -ggdb3 \
+        -c coolbears.c
+gcc  -std=c99 -pedantic -Wall -Wextra -ftrapv -ggdb3 \
+-o coolbears-driver coolbears-driver.c \
+coolbears.o 
+./coolbears-driver # just a shell command
+The coolest bear is Kevin
+</pre>
+
+
+<p>
+Ha it does the same thing!
+</p>
+
+
+<p>
+What if I run make again?
+</p>
+
+<div class="org-src-container">
+<pre class="src src-sh"><span style="color: #b22222;"># </span><span style="color: #b22222;">I am making clean just to clear out the executables and object files</span>
+make -f Makefile.coolbears
+</pre>
+</div>
+
+<pre class="example">
+./coolbears-driver # just a shell command
+The coolest bear is Kevin
+</pre>
+
+
+<p>
+It just uses the old object files.
+</p>
+
+<div class="org-src-container">
+<pre class="src src-sh"><span style="color: #b22222;"># </span><span style="color: #b22222;">if I remove the executable it'll rebuild only the executable</span>
+rm coolbears-driver
+make -f Makefile.coolbears
+</pre>
+</div>
+
+<pre class="example">
+gcc  -std=c99 -pedantic -Wall -Wextra -ftrapv -ggdb3 \
+-o coolbears-driver coolbears-driver.c \
+coolbears.o 
+./coolbears-driver # just a shell command
+The coolest bear is Kevin
+</pre>
+
+
+<div class="org-src-container">
+<pre class="src src-sh"><span style="color: #b22222;"># </span><span style="color: #b22222;">if I remove the object files it'll build the whole thing</span>
+rm *.o
+make -f Makefile.coolbears
+</pre>
+</div>
+
+<pre class="example">
+gcc  -std=c99 -pedantic -Wall -Wextra -ftrapv -ggdb3 \
+        -c coolbears.c
+gcc  -std=c99 -pedantic -Wall -Wextra -ftrapv -ggdb3 \
+-o coolbears-driver coolbears-driver.c \
+coolbears.o 
+./coolbears-driver # just a shell command
+The coolest bear is Kevin
+</pre>
+
+
+
+<p>
+Personally I would've preferred if assignments were done this way.
+</p>
+</div>
+</div>
+
+<div id="outline-container-orgfdc0309" class="outline-4">
+<h4 id="orgfdc0309"><span class="section-number-4">1.5.2</span> DRY Makefile</h4>
+<div class="outline-text-4" id="text-1-5-2">
+<p>
+DRY means DON'T REPEAT YOURSELF.
+</p>
+
+<p>
+Let's make a makefile that is easier to use and less prone to errors
+by repeating text.
+</p>
+
+<p>
+Instead of this:
+</p>
+
+<div class="org-src-container">
+<pre class="src src-makefile"><span style="color: #b22222;"># </span><span style="color: #b22222;">this just runs a command but ensures it is built</span>
+<span style="color: #0000ff;">run</span>: coolbears-driver
+        ./coolbears-driver <span style="color: #b22222;"># </span><span style="color: #b22222;">just a shell command</span>
+
+<span style="color: #b22222;"># </span><span style="color: #b22222;">build an object file</span>
+<span style="color: #0000ff;">coolbears.o</span>: coolbears.c
+        gcc  -std=c99 -pedantic -Wall -Wextra -ftrapv -ggdb3 \
+        -c coolbears.c
+
+<span style="color: #b22222;"># </span><span style="color: #b22222;">build an executable</span>
+<span style="color: #0000ff;">coolbears-driver</span>: coolbears-driver.c coolbears.o
+        gcc  -std=c99 -pedantic -Wall -Wextra -ftrapv -ggdb3 \
+        -o coolbears-driver coolbears-driver.c \
+        coolbears.o 
+
+<span style="color: #b22222;"># </span><span style="color: #b22222;">clean is idiomatic for remove object files and executables</span>
+<span style="color: #0000ff;">clean</span>: 
+        rm coolbears.o coolbears-driver || echo nothing to delete
+
+
+</pre>
+</div>
+
+<p>
+We're going to automate our Makefile a little more with variables.
+</p>
+
+<p>
+You can make a variable in a makefile by going
+   VARNAME=some string of stuff
+   LISTNAME=item1 item2 item3 item4
+   SCALARNAME="SCALAR VALUE"
+</p>
+
+<div class="org-src-container">
+<pre class="src src-makefile"><span style="color: #b22222;"># </span><span style="color: #b22222;">common arguments for GCC</span>
+<span style="color: #a0522d;">CFLAGS</span>= -std=c99 -pedantic -Wall -Wextra -ftrapv -ggdb3
+<span style="color: #b22222;"># </span><span style="color: #b22222;">Common compiler</span>
+<span style="color: #a0522d;">CC</span>=gcc
+<span style="color: #a0522d;">BUILDABLES</span>=coolbears.o coolbears-driver
+
+<span style="color: #b22222;"># </span><span style="color: #b22222;">this just runs a command but ensures it is built</span>
+<span style="color: #0000ff;">run</span>: coolbears-driver
+        ./coolbears-driver <span style="color: #b22222;"># </span><span style="color: #b22222;">just a shell command</span>
+
+<span style="color: #0000ff;">coolbears.o</span>: coolbears.c
+        $(<span style="color: #a0522d;">CC</span>) $(<span style="color: #a0522d;">CFLAGS</span>) \
+        -c coolbears.c
+
+<span style="color: #b22222;"># </span><span style="color: #b22222;">build an executable</span>
+<span style="color: #0000ff;">coolbears-driver</span>: coolbears-driver.c coolbears.o
+        $(<span style="color: #a0522d;">CC</span>) $(<span style="color: #a0522d;">CFLAGS</span>) \
+        -o coolbears-driver coolbears-driver.c \
+        coolbears.o 
+
+<span style="color: #b22222;"># </span><span style="color: #b22222;">clean is idiomatic for remove object files and executables</span>
+<span style="color: #0000ff;">clean</span>: 
+        rm $(<span style="color: #a0522d;">BUILDABLES</span>) || echo nothing to delete
+</pre>
+</div>
+
+<p>
+let's run it. Normally make just runs Makefile. But if you have your
+own makefiles you should use the -f option with make.
+</p>
+
+<div class="org-src-container">
+<pre class="src src-sh">make -f Makefile.coolbears.dry run
+</pre>
+</div>
+
+<pre class="example">
+gcc -std=c99 -pedantic -Wall -Wextra -ftrapv -ggdb3 \
+        -c coolbears.c
+gcc -std=c99 -pedantic -Wall -Wextra -ftrapv -ggdb3 \
+-o coolbears-driver coolbears-driver.c \
+coolbears.o 
+./coolbears-driver # just a shell command
+The coolest bear is Kevin
+</pre>
+</div>
+</div>
+
+<div id="outline-container-org687ce56" class="outline-4">
+<h4 id="org687ce56"><span class="section-number-4">1.5.3</span> Idiomatic GCC Makefile</h4>
+<div class="outline-text-4" id="text-1-5-3">
+<p>
+Make knows a lot about C. Make comes with default rules that will call
+your compiler for you as long as CFLAGS and CC are properly set!
+</p>
+
+<p>
+This means it knows how to make an executable. 
+</p>
+
+<p>
+It knows how to make an object file. It just needs to know the
+dependencies.
+</p>
+
+<p>
+You can reuse this makefile as well!
+</p>
+
+<div class="org-src-container">
+<pre class="src src-makefile"><span style="color: #b22222;"># </span><span style="color: #b22222;">common arguments for GCC</span>
+<span style="color: #a0522d;">CFLAGS</span>= -std=c99 -pedantic -Wall -Wextra -ftrapv -ggdb3
+<span style="color: #b22222;"># </span><span style="color: #b22222;">Do you need your math lib? Put it here this is the linking libraries</span>
+<span style="color: #b22222;"># </span><span style="color: #b22222;">variable</span>
+<span style="color: #a0522d;">LDLIBS</span>=-lm
+<span style="color: #b22222;"># </span><span style="color: #b22222;">Common compiler</span>
+<span style="color: #a0522d;">CC</span>=gcc
+<span style="color: #a0522d;">OBJECTS</span>=coolbears.o coolbears-driver.o
+<span style="color: #a0522d;">EXEC</span>=coolbears-driver
+<span style="color: #a0522d;">BUILDABLES</span>=$(<span style="color: #a0522d;">OBJECTS</span>) $(<span style="color: #a0522d;">EXEC</span>)
+
+<span style="color: #b22222;"># </span><span style="color: #b22222;">this just runs a command but ensures it is built</span>
+<span style="color: #0000ff;">run</span>: $(<span style="color: #a0522d;">EXEC</span>)
+        ./$(<span style="color: #a0522d;">EXEC</span>) <span style="color: #b22222;"># </span><span style="color: #b22222;">just a shell command</span>
+
+<span style="color: #b22222;"># </span><span style="color: #b22222;">We don't even need to specify how to make coolbears.o</span>
+<span style="color: #b22222;"># </span><span style="color: #b22222;">try commenting and uncommenting this line</span>
+<span style="color: #b22222;"># </span><span style="color: #b22222;">coolbears.o: coolbears.c</span>
+
+<span style="color: #b22222;"># </span><span style="color: #b22222;">build an executable</span>
+<span style="color: #b22222;"># </span><span style="color: #b22222;">coolbears-driver: coolbears-driver.c coolbears.o</span>
+
+<span style="color: #b22222;"># </span><span style="color: #b22222;"># this would work too</span>
+<span style="color: #b22222;"># </span><span style="color: #b22222;">coolbears-driver: coolbears-driver.o coolbears.o</span>
+
+<span style="color: #0000ff;">$(</span><span style="color: #0000ff;">EXEC</span><span style="color: #0000ff;">)</span>: $(<span style="color: #a0522d;">OBJECTS</span>)
+
+
+<span style="color: #b22222;"># </span><span style="color: #b22222;">clean is idiomatic for remove object files and executables</span>
+<span style="color: #0000ff;">clean</span>: 
+        rm $(<span style="color: #a0522d;">BUILDABLES</span>) || echo nothing to delete
+</pre>
+</div>
+
+<p>
+let's run it. Normally make just runs Makefile. But if you have your
+own makefiles you should use the -f option with make.
+</p>
+
+<div class="org-src-container">
+<pre class="src src-sh">make -f Makefile.coolbears.idiomatic clean
+make -f Makefile.coolbears.idiomatic run
+</pre>
+</div>
+
+<pre class="example">
+rm coolbears.o coolbears-driver.o coolbears-driver || echo nothing to delete
+gcc -std=c99 -pedantic -Wall -Wextra -ftrapv -ggdb3   -c -o coolbears-driver.o coolbears-driver.c
+gcc -std=c99 -pedantic -Wall -Wextra -ftrapv -ggdb3   -c -o coolbears.o coolbears.c
+gcc   coolbears-driver.o coolbears.o  -lm -o coolbears-driver
+./coolbears-driver # just a shell command
+The coolest bear is Kevin
+</pre>
+</div>
+</div>
+
+<div id="outline-container-org2d82ba4" class="outline-4">
+<h4 id="org2d82ba4"><span class="section-number-4">1.5.4</span> Special Macro Vars</h4>
+<div class="outline-text-4" id="text-1-5-4">
+<ul class="org-ul">
+<li>$@ the target file name</li>
+
+<li>$&lt; the first dependency</li>
+
+<li>$? new dependencies that have changed</li>
+
+<li>$^ all dependencies</li>
+
+<li>$* target suffix</li>
+</ul>
+
+<div class="org-src-container">
+<pre class="src src-makefile"><span style="color: #a0522d;">OBJECTS</span>=example.txt 1.txt 2.txt 3.txt
+
+<span style="color: #0000ff;">run</span>: example.txt
+        echo <span style="color: #0000ff;">$</span><span style="color: #008b8b;">@</span> $<span style="color: #008b8b;">&lt;</span> <span style="color: #0000ff;">$</span><span style="color: #008b8b;">*</span>
+        cat example.txt
+
+<span style="color: #0000ff;">example.txt</span>: 1.txt 2.txt 3.txt
+        echo First Dependency $<span style="color: #008b8b;">&lt;</span>
+        echo Target <span style="color: #0000ff;">$</span><span style="color: #008b8b;">@</span>
+        echo New Deps $<span style="color: #008b8b;">?</span>
+        echo All Deps $<span style="color: #008b8b;">^</span>
+        echo target suffix <span style="color: #0000ff;">$</span><span style="color: #008b8b;">*</span>
+        cat $<span style="color: #008b8b;">^</span> &gt; example.txt
+
+<span style="color: #0000ff;">1.txt</span>:
+        echo <span style="color: #0000ff;">$</span><span style="color: #008b8b;">@</span> &gt; <span style="color: #0000ff;">$</span><span style="color: #008b8b;">@</span>
+<span style="color: #0000ff;">2.txt</span>:
+        echo <span style="color: #0000ff;">$</span><span style="color: #008b8b;">@</span> &gt; <span style="color: #0000ff;">$</span><span style="color: #008b8b;">@</span>
+<span style="color: #0000ff;">3.txt</span>:
+        echo <span style="color: #0000ff;">$</span><span style="color: #008b8b;">@</span> &gt; <span style="color: #0000ff;">$</span><span style="color: #008b8b;">@</span>
+
+<span style="color: #0000ff;">clean</span>:
+        rm $(<span style="color: #a0522d;">OBJECTS</span>) || echo all good
+</pre>
+</div>
+
+<div class="org-src-container">
+<pre class="src src-sh">make -f Makefile.macros clean
+make -f Makefile.macros
+</pre>
+</div>
+
+<pre class="example">
+rm example.txt 1.txt 2.txt 3.txt || echo all good
+echo 1.txt &gt; 1.txt
+echo 2.txt &gt; 2.txt
+echo 3.txt &gt; 3.txt
+echo First Dependency 1.txt
+First Dependency 1.txt
+echo Target example.txt
+Target example.txt
+echo New Deps 1.txt 2.txt 3.txt
+New Deps 1.txt 2.txt 3.txt
+echo All Deps 1.txt 2.txt 3.txt
+All Deps 1.txt 2.txt 3.txt
+echo target suffix 
+target suffix
+cat 1.txt 2.txt 3.txt &gt; example.txt
+echo run example.txt 
+run example.txt
+cat example.txt
+1.txt
+2.txt
+3.txt
+</pre>
+</div>
+
+<ol class="org-ol">
+<li><a id="org95ac0b9"></a>Implicit Rules<br />
+<div class="outline-text-5" id="text-1-5-4-1">
+<p>
+Here's an example of implicit rules. Of how we convert 1 file to
+another implicitly much like how Make hands C compilation.
+</p>
+
+<div class="org-src-container">
+<pre class="src src-makefile"><span style="color: #b22222;">############################### </span><span style="color: #b22222;">Implicit rules ###############################</span>
+
+<span style="color: #b22222;"># </span><span style="color: #b22222;">Convert a .tex file to a .pdf</span>
+<span style="color: #0000ff;">%.pdf</span>: %.tex $(<span style="color: #a0522d;">ALLDEPS</span>)
+        latexmk -pdf $(<span style="color: #a0522d;">LATEXMK_OPTS</span>) <span style="color: #0000ff;">$</span><span style="color: #008b8b;">*</span>
+
+<span style="color: #b22222;"># </span><span style="color: #b22222;">Convert SVGs to PDFs</span>
+<span style="color: #b22222;"># </span><span style="color: #b22222;">Requires Inkscape</span>
+<span style="color: #0000ff;">%.pdf</span>: %.svg
+        inkscape -b white -t -T --export-ignore-filters --export-pdfs=<span style="color: #0000ff;">$</span><span style="color: #008b8b;">@</span> $<span style="color: #008b8b;">&lt;</span>
+
+<span style="color: #b22222;"># </span><span style="color: #b22222;">Convert EPSs to PDFs</span>
+<span style="color: #b22222;"># </span><span style="color: #b22222;">epstopdf(1) is often bundled with TeX distributions</span>
+<span style="color: #0000ff;">%.pdf</span>: %.eps
+        epstopdf $<span style="color: #008b8b;">&lt;</span>
+
+<span style="color: #b22222;"># </span><span style="color: #b22222;">Automatically crops the margins of a PDF.</span>
+<span style="color: #0000ff;">%-crop.pdf</span>: %.pdf
+        pdfcrop $<span style="color: #008b8b;">&lt;</span>
+</pre>
+</div>
+</div>
+</li>
+</ol>
+</div>
+
+<div id="outline-container-orgfd8c903" class="outline-4">
+<h4 id="orgfd8c903"><span class="section-number-4">1.5.5</span> Makefile help</h4>
+<div class="outline-text-4" id="text-1-5-5">
+<p>
+The GNU Manual is pretty good
+</p>
+
+<p>
+<a href="https://www.gnu.org/software/make/manual/html_node/Introduction.html">https://www.gnu.org/software/make/manual/html_node/Introduction.html</a>
+</p>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div id="postamble" class="status">
+<p class="author">Author: Abram Hindle</p>
+<p class="date">Created: 2020-03-17 Tue 11:20</p>
+<p class="validation"><a href="http://validator.w3.org/check?uri=referer">Validate</a></p>
+</div>
+</body>
+</html>
