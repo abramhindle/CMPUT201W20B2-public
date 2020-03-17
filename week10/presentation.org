@@ -89,265 +89,12 @@ int main(int argc, char**argv) {
 
 gcc  -std=c99 -pedantic -Wall -Wextra -ftrapv -ggdb3 -o programname programname.c
 
-
-** How C uses memory
-
-https://docs.google.com/document/d/1wcBnHZEaW4ukcZNlMNZJdbxkyPOQFGQhtANpqW5tx_8/edit?usp=sharing
-
-*** C's memory types
-
-    - File memory (code or text) 
-      - handled by the compiler, the linker, the loader, and the OS
-      - contains code, string literals, constants
-      - read only
-      - big
-    - static 
-      - your globals and static vars
-      - static or auto
-      - big
-    - Call stack or stack
-      - fast local memory for a function
-      - auto 
-      - small amount
-    - Heap
-      - general storage / memory for everything
-      - auto / static/ whatever
-      - huge
-    - registers
-      - not actually CPU registers -- but you hope!
-      - meant to be moved around for optimization reasons
-      - compiler dictated
-      - 'register' variables -- don't make pointers to these
-      - meant to be fast, might be in stack might be in actual registers
-        - no guarantees
-        - your compiler w/ optimizer is typically better.
-*** Type qualifiers
-
-Add these to types to communicate to other programmers and the
-compiler.
-
-- const - don't change it and I promise not to change it (but it might
-  change because I messed up with malloc)
-- volatile - this value could change so if you need it read it
-  immediately and use it. It could even change while you use it. Don't
-  rely on it staying the same. Something external could be changing it.
-- restrict - I promise that this pointer is the only pointer to the
-  thing it is pointing to. Speed hacks that rarely work.
-
-*** Extern
-
-Extern says that we have an external implementation or allocation for
-a variable or function. But if you define the body then you've gone
-and done it. It is fine. Extern means you plan to share your
-implementation with other source files.
-
 ** Preprocessor stuff like if-def
    The preprocessor deals with all the lines that you start with an
    octalthrope or hash mark: #
   
    The preprocessor lets you define symbols, macros, and include
    files.
-
-*** #ifdef
-
-#+BEGIN_SRC C :exports both 
-/* #ifdef   IF DEFined
- * 
- * If whatever comes after the #ifdef IS
- * defined, then all the code until the #endif
- * be treated normally.
- * 
- * If whatever comes afer the #ifdef is NOT
- * defined, then all the code until the #endif
- * will be SKIPPED, and not compiled at all.
- * 
- * #else    
- * Similar to else but in the preprocessor
- */
-
-#include <stdio.h>
-#include <stdio.h>
-
-#ifdef ENABLE_NONSENSE
-this is not even real c code!
-
-all of this gets skipped
-#endif
-
-// Try commenting/uncommenting the following:
-#define TURBO
-#define DEBUG
-
-
-
-int main() {
-    
-#ifdef TURBO
-    int value = 27;
-#else
-    int value = 32;
-#endif /* def TURBO */
-
-    printf("Value is %d!\n", value);
-    
-#ifdef TURBO
-    printf("Turbo is on!\n");
-#endif /* def TURBO */
-    
-#ifdef DEBUG
-    printf("Reached end of main, quitting!\n");
-#endif
-    
-    return 0;
-}
-#+END_SRC
-
-#+RESULTS:
-: Value is 27!
-: Turbo is on!
-: Reached end of main, quitting!
-
-
-
-*** #ifndef
-
-#+BEGIN_SRC C :exports both
-/* #ifndef   IF Not DEFined
- * 
- * If whatever comes after the #ifndef is NOT
- * defined, then all the code until the #endif
- * be treated normally.
- * 
- * If whatever comes afer the #ifndef IS
- * defined, then all the code until the #endif
- * will be SKIPPED, and not compiled at all.
- */
-
-#include <stdio.h>
-
-#ifdef THING
-order matters here
-#ifdef OTHER_THING
-this will only appear in the compiled program if both things are defined
-
-order doesnt matter here
-#endif
-order matters here too
-#endif
-
-#ifndef MAIN_DEFINED
-#define MAIN_DEFINED
-int main() {
-    printf("Main 1!\n");
-    return 0;
-}
-#endif
-
-#ifndef MAIN_DEFINED
-#define MAIN_DEFINED
-int main() {
-    printf("Main 2!\n");
-    return 0;
-}
-#endif
-#+END_SRC
-
-#+RESULTS:
-: Main 1!
-
-*** Guards
-
-#+BEGIN_SRC C :exports both
-/* Guards:
- * 
- * The purpose of the guard is to ensure that
- * IF the header is included more than once,
- * everything in it will be SKIPPED the second,
- * third, fourth, etc. time the header is
- * included.
- * 
- * For example, we might have main.c which
- * includes io.h which includes data.h,
- * as well as incuding data.h directly.
- * 
- * In such a situation, data.h gets included
- * TWICE in main.c, which would produce errors
- * without guards!
- */
-
-/* #ifndef   IF Not DEFined
- * 
- * If whatever comes after the #ifndef is NOT
- * defined, then all the code until the #endif
- * be treated normally.
- * 
- * If whatever comes afer the #ifndef IS
- * defined, then all the code until the #endif
- * will be SKIPPED, and not compiled at all.
- */
-
-#ifndef _GUARDS_H_
-
-#define _GUARDS_H_
-
-
-// # ends if
-#endif /* ndef _GUARDS_H_ */
-#+END_SRC
-
-#+RESULTS:
-
-
-**** No Guards
-
-What if we don't have a guard?
-
-We could redefine functions. Make conflicting types. Get in infinite
-include loops.
-
-#+BEGIN_SRC C :exports both
-#include <stdio.h>
-/* No Guards:
- * 
- */
-#define GUARDS "cool"
-
-#define GUARDS "awesome"
-
-int main() {
-    puts(GUARDS);
-}
-#+END_SRC
-
-#+RESULTS:
-: awesome
-
-**** W/ Guards
-
-What if we have a guard?
-
-We only define once :)
-
-#+BEGIN_SRC C :exports both
-#include <stdio.h>
-/* No Guards:
- * 
- */
-#ifndef GUARDS
-#define GUARDS "cool"
-#endif
-
-#ifndef GUARDS
-#define GUARDS "awesome"
-#endif
-
-int main() {
-    puts(GUARDS);
-}
-#+END_SRC
-
-#+RESULTS:
-: cool
 
 *** Multiple Files?
 
@@ -422,6 +169,8 @@ void checkInput(int err); // a prototype!
 #endif
 #+END_SRC 
 
+#+RESULTS:
+
 file:./checkinput-driver.c
 
 #+BEGIN_SRC C :exports both :tangle checkinput-driver.c
@@ -436,9 +185,35 @@ int main() {
 }
 #+END_SRC 
 
-**** Compiling Multiple Files
+#+RESULTS:
 
-OK now we compile it. The main is the last to compile and it needs all the .o files.
+**** Compiling Multiple Files Easy Mode
+
+We can put all our .c files on the same line and compile them all at
+once! This is handy. But quite limiting.
+
+We can't parallel compile. We can't use all our cores. We can't
+interupt compilation.
+
+#+BEGIN_SRC sh :exports both :tangle build-checkinput-easy.sh
+# build checkinput-driver
+gcc  -std=c99 -pedantic -Wall -Wextra -ftrapv -ggdb3 \
+       -o checkinput-driver checkinput-driver.c \
+       checkinput.c && \
+( echo YES | ./checkinput-driver  || \
+  echo 100 | ./checkinput-driver )
+#+END_SRC
+
+#+RESULTS:
+: 
+: Invalid input!
+: Good Input!
+
+
+**** Compiling Multiple Files with Linking
+
+OK now we compile it. The main is the last to compile and it needs all
+the .o files.
 
 All the .c files that don't contain main need to be compiled to object
 files. Use the -c flags to do this.
@@ -447,21 +222,33 @@ files. Use the -c flags to do this.
 # build checkinput.o
 gcc  -std=c99 -pedantic -Wall -Wextra -ftrapv -ggdb3 \
        -c checkinput.c
+file checkinput.o
 # build checkinput-driver and link it to checkinput.o
 gcc  -std=c99 -pedantic -Wall -Wextra -ftrapv -ggdb3 \
        -o checkinput-driver checkinput-driver.c \
        checkinput.o
+file checkinput-driver
 #+END_SRC
 
 #+RESULTS:
+: checkinput.o: ELF 64-bit LSB relocatable, x86-64, version 1 (SYSV), with debug_info, not stripped
+: checkinput-driver: ELF 64-bit LSB shared object, x86-64, version 1 (SYSV), dynamically linked, interpreter /lib64/l, for GNU/Linux 3.2.0, BuildID[sha1]=2df2006fd89c9d9dbc9655f59e4cf90c6d3f6017, with debug_info, not stripped
+
+- If you want some translation :-)
+  - ELF - Executable and Linking format
+  - relocatable - you can link it
+  - shared object - relocatable and executable
+  - LSB - little endian/least significant bit
+  - x86-64 - 64 bit x86 processor
+  - version 1 (SYSV) - version 1 of ELF System V Unix spec.
 
 Test drive it
 
 #+BEGIN_SRC sh :exports both
-echo   | ./checkinput-driver
-echo X | ./checkinput-driver
-echo 1 | ./checkinput-driver
-echo 1 | ./checkinput-driver
+echo    | ./checkinput-driver # bad
+echo X  | ./checkinput-driver # bad
+echo 1  | ./checkinput-driver # good
+echo -1 | ./checkinput-driver # good
 #+END_SRC
 
 #+RESULTS:
@@ -472,6 +259,7 @@ echo 1 | ./checkinput-driver
 : Good Input!
 : Good Input!
 
+Now let's see how it is linked!
 
 #+BEGIN_SRC sh
 ldd ./checkinput-driver
@@ -481,6 +269,58 @@ ldd ./checkinput-driver
 : 	linux-vdso.so.1 (0x00007ffe85be0000)
 : 	libc.so.6 => /lib/x86_64-linux-gnu/libc.so.6 (0x00007f919f994000)
 : 	/lib64/ld-linux-x86-64.so.2 (0x00007f919ff87000)
+
+- syscalls (read, write, gettimeofday) and libc (libc is stuff like stdio.h)
+
+*** Linking to libraries
+
+`math.h` includes fun functions like cos and tanh.
+
+Math.h, part of the C stdlib, is distributed as a seperate library.
+Not all computers have floating point numbers so why bother compiling
+floating code for them?
+
+file:/usr/include/math.h
+
+#+BEGIN_SRC sh :exports none
+gnome-terminal --window-with-profile Big \
+               -- man math.h
+#+END_SRC
+
+#+RESULTS:
+
+#+begin_src C :libs -lm
+#include <stdio.h>
+#include <math.h>
+int main(){
+   printf("Square = %f", tanh(4));
+   return 0;
+}
+
+#+end_src
+
+#+RESULTS:
+: Square = 0.999329
+
+I add the flag -lm so we get our math library :-)
+#+begin_src C :libs -lm
+#include <stdio.h>
+#include <math.h>
+
+int main() {
+    double x = 0.0;
+    double th = tanh(x);
+    do {
+        x += 0.1;
+        th = tanh(x);
+        printf("tanh(%g) == %g\n", x, th);
+    } while( th < 1.0 );
+}
+#+end_src
+
+#+RESULTS:
+
+
 
 *** Example Datastructure
 
