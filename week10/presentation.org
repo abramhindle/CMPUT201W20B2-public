@@ -267,7 +267,7 @@ echo -1 | ./checkinput-driver # good
 
 Now let's see how it is linked!
 
-#+BEGIN_SRC sh
+#+BEGIN_SRC sh :exports both
 ldd ./checkinput-driver
 #+END_SRC
 
@@ -824,7 +824,7 @@ int main() {
 
 #+RESULTS:
 
-#+BEGIN_SRC sh
+#+BEGIN_SRC sh :exports both
 gcc  -std=c99 -pedantic -Wall -Wextra -ftrapv -ggdb3 \
        -o checkinputmacro checkinputmacro.c
 echo   | ./checkinputmacro
@@ -910,7 +910,7 @@ int main() {
 
 #+RESULTS:
 
-#+BEGIN_SRC sh
+#+BEGIN_SRC sh :exports both
 gcc  -std=c99 -pedantic -Wall -Wextra -ftrapv -ggdb3 \
        -o checkinputmacro-fixed checkinputmacro-fixed.c
 echo   | ./checkinputmacro-fixed
@@ -1022,7 +1022,7 @@ clean:
 let's run it. Normally make just runs Makefile. But if you have your
 own makefiles you should use the -f option with make.
 
-#+BEGIN_SRC sh
+#+BEGIN_SRC sh :exports both
 make -f Makefile.coolbears clean
 make -f Makefile.coolbears coolbears.o
 make -f Makefile.coolbears coolbears-driver
@@ -1040,7 +1040,7 @@ make -f Makefile.coolbears run
 : The coolest bear is Kevin
 
 Or we could just do this:
-#+BEGIN_SRC sh
+#+BEGIN_SRC sh :exports both
 # I am making clean just to clear out the executables and object files
 make -f Makefile.coolbears clean
 make -f Makefile.coolbears run
@@ -1058,7 +1058,7 @@ make -f Makefile.coolbears run
 
 OR we could do this!
 
-#+BEGIN_SRC sh
+#+BEGIN_SRC sh :exports both
 # I am making clean just to clear out the executables and object files
 make -f Makefile.coolbears clean
 make -f Makefile.coolbears
@@ -1079,7 +1079,7 @@ Ha it does the same thing!
 
 What if I run make again?
 
-#+BEGIN_SRC sh
+#+BEGIN_SRC sh :exports both
 # I am making clean just to clear out the executables and object files
 make -f Makefile.coolbears
 #+END_SRC
@@ -1090,7 +1090,7 @@ make -f Makefile.coolbears
 
 It just uses the old object files.
 
-#+BEGIN_SRC sh
+#+BEGIN_SRC sh :exports both
 # if I remove the executable it'll rebuild only the executable
 rm coolbears-driver
 make -f Makefile.coolbears
@@ -1103,7 +1103,7 @@ make -f Makefile.coolbears
 : ./coolbears-driver # just a shell command
 : The coolest bear is Kevin
 
-#+BEGIN_SRC sh
+#+BEGIN_SRC sh :exports both
 # if I remove the object files it'll build the whole thing
 rm *.o
 make -f Makefile.coolbears
@@ -1189,7 +1189,7 @@ clean:
 let's run it. Normally make just runs Makefile. But if you have your
 own makefiles you should use the -f option with make.
 
-#+BEGIN_SRC sh
+#+BEGIN_SRC sh :exports both
 make -f Makefile.coolbears.dry run
 #+END_SRC
 
@@ -1251,7 +1251,7 @@ clean:
 let's run it. Normally make just runs Makefile. But if you have your
 own makefiles you should use the -f option with make.
 
-#+BEGIN_SRC sh
+#+BEGIN_SRC sh :exports both
 make -f Makefile.coolbears.idiomatic clean
 make -f Makefile.coolbears.idiomatic run
 #+END_SRC
@@ -1302,7 +1302,7 @@ clean:
 	rm $(OBJECTS) || echo all good
 #+END_SRC
 
-#+BEGIN_SRC sh
+#+BEGIN_SRC sh :exports both
 make -f Makefile.macros clean
 make -f Makefile.macros
 #+END_SRC
