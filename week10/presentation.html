@@ -3,7 +3,7 @@
 "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
 <head>
-<!-- 2020-03-17 Tue 11:33 -->
+<!-- 2020-03-17 Tue 16:53 -->
 <meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <title>CMPUT201W20B2 Week 10</title>
@@ -247,39 +247,39 @@ for the JavaScript code in this tag.
 <h2>Table of Contents</h2>
 <div id="text-table-of-contents">
 <ul>
-<li><a href="#org5344e80">1. Week10</a>
+<li><a href="#org6ae028e">1. Week10</a>
 <ul>
-<li><a href="#orgd9d4eda">1.1. Copyright Statement</a>
+<li><a href="#org9a99ab8">1.1. Copyright Statement</a>
 <ul>
-<li><a href="#org19a61ab">1.1.1. License</a></li>
-<li><a href="#orgd35e8f1">1.1.2. Hazel Code is licensed under AGPL3.0+</a></li>
+<li><a href="#org2fc5a65">1.1.1. License</a></li>
+<li><a href="#org2c29aff">1.1.2. Hazel Code is licensed under AGPL3.0+</a></li>
 </ul>
 </li>
-<li><a href="#orgb38cdb9">1.2. Alternative version</a></li>
-<li><a href="#orga7a164c">1.3. Init ORG-MODE</a>
+<li><a href="#org5c4e390">1.2. Alternative version</a></li>
+<li><a href="#org1c279dc">1.3. Init ORG-MODE</a>
 <ul>
-<li><a href="#org2db4a84">1.3.1. Org export</a></li>
-<li><a href="#org698014b">1.3.2. Org Template</a></li>
+<li><a href="#org640f948">1.3.1. Org export</a></li>
+<li><a href="#orgd36f116">1.3.2. Org Template</a></li>
 </ul>
 </li>
-<li><a href="#org1693d5a">1.4. Remember how to compile?</a></li>
-<li><a href="#org9b1bfae">1.5. Preprocessor stuff like if-def</a>
+<li><a href="#org99c33ee">1.4. Remember how to compile?</a></li>
+<li><a href="#org65d572a">1.5. Preprocessor stuff like if-def</a>
 <ul>
-<li><a href="#org200d893">1.5.1. Multiple Files?</a></li>
-<li><a href="#org473025b">1.5.2. Example</a></li>
-<li><a href="#orgfa2105a">1.5.3. Linking to libraries</a></li>
-<li><a href="#org41fc1f5">1.5.4. Example Datastructure</a></li>
-<li><a href="#orgadbf005">1.5.5. What is the preprocessor doing?</a></li>
-<li><a href="#orga59edf2">1.5.6. Parameterized Macros</a></li>
+<li><a href="#org4a99f8e">1.5.1. Multiple Files?</a></li>
+<li><a href="#org98d034f">1.5.2. Example</a></li>
+<li><a href="#org32cc44d">1.5.3. Linking to libraries</a></li>
+<li><a href="#orgfdf300d">1.5.4. Example Datastructure</a></li>
+<li><a href="#org235b282">1.5.5. What is the preprocessor doing?</a></li>
+<li><a href="#orgecac995">1.5.6. Parameterized Macros</a></li>
 </ul>
 </li>
-<li><a href="#orgca4f02c">1.6. Makefiles</a>
+<li><a href="#org4528a66">1.6. Makefiles</a>
 <ul>
-<li><a href="#orgbc490a8">1.6.1. Basic Makefile</a></li>
-<li><a href="#org5154b84">1.6.2. DRY Makefile</a></li>
-<li><a href="#orga6b94f6">1.6.3. Idiomatic GCC Makefile</a></li>
-<li><a href="#org8da322e">1.6.4. Special Macro Vars</a></li>
-<li><a href="#orga0e4136">1.6.5. Makefile help</a></li>
+<li><a href="#orga670fd2">1.6.1. Basic Makefile</a></li>
+<li><a href="#org34e4566">1.6.2. DRY Makefile</a></li>
+<li><a href="#org400e11c">1.6.3. Idiomatic GCC Makefile</a></li>
+<li><a href="#orgc40332b">1.6.4. Special Macro Vars</a></li>
+<li><a href="#orga907186">1.6.5. Makefile help</a></li>
 </ul>
 </li>
 </ul>
@@ -288,12 +288,12 @@ for the JavaScript code in this tag.
 </div>
 </div>
 
-<div id="outline-container-org5344e80" class="outline-2">
-<h2 id="org5344e80"><span class="section-number-2">1</span> Week10</h2>
+<div id="outline-container-org6ae028e" class="outline-2">
+<h2 id="org6ae028e"><span class="section-number-2">1</span> Week10</h2>
 <div class="outline-text-2" id="text-1">
 </div>
-<div id="outline-container-orgd9d4eda" class="outline-3">
-<h3 id="orgd9d4eda"><span class="section-number-3">1.1</span> Copyright Statement</h3>
+<div id="outline-container-org9a99ab8" class="outline-3">
+<h3 id="org9a99ab8"><span class="section-number-3">1.1</span> Copyright Statement</h3>
 <div class="outline-text-3" id="text-1-1">
 <p>
 If you are in CMPUT201 at UAlberta this code is released in the public
@@ -305,8 +305,8 @@ Otherwise it is (c) 2020 Abram Hindle, Hazel Campbell AGPL3.0+
 </p>
 </div>
 
-<div id="outline-container-org19a61ab" class="outline-4">
-<h4 id="org19a61ab"><span class="section-number-4">1.1.1</span> License</h4>
+<div id="outline-container-org2fc5a65" class="outline-4">
+<h4 id="org2fc5a65"><span class="section-number-4">1.1.1</span> License</h4>
 <div class="outline-text-4" id="text-1-1-1">
 <p>
 CMPUT 201 C Notes
@@ -335,8 +335,8 @@ along with this program.  If not, see <a href="https://www.gnu.org/licenses/">ht
 </div>
 
 
-<div id="outline-container-orgd35e8f1" class="outline-4">
-<h4 id="orgd35e8f1"><span class="section-number-4">1.1.2</span> Hazel Code is licensed under AGPL3.0+</h4>
+<div id="outline-container-org2c29aff" class="outline-4">
+<h4 id="org2c29aff"><span class="section-number-4">1.1.2</span> Hazel Code is licensed under AGPL3.0+</h4>
 <div class="outline-text-4" id="text-1-1-2">
 <p>
 Hazel's code is also found here
@@ -351,19 +351,17 @@ license, unless otherwise noted.
 </div>
 </div>
 
-<div id="outline-container-orgb38cdb9" class="outline-3">
-<h3 id="orgb38cdb9"><span class="section-number-3">1.2</span> Alternative version</h3>
+<div id="outline-container-org5c4e390" class="outline-3">
+<h3 id="org5c4e390"><span class="section-number-3">1.2</span> Alternative version</h3>
 <div class="outline-text-3" id="text-1-2">
 <p>
-<a href="presentation.txt">presentation.txt</a>
-<a href="presentation.pdf">presentation.pdf</a>
-<a href="presentation.html">presentation.html</a>
+Checkout the .txt, the .pdf, and the .html version
 </p>
 </div>
 </div>
 
-<div id="outline-container-orga7a164c" class="outline-3">
-<h3 id="orga7a164c"><span class="section-number-3">1.3</span> Init ORG-MODE</h3>
+<div id="outline-container-org1c279dc" class="outline-3">
+<h3 id="org1c279dc"><span class="section-number-3">1.3</span> Init ORG-MODE</h3>
 <div class="outline-text-3" id="text-1-3">
 <div class="org-src-container">
 <pre class="src src-elisp"><span style="color: #b22222;">;; </span><span style="color: #b22222;">I need this for org-mode to work well</span>
@@ -386,8 +384,8 @@ license, unless otherwise noted.
 </div>
 </div>
 
-<div id="outline-container-org2db4a84" class="outline-4">
-<h4 id="org2db4a84"><span class="section-number-4">1.3.1</span> Org export</h4>
+<div id="outline-container-org640f948" class="outline-4">
+<h4 id="org640f948"><span class="section-number-4">1.3.1</span> Org export</h4>
 <div class="outline-text-4" id="text-1-3-1">
 <div class="org-src-container">
 <pre class="src src-elisp">(org-html-export-to-html)
@@ -399,8 +397,8 @@ license, unless otherwise noted.
 </div>
 
 
-<div id="outline-container-org698014b" class="outline-4">
-<h4 id="org698014b"><span class="section-number-4">1.3.2</span> Org Template</h4>
+<div id="outline-container-orgd36f116" class="outline-4">
+<h4 id="orgd36f116"><span class="section-number-4">1.3.2</span> Org Template</h4>
 <div class="outline-text-4" id="text-1-3-2">
 <p>
 Copy and paste this to demo C
@@ -418,8 +416,8 @@ Copy and paste this to demo C
 </div>
 </div>
 
-<div id="outline-container-org1693d5a" class="outline-3">
-<h3 id="org1693d5a"><span class="section-number-3">1.4</span> Remember how to compile?</h3>
+<div id="outline-container-org99c33ee" class="outline-3">
+<h3 id="org99c33ee"><span class="section-number-3">1.4</span> Remember how to compile?</h3>
 <div class="outline-text-3" id="text-1-4">
 <p>
 gcc  -std=c99 -pedantic -Wall -Wextra -ftrapv -ggdb3 -o programname programname.c
@@ -427,8 +425,8 @@ gcc  -std=c99 -pedantic -Wall -Wextra -ftrapv -ggdb3 -o programname programname.
 </div>
 </div>
 
-<div id="outline-container-org9b1bfae" class="outline-3">
-<h3 id="org9b1bfae"><span class="section-number-3">1.5</span> Preprocessor stuff like if-def</h3>
+<div id="outline-container-org65d572a" class="outline-3">
+<h3 id="org65d572a"><span class="section-number-3">1.5</span> Preprocessor stuff like if-def</h3>
 <div class="outline-text-3" id="text-1-5">
 <p>
 The preprocessor deals with all the lines that you start with an
@@ -441,8 +439,8 @@ files.
 </p>
 </div>
 
-<div id="outline-container-org200d893" class="outline-4">
-<h4 id="org200d893"><span class="section-number-4">1.5.1</span> Multiple Files?</h4>
+<div id="outline-container-org4a99f8e" class="outline-4">
+<h4 id="org4a99f8e"><span class="section-number-4">1.5.1</span> Multiple Files?</h4>
 <div class="outline-text-4" id="text-1-5-1">
 <p>
 How does stdio.h work?
@@ -484,6 +482,7 @@ will go into a .c file that includes that .h as well.
 <ul class="org-ul">
 <li>main.c
 <ul class="org-ul">
+<li>#include &lt;stdio.h&gt;</li>
 <li>#include "library.h"</li>
 <li>relies on library.o</li>
 </ul></li>
@@ -500,8 +499,8 @@ will go into a .c file that includes that .h as well.
 </div>
 </div>
 
-<div id="outline-container-org473025b" class="outline-4">
-<h4 id="org473025b"><span class="section-number-4">1.5.2</span> Example</h4>
+<div id="outline-container-org98d034f" class="outline-4">
+<h4 id="org98d034f"><span class="section-number-4">1.5.2</span> Example</h4>
 <div class="outline-text-4" id="text-1-5-2">
 <p>
 This is a useful function to check if scanf read 1 or more elements
@@ -554,6 +553,12 @@ and didn't read EOF.
 <pre class="src src-C"><span style="color: #483d8b;">#include</span> <span style="color: #8b2252;">"checkinput.h"</span>
 <span style="color: #483d8b;">#include</span> <span style="color: #8b2252;">&lt;stdio.h&gt;</span>
 <span style="color: #483d8b;">#include</span> <span style="color: #8b2252;">"checkinput.h"</span>
+<span style="color: #483d8b;">#include</span> <span style="color: #8b2252;">"checkinput.h"</span>
+<span style="color: #483d8b;">#include</span> <span style="color: #8b2252;">"checkinput.h"</span>
+<span style="color: #483d8b;">#include</span> <span style="color: #8b2252;">"checkinput.h"</span>
+
+<span style="color: #b22222;">// </span><span style="color: #b22222;">void checkInput(int err); // a prototype!</span>
+
 
 <span style="color: #228b22;">int</span> <span style="color: #0000ff;">main</span>() {
   <span style="color: #228b22;">int</span> <span style="color: #a0522d;">input</span>;
@@ -565,7 +570,7 @@ and didn't read EOF.
 </div>
 
 <ol class="org-ol">
-<li><a id="orge752e18"></a>Compiling Multiple Files Easy Mode<br />
+<li><a id="org905f5e1"></a>Compiling Multiple Files Easy Mode<br />
 <div class="outline-text-5" id="text-1-5-2-1">
 <p>
 We can put all our .c files on the same line and compile them all at
@@ -575,6 +580,19 @@ once! This is handy. But quite limiting.
 <p>
 We can't parallel compile. We can't use all our cores. We can't
 interupt compilation.
+</p>
+
+<div class="org-src-container">
+<pre class="src src-sh"><span style="color: #b22222;"># </span><span style="color: #b22222;">build checkinput-driver</span>
+gcc  -std=c99 -pedantic -Wall -Wextra -ftrapv -ggdb3 <span style="color: #8b2252;">\</span>
+       -o checkinput-driver checkinput-driver.c &amp;&amp; <span style="color: #8b2252;">\</span>
+( <span style="color: #483d8b;">echo</span> YES | ./checkinput-driver  || <span style="color: #8b2252;">\</span>
+  <span style="color: #483d8b;">echo</span> 100 | ./checkinput-driver )
+</pre>
+</div>
+
+<p>
+BOTH FILES
 </p>
 
 <div class="org-src-container">
@@ -596,7 +614,7 @@ Good Input!
 </li>
 
 
-<li><a id="org5bd26b5"></a>Compiling Multiple Files with Linking<br />
+<li><a id="orga908352"></a>Compiling Multiple Files with Linking<br />
 <div class="outline-text-5" id="text-1-5-2-2">
 <p>
 OK now we compile it. The main is the last to compile and it needs all
@@ -615,7 +633,10 @@ gcc  -std=c99 -pedantic -Wall -Wextra -ftrapv -ggdb3 <span style="color: #8b2252
 file checkinput.o
 <span style="color: #b22222;"># </span><span style="color: #b22222;">build checkinput-driver and link it to checkinput.o</span>
 gcc  -std=c99 -pedantic -Wall -Wextra -ftrapv -ggdb3 <span style="color: #8b2252;">\</span>
-       -o checkinput-driver checkinput-driver.c <span style="color: #8b2252;">\</span>
+       -c checkinput-driver.c
+file checkinput-driver.o
+gcc  -std=c99 -pedantic -Wall -Wextra -ftrapv -ggdb3 <span style="color: #8b2252;">\</span>
+       -o checkinput-driver checkinput-driver.o <span style="color: #8b2252;">\</span>
        checkinput.o
 file checkinput-driver
 </pre>
@@ -623,7 +644,8 @@ file checkinput-driver
 
 <pre class="example">
 checkinput.o: ELF 64-bit LSB relocatable, x86-64, version 1 (SYSV), with debug_info, not stripped
-checkinput-driver: ELF 64-bit LSB shared object, x86-64, version 1 (SYSV), dynamically linked, interpreter /lib64/l, for GNU/Linux 3.2.0, BuildID[sha1]=d684c4dd438fb9319780cfc737c59ef2223d5a28, with debug_info, not stripped
+checkinput-driver.o: ELF 64-bit LSB relocatable, x86-64, version 1 (SYSV), with debug_info, not stripped
+checkinput-driver: ELF 64-bit LSB shared object, x86-64, version 1 (SYSV), dynamically linked, interpreter /lib64/l, for GNU/Linux 3.2.0, BuildID[sha1]=a0d9427bff4f04c1475aa889bce881e4a5b7fb31, with debug_info, not stripped
 </pre>
 
 
@@ -666,14 +688,18 @@ Now let's see how it is linked!
 </p>
 
 <div class="org-src-container">
-<pre class="src src-sh">ldd ./checkinput-driver
+<pre class="src src-sh">ls -l ./checkinput-driver
+ls -l /lib/x86_64-linux-gnu/libc-2.27.so
+ldd ./checkinput-driver
 </pre>
 </div>
 
 <pre class="example">
-linux-vdso.so.1 (0x00007fff67df3000)
-libc.so.6 =&gt; /lib/x86_64-linux-gnu/libc.so.6 (0x00007fa7e815c000)
-/lib64/ld-linux-x86-64.so.2 (0x00007fa7e874f000)
+-rwxrwxr-x 1 hindle1 hindle1 38472 Mar 17 16:53 ./checkinput-driver
+-rwxr-xr-x 1 root root 2030544 Apr 16  2018 /lib/x86_64-linux-gnu/libc-2.27.so
+	linux-vdso.so.1 (0x00007fff899b5000)
+	libc.so.6 =&gt; /lib/x86_64-linux-gnu/libc.so.6 (0x00007fedd000e000)
+	/lib64/ld-linux-x86-64.so.2 (0x00007fedd0601000)
 </pre>
 
 
@@ -685,8 +711,8 @@ libc.so.6 =&gt; /lib/x86_64-linux-gnu/libc.so.6 (0x00007fa7e815c000)
 </ol>
 </div>
 
-<div id="outline-container-orgfa2105a" class="outline-4">
-<h4 id="orgfa2105a"><span class="section-number-4">1.5.3</span> Linking to libraries</h4>
+<div id="outline-container-org32cc44d" class="outline-4">
+<h4 id="org32cc44d"><span class="section-number-4">1.5.3</span> Linking to libraries</h4>
 <div class="outline-text-4" id="text-1-5-3">
 <p>
 `math.h` includes fun functions like cos and tanh.
@@ -792,10 +818,10 @@ ldd ./poor-tanh-example
 <pre class="example">
 poor-tanh-example: ELF 64-bit LSB shared object, x86-64, version 1 (SYSV), dynamically linked, interpreter /lib64/l, for GNU/Linux 3.2.0, BuildID[sha1]=fdd28691d4637c2a9b9a76b129ea7585894e4378, with debug_info, not stripped
      40     120    1400
-	linux-vdso.so.1 (0x00007ffd9768d000)
-	libm.so.6 =&gt; /lib/x86_64-linux-gnu/libm.so.6 (0x00007f52e2127000)
-	libc.so.6 =&gt; /lib/x86_64-linux-gnu/libc.so.6 (0x00007f52e1d36000)
-	/lib64/ld-linux-x86-64.so.2 (0x00007f52e26c7000)
+	linux-vdso.so.1 (0x00007fff2a53e000)
+	libm.so.6 =&gt; /lib/x86_64-linux-gnu/libm.so.6 (0x00007fa956993000)
+	libc.so.6 =&gt; /lib/x86_64-linux-gnu/libc.so.6 (0x00007fa9565a2000)
+	/lib64/ld-linux-x86-64.so.2 (0x00007fa956f33000)
 </pre>
 
 
@@ -813,36 +839,36 @@ Larger programs link to lots of libraries.
 </div>
 
 <pre class="example">
-linux-vdso.so.1 (0x00007ffc1a3eb000)
-libXft.so.2 =&gt; /usr/lib/x86_64-linux-gnu/libXft.so.2 (0x00007fdc8b03c000)
-libfontconfig.so.1 =&gt; /usr/lib/x86_64-linux-gnu/libfontconfig.so.1 (0x00007fdc8adf7000)
-libXaw.so.7 =&gt; /usr/lib/x86_64-linux-gnu/libXaw.so.7 (0x00007fdc8ab83000)
-libXmu.so.6 =&gt; /usr/lib/x86_64-linux-gnu/libXmu.so.6 (0x00007fdc8a96a000)
-libXt.so.6 =&gt; /usr/lib/x86_64-linux-gnu/libXt.so.6 (0x00007fdc8a701000)
-libX11.so.6 =&gt; /usr/lib/x86_64-linux-gnu/libX11.so.6 (0x00007fdc8a3c9000)
-libXinerama.so.1 =&gt; /usr/lib/x86_64-linux-gnu/libXinerama.so.1 (0x00007fdc8a1c6000)
-libXpm.so.4 =&gt; /usr/lib/x86_64-linux-gnu/libXpm.so.4 (0x00007fdc89fb4000)
-libICE.so.6 =&gt; /usr/lib/x86_64-linux-gnu/libICE.so.6 (0x00007fdc89d99000)
-libutempter.so.0 =&gt; /usr/lib/x86_64-linux-gnu/libutempter.so.0 (0x00007fdc89b96000)
-libtinfo.so.5 =&gt; /lib/x86_64-linux-gnu/libtinfo.so.5 (0x00007fdc8996c000)
-libc.so.6 =&gt; /lib/x86_64-linux-gnu/libc.so.6 (0x00007fdc8957b000)
-libfreetype.so.6 =&gt; /usr/lib/x86_64-linux-gnu/libfreetype.so.6 (0x00007fdc892c7000)
-libXrender.so.1 =&gt; /usr/lib/x86_64-linux-gnu/libXrender.so.1 (0x00007fdc890bd000)
-libexpat.so.1 =&gt; /lib/x86_64-linux-gnu/libexpat.so.1 (0x00007fdc88e8b000)
-libpthread.so.0 =&gt; /lib/x86_64-linux-gnu/libpthread.so.0 (0x00007fdc88c6c000)
-libXext.so.6 =&gt; /usr/lib/x86_64-linux-gnu/libXext.so.6 (0x00007fdc88a5a000)
-libSM.so.6 =&gt; /usr/lib/x86_64-linux-gnu/libSM.so.6 (0x00007fdc88852000)
-libxcb.so.1 =&gt; /usr/lib/x86_64-linux-gnu/libxcb.so.1 (0x00007fdc8862a000)
-libdl.so.2 =&gt; /lib/x86_64-linux-gnu/libdl.so.2 (0x00007fdc88426000)
-libbsd.so.0 =&gt; /lib/x86_64-linux-gnu/libbsd.so.0 (0x00007fdc88211000)
-/lib64/ld-linux-x86-64.so.2 (0x00007fdc8b501000)
-libpng16.so.16 =&gt; /usr/lib/x86_64-linux-gnu/libpng16.so.16 (0x00007fdc87fdf000)
-libz.so.1 =&gt; /lib/x86_64-linux-gnu/libz.so.1 (0x00007fdc87dc2000)
-libuuid.so.1 =&gt; /lib/x86_64-linux-gnu/libuuid.so.1 (0x00007fdc87bbb000)
-libXau.so.6 =&gt; /usr/lib/x86_64-linux-gnu/libXau.so.6 (0x00007fdc879b7000)
-libXdmcp.so.6 =&gt; /usr/lib/x86_64-linux-gnu/libXdmcp.so.6 (0x00007fdc877b1000)
-librt.so.1 =&gt; /lib/x86_64-linux-gnu/librt.so.1 (0x00007fdc875a9000)
-libm.so.6 =&gt; /lib/x86_64-linux-gnu/libm.so.6 (0x00007fdc8720b000)
+linux-vdso.so.1 (0x00007ffd2ade9000)
+libXft.so.2 =&gt; /usr/lib/x86_64-linux-gnu/libXft.so.2 (0x00007fc5c916f000)
+libfontconfig.so.1 =&gt; /usr/lib/x86_64-linux-gnu/libfontconfig.so.1 (0x00007fc5c8f2a000)
+libXaw.so.7 =&gt; /usr/lib/x86_64-linux-gnu/libXaw.so.7 (0x00007fc5c8cb6000)
+libXmu.so.6 =&gt; /usr/lib/x86_64-linux-gnu/libXmu.so.6 (0x00007fc5c8a9d000)
+libXt.so.6 =&gt; /usr/lib/x86_64-linux-gnu/libXt.so.6 (0x00007fc5c8834000)
+libX11.so.6 =&gt; /usr/lib/x86_64-linux-gnu/libX11.so.6 (0x00007fc5c84fc000)
+libXinerama.so.1 =&gt; /usr/lib/x86_64-linux-gnu/libXinerama.so.1 (0x00007fc5c82f9000)
+libXpm.so.4 =&gt; /usr/lib/x86_64-linux-gnu/libXpm.so.4 (0x00007fc5c80e7000)
+libICE.so.6 =&gt; /usr/lib/x86_64-linux-gnu/libICE.so.6 (0x00007fc5c7ecc000)
+libutempter.so.0 =&gt; /usr/lib/x86_64-linux-gnu/libutempter.so.0 (0x00007fc5c7cc9000)
+libtinfo.so.5 =&gt; /lib/x86_64-linux-gnu/libtinfo.so.5 (0x00007fc5c7a9f000)
+libc.so.6 =&gt; /lib/x86_64-linux-gnu/libc.so.6 (0x00007fc5c76ae000)
+libfreetype.so.6 =&gt; /usr/lib/x86_64-linux-gnu/libfreetype.so.6 (0x00007fc5c73fa000)
+libXrender.so.1 =&gt; /usr/lib/x86_64-linux-gnu/libXrender.so.1 (0x00007fc5c71f0000)
+libexpat.so.1 =&gt; /lib/x86_64-linux-gnu/libexpat.so.1 (0x00007fc5c6fbe000)
+libpthread.so.0 =&gt; /lib/x86_64-linux-gnu/libpthread.so.0 (0x00007fc5c6d9f000)
+libXext.so.6 =&gt; /usr/lib/x86_64-linux-gnu/libXext.so.6 (0x00007fc5c6b8d000)
+libSM.so.6 =&gt; /usr/lib/x86_64-linux-gnu/libSM.so.6 (0x00007fc5c6985000)
+libxcb.so.1 =&gt; /usr/lib/x86_64-linux-gnu/libxcb.so.1 (0x00007fc5c675d000)
+libdl.so.2 =&gt; /lib/x86_64-linux-gnu/libdl.so.2 (0x00007fc5c6559000)
+libbsd.so.0 =&gt; /lib/x86_64-linux-gnu/libbsd.so.0 (0x00007fc5c6344000)
+/lib64/ld-linux-x86-64.so.2 (0x00007fc5c9634000)
+libpng16.so.16 =&gt; /usr/lib/x86_64-linux-gnu/libpng16.so.16 (0x00007fc5c6112000)
+libz.so.1 =&gt; /lib/x86_64-linux-gnu/libz.so.1 (0x00007fc5c5ef5000)
+libuuid.so.1 =&gt; /lib/x86_64-linux-gnu/libuuid.so.1 (0x00007fc5c5cee000)
+libXau.so.6 =&gt; /usr/lib/x86_64-linux-gnu/libXau.so.6 (0x00007fc5c5aea000)
+libXdmcp.so.6 =&gt; /usr/lib/x86_64-linux-gnu/libXdmcp.so.6 (0x00007fc5c58e4000)
+librt.so.1 =&gt; /lib/x86_64-linux-gnu/librt.so.1 (0x00007fc5c56dc000)
+libm.so.6 =&gt; /lib/x86_64-linux-gnu/libm.so.6 (0x00007fc5c533e000)
 </pre>
 
 <p>
@@ -851,7 +877,7 @@ See! Lots of libraries!
 </div>
 
 <ol class="org-ol">
-<li><a id="orgcc02d33"></a>Summary<br />
+<li><a id="org6bf74d1"></a>Summary<br />
 <div class="outline-text-5" id="text-1-5-3-1">
 <p>
 To link to a shared library with gcc or clang use the:
@@ -876,8 +902,8 @@ OK let's see how it affects you.
 </ol>
 </div>
 
-<div id="outline-container-org41fc1f5" class="outline-4">
-<h4 id="org41fc1f5"><span class="section-number-4">1.5.4</span> Example Datastructure</h4>
+<div id="outline-container-orgfdf300d" class="outline-4">
+<h4 id="orgfdf300d"><span class="section-number-4">1.5.4</span> Example Datastructure</h4>
 <div class="outline-text-4" id="text-1-5-4">
 <p>
 Let's make a brief data structure about one of my favourite topics:
@@ -967,7 +993,7 @@ cool bears.
                       getTemperatureCoolBear(kevin))? ziggy : kevin;
   printf(<span style="color: #8b2252;">"The coolest bear is %s\n"</span>, getNameCoolBear( coolest ));
   <span style="color: #b22222;">// </span><span style="color: #b22222;">// we actually don't know about name so we can't reference it below</span>
-  <span style="color: #b22222;">// </span><span style="color: #b22222;">printf("The coolest bear is %s\n", getNameCoolBear( coolest-&gt;name ));</span>
+  <span style="color: #b22222;">// </span><span style="color: #b22222;">printf("The coolest bear is %s\n", coolest-&gt;name );</span>
   freeCoolBear(ziggy);
   freeCoolBear(kevin);
 }
@@ -1013,8 +1039,8 @@ coolbears-driver.c:11:62: error: dereferencing pointer to incomplete type ‘str
 </div>
 
 
-<div id="outline-container-orgadbf005" class="outline-4">
-<h4 id="orgadbf005"><span class="section-number-4">1.5.5</span> What is the preprocessor doing?</h4>
+<div id="outline-container-org235b282" class="outline-4">
+<h4 id="org235b282"><span class="section-number-4">1.5.5</span> What is the preprocessor doing?</h4>
 <div class="outline-text-4" id="text-1-5-5">
 <p>
 Let's use the -E flag to see what checkinput.c becomes
@@ -1120,8 +1146,8 @@ It produces this file:
 </div>
 
 
-<div id="outline-container-orga59edf2" class="outline-4">
-<h4 id="orga59edf2"><span class="section-number-4">1.5.6</span> Parameterized Macros</h4>
+<div id="outline-container-orgecac995" class="outline-4">
+<h4 id="orgecac995"><span class="section-number-4">1.5.6</span> Parameterized Macros</h4>
 <div class="outline-text-4" id="text-1-5-6">
 <p>
 As we just demonstrated Macros generate code. So we can make compile
@@ -1289,7 +1315,7 @@ That's interesting, but be aware that x is not a value. It is a set of tokens.
 </div>
 
 <ol class="org-ol">
-<li><a id="orge9b30a6"></a>Easy bugs!<br />
+<li><a id="org9282341"></a>Easy bugs!<br />
 <div class="outline-text-5" id="text-1-5-6-1">
 <p>
 So why doesn't this work?
@@ -1317,14 +1343,12 @@ So why doesn't this work?
 <div class="org-src-container">
 <pre class="src src-sh">gcc  -std=c99 -pedantic -Wall -Wextra -ftrapv -ggdb3 <span style="color: #8b2252;">\</span>
        -o checkinputmacro checkinputmacro.c
-<span style="color: #483d8b;">echo</span>   | ./checkinputmacro
-<span style="color: #483d8b;">echo</span> X | ./checkinputmacro
-<span style="color: #483d8b;">echo</span> 6 | ./checkinputmacro
+<span style="color: #483d8b;">echo</span> 1 6  | ./checkinputmacro
 </pre>
 </div>
 
 <pre class="example">
-Invalid input!Invalid input!My int: 6
+My int: 6
 </pre>
 
 
@@ -1466,8 +1490,8 @@ My int: 6
 </div>
 </div>
 
-<div id="outline-container-orgca4f02c" class="outline-3">
-<h3 id="orgca4f02c"><span class="section-number-3">1.6</span> Makefiles</h3>
+<div id="outline-container-org4528a66" class="outline-3">
+<h3 id="org4528a66"><span class="section-number-3">1.6</span> Makefiles</h3>
 <div class="outline-text-3" id="text-1-6">
 <p>
 I am sick to death of all these shell scripts!
@@ -1515,8 +1539,8 @@ make
 </p>
 </div>
 
-<div id="outline-container-orgbc490a8" class="outline-4">
-<h4 id="orgbc490a8"><span class="section-number-4">1.6.1</span> Basic Makefile</h4>
+<div id="outline-container-orga670fd2" class="outline-4">
+<h4 id="orga670fd2"><span class="section-number-4">1.6.1</span> Basic Makefile</h4>
 <div class="outline-text-4" id="text-1-6-1">
 <p>
 We're going to use the coolbears source code from before.
@@ -1704,8 +1728,8 @@ Personally I would've preferred if assignments were done this way.
 </div>
 </div>
 
-<div id="outline-container-org5154b84" class="outline-4">
-<h4 id="org5154b84"><span class="section-number-4">1.6.2</span> DRY Makefile</h4>
+<div id="outline-container-org34e4566" class="outline-4">
+<h4 id="org34e4566"><span class="section-number-4">1.6.2</span> DRY Makefile</h4>
 <div class="outline-text-4" id="text-1-6-2">
 <p>
 DRY means DON'T REPEAT YOURSELF.
@@ -1799,8 +1823,8 @@ The coolest bear is Kevin
 </div>
 </div>
 
-<div id="outline-container-orga6b94f6" class="outline-4">
-<h4 id="orga6b94f6"><span class="section-number-4">1.6.3</span> Idiomatic GCC Makefile</h4>
+<div id="outline-container-org400e11c" class="outline-4">
+<h4 id="org400e11c"><span class="section-number-4">1.6.3</span> Idiomatic GCC Makefile</h4>
 <div class="outline-text-4" id="text-1-6-3">
 <p>
 Make knows a lot about C. Make comes with default rules that will call
@@ -1878,8 +1902,8 @@ The coolest bear is Kevin
 </div>
 </div>
 
-<div id="outline-container-org8da322e" class="outline-4">
-<h4 id="org8da322e"><span class="section-number-4">1.6.4</span> Special Macro Vars</h4>
+<div id="outline-container-orgc40332b" class="outline-4">
+<h4 id="orgc40332b"><span class="section-number-4">1.6.4</span> Special Macro Vars</h4>
 <div class="outline-text-4" id="text-1-6-4">
 <ul class="org-ul">
 <li>$@ the target file name</li>
@@ -1952,7 +1976,7 @@ cat example.txt
 </div>
 
 <ol class="org-ol">
-<li><a id="org6b92267"></a>Implicit Rules<br />
+<li><a id="orgdff0183"></a>Implicit Rules<br />
 <div class="outline-text-5" id="text-1-6-4-1">
 <p>
 Here's an example of implicit rules. Of how we convert 1 file to
@@ -1986,8 +2010,8 @@ another implicitly much like how Make hands C compilation.
 </ol>
 </div>
 
-<div id="outline-container-orga0e4136" class="outline-4">
-<h4 id="orga0e4136"><span class="section-number-4">1.6.5</span> Makefile help</h4>
+<div id="outline-container-orga907186" class="outline-4">
+<h4 id="orga907186"><span class="section-number-4">1.6.5</span> Makefile help</h4>
 <div class="outline-text-4" id="text-1-6-5">
 <p>
 The GNU Manual is pretty good
@@ -2003,7 +2027,7 @@ The GNU Manual is pretty good
 </div>
 <div id="postamble" class="status">
 <p class="author">Author: Abram Hindle</p>
-<p class="date">Created: 2020-03-17 Tue 11:33</p>
+<p class="date">Created: 2020-03-17 Tue 16:53</p>
 <p class="validation"><a href="http://validator.w3.org/check?uri=referer">Validate</a></p>
 </div>
 </body>

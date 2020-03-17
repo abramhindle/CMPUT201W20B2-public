@@ -13,18 +13,19 @@ _________________
 .. 1. Copyright Statement
 ..... 1. License
 ..... 2. Hazel Code is licensed under AGPL3.0+
-.. 2. Init ORG-MODE
+.. 2. Alternative version
+.. 3. Init ORG-MODE
 ..... 1. Org export
 ..... 2. Org Template
-.. 3. Remember how to compile?
-.. 4. Preprocessor stuff like if-def
+.. 4. Remember how to compile?
+.. 5. Preprocessor stuff like if-def
 ..... 1. Multiple Files?
 ..... 2. Example
 ..... 3. Linking to libraries
 ..... 4. Example Datastructure
 ..... 5. What is the preprocessor doing?
 ..... 6. Parameterized Macros
-.. 5. Makefiles
+.. 6. Makefiles
 ..... 1. Basic Makefile
 ..... 2. DRY Makefile
 ..... 3. Idiomatic GCC Makefile
@@ -77,7 +78,13 @@ _________________
   license, unless otherwise noted.
 
 
-1.2 Init ORG-MODE
+1.2 Alternative version
+~~~~~~~~~~~~~~~~~~~~~~~
+
+  Checkout the .txt, the .pdf, and the .html version
+
+
+1.3 Init ORG-MODE
 ~~~~~~~~~~~~~~~~~
 
   ,----
@@ -100,7 +107,7 @@ _________________
   `----
 
 
-1.2.1 Org export
+1.3.1 Org export
 ----------------
 
   ,----
@@ -110,7 +117,7 @@ _________________
   `----
 
 
-1.2.2 Org Template
+1.3.2 Org Template
 ------------------
 
   Copy and paste this to demo C
@@ -124,14 +131,14 @@ _________________
   `----
 
 
-1.3 Remember how to compile?
+1.4 Remember how to compile?
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
   gcc -std=c99 -pedantic -Wall -Wextra -ftrapv -ggdb3 -o programname
   programname.c
 
 
-1.4 Preprocessor stuff like if-def
+1.5 Preprocessor stuff like if-def
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
   The preprocessor deals with all the lines that you start with an
@@ -140,7 +147,7 @@ _________________
   The preprocessor lets you define symbols, macros, and include files.
 
 
-1.4.1 Multiple Files?
+1.5.1 Multiple Files?
 ---------------------
 
   How does stdio.h work?
@@ -167,6 +174,7 @@ _________________
   functions will go into a .c file that includes that .h as well.
 
   - main.c
+    - #include <stdio.h>
     - #include "library.h"
     - relies on library.o
   - library.c
@@ -176,7 +184,7 @@ _________________
     - defines functions and definitions from library.c
 
 
-1.4.2 Example
+1.5.2 Example
 -------------
 
   This is a useful function to check if scanf read 1 or more elements
@@ -220,6 +228,12 @@ _________________
   | #include "checkinput.h"
   | #include <stdio.h>
   | #include "checkinput.h"
+  | #include "checkinput.h"
+  | #include "checkinput.h"
+  | #include "checkinput.h"
+  | 
+  | // void checkInput(int err); // a prototype!
+  | 
   | 
   | int main() {
   |   int input;
@@ -229,13 +243,23 @@ _________________
   `----
 
 
-* 1.4.2.1 Compiling Multiple Files Easy Mode
+* 1.5.2.1 Compiling Multiple Files Easy Mode
 
   We can put all our .c files on the same line and compile them all at
   once! This is handy. But quite limiting.
 
   We can't parallel compile. We can't use all our cores. We can't
   interupt compilation.
+
+  ,----
+  | # build checkinput-driver
+  | gcc  -std=c99 -pedantic -Wall -Wextra -ftrapv -ggdb3 \
+  |        -o checkinput-driver checkinput-driver.c && \
+  | ( echo YES | ./checkinput-driver  || \
+  |   echo 100 | ./checkinput-driver )
+  `----
+
+  BOTH FILES
 
   ,----
   | # build checkinput-driver
@@ -253,7 +277,7 @@ _________________
   `----
 
 
-* 1.4.2.2 Compiling Multiple Files with Linking
+* 1.5.2.2 Compiling Multiple Files with Linking
 
   OK now we compile it. The main is the last to compile and it needs all
   the .o files.
@@ -268,14 +292,18 @@ _________________
   | file checkinput.o
   | # build checkinput-driver and link it to checkinput.o
   | gcc  -std=c99 -pedantic -Wall -Wextra -ftrapv -ggdb3 \
-  |        -o checkinput-driver checkinput-driver.c \
+  |        -c checkinput-driver.c
+  | file checkinput-driver.o
+  | gcc  -std=c99 -pedantic -Wall -Wextra -ftrapv -ggdb3 \
+  |        -o checkinput-driver checkinput-driver.o \
   |        checkinput.o
   | file checkinput-driver
   `----
 
   ,----
   | checkinput.o: ELF 64-bit LSB relocatable, x86-64, version 1 (SYSV), with debug_info, not stripped
-  | checkinput-driver: ELF 64-bit LSB shared object, x86-64, version 1 (SYSV), dynamically linked, interpreter /lib64/l, for GNU/Linux 3.2.0, BuildID[sha1]=d684c4dd438fb9319780cfc737c59ef2223d5a28, with debug_info, not stripped
+  | checkinput-driver.o: ELF 64-bit LSB relocatable, x86-64, version 1 (SYSV), with debug_info, not stripped
+  | checkinput-driver: ELF 64-bit LSB shared object, x86-64, version 1 (SYSV), dynamically linked, interpreter /lib64/l, for GNU/Linux 3.2.0, BuildID[sha1]=a0d9427bff4f04c1475aa889bce881e4a5b7fb31, with debug_info, not stripped
   `----
 
 
@@ -309,13 +337,17 @@ _________________
   Now let's see how it is linked!
 
   ,----
+  | ls -l ./checkinput-driver
+  | ls -l /lib/x86_64-linux-gnu/libc-2.27.so
   | ldd ./checkinput-driver
   `----
 
   ,----
-  | linux-vdso.so.1 (0x00007ffd82b62000)
-  | libc.so.6 => /lib/x86_64-linux-gnu/libc.so.6 (0x00007fc823b8e000)
-  | /lib64/ld-linux-x86-64.so.2 (0x00007fc824181000)
+  | -rwxrwxr-x 1 hindle1 hindle1 38472 Mar 17 16:54 ./checkinput-driver
+  | -rwxr-xr-x 1 root root 2030544 Apr 16  2018 /lib/x86_64-linux-gnu/libc-2.27.so
+  | 	linux-vdso.so.1 (0x00007ffdcd3a5000)
+  | 	libc.so.6 => /lib/x86_64-linux-gnu/libc.so.6 (0x00007fad55793000)
+  | 	/lib64/ld-linux-x86-64.so.2 (0x00007fad55d86000)
   `----
 
 
@@ -323,7 +355,7 @@ _________________
     stdio.h)
 
 
-1.4.3 Linking to libraries
+1.5.3 Linking to libraries
 --------------------------
 
   `math.h` includes fun functions like cos and tanh.
@@ -395,6 +427,14 @@ _________________
   | tanh(2.000000e+01) == 1.000000e+00
   `----
 
+
+
+
+
+
+
+
+
   OK so how does this work, how do link to math?
 
   ,----
@@ -410,10 +450,10 @@ _________________
   ,----
   | poor-tanh-example: ELF 64-bit LSB shared object, x86-64, version 1 (SYSV), dynamically linked, interpreter /lib64/l, for GNU/Linux 3.2.0, BuildID[sha1]=fdd28691d4637c2a9b9a76b129ea7585894e4378, with debug_info, not stripped
   |      40     120    1400
-  | 	linux-vdso.so.1 (0x00007ffd0c7c0000)
-  | 	libm.so.6 => /lib/x86_64-linux-gnu/libm.so.6 (0x00007fea07503000)
-  | 	libc.so.6 => /lib/x86_64-linux-gnu/libc.so.6 (0x00007fea07112000)
-  | 	/lib64/ld-linux-x86-64.so.2 (0x00007fea07aa3000)
+  | 	linux-vdso.so.1 (0x00007fff69fbe000)
+  | 	libm.so.6 => /lib/x86_64-linux-gnu/libm.so.6 (0x00007eff059b4000)
+  | 	libc.so.6 => /lib/x86_64-linux-gnu/libc.so.6 (0x00007eff055c3000)
+  | 	/lib64/ld-linux-x86-64.so.2 (0x00007eff05f54000)
   `----
 
 
@@ -426,42 +466,42 @@ _________________
   `----
 
   ,----
-  | linux-vdso.so.1 (0x00007fff88186000)
-  | libXft.so.2 => /usr/lib/x86_64-linux-gnu/libXft.so.2 (0x00007f6af1197000)
-  | libfontconfig.so.1 => /usr/lib/x86_64-linux-gnu/libfontconfig.so.1 (0x00007f6af0f52000)
-  | libXaw.so.7 => /usr/lib/x86_64-linux-gnu/libXaw.so.7 (0x00007f6af0cde000)
-  | libXmu.so.6 => /usr/lib/x86_64-linux-gnu/libXmu.so.6 (0x00007f6af0ac5000)
-  | libXt.so.6 => /usr/lib/x86_64-linux-gnu/libXt.so.6 (0x00007f6af085c000)
-  | libX11.so.6 => /usr/lib/x86_64-linux-gnu/libX11.so.6 (0x00007f6af0524000)
-  | libXinerama.so.1 => /usr/lib/x86_64-linux-gnu/libXinerama.so.1 (0x00007f6af0321000)
-  | libXpm.so.4 => /usr/lib/x86_64-linux-gnu/libXpm.so.4 (0x00007f6af010f000)
-  | libICE.so.6 => /usr/lib/x86_64-linux-gnu/libICE.so.6 (0x00007f6aefef4000)
-  | libutempter.so.0 => /usr/lib/x86_64-linux-gnu/libutempter.so.0 (0x00007f6aefcf1000)
-  | libtinfo.so.5 => /lib/x86_64-linux-gnu/libtinfo.so.5 (0x00007f6aefac7000)
-  | libc.so.6 => /lib/x86_64-linux-gnu/libc.so.6 (0x00007f6aef6d6000)
-  | libfreetype.so.6 => /usr/lib/x86_64-linux-gnu/libfreetype.so.6 (0x00007f6aef422000)
-  | libXrender.so.1 => /usr/lib/x86_64-linux-gnu/libXrender.so.1 (0x00007f6aef218000)
-  | libexpat.so.1 => /lib/x86_64-linux-gnu/libexpat.so.1 (0x00007f6aeefe6000)
-  | libpthread.so.0 => /lib/x86_64-linux-gnu/libpthread.so.0 (0x00007f6aeedc7000)
-  | libXext.so.6 => /usr/lib/x86_64-linux-gnu/libXext.so.6 (0x00007f6aeebb5000)
-  | libSM.so.6 => /usr/lib/x86_64-linux-gnu/libSM.so.6 (0x00007f6aee9ad000)
-  | libxcb.so.1 => /usr/lib/x86_64-linux-gnu/libxcb.so.1 (0x00007f6aee785000)
-  | libdl.so.2 => /lib/x86_64-linux-gnu/libdl.so.2 (0x00007f6aee581000)
-  | libbsd.so.0 => /lib/x86_64-linux-gnu/libbsd.so.0 (0x00007f6aee36c000)
-  | /lib64/ld-linux-x86-64.so.2 (0x00007f6af165c000)
-  | libpng16.so.16 => /usr/lib/x86_64-linux-gnu/libpng16.so.16 (0x00007f6aee13a000)
-  | libz.so.1 => /lib/x86_64-linux-gnu/libz.so.1 (0x00007f6aedf1d000)
-  | libuuid.so.1 => /lib/x86_64-linux-gnu/libuuid.so.1 (0x00007f6aedd16000)
-  | libXau.so.6 => /usr/lib/x86_64-linux-gnu/libXau.so.6 (0x00007f6aedb12000)
-  | libXdmcp.so.6 => /usr/lib/x86_64-linux-gnu/libXdmcp.so.6 (0x00007f6aed90c000)
-  | librt.so.1 => /lib/x86_64-linux-gnu/librt.so.1 (0x00007f6aed704000)
-  | libm.so.6 => /lib/x86_64-linux-gnu/libm.so.6 (0x00007f6aed366000)
+  | linux-vdso.so.1 (0x00007fffe6352000)
+  | libXft.so.2 => /usr/lib/x86_64-linux-gnu/libXft.so.2 (0x00007fe81a4a0000)
+  | libfontconfig.so.1 => /usr/lib/x86_64-linux-gnu/libfontconfig.so.1 (0x00007fe81a25b000)
+  | libXaw.so.7 => /usr/lib/x86_64-linux-gnu/libXaw.so.7 (0x00007fe819fe7000)
+  | libXmu.so.6 => /usr/lib/x86_64-linux-gnu/libXmu.so.6 (0x00007fe819dce000)
+  | libXt.so.6 => /usr/lib/x86_64-linux-gnu/libXt.so.6 (0x00007fe819b65000)
+  | libX11.so.6 => /usr/lib/x86_64-linux-gnu/libX11.so.6 (0x00007fe81982d000)
+  | libXinerama.so.1 => /usr/lib/x86_64-linux-gnu/libXinerama.so.1 (0x00007fe81962a000)
+  | libXpm.so.4 => /usr/lib/x86_64-linux-gnu/libXpm.so.4 (0x00007fe819418000)
+  | libICE.so.6 => /usr/lib/x86_64-linux-gnu/libICE.so.6 (0x00007fe8191fd000)
+  | libutempter.so.0 => /usr/lib/x86_64-linux-gnu/libutempter.so.0 (0x00007fe818ffa000)
+  | libtinfo.so.5 => /lib/x86_64-linux-gnu/libtinfo.so.5 (0x00007fe818dd0000)
+  | libc.so.6 => /lib/x86_64-linux-gnu/libc.so.6 (0x00007fe8189df000)
+  | libfreetype.so.6 => /usr/lib/x86_64-linux-gnu/libfreetype.so.6 (0x00007fe81872b000)
+  | libXrender.so.1 => /usr/lib/x86_64-linux-gnu/libXrender.so.1 (0x00007fe818521000)
+  | libexpat.so.1 => /lib/x86_64-linux-gnu/libexpat.so.1 (0x00007fe8182ef000)
+  | libpthread.so.0 => /lib/x86_64-linux-gnu/libpthread.so.0 (0x00007fe8180d0000)
+  | libXext.so.6 => /usr/lib/x86_64-linux-gnu/libXext.so.6 (0x00007fe817ebe000)
+  | libSM.so.6 => /usr/lib/x86_64-linux-gnu/libSM.so.6 (0x00007fe817cb6000)
+  | libxcb.so.1 => /usr/lib/x86_64-linux-gnu/libxcb.so.1 (0x00007fe817a8e000)
+  | libdl.so.2 => /lib/x86_64-linux-gnu/libdl.so.2 (0x00007fe81788a000)
+  | libbsd.so.0 => /lib/x86_64-linux-gnu/libbsd.so.0 (0x00007fe817675000)
+  | /lib64/ld-linux-x86-64.so.2 (0x00007fe81a965000)
+  | libpng16.so.16 => /usr/lib/x86_64-linux-gnu/libpng16.so.16 (0x00007fe817443000)
+  | libz.so.1 => /lib/x86_64-linux-gnu/libz.so.1 (0x00007fe817226000)
+  | libuuid.so.1 => /lib/x86_64-linux-gnu/libuuid.so.1 (0x00007fe81701f000)
+  | libXau.so.6 => /usr/lib/x86_64-linux-gnu/libXau.so.6 (0x00007fe816e1b000)
+  | libXdmcp.so.6 => /usr/lib/x86_64-linux-gnu/libXdmcp.so.6 (0x00007fe816c15000)
+  | librt.so.1 => /lib/x86_64-linux-gnu/librt.so.1 (0x00007fe816a0d000)
+  | libm.so.6 => /lib/x86_64-linux-gnu/libm.so.6 (0x00007fe81666f000)
   `----
 
   See! Lots of libraries!
 
 
-* 1.4.3.1 Summary
+* 1.5.3.1 Summary
 
   To link to a shared library with gcc or clang use the: -l flag
   -llibraryyouwant
@@ -474,7 +514,7 @@ _________________
   OK let's see how it affects you.
 
 
-1.4.4 Example Datastructure
+1.5.4 Example Datastructure
 ---------------------------
 
   Let's make a brief data structure about one of my favourite topics:
@@ -555,7 +595,7 @@ _________________
   |                       getTemperatureCoolBear(kevin))? ziggy : kevin;
   |   printf("The coolest bear is %s\n", getNameCoolBear( coolest ));
   |   // // we actually don't know about name so we can't reference it below
-  |   // printf("The coolest bear is %s\n", getNameCoolBear( coolest->name ));
+  |   // printf("The coolest bear is %s\n", coolest->name );
   |   freeCoolBear(ziggy);
   |   freeCoolBear(kevin);
   | }
@@ -591,7 +631,7 @@ _________________
   `----
 
 
-1.4.5 What is the preprocessor doing?
+1.5.5 What is the preprocessor doing?
 -------------------------------------
 
   Let's use the -E flag to see what checkinput.c becomes
@@ -679,7 +719,7 @@ _________________
   <file:checkinput-preprocessor.c>
 
 
-1.4.6 Parameterized Macros
+1.5.6 Parameterized Macros
 --------------------------
 
   As we just demonstrated Macros generate code. So we can make compile
@@ -834,7 +874,7 @@ _________________
   `----
 
 
-* 1.4.6.1 Easy bugs!
+* 1.5.6.1 Easy bugs!
 
   So why doesn't this work?
 
@@ -859,13 +899,11 @@ _________________
   ,----
   | gcc  -std=c99 -pedantic -Wall -Wextra -ftrapv -ggdb3 \
   |        -o checkinputmacro checkinputmacro.c
-  | echo   | ./checkinputmacro
-  | echo X | ./checkinputmacro
-  | echo 6 | ./checkinputmacro
+  | echo 1 6  | ./checkinputmacro
   `----
 
   ,----
-  | Invalid input!Invalid input!My int: 6
+  | My int: 6
   `----
 
 
@@ -984,7 +1022,7 @@ _________________
   `----
 
 
-1.5 Makefiles
+1.6 Makefiles
 ~~~~~~~~~~~~~
 
   I am sick to death of all these shell scripts!
@@ -1014,7 +1052,7 @@ _________________
   make
 
 
-1.5.1 Basic Makefile
+1.6.1 Basic Makefile
 --------------------
 
   We're going to use the coolbears source code from before.
@@ -1176,7 +1214,7 @@ _________________
   Personally I would've preferred if assignments were done this way.
 
 
-1.5.2 DRY Makefile
+1.6.2 DRY Makefile
 ------------------
 
   DRY means DON'T REPEAT YOURSELF.
@@ -1253,7 +1291,7 @@ _________________
   `----
 
 
-1.5.3 Idiomatic GCC Makefile
+1.6.3 Idiomatic GCC Makefile
 ----------------------------
 
   Make knows a lot about C. Make comes with default rules that will call
@@ -1319,7 +1357,7 @@ _________________
   `----
 
 
-1.5.4 Special Macro Vars
+1.6.4 Special Macro Vars
 ------------------------
 
   - $@ the target file name
@@ -1388,7 +1426,7 @@ _________________
   `----
 
 
-* 1.5.4.1 Implicit Rules
+* 1.6.4.1 Implicit Rules
 
   Here's an example of implicit rules. Of how we convert 1 file to
   another implicitly much like how Make hands C compilation.
@@ -1416,7 +1454,7 @@ _________________
   `----
 
 
-1.5.5 Makefile help
+1.6.5 Makefile help
 -------------------
 
   The GNU Manual is pretty good

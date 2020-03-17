@@ -40,9 +40,7 @@ license, unless otherwise noted.
 
 ** Alternative version
 
-- file:presentation.txt
-- file:presentation.pdf
-- file:presentation.html
+Checkout the .txt, the .pdf, and the .html version
 
 ** Init ORG-MODE
 

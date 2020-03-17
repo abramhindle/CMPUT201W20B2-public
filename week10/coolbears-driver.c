@@ -8,7 +8,7 @@ int main() {
                       getTemperatureCoolBear(kevin))? ziggy : kevin;
   printf("The coolest bear is %s\n", getNameCoolBear( coolest ));
   // // we actually don't know about name so we can't reference it below
-  // printf("The coolest bear is %s\n", getNameCoolBear( coolest->name ));
+  // printf("The coolest bear is %s\n", coolest->name );
   freeCoolBear(ziggy);
   freeCoolBear(kevin);
 }
