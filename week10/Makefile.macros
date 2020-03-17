@@ -1,0 +1,23 @@
+OBJECTS=example.txt 1.txt 2.txt 3.txt
+
+run: example.txt
+	echo $@ $< $*
+	cat example.txt
+
+example.txt: 1.txt 2.txt 3.txt
+	echo First Dependency $<
+	echo Target $@
+	echo New Deps $?
+	echo All Deps $^
+	echo target suffix $*
+	cat $^ > example.txt
+
+1.txt:
+	echo $@ > $@
+2.txt:
+	echo $@ > $@
+3.txt:
+	echo $@ > $@
+
+clean:
+	rm $(OBJECTS) || echo all good

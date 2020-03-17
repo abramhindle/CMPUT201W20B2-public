@@ -1,0 +1,31 @@
+# common arguments for GCC
+CFLAGS= -std=c99 -pedantic -Wall -Wextra -ftrapv -ggdb3
+# Do you need your math lib? Put it here this is the linking libraries
+# variable
+LDLIBS=-lm
+# Common compiler
+CC=gcc
+OBJECTS=coolbears.o coolbears-driver.o
+EXEC=coolbears-driver
+BUILDABLES=$(OBJECTS) $(EXEC)
+
+# this just runs a command but ensures it is built
+run: $(EXEC)
+	./$(EXEC) # just a shell command
+
+# We don't even need to specify how to make coolbears.o
+# try commenting and uncommenting this line
+# coolbears.o: coolbears.c
+
+# build an executable
+# coolbears-driver: coolbears-driver.c coolbears.o
+
+# # this would work too
+# coolbears-driver: coolbears-driver.o coolbears.o
+
+$(EXEC): $(OBJECTS)
+
+
+# clean is idiomatic for remove object files and executables
+clean: 
+	rm $(BUILDABLES) || echo nothing to delete

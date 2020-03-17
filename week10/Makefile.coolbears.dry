@@ -1,0 +1,23 @@
+# common arguments for GCC
+CFLAGS= -std=c99 -pedantic -Wall -Wextra -ftrapv -ggdb3
+# Common compiler
+CC=gcc
+BUILDABLES=coolbears.o coolbears-driver
+
+# this just runs a command but ensures it is built
+run: coolbears-driver
+	./coolbears-driver # just a shell command
+
+coolbears.o: coolbears.c
+	$(CC) $(CFLAGS) \
+        -c coolbears.c
+
+# build an executable
+coolbears-driver: coolbears-driver.c coolbears.o
+	$(CC) $(CFLAGS) \
+	-o coolbears-driver coolbears-driver.c \
+	coolbears.o 
+
+# clean is idiomatic for remove object files and executables
+clean: 
+	rm $(BUILDABLES) || echo nothing to delete
