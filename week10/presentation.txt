@@ -275,7 +275,7 @@ _________________
 
   ,----
   | checkinput.o: ELF 64-bit LSB relocatable, x86-64, version 1 (SYSV), with debug_info, not stripped
-  | checkinput-driver: ELF 64-bit LSB shared object, x86-64, version 1 (SYSV), dynamically linked, interpreter /lib64/l, for GNU/Linux 3.2.0, BuildID[sha1]=2df2006fd89c9d9dbc9655f59e4cf90c6d3f6017, with debug_info, not stripped
+  | checkinput-driver: ELF 64-bit LSB shared object, x86-64, version 1 (SYSV), dynamically linked, interpreter /lib64/l, for GNU/Linux 3.2.0, BuildID[sha1]=d684c4dd438fb9319780cfc737c59ef2223d5a28, with debug_info, not stripped
   `----
 
 
@@ -313,9 +313,9 @@ _________________
   `----
 
   ,----
-  | linux-vdso.so.1 (0x00007ffe85be0000)
-  | libc.so.6 => /lib/x86_64-linux-gnu/libc.so.6 (0x00007f919f994000)
-  | /lib64/ld-linux-x86-64.so.2 (0x00007f919ff87000)
+  | linux-vdso.so.1 (0x00007ffd82b62000)
+  | libc.so.6 => /lib/x86_64-linux-gnu/libc.so.6 (0x00007fc823b8e000)
+  | /lib64/ld-linux-x86-64.so.2 (0x00007fc824181000)
   `----
 
 
@@ -333,11 +333,6 @@ _________________
   floating code for them?
 
   <file:/usr/include/math.h>
-
-  ,----
-  | gnome-terminal --window-with-profile Big \
-  |                -- man math.h
-  `----
 
   I add the flag -lm so we get our math library :-)
   ,----
@@ -415,10 +410,10 @@ _________________
   ,----
   | poor-tanh-example: ELF 64-bit LSB shared object, x86-64, version 1 (SYSV), dynamically linked, interpreter /lib64/l, for GNU/Linux 3.2.0, BuildID[sha1]=fdd28691d4637c2a9b9a76b129ea7585894e4378, with debug_info, not stripped
   |      40     120    1400
-  | 	linux-vdso.so.1 (0x00007ffdd1570000)
-  | 	libm.so.6 => /lib/x86_64-linux-gnu/libm.so.6 (0x00007f4ed467b000)
-  | 	libc.so.6 => /lib/x86_64-linux-gnu/libc.so.6 (0x00007f4ed428a000)
-  | 	/lib64/ld-linux-x86-64.so.2 (0x00007f4ed4c1b000)
+  | 	linux-vdso.so.1 (0x00007ffd0c7c0000)
+  | 	libm.so.6 => /lib/x86_64-linux-gnu/libm.so.6 (0x00007fea07503000)
+  | 	libc.so.6 => /lib/x86_64-linux-gnu/libc.so.6 (0x00007fea07112000)
+  | 	/lib64/ld-linux-x86-64.so.2 (0x00007fea07aa3000)
   `----
 
 
@@ -431,36 +426,36 @@ _________________
   `----
 
   ,----
-  | linux-vdso.so.1 (0x00007ffdabcea000)
-  | libXft.so.2 => /usr/lib/x86_64-linux-gnu/libXft.so.2 (0x00007fc90b414000)
-  | libfontconfig.so.1 => /usr/lib/x86_64-linux-gnu/libfontconfig.so.1 (0x00007fc90b1cf000)
-  | libXaw.so.7 => /usr/lib/x86_64-linux-gnu/libXaw.so.7 (0x00007fc90af5b000)
-  | libXmu.so.6 => /usr/lib/x86_64-linux-gnu/libXmu.so.6 (0x00007fc90ad42000)
-  | libXt.so.6 => /usr/lib/x86_64-linux-gnu/libXt.so.6 (0x00007fc90aad9000)
-  | libX11.so.6 => /usr/lib/x86_64-linux-gnu/libX11.so.6 (0x00007fc90a7a1000)
-  | libXinerama.so.1 => /usr/lib/x86_64-linux-gnu/libXinerama.so.1 (0x00007fc90a59e000)
-  | libXpm.so.4 => /usr/lib/x86_64-linux-gnu/libXpm.so.4 (0x00007fc90a38c000)
-  | libICE.so.6 => /usr/lib/x86_64-linux-gnu/libICE.so.6 (0x00007fc90a171000)
-  | libutempter.so.0 => /usr/lib/x86_64-linux-gnu/libutempter.so.0 (0x00007fc909f6e000)
-  | libtinfo.so.5 => /lib/x86_64-linux-gnu/libtinfo.so.5 (0x00007fc909d44000)
-  | libc.so.6 => /lib/x86_64-linux-gnu/libc.so.6 (0x00007fc909953000)
-  | libfreetype.so.6 => /usr/lib/x86_64-linux-gnu/libfreetype.so.6 (0x00007fc90969f000)
-  | libXrender.so.1 => /usr/lib/x86_64-linux-gnu/libXrender.so.1 (0x00007fc909495000)
-  | libexpat.so.1 => /lib/x86_64-linux-gnu/libexpat.so.1 (0x00007fc909263000)
-  | libpthread.so.0 => /lib/x86_64-linux-gnu/libpthread.so.0 (0x00007fc909044000)
-  | libXext.so.6 => /usr/lib/x86_64-linux-gnu/libXext.so.6 (0x00007fc908e32000)
-  | libSM.so.6 => /usr/lib/x86_64-linux-gnu/libSM.so.6 (0x00007fc908c2a000)
-  | libxcb.so.1 => /usr/lib/x86_64-linux-gnu/libxcb.so.1 (0x00007fc908a02000)
-  | libdl.so.2 => /lib/x86_64-linux-gnu/libdl.so.2 (0x00007fc9087fe000)
-  | libbsd.so.0 => /lib/x86_64-linux-gnu/libbsd.so.0 (0x00007fc9085e9000)
-  | /lib64/ld-linux-x86-64.so.2 (0x00007fc90b8d9000)
-  | libpng16.so.16 => /usr/lib/x86_64-linux-gnu/libpng16.so.16 (0x00007fc9083b7000)
-  | libz.so.1 => /lib/x86_64-linux-gnu/libz.so.1 (0x00007fc90819a000)
-  | libuuid.so.1 => /lib/x86_64-linux-gnu/libuuid.so.1 (0x00007fc907f93000)
-  | libXau.so.6 => /usr/lib/x86_64-linux-gnu/libXau.so.6 (0x00007fc907d8f000)
-  | libXdmcp.so.6 => /usr/lib/x86_64-linux-gnu/libXdmcp.so.6 (0x00007fc907b89000)
-  | librt.so.1 => /lib/x86_64-linux-gnu/librt.so.1 (0x00007fc907981000)
-  | libm.so.6 => /lib/x86_64-linux-gnu/libm.so.6 (0x00007fc9075e3000)
+  | linux-vdso.so.1 (0x00007fff88186000)
+  | libXft.so.2 => /usr/lib/x86_64-linux-gnu/libXft.so.2 (0x00007f6af1197000)
+  | libfontconfig.so.1 => /usr/lib/x86_64-linux-gnu/libfontconfig.so.1 (0x00007f6af0f52000)
+  | libXaw.so.7 => /usr/lib/x86_64-linux-gnu/libXaw.so.7 (0x00007f6af0cde000)
+  | libXmu.so.6 => /usr/lib/x86_64-linux-gnu/libXmu.so.6 (0x00007f6af0ac5000)
+  | libXt.so.6 => /usr/lib/x86_64-linux-gnu/libXt.so.6 (0x00007f6af085c000)
+  | libX11.so.6 => /usr/lib/x86_64-linux-gnu/libX11.so.6 (0x00007f6af0524000)
+  | libXinerama.so.1 => /usr/lib/x86_64-linux-gnu/libXinerama.so.1 (0x00007f6af0321000)
+  | libXpm.so.4 => /usr/lib/x86_64-linux-gnu/libXpm.so.4 (0x00007f6af010f000)
+  | libICE.so.6 => /usr/lib/x86_64-linux-gnu/libICE.so.6 (0x00007f6aefef4000)
+  | libutempter.so.0 => /usr/lib/x86_64-linux-gnu/libutempter.so.0 (0x00007f6aefcf1000)
+  | libtinfo.so.5 => /lib/x86_64-linux-gnu/libtinfo.so.5 (0x00007f6aefac7000)
+  | libc.so.6 => /lib/x86_64-linux-gnu/libc.so.6 (0x00007f6aef6d6000)
+  | libfreetype.so.6 => /usr/lib/x86_64-linux-gnu/libfreetype.so.6 (0x00007f6aef422000)
+  | libXrender.so.1 => /usr/lib/x86_64-linux-gnu/libXrender.so.1 (0x00007f6aef218000)
+  | libexpat.so.1 => /lib/x86_64-linux-gnu/libexpat.so.1 (0x00007f6aeefe6000)
+  | libpthread.so.0 => /lib/x86_64-linux-gnu/libpthread.so.0 (0x00007f6aeedc7000)
+  | libXext.so.6 => /usr/lib/x86_64-linux-gnu/libXext.so.6 (0x00007f6aeebb5000)
+  | libSM.so.6 => /usr/lib/x86_64-linux-gnu/libSM.so.6 (0x00007f6aee9ad000)
+  | libxcb.so.1 => /usr/lib/x86_64-linux-gnu/libxcb.so.1 (0x00007f6aee785000)
+  | libdl.so.2 => /lib/x86_64-linux-gnu/libdl.so.2 (0x00007f6aee581000)
+  | libbsd.so.0 => /lib/x86_64-linux-gnu/libbsd.so.0 (0x00007f6aee36c000)
+  | /lib64/ld-linux-x86-64.so.2 (0x00007f6af165c000)
+  | libpng16.so.16 => /usr/lib/x86_64-linux-gnu/libpng16.so.16 (0x00007f6aee13a000)
+  | libz.so.1 => /lib/x86_64-linux-gnu/libz.so.1 (0x00007f6aedf1d000)
+  | libuuid.so.1 => /lib/x86_64-linux-gnu/libuuid.so.1 (0x00007f6aedd16000)
+  | libXau.so.6 => /usr/lib/x86_64-linux-gnu/libXau.so.6 (0x00007f6aedb12000)
+  | libXdmcp.so.6 => /usr/lib/x86_64-linux-gnu/libXdmcp.so.6 (0x00007f6aed90c000)
+  | librt.so.1 => /lib/x86_64-linux-gnu/librt.so.1 (0x00007f6aed704000)
+  | libm.so.6 => /lib/x86_64-linux-gnu/libm.so.6 (0x00007f6aed366000)
   `----
 
   See! Lots of libraries!
@@ -612,6 +607,10 @@ _________________
   | # build checkinput.o
   | gcc -E -std=c99 -pedantic -Wall -Wextra -ftrapv -ggdb3 \
   |        checkinput.c > checkinput-preprocessor.c
+  `----
+
+  ,----
+
   `----
 
   It produces this file:
@@ -866,6 +865,11 @@ _________________
   `----
 
   ,----
+  | Invalid input!Invalid input!My int: 6
+  `----
+
+
+  ,----
   | gcc -E -std=c99 -pedantic -Wall -Wextra -ftrapv -ggdb3 \
   |        checkinputmacro.c > \
   |        checkinputmacro-expanded.c
@@ -1027,6 +1031,11 @@ _________________
   |        coolbears.o 
   | ./coolbears-driver
   `----
+
+  ,----
+  | The coolest bear is Kevin
+  `----
+
 
   ,----
   | # this just runs a command but ensures it is built
@@ -1239,11 +1248,6 @@ _________________
   `----
 
   ,----
-  | gcc -std=c99 -pedantic -Wall -Wextra -ftrapv -ggdb3 \
-  |         -c coolbears.c
-  | gcc -std=c99 -pedantic -Wall -Wextra -ftrapv -ggdb3 \
-  | -o coolbears-driver coolbears-driver.c \
-  | coolbears.o 
   | ./coolbears-driver # just a shell command
   | The coolest bear is Kevin
   `----
@@ -1306,6 +1310,7 @@ _________________
 
   ,----
   | rm coolbears.o coolbears-driver.o coolbears-driver || echo nothing to delete
+  | nothing to delete
   | gcc -std=c99 -pedantic -Wall -Wextra -ftrapv -ggdb3   -c -o coolbears-driver.o coolbears-driver.c
   | gcc -std=c99 -pedantic -Wall -Wextra -ftrapv -ggdb3   -c -o coolbears.o coolbears.c
   | gcc   coolbears-driver.o coolbears.o  -lm -o coolbears-driver

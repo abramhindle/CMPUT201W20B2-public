@@ -2003,7 +2003,7 @@ extern size_t wcstombs (char *__restrict __s,
 # 4 "checkinputmacro.c" 2
 
 
-#define CHECKINPUT(scanfReturn) ( scanfReturn == false || scanfReturn == EOF)
+#define CHECKINPUT(scanfReturn) ( scanfReturn == EOF || !scanfReturn )
 
 
 # 8 "checkinputmacro.c"
@@ -2011,13 +2011,9 @@ int main() {
     int myInt = 0;
     if (( scanf("%d", &myInt) == 
 # 10 "checkinputmacro.c" 3 4
-       0 
+       (-1) 
 # 10 "checkinputmacro.c"
-       || scanf("%d", &myInt) == 
-# 10 "checkinputmacro.c" 3 4
-       (-1)
-# 10 "checkinputmacro.c"
-       )) {
+       || !scanf("%d", &myInt) )) {
         printf("Invalid input!");
         exit(1);
     }
