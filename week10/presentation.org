@@ -631,10 +631,6 @@ return 0;
 file:checkinput-preprocessor.c
 
 
-
-
-
-
 *** Parameterized Macros
 
 As we just demonstrated Macros generate code. So we can make compile
@@ -939,3 +935,111 @@ int main() {
     printf("My int: %d\n", myInt);
 }
 #+END_SRC
+
+** Makefiles
+
+I am sick to death of all these shell scripts!
+
+Look at the assignments 1 shell script per question and they mostly
+say the same things.
+
+Programmers uses build systems to manage compiling and linking large
+programs. They often do not use shell scripts or batch files directly.
+
+Makefiles allow you to use make to build your program. Make is
+declarative, dependency based build system.
+
+Makefiles are full of rules for building files.
+
+#+BEGIN_SRC makefile
+file-you-want-to-build: dependency1.c dependency2.o dependency3.o
+	gcc -o file-you-want-to-build dependency1.c dependency2.o dependency3.o
+#+END_SRC
+
+^^^ There is a tab character before the gcc 
+
+To build file-you-want-to-build you type:
+
+    make file-you-want-to-build
+    # or perhaps
+    make
+
+*** Basic Makefile
+
+We're going to use the coolbears source code from before.
+
+Instead of this:
+
+#+BEGIN_SRC sh :exports both :tangle build-coolbears.sh
+# build coolbears.o
+gcc  -std=c99 -pedantic -Wall -Wextra -ftrapv -ggdb3 \
+       -c coolbears.c
+# build coolbears-driver and link it to coolbears.o
+gcc  -std=c99 -pedantic -Wall -Wextra -ftrapv -ggdb3 \
+       -o coolbears-driver coolbears-driver.c \
+       coolbears.o 
+./coolbears-driver
+#+END_SRC
+
+#+BEGIN_SRC makefile :tangle Makefile.coolbears
+# build an object file
+coolbears.o: coolbears.c
+	gcc  -std=c99 -pedantic -Wall -Wextra -ftrapv -ggdb3 \
+        -c coolbears.c
+
+# build an executable
+coolbears-driver: coolbears-driver.c coolbears.o
+	gcc  -std=c99 -pedantic -Wall -Wextra -ftrapv -ggdb3 \
+	-o coolbears-driver coolbears-driver.c \
+	coolbears.o 
+
+# clean is idiomatic for remove object files and executables
+clean: 
+	rm coolbears.o coolbears-driver || echo nothing to delete
+
+# this just runs a command but ensures it is built
+run: coolbears-driver
+	./coolbears-driver # just a shell command
+
+#+END_SRC
+
+let's run it. Normally make just runs Makefile. But if you have your
+own makefiles you should use the -f option with make.
+
+#+BEGIN_SRC sh
+make -f Makefile.coolbears clean
+make -f Makefile.coolbears coolbears.o
+make -f Makefile.coolbears coolbears-driver
+make -f Makefile.coolbears run
+#+END_SRC
+
+#+RESULTS:
+: rm coolbears.o coolbears-driver || echo nothing to delete
+: gcc  -std=c99 -pedantic -Wall -Wextra -ftrapv -ggdb3 \
+:         -c coolbears.c
+: gcc  -std=c99 -pedantic -Wall -Wextra -ftrapv -ggdb3 \
+: -o coolbears-driver coolbears-driver.c \
+: coolbears.o 
+: ./coolbears-driver # just a shell command
+: The coolest bear is Kevin
+
+Or we could just do this:
+#+BEGIN_SRC sh
+# I am making clean just to clear out the executables and object files
+make -f Makefile.coolbears clean
+make -f Makefile.coolbears run
+#+END_SRC
+
+#+RESULTS:
+: rm coolbears.o coolbears-driver || echo nothing to delete
+: gcc  -std=c99 -pedantic -Wall -Wextra -ftrapv -ggdb3 \
+:         -c coolbears.c
+: gcc  -std=c99 -pedantic -Wall -Wextra -ftrapv -ggdb3 \
+: -o coolbears-driver coolbears-driver.c \
+: coolbears.o 
+: ./coolbears-driver # just a shell command
+: The coolest bear is Kevin
+
+Ha it does the same thing!
+
+Personally I would've preferred if assignments were done this way.
