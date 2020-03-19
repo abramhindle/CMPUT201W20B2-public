@@ -894,13 +894,9 @@ Let's look at the output:
 int main() {
     int myInt = 0;
     if (( scanf("%d", &myInt) == 
-# 10 "checkinputmacro.c" 3 4
        0 
-# 10 "checkinputmacro.c"
        || scanf("%d", &myInt) == 
-# 10 "checkinputmacro.c" 3 4
        (-1)
-# 10 "checkinputmacro.c"
        )) {
         printf("Invalid input!\n");
         exit(1);
@@ -957,12 +953,14 @@ gcc  -std=c99 -pedantic -Wall -Wextra -ftrapv -ggdb3 \
 echo   | ./checkinputmacro-fixed
 echo X | ./checkinputmacro-fixed
 echo 6 | ./checkinputmacro-fixed
+echo 7 8| ./checkinputmacro-fixed
 #+END_SRC
 
 #+RESULTS:
 : Invalid input!
 : Invalid input!
 : My int: 6
+: My int: 7
 
 #+BEGIN_SRC sh :exports both
 gcc -E -std=c99 -pedantic -Wall -Wextra -ftrapv -ggdb3 \
@@ -1044,7 +1042,7 @@ run: coolbears-driver
 	./coolbears-driver # just a shell command
 
 # build an object file
-coolbears.o: coolbears.c
+coolbears.o: coolbears.c coolbears.h
 	gcc  -std=c99 -pedantic -Wall -Wextra -ftrapv -ggdb3 \
         -c coolbears.c
 
@@ -1071,7 +1069,7 @@ make -f Makefile.coolbears run
 #+END_SRC
 
 #+RESULTS:
-: rm coolbears.o coolbears-driver || echo nothing to delete
+: rm -f coolbears.o coolbears-driver || echo nothing to delete
 : gcc  -std=c99 -pedantic -Wall -Wextra -ftrapv -ggdb3 \
 :         -c coolbears.c
 : gcc  -std=c99 -pedantic -Wall -Wextra -ftrapv -ggdb3 \
@@ -1106,7 +1104,7 @@ make -f Makefile.coolbears
 #+END_SRC
 
 #+RESULTS:
-: rm coolbears.o coolbears-driver || echo nothing to delete
+: rm -f coolbears.o coolbears-driver || echo nothing to delete
 : gcc  -std=c99 -pedantic -Wall -Wextra -ftrapv -ggdb3 \
 :         -c coolbears.c
 : gcc  -std=c99 -pedantic -Wall -Wextra -ftrapv -ggdb3 \
@@ -1171,7 +1169,7 @@ by repeating text.
 
 Instead of this:
 
-#+BEGIN_SRC makefile :tangle Makefile.coolbears
+#+BEGIN_SRC makefile 
 # this just runs a command but ensures it is built
 run: coolbears-driver
 	./coolbears-driver # just a shell command
@@ -1189,7 +1187,7 @@ coolbears-driver: coolbears-driver.c coolbears.o
 
 # clean is idiomatic for remove object files and executables
 clean: 
-	rm -f coolbears.o coolbears-driver || echo nothing to delete
+	rm -f coolbears.o coolbears-driver 
 
 
 #+END_SRC
@@ -1204,10 +1202,12 @@ You can make a variable in a makefile by going
 #+BEGIN_SRC makefile :tangle Makefile.coolbears.dry
 # common arguments for GCC
 CFLAGS= -std=c99 -pedantic -Wall -Wextra -ftrapv -ggdb3
+LDFLAGS=-lm
 # Common compiler
 CC=gcc
 # you might call these OBJECTS instead
 BUILDABLES=coolbears.o coolbears-driver
+OBJECTS=coolbears.o coolbears-driver.o
 
 # this just runs a command but ensures it is built
 run: coolbears-driver
@@ -1216,6 +1216,10 @@ run: coolbears-driver
 coolbears.o: coolbears.c
 	$(CC) $(CFLAGS) \
         -c coolbears.c
+
+coolbears2.o: coolbears2.c
+	$(CC) $(CFLAGS) \
+        -c coolbears2.c
 
 # build an executable
 coolbears-driver: coolbears-driver.c coolbears.o
@@ -1236,11 +1240,6 @@ make -f Makefile.coolbears.dry run
 #+END_SRC
 
 #+RESULTS:
-: gcc -std=c99 -pedantic -Wall -Wextra -ftrapv -ggdb3 \
-:         -c coolbears.c
-: gcc -std=c99 -pedantic -Wall -Wextra -ftrapv -ggdb3 \
-: -o coolbears-driver coolbears-driver.c \
-: coolbears.o 
 : ./coolbears-driver # just a shell command
 : The coolest bear is Kevin
 
@@ -1261,7 +1260,7 @@ You can reuse this makefile as well!
 CFLAGS= -std=c99 -pedantic -Wall -Wextra -ftrapv -ggdb3
 # Do you need your math lib? Put it here this is the linking libraries
 # variable
-LDLIBS=-lm
+LDFLAGS=$(CFLAGS) -lm
 # Common compiler
 CC=gcc
 OBJECTS=coolbears.o coolbears-driver.o
@@ -1282,8 +1281,9 @@ run: $(EXEC)
 # # this would work too
 # coolbears-driver: coolbears-driver.o coolbears.o
 
-$(EXEC): $(OBJECTS)
+coolbears-driver:  coolbears-driver.o coolbears.o
 
+$(EXEC): $(OBJECTS)
 
 # clean is idiomatic for remove object files and executables
 clean: 
@@ -1294,15 +1294,14 @@ let's run it. Normally make just runs Makefile. But if you have your
 own makefiles you should use the -f option with make.
 
 #+BEGIN_SRC sh :exports both
-make -f Makefile.coolbears.idiomatic clean
+# make -f Makefile.coolbears.idiomatic clean
 make -f Makefile.coolbears.idiomatic run
 #+END_SRC
 
 #+RESULTS:
-: rm coolbears.o coolbears-driver.o coolbears-driver || echo nothing to delete
 : gcc -std=c99 -pedantic -Wall -Wextra -ftrapv -ggdb3   -c -o coolbears-driver.o coolbears-driver.c
 : gcc -std=c99 -pedantic -Wall -Wextra -ftrapv -ggdb3   -c -o coolbears.o coolbears.c
-: gcc   coolbears-driver.o coolbears.o  -lm -o coolbears-driver
+: gcc -std=c99 -pedantic -Wall -Wextra -ftrapv -ggdb3 -lm  coolbears-driver.o coolbears.o   -o coolbears-driver
 : ./coolbears-driver # just a shell command
 : The coolest bear is Kevin
 
@@ -1316,7 +1315,7 @@ make -f Makefile.coolbears.idiomatic run
 
 - $^ all dependencies
 
-- $* target suffix
+- $* target suffix (it matches % in implicit rules)
 
 #+BEGIN_SRC makefile :tangle Makefile.macros
 OBJECTS=example.txt 1.txt 2.txt 3.txt
@@ -1325,7 +1324,7 @@ run: example.txt
 	echo $@ $< $*
 	cat example.txt
 
-example.txt: 1.txt 2.txt 3.txt
+example.txt: 1.txt 2.txt 3.txt 4.txt 5.txt
 	echo First Dependency $<
 	echo Target $@
 	echo New Deps $?
@@ -1339,6 +1338,8 @@ example.txt: 1.txt 2.txt 3.txt
 	echo $@ > $@
 3.txt:
 	echo $@ > $@
+%.txt:
+	echo $* $@ > $@
 
 clean:
 	rm $(OBJECTS) || echo all good
@@ -1346,33 +1347,14 @@ clean:
 
 #+BEGIN_SRC sh :exports both
 make -f Makefile.macros clean
-make -f Makefile.macros
+make -f Makefile.macros 8.txt
+cat 8.txt
 #+END_SRC
 
 #+RESULTS:
-#+begin_example
-rm example.txt 1.txt 2.txt 3.txt || echo all good
-echo 1.txt > 1.txt
-echo 2.txt > 2.txt
-echo 3.txt > 3.txt
-echo First Dependency 1.txt
-First Dependency 1.txt
-echo Target example.txt
-Target example.txt
-echo New Deps 1.txt 2.txt 3.txt
-New Deps 1.txt 2.txt 3.txt
-echo All Deps 1.txt 2.txt 3.txt
-All Deps 1.txt 2.txt 3.txt
-echo target suffix 
-target suffix
-cat 1.txt 2.txt 3.txt > example.txt
-echo run example.txt 
-run example.txt
-cat example.txt
-1.txt
-2.txt
-3.txt
-#+end_example
+: rm example.txt 1.txt 2.txt 3.txt || echo all good
+: echo 8 8.txt > 8.txt
+: 8 8.txt
 
 **** Implicit Rules
 
@@ -1507,12 +1489,12 @@ run: $(EXECUTABLE)
 	./$(EXECUTABLE)
 
 %.o: %.c $(HEADERS)
-	$(CC) $(CFLAGS) -c $<
-#	$(CLANGTIDY) $(CHECKS) \
-#		$< -- \
-#		$(CFLAGS) -c $< $(LDFLAGS)
-#	$(OCLINT) $(LINTR) $< \
-#		-- $(CFLAGS) -c $< $(LDFLAGS)
+	$(CC) $(CFLAGS) -c $< 
+	$(CLANGTIDY) $(CHECKS) \
+		$< -- \
+		$(CFLAGS) -c $< $(LDFLAGS)
+	$(OCLINT) $(LINTR) $< \
+		-- $(CFLAGS) -c $< $(LDFLAGS)
 
 
 $(EXECUTABLE): $(OBJECTS)
@@ -1539,13 +1521,30 @@ valgrind: $(EXECUTABLE)
 #+END_SRC
 
 #+BEGIN_SRC sh :exports both
-make -f Makefile.coolbears.lint.dry lint-coolbears-driver
-make -f Makefile.coolbears.lint.dry lint-coolbears
-make -f Makefile.coolbears.lint.dry valgrind-coolbears-driver
+make -f Makefile.coolbears.lint.dry clean run
+#make -f Makefile.coolbears.lint.dry lint-coolbears-driver
+#make -f Makefile.coolbears.lint.dry lint-coolbears
+#make -f Makefile.coolbears.lint.dry valgrind-coolbears-driver
 #+END_SRC
 
 #+RESULTS:
 #+begin_example
+rm -f coolbears-driver coolbears.o coolbears-driver.o 
+gcc -std=c99 -pedantic -Wall -Wextra -ftrapv -ggdb3 -c coolbears.c 
+clang-tidy --checks=*,-cert-err34-c,-cert-msc30-c,-cert-msc50-cpp \
+	coolbears.c -- \
+	-std=c99 -pedantic -Wall -Wextra -ftrapv -ggdb3 -c coolbears.c 
+oclint --disable-rule=UselessParentheses coolbears.c \
+	-- -std=c99 -pedantic -Wall -Wextra -ftrapv -ggdb3 -c coolbears.c 
+
+
+OCLint Report
+
+Summary: TotalFiles=1 FilesWithViolations=0 P1=0 P2=0 P3=0 
+
+
+[OCLint (http://oclint.org) v0.15]
+gcc -std=c99 -pedantic -Wall -Wextra -ftrapv -ggdb3 -c coolbears-driver.c 
 clang-tidy --checks=*,-cert-err34-c,-cert-msc30-c,-cert-msc50-cpp \
 	coolbears-driver.c -- \
 	-std=c99 -pedantic -Wall -Wextra -ftrapv -ggdb3 -c coolbears-driver.c 
@@ -1571,38 +1570,9 @@ Summary: TotalFiles=1 FilesWithViolations=0 P1=0 P2=0 P3=0
 
 
 [OCLint (http://oclint.org) v0.15]
-clang-tidy --checks=*,-cert-err34-c,-cert-msc30-c,-cert-msc50-cpp \
-	coolbears.c -- \
-	-std=c99 -pedantic -Wall -Wextra -ftrapv -ggdb3 -c coolbears.c 
-oclint --disable-rule=UselessParentheses coolbears.c \
-	-- -std=c99 -pedantic -Wall -Wextra -ftrapv -ggdb3 -c coolbears.c 
-
-
-OCLint Report
-
-Summary: TotalFiles=1 FilesWithViolations=0 P1=0 P2=0 P3=0 
-
-
-[OCLint (http://oclint.org) v0.15]
-gcc -std=c99 -pedantic -Wall -Wextra -ftrapv -ggdb3 -c coolbears.c
-gcc -std=c99 -pedantic -Wall -Wextra -ftrapv -ggdb3 -c coolbears-driver.c
 gcc -std=c99 -pedantic -Wall -Wextra -ftrapv -ggdb3 -o coolbears-driver coolbears.o coolbears-driver.o
-valgrind --leak-check=full --track-origins=yes ./coolbears-driver 2>&1
-==15258== Memcheck, a memory error detector
-==15258== Copyright (C) 2002-2017, and GNU GPL'd, by Julian Seward et al.
-==15258== Using Valgrind-3.13.0 and LibVEX; rerun with -h for copyright info
-==15258== Command: ./coolbears-driver
-==15258== 
+./coolbears-driver
 The coolest bear is Kevin
-==15258== 
-==15258== HEAP SUMMARY:
-==15258==     in use at exit: 0 bytes in 0 blocks
-==15258==   total heap usage: 5 allocs, 5 frees, 4,140 bytes allocated
-==15258== 
-==15258== All heap blocks were freed -- no leaks are possible
-==15258== 
-==15258== For counts of detected and suppressed errors, rerun with: -v
-==15258== ERROR SUMMARY: 0 errors from 0 contexts (suppressed: 0 from 0)
 #+end_example
 
 *** .PHONY
@@ -1647,7 +1617,7 @@ Google made some static analysis tools to detect issues!
 
 (From chefmax of Google (2020) https://github.com/google/sanitizers/wiki/AddressSanitizer )
 
-Address sanitizer detects:
+Address sanitizer detects (ASAN):
 
   - Use after free (dangling pointer dereference)
   - Heap buffer overflow
@@ -1669,6 +1639,8 @@ With clang or gcc add the argument
    -fsanitize=undefined
 
 For address sanitization or undefined santitization.
+
+USAN is undefined sanitiziation it detects uses of undefined behaviour in.
 
 If you want more options check out https://gcc.gnu.org/onlinedocs/gcc/Instrumentation-Options.html
 
@@ -1729,12 +1701,12 @@ echo 33 | ./array_oob 2>&1 || echo it crashed
 #+END_SRC
 
 #+RESULTS:
-: array_oob.c:27:25: runtime error: index 100 out of bounds for type 'int [*]'
-: array_oob.c:28:16: runtime error: index 100 out of bounds for type 'int [*]'
-: array_oob.c:29:25: runtime error: index 100 out of bounds for type 'int [*]'
+: array_oob.c:26:25: runtime error: index 100 out of bounds for type 'int [*]'
+: array_oob.c:27:16: runtime error: index 100 out of bounds for type 'int [*]'
+: array_oob.c:28:25: runtime error: index 100 out of bounds for type 'int [*]'
 : How big?
-: 2050280984
-: 2050280985
+: -122012136
+: -122012135
 
 **** ./array_uninit.c
 file:./array_uninit.c
@@ -1794,8 +1766,8 @@ echo 33 | ./array_uninit 2>&1 || echo it crashed
 How big?
 8
 0
--1989150157
-32706
+930196019
+32682
 0
 0
 0
@@ -1804,26 +1776,43 @@ How big?
 0
 8
 0
--1985607840
-32706
-885669205
-21855
--1985625440
-32706
--1889554928
-32765
+933738336
+32682
+-1222128299
+22050
+933720736
+32682
+-1930578816
+32766
 0
 0
--1989195121
-32706
+930151055
+32682
 0
 0
 0
 0
--1889554816
-32765
-885668352
-21855
+-1930578704
+32766
+-1222129152
+22050
+0
+How big?
+99898016
+0
+-16776688
+31
+0
+0
+96328335
+0
+0
+0
+0
+0
+-16776576
+31
+1083904
 0
 #+end_example
 
