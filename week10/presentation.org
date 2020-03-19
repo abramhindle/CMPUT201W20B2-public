@@ -1641,7 +1641,7 @@ Hazel's write up is very good (UAlberta ONLY)
 
 https://docs.google.com/document/d/1k8bAErdg6ju8reniMUhnkkjCtwUHWCM9mn59iHnI0rc/
 
-*** Useful Tool! asan and usan
+** Useful Tool! asan and usan
 
 Google made some static analysis tools to detect issues!
 
@@ -1675,6 +1675,40 @@ If you want more options check out https://gcc.gnu.org/onlinedocs/gcc/Instrument
 **** ./array_oob.c
 file:./array_oob.c
 
+#+BEGIN_SRC C :exports code :tangle array_oob.c
+#define _POSIX_C_SOURCE 200809L
+#include <stdint.h>
+#include <stdio.h>
+#include <stdlib.h>
+#include <string.h>
+
+/*
+ * This is an example of BAD CODE!
+ * Can you use valgrind and gdb 
+ * to figure out what's wrong with it?
+ */
+
+
+int main() {
+    size_t size;
+    printf("How big?\n");
+    if (scanf("%zu", &size) != 1) {
+        abort();
+    }
+
+    int array[size];
+    for (size_t idx = 0; idx < size; idx++) {
+        array[idx] = 0;
+    }
+    
+    printf("%d\n", array[100]);
+    array[100] += 1;
+    printf("%d\n", array[100]);
+    return 0;
+}
+#+END_SRC
+
+
 Sanitize ./array_oob.c with address!
 #+BEGIN_SRC sh :exports both
 gcc -std=c99 -pedantic -Wall -Wextra -ftrapv -ggdb3 -fsanitize=address -o array_oob ./array_oob.c
@@ -1685,6 +1719,8 @@ echo 33 | ./array_oob 2>&1 || echo it crashed
 : How big?
 : 32768
 : 32769
+
+We can see it didn't find any problem :(
 
 And now with undefined!
 #+BEGIN_SRC sh :exports both
