@@ -2,6 +2,7 @@
 CFLAGS= -std=c99 -pedantic -Wall -Wextra -ftrapv -ggdb3
 # Common compiler
 CC=gcc
+# you might call these OBJECTS instead
 BUILDABLES=coolbears.o coolbears-driver
 
 # this just runs a command but ensures it is built

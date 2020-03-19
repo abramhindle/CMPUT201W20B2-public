@@ -30,7 +30,10 @@ _________________
 ..... 2. DRY Makefile
 ..... 3. Idiomatic GCC Makefile
 ..... 4. Special Macro Vars
-..... 5. Makefile help
+..... 5. Can we lint and valgrind with our makefiles?
+..... 6. .PHONY
+..... 7. Makefile help
+..... 8. Useful Tool! asan and usan
 
 
 
@@ -343,11 +346,11 @@ _________________
   `----
 
   ,----
-  | -rwxrwxr-x 1 hindle1 hindle1 38472 Mar 17 16:54 ./checkinput-driver
+  | -rwxrwxr-x 1 hindle1 hindle1 38472 Mar 19 11:31 ./checkinput-driver
   | -rwxr-xr-x 1 root root 2030544 Apr 16  2018 /lib/x86_64-linux-gnu/libc-2.27.so
-  | 	linux-vdso.so.1 (0x00007ffdcd3a5000)
-  | 	libc.so.6 => /lib/x86_64-linux-gnu/libc.so.6 (0x00007fad55793000)
-  | 	/lib64/ld-linux-x86-64.so.2 (0x00007fad55d86000)
+  | 	linux-vdso.so.1 (0x00007ffed5fe8000)
+  | 	libc.so.6 => /lib/x86_64-linux-gnu/libc.so.6 (0x00007fe864229000)
+  | 	/lib64/ld-linux-x86-64.so.2 (0x00007fe86481c000)
   `----
 
 
@@ -450,10 +453,10 @@ _________________
   ,----
   | poor-tanh-example: ELF 64-bit LSB shared object, x86-64, version 1 (SYSV), dynamically linked, interpreter /lib64/l, for GNU/Linux 3.2.0, BuildID[sha1]=fdd28691d4637c2a9b9a76b129ea7585894e4378, with debug_info, not stripped
   |      40     120    1400
-  | 	linux-vdso.so.1 (0x00007fff69fbe000)
-  | 	libm.so.6 => /lib/x86_64-linux-gnu/libm.so.6 (0x00007eff059b4000)
-  | 	libc.so.6 => /lib/x86_64-linux-gnu/libc.so.6 (0x00007eff055c3000)
-  | 	/lib64/ld-linux-x86-64.so.2 (0x00007eff05f54000)
+  | 	linux-vdso.so.1 (0x00007ffe7df99000)
+  | 	libm.so.6 => /lib/x86_64-linux-gnu/libm.so.6 (0x00007f0a012af000)
+  | 	libc.so.6 => /lib/x86_64-linux-gnu/libc.so.6 (0x00007f0a00ebe000)
+  | 	/lib64/ld-linux-x86-64.so.2 (0x00007f0a0184f000)
   `----
 
 
@@ -466,36 +469,36 @@ _________________
   `----
 
   ,----
-  | linux-vdso.so.1 (0x00007fffe6352000)
-  | libXft.so.2 => /usr/lib/x86_64-linux-gnu/libXft.so.2 (0x00007fe81a4a0000)
-  | libfontconfig.so.1 => /usr/lib/x86_64-linux-gnu/libfontconfig.so.1 (0x00007fe81a25b000)
-  | libXaw.so.7 => /usr/lib/x86_64-linux-gnu/libXaw.so.7 (0x00007fe819fe7000)
-  | libXmu.so.6 => /usr/lib/x86_64-linux-gnu/libXmu.so.6 (0x00007fe819dce000)
-  | libXt.so.6 => /usr/lib/x86_64-linux-gnu/libXt.so.6 (0x00007fe819b65000)
-  | libX11.so.6 => /usr/lib/x86_64-linux-gnu/libX11.so.6 (0x00007fe81982d000)
-  | libXinerama.so.1 => /usr/lib/x86_64-linux-gnu/libXinerama.so.1 (0x00007fe81962a000)
-  | libXpm.so.4 => /usr/lib/x86_64-linux-gnu/libXpm.so.4 (0x00007fe819418000)
-  | libICE.so.6 => /usr/lib/x86_64-linux-gnu/libICE.so.6 (0x00007fe8191fd000)
-  | libutempter.so.0 => /usr/lib/x86_64-linux-gnu/libutempter.so.0 (0x00007fe818ffa000)
-  | libtinfo.so.5 => /lib/x86_64-linux-gnu/libtinfo.so.5 (0x00007fe818dd0000)
-  | libc.so.6 => /lib/x86_64-linux-gnu/libc.so.6 (0x00007fe8189df000)
-  | libfreetype.so.6 => /usr/lib/x86_64-linux-gnu/libfreetype.so.6 (0x00007fe81872b000)
-  | libXrender.so.1 => /usr/lib/x86_64-linux-gnu/libXrender.so.1 (0x00007fe818521000)
-  | libexpat.so.1 => /lib/x86_64-linux-gnu/libexpat.so.1 (0x00007fe8182ef000)
-  | libpthread.so.0 => /lib/x86_64-linux-gnu/libpthread.so.0 (0x00007fe8180d0000)
-  | libXext.so.6 => /usr/lib/x86_64-linux-gnu/libXext.so.6 (0x00007fe817ebe000)
-  | libSM.so.6 => /usr/lib/x86_64-linux-gnu/libSM.so.6 (0x00007fe817cb6000)
-  | libxcb.so.1 => /usr/lib/x86_64-linux-gnu/libxcb.so.1 (0x00007fe817a8e000)
-  | libdl.so.2 => /lib/x86_64-linux-gnu/libdl.so.2 (0x00007fe81788a000)
-  | libbsd.so.0 => /lib/x86_64-linux-gnu/libbsd.so.0 (0x00007fe817675000)
-  | /lib64/ld-linux-x86-64.so.2 (0x00007fe81a965000)
-  | libpng16.so.16 => /usr/lib/x86_64-linux-gnu/libpng16.so.16 (0x00007fe817443000)
-  | libz.so.1 => /lib/x86_64-linux-gnu/libz.so.1 (0x00007fe817226000)
-  | libuuid.so.1 => /lib/x86_64-linux-gnu/libuuid.so.1 (0x00007fe81701f000)
-  | libXau.so.6 => /usr/lib/x86_64-linux-gnu/libXau.so.6 (0x00007fe816e1b000)
-  | libXdmcp.so.6 => /usr/lib/x86_64-linux-gnu/libXdmcp.so.6 (0x00007fe816c15000)
-  | librt.so.1 => /lib/x86_64-linux-gnu/librt.so.1 (0x00007fe816a0d000)
-  | libm.so.6 => /lib/x86_64-linux-gnu/libm.so.6 (0x00007fe81666f000)
+  | linux-vdso.so.1 (0x00007ffe24fec000)
+  | libXft.so.2 => /usr/lib/x86_64-linux-gnu/libXft.so.2 (0x00007fc47bb75000)
+  | libfontconfig.so.1 => /usr/lib/x86_64-linux-gnu/libfontconfig.so.1 (0x00007fc47b930000)
+  | libXaw.so.7 => /usr/lib/x86_64-linux-gnu/libXaw.so.7 (0x00007fc47b6bc000)
+  | libXmu.so.6 => /usr/lib/x86_64-linux-gnu/libXmu.so.6 (0x00007fc47b4a3000)
+  | libXt.so.6 => /usr/lib/x86_64-linux-gnu/libXt.so.6 (0x00007fc47b23a000)
+  | libX11.so.6 => /usr/lib/x86_64-linux-gnu/libX11.so.6 (0x00007fc47af02000)
+  | libXinerama.so.1 => /usr/lib/x86_64-linux-gnu/libXinerama.so.1 (0x00007fc47acff000)
+  | libXpm.so.4 => /usr/lib/x86_64-linux-gnu/libXpm.so.4 (0x00007fc47aaed000)
+  | libICE.so.6 => /usr/lib/x86_64-linux-gnu/libICE.so.6 (0x00007fc47a8d2000)
+  | libutempter.so.0 => /usr/lib/x86_64-linux-gnu/libutempter.so.0 (0x00007fc47a6cf000)
+  | libtinfo.so.5 => /lib/x86_64-linux-gnu/libtinfo.so.5 (0x00007fc47a4a5000)
+  | libc.so.6 => /lib/x86_64-linux-gnu/libc.so.6 (0x00007fc47a0b4000)
+  | libfreetype.so.6 => /usr/lib/x86_64-linux-gnu/libfreetype.so.6 (0x00007fc479e00000)
+  | libXrender.so.1 => /usr/lib/x86_64-linux-gnu/libXrender.so.1 (0x00007fc479bf6000)
+  | libexpat.so.1 => /lib/x86_64-linux-gnu/libexpat.so.1 (0x00007fc4799c4000)
+  | libpthread.so.0 => /lib/x86_64-linux-gnu/libpthread.so.0 (0x00007fc4797a5000)
+  | libXext.so.6 => /usr/lib/x86_64-linux-gnu/libXext.so.6 (0x00007fc479593000)
+  | libSM.so.6 => /usr/lib/x86_64-linux-gnu/libSM.so.6 (0x00007fc47938b000)
+  | libxcb.so.1 => /usr/lib/x86_64-linux-gnu/libxcb.so.1 (0x00007fc479163000)
+  | libdl.so.2 => /lib/x86_64-linux-gnu/libdl.so.2 (0x00007fc478f5f000)
+  | libbsd.so.0 => /lib/x86_64-linux-gnu/libbsd.so.0 (0x00007fc478d4a000)
+  | /lib64/ld-linux-x86-64.so.2 (0x00007fc47c03a000)
+  | libpng16.so.16 => /usr/lib/x86_64-linux-gnu/libpng16.so.16 (0x00007fc478b18000)
+  | libz.so.1 => /lib/x86_64-linux-gnu/libz.so.1 (0x00007fc4788fb000)
+  | libuuid.so.1 => /lib/x86_64-linux-gnu/libuuid.so.1 (0x00007fc4786f4000)
+  | libXau.so.6 => /usr/lib/x86_64-linux-gnu/libXau.so.6 (0x00007fc4784f0000)
+  | libXdmcp.so.6 => /usr/lib/x86_64-linux-gnu/libXdmcp.so.6 (0x00007fc4782ea000)
+  | librt.so.1 => /lib/x86_64-linux-gnu/librt.so.1 (0x00007fc4780e2000)
+  | libm.so.6 => /lib/x86_64-linux-gnu/libm.so.6 (0x00007fc477d44000)
   `----
 
   See! Lots of libraries!
@@ -878,6 +881,8 @@ _________________
 
   So why doesn't this work?
 
+  <file:./checkinputmacro.c>
+
   ,----
   | #include <stdio.h>
   | #include <stdlib.h>
@@ -889,7 +894,7 @@ _________________
   | int main() {
   |     int myInt = 0;
   |     if (CHECKINPUT(scanf("%d", &myInt))) {
-  |         printf("Invalid input!");
+  |         printf("Invalid input!\n");
   |         exit(1);
   |     }
   |     printf("My int: %d\n", myInt);
@@ -899,11 +904,22 @@ _________________
   ,----
   | gcc  -std=c99 -pedantic -Wall -Wextra -ftrapv -ggdb3 \
   |        -o checkinputmacro checkinputmacro.c
-  | echo 1 6  | ./checkinputmacro
+  | echo 6  | ./checkinputmacro
+  | echo 6 7 | ./checkinputmacro
+  | echo 6 X | ./checkinputmacro || echo exit was $?
+  | echo X 6 | ./checkinputmacro || echo exit was $?
+  | echo | ./checkinputmacro || echo exit was $?
   `----
 
   ,----
   | My int: 6
+  | My int: 7
+  | Invalid input!
+  | exit was 1
+  | Invalid input!
+  | exit was 1
+  | Invalid input!
+  | exit was 1
   `----
 
 
@@ -932,7 +948,7 @@ _________________
   |        (-1)
   | # 10 "checkinputmacro.c"
   |        )) {
-  |         printf("Invalid input!");
+  |         printf("Invalid input!\n");
   |         exit(1);
   |     }
   |     printf("My int: %d\n", myInt);
@@ -947,7 +963,7 @@ _________________
   | int main() {
   |     int myInt = 0;
   |     if (( scanf("%d", &myInt) ==  0 || scanf("%d", &myInt) == (-1))) {
-  |         printf("Invalid input!");
+  |         printf("Invalid input!\n");
   |         exit(1);
   |     }
   |     printf("My int: %d\n", myInt);
@@ -957,7 +973,7 @@ _________________
   See? 2 scanfs instead of 1. Great. So macros will copy your tokens,
   not your values. They are meta-functions and not real functions.
 
-  How do we fix? We assign the result once
+  How do we fix? We assign the result once!
 
   ,----
   | #include <stdio.h>
@@ -1095,7 +1111,7 @@ _________________
   | 
   | # clean is idiomatic for remove object files and executables
   | clean: 
-  |         rm coolbears.o coolbears-driver || echo nothing to delete
+  |         rm -f coolbears.o coolbears-driver
   | 
   `----
 
@@ -1242,7 +1258,7 @@ _________________
   | 
   | # clean is idiomatic for remove object files and executables
   | clean: 
-  |         rm coolbears.o coolbears-driver || echo nothing to delete
+  |         rm -f coolbears.o coolbears-driver || echo nothing to delete
   | 
 
   `----
@@ -1257,6 +1273,7 @@ _________________
   | CFLAGS= -std=c99 -pedantic -Wall -Wextra -ftrapv -ggdb3
   | # Common compiler
   | CC=gcc
+  | # you might call these OBJECTS instead
   | BUILDABLES=coolbears.o coolbears-driver
   | 
   | # this just runs a command but ensures it is built
@@ -1275,7 +1292,7 @@ _________________
   | 
   | # clean is idiomatic for remove object files and executables
   | clean: 
-  |         rm $(BUILDABLES) || echo nothing to delete
+  |         rm -f $(BUILDABLES)
   `----
 
   let's run it. Normally make just runs Makefile. But if you have your
@@ -1335,7 +1352,7 @@ _________________
   | 
   | # clean is idiomatic for remove object files and executables
   | clean: 
-  |         rm $(BUILDABLES) || echo nothing to delete
+  |         rm -f $(BUILDABLES)
   `----
 
   let's run it. Normally make just runs Makefile. But if you have your
@@ -1454,9 +1471,935 @@ _________________
   `----
 
 
-1.6.5 Makefile help
+1.6.5 Can we lint and valgrind with our makefiles?
+--------------------------------------------------
+
+  ,----
+  | # common arguments for GCC
+  | CFLAGS= -std=c99 -pedantic -Wall -Wextra -ftrapv -ggdb3
+  | # Common compiler
+  | CC=gcc
+  | # you might call these OBJECTS instead
+  | BUILDABLES=coolbears.o coolbears-driver
+  | # clangtidy checks
+  | CHECKS=--checks=*,-cert-err34-c,-cert-msc30-c,-cert-msc50-cpp
+  | # oclint checks
+  | LINTR=--disable-rule=UselessParentheses
+  | CLANGTIDY=clang-tidy
+  | OCLINT=oclint
+  | .PHONY: run clean lint-coolbears-driver
+  | 
+  | # this just runs a command but ensures it is built
+  | run: coolbears-driver
+  |         ./coolbears-driver # just a shell command
+  | 
+  | coolbears.o: coolbears.c coolbears.h
+  |         $(CC) $(CFLAGS) \
+  |         -c coolbears.c
+  | 
+  | coolbears-driver.o: coolbears-driver.c coolbears.c
+  |         $(CC) $(CFLAGS) \
+  |         -c coolbears.c
+  | 
+  | # build an executable
+  | coolbears-driver: coolbears-driver.o coolbears.o
+  |         $(CC) $(CFLAGS) \
+  |         -o coolbears-driver coolbears-driver.o \
+  |         coolbears.o 
+  | 
+  | # clean is idiomatic for remove object files and executables
+  | clean: 
+  |         rm -f $(BUILDABLES) 
+  | 
+  | lint-coolbears-driver: coolbears-driver.c
+  |         $(CLANGTIDY) $(CHECKS) \
+  |                 $< -- \
+  |                 $(CFLAGS) -c $^ $(LDFLAGS)
+  |         $(OCLINT) $(LINTR) $< \
+  |                 -- $(CFLAGS) -c $< $(LDFLAGS)
+  `----
+
+  ,----
+  | make -f Makefile.coolbears.lint lint-coolbears-driver
+  `----
+
+  ,----
+  | clang-tidy --checks=*,-cert-err34-c,-cert-msc30-c,-cert-msc50-cpp \
+  | 	coolbears-driver.c -- \
+  | 	-std=c99 -pedantic -Wall -Wextra -ftrapv -ggdb3 -c coolbears-driver.c 
+  | /home/hindle1/projects/CMPUT201W20/2020-01/CMPUT201W20B2-public/week10/coolbears-driver.c:5:43: warning: narrowing conversion from 'double' to 'float' [bugprone-narrowing-conversions]
+  |   CoolBear ziggy = createCoolBear("Ziggy",-23.0 /* C */);
+  |                                           ^
+  | /home/hindle1/projects/CMPUT201W20/2020-01/CMPUT201W20B2-public/week10/coolbears-driver.c:5:44: warning: 23.0 is a magic number; consider replacing it with a named constant [cppcoreguidelines-avoid-magic-numbers]
+  |   CoolBear ziggy = createCoolBear("Ziggy",-23.0 /* C */);
+  |                                            ^
+  | /home/hindle1/projects/CMPUT201W20/2020-01/CMPUT201W20B2-public/week10/coolbears-driver.c:6:43: warning: narrowing conversion from 'double' to 'float' [bugprone-narrowing-conversions]
+  |   CoolBear kevin = createCoolBear("Kevin",-32.0 /* C */);
+  |                                           ^
+  | /home/hindle1/projects/CMPUT201W20/2020-01/CMPUT201W20B2-public/week10/coolbears-driver.c:6:44: warning: 32.0 is a magic number; consider replacing it with a named constant [cppcoreguidelines-avoid-magic-numbers]
+  |   CoolBear kevin = createCoolBear("Kevin",-32.0 /* C */);
+  |                                            ^
+  | oclint --disable-rule=UselessParentheses coolbears-driver.c \
+  | 	-- -std=c99 -pedantic -Wall -Wextra -ftrapv -ggdb3 -c coolbears-driver.c 
+  | 
+  | 
+  | OCLint Report
+  | 
+  | Summary: TotalFiles=1 FilesWithViolations=0 P1=0 P2=0 P3=0 
+  | 
+  | 
+  | [OCLint (http://oclint.org) v0.15]
+  `----
+
+  We can go further:
+
+  ,----
+  | # common arguments for GCC
+  | CFLAGS= -std=c99 -pedantic -Wall -Wextra -ftrapv -ggdb3
+  | # Common compiler
+  | CC=gcc
+  | # you might call these OBJECTS instead
+  | BUILDABLES=coolbears.o coolbears-driver
+  | # clangtidy checks
+  | CHECKS=--checks=*,-cert-err34-c,-cert-msc30-c,-cert-msc50-cpp
+  | # oclint checks
+  | LINTR=--disable-rule=UselessParentheses
+  | CLANGTIDY=clang-tidy
+  | OCLINT=oclint
+  | HEADERS=coolbears.h
+  | OBJECTS=coolbears.o coolbears-driver.o
+  | EXECUTABLE=coolbears-driver
+  | 
+  | .PHONY: lint-% run clean valgrind
+  | 
+  | # this just runs a command but ensures it is built
+  | run: $(EXECUTABLE)
+  |         ./$(EXECUTABLE)
+  | 
+  | %.o: %.c $(HEADERS)
+  |         $(CC) $(CFLAGS) -c $<
+  | #	$(CLANGTIDY) $(CHECKS) \
+  | #		$< -- \
+  | #		$(CFLAGS) -c $< $(LDFLAGS)
+  | #	$(OCLINT) $(LINTR) $< \
+  | #		-- $(CFLAGS) -c $< $(LDFLAGS)
+  | 
+  | 
+  | $(EXECUTABLE): $(OBJECTS)
+  |         $(CC) $(CFLAGS) -o $@ $^
+  | 
+  | # clean is idiomatic for remove object files and executables
+  | clean: 
+  |         rm -f $(EXECUTABLE) $(OBJECTS) 
+  | 
+  | lint-%: %.c
+  |         $(CLANGTIDY) $(CHECKS) \
+  |                 $< -- \
+  |                 $(CFLAGS) -c $< $(LDFLAGS)
+  |         $(OCLINT) $(LINTR) $< \
+  |                 -- $(CFLAGS) -c $< $(LDFLAGS)
+  | 
+  | # Lookie here how these 2 valgrinds are very similar
+  | valgrind-%: %
+  |         valgrind --leak-check=full --track-origins=yes ./$< 2>&1
+  | 
+  | valgrind: $(EXECUTABLE)
+  |         valgrind --leak-check=full --track-origins=yes ./$< 2>&1
+  | 
+  `----
+
+  ,----
+  | make -f Makefile.coolbears.lint.dry lint-coolbears-driver
+  | make -f Makefile.coolbears.lint.dry lint-coolbears
+  | make -f Makefile.coolbears.lint.dry valgrind-coolbears-driver
+  `----
+
+  ,----
+  | clang-tidy --checks=*,-cert-err34-c,-cert-msc30-c,-cert-msc50-cpp \
+  | 	coolbears-driver.c -- \
+  | 	-std=c99 -pedantic -Wall -Wextra -ftrapv -ggdb3 -c coolbears-driver.c 
+  | /home/hindle1/projects/CMPUT201W20/2020-01/CMPUT201W20B2-public/week10/coolbears-driver.c:5:43: warning: narrowing conversion from 'double' to 'float' [bugprone-narrowing-conversions]
+  |   CoolBear ziggy = createCoolBear("Ziggy",-23.0 /* C */);
+  |                                           ^
+  | /home/hindle1/projects/CMPUT201W20/2020-01/CMPUT201W20B2-public/week10/coolbears-driver.c:5:44: warning: 23.0 is a magic number; consider replacing it with a named constant [cppcoreguidelines-avoid-magic-numbers]
+  |   CoolBear ziggy = createCoolBear("Ziggy",-23.0 /* C */);
+  |                                            ^
+  | /home/hindle1/projects/CMPUT201W20/2020-01/CMPUT201W20B2-public/week10/coolbears-driver.c:6:43: warning: narrowing conversion from 'double' to 'float' [bugprone-narrowing-conversions]
+  |   CoolBear kevin = createCoolBear("Kevin",-32.0 /* C */);
+  |                                           ^
+  | /home/hindle1/projects/CMPUT201W20/2020-01/CMPUT201W20B2-public/week10/coolbears-driver.c:6:44: warning: 32.0 is a magic number; consider replacing it with a named constant [cppcoreguidelines-avoid-magic-numbers]
+  |   CoolBear kevin = createCoolBear("Kevin",-32.0 /* C */);
+  |                                            ^
+  | oclint --disable-rule=UselessParentheses coolbears-driver.c \
+  | 	-- -std=c99 -pedantic -Wall -Wextra -ftrapv -ggdb3 -c coolbears-driver.c 
+  | 
+  | 
+  | OCLint Report
+  | 
+  | Summary: TotalFiles=1 FilesWithViolations=0 P1=0 P2=0 P3=0 
+  | 
+  | 
+  | [OCLint (http://oclint.org) v0.15]
+  | clang-tidy --checks=*,-cert-err34-c,-cert-msc30-c,-cert-msc50-cpp \
+  | 	coolbears.c -- \
+  | 	-std=c99 -pedantic -Wall -Wextra -ftrapv -ggdb3 -c coolbears.c 
+  | oclint --disable-rule=UselessParentheses coolbears.c \
+  | 	-- -std=c99 -pedantic -Wall -Wextra -ftrapv -ggdb3 -c coolbears.c 
+  | 
+  | 
+  | OCLint Report
+  | 
+  | Summary: TotalFiles=1 FilesWithViolations=0 P1=0 P2=0 P3=0 
+  | 
+  | 
+  | [OCLint (http://oclint.org) v0.15]
+  | valgrind --leak-check=full --track-origins=yes ./coolbears-driver 2>&1
+  | ==17934== Memcheck, a memory error detector
+  | ==17934== Copyright (C) 2002-2017, and GNU GPL'd, by Julian Seward et al.
+  | ==17934== Using Valgrind-3.13.0 and LibVEX; rerun with -h for copyright info
+  | ==17934== Command: ./coolbears-driver
+  | ==17934== 
+  | The coolest bear is Kevin
+  | ==17934== 
+  | ==17934== HEAP SUMMARY:
+  | ==17934==     in use at exit: 0 bytes in 0 blocks
+  | ==17934==   total heap usage: 5 allocs, 5 frees, 4,140 bytes allocated
+  | ==17934== 
+  | ==17934== All heap blocks were freed -- no leaks are possible
+  | ==17934== 
+  | ==17934== For counts of detected and suppressed errors, rerun with: -v
+  | ==17934== ERROR SUMMARY: 0 errors from 0 contexts (suppressed: 0 from 0)
+  `----
+
+
+1.6.6 .PHONY
+------------
+
+  Hazel says:
+
+  It is also often useful to have a rule that removes the compiled code
+  so that you can easily compile your program from scratch. This is
+  useful when you change your Makefile. We can add a phony rule named
+  clean so that when we run “make clean” on the command line it removes
+  all the compiler outputs: s-expr, s-expr.o, and main.o:
+  ,----
+  | .PHONY: clean
+  | clean:
+  |        rm -f s-expr s-expr.o main.o
+  `----
+  This tells make:
+
+  “clean” is not an actual file that will be made, instead we should run
+  the recipe for “clean” everytime we make “clean”.
+
+  “clean” doesn’t have any input files that will change the output
+  (there is nothing after the colon :)
+
+  When we make “clean” we will remove the files s-expr, s-expr.o, and
+  main.o.
+
+
+1.6.7 Makefile help
 -------------------
 
   The GNU Manual is pretty good
 
   <https://www.gnu.org/software/make/manual/html_node/Introduction.html>
+
+  Hazel's write up is very good (UAlberta ONLY)
+
+  <https://docs.google.com/document/d/1k8bAErdg6ju8reniMUhnkkjCtwUHWCM9mn59iHnI0rc/>
+
+
+1.6.8 Useful Tool! asan and usan
+--------------------------------
+
+  Google made some static analysis tools to detect issues!
+
+  (From chefmax of Google (2020)
+  <https://github.com/google/sanitizers/wiki/AddressSanitizer> )
+
+  Address sanitizer detects:
+
+  - Use after free (dangling pointer dereference)
+  - Heap buffer overflow
+  - Stack buffer overflow
+  - Global buffer overflow
+  - Use after return
+  - Use after scope
+  - Initialization order bugs
+  - Memory leaks
+
+  I've been telling y'all to use it in the discussion forum. It's like
+  valgrind but it does different things and has nice output.
+
+  How do you use it?
+
+  With clang or gcc add the argument
+
+  -fsanitize=address fsanitize=undefined
+
+  For address sanitization or undefined santitization.
+
+  If you want more options check out
+  <https://gcc.gnu.org/onlinedocs/gcc/Instrumentation-Options.html>
+
+
+* 1.6.8.1 ./array_oob.c
+
+  <file:./array_oob.c>
+
+  Sanitize ./array_oob.c with address!
+  ,----
+  | gcc -std=c99 -pedantic -Wall -Wextra -ftrapv -ggdb3 -fsanitize=address -o array_oob ./array_oob.c
+  | echo 33 | ./array_oob 2>&1 || echo it crashed
+  `----
+
+  ,----
+  | How big?
+  | 32768
+  | 32769
+  `----
+
+
+  And now with undefined!
+  ,----
+  | gcc -std=c99 -pedantic -Wall -Wextra -ftrapv -ggdb3 -fsanitize=undefined -o array_oob ./array_oob.c
+  | echo 33 | ./array_oob 2>&1 || echo it crashed
+  `----
+
+  ,----
+  | array_oob.c:27:25: runtime error: index 100 out of bounds for type 'int [*]'
+  | array_oob.c:28:16: runtime error: index 100 out of bounds for type 'int [*]'
+  | array_oob.c:29:25: runtime error: index 100 out of bounds for type 'int [*]'
+  | How big?
+  | 228404760
+  | 228404761
+  `----
+
+
+* 1.6.8.2 ./array_uninit.c
+
+  <file:./array_uninit.c>
+
+  Sanitize ./array_uninit.c with address!
+  ,----
+  | gcc -std=c99 -pedantic -Wall -Wextra -ftrapv -ggdb3 -fsanitize=address -o array_uninit ./array_uninit.c
+  | echo 33 | ./array_uninit 2>&1 || echo it crashed
+  `----
+
+  ,----
+  | How big?
+  | 8
+  | 0
+  | -1161344461
+  | 32518
+  | 1
+  | 0
+  | -1139022064
+  | 32518
+  | 1
+  | 0
+  | 8
+  | 0
+  | -1157802144
+  | 32518
+  | -18317152
+  | 22068
+  | -1157819744
+  | 32518
+  | 0
+  | 0
+  | 0
+  | 0
+  | -1161389425
+  | 32518
+  | 0
+  | 0
+  | -1733836896
+  | 32765
+  | -1733836752
+  | 32765
+  | -1733836800
+  | 32765
+  | -1290471436
+  `----
+
+  And now with undefined!
+  ,----
+  | gcc -std=c99 -pedantic -Wall -Wextra -ftrapv -ggdb3 -fsanitize=undefined -o array_uninit ./array_uninit.c
+  | echo 33 | ./array_uninit 2>&1 || echo it crashed
+  `----
+
+  ,----
+  | How big?
+  | 8
+  | 0
+  | -1481213389
+  | 32667
+  | 0
+  | 0
+  | 0
+  | 0
+  | 0
+  | 0
+  | 8
+  | 0
+  | -1477671072
+  | 32667
+  | 1516891477
+  | 21955
+  | -1477688672
+  | 32667
+  | 27792816
+  | 32767
+  | 0
+  | 0
+  | -1481258353
+  | 32667
+  | 0
+  | 0
+  | 0
+  | 0
+  | 27792928
+  | 32767
+  | 1516890624
+  | 21955
+  | 0
+  `----
+
+
+* 1.6.8.3 ./bad_realloc.c
+
+  <file:./bad_realloc.c>
+
+  Sanitize ./bad_realloc.c with address!
+  ,----
+  | gcc -std=c99 -pedantic -Wall -Wextra -ftrapv -ggdb3 -fsanitize=address -o bad_realloc ./bad_realloc.c
+  | echo 33 | ./bad_realloc 2>&1 || echo it crashed
+  `----
+
+  ,----
+  | ASAN:DEADLYSIGNAL
+  | =================================================================
+  | ==17981==ERROR: AddressSanitizer: SEGV on unknown address 0x000000000000 (pc 0x55843be750f5 bp 0x7ffe82ab4760 sp 0x7ffe82ab4730 T0)
+  | ==17981==The signal is caused by a READ memory access.
+  | ==17981==Hint: address points to the zero page.
+  |     #0 0x55843be750f4 in push bad_realloc.c:54
+  |     #1 0x55843be754b2 in push_input_lines bad_realloc.c:91
+  |     #2 0x55843be75616 in main bad_realloc.c:111
+  |     #3 0x7efe33825b96 in __libc_start_main (/lib/x86_64-linux-gnu/libc.so.6+0x21b96)
+  |     #4 0x55843be74c99 in _start (/home/hindle1/projects/CMPUT201W20/2020-01/CMPUT201W20B2-public/week10/bad_realloc+0xc99)
+  | 
+  | AddressSanitizer can not provide additional info.
+  | SUMMARY: AddressSanitizer: SEGV bad_realloc.c:54 in push
+  | ==17981==ABORTING
+  | it crashed
+  `----
+
+  And now with undefined!
+  ,----
+  | gcc -std=c99 -pedantic -Wall -Wextra -ftrapv -ggdb3 -fsanitize=undefined -o bad_realloc ./bad_realloc.c
+  | echo 33 | ./bad_realloc 2>&1 || echo it crashed
+  `----
+
+  ,----
+  | it crashed
+  `----
+
+
+* 1.6.8.4 ./bad_str.c
+
+  <file:./bad_str.c>
+
+  Sanitize ./bad_str.c with address!
+  ,----
+  | gcc -std=c99 -pedantic -Wall -Wextra -ftrapv -ggdb3 -fsanitize=address -o bad_str ./bad_str.c
+  | echo 33 | ./bad_str 2>&1 || echo it crashed
+  `----
+
+  ,----
+  | 
+  | =================================================================
+  | ==18000==ERROR: LeakSanitizer: detected memory leaks
+  | 
+  | Direct leak of 5 byte(s) in 1 object(s) allocated from:
+  |     #0 0x7f31298c7b40 in __interceptor_malloc (/usr/lib/x86_64-linux-gnu/libasan.so.4+0xdeb40)
+  |     #1 0x55eb56141a7b in main bad_str.c:15
+  |     #2 0x7f3129419b96 in __libc_start_main (/lib/x86_64-linux-gnu/libc.so.6+0x21b96)
+  | 
+  | SUMMARY: AddressSanitizer: 5 byte(s) leaked in 1 allocation(s).
+  | it crashed
+  `----
+
+  And now with undefined!
+  ,----
+  | gcc -std=c99 -pedantic -Wall -Wextra -ftrapv -ggdb3 -fsanitize=undefined -o bad_str ./bad_str.c
+  | echo 33 | ./bad_str 2>&1 || echo it crashed
+  `----
+
+  ,----
+  | Enter a message:
+  | You entered: 33
+  `----
+
+
+* 1.6.8.5 ./double_free.c
+
+  <file:./double_free.c>
+
+  Sanitize ./double_free.c with address!
+  ,----
+  | gcc -std=c99 -pedantic -Wall -Wextra -ftrapv -ggdb3 -fsanitize=address -o double_free ./double_free.c
+  | echo 33 | ./double_free 2>&1 || echo it crashed
+  `----
+
+  ,----
+  | =================================================================
+  | ==18019==ERROR: AddressSanitizer: attempting double-free on 0x60d000000040 in thread T0:
+  |     #0 0x7f93b7a507a8 in __interceptor_free (/usr/lib/x86_64-linux-gnu/libasan.so.4+0xde7a8)
+  |     #1 0x555d99602ffa in main double_free.c:27
+  |     #2 0x7f93b75a2b96 in __libc_start_main (/lib/x86_64-linux-gnu/libc.so.6+0x21b96)
+  |     #3 0x555d99602ca9 in _start (/home/hindle1/projects/CMPUT201W20/2020-01/CMPUT201W20B2-public/week10/double_free+0xca9)
+  | 
+  | 0x60d000000040 is located 0 bytes inside of 132-byte region [0x60d000000040,0x60d0000000c4)
+  | freed by thread T0 here:
+  |     #0 0x7f93b7a507a8 in __interceptor_free (/usr/lib/x86_64-linux-gnu/libasan.so.4+0xde7a8)
+  |     #1 0x555d99602feb in main double_free.c:26
+  |     #2 0x7f93b75a2b96 in __libc_start_main (/lib/x86_64-linux-gnu/libc.so.6+0x21b96)
+  | 
+  | previously allocated by thread T0 here:
+  |     #0 0x7f93b7a50b40 in __interceptor_malloc (/usr/lib/x86_64-linux-gnu/libasan.so.4+0xdeb40)
+  |     #1 0x555d99602e7d in main double_free.c:21
+  |     #2 0x7f93b75a2b96 in __libc_start_main (/lib/x86_64-linux-gnu/libc.so.6+0x21b96)
+  | 
+  | SUMMARY: AddressSanitizer: double-free (/usr/lib/x86_64-linux-gnu/libasan.so.4+0xde7a8) in __interceptor_free
+  | ==18019==ABORTING
+  | it crashed
+  `----
+
+  And now with undefined!
+  ,----
+  | gcc -std=c99 -pedantic -Wall -Wextra -ftrapv -ggdb3 -fsanitize=undefined -o double_free ./double_free.c
+  | echo 33 | ./double_free 2>&1 || echo it crashed
+  `----
+
+  ,----
+  | How big?
+  | 0
+  | 1
+  | 2
+  | 3
+  | 4
+  | 5
+  | 6
+  | 7
+  | 8
+  | 9
+  | 10
+  | 11
+  | 12
+  | 13
+  | 14
+  | 15
+  | 16
+  | 17
+  | 18
+  | 19
+  | 20
+  | 21
+  | 22
+  | 23
+  | 24
+  | 25
+  | 26
+  | 27
+  | 28
+  | 29
+  | 30
+  | 31
+  | 32
+  `----
+
+
+* 1.6.8.6 ./huge_array.c
+
+  <file:./huge_array.c>
+
+  Sanitize ./huge_array.c with address!
+  ,----
+  | gcc -std=c99 -pedantic -Wall -Wextra -ftrapv -ggdb3 -fsanitize=address -o huge_array ./huge_array.c
+  | echo 33 | ./huge_array 2>&1 || echo it crashed
+  `----
+
+  ,----
+  | 0
+  `----
+
+
+  And now with undefined!
+  ,----
+  | gcc -std=c99 -pedantic -Wall -Wextra -ftrapv -ggdb3 -fsanitize=undefined -o huge_array ./huge_array.c
+  | echo 33 | ./huge_array 2>&1 || echo it crashed
+  `----
+
+  ,----
+  | 0
+  `----
+
+
+* 1.6.8.7 ./malloc_oob.c
+
+  <file:./malloc_oob.c>
+
+  Sanitize ./malloc_oob.c with address!
+  ,----
+  | gcc -std=c99 -pedantic -Wall -Wextra -ftrapv -ggdb3 -fsanitize=address -o malloc_oob ./malloc_oob.c
+  | echo 33 | ./malloc_oob 2>&1 || echo it crashed
+  `----
+
+  ,----
+  | =================================================================
+  | ==18056==ERROR: AddressSanitizer: heap-buffer-overflow on address 0x60d0000001d0 at pc 0x5580eaaf9fa2 bp 0x7fffab364aa0 sp 0x7fffab364a90
+  | READ of size 4 at 0x60d0000001d0 thread T0
+  |     #0 0x5580eaaf9fa1 in main malloc_oob.c:26
+  |     #1 0x7f20b589ab96 in __libc_start_main (/lib/x86_64-linux-gnu/libc.so.6+0x21b96)
+  |     #2 0x5580eaaf9ca9 in _start (/home/hindle1/projects/CMPUT201W20/2020-01/CMPUT201W20B2-public/week10/malloc_oob+0xca9)
+  | 
+  | Address 0x60d0000001d0 is a wild pointer.
+  | SUMMARY: AddressSanitizer: heap-buffer-overflow malloc_oob.c:26 in main
+  | Shadow bytes around the buggy address:
+  |   0x0c1a7fff7fe0: 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00
+  |   0x0c1a7fff7ff0: 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00
+  |   0x0c1a7fff8000: fa fa fa fa fa fa fa fa 00 00 00 00 00 00 00 00
+  |   0x0c1a7fff8010: 00 00 00 00 00 00 00 00 04 fa fa fa fa fa fa fa
+  |   0x0c1a7fff8020: fa fa fa fa fa fa fa fa fa fa fa fa fa fa fa fa
+  | =>0x0c1a7fff8030: fa fa fa fa fa fa fa fa fa fa[fa]fa fa fa fa fa
+  |   0x0c1a7fff8040: fa fa fa fa fa fa fa fa fa fa fa fa fa fa fa fa
+  |   0x0c1a7fff8050: fa fa fa fa fa fa fa fa fa fa fa fa fa fa fa fa
+  |   0x0c1a7fff8060: fa fa fa fa fa fa fa fa fa fa fa fa fa fa fa fa
+  |   0x0c1a7fff8070: fa fa fa fa fa fa fa fa fa fa fa fa fa fa fa fa
+  |   0x0c1a7fff8080: fa fa fa fa fa fa fa fa fa fa fa fa fa fa fa fa
+  | Shadow byte legend (one shadow byte represents 8 application bytes):
+  |   Addressable:           00
+  |   Partially addressable: 01 02 03 04 05 06 07 
+  |   Heap left redzone:       fa
+  |   Freed heap region:       fd
+  |   Stack left redzone:      f1
+  |   Stack mid redzone:       f2
+  |   Stack right redzone:     f3
+  |   Stack after return:      f5
+  |   Stack use after scope:   f8
+  |   Global redzone:          f9
+  |   Global init order:       f6
+  |   Poisoned by user:        f7
+  |   Container overflow:      fc
+  |   Array cookie:            ac
+  |   Intra object redzone:    bb
+  |   ASan internal:           fe
+  |   Left alloca redzone:     ca
+  |   Right alloca redzone:    cb
+  | ==18056==ABORTING
+  | it crashed
+  `----
+
+  And now with undefined!
+  ,----
+  | gcc -std=c99 -pedantic -Wall -Wextra -ftrapv -ggdb3 -fsanitize=undefined -o malloc_oob ./malloc_oob.c
+  | echo 33 | ./malloc_oob 2>&1 || echo it crashed
+  `----
+
+  ,----
+  | How big?
+  | 0
+  `----
+
+
+  ,----
+  | gcc -std=c99 -pedantic -Wall -Wextra -ftrapv -ggdb3 -o malloc_oob ./malloc_oob.c 2>&1
+  | echo 33 | ./malloc_oob 2>&1 || echo it crashed
+  `----
+
+  ,----
+  | How big?
+  | 0
+  `----
+
+
+* 1.6.8.8 ./malloc_uninit.c
+
+  <file:./malloc_uninit.c>
+
+  Sanitize ./malloc_uninit.c with address!
+  ,----
+  | gcc -std=c99 -pedantic -Wall -Wextra -ftrapv -ggdb3 -fsanitize=address -o malloc_uninit ./malloc_uninit.c
+  | echo 33 | ./malloc_uninit 2>&1 || echo it crashed
+  `----
+
+  ,----
+  | 
+  | =================================================================
+  | ==18083==ERROR: LeakSanitizer: detected memory leaks
+  | 
+  | Direct leak of 132 byte(s) in 1 object(s) allocated from:
+  |     #0 0x7f0eae866b40 in __interceptor_malloc (/usr/lib/x86_64-linux-gnu/libasan.so.4+0xdeb40)
+  |     #1 0x5576e0747ddd in main malloc_uninit.c:23
+  |     #2 0x7f0eae3b8b96 in __libc_start_main (/lib/x86_64-linux-gnu/libc.so.6+0x21b96)
+  | 
+  | SUMMARY: AddressSanitizer: 132 byte(s) leaked in 1 allocation(s).
+  | it crashed
+  `----
+
+  And now with undefined!
+  ,----
+  | gcc -std=c99 -pedantic -Wall -Wextra -ftrapv -ggdb3 -fsanitize=undefined -o malloc_uninit ./malloc_uninit.c
+  | echo 33 | ./malloc_uninit 2>&1 || echo it crashed
+  `----
+
+  ,----
+  | How big?
+  | 0
+  | 0
+  | 0
+  | 0
+  | 0
+  | 0
+  | 0
+  | 0
+  | 0
+  | 0
+  | 0
+  | 0
+  | 0
+  | 0
+  | 0
+  | 0
+  | 0
+  | 0
+  | 0
+  | 0
+  | 0
+  | 0
+  | 0
+  | 0
+  | 0
+  | 0
+  | 0
+  | 0
+  | 0
+  | 0
+  | 0
+  | 0
+  | 0
+  `----
+
+
+* 1.6.8.9 ./segv.c
+
+  <file:./segv.c>
+
+  Sanitize ./segv.c with address!
+  ,----
+  | gcc -std=c99 -pedantic -Wall -Wextra -ftrapv -ggdb3 -fsanitize=address -o segv ./segv.c
+  | echo 33 | ./segv 2>&1 || echo it crashed
+  `----
+
+  ,----
+  | ASAN:DEADLYSIGNAL
+  | =================================================================
+  | ==18102==ERROR: AddressSanitizer: SEGV on unknown address 0x60d0003d0940 (pc 0x560c86f12fa2 bp 0x7fff2d202fd0 sp 0x7fff2d202f10 T0)
+  | ==18102==The signal is caused by a READ memory access.
+  |     #0 0x560c86f12fa1 in main segv.c:26
+  |     #1 0x7ff5ee923b96 in __libc_start_main (/lib/x86_64-linux-gnu/libc.so.6+0x21b96)
+  |     #2 0x560c86f12ca9 in _start (/home/hindle1/projects/CMPUT201W20/2020-01/CMPUT201W20B2-public/week10/segv+0xca9)
+  | 
+  | AddressSanitizer can not provide additional info.
+  | SUMMARY: AddressSanitizer: SEGV segv.c:26 in main
+  | ==18102==ABORTING
+  | it crashed
+  `----
+
+  And now with undefined!
+  ,----
+  | gcc -std=c99 -pedantic -Wall -Wextra -ftrapv -ggdb3 -fsanitize=undefined -o segv ./segv.c
+  | echo 33 | ./segv 2>&1 || echo it crashed
+  `----
+
+  ,----
+  | it crashed
+  `----
+
+
+* 1.6.8.10 ./simple_uninit.c
+
+  <file:./simple_uninit.c>
+
+  Sanitize ./simple_uninit.c with address!
+  ,----
+  | gcc -std=c99 -pedantic -Wall -Wextra -ftrapv -ggdb3 -fsanitize=address -o simple_uninit ./simple_uninit.c
+  | echo 33 | ./simple_uninit 2>&1 || echo it crashed
+  `----
+
+  ,----
+  | Enter an int:
+  | 33
+  `----
+
+
+  And now with undefined!
+  ,----
+  | gcc -std=c99 -pedantic -Wall -Wextra -ftrapv -ggdb3 -fsanitize=undefined -o simple_uninit ./simple_uninit.c
+  | echo 33 | ./simple_uninit 2>&1 || echo it crashed
+  `----
+
+  ,----
+  | Enter an int:
+  | 33
+  `----
+
+
+* 1.6.8.11 ./use_after_free.c
+
+  <file:./use_after_free.c>
+
+  Sanitize ./use_after_free.c with address!
+  ,----
+  | gcc -std=c99 -pedantic -Wall -Wextra -ftrapv -ggdb3 -fsanitize=address -o use_after_free ./use_after_free.c
+  | echo 33 | ./use_after_free 2>&1 || echo it crashed
+  `----
+
+  ,----
+  | =================================================================
+  | ==18140==ERROR: AddressSanitizer: heap-use-after-free on address 0x60d000000040 at pc 0x5644c37af0b8 bp 0x7ffda1e71410 sp 0x7ffda1e71400
+  | READ of size 4 at 0x60d000000040 thread T0
+  |     #0 0x5644c37af0b7 in main use_after_free.c:30
+  |     #1 0x7f7e1f4abb96 in __libc_start_main (/lib/x86_64-linux-gnu/libc.so.6+0x21b96)
+  |     #2 0x5644c37aeca9 in _start (/home/hindle1/projects/CMPUT201W20/2020-01/CMPUT201W20B2-public/week10/use_after_free+0xca9)
+  | 
+  | 0x60d000000040 is located 0 bytes inside of 132-byte region [0x60d000000040,0x60d0000000c4)
+  | freed by thread T0 here:
+  |     #0 0x7f7e1f9597a8 in __interceptor_free (/usr/lib/x86_64-linux-gnu/libasan.so.4+0xde7a8)
+  |     #1 0x5644c37af03c in main use_after_free.c:28
+  |     #2 0x7f7e1f4abb96 in __libc_start_main (/lib/x86_64-linux-gnu/libc.so.6+0x21b96)
+  | 
+  | previously allocated by thread T0 here:
+  |     #0 0x7f7e1f959b40 in __interceptor_malloc (/usr/lib/x86_64-linux-gnu/libasan.so.4+0xdeb40)
+  |     #1 0x5644c37aee7e in main use_after_free.c:21
+  |     #2 0x7f7e1f4abb96 in __libc_start_main (/lib/x86_64-linux-gnu/libc.so.6+0x21b96)
+  | 
+  | SUMMARY: AddressSanitizer: heap-use-after-free use_after_free.c:30 in main
+  | Shadow bytes around the buggy address:
+  |   0x0c1a7fff7fb0: 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00
+  |   0x0c1a7fff7fc0: 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00
+  |   0x0c1a7fff7fd0: 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00
+  |   0x0c1a7fff7fe0: 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00
+  |   0x0c1a7fff7ff0: 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00
+  | =>0x0c1a7fff8000: fa fa fa fa fa fa fa fa[fd]fd fd fd fd fd fd fd
+  |   0x0c1a7fff8010: fd fd fd fd fd fd fd fd fd fa fa fa fa fa fa fa
+  |   0x0c1a7fff8020: fa fa fa fa fa fa fa fa fa fa fa fa fa fa fa fa
+  |   0x0c1a7fff8030: fa fa fa fa fa fa fa fa fa fa fa fa fa fa fa fa
+  |   0x0c1a7fff8040: fa fa fa fa fa fa fa fa fa fa fa fa fa fa fa fa
+  |   0x0c1a7fff8050: fa fa fa fa fa fa fa fa fa fa fa fa fa fa fa fa
+  | Shadow byte legend (one shadow byte represents 8 application bytes):
+  |   Addressable:           00
+  |   Partially addressable: 01 02 03 04 05 06 07 
+  |   Heap left redzone:       fa
+  |   Freed heap region:       fd
+  |   Stack left redzone:      f1
+  |   Stack mid redzone:       f2
+  |   Stack right redzone:     f3
+  |   Stack after return:      f5
+  |   Stack use after scope:   f8
+  |   Global redzone:          f9
+  |   Global init order:       f6
+  |   Poisoned by user:        f7
+  |   Container overflow:      fc
+  |   Array cookie:            ac
+  |   Intra object redzone:    bb
+  |   ASan internal:           fe
+  |   Left alloca redzone:     ca
+  |   Right alloca redzone:    cb
+  | ==18140==ABORTING
+  | it crashed
+  `----
+
+  And now with undefined!
+  ,----
+  | gcc -std=c99 -pedantic -Wall -Wextra -ftrapv -ggdb3 -fsanitize=undefined -o use_after_free ./use_after_free.c
+  | echo 33 | ./use_after_free 2>&1 || echo it crashed
+  `----
+
+  ,----
+  | How big?
+  | array[0] = 0
+  | array[1] = 1
+  | array[2] = 2
+  | array[3] = 3
+  | array[4] = 4
+  | array[5] = 5
+  | array[6] = 6
+  | array[7] = 7
+  | array[8] = 8
+  | array[9] = 9
+  | array[10] = 10
+  | array[11] = 11
+  | array[12] = 12
+  | array[13] = 13
+  | array[14] = 14
+  | array[15] = 15
+  | array[16] = 16
+  | array[17] = 17
+  | array[18] = 18
+  | array[19] = 19
+  | array[20] = 20
+  | array[21] = 21
+  | array[22] = 22
+  | array[23] = 23
+  | array[24] = 24
+  | array[25] = 25
+  | array[26] = 26
+  | array[27] = 27
+  | array[28] = 28
+  | array[29] = 29
+  | array[30] = 30
+  | array[31] = 31
+  | array[32] = 32
+  | array[0] = 0
+  | array[1] = 0
+  | array[2] = 2
+  | array[3] = 3
+  | array[4] = 4
+  | array[5] = 5
+  | array[6] = 6
+  | array[7] = 7
+  | array[8] = 8
+  | array[9] = 9
+  | array[10] = 10
+  | array[11] = 11
+  | array[12] = 12
+  | array[13] = 13
+  | array[14] = 14
+  | array[15] = 15
+  | array[16] = 16
+  | array[17] = 17
+  | array[18] = 18
+  | array[19] = 19
+  | array[20] = 20
+  | array[21] = 21
+  | array[22] = 22
+  | array[23] = 23
+  | array[24] = 24
+  | array[25] = 25
+  | array[26] = 26
+  | array[27] = 27
+  | array[28] = 28
+  | array[29] = 29
+  | array[30] = 30
+  | array[31] = 31
+  | array[32] = 32
+  `----
+
+
+  + 1.6.8.11.1 Generator (ignore)
+
+    This is just code for me to generate part of the slides

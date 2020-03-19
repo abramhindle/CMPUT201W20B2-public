@@ -8,7 +8,7 @@
 int main() {
     int myInt = 0;
     if (CHECKINPUT(scanf("%d", &myInt))) {
-        printf("Invalid input!");
+        printf("Invalid input!\n");
         exit(1);
     }
     printf("My int: %d\n", myInt);

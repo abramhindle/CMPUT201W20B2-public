@@ -3,7 +3,7 @@
 "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
 <head>
-<!-- 2020-03-17 Tue 16:53 -->
+<!-- 2020-03-19 Thu 11:31 -->
 <meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <title>CMPUT201W20B2 Week 10</title>
@@ -247,39 +247,42 @@ for the JavaScript code in this tag.
 <h2>Table of Contents</h2>
 <div id="text-table-of-contents">
 <ul>
-<li><a href="#org6ae028e">1. Week10</a>
+<li><a href="#orgb8d06da">1. Week10</a>
 <ul>
-<li><a href="#org9a99ab8">1.1. Copyright Statement</a>
+<li><a href="#org8d3738f">1.1. Copyright Statement</a>
 <ul>
-<li><a href="#org2fc5a65">1.1.1. License</a></li>
-<li><a href="#org2c29aff">1.1.2. Hazel Code is licensed under AGPL3.0+</a></li>
+<li><a href="#org2f6904f">1.1.1. License</a></li>
+<li><a href="#org75cc9cb">1.1.2. Hazel Code is licensed under AGPL3.0+</a></li>
 </ul>
 </li>
-<li><a href="#org5c4e390">1.2. Alternative version</a></li>
-<li><a href="#org1c279dc">1.3. Init ORG-MODE</a>
+<li><a href="#org64e8bd6">1.2. Alternative version</a></li>
+<li><a href="#orga5e6dc4">1.3. Init ORG-MODE</a>
 <ul>
-<li><a href="#org640f948">1.3.1. Org export</a></li>
-<li><a href="#orgd36f116">1.3.2. Org Template</a></li>
+<li><a href="#org69e4518">1.3.1. Org export</a></li>
+<li><a href="#org6c5e415">1.3.2. Org Template</a></li>
 </ul>
 </li>
-<li><a href="#org99c33ee">1.4. Remember how to compile?</a></li>
-<li><a href="#org65d572a">1.5. Preprocessor stuff like if-def</a>
+<li><a href="#orgb0ddc7f">1.4. Remember how to compile?</a></li>
+<li><a href="#org0ea7fdc">1.5. Preprocessor stuff like if-def</a>
 <ul>
-<li><a href="#org4a99f8e">1.5.1. Multiple Files?</a></li>
-<li><a href="#org98d034f">1.5.2. Example</a></li>
-<li><a href="#org32cc44d">1.5.3. Linking to libraries</a></li>
-<li><a href="#orgfdf300d">1.5.4. Example Datastructure</a></li>
-<li><a href="#org235b282">1.5.5. What is the preprocessor doing?</a></li>
-<li><a href="#orgecac995">1.5.6. Parameterized Macros</a></li>
+<li><a href="#org4e410a2">1.5.1. Multiple Files?</a></li>
+<li><a href="#orgbf54d78">1.5.2. Example</a></li>
+<li><a href="#org83a068e">1.5.3. Linking to libraries</a></li>
+<li><a href="#orgca3b1c1">1.5.4. Example Datastructure</a></li>
+<li><a href="#orge2b7608">1.5.5. What is the preprocessor doing?</a></li>
+<li><a href="#org50dee24">1.5.6. Parameterized Macros</a></li>
 </ul>
 </li>
-<li><a href="#org4528a66">1.6. Makefiles</a>
+<li><a href="#orgee34168">1.6. Makefiles</a>
 <ul>
-<li><a href="#orga670fd2">1.6.1. Basic Makefile</a></li>
-<li><a href="#org34e4566">1.6.2. DRY Makefile</a></li>
-<li><a href="#org400e11c">1.6.3. Idiomatic GCC Makefile</a></li>
-<li><a href="#orgc40332b">1.6.4. Special Macro Vars</a></li>
-<li><a href="#orga907186">1.6.5. Makefile help</a></li>
+<li><a href="#org66d2aed">1.6.1. Basic Makefile</a></li>
+<li><a href="#org8fd023c">1.6.2. DRY Makefile</a></li>
+<li><a href="#org99debfe">1.6.3. Idiomatic GCC Makefile</a></li>
+<li><a href="#orga64b233">1.6.4. Special Macro Vars</a></li>
+<li><a href="#org26df4eb">1.6.5. Can we lint and valgrind with our makefiles?</a></li>
+<li><a href="#org78b4acb">1.6.6. .PHONY</a></li>
+<li><a href="#org5e91534">1.6.7. Makefile help</a></li>
+<li><a href="#org622f2ba">1.6.8. Useful Tool! asan and usan</a></li>
 </ul>
 </li>
 </ul>
@@ -288,12 +291,12 @@ for the JavaScript code in this tag.
 </div>
 </div>
 
-<div id="outline-container-org6ae028e" class="outline-2">
-<h2 id="org6ae028e"><span class="section-number-2">1</span> Week10</h2>
+<div id="outline-container-orgb8d06da" class="outline-2">
+<h2 id="orgb8d06da"><span class="section-number-2">1</span> Week10</h2>
 <div class="outline-text-2" id="text-1">
 </div>
-<div id="outline-container-org9a99ab8" class="outline-3">
-<h3 id="org9a99ab8"><span class="section-number-3">1.1</span> Copyright Statement</h3>
+<div id="outline-container-org8d3738f" class="outline-3">
+<h3 id="org8d3738f"><span class="section-number-3">1.1</span> Copyright Statement</h3>
 <div class="outline-text-3" id="text-1-1">
 <p>
 If you are in CMPUT201 at UAlberta this code is released in the public
@@ -305,8 +308,8 @@ Otherwise it is (c) 2020 Abram Hindle, Hazel Campbell AGPL3.0+
 </p>
 </div>
 
-<div id="outline-container-org2fc5a65" class="outline-4">
-<h4 id="org2fc5a65"><span class="section-number-4">1.1.1</span> License</h4>
+<div id="outline-container-org2f6904f" class="outline-4">
+<h4 id="org2f6904f"><span class="section-number-4">1.1.1</span> License</h4>
 <div class="outline-text-4" id="text-1-1-1">
 <p>
 CMPUT 201 C Notes
@@ -335,8 +338,8 @@ along with this program.  If not, see <a href="https://www.gnu.org/licenses/">ht
 </div>
 
 
-<div id="outline-container-org2c29aff" class="outline-4">
-<h4 id="org2c29aff"><span class="section-number-4">1.1.2</span> Hazel Code is licensed under AGPL3.0+</h4>
+<div id="outline-container-org75cc9cb" class="outline-4">
+<h4 id="org75cc9cb"><span class="section-number-4">1.1.2</span> Hazel Code is licensed under AGPL3.0+</h4>
 <div class="outline-text-4" id="text-1-1-2">
 <p>
 Hazel's code is also found here
@@ -351,8 +354,8 @@ license, unless otherwise noted.
 </div>
 </div>
 
-<div id="outline-container-org5c4e390" class="outline-3">
-<h3 id="org5c4e390"><span class="section-number-3">1.2</span> Alternative version</h3>
+<div id="outline-container-org64e8bd6" class="outline-3">
+<h3 id="org64e8bd6"><span class="section-number-3">1.2</span> Alternative version</h3>
 <div class="outline-text-3" id="text-1-2">
 <p>
 Checkout the .txt, the .pdf, and the .html version
@@ -360,8 +363,8 @@ Checkout the .txt, the .pdf, and the .html version
 </div>
 </div>
 
-<div id="outline-container-org1c279dc" class="outline-3">
-<h3 id="org1c279dc"><span class="section-number-3">1.3</span> Init ORG-MODE</h3>
+<div id="outline-container-orga5e6dc4" class="outline-3">
+<h3 id="orga5e6dc4"><span class="section-number-3">1.3</span> Init ORG-MODE</h3>
 <div class="outline-text-3" id="text-1-3">
 <div class="org-src-container">
 <pre class="src src-elisp"><span style="color: #b22222;">;; </span><span style="color: #b22222;">I need this for org-mode to work well</span>
@@ -384,8 +387,8 @@ Checkout the .txt, the .pdf, and the .html version
 </div>
 </div>
 
-<div id="outline-container-org640f948" class="outline-4">
-<h4 id="org640f948"><span class="section-number-4">1.3.1</span> Org export</h4>
+<div id="outline-container-org69e4518" class="outline-4">
+<h4 id="org69e4518"><span class="section-number-4">1.3.1</span> Org export</h4>
 <div class="outline-text-4" id="text-1-3-1">
 <div class="org-src-container">
 <pre class="src src-elisp">(org-html-export-to-html)
@@ -397,8 +400,8 @@ Checkout the .txt, the .pdf, and the .html version
 </div>
 
 
-<div id="outline-container-orgd36f116" class="outline-4">
-<h4 id="orgd36f116"><span class="section-number-4">1.3.2</span> Org Template</h4>
+<div id="outline-container-org6c5e415" class="outline-4">
+<h4 id="org6c5e415"><span class="section-number-4">1.3.2</span> Org Template</h4>
 <div class="outline-text-4" id="text-1-3-2">
 <p>
 Copy and paste this to demo C
@@ -416,8 +419,8 @@ Copy and paste this to demo C
 </div>
 </div>
 
-<div id="outline-container-org99c33ee" class="outline-3">
-<h3 id="org99c33ee"><span class="section-number-3">1.4</span> Remember how to compile?</h3>
+<div id="outline-container-orgb0ddc7f" class="outline-3">
+<h3 id="orgb0ddc7f"><span class="section-number-3">1.4</span> Remember how to compile?</h3>
 <div class="outline-text-3" id="text-1-4">
 <p>
 gcc  -std=c99 -pedantic -Wall -Wextra -ftrapv -ggdb3 -o programname programname.c
@@ -425,8 +428,8 @@ gcc  -std=c99 -pedantic -Wall -Wextra -ftrapv -ggdb3 -o programname programname.
 </div>
 </div>
 
-<div id="outline-container-org65d572a" class="outline-3">
-<h3 id="org65d572a"><span class="section-number-3">1.5</span> Preprocessor stuff like if-def</h3>
+<div id="outline-container-org0ea7fdc" class="outline-3">
+<h3 id="org0ea7fdc"><span class="section-number-3">1.5</span> Preprocessor stuff like if-def</h3>
 <div class="outline-text-3" id="text-1-5">
 <p>
 The preprocessor deals with all the lines that you start with an
@@ -439,8 +442,8 @@ files.
 </p>
 </div>
 
-<div id="outline-container-org4a99f8e" class="outline-4">
-<h4 id="org4a99f8e"><span class="section-number-4">1.5.1</span> Multiple Files?</h4>
+<div id="outline-container-org4e410a2" class="outline-4">
+<h4 id="org4e410a2"><span class="section-number-4">1.5.1</span> Multiple Files?</h4>
 <div class="outline-text-4" id="text-1-5-1">
 <p>
 How does stdio.h work?
@@ -499,8 +502,8 @@ will go into a .c file that includes that .h as well.
 </div>
 </div>
 
-<div id="outline-container-org98d034f" class="outline-4">
-<h4 id="org98d034f"><span class="section-number-4">1.5.2</span> Example</h4>
+<div id="outline-container-orgbf54d78" class="outline-4">
+<h4 id="orgbf54d78"><span class="section-number-4">1.5.2</span> Example</h4>
 <div class="outline-text-4" id="text-1-5-2">
 <p>
 This is a useful function to check if scanf read 1 or more elements
@@ -570,7 +573,7 @@ and didn't read EOF.
 </div>
 
 <ol class="org-ol">
-<li><a id="org905f5e1"></a>Compiling Multiple Files Easy Mode<br />
+<li><a id="orgf832b7d"></a>Compiling Multiple Files Easy Mode<br />
 <div class="outline-text-5" id="text-1-5-2-1">
 <p>
 We can put all our .c files on the same line and compile them all at
@@ -614,7 +617,7 @@ Good Input!
 </li>
 
 
-<li><a id="orga908352"></a>Compiling Multiple Files with Linking<br />
+<li><a id="orgd68f2be"></a>Compiling Multiple Files with Linking<br />
 <div class="outline-text-5" id="text-1-5-2-2">
 <p>
 OK now we compile it. The main is the last to compile and it needs all
@@ -695,11 +698,11 @@ ldd ./checkinput-driver
 </div>
 
 <pre class="example">
--rwxrwxr-x 1 hindle1 hindle1 38472 Mar 17 16:53 ./checkinput-driver
+-rwxrwxr-x 1 hindle1 hindle1 38472 Mar 19 11:31 ./checkinput-driver
 -rwxr-xr-x 1 root root 2030544 Apr 16  2018 /lib/x86_64-linux-gnu/libc-2.27.so
-	linux-vdso.so.1 (0x00007fff899b5000)
-	libc.so.6 =&gt; /lib/x86_64-linux-gnu/libc.so.6 (0x00007fedd000e000)
-	/lib64/ld-linux-x86-64.so.2 (0x00007fedd0601000)
+	linux-vdso.so.1 (0x00007ffe69d2b000)
+	libc.so.6 =&gt; /lib/x86_64-linux-gnu/libc.so.6 (0x00007f07380e1000)
+	/lib64/ld-linux-x86-64.so.2 (0x00007f07386d4000)
 </pre>
 
 
@@ -711,8 +714,8 @@ ldd ./checkinput-driver
 </ol>
 </div>
 
-<div id="outline-container-org32cc44d" class="outline-4">
-<h4 id="org32cc44d"><span class="section-number-4">1.5.3</span> Linking to libraries</h4>
+<div id="outline-container-org83a068e" class="outline-4">
+<h4 id="org83a068e"><span class="section-number-4">1.5.3</span> Linking to libraries</h4>
 <div class="outline-text-4" id="text-1-5-3">
 <p>
 `math.h` includes fun functions like cos and tanh.
@@ -818,10 +821,10 @@ ldd ./poor-tanh-example
 <pre class="example">
 poor-tanh-example: ELF 64-bit LSB shared object, x86-64, version 1 (SYSV), dynamically linked, interpreter /lib64/l, for GNU/Linux 3.2.0, BuildID[sha1]=fdd28691d4637c2a9b9a76b129ea7585894e4378, with debug_info, not stripped
      40     120    1400
-	linux-vdso.so.1 (0x00007fff2a53e000)
-	libm.so.6 =&gt; /lib/x86_64-linux-gnu/libm.so.6 (0x00007fa956993000)
-	libc.so.6 =&gt; /lib/x86_64-linux-gnu/libc.so.6 (0x00007fa9565a2000)
-	/lib64/ld-linux-x86-64.so.2 (0x00007fa956f33000)
+	linux-vdso.so.1 (0x00007fffee9f7000)
+	libm.so.6 =&gt; /lib/x86_64-linux-gnu/libm.so.6 (0x00007fef60130000)
+	libc.so.6 =&gt; /lib/x86_64-linux-gnu/libc.so.6 (0x00007fef5fd3f000)
+	/lib64/ld-linux-x86-64.so.2 (0x00007fef606d0000)
 </pre>
 
 
@@ -839,36 +842,36 @@ Larger programs link to lots of libraries.
 </div>
 
 <pre class="example">
-linux-vdso.so.1 (0x00007ffd2ade9000)
-libXft.so.2 =&gt; /usr/lib/x86_64-linux-gnu/libXft.so.2 (0x00007fc5c916f000)
-libfontconfig.so.1 =&gt; /usr/lib/x86_64-linux-gnu/libfontconfig.so.1 (0x00007fc5c8f2a000)
-libXaw.so.7 =&gt; /usr/lib/x86_64-linux-gnu/libXaw.so.7 (0x00007fc5c8cb6000)
-libXmu.so.6 =&gt; /usr/lib/x86_64-linux-gnu/libXmu.so.6 (0x00007fc5c8a9d000)
-libXt.so.6 =&gt; /usr/lib/x86_64-linux-gnu/libXt.so.6 (0x00007fc5c8834000)
-libX11.so.6 =&gt; /usr/lib/x86_64-linux-gnu/libX11.so.6 (0x00007fc5c84fc000)
-libXinerama.so.1 =&gt; /usr/lib/x86_64-linux-gnu/libXinerama.so.1 (0x00007fc5c82f9000)
-libXpm.so.4 =&gt; /usr/lib/x86_64-linux-gnu/libXpm.so.4 (0x00007fc5c80e7000)
-libICE.so.6 =&gt; /usr/lib/x86_64-linux-gnu/libICE.so.6 (0x00007fc5c7ecc000)
-libutempter.so.0 =&gt; /usr/lib/x86_64-linux-gnu/libutempter.so.0 (0x00007fc5c7cc9000)
-libtinfo.so.5 =&gt; /lib/x86_64-linux-gnu/libtinfo.so.5 (0x00007fc5c7a9f000)
-libc.so.6 =&gt; /lib/x86_64-linux-gnu/libc.so.6 (0x00007fc5c76ae000)
-libfreetype.so.6 =&gt; /usr/lib/x86_64-linux-gnu/libfreetype.so.6 (0x00007fc5c73fa000)
-libXrender.so.1 =&gt; /usr/lib/x86_64-linux-gnu/libXrender.so.1 (0x00007fc5c71f0000)
-libexpat.so.1 =&gt; /lib/x86_64-linux-gnu/libexpat.so.1 (0x00007fc5c6fbe000)
-libpthread.so.0 =&gt; /lib/x86_64-linux-gnu/libpthread.so.0 (0x00007fc5c6d9f000)
-libXext.so.6 =&gt; /usr/lib/x86_64-linux-gnu/libXext.so.6 (0x00007fc5c6b8d000)
-libSM.so.6 =&gt; /usr/lib/x86_64-linux-gnu/libSM.so.6 (0x00007fc5c6985000)
-libxcb.so.1 =&gt; /usr/lib/x86_64-linux-gnu/libxcb.so.1 (0x00007fc5c675d000)
-libdl.so.2 =&gt; /lib/x86_64-linux-gnu/libdl.so.2 (0x00007fc5c6559000)
-libbsd.so.0 =&gt; /lib/x86_64-linux-gnu/libbsd.so.0 (0x00007fc5c6344000)
-/lib64/ld-linux-x86-64.so.2 (0x00007fc5c9634000)
-libpng16.so.16 =&gt; /usr/lib/x86_64-linux-gnu/libpng16.so.16 (0x00007fc5c6112000)
-libz.so.1 =&gt; /lib/x86_64-linux-gnu/libz.so.1 (0x00007fc5c5ef5000)
-libuuid.so.1 =&gt; /lib/x86_64-linux-gnu/libuuid.so.1 (0x00007fc5c5cee000)
-libXau.so.6 =&gt; /usr/lib/x86_64-linux-gnu/libXau.so.6 (0x00007fc5c5aea000)
-libXdmcp.so.6 =&gt; /usr/lib/x86_64-linux-gnu/libXdmcp.so.6 (0x00007fc5c58e4000)
-librt.so.1 =&gt; /lib/x86_64-linux-gnu/librt.so.1 (0x00007fc5c56dc000)
-libm.so.6 =&gt; /lib/x86_64-linux-gnu/libm.so.6 (0x00007fc5c533e000)
+linux-vdso.so.1 (0x00007ffe7eede000)
+libXft.so.2 =&gt; /usr/lib/x86_64-linux-gnu/libXft.so.2 (0x00007fdfa84ae000)
+libfontconfig.so.1 =&gt; /usr/lib/x86_64-linux-gnu/libfontconfig.so.1 (0x00007fdfa8269000)
+libXaw.so.7 =&gt; /usr/lib/x86_64-linux-gnu/libXaw.so.7 (0x00007fdfa7ff5000)
+libXmu.so.6 =&gt; /usr/lib/x86_64-linux-gnu/libXmu.so.6 (0x00007fdfa7ddc000)
+libXt.so.6 =&gt; /usr/lib/x86_64-linux-gnu/libXt.so.6 (0x00007fdfa7b73000)
+libX11.so.6 =&gt; /usr/lib/x86_64-linux-gnu/libX11.so.6 (0x00007fdfa783b000)
+libXinerama.so.1 =&gt; /usr/lib/x86_64-linux-gnu/libXinerama.so.1 (0x00007fdfa7638000)
+libXpm.so.4 =&gt; /usr/lib/x86_64-linux-gnu/libXpm.so.4 (0x00007fdfa7426000)
+libICE.so.6 =&gt; /usr/lib/x86_64-linux-gnu/libICE.so.6 (0x00007fdfa720b000)
+libutempter.so.0 =&gt; /usr/lib/x86_64-linux-gnu/libutempter.so.0 (0x00007fdfa7008000)
+libtinfo.so.5 =&gt; /lib/x86_64-linux-gnu/libtinfo.so.5 (0x00007fdfa6dde000)
+libc.so.6 =&gt; /lib/x86_64-linux-gnu/libc.so.6 (0x00007fdfa69ed000)
+libfreetype.so.6 =&gt; /usr/lib/x86_64-linux-gnu/libfreetype.so.6 (0x00007fdfa6739000)
+libXrender.so.1 =&gt; /usr/lib/x86_64-linux-gnu/libXrender.so.1 (0x00007fdfa652f000)
+libexpat.so.1 =&gt; /lib/x86_64-linux-gnu/libexpat.so.1 (0x00007fdfa62fd000)
+libpthread.so.0 =&gt; /lib/x86_64-linux-gnu/libpthread.so.0 (0x00007fdfa60de000)
+libXext.so.6 =&gt; /usr/lib/x86_64-linux-gnu/libXext.so.6 (0x00007fdfa5ecc000)
+libSM.so.6 =&gt; /usr/lib/x86_64-linux-gnu/libSM.so.6 (0x00007fdfa5cc4000)
+libxcb.so.1 =&gt; /usr/lib/x86_64-linux-gnu/libxcb.so.1 (0x00007fdfa5a9c000)
+libdl.so.2 =&gt; /lib/x86_64-linux-gnu/libdl.so.2 (0x00007fdfa5898000)
+libbsd.so.0 =&gt; /lib/x86_64-linux-gnu/libbsd.so.0 (0x00007fdfa5683000)
+/lib64/ld-linux-x86-64.so.2 (0x00007fdfa8973000)
+libpng16.so.16 =&gt; /usr/lib/x86_64-linux-gnu/libpng16.so.16 (0x00007fdfa5451000)
+libz.so.1 =&gt; /lib/x86_64-linux-gnu/libz.so.1 (0x00007fdfa5234000)
+libuuid.so.1 =&gt; /lib/x86_64-linux-gnu/libuuid.so.1 (0x00007fdfa502d000)
+libXau.so.6 =&gt; /usr/lib/x86_64-linux-gnu/libXau.so.6 (0x00007fdfa4e29000)
+libXdmcp.so.6 =&gt; /usr/lib/x86_64-linux-gnu/libXdmcp.so.6 (0x00007fdfa4c23000)
+librt.so.1 =&gt; /lib/x86_64-linux-gnu/librt.so.1 (0x00007fdfa4a1b000)
+libm.so.6 =&gt; /lib/x86_64-linux-gnu/libm.so.6 (0x00007fdfa467d000)
 </pre>
 
 <p>
@@ -877,7 +880,7 @@ See! Lots of libraries!
 </div>
 
 <ol class="org-ol">
-<li><a id="org6bf74d1"></a>Summary<br />
+<li><a id="org629b824"></a>Summary<br />
 <div class="outline-text-5" id="text-1-5-3-1">
 <p>
 To link to a shared library with gcc or clang use the:
@@ -902,8 +905,8 @@ OK let's see how it affects you.
 </ol>
 </div>
 
-<div id="outline-container-orgfdf300d" class="outline-4">
-<h4 id="orgfdf300d"><span class="section-number-4">1.5.4</span> Example Datastructure</h4>
+<div id="outline-container-orgca3b1c1" class="outline-4">
+<h4 id="orgca3b1c1"><span class="section-number-4">1.5.4</span> Example Datastructure</h4>
 <div class="outline-text-4" id="text-1-5-4">
 <p>
 Let's make a brief data structure about one of my favourite topics:
@@ -1039,8 +1042,8 @@ coolbears-driver.c:11:62: error: dereferencing pointer to incomplete type ‘str
 </div>
 
 
-<div id="outline-container-org235b282" class="outline-4">
-<h4 id="org235b282"><span class="section-number-4">1.5.5</span> What is the preprocessor doing?</h4>
+<div id="outline-container-orge2b7608" class="outline-4">
+<h4 id="orge2b7608"><span class="section-number-4">1.5.5</span> What is the preprocessor doing?</h4>
 <div class="outline-text-4" id="text-1-5-5">
 <p>
 Let's use the -E flag to see what checkinput.c becomes
@@ -1146,8 +1149,8 @@ It produces this file:
 </div>
 
 
-<div id="outline-container-orgecac995" class="outline-4">
-<h4 id="orgecac995"><span class="section-number-4">1.5.6</span> Parameterized Macros</h4>
+<div id="outline-container-org50dee24" class="outline-4">
+<h4 id="org50dee24"><span class="section-number-4">1.5.6</span> Parameterized Macros</h4>
 <div class="outline-text-4" id="text-1-5-6">
 <p>
 As we just demonstrated Macros generate code. So we can make compile
@@ -1315,10 +1318,14 @@ That's interesting, but be aware that x is not a value. It is a set of tokens.
 </div>
 
 <ol class="org-ol">
-<li><a id="org9282341"></a>Easy bugs!<br />
+<li><a id="orgff7addb"></a>Easy bugs!<br />
 <div class="outline-text-5" id="text-1-5-6-1">
 <p>
 So why doesn't this work?
+</p>
+
+<p>
+<a href="./checkinputmacro.c">./checkinputmacro.c</a>
 </p>
 
 <div class="org-src-container">
@@ -1332,7 +1339,7 @@ So why doesn't this work?
 <span style="color: #228b22;">int</span> <span style="color: #0000ff;">main</span>() {
     <span style="color: #228b22;">int</span> <span style="color: #a0522d;">myInt</span> = 0;
     <span style="color: #a020f0;">if</span> (CHECKINPUT(scanf(<span style="color: #8b2252;">"%d"</span>, &amp;myInt))) {
-        printf(<span style="color: #8b2252;">"Invalid input!"</span>);
+        printf(<span style="color: #8b2252;">"Invalid input!\n"</span>);
         exit(1);
     }
     printf(<span style="color: #8b2252;">"My int: %d\n"</span>, myInt);
@@ -1343,12 +1350,23 @@ So why doesn't this work?
 <div class="org-src-container">
 <pre class="src src-sh">gcc  -std=c99 -pedantic -Wall -Wextra -ftrapv -ggdb3 <span style="color: #8b2252;">\</span>
        -o checkinputmacro checkinputmacro.c
-<span style="color: #483d8b;">echo</span> 1 6  | ./checkinputmacro
+<span style="color: #483d8b;">echo</span> 6  | ./checkinputmacro
+<span style="color: #483d8b;">echo</span> 6 7 | ./checkinputmacro
+<span style="color: #483d8b;">echo</span> 6 X | ./checkinputmacro || <span style="color: #483d8b;">echo</span> exit was $<span style="color: #a0522d;">?</span>
+<span style="color: #483d8b;">echo</span> X 6 | ./checkinputmacro || <span style="color: #483d8b;">echo</span> exit was $<span style="color: #a0522d;">?</span>
+<span style="color: #483d8b;">echo</span> | ./checkinputmacro || <span style="color: #483d8b;">echo</span> exit was $<span style="color: #a0522d;">?</span>
 </pre>
 </div>
 
 <pre class="example">
 My int: 6
+My int: 7
+Invalid input!
+exit was 1
+Invalid input!
+exit was 1
+Invalid input!
+exit was 1
 </pre>
 
 
@@ -1382,7 +1400,7 @@ Let's look at the output:
        (-1)
 <span style="color: #483d8b;"># 10</span> <span style="color: #8b2252;">"checkinputmacro.c"</span>
        )) {
-        printf(<span style="color: #8b2252;">"Invalid input!"</span>);
+        printf(<span style="color: #8b2252;">"Invalid input!\n"</span>);
         exit(1);
     }
     printf(<span style="color: #8b2252;">"My int: %d\n"</span>, myInt);
@@ -1400,7 +1418,7 @@ I'll clear it up for you
 <span style="color: #228b22;">int</span> <span style="color: #0000ff;">main</span>() {
     <span style="color: #228b22;">int</span> <span style="color: #a0522d;">myInt</span> = 0;
     <span style="color: #a020f0;">if</span> (( scanf(<span style="color: #8b2252;">"%d"</span>, &amp;myInt) ==  0 || scanf(<span style="color: #8b2252;">"%d"</span>, &amp;myInt) == (-1))) {
-        printf(<span style="color: #8b2252;">"Invalid input!"</span>);
+        printf(<span style="color: #8b2252;">"Invalid input!\n"</span>);
         exit(1);
     }
     printf(<span style="color: #8b2252;">"My int: %d\n"</span>, myInt);
@@ -1414,7 +1432,7 @@ not your values. They are meta-functions and not real functions.
 </p>
 
 <p>
-How do we fix? We assign the result once
+How do we fix? We assign the result once!
 </p>
 
 <div class="org-src-container">
@@ -1490,8 +1508,8 @@ My int: 6
 </div>
 </div>
 
-<div id="outline-container-org4528a66" class="outline-3">
-<h3 id="org4528a66"><span class="section-number-3">1.6</span> Makefiles</h3>
+<div id="outline-container-orgee34168" class="outline-3">
+<h3 id="orgee34168"><span class="section-number-3">1.6</span> Makefiles</h3>
 <div class="outline-text-3" id="text-1-6">
 <p>
 I am sick to death of all these shell scripts!
@@ -1539,8 +1557,8 @@ make
 </p>
 </div>
 
-<div id="outline-container-orga670fd2" class="outline-4">
-<h4 id="orga670fd2"><span class="section-number-4">1.6.1</span> Basic Makefile</h4>
+<div id="outline-container-org66d2aed" class="outline-4">
+<h4 id="org66d2aed"><span class="section-number-4">1.6.1</span> Basic Makefile</h4>
 <div class="outline-text-4" id="text-1-6-1">
 <p>
 We're going to use the coolbears source code from before.
@@ -1587,7 +1605,7 @@ The coolest bear is Kevin
 
 <span style="color: #b22222;"># </span><span style="color: #b22222;">clean is idiomatic for remove object files and executables</span>
 <span style="color: #0000ff;">clean</span>: 
-        rm coolbears.o coolbears-driver || echo nothing to delete
+        rm -f coolbears.o coolbears-driver
 
 </pre>
 </div>
@@ -1728,8 +1746,8 @@ Personally I would've preferred if assignments were done this way.
 </div>
 </div>
 
-<div id="outline-container-org34e4566" class="outline-4">
-<h4 id="org34e4566"><span class="section-number-4">1.6.2</span> DRY Makefile</h4>
+<div id="outline-container-org8fd023c" class="outline-4">
+<h4 id="org8fd023c"><span class="section-number-4">1.6.2</span> DRY Makefile</h4>
 <div class="outline-text-4" id="text-1-6-2">
 <p>
 DRY means DON'T REPEAT YOURSELF.
@@ -1762,7 +1780,7 @@ Instead of this:
 
 <span style="color: #b22222;"># </span><span style="color: #b22222;">clean is idiomatic for remove object files and executables</span>
 <span style="color: #0000ff;">clean</span>: 
-        rm coolbears.o coolbears-driver || echo nothing to delete
+        rm -f coolbears.o coolbears-driver || echo nothing to delete
 
 
 </pre>
@@ -1784,6 +1802,7 @@ You can make a variable in a makefile by going
 <span style="color: #a0522d;">CFLAGS</span>= -std=c99 -pedantic -Wall -Wextra -ftrapv -ggdb3
 <span style="color: #b22222;"># </span><span style="color: #b22222;">Common compiler</span>
 <span style="color: #a0522d;">CC</span>=gcc
+<span style="color: #b22222;"># </span><span style="color: #b22222;">you might call these OBJECTS instead</span>
 <span style="color: #a0522d;">BUILDABLES</span>=coolbears.o coolbears-driver
 
 <span style="color: #b22222;"># </span><span style="color: #b22222;">this just runs a command but ensures it is built</span>
@@ -1802,7 +1821,7 @@ You can make a variable in a makefile by going
 
 <span style="color: #b22222;"># </span><span style="color: #b22222;">clean is idiomatic for remove object files and executables</span>
 <span style="color: #0000ff;">clean</span>: 
-        rm $(<span style="color: #a0522d;">BUILDABLES</span>) || echo nothing to delete
+        rm -f $(<span style="color: #a0522d;">BUILDABLES</span>)
 </pre>
 </div>
 
@@ -1823,8 +1842,8 @@ The coolest bear is Kevin
 </div>
 </div>
 
-<div id="outline-container-org400e11c" class="outline-4">
-<h4 id="org400e11c"><span class="section-number-4">1.6.3</span> Idiomatic GCC Makefile</h4>
+<div id="outline-container-org99debfe" class="outline-4">
+<h4 id="org99debfe"><span class="section-number-4">1.6.3</span> Idiomatic GCC Makefile</h4>
 <div class="outline-text-4" id="text-1-6-3">
 <p>
 Make knows a lot about C. Make comes with default rules that will call
@@ -1875,7 +1894,7 @@ You can reuse this makefile as well!
 
 <span style="color: #b22222;"># </span><span style="color: #b22222;">clean is idiomatic for remove object files and executables</span>
 <span style="color: #0000ff;">clean</span>: 
-        rm $(<span style="color: #a0522d;">BUILDABLES</span>) || echo nothing to delete
+        rm -f $(<span style="color: #a0522d;">BUILDABLES</span>)
 </pre>
 </div>
 
@@ -1902,8 +1921,8 @@ The coolest bear is Kevin
 </div>
 </div>
 
-<div id="outline-container-orgc40332b" class="outline-4">
-<h4 id="orgc40332b"><span class="section-number-4">1.6.4</span> Special Macro Vars</h4>
+<div id="outline-container-orga64b233" class="outline-4">
+<h4 id="orga64b233"><span class="section-number-4">1.6.4</span> Special Macro Vars</h4>
 <div class="outline-text-4" id="text-1-6-4">
 <ul class="org-ul">
 <li>$@ the target file name</li>
@@ -1976,7 +1995,7 @@ cat example.txt
 </div>
 
 <ol class="org-ol">
-<li><a id="orgdff0183"></a>Implicit Rules<br />
+<li><a id="orge465182"></a>Implicit Rules<br />
 <div class="outline-text-5" id="text-1-6-4-1">
 <p>
 Here's an example of implicit rules. Of how we convert 1 file to
@@ -2010,9 +2029,259 @@ another implicitly much like how Make hands C compilation.
 </ol>
 </div>
 
-<div id="outline-container-orga907186" class="outline-4">
-<h4 id="orga907186"><span class="section-number-4">1.6.5</span> Makefile help</h4>
+<div id="outline-container-org26df4eb" class="outline-4">
+<h4 id="org26df4eb"><span class="section-number-4">1.6.5</span> Can we lint and valgrind with our makefiles?</h4>
 <div class="outline-text-4" id="text-1-6-5">
+<div class="org-src-container">
+<pre class="src src-makefile"><span style="color: #b22222;"># </span><span style="color: #b22222;">common arguments for GCC</span>
+<span style="color: #a0522d;">CFLAGS</span>= -std=c99 -pedantic -Wall -Wextra -ftrapv -ggdb3
+<span style="color: #b22222;"># </span><span style="color: #b22222;">Common compiler</span>
+<span style="color: #a0522d;">CC</span>=gcc
+<span style="color: #b22222;"># </span><span style="color: #b22222;">you might call these OBJECTS instead</span>
+<span style="color: #a0522d;">BUILDABLES</span>=coolbears.o coolbears-driver
+<span style="color: #b22222;"># </span><span style="color: #b22222;">clangtidy checks</span>
+<span style="color: #a0522d;">CHECKS</span>=--checks=*,-cert-err34-c,-cert-msc30-c,-cert-msc50-cpp
+<span style="color: #b22222;"># </span><span style="color: #b22222;">oclint checks</span>
+<span style="color: #a0522d;">LINTR</span>=--disable-rule=UselessParentheses
+<span style="color: #a0522d;">CLANGTIDY</span>=clang-tidy
+<span style="color: #a0522d;">OCLINT</span>=oclint
+<span style="color: #0000ff;">.PHONY</span>: run clean lint-coolbears-driver
+
+<span style="color: #b22222;"># </span><span style="color: #b22222;">this just runs a command but ensures it is built</span>
+<span style="color: #0000ff;">run</span>: coolbears-driver
+        ./coolbears-driver <span style="color: #b22222;"># </span><span style="color: #b22222;">just a shell command</span>
+
+<span style="color: #0000ff;">coolbears.o</span>: coolbears.c coolbears.h
+        $(<span style="color: #a0522d;">CC</span>) $(<span style="color: #a0522d;">CFLAGS</span>) \
+        -c coolbears.c
+
+<span style="color: #0000ff;">coolbears-driver.o</span>: coolbears-driver.c coolbears.c
+        $(<span style="color: #a0522d;">CC</span>) $(<span style="color: #a0522d;">CFLAGS</span>) \
+        -c coolbears.c
+
+<span style="color: #b22222;"># </span><span style="color: #b22222;">build an executable</span>
+<span style="color: #0000ff;">coolbears-driver</span>: coolbears-driver.o coolbears.o
+        $(<span style="color: #a0522d;">CC</span>) $(<span style="color: #a0522d;">CFLAGS</span>) \
+        -o coolbears-driver coolbears-driver.o \
+        coolbears.o 
+
+<span style="color: #b22222;"># </span><span style="color: #b22222;">clean is idiomatic for remove object files and executables</span>
+<span style="color: #0000ff;">clean</span>: 
+        rm -f $(<span style="color: #a0522d;">BUILDABLES</span>) 
+
+<span style="color: #0000ff;">lint-coolbears-driver</span>: coolbears-driver.c
+        $(<span style="color: #a0522d;">CLANGTIDY</span>) $(<span style="color: #a0522d;">CHECKS</span>) \
+                $<span style="color: #008b8b;">&lt;</span> -- \
+                $(<span style="color: #a0522d;">CFLAGS</span>) -c $<span style="color: #008b8b;">^</span> $(<span style="color: #a0522d;">LDFLAGS</span>)
+        $(<span style="color: #a0522d;">OCLINT</span>) $(<span style="color: #a0522d;">LINTR</span>) $<span style="color: #008b8b;">&lt;</span> \
+                -- $(<span style="color: #a0522d;">CFLAGS</span>) -c $<span style="color: #008b8b;">&lt;</span> $(<span style="color: #a0522d;">LDFLAGS</span>)
+</pre>
+</div>
+
+<div class="org-src-container">
+<pre class="src src-sh">make -f Makefile.coolbears.lint lint-coolbears-driver
+</pre>
+</div>
+
+<pre class="example">
+clang-tidy --checks=*,-cert-err34-c,-cert-msc30-c,-cert-msc50-cpp \
+	coolbears-driver.c -- \
+	-std=c99 -pedantic -Wall -Wextra -ftrapv -ggdb3 -c coolbears-driver.c 
+/home/hindle1/projects/CMPUT201W20/2020-01/CMPUT201W20B2-public/week10/coolbears-driver.c:5:43: warning: narrowing conversion from 'double' to 'float' [bugprone-narrowing-conversions]
+  CoolBear ziggy = createCoolBear("Ziggy",-23.0 /* C */);
+                                          ^
+/home/hindle1/projects/CMPUT201W20/2020-01/CMPUT201W20B2-public/week10/coolbears-driver.c:5:44: warning: 23.0 is a magic number; consider replacing it with a named constant [cppcoreguidelines-avoid-magic-numbers]
+  CoolBear ziggy = createCoolBear("Ziggy",-23.0 /* C */);
+                                           ^
+/home/hindle1/projects/CMPUT201W20/2020-01/CMPUT201W20B2-public/week10/coolbears-driver.c:6:43: warning: narrowing conversion from 'double' to 'float' [bugprone-narrowing-conversions]
+  CoolBear kevin = createCoolBear("Kevin",-32.0 /* C */);
+                                          ^
+/home/hindle1/projects/CMPUT201W20/2020-01/CMPUT201W20B2-public/week10/coolbears-driver.c:6:44: warning: 32.0 is a magic number; consider replacing it with a named constant [cppcoreguidelines-avoid-magic-numbers]
+  CoolBear kevin = createCoolBear("Kevin",-32.0 /* C */);
+                                           ^
+oclint --disable-rule=UselessParentheses coolbears-driver.c \
+	-- -std=c99 -pedantic -Wall -Wextra -ftrapv -ggdb3 -c coolbears-driver.c 
+
+
+OCLint Report
+
+Summary: TotalFiles=1 FilesWithViolations=0 P1=0 P2=0 P3=0 
+
+
+[OCLint (http://oclint.org) v0.15]
+</pre>
+
+<p>
+We can go further:
+</p>
+
+<div class="org-src-container">
+<pre class="src src-makefile"><span style="color: #b22222;"># </span><span style="color: #b22222;">common arguments for GCC</span>
+<span style="color: #a0522d;">CFLAGS</span>= -std=c99 -pedantic -Wall -Wextra -ftrapv -ggdb3
+<span style="color: #b22222;"># </span><span style="color: #b22222;">Common compiler</span>
+<span style="color: #a0522d;">CC</span>=gcc
+<span style="color: #b22222;"># </span><span style="color: #b22222;">you might call these OBJECTS instead</span>
+<span style="color: #a0522d;">BUILDABLES</span>=coolbears.o coolbears-driver
+<span style="color: #b22222;"># </span><span style="color: #b22222;">clangtidy checks</span>
+<span style="color: #a0522d;">CHECKS</span>=--checks=*,-cert-err34-c,-cert-msc30-c,-cert-msc50-cpp
+<span style="color: #b22222;"># </span><span style="color: #b22222;">oclint checks</span>
+<span style="color: #a0522d;">LINTR</span>=--disable-rule=UselessParentheses
+<span style="color: #a0522d;">CLANGTIDY</span>=clang-tidy
+<span style="color: #a0522d;">OCLINT</span>=oclint
+<span style="color: #a0522d;">HEADERS</span>=coolbears.h
+<span style="color: #a0522d;">OBJECTS</span>=coolbears.o coolbears-driver.o
+<span style="color: #a0522d;">EXECUTABLE</span>=coolbears-driver
+
+<span style="color: #0000ff;">.PHONY</span>: lint-% run clean valgrind
+
+<span style="color: #b22222;"># </span><span style="color: #b22222;">this just runs a command but ensures it is built</span>
+<span style="color: #0000ff;">run</span>: $(<span style="color: #a0522d;">EXECUTABLE</span>)
+        ./$(<span style="color: #a0522d;">EXECUTABLE</span>)
+
+<span style="color: #0000ff;">%.o</span>: %.c $(<span style="color: #a0522d;">HEADERS</span>)
+        $(<span style="color: #a0522d;">CC</span>) $(<span style="color: #a0522d;">CFLAGS</span>) -c $<span style="color: #008b8b;">&lt;</span>
+<span style="color: #b22222;">#       </span><span style="color: #b22222;">$(</span><span style="color: #a0522d;">CLANGTIDY</span><span style="color: #b22222;">) $(</span><span style="color: #a0522d;">CHECKS</span><span style="color: #b22222;">) \</span>
+<span style="color: #b22222;">#               $</span><span style="color: #008b8b;">&lt;</span><span style="color: #b22222;"> -- \</span>
+<span style="color: #b22222;">#               $(</span><span style="color: #a0522d;">CFLAGS</span><span style="color: #b22222;">) -c $</span><span style="color: #008b8b;">&lt;</span><span style="color: #b22222;"> $(</span><span style="color: #a0522d;">LDFLAGS</span><span style="color: #b22222;">)</span>
+<span style="color: #b22222;">#       </span><span style="color: #b22222;">$(</span><span style="color: #a0522d;">OCLINT</span><span style="color: #b22222;">) $(</span><span style="color: #a0522d;">LINTR</span><span style="color: #b22222;">) $</span><span style="color: #008b8b;">&lt;</span><span style="color: #b22222;"> \</span>
+<span style="color: #b22222;">#               -- $(</span><span style="color: #a0522d;">CFLAGS</span><span style="color: #b22222;">) -c $</span><span style="color: #008b8b;">&lt;</span><span style="color: #b22222;"> $(</span><span style="color: #a0522d;">LDFLAGS</span><span style="color: #b22222;">)</span>
+
+
+<span style="color: #0000ff;">$(</span><span style="color: #0000ff;">EXECUTABLE</span><span style="color: #0000ff;">)</span>: $(<span style="color: #a0522d;">OBJECTS</span>)
+        $(<span style="color: #a0522d;">CC</span>) $(<span style="color: #a0522d;">CFLAGS</span>) -o <span style="color: #0000ff;">$</span><span style="color: #008b8b;">@</span> $<span style="color: #008b8b;">^</span>
+
+<span style="color: #b22222;"># </span><span style="color: #b22222;">clean is idiomatic for remove object files and executables</span>
+<span style="color: #0000ff;">clean</span>: 
+        rm -f $(<span style="color: #a0522d;">EXECUTABLE</span>) $(<span style="color: #a0522d;">OBJECTS</span>) 
+
+<span style="color: #0000ff;">lint-%</span>: %.c
+        $(<span style="color: #a0522d;">CLANGTIDY</span>) $(<span style="color: #a0522d;">CHECKS</span>) \
+                $<span style="color: #008b8b;">&lt;</span> -- \
+                $(<span style="color: #a0522d;">CFLAGS</span>) -c $<span style="color: #008b8b;">&lt;</span> $(<span style="color: #a0522d;">LDFLAGS</span>)
+        $(<span style="color: #a0522d;">OCLINT</span>) $(<span style="color: #a0522d;">LINTR</span>) $<span style="color: #008b8b;">&lt;</span> \
+                -- $(<span style="color: #a0522d;">CFLAGS</span>) -c $<span style="color: #008b8b;">&lt;</span> $(<span style="color: #a0522d;">LDFLAGS</span>)
+
+<span style="color: #b22222;"># </span><span style="color: #b22222;">Lookie here how these 2 valgrinds are very similar</span>
+<span style="color: #0000ff;">valgrind-%</span>: %
+        valgrind --leak-check=full --track-origins=yes ./$<span style="color: #008b8b;">&lt;</span> 2&gt;&amp;1
+
+<span style="color: #0000ff;">valgrind</span>: $(<span style="color: #a0522d;">EXECUTABLE</span>)
+        valgrind --leak-check=full --track-origins=yes ./$<span style="color: #008b8b;">&lt;</span> 2&gt;&amp;1
+
+</pre>
+</div>
+
+<div class="org-src-container">
+<pre class="src src-sh">make -f Makefile.coolbears.lint.dry lint-coolbears-driver
+make -f Makefile.coolbears.lint.dry lint-coolbears
+make -f Makefile.coolbears.lint.dry valgrind-coolbears-driver
+</pre>
+</div>
+
+<pre class="example">
+clang-tidy --checks=*,-cert-err34-c,-cert-msc30-c,-cert-msc50-cpp \
+	coolbears-driver.c -- \
+	-std=c99 -pedantic -Wall -Wextra -ftrapv -ggdb3 -c coolbears-driver.c 
+/home/hindle1/projects/CMPUT201W20/2020-01/CMPUT201W20B2-public/week10/coolbears-driver.c:5:43: warning: narrowing conversion from 'double' to 'float' [bugprone-narrowing-conversions]
+  CoolBear ziggy = createCoolBear("Ziggy",-23.0 /* C */);
+                                          ^
+/home/hindle1/projects/CMPUT201W20/2020-01/CMPUT201W20B2-public/week10/coolbears-driver.c:5:44: warning: 23.0 is a magic number; consider replacing it with a named constant [cppcoreguidelines-avoid-magic-numbers]
+  CoolBear ziggy = createCoolBear("Ziggy",-23.0 /* C */);
+                                           ^
+/home/hindle1/projects/CMPUT201W20/2020-01/CMPUT201W20B2-public/week10/coolbears-driver.c:6:43: warning: narrowing conversion from 'double' to 'float' [bugprone-narrowing-conversions]
+  CoolBear kevin = createCoolBear("Kevin",-32.0 /* C */);
+                                          ^
+/home/hindle1/projects/CMPUT201W20/2020-01/CMPUT201W20B2-public/week10/coolbears-driver.c:6:44: warning: 32.0 is a magic number; consider replacing it with a named constant [cppcoreguidelines-avoid-magic-numbers]
+  CoolBear kevin = createCoolBear("Kevin",-32.0 /* C */);
+                                           ^
+oclint --disable-rule=UselessParentheses coolbears-driver.c \
+	-- -std=c99 -pedantic -Wall -Wextra -ftrapv -ggdb3 -c coolbears-driver.c 
+
+
+OCLint Report
+
+Summary: TotalFiles=1 FilesWithViolations=0 P1=0 P2=0 P3=0 
+
+
+[OCLint (http://oclint.org) v0.15]
+clang-tidy --checks=*,-cert-err34-c,-cert-msc30-c,-cert-msc50-cpp \
+	coolbears.c -- \
+	-std=c99 -pedantic -Wall -Wextra -ftrapv -ggdb3 -c coolbears.c 
+oclint --disable-rule=UselessParentheses coolbears.c \
+	-- -std=c99 -pedantic -Wall -Wextra -ftrapv -ggdb3 -c coolbears.c 
+
+
+OCLint Report
+
+Summary: TotalFiles=1 FilesWithViolations=0 P1=0 P2=0 P3=0 
+
+
+[OCLint (http://oclint.org) v0.15]
+valgrind --leak-check=full --track-origins=yes ./coolbears-driver 2&gt;&amp;1
+==16719== Memcheck, a memory error detector
+==16719== Copyright (C) 2002-2017, and GNU GPL'd, by Julian Seward et al.
+==16719== Using Valgrind-3.13.0 and LibVEX; rerun with -h for copyright info
+==16719== Command: ./coolbears-driver
+==16719== 
+The coolest bear is Kevin
+==16719== 
+==16719== HEAP SUMMARY:
+==16719==     in use at exit: 0 bytes in 0 blocks
+==16719==   total heap usage: 5 allocs, 5 frees, 4,140 bytes allocated
+==16719== 
+==16719== All heap blocks were freed -- no leaks are possible
+==16719== 
+==16719== For counts of detected and suppressed errors, rerun with: -v
+==16719== ERROR SUMMARY: 0 errors from 0 contexts (suppressed: 0 from 0)
+</pre>
+</div>
+</div>
+
+<div id="outline-container-org78b4acb" class="outline-4">
+<h4 id="org78b4acb"><span class="section-number-4">1.6.6</span> .PHONY</h4>
+<div class="outline-text-4" id="text-1-6-6">
+<p>
+Hazel says:
+</p>
+
+<p>
+It is also often useful to have a rule that removes the compiled code
+so that you can easily compile your program from scratch. This is
+useful when you change your Makefile. We can add a phony rule named
+clean so that when we run “make clean” on the command line it removes
+all the compiler outputs: s-expr, s-expr.o, and main.o:
+</p>
+<div class="org-src-container">
+<pre class="src src-Makefile">.PHONY: clean
+clean:
+       rm -f s-expr s-expr.o main.o
+</pre>
+</div>
+<p>
+This tells make:
+</p>
+
+<p>
+“clean” is not an actual file that will be made, instead we should
+run the recipe for “clean” everytime we make “clean”.
+</p>
+
+<p>
+“clean” doesn’t have any input files that will change the output
+(there is nothing after the colon :)
+</p>
+
+<p>
+When we make “clean” we will remove the files s-expr, s-expr.o, and main.o.
+</p>
+</div>
+</div>
+
+
+
+<div id="outline-container-org5e91534" class="outline-4">
+<h4 id="org5e91534"><span class="section-number-4">1.6.7</span> Makefile help</h4>
+<div class="outline-text-4" id="text-1-6-7">
 <p>
 The GNU Manual is pretty good
 </p>
@@ -2020,14 +2289,846 @@ The GNU Manual is pretty good
 <p>
 <a href="https://www.gnu.org/software/make/manual/html_node/Introduction.html">https://www.gnu.org/software/make/manual/html_node/Introduction.html</a>
 </p>
+
+<p>
+Hazel's write up is very good (UAlberta ONLY)
+</p>
+
+<p>
+<a href="https://docs.google.com/document/d/1k8bAErdg6ju8reniMUhnkkjCtwUHWCM9mn59iHnI0rc/">https://docs.google.com/document/d/1k8bAErdg6ju8reniMUhnkkjCtwUHWCM9mn59iHnI0rc/</a>
+</p>
 </div>
+</div>
+
+<div id="outline-container-org622f2ba" class="outline-4">
+<h4 id="org622f2ba"><span class="section-number-4">1.6.8</span> Useful Tool! asan and usan</h4>
+<div class="outline-text-4" id="text-1-6-8">
+<p>
+Google made some static analysis tools to detect issues!
+</p>
+
+<p>
+(From chefmax of Google (2020) <a href="https://github.com/google/sanitizers/wiki/AddressSanitizer">https://github.com/google/sanitizers/wiki/AddressSanitizer</a> )
+</p>
+
+<p>
+Address sanitizer detects:
+</p>
+
+<ul class="org-ul">
+<li>Use after free (dangling pointer dereference)</li>
+<li>Heap buffer overflow</li>
+<li>Stack buffer overflow</li>
+<li>Global buffer overflow</li>
+<li>Use after return</li>
+<li>Use after scope</li>
+<li>Initialization order bugs</li>
+<li>Memory leaks</li>
+</ul>
+
+<p>
+I've been telling y'all to use it in the discussion forum. It's like
+valgrind but it does different things and has nice output.
+</p>
+
+<p>
+How do you use it?
+</p>
+
+<p>
+With clang or gcc add the argument
+</p>
+
+<p>
+-fsanitize=address
+-fsanitize=undefined
+</p>
+
+<p>
+For address sanitization or undefined santitization.
+</p>
+
+<p>
+If you want more options check out <a href="https://gcc.gnu.org/onlinedocs/gcc/Instrumentation-Options.html">https://gcc.gnu.org/onlinedocs/gcc/Instrumentation-Options.html</a>
+</p>
+</div>
+
+<ol class="org-ol">
+<li><a id="orgc716736"></a>./array<sub>oob.c</sub><br />
+<div class="outline-text-5" id="text-1-6-8-1">
+<p>
+<a href="./array_oob.c">./array_oob.c</a>
+</p>
+
+<p>
+Sanitize ./array<sub>oob.c</sub> with address!
+</p>
+<div class="org-src-container">
+<pre class="src src-sh">gcc -std=c99 -pedantic -Wall -Wextra -ftrapv -ggdb3 -fsanitize=address -o array_oob ./array_oob.c
+<span style="color: #483d8b;">echo</span> 33 | ./array_oob 2&gt;&amp;1 || <span style="color: #483d8b;">echo</span> it crashed
+</pre>
+</div>
+
+<pre class="example">
+How big?
+32768
+32769
+</pre>
+
+
+<p>
+And now with undefined!
+</p>
+<div class="org-src-container">
+<pre class="src src-sh">gcc -std=c99 -pedantic -Wall -Wextra -ftrapv -ggdb3 -fsanitize=undefined -o array_oob ./array_oob.c
+<span style="color: #483d8b;">echo</span> 33 | ./array_oob 2&gt;&amp;1 || <span style="color: #483d8b;">echo</span> it crashed
+</pre>
+</div>
+
+<pre class="example">
+array_oob.c:27:25: runtime error: index 100 out of bounds for type 'int [*]'
+array_oob.c:28:16: runtime error: index 100 out of bounds for type 'int [*]'
+array_oob.c:29:25: runtime error: index 100 out of bounds for type 'int [*]'
+How big?
+1304645144
+1304645145
+</pre>
+</div>
+</li>
+
+<li><a id="org26fce40"></a>./array<sub>uninit.c</sub><br />
+<div class="outline-text-5" id="text-1-6-8-2">
+<p>
+<a href="./array_uninit.c">./array_uninit.c</a>
+</p>
+
+<p>
+Sanitize ./array<sub>uninit.c</sub> with address!
+</p>
+<div class="org-src-container">
+<pre class="src src-sh">gcc -std=c99 -pedantic -Wall -Wextra -ftrapv -ggdb3 -fsanitize=address -o array_uninit ./array_uninit.c
+<span style="color: #483d8b;">echo</span> 33 | ./array_uninit 2&gt;&amp;1 || <span style="color: #483d8b;">echo</span> it crashed
+</pre>
+</div>
+
+<pre class="example">
+How big?
+8
+0
+385051187
+32604
+1
+0
+407373584
+32604
+1
+0
+8
+0
+388593504
+32604
+-1293348704
+21893
+388575904
+32604
+0
+0
+0
+0
+385006223
+32604
+0
+0
+152657632
+32764
+152657776
+32764
+152657728
+32764
+-2128401444
+</pre>
+
+<p>
+And now with undefined!
+</p>
+<div class="org-src-container">
+<pre class="src src-sh">gcc -std=c99 -pedantic -Wall -Wextra -ftrapv -ggdb3 -fsanitize=undefined -o array_uninit ./array_uninit.c
+<span style="color: #483d8b;">echo</span> 33 | ./array_uninit 2&gt;&amp;1 || <span style="color: #483d8b;">echo</span> it crashed
+</pre>
+</div>
+
+<pre class="example">
+How big?
+8
+0
+1152096819
+32633
+0
+0
+0
+0
+0
+0
+8
+0
+1155639136
+32633
+579099989
+22066
+1155621536
+32633
+-1536167232
+32765
+0
+0
+1152051855
+32633
+0
+0
+0
+0
+-1536167120
+32765
+579099136
+22066
+0
+</pre>
+</div>
+</li>
+
+<li><a id="orgdbf25a5"></a>./bad<sub>realloc.c</sub><br />
+<div class="outline-text-5" id="text-1-6-8-3">
+<p>
+<a href="./bad_realloc.c">./bad_realloc.c</a>
+</p>
+
+<p>
+Sanitize ./bad<sub>realloc.c</sub> with address!
+</p>
+<div class="org-src-container">
+<pre class="src src-sh">gcc -std=c99 -pedantic -Wall -Wextra -ftrapv -ggdb3 -fsanitize=address -o bad_realloc ./bad_realloc.c
+<span style="color: #483d8b;">echo</span> 33 | ./bad_realloc 2&gt;&amp;1 || <span style="color: #483d8b;">echo</span> it crashed
+</pre>
+</div>
+
+<pre class="example">
+ASAN:DEADLYSIGNAL
+=================================================================
+==16766==ERROR: AddressSanitizer: SEGV on unknown address 0x000000000000 (pc 0x5580633710f5 bp 0x7ffc7ccd54c0 sp 0x7ffc7ccd5490 T0)
+==16766==The signal is caused by a READ memory access.
+==16766==Hint: address points to the zero page.
+    #0 0x5580633710f4 in push bad_realloc.c:54
+    #1 0x5580633714b2 in push_input_lines bad_realloc.c:91
+    #2 0x558063371616 in main bad_realloc.c:111
+    #3 0x7fce5d2f1b96 in __libc_start_main (/lib/x86_64-linux-gnu/libc.so.6+0x21b96)
+    #4 0x558063370c99 in _start (/home/hindle1/projects/CMPUT201W20/2020-01/CMPUT201W20B2-public/week10/bad_realloc+0xc99)
+
+AddressSanitizer can not provide additional info.
+SUMMARY: AddressSanitizer: SEGV bad_realloc.c:54 in push
+==16766==ABORTING
+it crashed
+</pre>
+
+<p>
+And now with undefined!
+</p>
+<div class="org-src-container">
+<pre class="src src-sh">gcc -std=c99 -pedantic -Wall -Wextra -ftrapv -ggdb3 -fsanitize=undefined -o bad_realloc ./bad_realloc.c
+<span style="color: #483d8b;">echo</span> 33 | ./bad_realloc 2&gt;&amp;1 || <span style="color: #483d8b;">echo</span> it crashed
+</pre>
+</div>
+
+<pre class="example">
+it crashed
+</pre>
+</div>
+</li>
+
+<li><a id="orgfd50649"></a>./bad<sub>str.c</sub><br />
+<div class="outline-text-5" id="text-1-6-8-4">
+<p>
+<a href="./bad_str.c">./bad_str.c</a>
+</p>
+
+<p>
+Sanitize ./bad<sub>str.c</sub> with address!
+</p>
+<div class="org-src-container">
+<pre class="src src-sh">gcc -std=c99 -pedantic -Wall -Wextra -ftrapv -ggdb3 -fsanitize=address -o bad_str ./bad_str.c
+<span style="color: #483d8b;">echo</span> 33 | ./bad_str 2&gt;&amp;1 || <span style="color: #483d8b;">echo</span> it crashed
+</pre>
+</div>
+
+<pre class="example">
+
+=================================================================
+==16786==ERROR: LeakSanitizer: detected memory leaks
+
+Direct leak of 5 byte(s) in 1 object(s) allocated from:
+    #0 0x7f4523e73b40 in __interceptor_malloc (/usr/lib/x86_64-linux-gnu/libasan.so.4+0xdeb40)
+    #1 0x558d129afa7b in main bad_str.c:15
+    #2 0x7f45239c5b96 in __libc_start_main (/lib/x86_64-linux-gnu/libc.so.6+0x21b96)
+
+SUMMARY: AddressSanitizer: 5 byte(s) leaked in 1 allocation(s).
+it crashed
+</pre>
+
+<p>
+And now with undefined!
+</p>
+<div class="org-src-container">
+<pre class="src src-sh">gcc -std=c99 -pedantic -Wall -Wextra -ftrapv -ggdb3 -fsanitize=undefined -o bad_str ./bad_str.c
+<span style="color: #483d8b;">echo</span> 33 | ./bad_str 2&gt;&amp;1 || <span style="color: #483d8b;">echo</span> it crashed
+</pre>
+</div>
+
+<pre class="example">
+Enter a message:
+You entered: 33
+</pre>
+</div>
+</li>
+
+<li><a id="orgf8e5187"></a>./double<sub>free.c</sub><br />
+<div class="outline-text-5" id="text-1-6-8-5">
+<p>
+<a href="./double_free.c">./double_free.c</a>
+</p>
+
+<p>
+Sanitize ./double<sub>free.c</sub> with address!
+</p>
+<div class="org-src-container">
+<pre class="src src-sh">gcc -std=c99 -pedantic -Wall -Wextra -ftrapv -ggdb3 -fsanitize=address -o double_free ./double_free.c
+<span style="color: #483d8b;">echo</span> 33 | ./double_free 2&gt;&amp;1 || <span style="color: #483d8b;">echo</span> it crashed
+</pre>
+</div>
+
+<pre class="example">
+=================================================================
+==16805==ERROR: AddressSanitizer: attempting double-free on 0x60d000000040 in thread T0:
+    #0 0x7fd9b789b7a8 in __interceptor_free (/usr/lib/x86_64-linux-gnu/libasan.so.4+0xde7a8)
+    #1 0x5635b583cffa in main double_free.c:27
+    #2 0x7fd9b73edb96 in __libc_start_main (/lib/x86_64-linux-gnu/libc.so.6+0x21b96)
+    #3 0x5635b583cca9 in _start (/home/hindle1/projects/CMPUT201W20/2020-01/CMPUT201W20B2-public/week10/double_free+0xca9)
+
+0x60d000000040 is located 0 bytes inside of 132-byte region [0x60d000000040,0x60d0000000c4)
+freed by thread T0 here:
+    #0 0x7fd9b789b7a8 in __interceptor_free (/usr/lib/x86_64-linux-gnu/libasan.so.4+0xde7a8)
+    #1 0x5635b583cfeb in main double_free.c:26
+    #2 0x7fd9b73edb96 in __libc_start_main (/lib/x86_64-linux-gnu/libc.so.6+0x21b96)
+
+previously allocated by thread T0 here:
+    #0 0x7fd9b789bb40 in __interceptor_malloc (/usr/lib/x86_64-linux-gnu/libasan.so.4+0xdeb40)
+    #1 0x5635b583ce7d in main double_free.c:21
+    #2 0x7fd9b73edb96 in __libc_start_main (/lib/x86_64-linux-gnu/libc.so.6+0x21b96)
+
+SUMMARY: AddressSanitizer: double-free (/usr/lib/x86_64-linux-gnu/libasan.so.4+0xde7a8) in __interceptor_free
+==16805==ABORTING
+it crashed
+</pre>
+
+<p>
+And now with undefined!
+</p>
+<div class="org-src-container">
+<pre class="src src-sh">gcc -std=c99 -pedantic -Wall -Wextra -ftrapv -ggdb3 -fsanitize=undefined -o double_free ./double_free.c
+<span style="color: #483d8b;">echo</span> 33 | ./double_free 2&gt;&amp;1 || <span style="color: #483d8b;">echo</span> it crashed
+</pre>
+</div>
+
+<pre class="example">
+How big?
+0
+1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+12
+13
+14
+15
+16
+17
+18
+19
+20
+21
+22
+23
+24
+25
+26
+27
+28
+29
+30
+31
+32
+</pre>
+</div>
+</li>
+
+<li><a id="org2c6c857"></a>./huge<sub>array.c</sub><br />
+<div class="outline-text-5" id="text-1-6-8-6">
+<p>
+<a href="./huge_array.c">./huge_array.c</a>
+</p>
+
+<p>
+Sanitize ./huge<sub>array.c</sub> with address!
+</p>
+<div class="org-src-container">
+<pre class="src src-sh">gcc -std=c99 -pedantic -Wall -Wextra -ftrapv -ggdb3 -fsanitize=address -o huge_array ./huge_array.c
+<span style="color: #483d8b;">echo</span> 33 | ./huge_array 2&gt;&amp;1 || <span style="color: #483d8b;">echo</span> it crashed
+</pre>
+</div>
+
+<pre class="example">
+0
+</pre>
+
+
+<p>
+And now with undefined!
+</p>
+<div class="org-src-container">
+<pre class="src src-sh">gcc -std=c99 -pedantic -Wall -Wextra -ftrapv -ggdb3 -fsanitize=undefined -o huge_array ./huge_array.c
+<span style="color: #483d8b;">echo</span> 33 | ./huge_array 2&gt;&amp;1 || <span style="color: #483d8b;">echo</span> it crashed
+</pre>
+</div>
+
+<pre class="example">
+0
+</pre>
+</div>
+</li>
+
+
+<li><a id="org897ed8c"></a>./malloc<sub>oob.c</sub><br />
+<div class="outline-text-5" id="text-1-6-8-7">
+<p>
+<a href="./malloc_oob.c">./malloc_oob.c</a>
+</p>
+
+<p>
+Sanitize ./malloc<sub>oob.c</sub> with address!
+</p>
+<div class="org-src-container">
+<pre class="src src-sh">gcc -std=c99 -pedantic -Wall -Wextra -ftrapv -ggdb3 -fsanitize=address -o malloc_oob ./malloc_oob.c
+<span style="color: #483d8b;">echo</span> 33 | ./malloc_oob 2&gt;&amp;1 || <span style="color: #483d8b;">echo</span> it crashed
+</pre>
+</div>
+
+<pre class="example">
+=================================================================
+==16842==ERROR: AddressSanitizer: heap-buffer-overflow on address 0x60d0000001d0 at pc 0x55b070b34fa2 bp 0x7fff96f69330 sp 0x7fff96f69320
+READ of size 4 at 0x60d0000001d0 thread T0
+    #0 0x55b070b34fa1 in main malloc_oob.c:26
+    #1 0x7f45f2034b96 in __libc_start_main (/lib/x86_64-linux-gnu/libc.so.6+0x21b96)
+    #2 0x55b070b34ca9 in _start (/home/hindle1/projects/CMPUT201W20/2020-01/CMPUT201W20B2-public/week10/malloc_oob+0xca9)
+
+Address 0x60d0000001d0 is a wild pointer.
+SUMMARY: AddressSanitizer: heap-buffer-overflow malloc_oob.c:26 in main
+Shadow bytes around the buggy address:
+  0x0c1a7fff7fe0: 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00
+  0x0c1a7fff7ff0: 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00
+  0x0c1a7fff8000: fa fa fa fa fa fa fa fa 00 00 00 00 00 00 00 00
+  0x0c1a7fff8010: 00 00 00 00 00 00 00 00 04 fa fa fa fa fa fa fa
+  0x0c1a7fff8020: fa fa fa fa fa fa fa fa fa fa fa fa fa fa fa fa
+=&gt;0x0c1a7fff8030: fa fa fa fa fa fa fa fa fa fa[fa]fa fa fa fa fa
+  0x0c1a7fff8040: fa fa fa fa fa fa fa fa fa fa fa fa fa fa fa fa
+  0x0c1a7fff8050: fa fa fa fa fa fa fa fa fa fa fa fa fa fa fa fa
+  0x0c1a7fff8060: fa fa fa fa fa fa fa fa fa fa fa fa fa fa fa fa
+  0x0c1a7fff8070: fa fa fa fa fa fa fa fa fa fa fa fa fa fa fa fa
+  0x0c1a7fff8080: fa fa fa fa fa fa fa fa fa fa fa fa fa fa fa fa
+Shadow byte legend (one shadow byte represents 8 application bytes):
+  Addressable:           00
+  Partially addressable: 01 02 03 04 05 06 07 
+  Heap left redzone:       fa
+  Freed heap region:       fd
+  Stack left redzone:      f1
+  Stack mid redzone:       f2
+  Stack right redzone:     f3
+  Stack after return:      f5
+  Stack use after scope:   f8
+  Global redzone:          f9
+  Global init order:       f6
+  Poisoned by user:        f7
+  Container overflow:      fc
+  Array cookie:            ac
+  Intra object redzone:    bb
+  ASan internal:           fe
+  Left alloca redzone:     ca
+  Right alloca redzone:    cb
+==16842==ABORTING
+it crashed
+</pre>
+
+<p>
+And now with undefined!
+</p>
+<div class="org-src-container">
+<pre class="src src-sh">gcc -std=c99 -pedantic -Wall -Wextra -ftrapv -ggdb3 -fsanitize=undefined -o malloc_oob ./malloc_oob.c
+<span style="color: #483d8b;">echo</span> 33 | ./malloc_oob 2&gt;&amp;1 || <span style="color: #483d8b;">echo</span> it crashed
+</pre>
+</div>
+
+<pre class="example">
+How big?
+0
+</pre>
+
+
+<div class="org-src-container">
+<pre class="src src-sh">gcc -std=c99 -pedantic -Wall -Wextra -ftrapv -ggdb3 -o malloc_oob ./malloc_oob.c 2&gt;&amp;1
+<span style="color: #483d8b;">echo</span> 33 | ./malloc_oob 2&gt;&amp;1 || <span style="color: #483d8b;">echo</span> it crashed
+</pre>
+</div>
+
+<pre class="example">
+How big?
+0
+</pre>
+</div>
+</li>
+
+
+<li><a id="org3dba30d"></a>./malloc<sub>uninit.c</sub><br />
+<div class="outline-text-5" id="text-1-6-8-8">
+<p>
+<a href="./malloc_uninit.c">./malloc_uninit.c</a>
+</p>
+
+<p>
+Sanitize ./malloc<sub>uninit.c</sub> with address!
+</p>
+<div class="org-src-container">
+<pre class="src src-sh">gcc -std=c99 -pedantic -Wall -Wextra -ftrapv -ggdb3 -fsanitize=address -o malloc_uninit ./malloc_uninit.c
+<span style="color: #483d8b;">echo</span> 33 | ./malloc_uninit 2&gt;&amp;1 || <span style="color: #483d8b;">echo</span> it crashed
+</pre>
+</div>
+
+<pre class="example">
+
+=================================================================
+==16869==ERROR: LeakSanitizer: detected memory leaks
+
+Direct leak of 132 byte(s) in 1 object(s) allocated from:
+    #0 0x7fb2c579bb40 in __interceptor_malloc (/usr/lib/x86_64-linux-gnu/libasan.so.4+0xdeb40)
+    #1 0x55cfc8972ddd in main malloc_uninit.c:23
+    #2 0x7fb2c52edb96 in __libc_start_main (/lib/x86_64-linux-gnu/libc.so.6+0x21b96)
+
+SUMMARY: AddressSanitizer: 132 byte(s) leaked in 1 allocation(s).
+it crashed
+</pre>
+
+<p>
+And now with undefined!
+</p>
+<div class="org-src-container">
+<pre class="src src-sh">gcc -std=c99 -pedantic -Wall -Wextra -ftrapv -ggdb3 -fsanitize=undefined -o malloc_uninit ./malloc_uninit.c
+<span style="color: #483d8b;">echo</span> 33 | ./malloc_uninit 2&gt;&amp;1 || <span style="color: #483d8b;">echo</span> it crashed
+</pre>
+</div>
+
+<pre class="example">
+How big?
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+</pre>
+</div>
+</li>
+
+<li><a id="org06fb2f0"></a>./segv.c<br />
+<div class="outline-text-5" id="text-1-6-8-9">
+<p>
+<a href="./segv.c">./segv.c</a>
+</p>
+
+<p>
+Sanitize ./segv.c with address!
+</p>
+<div class="org-src-container">
+<pre class="src src-sh">gcc -std=c99 -pedantic -Wall -Wextra -ftrapv -ggdb3 -fsanitize=address -o segv ./segv.c
+<span style="color: #483d8b;">echo</span> 33 | ./segv 2&gt;&amp;1 || <span style="color: #483d8b;">echo</span> it crashed
+</pre>
+</div>
+
+<pre class="example">
+ASAN:DEADLYSIGNAL
+=================================================================
+==16888==ERROR: AddressSanitizer: SEGV on unknown address 0x60d0003d0940 (pc 0x562a635bdfa2 bp 0x7ffe9b7eb980 sp 0x7ffe9b7eb8c0 T0)
+==16888==The signal is caused by a READ memory access.
+    #0 0x562a635bdfa1 in main segv.c:26
+    #1 0x7f131db6ab96 in __libc_start_main (/lib/x86_64-linux-gnu/libc.so.6+0x21b96)
+    #2 0x562a635bdca9 in _start (/home/hindle1/projects/CMPUT201W20/2020-01/CMPUT201W20B2-public/week10/segv+0xca9)
+
+AddressSanitizer can not provide additional info.
+SUMMARY: AddressSanitizer: SEGV segv.c:26 in main
+==16888==ABORTING
+it crashed
+</pre>
+
+<p>
+And now with undefined!
+</p>
+<div class="org-src-container">
+<pre class="src src-sh">gcc -std=c99 -pedantic -Wall -Wextra -ftrapv -ggdb3 -fsanitize=undefined -o segv ./segv.c
+<span style="color: #483d8b;">echo</span> 33 | ./segv 2&gt;&amp;1 || <span style="color: #483d8b;">echo</span> it crashed
+</pre>
+</div>
+
+<pre class="example">
+it crashed
+</pre>
+</div>
+</li>
+
+<li><a id="orge078e36"></a>./simple<sub>uninit.c</sub><br />
+<div class="outline-text-5" id="text-1-6-8-10">
+<p>
+<a href="./simple_uninit.c">./simple_uninit.c</a>
+</p>
+
+<p>
+Sanitize ./simple<sub>uninit.c</sub> with address!
+</p>
+<div class="org-src-container">
+<pre class="src src-sh">gcc -std=c99 -pedantic -Wall -Wextra -ftrapv -ggdb3 -fsanitize=address -o simple_uninit ./simple_uninit.c
+<span style="color: #483d8b;">echo</span> 33 | ./simple_uninit 2&gt;&amp;1 || <span style="color: #483d8b;">echo</span> it crashed
+</pre>
+</div>
+
+<pre class="example">
+Enter an int:
+33
+</pre>
+
+
+<p>
+And now with undefined!
+</p>
+<div class="org-src-container">
+<pre class="src src-sh">gcc -std=c99 -pedantic -Wall -Wextra -ftrapv -ggdb3 -fsanitize=undefined -o simple_uninit ./simple_uninit.c
+<span style="color: #483d8b;">echo</span> 33 | ./simple_uninit 2&gt;&amp;1 || <span style="color: #483d8b;">echo</span> it crashed
+</pre>
+</div>
+
+<pre class="example">
+Enter an int:
+33
+</pre>
+</div>
+</li>
+
+<li><a id="org3d9ce72"></a>./use<sub>after</sub><sub>free.c</sub><br />
+<div class="outline-text-5" id="text-1-6-8-11">
+<p>
+<a href="./use_after_free.c">./use_after_free.c</a>
+</p>
+
+<p>
+Sanitize ./use<sub>after</sub><sub>free.c</sub> with address!
+</p>
+<div class="org-src-container">
+<pre class="src src-sh">gcc -std=c99 -pedantic -Wall -Wextra -ftrapv -ggdb3 -fsanitize=address -o use_after_free ./use_after_free.c
+<span style="color: #483d8b;">echo</span> 33 | ./use_after_free 2&gt;&amp;1 || <span style="color: #483d8b;">echo</span> it crashed
+</pre>
+</div>
+
+<pre class="example">
+=================================================================
+==16935==ERROR: AddressSanitizer: heap-use-after-free on address 0x60d000000040 at pc 0x5573276330b8 bp 0x7fff96afd3a0 sp 0x7fff96afd390
+READ of size 4 at 0x60d000000040 thread T0
+    #0 0x5573276330b7 in main use_after_free.c:30
+    #1 0x7f2f9d47bb96 in __libc_start_main (/lib/x86_64-linux-gnu/libc.so.6+0x21b96)
+    #2 0x557327632ca9 in _start (/home/hindle1/projects/CMPUT201W20/2020-01/CMPUT201W20B2-public/week10/use_after_free+0xca9)
+
+0x60d000000040 is located 0 bytes inside of 132-byte region [0x60d000000040,0x60d0000000c4)
+freed by thread T0 here:
+    #0 0x7f2f9d9297a8 in __interceptor_free (/usr/lib/x86_64-linux-gnu/libasan.so.4+0xde7a8)
+    #1 0x55732763303c in main use_after_free.c:28
+    #2 0x7f2f9d47bb96 in __libc_start_main (/lib/x86_64-linux-gnu/libc.so.6+0x21b96)
+
+previously allocated by thread T0 here:
+    #0 0x7f2f9d929b40 in __interceptor_malloc (/usr/lib/x86_64-linux-gnu/libasan.so.4+0xdeb40)
+    #1 0x557327632e7e in main use_after_free.c:21
+    #2 0x7f2f9d47bb96 in __libc_start_main (/lib/x86_64-linux-gnu/libc.so.6+0x21b96)
+
+SUMMARY: AddressSanitizer: heap-use-after-free use_after_free.c:30 in main
+Shadow bytes around the buggy address:
+  0x0c1a7fff7fb0: 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00
+  0x0c1a7fff7fc0: 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00
+  0x0c1a7fff7fd0: 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00
+  0x0c1a7fff7fe0: 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00
+  0x0c1a7fff7ff0: 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00
+=&gt;0x0c1a7fff8000: fa fa fa fa fa fa fa fa[fd]fd fd fd fd fd fd fd
+  0x0c1a7fff8010: fd fd fd fd fd fd fd fd fd fa fa fa fa fa fa fa
+  0x0c1a7fff8020: fa fa fa fa fa fa fa fa fa fa fa fa fa fa fa fa
+  0x0c1a7fff8030: fa fa fa fa fa fa fa fa fa fa fa fa fa fa fa fa
+  0x0c1a7fff8040: fa fa fa fa fa fa fa fa fa fa fa fa fa fa fa fa
+  0x0c1a7fff8050: fa fa fa fa fa fa fa fa fa fa fa fa fa fa fa fa
+Shadow byte legend (one shadow byte represents 8 application bytes):
+  Addressable:           00
+  Partially addressable: 01 02 03 04 05 06 07 
+  Heap left redzone:       fa
+  Freed heap region:       fd
+  Stack left redzone:      f1
+  Stack mid redzone:       f2
+  Stack right redzone:     f3
+  Stack after return:      f5
+  Stack use after scope:   f8
+  Global redzone:          f9
+  Global init order:       f6
+  Poisoned by user:        f7
+  Container overflow:      fc
+  Array cookie:            ac
+  Intra object redzone:    bb
+  ASan internal:           fe
+  Left alloca redzone:     ca
+  Right alloca redzone:    cb
+==16935==ABORTING
+it crashed
+</pre>
+
+<p>
+And now with undefined!
+</p>
+<div class="org-src-container">
+<pre class="src src-sh">gcc -std=c99 -pedantic -Wall -Wextra -ftrapv -ggdb3 -fsanitize=undefined -o use_after_free ./use_after_free.c
+<span style="color: #483d8b;">echo</span> 33 | ./use_after_free 2&gt;&amp;1 || <span style="color: #483d8b;">echo</span> it crashed
+</pre>
+</div>
+
+<pre class="example">
+How big?
+array[0] = 0
+array[1] = 1
+array[2] = 2
+array[3] = 3
+array[4] = 4
+array[5] = 5
+array[6] = 6
+array[7] = 7
+array[8] = 8
+array[9] = 9
+array[10] = 10
+array[11] = 11
+array[12] = 12
+array[13] = 13
+array[14] = 14
+array[15] = 15
+array[16] = 16
+array[17] = 17
+array[18] = 18
+array[19] = 19
+array[20] = 20
+array[21] = 21
+array[22] = 22
+array[23] = 23
+array[24] = 24
+array[25] = 25
+array[26] = 26
+array[27] = 27
+array[28] = 28
+array[29] = 29
+array[30] = 30
+array[31] = 31
+array[32] = 32
+array[0] = 0
+array[1] = 0
+array[2] = 2
+array[3] = 3
+array[4] = 4
+array[5] = 5
+array[6] = 6
+array[7] = 7
+array[8] = 8
+array[9] = 9
+array[10] = 10
+array[11] = 11
+array[12] = 12
+array[13] = 13
+array[14] = 14
+array[15] = 15
+array[16] = 16
+array[17] = 17
+array[18] = 18
+array[19] = 19
+array[20] = 20
+array[21] = 21
+array[22] = 22
+array[23] = 23
+array[24] = 24
+array[25] = 25
+array[26] = 26
+array[27] = 27
+array[28] = 28
+array[29] = 29
+array[30] = 30
+array[31] = 31
+array[32] = 32
+</pre>
+</div>
+
+
+<ol class="org-ol">
+<li><a id="org83dc5a9"></a>Generator (ignore)<br />
+<div class="outline-text-6" id="text-1-6-8-11-1">
+<p>
+This is just code for me to generate part of the slides
+</p>
+</div>
+</li>
+</ol>
+</li>
+</ol>
 </div>
 </div>
 </div>
 </div>
 <div id="postamble" class="status">
 <p class="author">Author: Abram Hindle</p>
-<p class="date">Created: 2020-03-17 Tue 16:53</p>
+<p class="date">Created: 2020-03-19 Thu 11:31</p>
 <p class="validation"><a href="http://validator.w3.org/check?uri=referer">Validate</a></p>
 </div>
 </body>

@@ -1,0 +1,42 @@
+# common arguments for GCC
+CFLAGS= -std=c99 -pedantic -Wall -Wextra -ftrapv -ggdb3
+# Common compiler
+CC=gcc
+# you might call these OBJECTS instead
+BUILDABLES=coolbears.o coolbears-driver
+# clangtidy checks
+CHECKS=--checks=*,-cert-err34-c,-cert-msc30-c,-cert-msc50-cpp
+# oclint checks
+LINTR=--disable-rule=UselessParentheses
+CLANGTIDY=clang-tidy
+OCLINT=oclint
+
+
+# this just runs a command but ensures it is built
+run: coolbears-driver
+	./coolbears-driver # just a shell command
+
+coolbears.o: coolbears.c coolbears.h
+	$(CC) $(CFLAGS) \
+        -c coolbears.c
+
+coolbears-driver.o: coolbears-driver.c coolbears.c
+	$(CC) $(CFLAGS) \
+        -c coolbears.c
+
+# build an executable
+coolbears-driver: coolbears-driver.o coolbears.o
+	$(CC) $(CFLAGS) \
+	-o coolbears-driver coolbears-driver.o \
+	coolbears.o 
+
+# clean is idiomatic for remove object files and executables
+clean: 
+	rm $(BUILDABLES) || echo nothing to delete
+
+lint-coolbears-driver: coolbears-driver.c
+	$(CLANGTIDY) $(CHECKS) \
+		$< -- \
+		$(CFLAGS) -c $^ $(LDFLAGS)
+	$(OCLINT) $(LINTR) $< \
+		-- $(CFLAGS) -c $< $(LDFLAGS)

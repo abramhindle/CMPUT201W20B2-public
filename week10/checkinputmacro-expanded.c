@@ -2014,7 +2014,7 @@ int main() {
        (-1) 
 # 10 "checkinputmacro.c"
        || !scanf("%d", &myInt) )) {
-        printf("Invalid input!");
+        printf("Invalid input!\n");
         exit(1);
     }
     printf("My int: %d\n", myInt);
