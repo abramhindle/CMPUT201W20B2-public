@@ -111,13 +111,14 @@ Bases used on computers:
 - 31 in base 8 is   3*pow(8,1) + 7*pow(8,0)
 - 31 in base 2 is   1*pow(2,4) + 1*pow(2,3) + 1*pow(2,2) + 1*pow(2,1) + 1*pow(2,0)
 
-Notation for base 2 for 31:  0b11111 # not available in C, good in python
-Notation for base 8 for 31:  037     # available in C    , good in python
-Notation for base 10 for 31: 31      # available in C    , good in python
-Notation for base 16 for 31: 0x1F    # available in C    , good in python
+- Notation for base 2 for 31:  0b11111 # not available in C, good in python
+- Notation for base 8 for 31:  037     # available in C    , good in python
+- Notation for base 10 for 31: 31      # available in C    , good in python
+- Notation for base 16 for 31: 0x1F    # available in C    , good in python
 
 *** Binary
-    
+
+#+begin_example    
     Base 2: powers of 2
     
     Digits: 0,1
@@ -131,8 +132,11 @@ Notation for base 16 for 31: 0x1F    # available in C    , good in python
     6:  0b00110 14:  0b01110         
     7:  0b00111 15:  0b01111
                 16:  0b10000
+#+end_example
+
 *** Octal
-    
+
+#+begin_example    
     Base 8: powers of 8
     
     3 bits
@@ -152,6 +156,8 @@ Notation for base 16 for 31: 0x1F    # available in C    , good in python
     07:                 7 =   7
     077:          7*8 + 7 =  63
     0777: 7*8*8 + 7*8 + 7 = 511
+#+end_example
+
 *** Base10 Review
     Base 10: power of 10
     
@@ -692,23 +698,8 @@ int main() {
 #+RESULTS:
 : u32: 11111111011101110000101010111110
 
-#+BEGIN_SRC C :exports both 
-#include <stdio.h>
-#include <inttypes.h>
-#define BIT(x,b,y) ((x<<(b-y-1))>>(b-1))
-#define BITS 32
-int main() {
-    // 0x7 = 0b0111
-    uint32_t u32 = 0xFF770ABE;
-    char str[BITS+1] = { '\0' };
-    for (int i = 0 ; i < BITS; i++) {
-        str[BITS-1-i] = (BIT(u32,BITS,i))?'1':'0';
-    }
-    printf("u32: %s\n", str);
-}
-#+END_SRC
-
-#+BEGIN_SRC C :exports both :main no :tangle bitprinter.h
+***** Bitprinter.h
+#+BEGIN_SRC C :exports code :main no :tangle bitprinter.h
 #ifndef _BITPRINTER_H_
 #define _BITPRINTER_H_
 #include <inttypes.h>
@@ -739,8 +730,6 @@ static char * bitString8(uint8_t value) {
 #endif
 #+END_SRC
 
-#+RESULTS:
-
 *** bitwise and
 
 The & operator is bitwise complement. It means every bit of an integer
@@ -748,10 +737,10 @@ is and'd.
 
 The & operator is a binary operator.
 
-  0 & 0 -> 0
-  0 & 1 -> 0
-  1 & 0 -> 0
-  1 & 1 -> 1
+-  0 & 0 -> 0
+-  0 & 1 -> 0
+-  1 & 0 -> 0
+-  1 & 1 -> 1
 
 #+BEGIN_SRC C :exports both 
 #include <stdio.h>
