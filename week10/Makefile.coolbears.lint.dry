@@ -14,21 +14,27 @@ HEADERS=coolbears.h
 OBJECTS=coolbears.o coolbears-driver.o
 EXECUTABLE=coolbears-driver
 
-.PHONY: lint-% run
+.PHONY: lint-% run clean valgrind
 
 # this just runs a command but ensures it is built
 run: $(EXECUTABLE)
 	./$(EXECUTABLE)
 
 %.o: %.c $(HEADERS)
-	$(CC) $(CFLAGS) -c $<
+	$(CC) $(CFLAGS) -c $< 
+	$(CLANGTIDY) $(CHECKS) \
+		$< -- \
+		$(CFLAGS) -c $< $(LDFLAGS)
+	$(OCLINT) $(LINTR) $< \
+		-- $(CFLAGS) -c $< $(LDFLAGS)
+
 
 $(EXECUTABLE): $(OBJECTS)
 	$(CC) $(CFLAGS) -o $@ $^
 
 # clean is idiomatic for remove object files and executables
 clean: 
-	rm $(EXECUTABLE) $(OBJECTS) || echo nothing to delete
+	rm -f $(EXECUTABLE) $(OBJECTS) 
 
 lint-%: %.c
 	$(CLANGTIDY) $(CHECKS) \
@@ -37,5 +43,9 @@ lint-%: %.c
 	$(OCLINT) $(LINTR) $< \
 		-- $(CFLAGS) -c $< $(LDFLAGS)
 
+# Lookie here how these 2 valgrinds are very similar
 valgrind-%: %
+	valgrind --leak-check=full --track-origins=yes ./$< 2>&1
+
+valgrind: $(EXECUTABLE)
 	valgrind --leak-check=full --track-origins=yes ./$< 2>&1

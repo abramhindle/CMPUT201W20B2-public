@@ -3137,7 +3137,7 @@ depth: 261799
 
 ***** Generator (ignore)
 
-#+BEGIN_SRC sh :exports none :eval no
+#+BEGIN_SRC sh :exports none :eval no :results raw
 # look a bash for loop!
 for file in ./array_oob.c ./array_uninit.c ./bad_realloc.c ./bad_str.c ./double_free.c ./huge_array.c ./malloc_oob.c ./malloc_uninit.c ./segv.c ./simple_uninit.c ./stack.c ./stack_limit.c ./use_after_free.c 
 #for file in ./array_oob.c ./array_uninit.c ./bad_realloc.c 
@@ -3147,16 +3147,20 @@ echo
 echo \*\*\*\* $file
 echo file:$file
 echo 
-echo \#+BEGIN_SRC sh 
-echo gcc -std=c99 -pedantic -Wall -Wextra -ftrapv -ggdb3 -o $exe $file
-echo echo 33 \| valgrind ./$exe 2\>\&1
+echo Sanitize $file with address!
+echo \#+BEGIN_SRC sh :exports code
+echo gcc -std=c99 -pedantic -Wall -Wextra -ftrapv -ggdb3 -fsanitize=address -o $exe $file
+echo echo 33 \| ./$exe 2\>\&1
 echo \#+END_SRC
 echo 
-echo Run GDB
-echo \#+BEGIN_SRC sh 
-echo gcc -std=c99 -pedantic -Wall -Wextra -ftrapv -ggdb3 -o $exe $file
-echo gnome-terminal -- gdb ./$exe
+echo And now with undefined!
+echo \#+BEGIN_SRC sh :exports code
+echo gcc -std=c99 -pedantic -Wall -Wextra -ftrapv -ggdb3 -fsanitize=undefined -o $exe $file
+echo echo 33 \| ./$exe 2\>\&1
 echo \#+END_SRC
+
 done
 #+END_SRC
+
+#+RESULTS:
 

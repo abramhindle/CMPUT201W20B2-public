@@ -1,9 +1,11 @@
 # common arguments for GCC
 CFLAGS= -std=c99 -pedantic -Wall -Wextra -ftrapv -ggdb3
+LDFLAGS=-lm
 # Common compiler
 CC=gcc
 # you might call these OBJECTS instead
 BUILDABLES=coolbears.o coolbears-driver
+OBJECTS=coolbears.o coolbears-driver.o
 
 # this just runs a command but ensures it is built
 run: coolbears-driver
@@ -13,6 +15,10 @@ coolbears.o: coolbears.c
 	$(CC) $(CFLAGS) \
         -c coolbears.c
 
+coolbears2.o: coolbears2.c
+	$(CC) $(CFLAGS) \
+        -c coolbears2.c
+
 # build an executable
 coolbears-driver: coolbears-driver.c coolbears.o
 	$(CC) $(CFLAGS) \
@@ -21,4 +27,4 @@ coolbears-driver: coolbears-driver.c coolbears.o
 
 # clean is idiomatic for remove object files and executables
 clean: 
-	rm $(BUILDABLES) || echo nothing to delete
+	rm -f $(BUILDABLES)

@@ -1,4 +1,4 @@
-% Created 2020-03-24 Tue 11:36
+% Created 2020-03-24 Tue 11:42
 % Intended LaTeX compiler: pdflatex
 \documentclass[11pt]{article}
 \usepackage[utf8]{inputenc}
@@ -31,9 +31,9 @@
 
 
 \section{Week11}
-\label{sec:orgfaacb6c}
+\label{sec:org0b5c663}
 \subsection{Copyright Statement}
-\label{sec:org79d41cb}
+\label{sec:orgceec8e9}
 
 If you are in CMPUT201 at UAlberta this code is released in the public
 domain to you.
@@ -41,7 +41,7 @@ domain to you.
 Otherwise it is (c) 2020 Abram Hindle, Hazel Campbell AGPL3.0+
 
 \subsubsection{License}
-\label{sec:orgb247f7f}
+\label{sec:org73d3a11}
 
 CMPUT 201 C Notes
 Copyright (C) 2020 Abram Hindle, Hazel Campbell
@@ -61,7 +61,7 @@ along with this program.  If not, see \url{https://www.gnu.org/licenses/}.
 
 
 \subsubsection{Hazel Code is licensed under AGPL3.0+}
-\label{sec:org8214f1a}
+\label{sec:org17e5bc5}
 
 Hazel's code is also found here
 \url{https://github.com/hazelybell/examples/tree/C-2020-01}
@@ -70,12 +70,12 @@ Hazel code is licensed: The example code is licensed under the AGPL3+
 license, unless otherwise noted.
 
 \subsection{Alternative version}
-\label{sec:org9a56860}
+\label{sec:org64a4906}
 
 Checkout the .txt, the .pdf, and the .html version
 
 \subsection{Init ORG-MODE}
-\label{sec:org1d93344}
+\label{sec:orgc8a7168}
 
 \begin{verbatim}
 ;; I need this for org-mode to work well
@@ -97,7 +97,7 @@ Checkout the .txt, the .pdf, and the .html version
 \end{verbatim}
 
 \subsubsection{Org export}
-\label{sec:org41ba130}
+\label{sec:org4aee5be}
 \begin{verbatim}
 (org-html-export-to-html)
 (org-latex-export-to-pdf)
@@ -106,7 +106,7 @@ Checkout the .txt, the .pdf, and the .html version
 
 
 \subsubsection{Org Template}
-\label{sec:org5c84f72}
+\label{sec:org00c0763}
 Copy and paste this to demo C
 
 \begin{verbatim}
@@ -118,12 +118,12 @@ int main(int argc, char**argv) {
 \end{verbatim}
 
 \subsection{Remember how to compile?}
-\label{sec:org5f86ca1}
+\label{sec:org40fa570}
 
 gcc  -std=c99 -pedantic -Wall -Wextra -ftrapv -ggdb3 -o programname programname.c
 
 \subsection{Numbers!}
-\label{sec:org9c052d9}
+\label{sec:org0fc184d}
 
 Computers love powers of 2 because we calculate everything via bits.
 
@@ -141,16 +141,17 @@ Bases used on computers:
 \item 31 in base 10 is 30*pow(10,1) + 1*pow(10,0)
 \item 31 in base 8 is   3*pow(8,1) + 7*pow(8,0)
 \item 31 in base 2 is   1*pow(2,4) + 1*pow(2,3) + 1*pow(2,2) + 1*pow(2,1) + 1*pow(2,0)
+
+\item Notation for base 2 for 31:  0b11111 \# not available in C, good in python
+\item Notation for base 8 for 31:  037     \# available in C    , good in python
+\item Notation for base 10 for 31: 31      \# available in C    , good in python
+\item Notation for base 16 for 31: 0x1F    \# available in C    , good in python
 \end{itemize}
 
-Notation for base 2 for 31:  0b11111 \# not available in C, good in python
-Notation for base 8 for 31:  037     \# available in C    , good in python
-Notation for base 10 for 31: 31      \# available in C    , good in python
-Notation for base 16 for 31: 0x1F    \# available in C    , good in python
-
 \subsubsection{Binary}
-\label{sec:org2045b3a}
+\label{sec:org0e6fcd8}
 
+\begin{verbatim}
 Base 2: powers of 2
 
 Digits: 0,1
@@ -164,9 +165,12 @@ Digits: 0,1
 6:  0b00110 14:  0b01110         
 7:  0b00111 15:  0b01111
             16:  0b10000
-\subsubsection{Octal}
-\label{sec:org2b8662b}
+\end{verbatim}
 
+\subsubsection{Octal}
+\label{sec:orgfe20be2}
+
+\begin{verbatim}
 Base 8: powers of 8
 
 3 bits
@@ -186,13 +190,16 @@ Digits: 0,1,2,3,4,5,6,7
 07:                 7 =   7
 077:          7*8 + 7 =  63
 0777: 7*8*8 + 7*8 + 7 = 511
+\end{verbatim}
+
 \subsubsection{Base10 Review}
-\label{sec:org3d08c04}
+\label{sec:org4806b14}
+\begin{verbatim}
 Base 10: power of 10
 
-Digits: 0,1,2,3,4,5,6,7,8,9
+   Digits: 0,1,2,3,4,5,6,7,8,9
 
-\textasciitilde{}4 bits - not a power of 2
+~4 bits - not a power of 2
 
 0:  0  8:  8
 1:  1  9:  9   
@@ -203,11 +210,12 @@ Digits: 0,1,2,3,4,5,6,7,8,9
 6:  6 14: 14          
 7:  7 15: 15 
       16: 16
-
+\end{verbatim}
 
 \subsubsection{Hex Review}
-\label{sec:orgd93a50b}
+\label{sec:org96608aa}
 
+\begin{verbatim}
 Base 16: power of 16
 
    Digits: 0,1,2,3,4,5,6,7,8,9,A,B,C,D,E,F
@@ -237,10 +245,10 @@ Digit Lookup
 5:  0x5 0b0101    13: 0xD 0b1101 
 6:  0x6 0b0110    14: 0xE 0b1110          
 7:  0x7 0b0111    15: 0xF 0b1111 
-
+\end{verbatim}
 
 \subsubsection{Bitwise Operators}
-\label{sec:org2dc733e}
+\label{sec:org4f8e89f}
 
 Bitwise operators operate at the bit-level for variables such as integers.
 
@@ -251,7 +259,7 @@ Also be aware that structs have padding so you might get unexpected
 results.
 
 \subsubsection{Left Shift}
-\label{sec:orgfcb94e8}
+\label{sec:org5975889}
 
 Integer Multiplication by 2. Shifts bits to the left. Do not use negative values.
 
@@ -480,7 +488,7 @@ int main() {
 
 
 \subsubsection{Right Shift}
-\label{sec:orgac85ee2}
+\label{sec:orgfd193e4}
 
 Integer Division by 2. Shifts bits to the right. Do not use negative values.
 
@@ -709,7 +717,7 @@ int main() {
 \end{verbatim}
 
 \subsubsection{Could we access the bits with shifts?}
-\label{sec:org1ce1b77}
+\label{sec:org27aee07}
 
 \begin{verbatim}
 #include <stdio.h>
@@ -731,28 +739,9 @@ int main() {
 u32: 11111111011101110000101010111110
 \end{verbatim}
 
-
-\begin{verbatim}
-#include <stdio.h>
-#include <inttypes.h>
-#define BIT(x,b,y) ((x<<(b-y-1))>>(b-1))
-#define BITS 32
-int main() {
-    // 0x7 = 0b0111
-    uint32_t u32 = 0xFF770ABE;
-    char str[BITS+1] = { '\0' };
-    for (int i = 0 ; i < BITS; i++) {
-        str[BITS-1-i] = (BIT(u32,BITS,i))?'1':'0';
-    }
-    printf("u32: %s\n", str);
-}
-\end{verbatim}
-
-\begin{verbatim}
-u32: 11111111011101110000101010111110
-\end{verbatim}
-
-
+\begin{enumerate}
+\item Bitprinter.h
+\label{sec:org83430b4}
 \begin{verbatim}
 #ifndef _BITPRINTER_H_
 #define _BITPRINTER_H_
@@ -783,19 +772,22 @@ static char * bitString8(uint8_t value) {
 }
 #endif
 \end{verbatim}
+\end{enumerate}
 
 \subsubsection{bitwise and}
-\label{sec:orgf372b5c}
+\label{sec:org24cd29f}
 
 The \& operator is bitwise complement. It means every bit of an integer
 is and'd. 
 
 The \& operator is a binary operator.
 
-0 \& 0 -> 0
-0 \& 1 -> 0
-1 \& 0 -> 0
-1 \& 1 -> 1
+\begin{itemize}
+\item 0 \& 0 -> 0
+\item 0 \& 1 -> 0
+\item 1 \& 0 -> 0
+\item 1 \& 1 -> 1
+\end{itemize}
 
 \begin{verbatim}
 #include <stdio.h>
@@ -887,11 +879,11 @@ ffffffff & 80000000 = 80000000
 
 \begin{enumerate}
 \item Uses of \&
-\label{sec:org04c5eef}
+\label{sec:org2a4ef3c}
 
 \begin{enumerate}
 \item Checking for bits
-\label{sec:orgd7c0ba4}
+\label{sec:orgae8d45d}
 
 \begin{verbatim}
 #include <inttypes.h>
@@ -922,7 +914,7 @@ Lets see some bits!
 
 
 \item Bit Printing
-\label{sec:org5e495ae}
+\label{sec:org6643662}
 
 \& is way safer than shift for bit printing.
 
@@ -1003,17 +995,19 @@ Interesting[0] & Interesting[1]0000000000000000000000000000000000000000000000000
 
 
 \subsubsection{bitwise OR}
-\label{sec:orgd3f22ed}
+\label{sec:org0c8838b}
 
 The | operator is bitwise complement. It is the or operator between
 bits. 
 
 The | operator is a binary operator.
 
-0 | 0 -> 0
-0 | 1 -> 1
-1 | 0 -> 1
-1 | 1 -> 1
+\begin{itemize}
+\item 0 | 0 -> 0
+\item 0 | 1 -> 1
+\item 1 | 0 -> 1
+\item 1 | 1 -> 1
+\end{itemize}
 
 \begin{verbatim}
 #include <stdio.h>
@@ -1105,13 +1099,13 @@ ffffffff & 80000000 = ffffffff
 
 \begin{enumerate}
 \item Uses of |
-\label{sec:org185b693}
+\label{sec:org7ea7897}
 
 We mostly use | to combine bits together for arguments to functions.
 \end{enumerate}
 
 \subsubsection{bitwise XOR}
-\label{sec:orgf4cfc34}
+\label{sec:org27c087e}
 
 The \^{} operator is bitwise exclusive OR. It is the XOR operator between
 bits. It differs from or because when both inputs bits are hot the
@@ -1119,10 +1113,12 @@ result in 0.
 
 The \^{} operator is a binary operator.
 
-0 | 0 -> 0
-0 | 1 -> 1
-1 | 0 -> 1
-1 | 1 -> 0
+\begin{itemize}
+\item 0 | 0 -> 0
+\item 0 | 1 -> 1
+\item 1 | 0 -> 1
+\item 1 | 1 -> 0
+\end{itemize}
 
 \begin{verbatim}
 #include <stdio.h>
@@ -1214,7 +1210,7 @@ ffffffff & 80000000 = 7fffffff
 
 \begin{enumerate}
 \item Uses of \^{}
-\label{sec:org19b4855}
+\label{sec:org6a80c77}
 
 XOR has interesting properties .
 
@@ -1254,13 +1250,15 @@ Encrypted Again: I enjoy olive bread
 \end{enumerate}
 
 \subsubsection{bitwise complement}
-\label{sec:org0125f7f}
+\label{sec:org0012059}
 
 The \textasciitilde{} operator is bitwise complement. It means every bit is notted
 The \textasciitilde{} operator is a unary operator.
 
-0 -> 1
-1 -> 0
+\begin{itemize}
+\item 0 -> 1
+\item 1 -> 0
+\end{itemize}
 
 \begin{verbatim}
 #include <stdio.h>
@@ -1325,7 +1323,7 @@ int main() {
 
 
 \subsubsection{Flags}
-\label{sec:orgda17dc6}
+\label{sec:orgc2018de}
 
 In C flags are often used. Flags are parameters who's bits indicate if
 some option is chosen.
@@ -1398,7 +1396,7 @@ warning: flags must be not 0
 
 \begin{enumerate}
 \item Expected Flag use:
-\label{sec:org9264cb6}
+\label{sec:org4cf5765}
 
 Use | to set a flag:   FLAG1 | FLAG2
 
@@ -1423,7 +1421,7 @@ It actually just checks if you have either FLAG1 or FLAG2.
 
 
 \item Flags Example
-\label{sec:org292001e}
+\label{sec:org62b2817}
 
 Hazel talks in depth about pizza
 \begin{itemize}
@@ -1666,7 +1664,7 @@ WARNING: SPAAAAAAAARTA, or spatarn.
 \end{enumerate}
 
 \subsubsection{PRACTICE and More resources}
-\label{sec:orgf740d96}
+\label{sec:org70e0fe2}
 
 \begin{itemize}
 \item PLEASE Read Hazel's Notes on the subject 
@@ -1686,10 +1684,10 @@ WARNING: SPAAAAAAAARTA, or spatarn.
 
 
 \subsubsection{BitFields}
-\label{sec:org4e71299}
+\label{sec:org88cc65b}
 
 
 
 \subsubsection{Floating Point Numbers}
-\label{sec:orge3daaa3}
+\label{sec:org6b8a304}
 \end{document}

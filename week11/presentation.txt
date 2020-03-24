@@ -162,72 +162,115 @@ _________________
   - 31 in base 2 is 1*pow(2,4) + 1*pow(2,3) + 1*pow(2,2) + 1*pow(2,1) +
     1*pow(2,0)
 
-  Notation for base 2 for 31: 0b11111 # not available in C, good in
-  python Notation for base 8 for 31: 037 # available in C , good in
-  python Notation for base 10 for 31: 31 # available in C , good in
-  python Notation for base 16 for 31: 0x1F # available in C , good in
-  python
+  - Notation for base 2 for 31: 0b11111 # not available in C, good in
+    python
+  - Notation for base 8 for 31: 037 # available in C , good in python
+  - Notation for base 10 for 31: 31 # available in C , good in python
+  - Notation for base 16 for 31: 0x1F # available in C , good in python
 
 
 1.5.1 Binary
 ------------
 
-  Base 2: powers of 2
-
-  Digits: 0,1
-
-  0: 0b00000 8: 0b01000 1: 0b00001 9: 0b01001 2: 0b00010 10: 0b01010 3:
-  0b00011 11: 0b01011 4: 0b00100 12: 0b01100 5: 0b00101 13: 0b01101 6:
-  0b00110 14: 0b01110 7: 0b00111 15: 0b01111 16: 0b10000
+  ,----
+  | Base 2: powers of 2
+  | 
+  | Digits: 0,1
+  | 
+  | 0:  0b00000  8:  0b01000
+  | 1:  0b00001  9:  0b01001 
+  | 2:  0b00010 10:  0b01010 
+  | 3:  0b00011 11:  0b01011 
+  | 4:  0b00100 12:  0b01100
+  | 5:  0b00101 13:  0b01101
+  | 6:  0b00110 14:  0b01110         
+  | 7:  0b00111 15:  0b01111
+  |             16:  0b10000
+  `----
 
 
 1.5.2 Octal
 -----------
 
-  Base 8: powers of 8
-
-  3 bits
-
-  Digits: 0,1,2,3,4,5,6,7
-
-  0: 000 8: 010 1: 001 9: 011 2: 002 10: 012 3: 003 11: 013 4: 004 12:
-  014 5: 005 13: 015 6: 006 14: 016 7: 007 15: 017 16: 020
-
-  07: 7 = 7 077: 7*8 + 7 = 63 0777: 7*8*8 + 7*8 + 7 = 511
+  ,----
+  | Base 8: powers of 8
+  | 
+  | 3 bits
+  | 
+  | Digits: 0,1,2,3,4,5,6,7
+  | 
+  | 0:  000  8: 010
+  | 1:  001  9: 011   
+  | 2:  002 10: 012   
+  | 3:  003 11: 013   
+  | 4:  004 12: 014  
+  | 5:  005 13: 015  
+  | 6:  006 14: 016           
+  | 7:  007 15: 017  
+  |         16: 020
+  | 
+  | 07:                 7 =   7
+  | 077:          7*8 + 7 =  63
+  | 0777: 7*8*8 + 7*8 + 7 = 511
+  `----
 
 
 1.5.3 Base10 Review
 -------------------
 
-  Base 10: power of 10
-
-  Digits: 0,1,2,3,4,5,6,7,8,9
-
-  ~4 bits - not a power of 2
-
-  0: 0 8: 8 1: 1 9: 9 2: 2 10: 10 3: 3 11: 11 4: 4 12: 12 5: 5 13: 13 6:
-  6 14: 14 7: 7 15: 15 16: 16
+  ,----
+  | Base 10: power of 10
+  | 
+  |    Digits: 0,1,2,3,4,5,6,7,8,9
+  | 
+  | ~4 bits - not a power of 2
+  | 
+  | 0:  0  8:  8
+  | 1:  1  9:  9   
+  | 2:  2 10: 10  
+  | 3:  3 11: 11  
+  | 4:  4 12: 12  
+  | 5:  5 13: 13 
+  | 6:  6 14: 14          
+  | 7:  7 15: 15 
+  |       16: 16
+  `----
 
 
 1.5.4 Hex Review
 ----------------
 
-  Base 16: power of 16
-
-     Digits: 0,1,2,3,4,5,6,7,8,9,A,B,C,D,E,F or Digits:
-  0,1,2,3,4,5,6,7,8,9,a,b,c,d,e,f
-
-  0: 0x00 8: 0x08 1: 0x01 9: 0x09 2: 0x02 10: 0x0A 3: 0x03 11: 0x0B 4:
-  0x04 12: 0x0C 5: 0x05 13: 0x0D 6: 0x06 14: 0x0E 7: 0x07 15: 0x0F 16:
-  0x10 0xF = 15 = 15 0xFF = 15*16 + 15 = 255 0xFFF = 15*16*16 + 15*16 +
-  15 = 4095 0xFFFF = 15*16*16*16 + 15*16*16 + 15*16 + 15 = 65535
-
-  Digit Lookup
-
-  0: 0x0 0b0000 8: 0x8 0b1000 1: 0x1 0b0001 9: 0x9 0b1001 2: 0x2 0b0010
-  10: 0xA 0b1010 3: 0x3 0b0011 11: 0xB 0b1011 4: 0x4 0b0100 12: 0xC
-  0b1100 5: 0x5 0b0101 13: 0xD 0b1101 6: 0x6 0b0110 14: 0xE 0b1110 7:
-  0x7 0b0111 15: 0xF 0b1111
+  ,----
+  | Base 16: power of 16
+  | 
+  |    Digits: 0,1,2,3,4,5,6,7,8,9,A,B,C,D,E,F
+  | or Digits: 0,1,2,3,4,5,6,7,8,9,a,b,c,d,e,f
+  | 
+  | 0:  0x00  8: 0x08
+  | 1:  0x01  9: 0x09   
+  | 2:  0x02 10: 0x0A  
+  | 3:  0x03 11: 0x0B   
+  | 4:  0x04 12: 0x0C  
+  | 5:  0x05 13: 0x0D  
+  | 6:  0x06 14: 0x0E           
+  | 7:  0x07 15: 0x0F  
+  |          16: 0x10
+  | 0xF    =                                  15 =    15
+  | 0xFF   =                          15*16 + 15 =   255
+  | 0xFFF  =               15*16*16 + 15*16 + 15 =  4095
+  | 0xFFFF = 15*16*16*16 + 15*16*16 + 15*16 + 15 = 65535
+  | 
+  | Digit Lookup
+  | 
+  | 0:  0x0 0b0000     8: 0x8 0b1000
+  | 1:  0x1 0b0001     9: 0x9 0b1001  
+  | 2:  0x2 0b0010    10: 0xA 0b1010 
+  | 3:  0x3 0b0011    11: 0xB 0b1011  
+  | 4:  0x4 0b0100    12: 0xC 0b1100 
+  | 5:  0x5 0b0101    13: 0xD 0b1101 
+  | 6:  0x6 0b0110    14: 0xE 0b1110          
+  | 7:  0x7 0b0111    15: 0xF 0b1111 
+  `----
 
 
 1.5.5 Bitwise Operators
@@ -727,26 +770,7 @@ _________________
   `----
 
 
-  ,----
-  | #include <stdio.h>
-  | #include <inttypes.h>
-  | #define BIT(x,b,y) ((x<<(b-y-1))>>(b-1))
-  | #define BITS 32
-  | int main() {
-  |     // 0x7 = 0b0111
-  |     uint32_t u32 = 0xFF770ABE;
-  |     char str[BITS+1] = { '\0' };
-  |     for (int i = 0 ; i < BITS; i++) {
-  |         str[BITS-1-i] = (BIT(u32,BITS,i))?'1':'0';
-  |     }
-  |     printf("u32: %s\n", str);
-  | }
-  `----
-
-  ,----
-  | u32: 11111111011101110000101010111110
-  `----
-
++ 1.5.8.0.1 Bitprinter.h
 
   ,----
   | #ifndef _BITPRINTER_H_
@@ -788,7 +812,10 @@ _________________
 
   The & operator is a binary operator.
 
-  0 & 0 -> 0 0 & 1 -> 0 1 & 0 -> 0 1 & 1 -> 1
+  - 0 & 0 -> 0
+  - 0 & 1 -> 0
+  - 1 & 0 -> 0
+  - 1 & 1 -> 1
 
   ,----
   | #include <stdio.h>
@@ -996,7 +1023,10 @@ _________________
 
   The | operator is a binary operator.
 
-  0 | 0 -> 0 0 | 1 -> 1 1 | 0 -> 1 1 | 1 -> 1
+  - 0 | 0 -> 0
+  - 0 | 1 -> 1
+  - 1 | 0 -> 1
+  - 1 | 1 -> 1
 
   ,----
   | #include <stdio.h>
@@ -1101,7 +1131,10 @@ _________________
 
   The ^ operator is a binary operator.
 
-  0 | 0 -> 0 0 | 1 -> 1 1 | 0 -> 1 1 | 1 -> 0
+  - 0 | 0 -> 0
+  - 0 | 1 -> 1
+  - 1 | 0 -> 1
+  - 1 | 1 -> 0
 
   ,----
   | #include <stdio.h>
@@ -1237,7 +1270,8 @@ _________________
   The ~ operator is bitwise complement. It means every bit is notted The
   ~ operator is a unary operator.
 
-  0 -> 1 1 -> 0
+  - 0 -> 1
+  - 1 -> 0
 
   ,----
   | #include <stdio.h>

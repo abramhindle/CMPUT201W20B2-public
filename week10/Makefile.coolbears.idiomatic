@@ -2,7 +2,7 @@
 CFLAGS= -std=c99 -pedantic -Wall -Wextra -ftrapv -ggdb3
 # Do you need your math lib? Put it here this is the linking libraries
 # variable
-LDLIBS=-lm
+LDFLAGS=$(CFLAGS) -lm
 # Common compiler
 CC=gcc
 OBJECTS=coolbears.o coolbears-driver.o
@@ -23,9 +23,10 @@ run: $(EXEC)
 # # this would work too
 # coolbears-driver: coolbears-driver.o coolbears.o
 
-$(EXEC): $(OBJECTS)
+coolbears-driver:  coolbears-driver.o coolbears.o
 
+$(EXEC): $(OBJECTS)
 
 # clean is idiomatic for remove object files and executables
 clean: 
-	rm $(BUILDABLES) || echo nothing to delete
+	rm -f $(BUILDABLES)

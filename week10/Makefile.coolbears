@@ -5,7 +5,7 @@ run: coolbears-driver
 	./coolbears-driver # just a shell command
 
 # build an object file
-coolbears.o: coolbears.c
+coolbears.o: coolbears.c coolbears.h
 	gcc  -std=c99 -pedantic -Wall -Wextra -ftrapv -ggdb3 \
         -c coolbears.c
 
@@ -17,23 +17,4 @@ coolbears-driver: coolbears-driver.c coolbears.o
 
 # clean is idiomatic for remove object files and executables
 clean: 
-	rm coolbears.o coolbears-driver || echo nothing to delete
-
-# this just runs a command but ensures it is built
-run: coolbears-driver
-	./coolbears-driver # just a shell command
-
-# build an object file
-coolbears.o: coolbears.c
-	gcc  -std=c99 -pedantic -Wall -Wextra -ftrapv -ggdb3 \
-        -c coolbears.c
-
-# build an executable
-coolbears-driver: coolbears-driver.c coolbears.o
-	gcc  -std=c99 -pedantic -Wall -Wextra -ftrapv -ggdb3 \
-	-o coolbears-driver coolbears-driver.c \
-	coolbears.o 
-
-# clean is idiomatic for remove object files and executables
-clean: 
-	rm coolbears.o coolbears-driver || echo nothing to delete
+	rm -f coolbears.o coolbears-driver

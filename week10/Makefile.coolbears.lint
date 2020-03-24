@@ -10,7 +10,7 @@ CHECKS=--checks=*,-cert-err34-c,-cert-msc30-c,-cert-msc50-cpp
 LINTR=--disable-rule=UselessParentheses
 CLANGTIDY=clang-tidy
 OCLINT=oclint
-
+.PHONY: run clean lint-coolbears-driver
 
 # this just runs a command but ensures it is built
 run: coolbears-driver
@@ -32,7 +32,7 @@ coolbears-driver: coolbears-driver.o coolbears.o
 
 # clean is idiomatic for remove object files and executables
 clean: 
-	rm $(BUILDABLES) || echo nothing to delete
+	rm -f $(BUILDABLES) 
 
 lint-coolbears-driver: coolbears-driver.c
 	$(CLANGTIDY) $(CHECKS) \
