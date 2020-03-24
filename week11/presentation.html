@@ -1,0 +1,2188 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
+<head>
+<!-- 2020-03-24 Tue 11:36 -->
+<meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>CMPUT201W20B2 Week 11</title>
+<meta name="generator" content="Org mode" />
+<meta name="author" content="Abram Hindle" />
+<style type="text/css">
+ <!--/*--><![CDATA[/*><!--*/
+  .title  { text-align: center;
+             margin-bottom: .2em; }
+  .subtitle { text-align: center;
+              font-size: medium;
+              font-weight: bold;
+              margin-top:0; }
+  .todo   { font-family: monospace; color: red; }
+  .done   { font-family: monospace; color: green; }
+  .priority { font-family: monospace; color: orange; }
+  .tag    { background-color: #eee; font-family: monospace;
+            padding: 2px; font-size: 80%; font-weight: normal; }
+  .timestamp { color: #bebebe; }
+  .timestamp-kwd { color: #5f9ea0; }
+  .org-right  { margin-left: auto; margin-right: 0px;  text-align: right; }
+  .org-left   { margin-left: 0px;  margin-right: auto; text-align: left; }
+  .org-center { margin-left: auto; margin-right: auto; text-align: center; }
+  .underline { text-decoration: underline; }
+  #postamble p, #preamble p { font-size: 90%; margin: .2em; }
+  p.verse { margin-left: 3%; }
+  pre {
+    border: 1px solid #ccc;
+    box-shadow: 3px 3px 3px #eee;
+    padding: 8pt;
+    font-family: monospace;
+    overflow: auto;
+    margin: 1.2em;
+  }
+  pre.src {
+    position: relative;
+    overflow: visible;
+    padding-top: 1.2em;
+  }
+  pre.src:before {
+    display: none;
+    position: absolute;
+    background-color: white;
+    top: -10px;
+    right: 10px;
+    padding: 3px;
+    border: 1px solid black;
+  }
+  pre.src:hover:before { display: inline;}
+  /* Languages per Org manual */
+  pre.src-asymptote:before { content: 'Asymptote'; }
+  pre.src-awk:before { content: 'Awk'; }
+  pre.src-C:before { content: 'C'; }
+  /* pre.src-C++ doesn't work in CSS */
+  pre.src-clojure:before { content: 'Clojure'; }
+  pre.src-css:before { content: 'CSS'; }
+  pre.src-D:before { content: 'D'; }
+  pre.src-ditaa:before { content: 'ditaa'; }
+  pre.src-dot:before { content: 'Graphviz'; }
+  pre.src-calc:before { content: 'Emacs Calc'; }
+  pre.src-emacs-lisp:before { content: 'Emacs Lisp'; }
+  pre.src-fortran:before { content: 'Fortran'; }
+  pre.src-gnuplot:before { content: 'gnuplot'; }
+  pre.src-haskell:before { content: 'Haskell'; }
+  pre.src-hledger:before { content: 'hledger'; }
+  pre.src-java:before { content: 'Java'; }
+  pre.src-js:before { content: 'Javascript'; }
+  pre.src-latex:before { content: 'LaTeX'; }
+  pre.src-ledger:before { content: 'Ledger'; }
+  pre.src-lisp:before { content: 'Lisp'; }
+  pre.src-lilypond:before { content: 'Lilypond'; }
+  pre.src-lua:before { content: 'Lua'; }
+  pre.src-matlab:before { content: 'MATLAB'; }
+  pre.src-mscgen:before { content: 'Mscgen'; }
+  pre.src-ocaml:before { content: 'Objective Caml'; }
+  pre.src-octave:before { content: 'Octave'; }
+  pre.src-org:before { content: 'Org mode'; }
+  pre.src-oz:before { content: 'OZ'; }
+  pre.src-plantuml:before { content: 'Plantuml'; }
+  pre.src-processing:before { content: 'Processing.js'; }
+  pre.src-python:before { content: 'Python'; }
+  pre.src-R:before { content: 'R'; }
+  pre.src-ruby:before { content: 'Ruby'; }
+  pre.src-sass:before { content: 'Sass'; }
+  pre.src-scheme:before { content: 'Scheme'; }
+  pre.src-screen:before { content: 'Gnu Screen'; }
+  pre.src-sed:before { content: 'Sed'; }
+  pre.src-sh:before { content: 'shell'; }
+  pre.src-sql:before { content: 'SQL'; }
+  pre.src-sqlite:before { content: 'SQLite'; }
+  /* additional languages in org.el's org-babel-load-languages alist */
+  pre.src-forth:before { content: 'Forth'; }
+  pre.src-io:before { content: 'IO'; }
+  pre.src-J:before { content: 'J'; }
+  pre.src-makefile:before { content: 'Makefile'; }
+  pre.src-maxima:before { content: 'Maxima'; }
+  pre.src-perl:before { content: 'Perl'; }
+  pre.src-picolisp:before { content: 'Pico Lisp'; }
+  pre.src-scala:before { content: 'Scala'; }
+  pre.src-shell:before { content: 'Shell Script'; }
+  pre.src-ebnf2ps:before { content: 'ebfn2ps'; }
+  /* additional language identifiers per "defun org-babel-execute"
+       in ob-*.el */
+  pre.src-cpp:before  { content: 'C++'; }
+  pre.src-abc:before  { content: 'ABC'; }
+  pre.src-coq:before  { content: 'Coq'; }
+  pre.src-groovy:before  { content: 'Groovy'; }
+  /* additional language identifiers from org-babel-shell-names in
+     ob-shell.el: ob-shell is the only babel language using a lambda to put
+     the execution function name together. */
+  pre.src-bash:before  { content: 'bash'; }
+  pre.src-csh:before  { content: 'csh'; }
+  pre.src-ash:before  { content: 'ash'; }
+  pre.src-dash:before  { content: 'dash'; }
+  pre.src-ksh:before  { content: 'ksh'; }
+  pre.src-mksh:before  { content: 'mksh'; }
+  pre.src-posh:before  { content: 'posh'; }
+  /* Additional Emacs modes also supported by the LaTeX listings package */
+  pre.src-ada:before { content: 'Ada'; }
+  pre.src-asm:before { content: 'Assembler'; }
+  pre.src-caml:before { content: 'Caml'; }
+  pre.src-delphi:before { content: 'Delphi'; }
+  pre.src-html:before { content: 'HTML'; }
+  pre.src-idl:before { content: 'IDL'; }
+  pre.src-mercury:before { content: 'Mercury'; }
+  pre.src-metapost:before { content: 'MetaPost'; }
+  pre.src-modula-2:before { content: 'Modula-2'; }
+  pre.src-pascal:before { content: 'Pascal'; }
+  pre.src-ps:before { content: 'PostScript'; }
+  pre.src-prolog:before { content: 'Prolog'; }
+  pre.src-simula:before { content: 'Simula'; }
+  pre.src-tcl:before { content: 'tcl'; }
+  pre.src-tex:before { content: 'TeX'; }
+  pre.src-plain-tex:before { content: 'Plain TeX'; }
+  pre.src-verilog:before { content: 'Verilog'; }
+  pre.src-vhdl:before { content: 'VHDL'; }
+  pre.src-xml:before { content: 'XML'; }
+  pre.src-nxml:before { content: 'XML'; }
+  /* add a generic configuration mode; LaTeX export needs an additional
+     (add-to-list 'org-latex-listings-langs '(conf " ")) in .emacs */
+  pre.src-conf:before { content: 'Configuration File'; }
+
+  table { border-collapse:collapse; }
+  caption.t-above { caption-side: top; }
+  caption.t-bottom { caption-side: bottom; }
+  td, th { vertical-align:top;  }
+  th.org-right  { text-align: center;  }
+  th.org-left   { text-align: center;   }
+  th.org-center { text-align: center; }
+  td.org-right  { text-align: right;  }
+  td.org-left   { text-align: left;   }
+  td.org-center { text-align: center; }
+  dt { font-weight: bold; }
+  .footpara { display: inline; }
+  .footdef  { margin-bottom: 1em; }
+  .figure { padding: 1em; }
+  .figure p { text-align: center; }
+  .equation-container {
+    display: table;
+    text-align: center;
+    width: 100%;
+  }
+  .equation {
+    vertical-align: middle;
+  }
+  .equation-label {
+    display: table-cell;
+    text-align: right;
+    vertical-align: middle;
+  }
+  .inlinetask {
+    padding: 10px;
+    border: 2px solid gray;
+    margin: 10px;
+    background: #ffffcc;
+  }
+  #org-div-home-and-up
+   { text-align: right; font-size: 70%; white-space: nowrap; }
+  textarea { overflow-x: auto; }
+  .linenr { font-size: smaller }
+  .code-highlighted { background-color: #ffff00; }
+  .org-info-js_info-navigation { border-style: none; }
+  #org-info-js_console-label
+    { font-size: 10px; font-weight: bold; white-space: nowrap; }
+  .org-info-js_search-highlight
+    { background-color: #ffff00; color: #000000; font-weight: bold; }
+  .org-svg { width: 90%; }
+  /*]]>*/-->
+</style>
+<script type="text/javascript">
+/*
+@licstart  The following is the entire license notice for the
+JavaScript code in this tag.
+
+Copyright (C) 2012-2019 Free Software Foundation, Inc.
+
+The JavaScript code in this tag is free software: you can
+redistribute it and/or modify it under the terms of the GNU
+General Public License (GNU GPL) as published by the Free Software
+Foundation, either version 3 of the License, or (at your option)
+any later version.  The code is distributed WITHOUT ANY WARRANTY;
+without even the implied warranty of MERCHANTABILITY or FITNESS
+FOR A PARTICULAR PURPOSE.  See the GNU GPL for more details.
+
+As additional permission under GNU GPL version 3 section 7, you
+may distribute non-source (e.g., minimized or compacted) forms of
+that code without the copy of the GNU GPL normally required by
+section 4, provided you include this license notice and a URL
+through which recipients can access the Corresponding Source.
+
+
+@licend  The above is the entire license notice
+for the JavaScript code in this tag.
+*/
+<!--/*--><![CDATA[/*><!--*/
+ function CodeHighlightOn(elem, id)
+ {
+   var target = document.getElementById(id);
+   if(null != target) {
+     elem.cacheClassElem = elem.className;
+     elem.cacheClassTarget = target.className;
+     target.className = "code-highlighted";
+     elem.className   = "code-highlighted";
+   }
+ }
+ function CodeHighlightOff(elem, id)
+ {
+   var target = document.getElementById(id);
+   if(elem.cacheClassElem)
+     elem.className = elem.cacheClassElem;
+   if(elem.cacheClassTarget)
+     target.className = elem.cacheClassTarget;
+ }
+/*]]>*///-->
+</script>
+</head>
+<body>
+<div id="content">
+<h1 class="title">CMPUT201W20B2 Week 11</h1>
+<div id="table-of-contents">
+<h2>Table of Contents</h2>
+<div id="text-table-of-contents">
+<ul>
+<li><a href="#orgd4af850">1. Week11</a>
+<ul>
+<li><a href="#orge53af53">1.1. Copyright Statement</a>
+<ul>
+<li><a href="#org4d33241">1.1.1. License</a></li>
+<li><a href="#orgb01f6a0">1.1.2. Hazel Code is licensed under AGPL3.0+</a></li>
+</ul>
+</li>
+<li><a href="#org5624b3d">1.2. Alternative version</a></li>
+<li><a href="#org4799133">1.3. Init ORG-MODE</a>
+<ul>
+<li><a href="#orgbd3a3fe">1.3.1. Org export</a></li>
+<li><a href="#orgd4bfcf5">1.3.2. Org Template</a></li>
+</ul>
+</li>
+<li><a href="#org564c31b">1.4. Remember how to compile?</a></li>
+<li><a href="#orgf337ba6">1.5. Numbers!</a>
+<ul>
+<li><a href="#org6835aad">1.5.1. Binary</a></li>
+<li><a href="#org8686c81">1.5.2. Octal</a></li>
+<li><a href="#org916a648">1.5.3. Base10 Review</a></li>
+<li><a href="#org612a7eb">1.5.4. Hex Review</a></li>
+<li><a href="#org15cae1a">1.5.5. Bitwise Operators</a></li>
+<li><a href="#orgbbc20e2">1.5.6. Left Shift</a></li>
+<li><a href="#org10a876f">1.5.7. Right Shift</a></li>
+<li><a href="#orgb243c29">1.5.8. Could we access the bits with shifts?</a></li>
+<li><a href="#org565756a">1.5.9. bitwise and</a></li>
+<li><a href="#orgbc8e37a">1.5.10. bitwise OR</a></li>
+<li><a href="#orgf85d0b8">1.5.11. bitwise XOR</a></li>
+<li><a href="#org53d59ef">1.5.12. bitwise complement</a></li>
+<li><a href="#org6b98a11">1.5.13. Flags</a></li>
+<li><a href="#org875e9ce">1.5.14. PRACTICE and More resources</a></li>
+<li><a href="#orge127ea2">1.5.15. BitFields</a></li>
+<li><a href="#org96cb83a">1.5.16. Floating Point Numbers</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</div>
+</div>
+
+<div id="outline-container-orgd4af850" class="outline-2">
+<h2 id="orgd4af850"><span class="section-number-2">1</span> Week11</h2>
+<div class="outline-text-2" id="text-1">
+</div>
+<div id="outline-container-orge53af53" class="outline-3">
+<h3 id="orge53af53"><span class="section-number-3">1.1</span> Copyright Statement</h3>
+<div class="outline-text-3" id="text-1-1">
+<p>
+If you are in CMPUT201 at UAlberta this code is released in the public
+domain to you.
+</p>
+
+<p>
+Otherwise it is (c) 2020 Abram Hindle, Hazel Campbell AGPL3.0+
+</p>
+</div>
+
+<div id="outline-container-org4d33241" class="outline-4">
+<h4 id="org4d33241"><span class="section-number-4">1.1.1</span> License</h4>
+<div class="outline-text-4" id="text-1-1-1">
+<p>
+CMPUT 201 C Notes
+Copyright (C) 2020 Abram Hindle, Hazel Campbell
+</p>
+
+<p>
+This program is free software: you can redistribute it and/or modify
+it under the terms of the GNU Affero General Public License as
+published by the Free Software Foundation, either version 3 of the
+License, or (at your option) any later version.
+</p>
+
+<p>
+This program is distributed in the hope that it will be useful,
+but WITHOUT ANY WARRANTY; without even the implied warranty of
+MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+GNU Affero General Public License for more details.
+</p>
+
+<p>
+You should have received a copy of the GNU Affero General Public License
+along with this program.  If not, see <a href="https://www.gnu.org/licenses/">https://www.gnu.org/licenses/</a>.
+</p>
+</div>
+</div>
+
+
+<div id="outline-container-orgb01f6a0" class="outline-4">
+<h4 id="orgb01f6a0"><span class="section-number-4">1.1.2</span> Hazel Code is licensed under AGPL3.0+</h4>
+<div class="outline-text-4" id="text-1-1-2">
+<p>
+Hazel's code is also found here
+<a href="https://github.com/hazelybell/examples/tree/C-2020-01">https://github.com/hazelybell/examples/tree/C-2020-01</a>
+</p>
+
+<p>
+Hazel code is licensed: The example code is licensed under the AGPL3+
+license, unless otherwise noted.
+</p>
+</div>
+</div>
+</div>
+
+<div id="outline-container-org5624b3d" class="outline-3">
+<h3 id="org5624b3d"><span class="section-number-3">1.2</span> Alternative version</h3>
+<div class="outline-text-3" id="text-1-2">
+<p>
+Checkout the .txt, the .pdf, and the .html version
+</p>
+</div>
+</div>
+
+<div id="outline-container-org4799133" class="outline-3">
+<h3 id="org4799133"><span class="section-number-3">1.3</span> Init ORG-MODE</h3>
+<div class="outline-text-3" id="text-1-3">
+<div class="org-src-container">
+<pre class="src src-elisp"><span style="color: #b22222;">;; </span><span style="color: #b22222;">I need this for org-mode to work well</span>
+<span style="color: #b22222;">;; </span><span style="color: #b22222;">If we have a new org-mode use ob-shell</span>
+<span style="color: #b22222;">;; </span><span style="color: #b22222;">otherwise use ob-sh --- but not both!</span>
+(<span style="color: #a020f0;">if</span> (<span style="color: #a020f0;">require</span> '<span style="color: #008b8b;">ob-shell</span> nil 'noerror)
+  (<span style="color: #a020f0;">progn</span>
+    (org-babel-do-load-languages 'org-babel-load-languages '((shell . t))))
+  (<span style="color: #a020f0;">progn</span>
+    (<span style="color: #a020f0;">require</span> '<span style="color: #008b8b;">ob-sh</span>)
+    (org-babel-do-load-languages 'org-babel-load-languages '((sh . t)))))
+(org-babel-do-load-languages 'org-babel-load-languages '((C . t)))
+(org-babel-do-load-languages 'org-babel-load-languages '((python . t)))
+(<span style="color: #a020f0;">setq</span> org-src-fontify-natively t)
+(<span style="color: #a020f0;">setq</span> org-confirm-babel-evaluate nil) <span style="color: #b22222;">;; </span><span style="color: #b22222;">danger!</span>
+(custom-set-faces
+ '(org-block ((t (<span style="color: #483d8b;">:inherit</span> shadow <span style="color: #483d8b;">:foreground</span> <span style="color: #8b2252;">"black"</span>))))
+ '(org-code ((t (<span style="color: #483d8b;">:inherit</span> shadow <span style="color: #483d8b;">:foreground</span> <span style="color: #8b2252;">"black"</span>)))))
+</pre>
+</div>
+</div>
+
+<div id="outline-container-orgbd3a3fe" class="outline-4">
+<h4 id="orgbd3a3fe"><span class="section-number-4">1.3.1</span> Org export</h4>
+<div class="outline-text-4" id="text-1-3-1">
+<div class="org-src-container">
+<pre class="src src-elisp">(org-html-export-to-html)
+(org-latex-export-to-pdf)
+(org-ascii-export-to-ascii)
+</pre>
+</div>
+</div>
+</div>
+
+
+<div id="outline-container-orgd4bfcf5" class="outline-4">
+<h4 id="orgd4bfcf5"><span class="section-number-4">1.3.2</span> Org Template</h4>
+<div class="outline-text-4" id="text-1-3-2">
+<p>
+Copy and paste this to demo C
+</p>
+
+<div class="org-src-container">
+<pre class="src src-C"><span style="color: #483d8b;">#include</span> <span style="color: #8b2252;">&lt;stdio.h&gt;</span>
+
+<span style="color: #228b22;">int</span> <span style="color: #0000ff;">main</span>(<span style="color: #228b22;">int</span> <span style="color: #a0522d;">argc</span>, <span style="color: #228b22;">char</span>**<span style="color: #a0522d;">argv</span>) {
+    <span style="color: #a020f0;">return</span> 0;
+}
+</pre>
+</div>
+</div>
+</div>
+</div>
+
+<div id="outline-container-org564c31b" class="outline-3">
+<h3 id="org564c31b"><span class="section-number-3">1.4</span> Remember how to compile?</h3>
+<div class="outline-text-3" id="text-1-4">
+<p>
+gcc  -std=c99 -pedantic -Wall -Wextra -ftrapv -ggdb3 -o programname programname.c
+</p>
+</div>
+</div>
+
+<div id="outline-container-orgf337ba6" class="outline-3">
+<h3 id="orgf337ba6"><span class="section-number-3">1.5</span> Numbers!</h3>
+<div class="outline-text-3" id="text-1-5">
+<p>
+Computers love powers of 2 because we calculate everything via bits.
+</p>
+
+<p>
+Bases used on computers:
+</p>
+
+<p>
+2, 8, 10, 16
+</p>
+
+<ul class="org-ul">
+<li>32 in base 16 is  2*pow(16,1)</li>
+<li>32 in base 10 is 30*pow(10,1) + 2*pow(10,0)</li>
+<li>32 in base 8 is   4*pow(8,1)</li>
+<li>32 in base 2 is   1*pow(2,5)</li>
+
+<li>31 in base 16 is  1*pow(16,1) + 15*pow(16,0)</li>
+<li>31 in base 10 is 30*pow(10,1) + 1*pow(10,0)</li>
+<li>31 in base 8 is   3*pow(8,1) + 7*pow(8,0)</li>
+<li>31 in base 2 is   1*pow(2,4) + 1*pow(2,3) + 1*pow(2,2) + 1*pow(2,1) + 1*pow(2,0)</li>
+</ul>
+
+<p>
+Notation for base 2 for 31:  0b11111 # not available in C, good in python
+Notation for base 8 for 31:  037     # available in C    , good in python
+Notation for base 10 for 31: 31      # available in C    , good in python
+Notation for base 16 for 31: 0x1F    # available in C    , good in python
+</p>
+</div>
+
+<div id="outline-container-org6835aad" class="outline-4">
+<h4 id="org6835aad"><span class="section-number-4">1.5.1</span> Binary</h4>
+<div class="outline-text-4" id="text-1-5-1">
+<p>
+Base 2: powers of 2
+</p>
+
+<p>
+Digits: 0,1
+</p>
+
+<p>
+0:  0b00000  8:  0b01000
+1:  0b00001  9:  0b01001 
+2:  0b00010 10:  0b01010 
+3:  0b00011 11:  0b01011 
+4:  0b00100 12:  0b01100
+5:  0b00101 13:  0b01101
+6:  0b00110 14:  0b01110         
+7:  0b00111 15:  0b01111
+            16:  0b10000
+</p>
+</div>
+</div>
+<div id="outline-container-org8686c81" class="outline-4">
+<h4 id="org8686c81"><span class="section-number-4">1.5.2</span> Octal</h4>
+<div class="outline-text-4" id="text-1-5-2">
+<p>
+Base 8: powers of 8
+</p>
+
+<p>
+3 bits
+</p>
+
+<p>
+Digits: 0,1,2,3,4,5,6,7
+</p>
+
+<p>
+0:  000  8: 010
+1:  001  9: 011   
+2:  002 10: 012   
+3:  003 11: 013   
+4:  004 12: 014  
+5:  005 13: 015  
+6:  006 14: 016           
+7:  007 15: 017  
+        16: 020
+</p>
+
+<p>
+07:                 7 =   7
+077:          7*8 + 7 =  63
+0777: 7*8*8 + 7*8 + 7 = 511
+</p>
+</div>
+</div>
+<div id="outline-container-org916a648" class="outline-4">
+<h4 id="org916a648"><span class="section-number-4">1.5.3</span> Base10 Review</h4>
+<div class="outline-text-4" id="text-1-5-3">
+<p>
+Base 10: power of 10
+</p>
+
+<p>
+Digits: 0,1,2,3,4,5,6,7,8,9
+</p>
+
+<p>
+~4 bits - not a power of 2
+</p>
+
+<p>
+0:  0  8:  8
+1:  1  9:  9   
+2:  2 10: 10  
+3:  3 11: 11  
+4:  4 12: 12  
+5:  5 13: 13 
+6:  6 14: 14          
+7:  7 15: 15 
+      16: 16
+</p>
+</div>
+</div>
+
+
+<div id="outline-container-org612a7eb" class="outline-4">
+<h4 id="org612a7eb"><span class="section-number-4">1.5.4</span> Hex Review</h4>
+<div class="outline-text-4" id="text-1-5-4">
+<p>
+Base 16: power of 16
+</p>
+
+<p>
+   Digits: 0,1,2,3,4,5,6,7,8,9,A,B,C,D,E,F
+or Digits: 0,1,2,3,4,5,6,7,8,9,a,b,c,d,e,f
+</p>
+
+<p>
+0:  0x00  8: 0x08
+1:  0x01  9: 0x09   
+2:  0x02 10: 0x0A  
+3:  0x03 11: 0x0B   
+4:  0x04 12: 0x0C  
+5:  0x05 13: 0x0D  
+6:  0x06 14: 0x0E           
+7:  0x07 15: 0x0F  
+         16: 0x10
+0xF    =                                  15 =    15
+0xFF   =                          15*16 + 15 =   255
+0xFFF  =               15*16*16 + 15*16 + 15 =  4095
+0xFFFF = 15*16*16*16 + 15*16*16 + 15*16 + 15 = 65535
+</p>
+
+<p>
+Digit Lookup
+</p>
+
+<p>
+0:  0x0 0b0000     8: 0x8 0b1000
+1:  0x1 0b0001     9: 0x9 0b1001  
+2:  0x2 0b0010    10: 0xA 0b1010 
+3:  0x3 0b0011    11: 0xB 0b1011  
+4:  0x4 0b0100    12: 0xC 0b1100 
+5:  0x5 0b0101    13: 0xD 0b1101 
+6:  0x6 0b0110    14: 0xE 0b1110          
+7:  0x7 0b0111    15: 0xF 0b1111 
+</p>
+</div>
+</div>
+
+
+<div id="outline-container-org15cae1a" class="outline-4">
+<h4 id="org15cae1a"><span class="section-number-4">1.5.5</span> Bitwise Operators</h4>
+<div class="outline-text-4" id="text-1-5-5">
+<p>
+Bitwise operators operate at the bit-level for variables such as integers.
+</p>
+
+<p>
+Typically try to avoid anything signed or floating point when doing
+bitwise operations unless you are sure.
+</p>
+
+<p>
+Also be aware that structs have padding so you might get unexpected
+results.
+</p>
+</div>
+</div>
+
+<div id="outline-container-orgbbc20e2" class="outline-4">
+<h4 id="orgbbc20e2"><span class="section-number-4">1.5.6</span> Left Shift</h4>
+<div class="outline-text-4" id="text-1-5-6">
+<p>
+Integer Multiplication by 2. Shifts bits to the left. Do not use negative values.
+</p>
+
+<p>
+WARNING: Shifting on signed integers is not safe or portable.
+</p>
+
+
+<div class="org-src-container">
+<pre class="src src-C"><span style="color: #483d8b;">#include</span> <span style="color: #8b2252;">&lt;stdio.h&gt;</span>
+<span style="color: #483d8b;">#include</span> <span style="color: #8b2252;">&lt;inttypes.h&gt;</span>
+<span style="color: #228b22;">int</span> <span style="color: #0000ff;">main</span>() {
+    <span style="color: #228b22;">uint64_t</span> <span style="color: #a0522d;">u64</span> = 1;
+    <span style="color: #228b22;">uint32_t</span> <span style="color: #a0522d;">u32</span> = 1;
+    <span style="color: #228b22;">uint16_t</span> <span style="color: #a0522d;">u16</span> = 1;
+    <span style="color: #228b22;">int64_t</span>  <span style="color: #a0522d;">i64</span> = 1;
+    <span style="color: #228b22;">int32_t</span>  <span style="color: #a0522d;">i32</span> = 1;
+    <span style="color: #228b22;">uint16_t</span> <span style="color: #a0522d;">i16</span> = 1;
+    <span style="color: #a020f0;">for</span> (<span style="color: #228b22;">int</span> <span style="color: #a0522d;">i</span> = 0 ; i &lt; 64; i++) {
+        u64 = u64 &lt;&lt; 1;
+        i64 = i64 &lt;&lt; 1;
+        u32 = u32 &lt;&lt; 1;
+        i32 = i32 &lt;&lt; 1;
+        u16 = u16 &lt;&lt; 1;
+        i16 = i16 &lt;&lt; 1;
+        printf(<span style="color: #8b2252;">"64: %20llu %20lld\n"</span>, u64, i64);
+        printf(<span style="color: #8b2252;">"32: %20lu %20ld\n"</span>,   u32, i32);
+        printf(<span style="color: #8b2252;">"16: %20zu %20zd\n"</span>,   u16, i16);
+    }
+}
+</pre>
+</div>
+
+<pre class="example">
+64:                    2                    2
+32:                    2                    2
+16:                    2                    2
+64:                    4                    4
+32:                    4                    4
+16:                    4                    4
+64:                    8                    8
+32:                    8                    8
+16:                    8                    8
+64:                   16                   16
+32:                   16                   16
+16:                   16                   16
+64:                   32                   32
+32:                   32                   32
+16:                   32                   32
+64:                   64                   64
+32:                   64                   64
+16:                   64                   64
+64:                  128                  128
+32:                  128                  128
+16:                  128                  128
+64:                  256                  256
+32:                  256                  256
+16:                  256                  256
+64:                  512                  512
+32:                  512                  512
+16:                  512                  512
+64:                 1024                 1024
+32:                 1024                 1024
+16:                 1024                 1024
+64:                 2048                 2048
+32:                 2048                 2048
+16:                 2048                 2048
+64:                 4096                 4096
+32:                 4096                 4096
+16:                 4096                 4096
+64:                 8192                 8192
+32:                 8192                 8192
+16:                 8192                 8192
+64:                16384                16384
+32:                16384                16384
+16:                16384                16384
+64:                32768                32768
+32:                32768                32768
+16:                32768                32768
+64:                65536                65536
+32:                65536                65536
+16:                    0                    0
+64:               131072               131072
+32:               131072               131072
+16:                    0                    0
+64:               262144               262144
+32:               262144               262144
+16:                    0                    0
+64:               524288               524288
+32:               524288               524288
+16:                    0                    0
+64:              1048576              1048576
+32:              1048576              1048576
+16:                    0                    0
+64:              2097152              2097152
+32:              2097152              2097152
+16:                    0                    0
+64:              4194304              4194304
+32:              4194304              4194304
+16:                    0                    0
+64:              8388608              8388608
+32:              8388608              8388608
+16:                    0                    0
+64:             16777216             16777216
+32:             16777216             16777216
+16:                    0                    0
+64:             33554432             33554432
+32:             33554432             33554432
+16:                    0                    0
+64:             67108864             67108864
+32:             67108864             67108864
+16:                    0                    0
+64:            134217728            134217728
+32:            134217728            134217728
+16:                    0                    0
+64:            268435456            268435456
+32:            268435456            268435456
+16:                    0                    0
+64:            536870912            536870912
+32:            536870912            536870912
+16:                    0                    0
+64:           1073741824           1073741824
+32:           1073741824           1073741824
+16:                    0                    0
+64:           2147483648           2147483648
+32:           2147483648           2147483648
+16:                    0                    0
+64:           4294967296           4294967296
+32:                    0                    0
+16:                    0                    0
+64:           8589934592           8589934592
+32:                    0                    0
+16:                    0                    0
+64:          17179869184          17179869184
+32:                    0                    0
+16:                    0                    0
+64:          34359738368          34359738368
+32:                    0                    0
+16:                    0                    0
+64:          68719476736          68719476736
+32:                    0                    0
+16:                    0                    0
+64:         137438953472         137438953472
+32:                    0                    0
+16:                    0                    0
+64:         274877906944         274877906944
+32:                    0                    0
+16:                    0                    0
+64:         549755813888         549755813888
+32:                    0                    0
+16:                    0                    0
+64:        1099511627776        1099511627776
+32:                    0                    0
+16:                    0                    0
+64:        2199023255552        2199023255552
+32:                    0                    0
+16:                    0                    0
+64:        4398046511104        4398046511104
+32:                    0                    0
+16:                    0                    0
+64:        8796093022208        8796093022208
+32:                    0                    0
+16:                    0                    0
+64:       17592186044416       17592186044416
+32:                    0                    0
+16:                    0                    0
+64:       35184372088832       35184372088832
+32:                    0                    0
+16:                    0                    0
+64:       70368744177664       70368744177664
+32:                    0                    0
+16:                    0                    0
+64:      140737488355328      140737488355328
+32:                    0                    0
+16:                    0                    0
+64:      281474976710656      281474976710656
+32:                    0                    0
+16:                    0                    0
+64:      562949953421312      562949953421312
+32:                    0                    0
+16:                    0                    0
+64:     1125899906842624     1125899906842624
+32:                    0                    0
+16:                    0                    0
+64:     2251799813685248     2251799813685248
+32:                    0                    0
+16:                    0                    0
+64:     4503599627370496     4503599627370496
+32:                    0                    0
+16:                    0                    0
+64:     9007199254740992     9007199254740992
+32:                    0                    0
+16:                    0                    0
+64:    18014398509481984    18014398509481984
+32:                    0                    0
+16:                    0                    0
+64:    36028797018963968    36028797018963968
+32:                    0                    0
+16:                    0                    0
+64:    72057594037927936    72057594037927936
+32:                    0                    0
+16:                    0                    0
+64:   144115188075855872   144115188075855872
+32:                    0                    0
+16:                    0                    0
+64:   288230376151711744   288230376151711744
+32:                    0                    0
+16:                    0                    0
+64:   576460752303423488   576460752303423488
+32:                    0                    0
+16:                    0                    0
+64:  1152921504606846976  1152921504606846976
+32:                    0                    0
+16:                    0                    0
+64:  2305843009213693952  2305843009213693952
+32:                    0                    0
+16:                    0                    0
+64:  4611686018427387904  4611686018427387904
+32:                    0                    0
+16:                    0                    0
+64:  9223372036854775808 -9223372036854775808
+32:                    0                    0
+16:                    0                    0
+64:                    0                    0
+32:                    0                    0
+16:                    0                    0
+</pre>
+</div>
+</div>
+
+
+
+<div id="outline-container-org10a876f" class="outline-4">
+<h4 id="org10a876f"><span class="section-number-4">1.5.7</span> Right Shift</h4>
+<div class="outline-text-4" id="text-1-5-7">
+<p>
+Integer Division by 2. Shifts bits to the right. Do not use negative values.
+</p>
+
+<p>
+WARNING: Shifting on signed integers is not safe or portable.
+</p>
+
+
+<div class="org-src-container">
+<pre class="src src-C"><span style="color: #483d8b;">#include</span> <span style="color: #8b2252;">&lt;stdio.h&gt;</span>
+<span style="color: #483d8b;">#include</span> <span style="color: #8b2252;">&lt;inttypes.h&gt;</span>
+<span style="color: #228b22;">int</span> <span style="color: #0000ff;">main</span>() {
+    <span style="color: #b22222;">// </span><span style="color: #b22222;">0xF = 0b1111</span>
+    <span style="color: #b22222;">// </span><span style="color: #b22222;">0x7 = 0b0111</span>
+    <span style="color: #228b22;">uint64_t</span> <span style="color: #a0522d;">u64</span> = 0x7FFFFFFFFFFFFFFF;
+    <span style="color: #228b22;">uint32_t</span> <span style="color: #a0522d;">u32</span> = 0x7FFFFFFF;
+    <span style="color: #228b22;">uint16_t</span> <span style="color: #a0522d;">u16</span> = 0x7FFF;
+    <span style="color: #228b22;">int64_t</span>  <span style="color: #a0522d;">i64</span> = 0x7FFFFFFFFFFFFFFF;
+    <span style="color: #228b22;">int32_t</span>  <span style="color: #a0522d;">i32</span> = 0x7FFFFFFF;
+    <span style="color: #228b22;">uint16_t</span> <span style="color: #a0522d;">i16</span> = 0x7FFF;
+    <span style="color: #a020f0;">for</span> (<span style="color: #228b22;">int</span> <span style="color: #a0522d;">i</span> = 0 ; i &lt; 64; i++) {
+        u64 = u64 &gt;&gt; 1;
+        i64 = i64 &gt;&gt; 1;
+        u32 = u32 &gt;&gt; 1;
+        i32 = i32 &gt;&gt; 1;
+        u16 = u16 &gt;&gt; 1;
+        i16 = i16 &gt;&gt; 1;
+        printf(<span style="color: #8b2252;">"64: %20llu %20lld\n"</span>, u64, i64);
+        printf(<span style="color: #8b2252;">"32: %20lu %20ld\n"</span>,   u32, i32);
+        printf(<span style="color: #8b2252;">"16: %20zu %20zd\n"</span>,   u16, i16);
+    }
+}
+</pre>
+</div>
+
+<pre class="example">
+64:  4611686018427387903  4611686018427387903
+32:           1073741823           1073741823
+16:                16383                16383
+64:  2305843009213693951  2305843009213693951
+32:            536870911            536870911
+16:                 8191                 8191
+64:  1152921504606846975  1152921504606846975
+32:            268435455            268435455
+16:                 4095                 4095
+64:   576460752303423487   576460752303423487
+32:            134217727            134217727
+16:                 2047                 2047
+64:   288230376151711743   288230376151711743
+32:             67108863             67108863
+16:                 1023                 1023
+64:   144115188075855871   144115188075855871
+32:             33554431             33554431
+16:                  511                  511
+64:    72057594037927935    72057594037927935
+32:             16777215             16777215
+16:                  255                  255
+64:    36028797018963967    36028797018963967
+32:              8388607              8388607
+16:                  127                  127
+64:    18014398509481983    18014398509481983
+32:              4194303              4194303
+16:                   63                   63
+64:     9007199254740991     9007199254740991
+32:              2097151              2097151
+16:                   31                   31
+64:     4503599627370495     4503599627370495
+32:              1048575              1048575
+16:                   15                   15
+64:     2251799813685247     2251799813685247
+32:               524287               524287
+16:                    7                    7
+64:     1125899906842623     1125899906842623
+32:               262143               262143
+16:                    3                    3
+64:      562949953421311      562949953421311
+32:               131071               131071
+16:                    1                    1
+64:      281474976710655      281474976710655
+32:                65535                65535
+16:                    0                    0
+64:      140737488355327      140737488355327
+32:                32767                32767
+16:                    0                    0
+64:       70368744177663       70368744177663
+32:                16383                16383
+16:                    0                    0
+64:       35184372088831       35184372088831
+32:                 8191                 8191
+16:                    0                    0
+64:       17592186044415       17592186044415
+32:                 4095                 4095
+16:                    0                    0
+64:        8796093022207        8796093022207
+32:                 2047                 2047
+16:                    0                    0
+64:        4398046511103        4398046511103
+32:                 1023                 1023
+16:                    0                    0
+64:        2199023255551        2199023255551
+32:                  511                  511
+16:                    0                    0
+64:        1099511627775        1099511627775
+32:                  255                  255
+16:                    0                    0
+64:         549755813887         549755813887
+32:                  127                  127
+16:                    0                    0
+64:         274877906943         274877906943
+32:                   63                   63
+16:                    0                    0
+64:         137438953471         137438953471
+32:                   31                   31
+16:                    0                    0
+64:          68719476735          68719476735
+32:                   15                   15
+16:                    0                    0
+64:          34359738367          34359738367
+32:                    7                    7
+16:                    0                    0
+64:          17179869183          17179869183
+32:                    3                    3
+16:                    0                    0
+64:           8589934591           8589934591
+32:                    1                    1
+16:                    0                    0
+64:           4294967295           4294967295
+32:                    0                    0
+16:                    0                    0
+64:           2147483647           2147483647
+32:                    0                    0
+16:                    0                    0
+64:           1073741823           1073741823
+32:                    0                    0
+16:                    0                    0
+64:            536870911            536870911
+32:                    0                    0
+16:                    0                    0
+64:            268435455            268435455
+32:                    0                    0
+16:                    0                    0
+64:            134217727            134217727
+32:                    0                    0
+16:                    0                    0
+64:             67108863             67108863
+32:                    0                    0
+16:                    0                    0
+64:             33554431             33554431
+32:                    0                    0
+16:                    0                    0
+64:             16777215             16777215
+32:                    0                    0
+16:                    0                    0
+64:              8388607              8388607
+32:                    0                    0
+16:                    0                    0
+64:              4194303              4194303
+32:                    0                    0
+16:                    0                    0
+64:              2097151              2097151
+32:                    0                    0
+16:                    0                    0
+64:              1048575              1048575
+32:                    0                    0
+16:                    0                    0
+64:               524287               524287
+32:                    0                    0
+16:                    0                    0
+64:               262143               262143
+32:                    0                    0
+16:                    0                    0
+64:               131071               131071
+32:                    0                    0
+16:                    0                    0
+64:                65535                65535
+32:                    0                    0
+16:                    0                    0
+64:                32767                32767
+32:                    0                    0
+16:                    0                    0
+64:                16383                16383
+32:                    0                    0
+16:                    0                    0
+64:                 8191                 8191
+32:                    0                    0
+16:                    0                    0
+64:                 4095                 4095
+32:                    0                    0
+16:                    0                    0
+64:                 2047                 2047
+32:                    0                    0
+16:                    0                    0
+64:                 1023                 1023
+32:                    0                    0
+16:                    0                    0
+64:                  511                  511
+32:                    0                    0
+16:                    0                    0
+64:                  255                  255
+32:                    0                    0
+16:                    0                    0
+64:                  127                  127
+32:                    0                    0
+16:                    0                    0
+64:                   63                   63
+32:                    0                    0
+16:                    0                    0
+64:                   31                   31
+32:                    0                    0
+16:                    0                    0
+64:                   15                   15
+32:                    0                    0
+16:                    0                    0
+64:                    7                    7
+32:                    0                    0
+16:                    0                    0
+64:                    3                    3
+32:                    0                    0
+16:                    0                    0
+64:                    1                    1
+32:                    0                    0
+16:                    0                    0
+64:                    0                    0
+32:                    0                    0
+16:                    0                    0
+64:                    0                    0
+32:                    0                    0
+16:                    0                    0
+</pre>
+</div>
+</div>
+
+<div id="outline-container-orgb243c29" class="outline-4">
+<h4 id="orgb243c29"><span class="section-number-4">1.5.8</span> Could we access the bits with shifts?</h4>
+<div class="outline-text-4" id="text-1-5-8">
+<div class="org-src-container">
+<pre class="src src-C"><span style="color: #483d8b;">#include</span> <span style="color: #8b2252;">&lt;stdio.h&gt;</span>
+<span style="color: #483d8b;">#include</span> <span style="color: #8b2252;">&lt;inttypes.h&gt;</span>
+<span style="color: #483d8b;">#define</span> <span style="color: #0000ff;">BIT</span>(<span style="color: #a0522d;">x</span>,<span style="color: #a0522d;">b</span>,<span style="color: #a0522d;">y</span>) ((x&lt;&lt;(b-y-1))&gt;&gt;(b-1))
+<span style="color: #483d8b;">#define</span> <span style="color: #a0522d;">BITS</span> 32
+<span style="color: #228b22;">int</span> <span style="color: #0000ff;">main</span>() {
+    <span style="color: #b22222;">// </span><span style="color: #b22222;">0x7 = 0b0111</span>
+    <span style="color: #228b22;">uint32_t</span> <span style="color: #a0522d;">u32</span> = 0xFF770ABE;
+    <span style="color: #228b22;">char</span> <span style="color: #a0522d;">str</span>[BITS+1] = { <span style="color: #8b2252;">'\0'</span> };
+    <span style="color: #a020f0;">for</span> (<span style="color: #228b22;">int</span> <span style="color: #a0522d;">i</span> = 0 ; i &lt; BITS; i++) {
+        str[BITS-1-i] = (BIT(u32,BITS,i))?<span style="color: #8b2252;">'1'</span>:<span style="color: #8b2252;">'0'</span>;
+    }
+    printf(<span style="color: #8b2252;">"u32: %s\n"</span>, str);
+}
+</pre>
+</div>
+
+<pre class="example">
+u32: 11111111011101110000101010111110
+</pre>
+
+
+<div class="org-src-container">
+<pre class="src src-C"><span style="color: #483d8b;">#include</span> <span style="color: #8b2252;">&lt;stdio.h&gt;</span>
+<span style="color: #483d8b;">#include</span> <span style="color: #8b2252;">&lt;inttypes.h&gt;</span>
+<span style="color: #483d8b;">#define</span> <span style="color: #0000ff;">BIT</span>(<span style="color: #a0522d;">x</span>,<span style="color: #a0522d;">b</span>,<span style="color: #a0522d;">y</span>) ((x&lt;&lt;(b-y-1))&gt;&gt;(b-1))
+<span style="color: #483d8b;">#define</span> <span style="color: #a0522d;">BITS</span> 32
+<span style="color: #228b22;">int</span> <span style="color: #0000ff;">main</span>() {
+    <span style="color: #b22222;">// </span><span style="color: #b22222;">0x7 = 0b0111</span>
+    <span style="color: #228b22;">uint32_t</span> <span style="color: #a0522d;">u32</span> = 0xFF770ABE;
+    <span style="color: #228b22;">char</span> <span style="color: #a0522d;">str</span>[BITS+1] = { <span style="color: #8b2252;">'\0'</span> };
+    <span style="color: #a020f0;">for</span> (<span style="color: #228b22;">int</span> <span style="color: #a0522d;">i</span> = 0 ; i &lt; BITS; i++) {
+        str[BITS-1-i] = (BIT(u32,BITS,i))?<span style="color: #8b2252;">'1'</span>:<span style="color: #8b2252;">'0'</span>;
+    }
+    printf(<span style="color: #8b2252;">"u32: %s\n"</span>, str);
+}
+</pre>
+</div>
+
+<pre class="example">
+u32: 11111111011101110000101010111110
+</pre>
+
+
+<div class="org-src-container">
+<pre class="src src-C"><span style="color: #483d8b;">#if</span><span style="color: #483d8b;">n</span><span style="color: #483d8b;">def</span> _BITPRINTER_H_
+<span style="color: #483d8b;">#define</span> <span style="color: #a0522d;">_BITPRINTER_H_</span>
+<span style="color: #483d8b;">#include</span> <span style="color: #8b2252;">&lt;inttypes.h&gt;</span>
+<span style="color: #b22222;">// </span><span style="color: #b22222;">Warning some bad hacks here</span>
+
+<span style="color: #483d8b;">#define</span> <span style="color: #0000ff;">BIT</span>(<span style="color: #a0522d;">x</span>,<span style="color: #a0522d;">b</span>,<span style="color: #a0522d;">y</span>) ((x&lt;&lt;(b-y-1))&gt;&gt;(b-1))
+<span style="color: #483d8b;">#define</span> <span style="color: #a0522d;">MAXBITSTRBITS</span> 129
+<span style="color: #a020f0;">static</span> <span style="color: #228b22;">char</span> <span style="color: #a0522d;">_bitstr</span>[MAXBITSTRBITS] = { <span style="color: #8b2252;">'\0'</span> };
+<span style="color: #a020f0;">static</span> <span style="color: #228b22;">char</span> * <span style="color: #0000ff;">bitString</span>(<span style="color: #228b22;">uint64_t</span> <span style="color: #a0522d;">value</span>, <span style="color: #a020f0;">const</span> <span style="color: #228b22;">unsigned</span> <span style="color: #228b22;">int</span> <span style="color: #a0522d;">bits</span>) {
+    <span style="color: #a020f0;">for</span> (<span style="color: #228b22;">unsigned</span> <span style="color: #228b22;">int</span> <span style="color: #a0522d;">i</span> = 0 ; i &lt; bits; i++) {
+        _bitstr[bits-1-i] = (BIT(value,bits,i))?<span style="color: #8b2252;">'1'</span>:<span style="color: #8b2252;">'0'</span>;
+    }
+    _bitstr[bits] = <span style="color: #8b2252;">'\0'</span>;
+    <span style="color: #a020f0;">return</span> _bitstr;
+}
+<span style="color: #a020f0;">static</span> <span style="color: #228b22;">char</span> * <span style="color: #0000ff;">bitString64</span>(<span style="color: #228b22;">uint64_t</span> <span style="color: #a0522d;">value</span>) {
+    <span style="color: #a020f0;">return</span> bitString(value,64);
+}
+<span style="color: #a020f0;">static</span> <span style="color: #228b22;">char</span> * <span style="color: #0000ff;">bitString32</span>(<span style="color: #228b22;">uint32_t</span> <span style="color: #a0522d;">value</span>) {
+    <span style="color: #a020f0;">return</span> bitString(value,32);
+}
+<span style="color: #a020f0;">static</span> <span style="color: #228b22;">char</span> * <span style="color: #0000ff;">bitString16</span>(<span style="color: #228b22;">uint16_t</span> <span style="color: #a0522d;">value</span>) {
+    <span style="color: #a020f0;">return</span> bitString(value,16);
+}
+<span style="color: #a020f0;">static</span> <span style="color: #228b22;">char</span> * <span style="color: #0000ff;">bitString8</span>(<span style="color: #228b22;">uint8_t</span> <span style="color: #a0522d;">value</span>) {
+    <span style="color: #a020f0;">return</span> bitString(value,8);
+}
+<span style="color: #483d8b;">#endif</span>
+</pre>
+</div>
+</div>
+</div>
+
+<div id="outline-container-org565756a" class="outline-4">
+<h4 id="org565756a"><span class="section-number-4">1.5.9</span> bitwise and</h4>
+<div class="outline-text-4" id="text-1-5-9">
+<p>
+The &amp; operator is bitwise complement. It means every bit of an integer
+is and'd. 
+</p>
+
+<p>
+The &amp; operator is a binary operator.
+</p>
+
+<p>
+0 &amp; 0 -&gt; 0
+0 &amp; 1 -&gt; 0
+1 &amp; 0 -&gt; 0
+1 &amp; 1 -&gt; 1
+</p>
+
+<div class="org-src-container">
+<pre class="src src-C"><span style="color: #483d8b;">#include</span> <span style="color: #8b2252;">&lt;stdio.h&gt;</span>
+<span style="color: #483d8b;">#include</span> <span style="color: #8b2252;">&lt;inttypes.h&gt;</span>
+<span style="color: #228b22;">int</span> <span style="color: #0000ff;">main</span>() {  
+    <span style="color: #228b22;">uint32_t</span> <span style="color: #a0522d;">pressF</span> = 0xFFFFFFFF;
+    printf(<span style="color: #8b2252;">"Anding 1 bit\n"</span>);
+    <span style="color: #a020f0;">for</span> (<span style="color: #228b22;">uint32_t</span> <span style="color: #a0522d;">i</span> = 0 ; i &lt; 32; i++) {
+        <span style="color: #228b22;">uint32_t</span> <span style="color: #a0522d;">bit</span> = (1 &lt;&lt; i);
+        printf(<span style="color: #8b2252;">"%12lu &amp; %12lu = %12lu - 0x%08x\n"</span>,  
+               pressF, bit,  pressF &amp; bit, pressF &amp; bit);
+    }
+    <span style="color: #a020f0;">for</span> (<span style="color: #228b22;">uint32_t</span> <span style="color: #a0522d;">i</span> = 0 ; i &lt; 32; i++) {
+        <span style="color: #228b22;">uint32_t</span> <span style="color: #a0522d;">bit</span> = (1 &lt;&lt; i);
+        printf(<span style="color: #8b2252;">"%08x &amp; %08x = %08x\n"</span>,
+               pressF, bit,  pressF &amp; bit);
+    }
+
+}
+</pre>
+</div>
+
+<pre class="example">
+Anding 1 bit
+  4294967295 &amp;            1 =            1 - 0x00000001
+  4294967295 &amp;            2 =            2 - 0x00000002
+  4294967295 &amp;            4 =            4 - 0x00000004
+  4294967295 &amp;            8 =            8 - 0x00000008
+  4294967295 &amp;           16 =           16 - 0x00000010
+  4294967295 &amp;           32 =           32 - 0x00000020
+  4294967295 &amp;           64 =           64 - 0x00000040
+  4294967295 &amp;          128 =          128 - 0x00000080
+  4294967295 &amp;          256 =          256 - 0x00000100
+  4294967295 &amp;          512 =          512 - 0x00000200
+  4294967295 &amp;         1024 =         1024 - 0x00000400
+  4294967295 &amp;         2048 =         2048 - 0x00000800
+  4294967295 &amp;         4096 =         4096 - 0x00001000
+  4294967295 &amp;         8192 =         8192 - 0x00002000
+  4294967295 &amp;        16384 =        16384 - 0x00004000
+  4294967295 &amp;        32768 =        32768 - 0x00008000
+  4294967295 &amp;        65536 =        65536 - 0x00010000
+  4294967295 &amp;       131072 =       131072 - 0x00020000
+  4294967295 &amp;       262144 =       262144 - 0x00040000
+  4294967295 &amp;       524288 =       524288 - 0x00080000
+  4294967295 &amp;      1048576 =      1048576 - 0x00100000
+  4294967295 &amp;      2097152 =      2097152 - 0x00200000
+  4294967295 &amp;      4194304 =      4194304 - 0x00400000
+  4294967295 &amp;      8388608 =      8388608 - 0x00800000
+  4294967295 &amp;     16777216 =     16777216 - 0x01000000
+  4294967295 &amp;     33554432 =     33554432 - 0x02000000
+  4294967295 &amp;     67108864 =     67108864 - 0x04000000
+  4294967295 &amp;    134217728 =    134217728 - 0x08000000
+  4294967295 &amp;    268435456 =    268435456 - 0x10000000
+  4294967295 &amp;    536870912 =    536870912 - 0x20000000
+  4294967295 &amp;   1073741824 =   1073741824 - 0x40000000
+  4294967295 &amp;   2147483648 =   2147483648 - 0x80000000
+ffffffff &amp; 00000001 = 00000001
+ffffffff &amp; 00000002 = 00000002
+ffffffff &amp; 00000004 = 00000004
+ffffffff &amp; 00000008 = 00000008
+ffffffff &amp; 00000010 = 00000010
+ffffffff &amp; 00000020 = 00000020
+ffffffff &amp; 00000040 = 00000040
+ffffffff &amp; 00000080 = 00000080
+ffffffff &amp; 00000100 = 00000100
+ffffffff &amp; 00000200 = 00000200
+ffffffff &amp; 00000400 = 00000400
+ffffffff &amp; 00000800 = 00000800
+ffffffff &amp; 00001000 = 00001000
+ffffffff &amp; 00002000 = 00002000
+ffffffff &amp; 00004000 = 00004000
+ffffffff &amp; 00008000 = 00008000
+ffffffff &amp; 00010000 = 00010000
+ffffffff &amp; 00020000 = 00020000
+ffffffff &amp; 00040000 = 00040000
+ffffffff &amp; 00080000 = 00080000
+ffffffff &amp; 00100000 = 00100000
+ffffffff &amp; 00200000 = 00200000
+ffffffff &amp; 00400000 = 00400000
+ffffffff &amp; 00800000 = 00800000
+ffffffff &amp; 01000000 = 01000000
+ffffffff &amp; 02000000 = 02000000
+ffffffff &amp; 04000000 = 04000000
+ffffffff &amp; 08000000 = 08000000
+ffffffff &amp; 10000000 = 10000000
+ffffffff &amp; 20000000 = 20000000
+ffffffff &amp; 40000000 = 40000000
+ffffffff &amp; 80000000 = 80000000
+</pre>
+</div>
+
+<ol class="org-ol">
+<li><a id="orgb11a5eb"></a>Uses of &amp;<br />
+<ol class="org-ol">
+<li><a id="org9b44b4a"></a>Checking for bits<br />
+<div class="outline-text-7" id="text-1-5-9-0-1-1">
+<div class="org-src-container">
+<pre class="src src-C"><span style="color: #483d8b;">#include</span> <span style="color: #8b2252;">&lt;inttypes.h&gt;</span>
+<span style="color: #483d8b;">#include</span> <span style="color: #8b2252;">&lt;stdio.h&gt;</span>
+
+<span style="color: #b22222;">// </span><span style="color: #b22222;">0x1L MUST be used 0x1 causes bugs</span>
+<span style="color: #483d8b;">#define</span> <span style="color: #0000ff;">BIT</span>(<span style="color: #a0522d;">x</span>,<span style="color: #a0522d;">y</span>) (x &amp; (0x1L &lt;&lt; y))
+
+<span style="color: #228b22;">int</span> <span style="color: #0000ff;">main</span>() {
+    <span style="color: #228b22;">uint64_t</span> <span style="color: #a0522d;">interesting</span> = 0x0123456789ABCDEF;
+    puts(<span style="color: #8b2252;">"Lets see some bits!"</span>);
+    <span style="color: #a020f0;">for</span> (<span style="color: #228b22;">size_t</span> <span style="color: #a0522d;">i</span> = 0 ; i &lt; 64; i++) {
+        putchar(BIT(interesting, i)?<span style="color: #8b2252;">'1'</span>:<span style="color: #8b2252;">'0'</span>);
+    }
+    puts(<span style="color: #8b2252;">""</span>);
+    <span style="color: #a020f0;">for</span> (<span style="color: #228b22;">size_t</span> <span style="color: #a0522d;">i</span> = 0 ; i &lt; 64; i++) {
+        putchar(<span style="color: #8b2252;">'0'</span> + i%10);
+    }
+    puts(<span style="color: #8b2252;">""</span>);
+}
+</pre>
+</div>
+
+<pre class="example">
+Lets see some bits!
+1111011110110011110101011001000111100110101000101100010010000000
+0123456789012345678901234567890123456789012345678901234567890123
+</pre>
+</div>
+</li>
+
+
+<li><a id="org9681f54"></a>Bit Printing<br />
+<div class="outline-text-7" id="text-1-5-9-0-1-2">
+<p>
+&amp; is way safer than shift for bit printing.
+</p>
+
+<div class="org-src-container">
+<pre class="src src-C"><span style="color: #483d8b;">#include</span> <span style="color: #8b2252;">&lt;inttypes.h&gt;</span>
+<span style="color: #483d8b;">#include</span> <span style="color: #8b2252;">&lt;stdio.h&gt;</span>
+
+<span style="color: #b22222;">// </span><span style="color: #b22222;">0x1L MUST be used 0x1 causes bugs</span>
+<span style="color: #483d8b;">#define</span> <span style="color: #0000ff;">BIT</span>(<span style="color: #a0522d;">x</span>,<span style="color: #a0522d;">y</span>) (x &amp; (0x1L &lt;&lt; y))
+<span style="color: #483d8b;">#define</span> <span style="color: #a0522d;">MAXBITSTRBITS</span> 129
+<span style="color: #a020f0;">static</span> <span style="color: #228b22;">char</span> <span style="color: #a0522d;">_bitstr</span>[MAXBITSTRBITS] = { <span style="color: #8b2252;">'\0'</span> };
+<span style="color: #a020f0;">static</span> <span style="color: #228b22;">char</span> * <span style="color: #0000ff;">bitString</span>(<span style="color: #228b22;">uint64_t</span> <span style="color: #a0522d;">value</span>, <span style="color: #a020f0;">const</span> <span style="color: #228b22;">unsigned</span> <span style="color: #228b22;">int</span> <span style="color: #a0522d;">bits</span>) {
+    <span style="color: #b22222;">// </span><span style="color: #b22222;">iterator must be uint64_t</span>
+    <span style="color: #a020f0;">for</span> (<span style="color: #228b22;">uint64_t</span> <span style="color: #a0522d;">i</span> = 0 ; i &lt; bits; i++) {
+        <span style="color: #228b22;">char</span> <span style="color: #a0522d;">bit</span> = (BIT(value,i))?<span style="color: #8b2252;">'1'</span>:<span style="color: #8b2252;">'0'</span>;
+        _bitstr[bits-1-i] = bit;
+    }
+    _bitstr[bits] = <span style="color: #8b2252;">'\0'</span>;
+    <span style="color: #a020f0;">return</span> _bitstr;
+}
+
+<span style="color: #228b22;">int</span> <span style="color: #0000ff;">main</span>() {
+    <span style="color: #228b22;">uint64_t</span> <span style="color: #a0522d;">interesting</span>[] = {
+        0x7F,
+        0xFF,
+        0xFFF,
+        0xABE4BEEF,
+        0x7777777777,
+        0xFFFFFFFFFF,
+        0xABCDEF01234,
+        0x7FFFFFFFFFFFFFFF,
+        0xFFFFFFFFFFFFFFFF,
+    };
+    <span style="color: #a020f0;">const</span> <span style="color: #228b22;">size_t</span> <span style="color: #a0522d;">nints</span> = <span style="color: #a020f0;">sizeof</span>(interesting)/<span style="color: #a020f0;">sizeof</span>(uint64_t);
+    printf(<span style="color: #8b2252;">"Interesting numbers!\n"</span>);
+    <span style="color: #a020f0;">for</span> (<span style="color: #228b22;">size_t</span> <span style="color: #a0522d;">i</span> = 0 ; i &lt; nints; i++) {
+        printf(<span style="color: #8b2252;">"%16lx %20llu %s\n"</span>,
+               interesting[i],
+               interesting[i],
+               bitString(interesting[i],64)
+        );
+    }
+    printf(<span style="color: #8b2252;">"Interesting[0] &amp; Interesting[1]"</span>);
+    <span style="color: #a020f0;">for</span> (<span style="color: #228b22;">size_t</span> <span style="color: #a0522d;">i</span> = 0 ; i &lt; nints; i++) {
+        printf(<span style="color: #8b2252;">"%s\n"</span>,
+               bitString(interesting[i] &amp; interesting[(i+1)%nints],64)
+        );
+    }
+
+}
+
+</pre>
+</div>
+
+<pre class="example">
+Interesting numbers!
+              7f                  127 0000000000000000000000000000000000000000000000000000000001111111
+              ff                  255 0000000000000000000000000000000000000000000000000000000011111111
+             fff                 4095 0000000000000000000000000000000000000000000000000000111111111111
+        abe4beef           2883895023 0000000000000000000000000000000010101011111001001011111011101111
+      7777777777         513105426295 0000000000000000000000000111011101110111011101110111011101110111
+      ffffffffff        1099511627775 0000000000000000000000001111111111111111111111111111111111111111
+     abcdef01234       11806310404660 0000000000000000000010101011110011011110111100000001001000110100
+7fffffffffffffff  9223372036854775807 0111111111111111111111111111111111111111111111111111111111111111
+ffffffffffffffff 18446744073709551615 1111111111111111111111111111111111111111111111111111111111111111
+Interesting[0] &amp; Interesting[1]0000000000000000000000000000000000000000000000000000000001111111
+0000000000000000000000000000000000000000000000000000000011111111
+0000000000000000000000000000000000000000000000000000111011101111
+0000000000000000000000000000000000100011011001000011011001100111
+0000000000000000000000000111011101110111011101110111011101110111
+0000000000000000000000001011110011011110111100000001001000110100
+0000000000000000000010101011110011011110111100000001001000110100
+0111111111111111111111111111111111111111111111111111111111111111
+0000000000000000000000000000000000000000000000000000000001111111
+</pre>
+</div>
+</li>
+</ol>
+</li>
+</ol>
+</div>
+
+
+
+<div id="outline-container-orgbc8e37a" class="outline-4">
+<h4 id="orgbc8e37a"><span class="section-number-4">1.5.10</span> bitwise OR</h4>
+<div class="outline-text-4" id="text-1-5-10">
+<p>
+The | operator is bitwise complement. It is the or operator between
+bits. 
+</p>
+
+<p>
+The | operator is a binary operator.
+</p>
+
+<p>
+0 | 0 -&gt; 0
+0 | 1 -&gt; 1
+1 | 0 -&gt; 1
+1 | 1 -&gt; 1
+</p>
+
+<div class="org-src-container">
+<pre class="src src-C"><span style="color: #483d8b;">#include</span> <span style="color: #8b2252;">&lt;stdio.h&gt;</span>
+<span style="color: #483d8b;">#include</span> <span style="color: #8b2252;">&lt;inttypes.h&gt;</span>
+<span style="color: #228b22;">int</span> <span style="color: #0000ff;">main</span>() {  
+    <span style="color: #228b22;">uint32_t</span> <span style="color: #a0522d;">pressF</span> = 0xFFFFFFFF;
+    printf(<span style="color: #8b2252;">"ORing 1 bit\n"</span>);
+    <span style="color: #a020f0;">for</span> (<span style="color: #228b22;">uint32_t</span> <span style="color: #a0522d;">i</span> = 0 ; i &lt; 32; i++) {
+        <span style="color: #228b22;">uint32_t</span> <span style="color: #a0522d;">bit</span> = (1 &lt;&lt; i);
+        printf(<span style="color: #8b2252;">"%08x &amp; %08x = %08x\n"</span>,
+               pressF, bit,  pressF | bit);
+    }
+    pressF = 0x11111111;
+    <span style="color: #a020f0;">for</span> (<span style="color: #228b22;">uint32_t</span> <span style="color: #a0522d;">i</span> = 0 ; i &lt; 32; i++) {
+        <span style="color: #228b22;">uint32_t</span> <span style="color: #a0522d;">bit</span> = (1 &lt;&lt; i);
+        printf(<span style="color: #8b2252;">"%08x &amp; %08x = %08x\n"</span>,
+               pressF, bit,  pressF | bit);
+    }
+}
+</pre>
+</div>
+
+<pre class="example">
+ORing 1 bit
+ffffffff &amp; 00000001 = ffffffff
+ffffffff &amp; 00000002 = ffffffff
+ffffffff &amp; 00000004 = ffffffff
+ffffffff &amp; 00000008 = ffffffff
+ffffffff &amp; 00000010 = ffffffff
+ffffffff &amp; 00000020 = ffffffff
+ffffffff &amp; 00000040 = ffffffff
+ffffffff &amp; 00000080 = ffffffff
+ffffffff &amp; 00000100 = ffffffff
+ffffffff &amp; 00000200 = ffffffff
+ffffffff &amp; 00000400 = ffffffff
+ffffffff &amp; 00000800 = ffffffff
+ffffffff &amp; 00001000 = ffffffff
+ffffffff &amp; 00002000 = ffffffff
+ffffffff &amp; 00004000 = ffffffff
+ffffffff &amp; 00008000 = ffffffff
+ffffffff &amp; 00010000 = ffffffff
+ffffffff &amp; 00020000 = ffffffff
+ffffffff &amp; 00040000 = ffffffff
+ffffffff &amp; 00080000 = ffffffff
+ffffffff &amp; 00100000 = ffffffff
+ffffffff &amp; 00200000 = ffffffff
+ffffffff &amp; 00400000 = ffffffff
+ffffffff &amp; 00800000 = ffffffff
+ffffffff &amp; 01000000 = ffffffff
+ffffffff &amp; 02000000 = ffffffff
+ffffffff &amp; 04000000 = ffffffff
+ffffffff &amp; 08000000 = ffffffff
+ffffffff &amp; 10000000 = ffffffff
+ffffffff &amp; 20000000 = ffffffff
+ffffffff &amp; 40000000 = ffffffff
+ffffffff &amp; 80000000 = ffffffff
+11111111 &amp; 00000001 = 11111111
+11111111 &amp; 00000002 = 11111113
+11111111 &amp; 00000004 = 11111115
+11111111 &amp; 00000008 = 11111119
+11111111 &amp; 00000010 = 11111111
+11111111 &amp; 00000020 = 11111131
+11111111 &amp; 00000040 = 11111151
+11111111 &amp; 00000080 = 11111191
+11111111 &amp; 00000100 = 11111111
+11111111 &amp; 00000200 = 11111311
+11111111 &amp; 00000400 = 11111511
+11111111 &amp; 00000800 = 11111911
+11111111 &amp; 00001000 = 11111111
+11111111 &amp; 00002000 = 11113111
+11111111 &amp; 00004000 = 11115111
+11111111 &amp; 00008000 = 11119111
+11111111 &amp; 00010000 = 11111111
+11111111 &amp; 00020000 = 11131111
+11111111 &amp; 00040000 = 11151111
+11111111 &amp; 00080000 = 11191111
+11111111 &amp; 00100000 = 11111111
+11111111 &amp; 00200000 = 11311111
+11111111 &amp; 00400000 = 11511111
+11111111 &amp; 00800000 = 11911111
+11111111 &amp; 01000000 = 11111111
+11111111 &amp; 02000000 = 13111111
+11111111 &amp; 04000000 = 15111111
+11111111 &amp; 08000000 = 19111111
+11111111 &amp; 10000000 = 11111111
+11111111 &amp; 20000000 = 31111111
+11111111 &amp; 40000000 = 51111111
+11111111 &amp; 80000000 = 91111111
+</pre>
+</div>
+
+<ol class="org-ol">
+<li><a id="org05964df"></a>Uses of |<br />
+<div class="outline-text-6" id="text-1-5-10-0-1">
+<p>
+We mostly use | to combine bits together for arguments to functions.
+</p>
+</div>
+</li>
+</ol>
+</div>
+
+<div id="outline-container-orgf85d0b8" class="outline-4">
+<h4 id="orgf85d0b8"><span class="section-number-4">1.5.11</span> bitwise XOR</h4>
+<div class="outline-text-4" id="text-1-5-11">
+<p>
+The ^ operator is bitwise exclusive OR. It is the XOR operator between
+bits. It differs from or because when both inputs bits are hot the
+result in 0.
+</p>
+
+<p>
+The ^ operator is a binary operator.
+</p>
+
+<p>
+0 | 0 -&gt; 0
+0 | 1 -&gt; 1
+1 | 0 -&gt; 1
+1 | 1 -&gt; 0
+</p>
+
+<div class="org-src-container">
+<pre class="src src-C"><span style="color: #483d8b;">#include</span> <span style="color: #8b2252;">&lt;stdio.h&gt;</span>
+<span style="color: #483d8b;">#include</span> <span style="color: #8b2252;">&lt;inttypes.h&gt;</span>
+<span style="color: #228b22;">int</span> <span style="color: #0000ff;">main</span>() {  
+    <span style="color: #228b22;">uint32_t</span> <span style="color: #a0522d;">pressF</span> = 0xFFFFFFFF;
+    printf(<span style="color: #8b2252;">"ORing 1 bit\n"</span>);
+    <span style="color: #a020f0;">for</span> (<span style="color: #228b22;">uint32_t</span> <span style="color: #a0522d;">i</span> = 0 ; i &lt; 32; i++) {
+        <span style="color: #228b22;">uint32_t</span> <span style="color: #a0522d;">bit</span> = (1 &lt;&lt; i);
+        printf(<span style="color: #8b2252;">"%08x &amp; %08x = %08x\n"</span>,
+               pressF, bit,  pressF ^ bit);
+    }
+    pressF = 0x11111111;
+    <span style="color: #a020f0;">for</span> (<span style="color: #228b22;">uint32_t</span> <span style="color: #a0522d;">i</span> = 0 ; i &lt; 32; i++) {
+        <span style="color: #228b22;">uint32_t</span> <span style="color: #a0522d;">bit</span> = (1 &lt;&lt; i);
+        printf(<span style="color: #8b2252;">"%08x &amp; %08x = %08x\n"</span>,
+               pressF, bit,  pressF ^ bit);
+    }
+}
+</pre>
+</div>
+
+<pre class="example">
+ORing 1 bit
+ffffffff &amp; 00000001 = fffffffe
+ffffffff &amp; 00000002 = fffffffd
+ffffffff &amp; 00000004 = fffffffb
+ffffffff &amp; 00000008 = fffffff7
+ffffffff &amp; 00000010 = ffffffef
+ffffffff &amp; 00000020 = ffffffdf
+ffffffff &amp; 00000040 = ffffffbf
+ffffffff &amp; 00000080 = ffffff7f
+ffffffff &amp; 00000100 = fffffeff
+ffffffff &amp; 00000200 = fffffdff
+ffffffff &amp; 00000400 = fffffbff
+ffffffff &amp; 00000800 = fffff7ff
+ffffffff &amp; 00001000 = ffffefff
+ffffffff &amp; 00002000 = ffffdfff
+ffffffff &amp; 00004000 = ffffbfff
+ffffffff &amp; 00008000 = ffff7fff
+ffffffff &amp; 00010000 = fffeffff
+ffffffff &amp; 00020000 = fffdffff
+ffffffff &amp; 00040000 = fffbffff
+ffffffff &amp; 00080000 = fff7ffff
+ffffffff &amp; 00100000 = ffefffff
+ffffffff &amp; 00200000 = ffdfffff
+ffffffff &amp; 00400000 = ffbfffff
+ffffffff &amp; 00800000 = ff7fffff
+ffffffff &amp; 01000000 = feffffff
+ffffffff &amp; 02000000 = fdffffff
+ffffffff &amp; 04000000 = fbffffff
+ffffffff &amp; 08000000 = f7ffffff
+ffffffff &amp; 10000000 = efffffff
+ffffffff &amp; 20000000 = dfffffff
+ffffffff &amp; 40000000 = bfffffff
+ffffffff &amp; 80000000 = 7fffffff
+11111111 &amp; 00000001 = 11111110
+11111111 &amp; 00000002 = 11111113
+11111111 &amp; 00000004 = 11111115
+11111111 &amp; 00000008 = 11111119
+11111111 &amp; 00000010 = 11111101
+11111111 &amp; 00000020 = 11111131
+11111111 &amp; 00000040 = 11111151
+11111111 &amp; 00000080 = 11111191
+11111111 &amp; 00000100 = 11111011
+11111111 &amp; 00000200 = 11111311
+11111111 &amp; 00000400 = 11111511
+11111111 &amp; 00000800 = 11111911
+11111111 &amp; 00001000 = 11110111
+11111111 &amp; 00002000 = 11113111
+11111111 &amp; 00004000 = 11115111
+11111111 &amp; 00008000 = 11119111
+11111111 &amp; 00010000 = 11101111
+11111111 &amp; 00020000 = 11131111
+11111111 &amp; 00040000 = 11151111
+11111111 &amp; 00080000 = 11191111
+11111111 &amp; 00100000 = 11011111
+11111111 &amp; 00200000 = 11311111
+11111111 &amp; 00400000 = 11511111
+11111111 &amp; 00800000 = 11911111
+11111111 &amp; 01000000 = 10111111
+11111111 &amp; 02000000 = 13111111
+11111111 &amp; 04000000 = 15111111
+11111111 &amp; 08000000 = 19111111
+11111111 &amp; 10000000 = 01111111
+11111111 &amp; 20000000 = 31111111
+11111111 &amp; 40000000 = 51111111
+11111111 &amp; 80000000 = 91111111
+</pre>
+</div>
+
+<ol class="org-ol">
+<li><a id="org0ab9ffd"></a>Uses of ^<br />
+<div class="outline-text-6" id="text-1-5-11-0-1">
+<p>
+XOR has interesting properties .
+</p>
+
+<p>
+a ^ b ^ a = b
+</p>
+
+<p>
+So if we send a message of a<sup>b</sup> we can decode the message of (a<sup>b</sup>)<sup>b</sup>
+</p>
+
+<div class="org-src-container">
+<pre class="src src-C"><span style="color: #483d8b;">#include</span> <span style="color: #8b2252;">&lt;stdio.h&gt;</span>
+<span style="color: #483d8b;">#include</span> <span style="color: #8b2252;">&lt;inttypes.h&gt;</span>
+
+<span style="color: #228b22;">void</span> <span style="color: #0000ff;">encrypt</span>(<span style="color: #228b22;">char</span> * <span style="color: #a0522d;">output</span>, <span style="color: #a020f0;">const</span> <span style="color: #228b22;">char</span> * <span style="color: #a0522d;">key</span>, <span style="color: #228b22;">char</span> * <span style="color: #a0522d;">input</span>) {
+    <span style="color: #a020f0;">const</span> <span style="color: #228b22;">size_t</span> <span style="color: #a0522d;">keylen</span>   = strlen(key);
+    <span style="color: #a020f0;">const</span> <span style="color: #228b22;">size_t</span> <span style="color: #a0522d;">inputlen</span> = strlen(input);
+    <span style="color: #a020f0;">for</span> (<span style="color: #228b22;">size_t</span> <span style="color: #a0522d;">i</span> = 0 ; i &lt; inputlen; i++) {
+        output[i] = input[i] ^ key[i%keylen];
+    }
+    output[inputlen] = <span style="color: #8b2252;">'\0'</span>;   
+}
+
+<span style="color: #228b22;">int</span> <span style="color: #0000ff;">main</span>() {  
+    <span style="color: #a020f0;">const</span> <span style="color: #228b22;">char</span> * <span style="color: #a0522d;">key</span> = <span style="color: #8b2252;">"EATFOOD"</span>;
+    <span style="color: #a020f0;">const</span> <span style="color: #228b22;">size_t</span> <span style="color: #a0522d;">keylen</span> = strlen(key);
+    <span style="color: #228b22;">char</span> * <span style="color: #a0522d;">input</span> = <span style="color: #8b2252;">"I enjoy olive bread"</span>;
+    <span style="color: #228b22;">char</span> <span style="color: #a0522d;">output</span>[1024] = {<span style="color: #8b2252;">'\0'</span>};
+    encrypt(output, key, input);
+    printf(<span style="color: #8b2252;">"Encrypted: %s\n"</span>, output);
+    encrypt(output, key, output);
+    printf(<span style="color: #8b2252;">"Encrypted Again: %s\n"</span>, output);
+}
+</pre>
+</div>
+
+<pre class="example">
+Encrypted: a1(% =e.8/9*d'31'+
+Encrypted Again: I enjoy olive bread
+</pre>
+</div>
+</li>
+</ol>
+</div>
+
+<div id="outline-container-org53d59ef" class="outline-4">
+<h4 id="org53d59ef"><span class="section-number-4">1.5.12</span> bitwise complement</h4>
+<div class="outline-text-4" id="text-1-5-12">
+<p>
+The ~ operator is bitwise complement. It means every bit is notted
+The ~ operator is a unary operator.
+</p>
+
+<p>
+0 -&gt; 1
+1 -&gt; 0
+</p>
+
+<div class="org-src-container">
+<pre class="src src-C"><span style="color: #483d8b;">#include</span> <span style="color: #8b2252;">&lt;stdio.h&gt;</span>
+<span style="color: #483d8b;">#include</span> <span style="color: #8b2252;">&lt;inttypes.h&gt;</span>
+<span style="color: #228b22;">int</span> <span style="color: #0000ff;">main</span>() {
+    <span style="color: #228b22;">uint8_t</span> <span style="color: #a0522d;">u8</span> = 0;
+    <span style="color: #a020f0;">for</span> (<span style="color: #228b22;">uint32_t</span> <span style="color: #a0522d;">i</span> = 0 ; i &lt; 256; i+=6) {
+        u8 = (<span style="color: #228b22;">uint8_t</span>)i;
+        <span style="color: #b22222;">// </span><span style="color: #b22222;">be careful about how you deal with chars</span>
+        printf(<span style="color: #8b2252;">"%3hhu %3hhu\t-- %3u %3u\n"</span>,
+               u8, ~u8, u8, ~u8);
+    }
+}
+</pre>
+</div>
+
+<pre class="example">
+0 255	--   0 4294967295
+  6 249	--   6 4294967289
+ 12 243	--  12 4294967283
+ 18 237	--  18 4294967277
+ 24 231	--  24 4294967271
+ 30 225	--  30 4294967265
+ 36 219	--  36 4294967259
+ 42 213	--  42 4294967253
+ 48 207	--  48 4294967247
+ 54 201	--  54 4294967241
+ 60 195	--  60 4294967235
+ 66 189	--  66 4294967229
+ 72 183	--  72 4294967223
+ 78 177	--  78 4294967217
+ 84 171	--  84 4294967211
+ 90 165	--  90 4294967205
+ 96 159	--  96 4294967199
+102 153	-- 102 4294967193
+108 147	-- 108 4294967187
+114 141	-- 114 4294967181
+120 135	-- 120 4294967175
+126 129	-- 126 4294967169
+132 123	-- 132 4294967163
+138 117	-- 138 4294967157
+144 111	-- 144 4294967151
+150 105	-- 150 4294967145
+156  99	-- 156 4294967139
+162  93	-- 162 4294967133
+168  87	-- 168 4294967127
+174  81	-- 174 4294967121
+180  75	-- 180 4294967115
+186  69	-- 186 4294967109
+192  63	-- 192 4294967103
+198  57	-- 198 4294967097
+204  51	-- 204 4294967091
+210  45	-- 210 4294967085
+216  39	-- 216 4294967079
+222  33	-- 222 4294967073
+228  27	-- 228 4294967067
+234  21	-- 234 4294967061
+240  15	-- 240 4294967055
+246   9	-- 246 4294967049
+252   3	-- 252 4294967043
+</pre>
+</div>
+</div>
+
+
+
+<div id="outline-container-org6b98a11" class="outline-4">
+<h4 id="org6b98a11"><span class="section-number-4">1.5.13</span> Flags</h4>
+<div class="outline-text-4" id="text-1-5-13">
+<p>
+In C flags are often used. Flags are parameters who's bits indicate if
+some option is chosen.
+</p>
+
+<p>
+`man 2 open` has the open function
+</p>
+<div class="org-src-container">
+<pre class="src src-C"><span style="color: #483d8b;">#include</span> <span style="color: #8b2252;">&lt;sys/types.h&gt;</span>
+<span style="color: #483d8b;">#include</span> <span style="color: #8b2252;">&lt;sys/stat.h&gt;</span>
+<span style="color: #483d8b;">#include</span> <span style="color: #8b2252;">&lt;fcntl.h&gt;</span>
+
+<span style="color: #228b22;">int</span> <span style="color: #0000ff;">open</span>(<span style="color: #a020f0;">const</span> <span style="color: #228b22;">char</span> *<span style="color: #a0522d;">pathname</span>, <span style="color: #228b22;">int</span> <span style="color: #a0522d;">flags</span>);
+</pre>
+</div>
+
+<p>
+open is part of POSIX systems like linux.
+open takes a file name (pathname) and takes flags:
+</p>
+<ul class="org-ul">
+<li>O<sub>RDONLY</sub> - Read the file</li>
+<li>O<sub>WRONLY</sub> - Write to the file</li>
+<li>O<sub>RDWR</sub>   - Read and Write to the file</li>
+<li>O<sub>CREAT</sub>  - CREATE the file if it doesn't exist</li>
+<li>O<sub>APPEND</sub> - append to existing file</li>
+</ul>
+
+<p>
+But how do we open a file for writing that creates a new file with only 1 argument?
+</p>
+
+<p>
+The bitwise | operator! 
+</p>
+
+<p>
+O<sub>WRONLY</sub> | O<sub>CREAT</sub> will allow us to open a file for writing that will
+create the file on disk if it doesn't already exist!
+</p>
+
+
+<div class="org-src-container">
+<pre class="src src-C"><span style="color: #b22222;">// </span><span style="color: #b22222;">in /usr/include/asm-generic/fcntl.h (used by fcntl.h)</span>
+<span style="color: #b22222;">// </span><span style="color: #b22222;">we see the definitions:</span>
+<span style="color: #483d8b;">#define</span> <span style="color: #a0522d;">O_ACCMODE</span>       00000003
+<span style="color: #483d8b;">#define</span> <span style="color: #a0522d;">O_RDONLY</span>        00000000
+<span style="color: #483d8b;">#define</span> <span style="color: #a0522d;">O_WRONLY</span>        00000001
+<span style="color: #483d8b;">#define</span> <span style="color: #a0522d;">O_RDWR</span>          00000002
+<span style="color: #483d8b;">#if</span><span style="color: #483d8b;">n</span><span style="color: #483d8b;">def</span> O_CREAT
+<span style="color: #483d8b;">#define</span> <span style="color: #a0522d;">O_CREAT</span>         00000100        <span style="color: #b22222;">/* </span><span style="color: #b22222;">not fcntl </span><span style="color: #b22222;">*/</span>
+<span style="color: #483d8b;">#endif</span>
+<span style="color: #483d8b;">#if</span><span style="color: #483d8b;">n</span><span style="color: #483d8b;">def</span> O_EXCL
+<span style="color: #483d8b;">#define</span> <span style="color: #a0522d;">O_EXCL</span>          00000200        <span style="color: #b22222;">/* </span><span style="color: #b22222;">not fcntl </span><span style="color: #b22222;">*/</span>
+<span style="color: #483d8b;">#endif</span>
+<span style="color: #483d8b;">#if</span><span style="color: #483d8b;">n</span><span style="color: #483d8b;">def</span> O_NOCTTY
+<span style="color: #483d8b;">#define</span> <span style="color: #a0522d;">O_NOCTTY</span>        00000400        <span style="color: #b22222;">/* </span><span style="color: #b22222;">not fcntl </span><span style="color: #b22222;">*/</span>
+<span style="color: #483d8b;">#endif</span>
+<span style="color: #483d8b;">#if</span><span style="color: #483d8b;">n</span><span style="color: #483d8b;">def</span> O_TRUNC
+<span style="color: #483d8b;">#define</span> <span style="color: #a0522d;">O_TRUNC</span>         00001000        <span style="color: #b22222;">/* </span><span style="color: #b22222;">not fcntl </span><span style="color: #b22222;">*/</span>
+<span style="color: #483d8b;">#endif</span>
+<span style="color: #483d8b;">#if</span><span style="color: #483d8b;">n</span><span style="color: #483d8b;">def</span> O_APPEND
+<span style="color: #483d8b;">#define</span> <span style="color: #a0522d;">O_APPEND</span>        00002000
+<span style="color: #483d8b;">#endif</span>
+
+open(<span style="color: #8b2252;">"~/.bashrc"</span>, O_RDONLY); <span style="color: #b22222;">// </span><span style="color: #b22222;">open ~/.bashrc for read only access</span>
+open(<span style="color: #8b2252;">"/tmp/map.txt"</span>, O_WRONLY | O_CREATE); <span style="color: #b22222;">// </span><span style="color: #b22222;">open /tmp/map.txt to write to it</span>
+open(<span style="color: #8b2252;">"./log.txt"</span>, O_WRONLY | O_CREATE | O_APPEND); <span style="color: #b22222;">// </span><span style="color: #b22222;">open ./map.txt to write to it or append to it</span>
+
+<span style="color: #b22222;">// </span><span style="color: #b22222;">So </span>
+O_WRONLY | O_CREATE            == 00000101 (00000001 | 00000100)
+O_WRONLY | O_CREATE | O_APPEND == 00002101 (00000001 | 00000100 | 00002000)
+<span style="color: #b22222;">// </span><span style="color: #b22222;">Question wht number format are they using to define these flags?</span>
+</pre>
+</div>
+
+<p>
+warning: open is just an example. Please use fopen if you want to read / write files.
+</p>
+
+<p>
+warning: flags should only be unsigned integers
+</p>
+
+<p>
+warning: flags must be not 0
+</p>
+</div>
+
+<ol class="org-ol">
+<li><a id="orgc39ac29"></a>Expected Flag use:<br />
+<div class="outline-text-5" id="text-1-5-13-1">
+<p>
+Use | to set a flag:   FLAG1 | FLAG2
+</p>
+
+<p>
+Use &amp; to check a flag: input &amp; FLAG1
+</p>
+
+<p>
+Watch out testing for truth and combining flags
+</p>
+
+<p>
+To check for FLAG1 and FLAG2 being hot you should:
+</p>
+
+<p>
+`if (input &amp; FLAG1 &amp;&amp; input &amp; FLAG2) `
+</p>
+
+<p>
+or
+</p>
+
+<p>
+`if (input &amp; (FLAG1 | FLAG2) == (FLAG1 | FLAG2))`
+</p>
+
+<p>
+It's very convoluted so don't get too complicated
+</p>
+
+<p>
+This is a bug:
+`if (input &amp; (FLAG1 | FLAG2))`
+</p>
+
+<p>
+It actually just checks if you have either FLAG1 or FLAG2.
+</p>
+</div>
+</li>
+
+
+<li><a id="org3ba7949"></a>Flags Example<br />
+<div class="outline-text-5" id="text-1-5-13-2">
+<p>
+Hazel talks in depth about pizza
+</p>
+<ul class="org-ul">
+<li><a href="https://docs.google.com/document/d/1S-I-OthHf0mgNZXnTSOvyx5lSduQwsbHYMmVPLtTl1Y/edit">https://docs.google.com/document/d/1S-I-OthHf0mgNZXnTSOvyx5lSduQwsbHYMmVPLtTl1Y/edit</a>#</li>
+</ul>
+
+<div class="org-src-container">
+<pre class="src src-C"><span style="color: #483d8b;">#include</span> <span style="color: #8b2252;">&lt;inttypes.h&gt;</span>
+<span style="color: #483d8b;">#include</span> <span style="color: #8b2252;">&lt;stdio.h&gt;</span>
+
+<span style="color: #a020f0;">enum</span> <span style="color: #228b22;">pizza_toppings</span> {
+    <span style="color: #a0522d;">CHEESE</span>          =  0x1,
+    <span style="color: #a0522d;">THINCRUST</span>       =  0x2,
+    <span style="color: #a0522d;">THICKCRUST</span>      =  0x4,
+    <span style="color: #a0522d;">TOMATOSAUCE</span>     =  0x8,
+    <span style="color: #a0522d;">BLACKMETALSAUCE</span> = 0x10, 
+    <span style="color: #a0522d;">CORN</span>            = 0x20, <span style="color: #b22222;">// </span><span style="color: #b22222;">Hazel's favourite topping</span>
+    <span style="color: #a0522d;">ONIONS</span>          = 0x40,
+    <span style="color: #a0522d;">MYSTERYMEAT</span>     = 0x80,
+};
+
+<span style="color: #a020f0;">typedef</span> <span style="color: #228b22;">uint32_t</span> <span style="color: #228b22;">PizzaFlags</span>;
+
+<span style="color: #228b22;">void</span> <span style="color: #0000ff;">printPizza</span>(<span style="color: #228b22;">PizzaFlags</span> <span style="color: #a0522d;">pizza</span>) {
+    <span style="color: #b22222;">// </span><span style="color: #b22222;">Don't do what doctor hindle does.</span>
+    <span style="color: #b22222;">// </span><span style="color: #b22222;">you should use a loop over the constants instead</span>
+    printf(<span style="color: #8b2252;">"A pizza of %s%s%s%s%s%s%s%s.\n"</span>,
+           (pizza &amp; CHEESE)?<span style="color: #8b2252;">"cheese, "</span>:<span style="color: #8b2252;">""</span>,
+           (pizza &amp; THINCRUST)?<span style="color: #8b2252;">"thin crust, "</span>:<span style="color: #8b2252;">""</span>,
+           (pizza &amp; THICKCRUST)?<span style="color: #8b2252;">"thick crust, "</span>:<span style="color: #8b2252;">""</span>,
+           (pizza &amp; TOMATOSAUCE)?<span style="color: #8b2252;">"tomato sauce, "</span>:<span style="color: #8b2252;">""</span>,
+           (pizza &amp; BLACKMETALSAUCE)?<span style="color: #8b2252;">"black metal sauce, "</span>:<span style="color: #8b2252;">""</span>,
+           (pizza &amp; CORN)?<span style="color: #8b2252;">"corn (srsly?), "</span>:<span style="color: #8b2252;">""</span>,
+           (pizza &amp; ONIONS)?<span style="color: #8b2252;">"onions, "</span>:<span style="color: #8b2252;">""</span>,
+           (pizza &amp; MYSTERYMEAT)?<span style="color: #8b2252;">"exotic meats, "</span>:<span style="color: #8b2252;">""</span>
+    );
+}
+<span style="color: #228b22;">void</span> <span style="color: #0000ff;">violation</span>(<span style="color: #228b22;">PizzaFlags</span> <span style="color: #a0522d;">pizza</span>) {
+    <span style="color: #b22222;">// </span><span style="color: #b22222;">Not all pizzas are created equal</span>
+    <span style="color: #a020f0;">if</span> (pizza &amp; THINCRUST &amp;&amp; pizza &amp; THICKCRUST) {
+        printf(<span style="color: #8b2252;">"WARNING: Impossible to make a thin / thick crust pizza!\n"</span>);
+    }
+    <span style="color: #a020f0;">if</span> (pizza &amp; CORN) {
+        printf(<span style="color: #8b2252;">"WARNING: Corn? REALLY?\n"</span>);
+    }
+    <span style="color: #a020f0;">if</span> (pizza == (CHEESE | THINCRUST) || pizza == (CHEESE | THICKCRUST)) {
+        printf(<span style="color: #8b2252;">"WARNING: SPAAAAAAAARTA, or spatarn.\n"</span>);
+    }
+}
+<span style="color: #228b22;">int</span> <span style="color: #0000ff;">main</span>() {
+    printf(<span style="color: #8b2252;">"OK build some pizza using |\n\n\n"</span>);
+    printPizza(CHEESE | CORN);
+    printPizza(CHEESE |  THINCRUST | BLACKMETALSAUCE | CORN | MYSTERYMEAT);
+    printf(<span style="color: #8b2252;">"\n\nOK build some pizza via iteration\n\n\n"</span>);
+    <span style="color: #a020f0;">for</span> (<span style="color: #228b22;">uint32_t</span> <span style="color: #a0522d;">i</span> = 0; i &lt; 0x8F; i++) {
+        printPizza((<span style="color: #228b22;">PizzaFlags</span>)i);
+    }
+    <span style="color: #b22222;">// </span><span style="color: #b22222;">Check the pizza</span>
+    printf(<span style="color: #8b2252;">"\n\nOK check some pizzas yo\n\n\n"</span>);
+    <span style="color: #228b22;">PizzaFlags</span> <span style="color: #a0522d;">pizza</span> = CHEESE | CORN | THINCRUST | THICKCRUST;
+    printPizza(pizza);
+    violation(pizza);
+    pizza = CHEESE | CORN | THINCRUST;
+    printPizza(pizza);
+    violation(pizza);
+    pizza = CHEESE | THINCRUST;
+    printPizza(pizza);
+    violation(pizza);
+}
+
+</pre>
+</div>
+
+<pre class="example">
+OK build some pizza using |
+
+
+A pizza of cheese, corn (srsly?), .
+A pizza of cheese, thin crust, black metal sauce, corn (srsly?), exotic meats, .
+
+
+OK build some pizza via iteration
+
+
+A pizza of .
+A pizza of cheese, .
+A pizza of thin crust, .
+A pizza of cheese, thin crust, .
+A pizza of thick crust, .
+A pizza of cheese, thick crust, .
+A pizza of thin crust, thick crust, .
+A pizza of cheese, thin crust, thick crust, .
+A pizza of tomato sauce, .
+A pizza of cheese, tomato sauce, .
+A pizza of thin crust, tomato sauce, .
+A pizza of cheese, thin crust, tomato sauce, .
+A pizza of thick crust, tomato sauce, .
+A pizza of cheese, thick crust, tomato sauce, .
+A pizza of thin crust, thick crust, tomato sauce, .
+A pizza of cheese, thin crust, thick crust, tomato sauce, .
+A pizza of black metal sauce, .
+A pizza of cheese, black metal sauce, .
+A pizza of thin crust, black metal sauce, .
+A pizza of cheese, thin crust, black metal sauce, .
+A pizza of thick crust, black metal sauce, .
+A pizza of cheese, thick crust, black metal sauce, .
+A pizza of thin crust, thick crust, black metal sauce, .
+A pizza of cheese, thin crust, thick crust, black metal sauce, .
+A pizza of tomato sauce, black metal sauce, .
+A pizza of cheese, tomato sauce, black metal sauce, .
+A pizza of thin crust, tomato sauce, black metal sauce, .
+A pizza of cheese, thin crust, tomato sauce, black metal sauce, .
+A pizza of thick crust, tomato sauce, black metal sauce, .
+A pizza of cheese, thick crust, tomato sauce, black metal sauce, .
+A pizza of thin crust, thick crust, tomato sauce, black metal sauce, .
+A pizza of cheese, thin crust, thick crust, tomato sauce, black metal sauce, .
+A pizza of corn (srsly?), .
+A pizza of cheese, corn (srsly?), .
+A pizza of thin crust, corn (srsly?), .
+A pizza of cheese, thin crust, corn (srsly?), .
+A pizza of thick crust, corn (srsly?), .
+A pizza of cheese, thick crust, corn (srsly?), .
+A pizza of thin crust, thick crust, corn (srsly?), .
+A pizza of cheese, thin crust, thick crust, corn (srsly?), .
+A pizza of tomato sauce, corn (srsly?), .
+A pizza of cheese, tomato sauce, corn (srsly?), .
+A pizza of thin crust, tomato sauce, corn (srsly?), .
+A pizza of cheese, thin crust, tomato sauce, corn (srsly?), .
+A pizza of thick crust, tomato sauce, corn (srsly?), .
+A pizza of cheese, thick crust, tomato sauce, corn (srsly?), .
+A pizza of thin crust, thick crust, tomato sauce, corn (srsly?), .
+A pizza of cheese, thin crust, thick crust, tomato sauce, corn (srsly?), .
+A pizza of black metal sauce, corn (srsly?), .
+A pizza of cheese, black metal sauce, corn (srsly?), .
+A pizza of thin crust, black metal sauce, corn (srsly?), .
+A pizza of cheese, thin crust, black metal sauce, corn (srsly?), .
+A pizza of thick crust, black metal sauce, corn (srsly?), .
+A pizza of cheese, thick crust, black metal sauce, corn (srsly?), .
+A pizza of thin crust, thick crust, black metal sauce, corn (srsly?), .
+A pizza of cheese, thin crust, thick crust, black metal sauce, corn (srsly?), .
+A pizza of tomato sauce, black metal sauce, corn (srsly?), .
+A pizza of cheese, tomato sauce, black metal sauce, corn (srsly?), .
+A pizza of thin crust, tomato sauce, black metal sauce, corn (srsly?), .
+A pizza of cheese, thin crust, tomato sauce, black metal sauce, corn (srsly?), .
+A pizza of thick crust, tomato sauce, black metal sauce, corn (srsly?), .
+A pizza of cheese, thick crust, tomato sauce, black metal sauce, corn (srsly?), .
+A pizza of thin crust, thick crust, tomato sauce, black metal sauce, corn (srsly?), .
+A pizza of cheese, thin crust, thick crust, tomato sauce, black metal sauce, corn (srsly?), .
+A pizza of onions, .
+A pizza of cheese, onions, .
+A pizza of thin crust, onions, .
+A pizza of cheese, thin crust, onions, .
+A pizza of thick crust, onions, .
+A pizza of cheese, thick crust, onions, .
+A pizza of thin crust, thick crust, onions, .
+A pizza of cheese, thin crust, thick crust, onions, .
+A pizza of tomato sauce, onions, .
+A pizza of cheese, tomato sauce, onions, .
+A pizza of thin crust, tomato sauce, onions, .
+A pizza of cheese, thin crust, tomato sauce, onions, .
+A pizza of thick crust, tomato sauce, onions, .
+A pizza of cheese, thick crust, tomato sauce, onions, .
+A pizza of thin crust, thick crust, tomato sauce, onions, .
+A pizza of cheese, thin crust, thick crust, tomato sauce, onions, .
+A pizza of black metal sauce, onions, .
+A pizza of cheese, black metal sauce, onions, .
+A pizza of thin crust, black metal sauce, onions, .
+A pizza of cheese, thin crust, black metal sauce, onions, .
+A pizza of thick crust, black metal sauce, onions, .
+A pizza of cheese, thick crust, black metal sauce, onions, .
+A pizza of thin crust, thick crust, black metal sauce, onions, .
+A pizza of cheese, thin crust, thick crust, black metal sauce, onions, .
+A pizza of tomato sauce, black metal sauce, onions, .
+A pizza of cheese, tomato sauce, black metal sauce, onions, .
+A pizza of thin crust, tomato sauce, black metal sauce, onions, .
+A pizza of cheese, thin crust, tomato sauce, black metal sauce, onions, .
+A pizza of thick crust, tomato sauce, black metal sauce, onions, .
+A pizza of cheese, thick crust, tomato sauce, black metal sauce, onions, .
+A pizza of thin crust, thick crust, tomato sauce, black metal sauce, onions, .
+A pizza of cheese, thin crust, thick crust, tomato sauce, black metal sauce, onions, .
+A pizza of corn (srsly?), onions, .
+A pizza of cheese, corn (srsly?), onions, .
+A pizza of thin crust, corn (srsly?), onions, .
+A pizza of cheese, thin crust, corn (srsly?), onions, .
+A pizza of thick crust, corn (srsly?), onions, .
+A pizza of cheese, thick crust, corn (srsly?), onions, .
+A pizza of thin crust, thick crust, corn (srsly?), onions, .
+A pizza of cheese, thin crust, thick crust, corn (srsly?), onions, .
+A pizza of tomato sauce, corn (srsly?), onions, .
+A pizza of cheese, tomato sauce, corn (srsly?), onions, .
+A pizza of thin crust, tomato sauce, corn (srsly?), onions, .
+A pizza of cheese, thin crust, tomato sauce, corn (srsly?), onions, .
+A pizza of thick crust, tomato sauce, corn (srsly?), onions, .
+A pizza of cheese, thick crust, tomato sauce, corn (srsly?), onions, .
+A pizza of thin crust, thick crust, tomato sauce, corn (srsly?), onions, .
+A pizza of cheese, thin crust, thick crust, tomato sauce, corn (srsly?), onions, .
+A pizza of black metal sauce, corn (srsly?), onions, .
+A pizza of cheese, black metal sauce, corn (srsly?), onions, .
+A pizza of thin crust, black metal sauce, corn (srsly?), onions, .
+A pizza of cheese, thin crust, black metal sauce, corn (srsly?), onions, .
+A pizza of thick crust, black metal sauce, corn (srsly?), onions, .
+A pizza of cheese, thick crust, black metal sauce, corn (srsly?), onions, .
+A pizza of thin crust, thick crust, black metal sauce, corn (srsly?), onions, .
+A pizza of cheese, thin crust, thick crust, black metal sauce, corn (srsly?), onions, .
+A pizza of tomato sauce, black metal sauce, corn (srsly?), onions, .
+A pizza of cheese, tomato sauce, black metal sauce, corn (srsly?), onions, .
+A pizza of thin crust, tomato sauce, black metal sauce, corn (srsly?), onions, .
+A pizza of cheese, thin crust, tomato sauce, black metal sauce, corn (srsly?), onions, .
+A pizza of thick crust, tomato sauce, black metal sauce, corn (srsly?), onions, .
+A pizza of cheese, thick crust, tomato sauce, black metal sauce, corn (srsly?), onions, .
+A pizza of thin crust, thick crust, tomato sauce, black metal sauce, corn (srsly?), onions, .
+A pizza of cheese, thin crust, thick crust, tomato sauce, black metal sauce, corn (srsly?), onions, .
+A pizza of exotic meats, .
+A pizza of cheese, exotic meats, .
+A pizza of thin crust, exotic meats, .
+A pizza of cheese, thin crust, exotic meats, .
+A pizza of thick crust, exotic meats, .
+A pizza of cheese, thick crust, exotic meats, .
+A pizza of thin crust, thick crust, exotic meats, .
+A pizza of cheese, thin crust, thick crust, exotic meats, .
+A pizza of tomato sauce, exotic meats, .
+A pizza of cheese, tomato sauce, exotic meats, .
+A pizza of thin crust, tomato sauce, exotic meats, .
+A pizza of cheese, thin crust, tomato sauce, exotic meats, .
+A pizza of thick crust, tomato sauce, exotic meats, .
+A pizza of cheese, thick crust, tomato sauce, exotic meats, .
+A pizza of thin crust, thick crust, tomato sauce, exotic meats, .
+
+
+OK check some pizzas yo
+
+
+A pizza of cheese, thin crust, thick crust, corn (srsly?), .
+WARNING: Impossible to make a thin / thick crust pizza!
+WARNING: Corn? REALLY?
+A pizza of cheese, thin crust, corn (srsly?), .
+WARNING: Corn? REALLY?
+A pizza of cheese, thin crust, .
+WARNING: SPAAAAAAAARTA, or spatarn.
+</pre>
+</div>
+</li>
+</ol>
+</div>
+
+<div id="outline-container-org875e9ce" class="outline-4">
+<h4 id="org875e9ce"><span class="section-number-4">1.5.14</span> PRACTICE and More resources</h4>
+<div class="outline-text-4" id="text-1-5-14">
+<ul class="org-ul">
+<li>PLEASE Read Hazel's Notes on the subject 
+<ul class="org-ul">
+<li><a href="https://docs.google.com/document/d/1S-I-OthHf0mgNZXnTSOvyx5lSduQwsbHYMmVPLtTl1Y/edit">https://docs.google.com/document/d/1S-I-OthHf0mgNZXnTSOvyx5lSduQwsbHYMmVPLtTl1Y/edit</a>#</li>
+<li>UAlberta accounts only</li>
+</ul></li>
+
+<li>Please READ CHAPTER 20 OF THE TEXTBOOK. Then practice your binary skills!
+<ul class="org-ul">
+<li><a href="http://www.free-test-online.com/binary/hex2bin.htm">http://www.free-test-online.com/binary/hex2bin.htm</a></li>
+<li><a href="http://www.free-test-online.com/binary/binary2hex.htm">http://www.free-test-online.com/binary/binary2hex.htm</a></li>
+<li><a href="http://www.free-test-online.com/binary/add_binary.htm">http://www.free-test-online.com/binary/add_binary.htm</a></li>
+<li><a href="https://web.stanford.edu/class/cs107/lab1/practice.html">https://web.stanford.edu/class/cs107/lab1/practice.html</a></li>
+</ul></li>
+</ul>
+</div>
+</div>
+
+
+<div id="outline-container-orge127ea2" class="outline-4">
+<h4 id="orge127ea2"><span class="section-number-4">1.5.15</span> BitFields</h4>
+</div>
+
+
+
+<div id="outline-container-org96cb83a" class="outline-4">
+<h4 id="org96cb83a"><span class="section-number-4">1.5.16</span> Floating Point Numbers</h4>
+</div>
+</div>
+</div>
+</div>
+<div id="postamble" class="status">
+<p class="author">Author: Abram Hindle</p>
+<p class="date">Created: 2020-03-24 Tue 11:36</p>
+<p class="validation"><a href="http://validator.w3.org/check?uri=referer">Validate</a></p>
+</div>
+</body>
+</html>

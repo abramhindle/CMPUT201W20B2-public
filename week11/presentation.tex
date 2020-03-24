@@ -1,50 +1,83 @@
-#+TITLE: CMPUT201W20B2 Week 11
-#+PROPERTY: header-args:C             :exports both :eval yes :flags -std=c99 -pedantic -Wall -Wextra -ftrapv -ggdb3 :eval yes :results value verbatim
-#+PROPERTY: header-args:sh            :exports both :eval yes :results value verbatim
-#+PROPERTY: header-args:shell         :exports both :eval yes :results value verbatim
+% Created 2020-03-24 Tue 11:36
+% Intended LaTeX compiler: pdflatex
+\documentclass[11pt]{article}
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage{graphicx}
+\usepackage{grffile}
+\usepackage{longtable}
+\usepackage{wrapfig}
+\usepackage{rotating}
+\usepackage[normalem]{ulem}
+\usepackage{amsmath}
+\usepackage{textcomp}
+\usepackage{amssymb}
+\usepackage{capt-of}
+\usepackage{hyperref}
+\author{Abram Hindle}
+\date{\today}
+\title{CMPUT201W20B2 Week 11}
+\hypersetup{
+ pdfauthor={Abram Hindle},
+ pdftitle={CMPUT201W20B2 Week 11},
+ pdfkeywords={},
+ pdfsubject={},
+ pdfcreator={Emacs 25.2.2 (Org mode 9.2.1)}, 
+ pdflang={English}}
+\begin{document}
 
-* Week11
-** Copyright Statement
+\maketitle
+\tableofcontents
+
+
+\section{Week11}
+\label{sec:orgfaacb6c}
+\subsection{Copyright Statement}
+\label{sec:org79d41cb}
 
 If you are in CMPUT201 at UAlberta this code is released in the public
 domain to you.
 
 Otherwise it is (c) 2020 Abram Hindle, Hazel Campbell AGPL3.0+
 
-*** License
+\subsubsection{License}
+\label{sec:orgb247f7f}
 
-    CMPUT 201 C Notes
-    Copyright (C) 2020 Abram Hindle, Hazel Campbell
+CMPUT 201 C Notes
+Copyright (C) 2020 Abram Hindle, Hazel Campbell
 
-    This program is free software: you can redistribute it and/or modify
-    it under the terms of the GNU Affero General Public License as
-    published by the Free Software Foundation, either version 3 of the
-    License, or (at your option) any later version.
+This program is free software: you can redistribute it and/or modify
+it under the terms of the GNU Affero General Public License as
+published by the Free Software Foundation, either version 3 of the
+License, or (at your option) any later version.
 
-    This program is distributed in the hope that it will be useful,
-    but WITHOUT ANY WARRANTY; without even the implied warranty of
-    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-    GNU Affero General Public License for more details.
+This program is distributed in the hope that it will be useful,
+but WITHOUT ANY WARRANTY; without even the implied warranty of
+MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+GNU Affero General Public License for more details.
 
-    You should have received a copy of the GNU Affero General Public License
-    along with this program.  If not, see <https://www.gnu.org/licenses/>.
+You should have received a copy of the GNU Affero General Public License
+along with this program.  If not, see \url{https://www.gnu.org/licenses/}.
 
 
-*** Hazel Code is licensed under AGPL3.0+
+\subsubsection{Hazel Code is licensed under AGPL3.0+}
+\label{sec:org8214f1a}
 
 Hazel's code is also found here
-https://github.com/hazelybell/examples/tree/C-2020-01
+\url{https://github.com/hazelybell/examples/tree/C-2020-01}
 
 Hazel code is licensed: The example code is licensed under the AGPL3+
 license, unless otherwise noted.
 
-** Alternative version
+\subsection{Alternative version}
+\label{sec:org9a56860}
 
 Checkout the .txt, the .pdf, and the .html version
 
-** Init ORG-MODE
+\subsection{Init ORG-MODE}
+\label{sec:org1d93344}
 
-#+BEGIN_SRC elisp
+\begin{verbatim}
 ;; I need this for org-mode to work well
 ;; If we have a new org-mode use ob-shell
 ;; otherwise use ob-sh --- but not both!
@@ -61,39 +94,36 @@ Checkout the .txt, the .pdf, and the .html version
 (custom-set-faces
  '(org-block ((t (:inherit shadow :foreground "black"))))
  '(org-code ((t (:inherit shadow :foreground "black")))))
-#+END_SRC
+\end{verbatim}
 
-#+RESULTS:
-
-*** Org export
-#+BEGIN_SRC elisp
+\subsubsection{Org export}
+\label{sec:org41ba130}
+\begin{verbatim}
 (org-html-export-to-html)
 (org-latex-export-to-pdf)
 (org-ascii-export-to-ascii)
-#+END_SRC
-
-#+RESULTS:
-: presentation.txt
+\end{verbatim}
 
 
-*** Org Template
+\subsubsection{Org Template}
+\label{sec:org5c84f72}
 Copy and paste this to demo C
 
-#+BEGIN_SRC C :exports both
+\begin{verbatim}
 #include <stdio.h>
 
 int main(int argc, char**argv) {
     return 0;
 }
-#+END_SRC
+\end{verbatim}
 
-#+RESULTS:
-
-** Remember how to compile?
+\subsection{Remember how to compile?}
+\label{sec:org5f86ca1}
 
 gcc  -std=c99 -pedantic -Wall -Wextra -ftrapv -ggdb3 -o programname programname.c
 
-** Numbers!
+\subsection{Numbers!}
+\label{sec:org9c052d9}
 
 Computers love powers of 2 because we calculate everything via bits.
 
@@ -101,109 +131,116 @@ Bases used on computers:
 
 2, 8, 10, 16
 
-- 32 in base 16 is  2*pow(16,1)
-- 32 in base 10 is 30*pow(10,1) + 2*pow(10,0)
-- 32 in base 8 is   4*pow(8,1)
-- 32 in base 2 is   1*pow(2,5)
+\begin{itemize}
+\item 32 in base 16 is  2*pow(16,1)
+\item 32 in base 10 is 30*pow(10,1) + 2*pow(10,0)
+\item 32 in base 8 is   4*pow(8,1)
+\item 32 in base 2 is   1*pow(2,5)
 
-- 31 in base 16 is  1*pow(16,1) + 15*pow(16,0)
-- 31 in base 10 is 30*pow(10,1) + 1*pow(10,0)
-- 31 in base 8 is   3*pow(8,1) + 7*pow(8,0)
-- 31 in base 2 is   1*pow(2,4) + 1*pow(2,3) + 1*pow(2,2) + 1*pow(2,1) + 1*pow(2,0)
+\item 31 in base 16 is  1*pow(16,1) + 15*pow(16,0)
+\item 31 in base 10 is 30*pow(10,1) + 1*pow(10,0)
+\item 31 in base 8 is   3*pow(8,1) + 7*pow(8,0)
+\item 31 in base 2 is   1*pow(2,4) + 1*pow(2,3) + 1*pow(2,2) + 1*pow(2,1) + 1*pow(2,0)
+\end{itemize}
 
-Notation for base 2 for 31:  0b11111 # not available in C, good in python
-Notation for base 8 for 31:  037     # available in C    , good in python
-Notation for base 10 for 31: 31      # available in C    , good in python
-Notation for base 16 for 31: 0x1F    # available in C    , good in python
+Notation for base 2 for 31:  0b11111 \# not available in C, good in python
+Notation for base 8 for 31:  037     \# available in C    , good in python
+Notation for base 10 for 31: 31      \# available in C    , good in python
+Notation for base 16 for 31: 0x1F    \# available in C    , good in python
 
-*** Binary
-    
-    Base 2: powers of 2
-    
-    Digits: 0,1
-    
-    0:  0b00000  8:  0b01000
-    1:  0b00001  9:  0b01001 
-    2:  0b00010 10:  0b01010 
-    3:  0b00011 11:  0b01011 
-    4:  0b00100 12:  0b01100
-    5:  0b00101 13:  0b01101
-    6:  0b00110 14:  0b01110         
-    7:  0b00111 15:  0b01111
-                16:  0b10000
-*** Octal
-    
-    Base 8: powers of 8
-    
-    3 bits
-    
-    Digits: 0,1,2,3,4,5,6,7
-    
-    0:  000  8: 010
-    1:  001  9: 011   
-    2:  002 10: 012   
-    3:  003 11: 013   
-    4:  004 12: 014  
-    5:  005 13: 015  
-    6:  006 14: 016           
-    7:  007 15: 017  
-            16: 020
-    
-    07:                 7 =   7
-    077:          7*8 + 7 =  63
-    0777: 7*8*8 + 7*8 + 7 = 511
-*** Base10 Review
-    Base 10: power of 10
-    
-       Digits: 0,1,2,3,4,5,6,7,8,9
-    
-    ~4 bits - not a power of 2
-    
-    0:  0  8:  8
-    1:  1  9:  9   
-    2:  2 10: 10  
-    3:  3 11: 11  
-    4:  4 12: 12  
-    5:  5 13: 13 
-    6:  6 14: 14          
-    7:  7 15: 15 
-          16: 16
-    
-    
-*** Hex Review
-    
-    Base 16: power of 16
-    
-       Digits: 0,1,2,3,4,5,6,7,8,9,A,B,C,D,E,F
-    or Digits: 0,1,2,3,4,5,6,7,8,9,a,b,c,d,e,f
-    
-    0:  0x00  8: 0x08
-    1:  0x01  9: 0x09   
-    2:  0x02 10: 0x0A  
-    3:  0x03 11: 0x0B   
-    4:  0x04 12: 0x0C  
-    5:  0x05 13: 0x0D  
-    6:  0x06 14: 0x0E           
-    7:  0x07 15: 0x0F  
-             16: 0x10
-    0xF    =                                  15 =    15
-    0xFF   =                          15*16 + 15 =   255
-    0xFFF  =               15*16*16 + 15*16 + 15 =  4095
-    0xFFFF = 15*16*16*16 + 15*16*16 + 15*16 + 15 = 65535
-    
-    Digit Lookup
-    
-    0:  0x0 0b0000     8: 0x8 0b1000
-    1:  0x1 0b0001     9: 0x9 0b1001  
-    2:  0x2 0b0010    10: 0xA 0b1010 
-    3:  0x3 0b0011    11: 0xB 0b1011  
-    4:  0x4 0b0100    12: 0xC 0b1100 
-    5:  0x5 0b0101    13: 0xD 0b1101 
-    6:  0x6 0b0110    14: 0xE 0b1110          
-    7:  0x7 0b0111    15: 0xF 0b1111 
-    
+\subsubsection{Binary}
+\label{sec:org2045b3a}
 
-*** Bitwise Operators    
+Base 2: powers of 2
+
+Digits: 0,1
+
+0:  0b00000  8:  0b01000
+1:  0b00001  9:  0b01001 
+2:  0b00010 10:  0b01010 
+3:  0b00011 11:  0b01011 
+4:  0b00100 12:  0b01100
+5:  0b00101 13:  0b01101
+6:  0b00110 14:  0b01110         
+7:  0b00111 15:  0b01111
+            16:  0b10000
+\subsubsection{Octal}
+\label{sec:org2b8662b}
+
+Base 8: powers of 8
+
+3 bits
+
+Digits: 0,1,2,3,4,5,6,7
+
+0:  000  8: 010
+1:  001  9: 011   
+2:  002 10: 012   
+3:  003 11: 013   
+4:  004 12: 014  
+5:  005 13: 015  
+6:  006 14: 016           
+7:  007 15: 017  
+        16: 020
+
+07:                 7 =   7
+077:          7*8 + 7 =  63
+0777: 7*8*8 + 7*8 + 7 = 511
+\subsubsection{Base10 Review}
+\label{sec:org3d08c04}
+Base 10: power of 10
+
+Digits: 0,1,2,3,4,5,6,7,8,9
+
+\textasciitilde{}4 bits - not a power of 2
+
+0:  0  8:  8
+1:  1  9:  9   
+2:  2 10: 10  
+3:  3 11: 11  
+4:  4 12: 12  
+5:  5 13: 13 
+6:  6 14: 14          
+7:  7 15: 15 
+      16: 16
+
+
+\subsubsection{Hex Review}
+\label{sec:orgd93a50b}
+
+Base 16: power of 16
+
+   Digits: 0,1,2,3,4,5,6,7,8,9,A,B,C,D,E,F
+or Digits: 0,1,2,3,4,5,6,7,8,9,a,b,c,d,e,f
+
+0:  0x00  8: 0x08
+1:  0x01  9: 0x09   
+2:  0x02 10: 0x0A  
+3:  0x03 11: 0x0B   
+4:  0x04 12: 0x0C  
+5:  0x05 13: 0x0D  
+6:  0x06 14: 0x0E           
+7:  0x07 15: 0x0F  
+         16: 0x10
+0xF    =                                  15 =    15
+0xFF   =                          15*16 + 15 =   255
+0xFFF  =               15*16*16 + 15*16 + 15 =  4095
+0xFFFF = 15*16*16*16 + 15*16*16 + 15*16 + 15 = 65535
+
+Digit Lookup
+
+0:  0x0 0b0000     8: 0x8 0b1000
+1:  0x1 0b0001     9: 0x9 0b1001  
+2:  0x2 0b0010    10: 0xA 0b1010 
+3:  0x3 0b0011    11: 0xB 0b1011  
+4:  0x4 0b0100    12: 0xC 0b1100 
+5:  0x5 0b0101    13: 0xD 0b1101 
+6:  0x6 0b0110    14: 0xE 0b1110          
+7:  0x7 0b0111    15: 0xF 0b1111 
+
+
+\subsubsection{Bitwise Operators}
+\label{sec:org2dc733e}
 
 Bitwise operators operate at the bit-level for variables such as integers.
 
@@ -213,14 +250,15 @@ bitwise operations unless you are sure.
 Also be aware that structs have padding so you might get unexpected
 results.
 
-*** Left Shift
+\subsubsection{Left Shift}
+\label{sec:orgfcb94e8}
 
 Integer Multiplication by 2. Shifts bits to the left. Do not use negative values.
 
 WARNING: Shifting on signed integers is not safe or portable.
 
 
-#+BEGIN_SRC C :exports both
+\begin{verbatim}
 #include <stdio.h>
 #include <inttypes.h>
 int main() {
@@ -242,10 +280,9 @@ int main() {
         printf("16: %20zu %20zd\n",   u16, i16);
     }
 }
-#+END_SRC
+\end{verbatim}
 
-#+RESULTS:
-#+begin_example
+\begin{verbatim}
 64:                    2                    2
 32:                    2                    2
 16:                    2                    2
@@ -438,18 +475,19 @@ int main() {
 64:                    0                    0
 32:                    0                    0
 16:                    0                    0
-#+end_example
+\end{verbatim}
 
 
 
-*** Right Shift
+\subsubsection{Right Shift}
+\label{sec:orgac85ee2}
 
 Integer Division by 2. Shifts bits to the right. Do not use negative values.
 
 WARNING: Shifting on signed integers is not safe or portable.
 
 
-#+BEGIN_SRC C :exports both
+\begin{verbatim}
 #include <stdio.h>
 #include <inttypes.h>
 int main() {
@@ -473,10 +511,9 @@ int main() {
         printf("16: %20zu %20zd\n",   u16, i16);
     }
 }
-#+END_SRC
+\end{verbatim}
 
-#+RESULTS:
-#+begin_example
+\begin{verbatim}
 64:  4611686018427387903  4611686018427387903
 32:           1073741823           1073741823
 16:                16383                16383
@@ -669,11 +706,12 @@ int main() {
 64:                    0                    0
 32:                    0                    0
 16:                    0                    0
-#+end_example
+\end{verbatim}
 
-*** Could we access the bits with shifts?
+\subsubsection{Could we access the bits with shifts?}
+\label{sec:org1ce1b77}
 
-#+BEGIN_SRC C :exports both 
+\begin{verbatim}
 #include <stdio.h>
 #include <inttypes.h>
 #define BIT(x,b,y) ((x<<(b-y-1))>>(b-1))
@@ -687,12 +725,14 @@ int main() {
     }
     printf("u32: %s\n", str);
 }
-#+END_SRC
+\end{verbatim}
 
-#+RESULTS:
-: u32: 11111111011101110000101010111110
+\begin{verbatim}
+u32: 11111111011101110000101010111110
+\end{verbatim}
 
-#+BEGIN_SRC C :exports both 
+
+\begin{verbatim}
 #include <stdio.h>
 #include <inttypes.h>
 #define BIT(x,b,y) ((x<<(b-y-1))>>(b-1))
@@ -706,9 +746,14 @@ int main() {
     }
     printf("u32: %s\n", str);
 }
-#+END_SRC
+\end{verbatim}
 
-#+BEGIN_SRC C :exports both :main no :tangle bitprinter.h
+\begin{verbatim}
+u32: 11111111011101110000101010111110
+\end{verbatim}
+
+
+\begin{verbatim}
 #ifndef _BITPRINTER_H_
 #define _BITPRINTER_H_
 #include <inttypes.h>
@@ -737,23 +782,22 @@ static char * bitString8(uint8_t value) {
     return bitString(value,8);
 }
 #endif
-#+END_SRC
+\end{verbatim}
 
-#+RESULTS:
+\subsubsection{bitwise and}
+\label{sec:orgf372b5c}
 
-*** bitwise and
-
-The & operator is bitwise complement. It means every bit of an integer
+The \& operator is bitwise complement. It means every bit of an integer
 is and'd. 
 
-The & operator is a binary operator.
+The \& operator is a binary operator.
 
-  0 & 0 -> 0
-  0 & 1 -> 0
-  1 & 0 -> 0
-  1 & 1 -> 1
+0 \& 0 -> 0
+0 \& 1 -> 0
+1 \& 0 -> 0
+1 \& 1 -> 1
 
-#+BEGIN_SRC C :exports both 
+\begin{verbatim}
 #include <stdio.h>
 #include <inttypes.h>
 int main() {  
@@ -771,10 +815,9 @@ int main() {
     }
 
 }
-#+END_SRC
+\end{verbatim}
 
-#+RESULTS:
-#+begin_example
+\begin{verbatim}
 Anding 1 bit
   4294967295 &            1 =            1 - 0x00000001
   4294967295 &            2 =            2 - 0x00000002
@@ -840,13 +883,17 @@ ffffffff & 10000000 = 10000000
 ffffffff & 20000000 = 20000000
 ffffffff & 40000000 = 40000000
 ffffffff & 80000000 = 80000000
-#+end_example
+\end{verbatim}
 
-***** Uses of &
+\begin{enumerate}
+\item Uses of \&
+\label{sec:org04c5eef}
 
-****** Checking for bits
+\begin{enumerate}
+\item Checking for bits
+\label{sec:orgd7c0ba4}
 
-#+BEGIN_SRC C :exports both
+\begin{verbatim}
 #include <inttypes.h>
 #include <stdio.h>
 
@@ -865,19 +912,21 @@ int main() {
     }
     puts("");
 }
-#+END_SRC
+\end{verbatim}
 
-#+RESULTS:
-: Lets see some bits!
-: 1111011110110011110101011001000111100110101000101100010010000000
-: 0123456789012345678901234567890123456789012345678901234567890123
+\begin{verbatim}
+Lets see some bits!
+1111011110110011110101011001000111100110101000101100010010000000
+0123456789012345678901234567890123456789012345678901234567890123
+\end{verbatim}
 
 
-****** Bit Printing
+\item Bit Printing
+\label{sec:org5e495ae}
 
-& is way safer than shift for bit printing.
+\& is way safer than shift for bit printing.
 
-#+BEGIN_SRC C :exports both
+\begin{verbatim}
 #include <inttypes.h>
 #include <stdio.h>
 
@@ -925,10 +974,9 @@ int main() {
 
 }
 
-#+END_SRC
+\end{verbatim}
 
-#+RESULTS:
-#+begin_example
+\begin{verbatim}
 Interesting numbers!
               7f                  127 0000000000000000000000000000000000000000000000000000000001111111
               ff                  255 0000000000000000000000000000000000000000000000000000000011111111
@@ -948,23 +996,26 @@ Interesting[0] & Interesting[1]0000000000000000000000000000000000000000000000000
 0000000000000000000010101011110011011110111100000001001000110100
 0111111111111111111111111111111111111111111111111111111111111111
 0000000000000000000000000000000000000000000000000000000001111111
-#+end_example
+\end{verbatim}
+\end{enumerate}
+\end{enumerate}
 
 
 
-*** bitwise OR
+\subsubsection{bitwise OR}
+\label{sec:orgd3f22ed}
 
 The | operator is bitwise complement. It is the or operator between
 bits. 
 
 The | operator is a binary operator.
 
-  0 | 0 -> 0
-  0 | 1 -> 1
-  1 | 0 -> 1
-  1 | 1 -> 1
+0 | 0 -> 0
+0 | 1 -> 1
+1 | 0 -> 1
+1 | 1 -> 1
 
-#+BEGIN_SRC C :exports both 
+\begin{verbatim}
 #include <stdio.h>
 #include <inttypes.h>
 int main() {  
@@ -982,10 +1033,9 @@ int main() {
                pressF, bit,  pressF | bit);
     }
 }
-#+END_SRC
+\end{verbatim}
 
-#+RESULTS:
-#+begin_example
+\begin{verbatim}
 ORing 1 bit
 ffffffff & 00000001 = ffffffff
 ffffffff & 00000002 = ffffffff
@@ -1051,26 +1101,30 @@ ffffffff & 80000000 = ffffffff
 11111111 & 20000000 = 31111111
 11111111 & 40000000 = 51111111
 11111111 & 80000000 = 91111111
-#+end_example
+\end{verbatim}
 
-***** Uses of |
+\begin{enumerate}
+\item Uses of |
+\label{sec:org185b693}
 
 We mostly use | to combine bits together for arguments to functions.
+\end{enumerate}
 
-*** bitwise XOR
+\subsubsection{bitwise XOR}
+\label{sec:orgf4cfc34}
 
-The ^ operator is bitwise exclusive OR. It is the XOR operator between
+The \^{} operator is bitwise exclusive OR. It is the XOR operator between
 bits. It differs from or because when both inputs bits are hot the
 result in 0.
 
-The ^ operator is a binary operator.
+The \^{} operator is a binary operator.
 
-  0 | 0 -> 0
-  0 | 1 -> 1
-  1 | 0 -> 1
-  1 | 1 -> 0
+0 | 0 -> 0
+0 | 1 -> 1
+1 | 0 -> 1
+1 | 1 -> 0
 
-#+BEGIN_SRC C :exports both 
+\begin{verbatim}
 #include <stdio.h>
 #include <inttypes.h>
 int main() {  
@@ -1088,10 +1142,9 @@ int main() {
                pressF, bit,  pressF ^ bit);
     }
 }
-#+END_SRC
+\end{verbatim}
 
-#+RESULTS:
-#+begin_example
+\begin{verbatim}
 ORing 1 bit
 ffffffff & 00000001 = fffffffe
 ffffffff & 00000002 = fffffffd
@@ -1157,17 +1210,19 @@ ffffffff & 80000000 = 7fffffff
 11111111 & 20000000 = 31111111
 11111111 & 40000000 = 51111111
 11111111 & 80000000 = 91111111
-#+end_example
+\end{verbatim}
 
-***** Uses of ^
+\begin{enumerate}
+\item Uses of \^{}
+\label{sec:org19b4855}
 
 XOR has interesting properties .
 
-a ^ b ^ a = b
+a \^{} b \^{} a = b
 
-So if we send a message of a^b we can decode the message of (a^b)^b
+So if we send a message of a\textsuperscript{b} we can decode the message of (a\textsuperscript{b})\textsuperscript{b}
 
-#+BEGIN_SRC C :exports both 
+\begin{verbatim}
 #include <stdio.h>
 #include <inttypes.h>
 
@@ -1190,21 +1245,24 @@ int main() {
     encrypt(output, key, output);
     printf("Encrypted Again: %s\n", output);
 }
-#+END_SRC
+\end{verbatim}
 
-#+RESULTS:
-: Encrypted: a1(% =e.8/9*d'31'+
-: Encrypted Again: I enjoy olive bread
+\begin{verbatim}
+Encrypted: a1(% =e.8/9*d'31'+
+Encrypted Again: I enjoy olive bread
+\end{verbatim}
+\end{enumerate}
 
-*** bitwise complement
+\subsubsection{bitwise complement}
+\label{sec:org0125f7f}
 
-The ~ operator is bitwise complement. It means every bit is notted
-The ~ operator is a unary operator.
+The \textasciitilde{} operator is bitwise complement. It means every bit is notted
+The \textasciitilde{} operator is a unary operator.
 
-  0 -> 1
-  1 -> 0
+0 -> 1
+1 -> 0
 
-#+BEGIN_SRC C :exports both 
+\begin{verbatim}
 #include <stdio.h>
 #include <inttypes.h>
 int main() {
@@ -1216,10 +1274,9 @@ int main() {
                u8, ~u8, u8, ~u8);
     }
 }
-#+END_SRC
+\end{verbatim}
 
-#+RESULTS:
-#+begin_example
+\begin{verbatim}
 0 255	--   0 4294967295
   6 249	--   6 4294967289
  12 243	--  12 4294967283
@@ -1263,41 +1320,44 @@ int main() {
 240  15	-- 240 4294967055
 246   9	-- 246 4294967049
 252   3	-- 252 4294967043
-#+end_example
+\end{verbatim}
 
 
 
-*** Flags
+\subsubsection{Flags}
+\label{sec:orgda17dc6}
 
 In C flags are often used. Flags are parameters who's bits indicate if
 some option is chosen.
 
 `man 2 open` has the open function
-#+BEGIN_SRC C :exports code :eval no
-       #include <sys/types.h>
-       #include <sys/stat.h>
-       #include <fcntl.h>
+\begin{verbatim}
+#include <sys/types.h>
+#include <sys/stat.h>
+#include <fcntl.h>
 
-       int open(const char *pathname, int flags);
-#+END_SRC
+int open(const char *pathname, int flags);
+\end{verbatim}
 
 open is part of POSIX systems like linux.
 open takes a file name (pathname) and takes flags:
-- O_RDONLY - Read the file 
-- O_WRONLY - Write to the file
-- O_RDWR   - Read and Write to the file
-- O_CREAT  - CREATE the file if it doesn't exist
-- O_APPEND - append to existing file
+\begin{itemize}
+\item O\textsubscript{RDONLY} - Read the file
+\item O\textsubscript{WRONLY} - Write to the file
+\item O\textsubscript{RDWR}   - Read and Write to the file
+\item O\textsubscript{CREAT}  - CREATE the file if it doesn't exist
+\item O\textsubscript{APPEND} - append to existing file
+\end{itemize}
 
 But how do we open a file for writing that creates a new file with only 1 argument?
 
 The bitwise | operator! 
 
-O_WRONLY | O_CREAT will allow us to open a file for writing that will
+O\textsubscript{WRONLY} | O\textsubscript{CREAT} will allow us to open a file for writing that will
 create the file on disk if it doesn't already exist!
 
 
-#+BEGIN_SRC C :eval no :exports code
+\begin{verbatim}
 // in /usr/include/asm-generic/fcntl.h (used by fcntl.h)
 // we see the definitions:
 #define O_ACCMODE	00000003
@@ -1328,7 +1388,7 @@ open("./log.txt", O_WRONLY | O_CREATE | O_APPEND); // open ./map.txt to write to
 O_WRONLY | O_CREATE            == 00000101 (00000001 | 00000100)
 O_WRONLY | O_CREATE | O_APPEND == 00002101 (00000001 | 00000100 | 00002000)
 // Question wht number format are they using to define these flags?
-#+END_SRC
+\end{verbatim}
 
 warning: open is just an example. Please use fopen if you want to read / write files.
 
@@ -1336,36 +1396,41 @@ warning: flags should only be unsigned integers
 
 warning: flags must be not 0
 
-**** Expected Flag use:
+\begin{enumerate}
+\item Expected Flag use:
+\label{sec:org9264cb6}
 
 Use | to set a flag:   FLAG1 | FLAG2
 
-Use & to check a flag: input & FLAG1
+Use \& to check a flag: input \& FLAG1
 
 Watch out testing for truth and combining flags
 
 To check for FLAG1 and FLAG2 being hot you should:
 
-`if (input & FLAG1 && input & FLAG2) `
+`if (input \& FLAG1 \&\& input \& FLAG2) `
 
 or
 
-`if (input & (FLAG1 | FLAG2) == (FLAG1 | FLAG2))`
+`if (input \& (FLAG1 | FLAG2) == (FLAG1 | FLAG2))`
 
 It's very convoluted so don't get too complicated
 
 This is a bug:
-`if (input & (FLAG1 | FLAG2))`
+`if (input \& (FLAG1 | FLAG2))`
 
 It actually just checks if you have either FLAG1 or FLAG2.
 
 
-**** Flags Example
+\item Flags Example
+\label{sec:org292001e}
 
 Hazel talks in depth about pizza
-  - https://docs.google.com/document/d/1S-I-OthHf0mgNZXnTSOvyx5lSduQwsbHYMmVPLtTl1Y/edit#
+\begin{itemize}
+\item \url{https://docs.google.com/document/d/1S-I-OthHf0mgNZXnTSOvyx5lSduQwsbHYMmVPLtTl1Y/edit}\#
+\end{itemize}
 
-#+BEGIN_SRC C :eval yes :exports both
+\begin{verbatim}
 #include <inttypes.h>
 #include <stdio.h>
 
@@ -1429,10 +1494,9 @@ int main() {
     violation(pizza);
 }
 
-#+END_SRC
+\end{verbatim}
 
-#+RESULTS:
-#+begin_example
+\begin{verbatim}
 OK build some pizza using |
 
 
@@ -1598,24 +1662,34 @@ A pizza of cheese, thin crust, corn (srsly?), .
 WARNING: Corn? REALLY?
 A pizza of cheese, thin crust, .
 WARNING: SPAAAAAAAARTA, or spatarn.
-#+end_example
+\end{verbatim}
+\end{enumerate}
 
-*** PRACTICE and More resources
+\subsubsection{PRACTICE and More resources}
+\label{sec:orgf740d96}
 
-- PLEASE Read Hazel's Notes on the subject 
-  - https://docs.google.com/document/d/1S-I-OthHf0mgNZXnTSOvyx5lSduQwsbHYMmVPLtTl1Y/edit#
-  - UAlberta accounts only
+\begin{itemize}
+\item PLEASE Read Hazel's Notes on the subject 
+\begin{itemize}
+\item \url{https://docs.google.com/document/d/1S-I-OthHf0mgNZXnTSOvyx5lSduQwsbHYMmVPLtTl1Y/edit}\#
+\item UAlberta accounts only
+\end{itemize}
 
-- Please READ CHAPTER 20 OF THE TEXTBOOK. Then practice your binary skills!
-  - http://www.free-test-online.com/binary/hex2bin.htm
-  - http://www.free-test-online.com/binary/binary2hex.htm
-  - http://www.free-test-online.com/binary/add_binary.htm
-  - https://web.stanford.edu/class/cs107/lab1/practice.html
+\item Please READ CHAPTER 20 OF THE TEXTBOOK. Then practice your binary skills!
+\begin{itemize}
+\item \url{http://www.free-test-online.com/binary/hex2bin.htm}
+\item \url{http://www.free-test-online.com/binary/binary2hex.htm}
+\item \url{http://www.free-test-online.com/binary/add\_binary.htm}
+\item \url{https://web.stanford.edu/class/cs107/lab1/practice.html}
+\end{itemize}
+\end{itemize}
 
 
-*** BitFields
+\subsubsection{BitFields}
+\label{sec:org4e71299}
 
 
 
-*** Floating Point Numbers    
-
+\subsubsection{Floating Point Numbers}
+\label{sec:orge3daaa3}
+\end{document}
