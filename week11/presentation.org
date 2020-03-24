@@ -950,10 +950,10 @@ bits.
 
 The | operator is a binary operator.
 
-  0 | 0 -> 0
-  0 | 1 -> 1
-  1 | 0 -> 1
-  1 | 1 -> 1
+-   0 | 0 -> 0
+-   0 | 1 -> 1
+-   1 | 0 -> 1
+-   1 | 1 -> 1
 
 #+BEGIN_SRC C :exports both 
 #include <stdio.h>
@@ -1056,10 +1056,10 @@ result in 0.
 
 The ^ operator is a binary operator.
 
-  0 | 0 -> 0
-  0 | 1 -> 1
-  1 | 0 -> 1
-  1 | 1 -> 0
+-  0 | 0 -> 0
+-  0 | 1 -> 1
+-  1 | 0 -> 1
+-  1 | 1 -> 0
 
 #+BEGIN_SRC C :exports both 
 #include <stdio.h>
@@ -1192,8 +1192,8 @@ int main() {
 The ~ operator is bitwise complement. It means every bit is notted
 The ~ operator is a unary operator.
 
-  0 -> 1
-  1 -> 0
+-  0 -> 1
+-  1 -> 0
 
 #+BEGIN_SRC C :exports both 
 #include <stdio.h>
