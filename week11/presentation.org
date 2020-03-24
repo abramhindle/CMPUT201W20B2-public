@@ -159,6 +159,7 @@ Bases used on computers:
 #+end_example
 
 *** Base10 Review
+#+begin_example
     Base 10: power of 10
     
        Digits: 0,1,2,3,4,5,6,7,8,9
@@ -174,10 +175,11 @@ Bases used on computers:
     6:  6 14: 14          
     7:  7 15: 15 
           16: 16
-    
+#+end_example
     
 *** Hex Review
-    
+
+#+begin_example    
     Base 16: power of 16
     
        Digits: 0,1,2,3,4,5,6,7,8,9,A,B,C,D,E,F
@@ -207,7 +209,7 @@ Bases used on computers:
     5:  0x5 0b0101    13: 0xD 0b1101 
     6:  0x6 0b0110    14: 0xE 0b1110          
     7:  0x7 0b0111    15: 0xF 0b1111 
-    
+#+end_example    
 
 *** Bitwise Operators    
 
