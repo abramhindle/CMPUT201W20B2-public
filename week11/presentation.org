@@ -737,7 +737,9 @@ static char * bitString8(uint8_t value) {
 
 *** bitwise and
 
-The & operator is bitwise complement. It means every bit is notted
+The & operator is bitwise complement. It means every bit of an integer
+is and'd. 
+
 The & operator is a binary operator.
 
   0 & 0 -> 0
@@ -756,6 +758,12 @@ int main() {
         printf("%12lu & %12lu = %12lu - 0x%08x\n",  
                pressF, bit,  pressF & bit, pressF & bit);
     }
+    for (uint32_t i = 0 ; i < 32; i++) {
+        uint32_t bit = (1 << i);
+        printf("%08x & %08x = %08x\n",
+               pressF, bit,  pressF & bit);
+    }
+
 }
 #+END_SRC
 
@@ -794,10 +802,391 @@ Anding 1 bit
   4294967295 &    536870912 =    536870912 - 0x20000000
   4294967295 &   1073741824 =   1073741824 - 0x40000000
   4294967295 &   2147483648 =   2147483648 - 0x80000000
+ffffffff & 00000001 = 00000001
+ffffffff & 00000002 = 00000002
+ffffffff & 00000004 = 00000004
+ffffffff & 00000008 = 00000008
+ffffffff & 00000010 = 00000010
+ffffffff & 00000020 = 00000020
+ffffffff & 00000040 = 00000040
+ffffffff & 00000080 = 00000080
+ffffffff & 00000100 = 00000100
+ffffffff & 00000200 = 00000200
+ffffffff & 00000400 = 00000400
+ffffffff & 00000800 = 00000800
+ffffffff & 00001000 = 00001000
+ffffffff & 00002000 = 00002000
+ffffffff & 00004000 = 00004000
+ffffffff & 00008000 = 00008000
+ffffffff & 00010000 = 00010000
+ffffffff & 00020000 = 00020000
+ffffffff & 00040000 = 00040000
+ffffffff & 00080000 = 00080000
+ffffffff & 00100000 = 00100000
+ffffffff & 00200000 = 00200000
+ffffffff & 00400000 = 00400000
+ffffffff & 00800000 = 00800000
+ffffffff & 01000000 = 01000000
+ffffffff & 02000000 = 02000000
+ffffffff & 04000000 = 04000000
+ffffffff & 08000000 = 08000000
+ffffffff & 10000000 = 10000000
+ffffffff & 20000000 = 20000000
+ffffffff & 40000000 = 40000000
+ffffffff & 80000000 = 80000000
 #+end_example
 
 ***** Uses of &
 
+****** Checking for bits
+
+#+BEGIN_SRC C :exports both
+#include <inttypes.h>
+#include <stdio.h>
+
+// 0x1L MUST be used 0x1 causes bugs
+#define BIT(x,y) (x & (0x1L << y))
+
+int main() {
+    uint64_t interesting = 0x0123456789ABCDEF;
+    puts("Lets see some bits!");
+    for (size_t i = 0 ; i < 64; i++) {
+        putchar(BIT(interesting, i)?'1':'0');
+    }
+    puts("");
+    for (size_t i = 0 ; i < 64; i++) {
+        putchar('0' + i%10);
+    }
+    puts("");
+}
+#+END_SRC
+
+#+RESULTS:
+: Lets see some bits!
+: 1111011110110011110101011001000111100110101000101100010010000000
+: 0123456789012345678901234567890123456789012345678901234567890123
+
+
+****** Bit Printing
+
+& is way safer than shift for bit printing.
+
+#+BEGIN_SRC C :exports both
+#include <inttypes.h>
+#include <stdio.h>
+
+// 0x1L MUST be used 0x1 causes bugs
+#define BIT(x,y) (x & (0x1L << y))
+#define MAXBITSTRBITS 129
+static char _bitstr[MAXBITSTRBITS] = { '\0' };
+static char * bitString(uint64_t value, const unsigned int bits) {
+    // iterator must be uint64_t
+    for (uint64_t i = 0 ; i < bits; i++) {
+        char bit = (BIT(value,i))?'1':'0';
+        _bitstr[bits-1-i] = bit;
+    }
+    _bitstr[bits] = '\0';
+    return _bitstr;
+}
+
+int main() {
+    uint64_t interesting[] = {
+        0x7F,
+        0xFF,
+        0xFFF,
+        0xABE4BEEF,
+        0x7777777777,
+        0xFFFFFFFFFF,
+        0xABCDEF01234,
+        0x7FFFFFFFFFFFFFFF,
+        0xFFFFFFFFFFFFFFFF,
+    };
+    const size_t nints = sizeof(interesting)/sizeof(uint64_t);
+    printf("Interesting numbers!\n");
+    for (size_t i = 0 ; i < nints; i++) {
+        printf("%16lx %20llu %s\n",
+               interesting[i],
+               interesting[i],
+               bitString(interesting[i],64)
+        );
+    }
+    printf("Interesting[0] & Interesting[1]");
+    for (size_t i = 0 ; i < nints; i++) {
+        printf("%s\n",
+               bitString(interesting[i] & interesting[(i+1)%nints],64)
+        );
+    }
+
+}
+
+#+END_SRC
+
+#+RESULTS:
+#+begin_example
+Interesting numbers!
+              7f                  127 0000000000000000000000000000000000000000000000000000000001111111
+              ff                  255 0000000000000000000000000000000000000000000000000000000011111111
+             fff                 4095 0000000000000000000000000000000000000000000000000000111111111111
+        abe4beef           2883895023 0000000000000000000000000000000010101011111001001011111011101111
+      7777777777         513105426295 0000000000000000000000000111011101110111011101110111011101110111
+      ffffffffff        1099511627775 0000000000000000000000001111111111111111111111111111111111111111
+     abcdef01234       11806310404660 0000000000000000000010101011110011011110111100000001001000110100
+7fffffffffffffff  9223372036854775807 0111111111111111111111111111111111111111111111111111111111111111
+ffffffffffffffff 18446744073709551615 1111111111111111111111111111111111111111111111111111111111111111
+Interesting[0] & Interesting[1]0000000000000000000000000000000000000000000000000000000001111111
+0000000000000000000000000000000000000000000000000000000011111111
+0000000000000000000000000000000000000000000000000000111011101111
+0000000000000000000000000000000000100011011001000011011001100111
+0000000000000000000000000111011101110111011101110111011101110111
+0000000000000000000000001011110011011110111100000001001000110100
+0000000000000000000010101011110011011110111100000001001000110100
+0111111111111111111111111111111111111111111111111111111111111111
+0000000000000000000000000000000000000000000000000000000001111111
+#+end_example
+
+
+
+*** bitwise OR
+
+The | operator is bitwise complement. It is the or operator between
+bits. 
+
+The | operator is a binary operator.
+
+  0 | 0 -> 0
+  0 | 1 -> 1
+  1 | 0 -> 1
+  1 | 1 -> 1
+
+#+BEGIN_SRC C :exports both 
+#include <stdio.h>
+#include <inttypes.h>
+int main() {  
+    uint32_t pressF = 0xFFFFFFFF;
+    printf("ORing 1 bit\n");
+    for (uint32_t i = 0 ; i < 32; i++) {
+        uint32_t bit = (1 << i);
+        printf("%08x & %08x = %08x\n",
+               pressF, bit,  pressF | bit);
+    }
+    pressF = 0x11111111;
+    for (uint32_t i = 0 ; i < 32; i++) {
+        uint32_t bit = (1 << i);
+        printf("%08x & %08x = %08x\n",
+               pressF, bit,  pressF | bit);
+    }
+}
+#+END_SRC
+
+#+RESULTS:
+#+begin_example
+ORing 1 bit
+ffffffff & 00000001 = ffffffff
+ffffffff & 00000002 = ffffffff
+ffffffff & 00000004 = ffffffff
+ffffffff & 00000008 = ffffffff
+ffffffff & 00000010 = ffffffff
+ffffffff & 00000020 = ffffffff
+ffffffff & 00000040 = ffffffff
+ffffffff & 00000080 = ffffffff
+ffffffff & 00000100 = ffffffff
+ffffffff & 00000200 = ffffffff
+ffffffff & 00000400 = ffffffff
+ffffffff & 00000800 = ffffffff
+ffffffff & 00001000 = ffffffff
+ffffffff & 00002000 = ffffffff
+ffffffff & 00004000 = ffffffff
+ffffffff & 00008000 = ffffffff
+ffffffff & 00010000 = ffffffff
+ffffffff & 00020000 = ffffffff
+ffffffff & 00040000 = ffffffff
+ffffffff & 00080000 = ffffffff
+ffffffff & 00100000 = ffffffff
+ffffffff & 00200000 = ffffffff
+ffffffff & 00400000 = ffffffff
+ffffffff & 00800000 = ffffffff
+ffffffff & 01000000 = ffffffff
+ffffffff & 02000000 = ffffffff
+ffffffff & 04000000 = ffffffff
+ffffffff & 08000000 = ffffffff
+ffffffff & 10000000 = ffffffff
+ffffffff & 20000000 = ffffffff
+ffffffff & 40000000 = ffffffff
+ffffffff & 80000000 = ffffffff
+11111111 & 00000001 = 11111111
+11111111 & 00000002 = 11111113
+11111111 & 00000004 = 11111115
+11111111 & 00000008 = 11111119
+11111111 & 00000010 = 11111111
+11111111 & 00000020 = 11111131
+11111111 & 00000040 = 11111151
+11111111 & 00000080 = 11111191
+11111111 & 00000100 = 11111111
+11111111 & 00000200 = 11111311
+11111111 & 00000400 = 11111511
+11111111 & 00000800 = 11111911
+11111111 & 00001000 = 11111111
+11111111 & 00002000 = 11113111
+11111111 & 00004000 = 11115111
+11111111 & 00008000 = 11119111
+11111111 & 00010000 = 11111111
+11111111 & 00020000 = 11131111
+11111111 & 00040000 = 11151111
+11111111 & 00080000 = 11191111
+11111111 & 00100000 = 11111111
+11111111 & 00200000 = 11311111
+11111111 & 00400000 = 11511111
+11111111 & 00800000 = 11911111
+11111111 & 01000000 = 11111111
+11111111 & 02000000 = 13111111
+11111111 & 04000000 = 15111111
+11111111 & 08000000 = 19111111
+11111111 & 10000000 = 11111111
+11111111 & 20000000 = 31111111
+11111111 & 40000000 = 51111111
+11111111 & 80000000 = 91111111
+#+end_example
+
+***** Uses of &
+
+*** bitwise XOR
+
+The ^ operator is bitwise exclusive OR. It is the XOR operator between
+bits. It differs from or because when both inputs bits are hot the
+result in 0.
+
+The ^ operator is a binary operator.
+
+  0 | 0 -> 0
+  0 | 1 -> 1
+  1 | 0 -> 1
+  1 | 1 -> 0
+
+#+BEGIN_SRC C :exports both 
+#include <stdio.h>
+#include <inttypes.h>
+int main() {  
+    uint32_t pressF = 0xFFFFFFFF;
+    printf("ORing 1 bit\n");
+    for (uint32_t i = 0 ; i < 32; i++) {
+        uint32_t bit = (1 << i);
+        printf("%08x & %08x = %08x\n",
+               pressF, bit,  pressF ^ bit);
+    }
+    pressF = 0x11111111;
+    for (uint32_t i = 0 ; i < 32; i++) {
+        uint32_t bit = (1 << i);
+        printf("%08x & %08x = %08x\n",
+               pressF, bit,  pressF ^ bit);
+    }
+}
+#+END_SRC
+
+#+RESULTS:
+#+begin_example
+ORing 1 bit
+ffffffff & 00000001 = fffffffe
+ffffffff & 00000002 = fffffffd
+ffffffff & 00000004 = fffffffb
+ffffffff & 00000008 = fffffff7
+ffffffff & 00000010 = ffffffef
+ffffffff & 00000020 = ffffffdf
+ffffffff & 00000040 = ffffffbf
+ffffffff & 00000080 = ffffff7f
+ffffffff & 00000100 = fffffeff
+ffffffff & 00000200 = fffffdff
+ffffffff & 00000400 = fffffbff
+ffffffff & 00000800 = fffff7ff
+ffffffff & 00001000 = ffffefff
+ffffffff & 00002000 = ffffdfff
+ffffffff & 00004000 = ffffbfff
+ffffffff & 00008000 = ffff7fff
+ffffffff & 00010000 = fffeffff
+ffffffff & 00020000 = fffdffff
+ffffffff & 00040000 = fffbffff
+ffffffff & 00080000 = fff7ffff
+ffffffff & 00100000 = ffefffff
+ffffffff & 00200000 = ffdfffff
+ffffffff & 00400000 = ffbfffff
+ffffffff & 00800000 = ff7fffff
+ffffffff & 01000000 = feffffff
+ffffffff & 02000000 = fdffffff
+ffffffff & 04000000 = fbffffff
+ffffffff & 08000000 = f7ffffff
+ffffffff & 10000000 = efffffff
+ffffffff & 20000000 = dfffffff
+ffffffff & 40000000 = bfffffff
+ffffffff & 80000000 = 7fffffff
+11111111 & 00000001 = 11111110
+11111111 & 00000002 = 11111113
+11111111 & 00000004 = 11111115
+11111111 & 00000008 = 11111119
+11111111 & 00000010 = 11111101
+11111111 & 00000020 = 11111131
+11111111 & 00000040 = 11111151
+11111111 & 00000080 = 11111191
+11111111 & 00000100 = 11111011
+11111111 & 00000200 = 11111311
+11111111 & 00000400 = 11111511
+11111111 & 00000800 = 11111911
+11111111 & 00001000 = 11110111
+11111111 & 00002000 = 11113111
+11111111 & 00004000 = 11115111
+11111111 & 00008000 = 11119111
+11111111 & 00010000 = 11101111
+11111111 & 00020000 = 11131111
+11111111 & 00040000 = 11151111
+11111111 & 00080000 = 11191111
+11111111 & 00100000 = 11011111
+11111111 & 00200000 = 11311111
+11111111 & 00400000 = 11511111
+11111111 & 00800000 = 11911111
+11111111 & 01000000 = 10111111
+11111111 & 02000000 = 13111111
+11111111 & 04000000 = 15111111
+11111111 & 08000000 = 19111111
+11111111 & 10000000 = 01111111
+11111111 & 20000000 = 31111111
+11111111 & 40000000 = 51111111
+11111111 & 80000000 = 91111111
+#+end_example
+
+***** Uses of ^
+
+XOR has interesting properties .
+
+a ^ b ^ a = b
+
+So if we send a message of a^b we can decode the message of (a^b)^b
+
+#+BEGIN_SRC C :exports both 
+#include <stdio.h>
+#include <inttypes.h>
+
+void encrypt(char * output, const char * key, char * input) {
+    const size_t keylen   = strlen(key);
+    const size_t inputlen = strlen(input);
+    for (size_t i = 0 ; i < inputlen; i++) {
+        output[i] = input[i] ^ key[i%keylen];
+    }
+    output[inputlen] = '\0';   
+}
+
+int main() {  
+    const char * key = "EATFOOD";
+    const size_t keylen = strlen(key);
+    char * input = "I enjoy olive bread";
+    char output[1024] = {'\0'};
+    encrypt(output, key, input);
+    printf("Encrypted: %s\n", output);
+    encrypt(output, key, output);
+    printf("Encrypted Again: %s\n", output);
+}
+#+END_SRC
+
+#+RESULTS:
+: Encrypted: a1(% =e.8/9*d'31'+
+: Encrypted Again: I enjoy olive bread
 
 *** bitwise complement
 
@@ -868,24 +1257,11 @@ int main() {
 252   3	-- 252 4294967043
 #+end_example
 
-*** Bitwise AND
 
-#+BEGIN_SRC C :exports both 
-#include <stdio.h>
-#include <inttypes.h>
-#define BIT(x,b,y) ((x<<(b-y-1))>>(b-1))
-#define BITS 32
-int main() {
-    uint8_t u8 = 0;
-    for (uint32_t i = 0 ; i < 256; i+=6) {
-        u8 = (uint8_t)i;
-        // be careful about how you deal with chars
-        printf(" %3hhu %3hhu\t-- %3u %3u\n", 
-               u8, ~u8, u8, ~u8);
-    }
-}
-#+END_SRC
 
+*** Flags
+
+*** BitFields
 
 *** Floating Point Numbers    
 
