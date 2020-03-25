@@ -4,6 +4,7 @@
 #+PROPERTY: header-args:shell         :exports both :eval yes :results value verbatim
 
 * Week11
+https://github.com/abramhindle/CMPUT201W20B2-public/tree/master/week11
 ** Copyright Statement
 
 If you are in CMPUT201 at UAlberta this code is released in the public
@@ -101,13 +102,13 @@ Bases used on computers:
 
 2, 8, 10, 16
 
-- 32 in base 16 is  2*pow(16,1)
-- 32 in base 10 is 30*pow(10,1) + 2*pow(10,0)
-- 32 in base 8 is   4*pow(8,1)
-- 32 in base 2 is   1*pow(2,5)
+- 32 in base 16 is  2*pow(16,1) = 0x20 
+- 32 in base 10 is  3*pow(10,1) + 2*pow(10,0) = 3*10 + 2*1 = 32
+- 32 in base 8 is   4*pow(8,1) = 4*8 = 32 = 040
+- 32 in base 2 is   1*pow(2,5) = 0b100000
 
 - 31 in base 16 is  1*pow(16,1) + 15*pow(16,0)
-- 31 in base 10 is 30*pow(10,1) + 1*pow(10,0)
+- 31 in base 10 is  3*pow(10,1) + 1*pow(10,0)
 - 31 in base 8 is   3*pow(8,1) + 7*pow(8,0)
 - 31 in base 2 is   1*pow(2,4) + 1*pow(2,3) + 1*pow(2,2) + 1*pow(2,1) + 1*pow(2,0)
 
@@ -136,6 +137,17 @@ Bases used on computers:
 
 *** Octal
 
+#+begin_src C 
+#include <stdio.h>
+
+int main() {
+   printf("%d\n", 037);
+}
+#+end_src
+
+#+RESULTS:
+: 31
+
 #+begin_example    
     Base 8: powers of 8
     
@@ -153,9 +165,10 @@ Bases used on computers:
     7:  007 15: 017  
             16: 020
     
-    07:                 7 =   7
-    077:          7*8 + 7 =  63
-    0777: 7*8*8 + 7*8 + 7 = 511
+    07:                            7 =   7
+    077:                     7*8 + 7 =  63
+    0777:            7*8*8 + 7*8 + 7 = 511
+    07777: 7*8*8*8 + 7*8*8 + 7*8 + 7 = 4095
 #+end_example
 
 *** Base10 Review
@@ -194,10 +207,10 @@ Bases used on computers:
     6:  0x06 14: 0x0E           
     7:  0x07 15: 0x0F  
              16: 0x10
-    0xF    =                                  15 =    15
-    0xFF   =                          15*16 + 15 =   255
-    0xFFF  =               15*16*16 + 15*16 + 15 =  4095
-    0xFFFF = 15*16*16*16 + 15*16*16 + 15*16 + 15 = 65535
+    0xF    =                                  15 =    15 = 2^4 - 1
+    0xFF   =                          15*16 + 15 =   255 = 2^8 - 1
+    0xFFF  =               15*16*16 + 15*16 + 15 =  4095 = 2^12 - 1
+    0xFFFF = 15*16*16*16 + 15*16*16 + 15*16 + 15 = 65535 = 2^16 - 1
     
     Digit Lookup
     
@@ -209,6 +222,8 @@ Bases used on computers:
     5:  0x5 0b0101    13: 0xD 0b1101 
     6:  0x6 0b0110    14: 0xE 0b1110          
     7:  0x7 0b0111    15: 0xF 0b1111 
+
+    1 nibble = 4 bits = 1 hex digit
 #+end_example    
 
 *** Bitwise Operators    
@@ -222,6 +237,12 @@ Also be aware that structs have padding so you might get unexpected
 results.
 
 *** Left Shift
+
+0b000001 << 1 = 0b000010
+0b000001 << 2 = 0b000100
+0b000001 << 3 = 0b001000
+0b101011 << 3 = 0b011000
+
 
 Integer Multiplication by 2. Shifts bits to the left. Do not use negative values.
 
@@ -237,7 +258,7 @@ int main() {
     uint16_t u16 = 1;
     int64_t  i64 = 1;
     int32_t  i32 = 1;
-    uint16_t i16 = 1;
+    int16_t  i16 = 1;
     for (int i = 0 ; i < 64; i++) {
         u64 = u64 << 1;
         i64 = i64 << 1;
@@ -247,7 +268,7 @@ int main() {
         i16 = i16 << 1;
         printf("64: %20llu %20lld\n", u64, i64);
         printf("32: %20lu %20ld\n",   u32, i32);
-        printf("16: %20zu %20zd\n",   u16, i16);
+        printf("16: %20hu %20hd\n",   u16, i16);
     }
 }
 #+END_SRC
@@ -298,7 +319,7 @@ int main() {
 16:                16384                16384
 64:                32768                32768
 32:                32768                32768
-16:                32768                32768
+16:                32768               -32768
 64:                65536                65536
 32:                65536                65536
 16:                    0                    0
@@ -744,6 +765,18 @@ The & operator is a binary operator.
 -  1 & 0 -> 0
 -  1 & 1 -> 1
 
+0b11111111011101110000101010111110 & 0b1111111111111111111111111111111111111
+0b11111111011101110000101010111110 & 0b0000000000000000000000000000000000000
+0b0
+
+0b011 & 0b010 == 0b010
+
+0x00000001 & 0xFFFFFFFF = 0x1
+
+if (0x10 & input) {
+
+}
+
 #+BEGIN_SRC C :exports both 
 #include <stdio.h>
 #include <inttypes.h>
@@ -836,6 +869,22 @@ ffffffff & 80000000 = 80000000
 ***** Uses of &
 
 ****** Checking for bits
+#+BEGIN_SRC C :exports both
+#include <inttypes.h>
+#include <stdio.h>
+
+// 0x1L MUST be used 0x1 causes bugs
+#define BIT(x,y) (x & (0x1L << y))
+
+int main() {
+    printf("%lu\n",sizeof(0x1L));
+    printf("%lu\n",sizeof(0x1));
+}
+#+end_Src
+
+#+RESULTS:
+: 8
+: 4
 
 #+BEGIN_SRC C :exports both
 #include <inttypes.h>
@@ -847,21 +896,22 @@ ffffffff & 80000000 = 80000000
 int main() {
     uint64_t interesting = 0x0123456789ABCDEF;
     puts("Lets see some bits!");
-    for (size_t i = 0 ; i < 64; i++) {
-        putchar(BIT(interesting, i)?'1':'0');
+    for (size_t i = 64 ; i > 0; i--) {
+        putchar(BIT(interesting, i-1)?'1':'0');
     }
-    puts("");
+    putchar('\n');
     for (size_t i = 0 ; i < 64; i++) {
         putchar('0' + i%10);
     }
-    puts("");
+    putchar('\n');
 }
 #+END_SRC
 
 #+RESULTS:
 : Lets see some bits!
-: 1111011110110011110101011001000111100110101000101100010010000000
+: 0000000100100011010001010110011110001001101010111100110111101111
 : 0123456789012345678901234567890123456789012345678901234567890123
+
 
 
 ****** Bit Printing
@@ -1606,6 +1656,29 @@ WARNING: SPAAAAAAAARTA, or spatarn.
 
 *** BitFields
 
+#+BEGIN_SRC C :exports both
+
+struct bitfield {
+    unsigned int b0:  1;
+    unsigned int b1:  2;
+    unsigned int b2:  4;
+    unsigned int b3:  8;
+    unsigned int b4: 16;
+    unsigned int b5: 1;
+    //unsigned int b6: 1;
+};
+
+int main() {
+    struct bitfield b = { 0, 3, 12, 242, 65000 };
+    printf("%hhu %hhu %hhu %hhu %hu\n", b.b0, b.b1, b.b2, b.b3, b.b4);
+    printf("size: %lu\n", sizeof(b));
+}
+
+#+END_SRC
+
+#+RESULTS:
+: 0 3 12 242 65000
+: size: 8
 
 
 *** Floating Point Numbers    
