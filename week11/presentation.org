@@ -226,7 +226,7 @@ int main() {
     1 nibble = 4 bits = 1 hex digit
 #+end_example    
 
-*** Bitwise Operators    
+** Bitwise Operators    
 
 Bitwise operators operate at the bit-level for variables such as integers.
 
@@ -1857,12 +1857,15 @@ sizeof(chmodb)==4
 Better? 7 1 0 017
 #+end_example
 
-*** Floating Point Numbers    
+** Floating Point Numbers    
+
+*** Resources
 
 Helpful resources:
 - https://en.wikipedia.org/wiki/IEEE_754
 - http://steve.hollasch.net/cgindex/coding/ieeefloat.html
-Single precision IEEE754 floating point numbers
+
+*** Single precision IEEE754 floating point numbers
 
 Type: float
 
@@ -1892,6 +1895,8 @@ Type: float
 0.15625 to floating point. Implied bit is pow(2,-3)
 
 pow(2,-3) + 0*pow(2,-4) + 1*pow(2,-5) (pow(2,5)==32, pow(2,-5) = 1/32.0)
+
+*** Let's explore the bits of floats
 
 #+BEGIN_SRC C :exports both
 #include <math.h>
@@ -2039,11 +2044,11 @@ sizeof(float_t) == 4
  3.68935e+19 60000000 sign: 0 exponent: 192 exp-127: 65 mantissa: 00000000
 #+end_example
 
-**** How do I avoid typepunning?
+*** How do I avoid typepunning?
 
-The C99 is union type punning :-/
+The C99 is OK with union type punning :-/
 
 The "blessed" way that is C11 compatible is memcpy.
 
-Bitfields are generally considered CURSED due to platform specific
+Bitfields are generally considered "CURSED" due to platform specific
 behaviour.
