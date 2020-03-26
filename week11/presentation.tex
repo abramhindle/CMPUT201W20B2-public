@@ -1,4 +1,4 @@
-% Created 2020-03-24 Tue 11:42
+% Created 2020-03-26 Thu 11:20
 % Intended LaTeX compiler: pdflatex
 \documentclass[11pt]{article}
 \usepackage[utf8]{inputenc}
@@ -31,9 +31,10 @@
 
 
 \section{Week11}
-\label{sec:org0b5c663}
+\label{sec:org35e11e0}
+\url{https://github.com/abramhindle/CMPUT201W20B2-public/tree/master/week11}
 \subsection{Copyright Statement}
-\label{sec:orgceec8e9}
+\label{sec:org258f1bb}
 
 If you are in CMPUT201 at UAlberta this code is released in the public
 domain to you.
@@ -41,7 +42,7 @@ domain to you.
 Otherwise it is (c) 2020 Abram Hindle, Hazel Campbell AGPL3.0+
 
 \subsubsection{License}
-\label{sec:org73d3a11}
+\label{sec:org54f188e}
 
 CMPUT 201 C Notes
 Copyright (C) 2020 Abram Hindle, Hazel Campbell
@@ -61,7 +62,7 @@ along with this program.  If not, see \url{https://www.gnu.org/licenses/}.
 
 
 \subsubsection{Hazel Code is licensed under AGPL3.0+}
-\label{sec:org17e5bc5}
+\label{sec:orgb8feda5}
 
 Hazel's code is also found here
 \url{https://github.com/hazelybell/examples/tree/C-2020-01}
@@ -70,12 +71,12 @@ Hazel code is licensed: The example code is licensed under the AGPL3+
 license, unless otherwise noted.
 
 \subsection{Alternative version}
-\label{sec:org64a4906}
+\label{sec:org445838d}
 
 Checkout the .txt, the .pdf, and the .html version
 
 \subsection{Init ORG-MODE}
-\label{sec:orgc8a7168}
+\label{sec:org0085b0f}
 
 \begin{verbatim}
 ;; I need this for org-mode to work well
@@ -97,7 +98,7 @@ Checkout the .txt, the .pdf, and the .html version
 \end{verbatim}
 
 \subsubsection{Org export}
-\label{sec:org4aee5be}
+\label{sec:org7233a5e}
 \begin{verbatim}
 (org-html-export-to-html)
 (org-latex-export-to-pdf)
@@ -106,7 +107,7 @@ Checkout the .txt, the .pdf, and the .html version
 
 
 \subsubsection{Org Template}
-\label{sec:org00c0763}
+\label{sec:orgc80d9a1}
 Copy and paste this to demo C
 
 \begin{verbatim}
@@ -118,12 +119,12 @@ int main(int argc, char**argv) {
 \end{verbatim}
 
 \subsection{Remember how to compile?}
-\label{sec:org40fa570}
+\label{sec:org5e2199b}
 
 gcc  -std=c99 -pedantic -Wall -Wextra -ftrapv -ggdb3 -o programname programname.c
 
 \subsection{Numbers!}
-\label{sec:org0fc184d}
+\label{sec:org16458e7}
 
 Computers love powers of 2 because we calculate everything via bits.
 
@@ -132,13 +133,13 @@ Bases used on computers:
 2, 8, 10, 16
 
 \begin{itemize}
-\item 32 in base 16 is  2*pow(16,1)
-\item 32 in base 10 is 30*pow(10,1) + 2*pow(10,0)
-\item 32 in base 8 is   4*pow(8,1)
-\item 32 in base 2 is   1*pow(2,5)
+\item 32 in base 16 is  2*pow(16,1) = 0x20
+\item 32 in base 10 is  3*pow(10,1) + 2*pow(10,0) = 3*10 + 2*1 = 32
+\item 32 in base 8 is   4*pow(8,1) = 4*8 = 32 = 040
+\item 32 in base 2 is   1*pow(2,5) = 0b100000
 
 \item 31 in base 16 is  1*pow(16,1) + 15*pow(16,0)
-\item 31 in base 10 is 30*pow(10,1) + 1*pow(10,0)
+\item 31 in base 10 is  3*pow(10,1) + 1*pow(10,0)
 \item 31 in base 8 is   3*pow(8,1) + 7*pow(8,0)
 \item 31 in base 2 is   1*pow(2,4) + 1*pow(2,3) + 1*pow(2,2) + 1*pow(2,1) + 1*pow(2,0)
 
@@ -149,7 +150,7 @@ Bases used on computers:
 \end{itemize}
 
 \subsubsection{Binary}
-\label{sec:org0e6fcd8}
+\label{sec:org9bcaee0}
 
 \begin{verbatim}
 Base 2: powers of 2
@@ -168,7 +169,20 @@ Digits: 0,1
 \end{verbatim}
 
 \subsubsection{Octal}
-\label{sec:orgfe20be2}
+\label{sec:orgc216c3d}
+
+\begin{verbatim}
+#include <stdio.h>
+
+int main() {
+   printf("%d\n", 037);
+}
+\end{verbatim}
+
+\begin{verbatim}
+31
+\end{verbatim}
+
 
 \begin{verbatim}
 Base 8: powers of 8
@@ -187,13 +201,14 @@ Digits: 0,1,2,3,4,5,6,7
 7:  007 15: 017  
         16: 020
 
-07:                 7 =   7
-077:          7*8 + 7 =  63
-0777: 7*8*8 + 7*8 + 7 = 511
+07:                            7 =   7
+077:                     7*8 + 7 =  63
+0777:            7*8*8 + 7*8 + 7 = 511
+07777: 7*8*8*8 + 7*8*8 + 7*8 + 7 = 4095
 \end{verbatim}
 
 \subsubsection{Base10 Review}
-\label{sec:org4806b14}
+\label{sec:orge067a5e}
 \begin{verbatim}
 Base 10: power of 10
 
@@ -213,7 +228,7 @@ Base 10: power of 10
 \end{verbatim}
 
 \subsubsection{Hex Review}
-\label{sec:org96608aa}
+\label{sec:orga726e1b}
 
 \begin{verbatim}
 Base 16: power of 16
@@ -230,10 +245,10 @@ or Digits: 0,1,2,3,4,5,6,7,8,9,a,b,c,d,e,f
 6:  0x06 14: 0x0E           
 7:  0x07 15: 0x0F  
          16: 0x10
-0xF    =                                  15 =    15
-0xFF   =                          15*16 + 15 =   255
-0xFFF  =               15*16*16 + 15*16 + 15 =  4095
-0xFFFF = 15*16*16*16 + 15*16*16 + 15*16 + 15 = 65535
+0xF    =                                  15 =    15 = 2^4 - 1
+0xFF   =                          15*16 + 15 =   255 = 2^8 - 1
+0xFFF  =               15*16*16 + 15*16 + 15 =  4095 = 2^12 - 1
+0xFFFF = 15*16*16*16 + 15*16*16 + 15*16 + 15 = 65535 = 2^16 - 1
 
 Digit Lookup
 
@@ -245,10 +260,12 @@ Digit Lookup
 5:  0x5 0b0101    13: 0xD 0b1101 
 6:  0x6 0b0110    14: 0xE 0b1110          
 7:  0x7 0b0111    15: 0xF 0b1111 
+
+1 nibble = 4 bits = 1 hex digit
 \end{verbatim}
 
 \subsubsection{Bitwise Operators}
-\label{sec:org4f8e89f}
+\label{sec:orgbc7feb2}
 
 Bitwise operators operate at the bit-level for variables such as integers.
 
@@ -259,7 +276,13 @@ Also be aware that structs have padding so you might get unexpected
 results.
 
 \subsubsection{Left Shift}
-\label{sec:org5975889}
+\label{sec:org389a7dd}
+
+0b000001 << 1 = 0b000010
+0b000001 << 2 = 0b000100
+0b000001 << 3 = 0b001000
+0b101011 << 3 = 0b011000
+
 
 Integer Multiplication by 2. Shifts bits to the left. Do not use negative values.
 
@@ -275,7 +298,7 @@ int main() {
     uint16_t u16 = 1;
     int64_t  i64 = 1;
     int32_t  i32 = 1;
-    uint16_t i16 = 1;
+    int16_t  i16 = 1;
     for (int i = 0 ; i < 64; i++) {
         u64 = u64 << 1;
         i64 = i64 << 1;
@@ -285,7 +308,7 @@ int main() {
         i16 = i16 << 1;
         printf("64: %20llu %20lld\n", u64, i64);
         printf("32: %20lu %20ld\n",   u32, i32);
-        printf("16: %20zu %20zd\n",   u16, i16);
+        printf("16: %20hu %20hd\n",   u16, i16);
     }
 }
 \end{verbatim}
@@ -335,7 +358,7 @@ int main() {
 16:                16384                16384
 64:                32768                32768
 32:                32768                32768
-16:                32768                32768
+16:                32768               -32768
 64:                65536                65536
 32:                65536                65536
 16:                    0                    0
@@ -488,7 +511,7 @@ int main() {
 
 
 \subsubsection{Right Shift}
-\label{sec:orgfd193e4}
+\label{sec:org0885917}
 
 Integer Division by 2. Shifts bits to the right. Do not use negative values.
 
@@ -717,7 +740,7 @@ int main() {
 \end{verbatim}
 
 \subsubsection{Could we access the bits with shifts?}
-\label{sec:org27aee07}
+\label{sec:org6034894}
 
 \begin{verbatim}
 #include <stdio.h>
@@ -741,7 +764,7 @@ u32: 11111111011101110000101010111110
 
 \begin{enumerate}
 \item Bitprinter.h
-\label{sec:org83430b4}
+\label{sec:org84a780e}
 \begin{verbatim}
 #ifndef _BITPRINTER_H_
 #define _BITPRINTER_H_
@@ -775,7 +798,7 @@ static char * bitString8(uint8_t value) {
 \end{enumerate}
 
 \subsubsection{bitwise and}
-\label{sec:org24cd29f}
+\label{sec:org1d5130f}
 
 The \& operator is bitwise complement. It means every bit of an integer
 is and'd. 
@@ -788,6 +811,18 @@ The \& operator is a binary operator.
 \item 1 \& 0 -> 0
 \item 1 \& 1 -> 1
 \end{itemize}
+
+0b11111111011101110000101010111110 \& 0b1111111111111111111111111111111111111
+0b11111111011101110000101010111110 \& 0b0000000000000000000000000000000000000
+0b0
+
+0b011 \& 0b010 == 0b010
+
+0x00000001 \& 0xFFFFFFFF = 0x1
+
+if (0x10 \& input) \{
+
+\}
 
 \begin{verbatim}
 #include <stdio.h>
@@ -879,11 +914,29 @@ ffffffff & 80000000 = 80000000
 
 \begin{enumerate}
 \item Uses of \&
-\label{sec:org2a4ef3c}
+\label{sec:org1e92931}
 
 \begin{enumerate}
 \item Checking for bits
-\label{sec:orgae8d45d}
+\label{sec:org24e582e}
+\begin{verbatim}
+#include <inttypes.h>
+#include <stdio.h>
+
+// 0x1L MUST be used 0x1 causes bugs
+#define BIT(x,y) (x & (0x1L << y))
+
+int main() {
+    printf("%lu\n",sizeof(0x1L));
+    printf("%lu\n",sizeof(0x1));
+}
+\end{verbatim}
+
+\begin{verbatim}
+8
+4
+\end{verbatim}
+
 
 \begin{verbatim}
 #include <inttypes.h>
@@ -895,26 +948,27 @@ ffffffff & 80000000 = 80000000
 int main() {
     uint64_t interesting = 0x0123456789ABCDEF;
     puts("Lets see some bits!");
-    for (size_t i = 0 ; i < 64; i++) {
-        putchar(BIT(interesting, i)?'1':'0');
+    for (size_t i = 64 ; i > 0; i--) {
+        putchar(BIT(interesting, i-1)?'1':'0');
     }
-    puts("");
+    putchar('\n');
     for (size_t i = 0 ; i < 64; i++) {
         putchar('0' + i%10);
     }
-    puts("");
+    putchar('\n');
 }
 \end{verbatim}
 
 \begin{verbatim}
 Lets see some bits!
-1111011110110011110101011001000111100110101000101100010010000000
+0000000100100011010001010110011110001001101010111100110111101111
 0123456789012345678901234567890123456789012345678901234567890123
 \end{verbatim}
 
 
+
 \item Bit Printing
-\label{sec:org6643662}
+\label{sec:org3b04090}
 
 \& is way safer than shift for bit printing.
 
@@ -995,7 +1049,7 @@ Interesting[0] & Interesting[1]0000000000000000000000000000000000000000000000000
 
 
 \subsubsection{bitwise OR}
-\label{sec:org0c8838b}
+\label{sec:org4a0d459}
 
 The | operator is bitwise complement. It is the or operator between
 bits. 
@@ -1099,13 +1153,13 @@ ffffffff & 80000000 = ffffffff
 
 \begin{enumerate}
 \item Uses of |
-\label{sec:org7ea7897}
+\label{sec:org52a6d06}
 
 We mostly use | to combine bits together for arguments to functions.
 \end{enumerate}
 
 \subsubsection{bitwise XOR}
-\label{sec:org27c087e}
+\label{sec:orgc8d4c15}
 
 The \^{} operator is bitwise exclusive OR. It is the XOR operator between
 bits. It differs from or because when both inputs bits are hot the
@@ -1210,7 +1264,7 @@ ffffffff & 80000000 = 7fffffff
 
 \begin{enumerate}
 \item Uses of \^{}
-\label{sec:org6a80c77}
+\label{sec:orgc9e6802}
 
 XOR has interesting properties .
 
@@ -1250,7 +1304,7 @@ Encrypted Again: I enjoy olive bread
 \end{enumerate}
 
 \subsubsection{bitwise complement}
-\label{sec:org0012059}
+\label{sec:orgf7989ae}
 
 The \textasciitilde{} operator is bitwise complement. It means every bit is notted
 The \textasciitilde{} operator is a unary operator.
@@ -1323,7 +1377,7 @@ int main() {
 
 
 \subsubsection{Flags}
-\label{sec:orgc2018de}
+\label{sec:org41c85aa}
 
 In C flags are often used. Flags are parameters who's bits indicate if
 some option is chosen.
@@ -1396,7 +1450,7 @@ warning: flags must be not 0
 
 \begin{enumerate}
 \item Expected Flag use:
-\label{sec:org4cf5765}
+\label{sec:orgc8b0936}
 
 Use | to set a flag:   FLAG1 | FLAG2
 
@@ -1421,7 +1475,7 @@ It actually just checks if you have either FLAG1 or FLAG2.
 
 
 \item Flags Example
-\label{sec:org62b2817}
+\label{sec:orgc05444c}
 
 Hazel talks in depth about pizza
 \begin{itemize}
@@ -1664,7 +1718,7 @@ WARNING: SPAAAAAAAARTA, or spatarn.
 \end{enumerate}
 
 \subsubsection{PRACTICE and More resources}
-\label{sec:org70e0fe2}
+\label{sec:org24d3fd4}
 
 \begin{itemize}
 \item PLEASE Read Hazel's Notes on the subject 
@@ -1684,10 +1738,399 @@ WARNING: SPAAAAAAAARTA, or spatarn.
 
 
 \subsubsection{BitFields}
-\label{sec:org88cc65b}
+\label{sec:org8e338cb}
 
+\begin{verbatim}
 
+struct bitfield {
+    unsigned int b0:  1;
+    unsigned int b1:  2;
+    unsigned int b2:  4;
+    unsigned int b3:  8;
+    unsigned int b4: 16;
+    unsigned int b5:  1;
+    //unsigned int b6: 1;
+};
+
+int main() {
+    struct bitfield b = { 0, 3, 12, 242, 65000 };
+    printf("%hhu %hhu %hhu %hhu %hu\n", b.b0, b.b1, b.b2, b.b3, b.b4);
+    printf("size: %lu\n", sizeof(b));
+}
+
+\end{verbatim}
+
+\begin{verbatim}
+0 3 12 242 65000
+size: 4
+\end{verbatim}
+
+\begin{enumerate}
+\item Chmod example
+\label{sec:org9c71808}
+
+Let's try bitfields and unix file permissions!
+
+\begin{itemize}
+\item 1 execute
+\item 2 write
+\item 4 read
+
+\item 7 read | write | execute
+\end{itemize}
+
+\begin{verbatim}
+@piggy:/tmp/coolbears$ touch what
+@piggy:/tmp/coolbears$ ls -l what
+-rw-r--r-- 1 hindle1 hindle1 0 Mar 26 10:14 what
+@piggy:/tmp/coolbears$ echo NEAT > what
+@piggy:/tmp/coolbears$ cat what
+NEAT
+@piggy:/tmp/coolbears$ ls -l what
+-rw-r--r-- 1 hindle1 hindle1 5 Mar 26 10:14 what
+@piggy:/tmp/coolbears$ chmod 000 what
+@piggy:/tmp/coolbears$ cat what
+cat: what: Permission denied
+@piggy:/tmp/coolbears$ ls -l what
+---------- 1 hindle1 hindle1 5 Mar 26 10:14 what
+@piggy:/tmp/coolbears$ chmod 444 what
+@piggy:/tmp/coolbears$ ls -l
+total 4
+-r--r--r-- 1 hindle1 hindle1 5 Mar 26 10:14 what
+@piggy:/tmp/coolbears$ cat what
+NEAT
+@piggy:/tmp/coolbears$ echo echo do I hear an echo > what
+-bash: what: Permission denied
+@piggy:/tmp/coolbears$ chmod 666 what
+@piggy:/tmp/coolbears$ echo echo do I hear an echo > what
+@piggy:/tmp/coolbears$ cat what
+echo do I hear an echo
+@piggy:/tmp/coolbears$ ./what
+-bash: ./what: Permission denied
+@piggy:/tmp/coolbears$ chmod 777 what
+@piggy:/tmp/coolbears$ ./what
+do I hear an echo
+@piggy:/tmp/coolbears$ cat what
+echo do I hear an echo
+@piggy:/tmp/coolbears$ chmod 711 what
+@piggy:/tmp/coolbears$ ls -l what
+-rwx--x--x 1 hindle1 hindle1 23 Mar 26 10:15 what
+\end{verbatim}
+
+Let's go to that chmod example I gave you where I set the 
+
+\begin{verbatim}
+#include <stdio.h>
+
+struct unixperms {
+    unsigned int execute:  1;
+    unsigned int write:  1;
+    unsigned int read:  1;
+    unsigned int: 5; // try filling up to the next storage unit see what happens
+};
+// these don't stack well
+struct fullperms {
+   struct unixperms user;
+   struct unixperms group;
+   struct unixperms all;
+};
+
+// GCC is OK with this but clang is not so impressed
+union unixpun {
+    unsigned int uint;
+    struct unixperms perm;
+};
+union fullpun {
+    unsigned char bytes[sizeof(struct fullperms)];
+    struct fullperms perm;
+};
+
+int main() {
+    union unixpun nonePun          = { .perm=(struct unixperms){0,0,0} };
+    union unixpun readPun          = { .perm=(struct unixperms){0,0,1} };
+    union unixpun readWritePun     = { .perm=(struct unixperms){0,1,1} };
+    union unixpun readWriteExecPun = { .perm=(struct unixperms){1,1,1} };
+    union unixpun readExecPun      = { .perm=(struct unixperms){1,0,1} };
+    union unixpun puns[] = { nonePun, readPun, readWritePun, 
+                             readWriteExecPun, readExecPun };
+    char * names[] = { "nonePun", "readPun", "readWritePun", 
+                             "readWriteExecPun", "readExecPun" };
+    size_t npuns = sizeof(puns)/sizeof(puns[0]);
+    printf("sizeof(struct unixperms)=%lu\n",sizeof(struct unixperms));
+    for (size_t i = 0; i < npuns; i++) {
+        printf("Pun:%16s E:%hhu W:%hhu R:%hhu [%4hhu] [%08x]\n", names[i], 
+              puns[i].perm.execute,
+              puns[i].perm.write,
+              puns[i].perm.read,
+              puns[i].uint,  // here's the undefined behaviour
+              puns[i].uint   // here's the undefined behaviour
+        );
+    }
+    struct fullperms aFile = { readExecPun.perm, readExecPun.perm, nonePun.perm };
+    union fullpun fullPun = { .perm=aFile };
+    printf("sizeof(fullPun)==%lu\n", sizeof(fullPun));
+    for (size_t i = 0 ; i < sizeof(struct fullperms); i++) {
+        printf("%02x", fullPun.bytes[i]);
+    }
+    puts("");
+    printf("^^^ well that is confusing\n");
+
+    // Let's do this better
+    struct betterunixperms {
+        unsigned int ue:  1;
+        unsigned int uw:  1;
+        unsigned int ur:  1;
+        unsigned int ge:  1;
+        unsigned int gw:  1;
+        unsigned int gr:  1;
+        unsigned int ae:  1;
+        unsigned int aw:  1;
+        unsigned int ar:  1;
+        unsigned int: 7; // pad
+    };
+    struct chmod {
+        unsigned int u: 3;        
+        unsigned int g: 3;        
+        unsigned int a: 3;
+        unsigned int: 7; // pad
+    };
+    union chmodb {
+         struct chmod ch;
+         struct betterunixperms bits;
+         unsigned short ushort;
+         unsigned int uint;
+    };
+    union chmodb ch = { .ch={7,1,0} };
+    printf("sizeof(betterunixperms)==%lu\n",sizeof(struct betterunixperms));
+    printf("sizeof(chmod)==%lu\n",sizeof(struct chmod));
+    printf("sizeof(chmodb)==%lu\n",sizeof(union chmodb));
+    printf("Better? %o %o %o %03o\n", ch.ch.u, ch.ch.g, ch.ch.a,
+           ch.uint);
+}
+
+\end{verbatim}
+
+\begin{verbatim}
+sizeof(struct unixperms)=4
+Pun:         nonePun E:0 W:0 R:0 [   0] [00000000]
+Pun:         readPun E:0 W:0 R:1 [   4] [00000004]
+Pun:    readWritePun E:0 W:1 R:1 [   6] [00000006]
+Pun:readWriteExecPun E:1 W:1 R:1 [   7] [00000007]
+Pun:     readExecPun E:1 W:0 R:1 [   5] [00000005]
+sizeof(fullPun)==12
+050000000500000000000000
+^^^ well that is confusing
+sizeof(betterunixperms)==4
+sizeof(chmod)==4
+sizeof(chmodb)==4
+Better? 7 1 0 017
+\end{verbatim}
+\end{enumerate}
 
 \subsubsection{Floating Point Numbers}
-\label{sec:org6b8a304}
+\label{sec:org9a4c85a}
+
+Helpful resources:
+\begin{itemize}
+\item \url{https://en.wikipedia.org/wiki/IEEE\_754}
+\item \url{http://steve.hollasch.net/cgindex/coding/ieeefloat.html}
+\end{itemize}
+Single precision IEEE754 floating point numbers
+
+Type: float
+
+-Sign: 0 - positive, 1 negative
+-Exponent: unsigned 8 bit integer with 127 (2\textsuperscript{7}-1) offset
+\begin{itemize}
+\item -126 to 127
+\end{itemize}
+\begin{itemize}
+\item Fraction: 24 bits (only 23 used). The first bit is implied. 
+\begin{itemize}
+\item So 00000000000000000000000 is actually 100000000000000000000000
+\end{itemize}
+\end{itemize}
+
+\begin{center}
+\begin{tabular}{rrrrrl}
+Sign (1 bit) & Exponent (8 bit) & b10 & Fraction (23 bit) & Value & base 2\\
+0 & 01111100 & -3 & 01000000000000000000000 & 0.15625 & 1/8 + 1/32\\
+1 & 01111100 & -3 & 01000000000000000000000 & -0.15625 & \\
+0 & 01111100 & -3 & 01000000000000000000000 & -0.15625 & \\
+0 & 00000000 & 0 & 00000000000000000000000 & 0 & \\
+1 & 00000000 & 0 & 00000000000000000000000 & -0 & \\
+0 & 11000000 & 65 & 00000000000000000000000 & 3.68e+19 & 2\textsuperscript{65}\\
+1 & 11111111 & 0 & 00000000000000000000000 & -inf & \\
+0 & 11111111 & 0 & 00000000000000000000000 & inf & \\
+\end{tabular}
+\end{center}
+
+\begin{itemize}
+\item Neat design trick: you can sort them as signed integers (two's complement)!
+\item -0 is right before 0 for signed integer sorting
+\end{itemize}
+
+\begin{center}
+\begin{tabular}{rrrrrl}
+0 & 01111100 & -3 & 01000000000000000000000 & 0.15625 & 1/8 + 1/32\\
+\end{tabular}
+\end{center}
+
+0.15625 to floating point. Implied bit is pow(2,-3)
+
+pow(2,-3) + 0*pow(2,-4) + 1*pow(2,-5) (pow(2,5)==32, pow(2,-5) = 1/32.0)
+
+\begin{verbatim}
+#include <math.h>
+#include <stdio.h>
+#include <inttypes.h>
+// 0x1L MUST be used 0x1 causes bugs
+#define BIT(x,y) (x & (0x1L << y))
+#define MAXBITSTRBITS 129
+static char _bitstr[MAXBITSTRBITS] = { '\0' };
+static char * bitString(uint64_t value, const unsigned int bits) {
+    // iterator must be uint64_t
+    for (uint64_t i = 0 ; i < bits; i++) {
+        char bit = (BIT(value,i))?'1':'0';
+        _bitstr[bits-1-i] = bit;
+    }
+    _bitstr[bits] = '\0';
+    return _bitstr;
+}
+
+// NOT PORTABLE
+struct float_t {
+    unsigned int mantissa:23; // LOWEST
+    unsigned int exponent:8;
+    unsigned int sign:1; // HIGHEST
+};
+// type pun for fun!
+union floatint {
+    float f;
+    uint32_t i;
+    struct float_t t;
+};
+
+
+int main() {
+    float floats[] = {
+        0.0,
+       -0.0,
+        INFINITY,
+       -INFINITY,
+        0.00001,
+        0.0001,
+        0.001,
+        0.01,
+        0.1,
+        1.0,
+        1/64.0,
+        1/32.0,
+        1/16.0,
+        1/8.0,
+        1/4.0,
+        1/2.0,
+        1.0,
+        2.0,
+        4.0,
+        128.0,
+        65536.0,
+        0.15625,
+        36893488147419103232.0 // 2**65
+    };
+    size_t nfloats = sizeof(floats)/sizeof(float);
+    printf("We're printing floats!\n");
+    printf("sizeof(floatint) == %lu\n", sizeof(union floatint));
+    printf("sizeof(float_t) == %lu\n", sizeof(struct float_t));
+    for (size_t i = 0; i < nfloats; i++) {
+        float f = floats[i];
+        union floatint fi = {.f=f};
+        printf("%12g %08x %s\n", f, fi.i, bitString(fi.i, 32));
+        printf("%12g %08x sign: %hhu exponent: %hhu exp-127: %d mantissa: %08x\n", 
+               f,
+               fi.i,
+               fi.t.sign,
+               fi.t.exponent,
+               (int)fi.t.exponent - (int)127,
+               fi.t.mantissa
+        );
+        /* // We don't need bitfields
+        printf("%12g %08x sign: %hhu exponent: %hhu exp-127: %d mantissa: %08x\n", 
+               f,
+               fi.i,
+               (fi.i >> 31),
+               ((fi.i << 1) >> 24),
+               (int)((fi.i << 1) >> 24) - (int)127,
+               (fi.i & 0x007FFFFF)
+        );
+        */ 
+
+    }
+    puts("");
+}
+\end{verbatim}
+
+\begin{verbatim}
+We're printing floats!
+sizeof(floatint) == 4
+sizeof(float_t) == 4
+           0 00000000 00000000000000000000000000000000
+           0 00000000 sign: 0 exponent: 0 exp-127: -127 mantissa: 00000000
+          -0 80000000 10000000000000000000000000000000
+          -0 80000000 sign: 1 exponent: 0 exp-127: -127 mantissa: 00000000
+         inf 7f800000 01111111100000000000000000000000
+         inf 7f800000 sign: 0 exponent: 255 exp-127: 128 mantissa: 00000000
+        -inf ff800000 11111111100000000000000000000000
+        -inf ff800000 sign: 1 exponent: 255 exp-127: 128 mantissa: 00000000
+       1e-05 3727c5ac 00110111001001111100010110101100
+       1e-05 3727c5ac sign: 0 exponent: 110 exp-127: -17 mantissa: 0027c5ac
+      0.0001 38d1b717 00111000110100011011011100010111
+      0.0001 38d1b717 sign: 0 exponent: 113 exp-127: -14 mantissa: 0051b717
+       0.001 3a83126f 00111010100000110001001001101111
+       0.001 3a83126f sign: 0 exponent: 117 exp-127: -10 mantissa: 0003126f
+        0.01 3c23d70a 00111100001000111101011100001010
+        0.01 3c23d70a sign: 0 exponent: 120 exp-127: -7 mantissa: 0023d70a
+         0.1 3dcccccd 00111101110011001100110011001101
+         0.1 3dcccccd sign: 0 exponent: 123 exp-127: -4 mantissa: 004ccccd
+           1 3f800000 00111111100000000000000000000000
+           1 3f800000 sign: 0 exponent: 127 exp-127: 0 mantissa: 00000000
+    0.015625 3c800000 00111100100000000000000000000000
+    0.015625 3c800000 sign: 0 exponent: 121 exp-127: -6 mantissa: 00000000
+     0.03125 3d000000 00111101000000000000000000000000
+     0.03125 3d000000 sign: 0 exponent: 122 exp-127: -5 mantissa: 00000000
+      0.0625 3d800000 00111101100000000000000000000000
+      0.0625 3d800000 sign: 0 exponent: 123 exp-127: -4 mantissa: 00000000
+       0.125 3e000000 00111110000000000000000000000000
+       0.125 3e000000 sign: 0 exponent: 124 exp-127: -3 mantissa: 00000000
+        0.25 3e800000 00111110100000000000000000000000
+        0.25 3e800000 sign: 0 exponent: 125 exp-127: -2 mantissa: 00000000
+         0.5 3f000000 00111111000000000000000000000000
+         0.5 3f000000 sign: 0 exponent: 126 exp-127: -1 mantissa: 00000000
+           1 3f800000 00111111100000000000000000000000
+           1 3f800000 sign: 0 exponent: 127 exp-127: 0 mantissa: 00000000
+           2 40000000 01000000000000000000000000000000
+           2 40000000 sign: 0 exponent: 128 exp-127: 1 mantissa: 00000000
+           4 40800000 01000000100000000000000000000000
+           4 40800000 sign: 0 exponent: 129 exp-127: 2 mantissa: 00000000
+         128 43000000 01000011000000000000000000000000
+         128 43000000 sign: 0 exponent: 134 exp-127: 7 mantissa: 00000000
+       65536 47800000 01000111100000000000000000000000
+       65536 47800000 sign: 0 exponent: 143 exp-127: 16 mantissa: 00000000
+     0.15625 3e200000 00111110001000000000000000000000
+     0.15625 3e200000 sign: 0 exponent: 124 exp-127: -3 mantissa: 00200000
+ 3.68935e+19 60000000 01100000000000000000000000000000
+ 3.68935e+19 60000000 sign: 0 exponent: 192 exp-127: 65 mantissa: 00000000
+\end{verbatim}
+
+\begin{enumerate}
+\item How do I avoid typepunning?
+\label{sec:orgdf1a773}
+
+The C99 is union type punning :-/
+
+The "blessed" way that is C11 compatible is memcpy.
+
+Bitfields are generally considered CURSED due to platform specific
+behaviour.
+\end{enumerate}
 \end{document}

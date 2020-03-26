@@ -43,6 +43,9 @@ _________________
 1 Week11
 ========
 
+  <https://github.com/abramhindle/CMPUT201W20B2-public/tree/master/week11>
+
+
 1.1 Copyright Statement
 ~~~~~~~~~~~~~~~~~~~~~~~
 
@@ -151,13 +154,13 @@ _________________
 
   2, 8, 10, 16
 
-  - 32 in base 16 is 2*pow(16,1)
-  - 32 in base 10 is 30*pow(10,1) + 2*pow(10,0)
-  - 32 in base 8 is 4*pow(8,1)
-  - 32 in base 2 is 1*pow(2,5)
+  - 32 in base 16 is 2*pow(16,1) = 0x20
+  - 32 in base 10 is 3*pow(10,1) + 2*pow(10,0) = 3*10 + 2*1 = 32
+  - 32 in base 8 is 4*pow(8,1) = 4*8 = 32 = 040
+  - 32 in base 2 is 1*pow(2,5) = 0b100000
 
   - 31 in base 16 is 1*pow(16,1) + 15*pow(16,0)
-  - 31 in base 10 is 30*pow(10,1) + 1*pow(10,0)
+  - 31 in base 10 is 3*pow(10,1) + 1*pow(10,0)
   - 31 in base 8 is 3*pow(8,1) + 7*pow(8,0)
   - 31 in base 2 is 1*pow(2,4) + 1*pow(2,3) + 1*pow(2,2) + 1*pow(2,1) +
     1*pow(2,0)
@@ -193,6 +196,19 @@ _________________
 -----------
 
   ,----
+  | #include <stdio.h>
+  | 
+  | int main() {
+  |    printf("%d\n", 037);
+  | }
+  `----
+
+  ,----
+  | 31
+  `----
+
+
+  ,----
   | Base 8: powers of 8
   | 
   | 3 bits
@@ -209,9 +225,10 @@ _________________
   | 7:  007 15: 017  
   |         16: 020
   | 
-  | 07:                 7 =   7
-  | 077:          7*8 + 7 =  63
-  | 0777: 7*8*8 + 7*8 + 7 = 511
+  | 07:                            7 =   7
+  | 077:                     7*8 + 7 =  63
+  | 0777:            7*8*8 + 7*8 + 7 = 511
+  | 07777: 7*8*8*8 + 7*8*8 + 7*8 + 7 = 4095
   `----
 
 
@@ -255,10 +272,10 @@ _________________
   | 6:  0x06 14: 0x0E           
   | 7:  0x07 15: 0x0F  
   |          16: 0x10
-  | 0xF    =                                  15 =    15
-  | 0xFF   =                          15*16 + 15 =   255
-  | 0xFFF  =               15*16*16 + 15*16 + 15 =  4095
-  | 0xFFFF = 15*16*16*16 + 15*16*16 + 15*16 + 15 = 65535
+  | 0xF    =                                  15 =    15 = 2^4 - 1
+  | 0xFF   =                          15*16 + 15 =   255 = 2^8 - 1
+  | 0xFFF  =               15*16*16 + 15*16 + 15 =  4095 = 2^12 - 1
+  | 0xFFFF = 15*16*16*16 + 15*16*16 + 15*16 + 15 = 65535 = 2^16 - 1
   | 
   | Digit Lookup
   | 
@@ -270,6 +287,8 @@ _________________
   | 5:  0x5 0b0101    13: 0xD 0b1101 
   | 6:  0x6 0b0110    14: 0xE 0b1110          
   | 7:  0x7 0b0111    15: 0xF 0b1111 
+  | 
+  | 1 nibble = 4 bits = 1 hex digit
   `----
 
 
@@ -289,6 +308,10 @@ _________________
 1.5.6 Left Shift
 ----------------
 
+  0b000001 << 1 = 0b000010 0b000001 << 2 = 0b000100 0b000001 << 3 =
+  0b001000 0b101011 << 3 = 0b011000
+
+
   Integer Multiplication by 2. Shifts bits to the left. Do not use
   negative values.
 
@@ -304,7 +327,7 @@ _________________
   |     uint16_t u16 = 1;
   |     int64_t  i64 = 1;
   |     int32_t  i32 = 1;
-  |     uint16_t i16 = 1;
+  |     int16_t  i16 = 1;
   |     for (int i = 0 ; i < 64; i++) {
   |         u64 = u64 << 1;
   |         i64 = i64 << 1;
@@ -314,7 +337,7 @@ _________________
   |         i16 = i16 << 1;
   |         printf("64: %20llu %20lld\n", u64, i64);
   |         printf("32: %20lu %20ld\n",   u32, i32);
-  |         printf("16: %20zu %20zd\n",   u16, i16);
+  |         printf("16: %20hu %20hd\n",   u16, i16);
   |     }
   | }
   `----
@@ -364,7 +387,7 @@ _________________
   | 16:                16384                16384
   | 64:                32768                32768
   | 32:                32768                32768
-  | 16:                32768                32768
+  | 16:                32768               -32768
   | 64:                65536                65536
   | 32:                65536                65536
   | 16:                    0                    0
@@ -817,6 +840,19 @@ _________________
   - 1 & 0 -> 0
   - 1 & 1 -> 1
 
+  0b11111111011101110000101010111110 &
+  0b1111111111111111111111111111111111111
+  0b11111111011101110000101010111110 &
+  0b0000000000000000000000000000000000000 0b0
+
+  0b011 & 0b010 == 0b010
+
+  0x00000001 & 0xFFFFFFFF = 0x1
+
+  if (0x10 & input) {
+
+  }
+
   ,----
   | #include <stdio.h>
   | #include <inttypes.h>
@@ -918,22 +954,41 @@ _________________
     | #define BIT(x,y) (x & (0x1L << y))
     | 
     | int main() {
+    |     printf("%lu\n",sizeof(0x1L));
+    |     printf("%lu\n",sizeof(0x1));
+    | }
+    `----
+
+    ,----
+    | 8
+    | 4
+    `----
+
+
+    ,----
+    | #include <inttypes.h>
+    | #include <stdio.h>
+    | 
+    | // 0x1L MUST be used 0x1 causes bugs
+    | #define BIT(x,y) (x & (0x1L << y))
+    | 
+    | int main() {
     |     uint64_t interesting = 0x0123456789ABCDEF;
     |     puts("Lets see some bits!");
-    |     for (size_t i = 0 ; i < 64; i++) {
-    |         putchar(BIT(interesting, i)?'1':'0');
+    |     for (size_t i = 64 ; i > 0; i--) {
+    |         putchar(BIT(interesting, i-1)?'1':'0');
     |     }
-    |     puts("");
+    |     putchar('\n');
     |     for (size_t i = 0 ; i < 64; i++) {
     |         putchar('0' + i%10);
     |     }
-    |     puts("");
+    |     putchar('\n');
     | }
     `----
 
     ,----
     | Lets see some bits!
-    | 1111011110110011110101011001000111100110101000101100010010000000
+    | 0000000100100011010001010110011110001001101010111100110111101111
     | 0123456789012345678901234567890123456789012345678901234567890123
     `----
 
@@ -1688,6 +1743,375 @@ _________________
 1.5.15 BitFields
 ----------------
 
+  ,----
+  | 
+  | struct bitfield {
+  |     unsigned int b0:  1;
+  |     unsigned int b1:  2;
+  |     unsigned int b2:  4;
+  |     unsigned int b3:  8;
+  |     unsigned int b4: 16;
+  |     unsigned int b5:  1;
+  |     //unsigned int b6: 1;
+  | };
+  | 
+  | int main() {
+  |     struct bitfield b = { 0, 3, 12, 242, 65000 };
+  |     printf("%hhu %hhu %hhu %hhu %hu\n", b.b0, b.b1, b.b2, b.b3, b.b4);
+  |     printf("size: %lu\n", sizeof(b));
+  | }
+  | 
+  `----
+
+  ,----
+  | 0 3 12 242 65000
+  | size: 4
+  `----
+
+
+* 1.5.15.1 Chmod example
+
+  Let's try bitfields and unix file permissions!
+
+  - 1 execute
+  - 2 write
+  - 4 read
+
+  - 7 read | write | execute
+
+  ,----
+  | @piggy:/tmp/coolbears$ touch what
+  | @piggy:/tmp/coolbears$ ls -l what
+  | -rw-r--r-- 1 hindle1 hindle1 0 Mar 26 10:14 what
+  | @piggy:/tmp/coolbears$ echo NEAT > what
+  | @piggy:/tmp/coolbears$ cat what
+  | NEAT
+  | @piggy:/tmp/coolbears$ ls -l what
+  | -rw-r--r-- 1 hindle1 hindle1 5 Mar 26 10:14 what
+  | @piggy:/tmp/coolbears$ chmod 000 what
+  | @piggy:/tmp/coolbears$ cat what
+  | cat: what: Permission denied
+  | @piggy:/tmp/coolbears$ ls -l what
+  | ---------- 1 hindle1 hindle1 5 Mar 26 10:14 what
+  | @piggy:/tmp/coolbears$ chmod 444 what
+  | @piggy:/tmp/coolbears$ ls -l
+  | total 4
+  | -r--r--r-- 1 hindle1 hindle1 5 Mar 26 10:14 what
+  | @piggy:/tmp/coolbears$ cat what
+  | NEAT
+  | @piggy:/tmp/coolbears$ echo echo do I hear an echo > what
+  | -bash: what: Permission denied
+  | @piggy:/tmp/coolbears$ chmod 666 what
+  | @piggy:/tmp/coolbears$ echo echo do I hear an echo > what
+  | @piggy:/tmp/coolbears$ cat what
+  | echo do I hear an echo
+  | @piggy:/tmp/coolbears$ ./what
+  | -bash: ./what: Permission denied
+  | @piggy:/tmp/coolbears$ chmod 777 what
+  | @piggy:/tmp/coolbears$ ./what
+  | do I hear an echo
+  | @piggy:/tmp/coolbears$ cat what
+  | echo do I hear an echo
+  | @piggy:/tmp/coolbears$ chmod 711 what
+  | @piggy:/tmp/coolbears$ ls -l what
+  | -rwx--x--x 1 hindle1 hindle1 23 Mar 26 10:15 what
+  `----
+
+  Let's go to that chmod example I gave you where I set the
+
+  ,----
+  | #include <stdio.h>
+  | 
+  | struct unixperms {
+  |     unsigned int execute:  1;
+  |     unsigned int write:  1;
+  |     unsigned int read:  1;
+  |     unsigned int: 5; // try filling up to the next storage unit see what happens
+  | };
+  | // these don't stack well
+  | struct fullperms {
+  |    struct unixperms user;
+  |    struct unixperms group;
+  |    struct unixperms all;
+  | };
+  | 
+  | // GCC is OK with this but clang is not so impressed
+  | union unixpun {
+  |     unsigned int uint;
+  |     struct unixperms perm;
+  | };
+  | union fullpun {
+  |     unsigned char bytes[sizeof(struct fullperms)];
+  |     struct fullperms perm;
+  | };
+  | 
+  | int main() {
+  |     union unixpun nonePun          = { .perm=(struct unixperms){0,0,0} };
+  |     union unixpun readPun          = { .perm=(struct unixperms){0,0,1} };
+  |     union unixpun readWritePun     = { .perm=(struct unixperms){0,1,1} };
+  |     union unixpun readWriteExecPun = { .perm=(struct unixperms){1,1,1} };
+  |     union unixpun readExecPun      = { .perm=(struct unixperms){1,0,1} };
+  |     union unixpun puns[] = { nonePun, readPun, readWritePun, 
+  |                              readWriteExecPun, readExecPun };
+  |     char * names[] = { "nonePun", "readPun", "readWritePun", 
+  |                              "readWriteExecPun", "readExecPun" };
+  |     size_t npuns = sizeof(puns)/sizeof(puns[0]);
+  |     printf("sizeof(struct unixperms)=%lu\n",sizeof(struct unixperms));
+  |     for (size_t i = 0; i < npuns; i++) {
+  |         printf("Pun:%16s E:%hhu W:%hhu R:%hhu [%4hhu] [%08x]\n", names[i], 
+  |               puns[i].perm.execute,
+  |               puns[i].perm.write,
+  |               puns[i].perm.read,
+  |               puns[i].uint,  // here's the undefined behaviour
+  |               puns[i].uint   // here's the undefined behaviour
+  |         );
+  |     }
+  |     struct fullperms aFile = { readExecPun.perm, readExecPun.perm, nonePun.perm };
+  |     union fullpun fullPun = { .perm=aFile };
+  |     printf("sizeof(fullPun)==%lu\n", sizeof(fullPun));
+  |     for (size_t i = 0 ; i < sizeof(struct fullperms); i++) {
+  |         printf("%02x", fullPun.bytes[i]);
+  |     }
+  |     puts("");
+  |     printf("^^^ well that is confusing\n");
+  | 
+  |     // Let's do this better
+  |     struct betterunixperms {
+  |         unsigned int ue:  1;
+  |         unsigned int uw:  1;
+  |         unsigned int ur:  1;
+  |         unsigned int ge:  1;
+  |         unsigned int gw:  1;
+  |         unsigned int gr:  1;
+  |         unsigned int ae:  1;
+  |         unsigned int aw:  1;
+  |         unsigned int ar:  1;
+  |         unsigned int: 7; // pad
+  |     };
+  |     struct chmod {
+  |         unsigned int u: 3;        
+  |         unsigned int g: 3;        
+  |         unsigned int a: 3;
+  |         unsigned int: 7; // pad
+  |     };
+  |     union chmodb {
+  |          struct chmod ch;
+  |          struct betterunixperms bits;
+  |          unsigned short ushort;
+  |          unsigned int uint;
+  |     };
+  |     union chmodb ch = { .ch={7,1,0} };
+  |     printf("sizeof(betterunixperms)==%lu\n",sizeof(struct betterunixperms));
+  |     printf("sizeof(chmod)==%lu\n",sizeof(struct chmod));
+  |     printf("sizeof(chmodb)==%lu\n",sizeof(union chmodb));
+  |     printf("Better? %o %o %o %03o\n", ch.ch.u, ch.ch.g, ch.ch.a,
+  |            ch.uint);
+  | }
+  | 
+  `----
+
+  ,----
+  | sizeof(struct unixperms)=4
+  | Pun:         nonePun E:0 W:0 R:0 [   0] [00000000]
+  | Pun:         readPun E:0 W:0 R:1 [   4] [00000004]
+  | Pun:    readWritePun E:0 W:1 R:1 [   6] [00000006]
+  | Pun:readWriteExecPun E:1 W:1 R:1 [   7] [00000007]
+  | Pun:     readExecPun E:1 W:0 R:1 [   5] [00000005]
+  | sizeof(fullPun)==12
+  | 050000000500000000000000
+  | ^^^ well that is confusing
+  | sizeof(betterunixperms)==4
+  | sizeof(chmod)==4
+  | sizeof(chmodb)==4
+  | Better? 7 1 0 017
+  `----
+
 
 1.5.16 Floating Point Numbers
 -----------------------------
+
+  Helpful resources:
+  - <https://en.wikipedia.org/wiki/IEEE_754>
+  - <http://steve.hollasch.net/cgindex/coding/ieeefloat.html>
+  Single precision IEEE754 floating point numbers
+
+  Type: float
+
+  -Sign: 0 - positive, 1 negative Exponent: unsigned 8 bit integer with
+  -127 (2^7-1) offset
+  - -126 to 127
+  - Fraction: 24 bits (only 23 used). The first bit is implied.
+    - So 00000000000000000000000 is actually 100000000000000000000000
+
+   Sign (1 bit)  Exponent (8 bit)  b10        Fraction (23 bit)     Value  base 2     
+              0          01111100   -3  01000000000000000000000   0.15625  1/8 + 1/32 
+              1          01111100   -3  01000000000000000000000  -0.15625             
+              0          01111100   -3  01000000000000000000000  -0.15625             
+              0          00000000    0  00000000000000000000000         0             
+              1          00000000    0  00000000000000000000000        -0             
+              0          11000000   65  00000000000000000000000  3.68e+19  2^65       
+              1          11111111    0  00000000000000000000000      -inf             
+              0          11111111    0  00000000000000000000000       inf             
+
+  - Neat design trick: you can sort them as signed integers (two's
+    complement)!
+  - -0 is right before 0 for signed integer sorting
+
+   0  01111100  -3  01000000000000000000000  0.15625  1/8 + 1/32 
+
+  0.15625 to floating point. Implied bit is pow(2,-3)
+
+  pow(2,-3) + 0*pow(2,-4) + 1*pow(2,-5) (pow(2,5)==32, pow(2,-5) =
+  1/32.0)
+
+  ,----
+  | #include <math.h>
+  | #include <stdio.h>
+  | #include <inttypes.h>
+  | // 0x1L MUST be used 0x1 causes bugs
+  | #define BIT(x,y) (x & (0x1L << y))
+  | #define MAXBITSTRBITS 129
+  | static char _bitstr[MAXBITSTRBITS] = { '\0' };
+  | static char * bitString(uint64_t value, const unsigned int bits) {
+  |     // iterator must be uint64_t
+  |     for (uint64_t i = 0 ; i < bits; i++) {
+  |         char bit = (BIT(value,i))?'1':'0';
+  |         _bitstr[bits-1-i] = bit;
+  |     }
+  |     _bitstr[bits] = '\0';
+  |     return _bitstr;
+  | }
+  | 
+  | // NOT PORTABLE
+  | struct float_t {
+  |     unsigned int mantissa:23; // LOWEST
+  |     unsigned int exponent:8;
+  |     unsigned int sign:1; // HIGHEST
+  | };
+  | // type pun for fun!
+  | union floatint {
+  |     float f;
+  |     uint32_t i;
+  |     struct float_t t;
+  | };
+  | 
+  | 
+  | int main() {
+  |     float floats[] = {
+  |         0.0,
+  |        -0.0,
+  |         INFINITY,
+  |        -INFINITY,
+  |         0.00001,
+  |         0.0001,
+  |         0.001,
+  |         0.01,
+  |         0.1,
+  |         1.0,
+  |         1/64.0,
+  |         1/32.0,
+  |         1/16.0,
+  |         1/8.0,
+  |         1/4.0,
+  |         1/2.0,
+  |         1.0,
+  |         2.0,
+  |         4.0,
+  |         128.0,
+  |         65536.0,
+  |         0.15625,
+  |         36893488147419103232.0 // 2**65
+  |     };
+  |     size_t nfloats = sizeof(floats)/sizeof(float);
+  |     printf("We're printing floats!\n");
+  |     printf("sizeof(floatint) == %lu\n", sizeof(union floatint));
+  |     printf("sizeof(float_t) == %lu\n", sizeof(struct float_t));
+  |     for (size_t i = 0; i < nfloats; i++) {
+  |         float f = floats[i];
+  |         union floatint fi = {.f=f};
+  |         printf("%12g %08x %s\n", f, fi.i, bitString(fi.i, 32));
+  |         printf("%12g %08x sign: %hhu exponent: %hhu exp-127: %d mantissa: %08x\n", 
+  |                f,
+  |                fi.i,
+  |                fi.t.sign,
+  |                fi.t.exponent,
+  |                (int)fi.t.exponent - (int)127,
+  |                fi.t.mantissa
+  |         );
+  |         /* // We don't need bitfields
+  |         printf("%12g %08x sign: %hhu exponent: %hhu exp-127: %d mantissa: %08x\n", 
+  |                f,
+  |                fi.i,
+  |                (fi.i >> 31),
+  |                ((fi.i << 1) >> 24),
+  |                (int)((fi.i << 1) >> 24) - (int)127,
+  |                (fi.i & 0x007FFFFF)
+  |         );
+  |         */ 
+  | 
+  |     }
+  |     puts("");
+  | }
+  `----
+
+  ,----
+  | We're printing floats!
+  | sizeof(floatint) == 4
+  | sizeof(float_t) == 4
+  |            0 00000000 00000000000000000000000000000000
+  |            0 00000000 sign: 0 exponent: 0 exp-127: -127 mantissa: 00000000
+  |           -0 80000000 10000000000000000000000000000000
+  |           -0 80000000 sign: 1 exponent: 0 exp-127: -127 mantissa: 00000000
+  |          inf 7f800000 01111111100000000000000000000000
+  |          inf 7f800000 sign: 0 exponent: 255 exp-127: 128 mantissa: 00000000
+  |         -inf ff800000 11111111100000000000000000000000
+  |         -inf ff800000 sign: 1 exponent: 255 exp-127: 128 mantissa: 00000000
+  |        1e-05 3727c5ac 00110111001001111100010110101100
+  |        1e-05 3727c5ac sign: 0 exponent: 110 exp-127: -17 mantissa: 0027c5ac
+  |       0.0001 38d1b717 00111000110100011011011100010111
+  |       0.0001 38d1b717 sign: 0 exponent: 113 exp-127: -14 mantissa: 0051b717
+  |        0.001 3a83126f 00111010100000110001001001101111
+  |        0.001 3a83126f sign: 0 exponent: 117 exp-127: -10 mantissa: 0003126f
+  |         0.01 3c23d70a 00111100001000111101011100001010
+  |         0.01 3c23d70a sign: 0 exponent: 120 exp-127: -7 mantissa: 0023d70a
+  |          0.1 3dcccccd 00111101110011001100110011001101
+  |          0.1 3dcccccd sign: 0 exponent: 123 exp-127: -4 mantissa: 004ccccd
+  |            1 3f800000 00111111100000000000000000000000
+  |            1 3f800000 sign: 0 exponent: 127 exp-127: 0 mantissa: 00000000
+  |     0.015625 3c800000 00111100100000000000000000000000
+  |     0.015625 3c800000 sign: 0 exponent: 121 exp-127: -6 mantissa: 00000000
+  |      0.03125 3d000000 00111101000000000000000000000000
+  |      0.03125 3d000000 sign: 0 exponent: 122 exp-127: -5 mantissa: 00000000
+  |       0.0625 3d800000 00111101100000000000000000000000
+  |       0.0625 3d800000 sign: 0 exponent: 123 exp-127: -4 mantissa: 00000000
+  |        0.125 3e000000 00111110000000000000000000000000
+  |        0.125 3e000000 sign: 0 exponent: 124 exp-127: -3 mantissa: 00000000
+  |         0.25 3e800000 00111110100000000000000000000000
+  |         0.25 3e800000 sign: 0 exponent: 125 exp-127: -2 mantissa: 00000000
+  |          0.5 3f000000 00111111000000000000000000000000
+  |          0.5 3f000000 sign: 0 exponent: 126 exp-127: -1 mantissa: 00000000
+  |            1 3f800000 00111111100000000000000000000000
+  |            1 3f800000 sign: 0 exponent: 127 exp-127: 0 mantissa: 00000000
+  |            2 40000000 01000000000000000000000000000000
+  |            2 40000000 sign: 0 exponent: 128 exp-127: 1 mantissa: 00000000
+  |            4 40800000 01000000100000000000000000000000
+  |            4 40800000 sign: 0 exponent: 129 exp-127: 2 mantissa: 00000000
+  |          128 43000000 01000011000000000000000000000000
+  |          128 43000000 sign: 0 exponent: 134 exp-127: 7 mantissa: 00000000
+  |        65536 47800000 01000111100000000000000000000000
+  |        65536 47800000 sign: 0 exponent: 143 exp-127: 16 mantissa: 00000000
+  |      0.15625 3e200000 00111110001000000000000000000000
+  |      0.15625 3e200000 sign: 0 exponent: 124 exp-127: -3 mantissa: 00200000
+  |  3.68935e+19 60000000 01100000000000000000000000000000
+  |  3.68935e+19 60000000 sign: 0 exponent: 192 exp-127: 65 mantissa: 00000000
+  `----
+
+
+* 1.5.16.1 How do I avoid typepunning?
+
+  The C99 is union type punning :-/
+
+  The "blessed" way that is C11 compatible is memcpy.
+
+  Bitfields are generally considered CURSED due to platform specific
+  behaviour.
