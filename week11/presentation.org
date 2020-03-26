@@ -957,7 +957,7 @@ int main() {
                bitString(interesting[i],64)
         );
     }
-    printf("Interesting[0] & Interesting[1]");
+    printf("Interesting[0] & Interesting[1]\n");
     for (size_t i = 0 ; i < nints; i++) {
         printf("%s\n",
                bitString(interesting[i] & interesting[(i+1)%nints],64)
@@ -980,7 +980,8 @@ Interesting numbers!
      abcdef01234       11806310404660 0000000000000000000010101011110011011110111100000001001000110100
 7fffffffffffffff  9223372036854775807 0111111111111111111111111111111111111111111111111111111111111111
 ffffffffffffffff 18446744073709551615 1111111111111111111111111111111111111111111111111111111111111111
-Interesting[0] & Interesting[1]0000000000000000000000000000000000000000000000000000000001111111
+Interesting[0] & Interesting[1]
+0000000000000000000000000000000000000000000000000000000001111111
 0000000000000000000000000000000000000000000000000000000011111111
 0000000000000000000000000000000000000000000000000000111011101111
 0000000000000000000000000000000000100011011001000011011001100111
@@ -1013,13 +1014,13 @@ int main() {
     printf("ORing 1 bit\n");
     for (uint32_t i = 0 ; i < 32; i++) {
         uint32_t bit = (1 << i);
-        printf("%08x & %08x = %08x\n",
+        printf("0x%08x & 0x%08x = 0x%08x\n",
                pressF, bit,  pressF | bit);
     }
     pressF = 0x11111111;
     for (uint32_t i = 0 ; i < 32; i++) {
         uint32_t bit = (1 << i);
-        printf("%08x & %08x = %08x\n",
+        printf("0x%08x & 0x%08x = 0x%08x\n",
                pressF, bit,  pressF | bit);
     }
 }
@@ -1028,70 +1029,70 @@ int main() {
 #+RESULTS:
 #+begin_example
 ORing 1 bit
-ffffffff & 00000001 = ffffffff
-ffffffff & 00000002 = ffffffff
-ffffffff & 00000004 = ffffffff
-ffffffff & 00000008 = ffffffff
-ffffffff & 00000010 = ffffffff
-ffffffff & 00000020 = ffffffff
-ffffffff & 00000040 = ffffffff
-ffffffff & 00000080 = ffffffff
-ffffffff & 00000100 = ffffffff
-ffffffff & 00000200 = ffffffff
-ffffffff & 00000400 = ffffffff
-ffffffff & 00000800 = ffffffff
-ffffffff & 00001000 = ffffffff
-ffffffff & 00002000 = ffffffff
-ffffffff & 00004000 = ffffffff
-ffffffff & 00008000 = ffffffff
-ffffffff & 00010000 = ffffffff
-ffffffff & 00020000 = ffffffff
-ffffffff & 00040000 = ffffffff
-ffffffff & 00080000 = ffffffff
-ffffffff & 00100000 = ffffffff
-ffffffff & 00200000 = ffffffff
-ffffffff & 00400000 = ffffffff
-ffffffff & 00800000 = ffffffff
-ffffffff & 01000000 = ffffffff
-ffffffff & 02000000 = ffffffff
-ffffffff & 04000000 = ffffffff
-ffffffff & 08000000 = ffffffff
-ffffffff & 10000000 = ffffffff
-ffffffff & 20000000 = ffffffff
-ffffffff & 40000000 = ffffffff
-ffffffff & 80000000 = ffffffff
-11111111 & 00000001 = 11111111
-11111111 & 00000002 = 11111113
-11111111 & 00000004 = 11111115
-11111111 & 00000008 = 11111119
-11111111 & 00000010 = 11111111
-11111111 & 00000020 = 11111131
-11111111 & 00000040 = 11111151
-11111111 & 00000080 = 11111191
-11111111 & 00000100 = 11111111
-11111111 & 00000200 = 11111311
-11111111 & 00000400 = 11111511
-11111111 & 00000800 = 11111911
-11111111 & 00001000 = 11111111
-11111111 & 00002000 = 11113111
-11111111 & 00004000 = 11115111
-11111111 & 00008000 = 11119111
-11111111 & 00010000 = 11111111
-11111111 & 00020000 = 11131111
-11111111 & 00040000 = 11151111
-11111111 & 00080000 = 11191111
-11111111 & 00100000 = 11111111
-11111111 & 00200000 = 11311111
-11111111 & 00400000 = 11511111
-11111111 & 00800000 = 11911111
-11111111 & 01000000 = 11111111
-11111111 & 02000000 = 13111111
-11111111 & 04000000 = 15111111
-11111111 & 08000000 = 19111111
-11111111 & 10000000 = 11111111
-11111111 & 20000000 = 31111111
-11111111 & 40000000 = 51111111
-11111111 & 80000000 = 91111111
+0xffffffff & 0x00000001 = 0xffffffff
+0xffffffff & 0x00000002 = 0xffffffff
+0xffffffff & 0x00000004 = 0xffffffff
+0xffffffff & 0x00000008 = 0xffffffff
+0xffffffff & 0x00000010 = 0xffffffff
+0xffffffff & 0x00000020 = 0xffffffff
+0xffffffff & 0x00000040 = 0xffffffff
+0xffffffff & 0x00000080 = 0xffffffff
+0xffffffff & 0x00000100 = 0xffffffff
+0xffffffff & 0x00000200 = 0xffffffff
+0xffffffff & 0x00000400 = 0xffffffff
+0xffffffff & 0x00000800 = 0xffffffff
+0xffffffff & 0x00001000 = 0xffffffff
+0xffffffff & 0x00002000 = 0xffffffff
+0xffffffff & 0x00004000 = 0xffffffff
+0xffffffff & 0x00008000 = 0xffffffff
+0xffffffff & 0x00010000 = 0xffffffff
+0xffffffff & 0x00020000 = 0xffffffff
+0xffffffff & 0x00040000 = 0xffffffff
+0xffffffff & 0x00080000 = 0xffffffff
+0xffffffff & 0x00100000 = 0xffffffff
+0xffffffff & 0x00200000 = 0xffffffff
+0xffffffff & 0x00400000 = 0xffffffff
+0xffffffff & 0x00800000 = 0xffffffff
+0xffffffff & 0x01000000 = 0xffffffff
+0xffffffff & 0x02000000 = 0xffffffff
+0xffffffff & 0x04000000 = 0xffffffff
+0xffffffff & 0x08000000 = 0xffffffff
+0xffffffff & 0x10000000 = 0xffffffff
+0xffffffff & 0x20000000 = 0xffffffff
+0xffffffff & 0x40000000 = 0xffffffff
+0xffffffff & 0x80000000 = 0xffffffff
+0x11111111 & 0x00000001 = 0x11111111
+0x11111111 & 0x00000002 = 0x11111113
+0x11111111 & 0x00000004 = 0x11111115
+0x11111111 & 0x00000008 = 0x11111119
+0x11111111 & 0x00000010 = 0x11111111
+0x11111111 & 0x00000020 = 0x11111131
+0x11111111 & 0x00000040 = 0x11111151
+0x11111111 & 0x00000080 = 0x11111191
+0x11111111 & 0x00000100 = 0x11111111
+0x11111111 & 0x00000200 = 0x11111311
+0x11111111 & 0x00000400 = 0x11111511
+0x11111111 & 0x00000800 = 0x11111911
+0x11111111 & 0x00001000 = 0x11111111
+0x11111111 & 0x00002000 = 0x11113111
+0x11111111 & 0x00004000 = 0x11115111
+0x11111111 & 0x00008000 = 0x11119111
+0x11111111 & 0x00010000 = 0x11111111
+0x11111111 & 0x00020000 = 0x11131111
+0x11111111 & 0x00040000 = 0x11151111
+0x11111111 & 0x00080000 = 0x11191111
+0x11111111 & 0x00100000 = 0x11111111
+0x11111111 & 0x00200000 = 0x11311111
+0x11111111 & 0x00400000 = 0x11511111
+0x11111111 & 0x00800000 = 0x11911111
+0x11111111 & 0x01000000 = 0x11111111
+0x11111111 & 0x02000000 = 0x13111111
+0x11111111 & 0x04000000 = 0x15111111
+0x11111111 & 0x08000000 = 0x19111111
+0x11111111 & 0x10000000 = 0x11111111
+0x11111111 & 0x20000000 = 0x31111111
+0x11111111 & 0x40000000 = 0x51111111
+0x11111111 & 0x80000000 = 0x91111111
 #+end_example
 
 ***** Uses of |
@@ -1119,13 +1120,13 @@ int main() {
     printf("ORing 1 bit\n");
     for (uint32_t i = 0 ; i < 32; i++) {
         uint32_t bit = (1 << i);
-        printf("%08x & %08x = %08x\n",
+        printf("0x%08x & 0x%08x = 0x%08x\n",
                pressF, bit,  pressF ^ bit);
     }
     pressF = 0x11111111;
     for (uint32_t i = 0 ; i < 32; i++) {
         uint32_t bit = (1 << i);
-        printf("%08x & %08x = %08x\n",
+        printf("0x%08x & 0x%08x = 0x%08x\n",
                pressF, bit,  pressF ^ bit);
     }
 }
@@ -1955,7 +1956,9 @@ int main() {
         128.0,
         65536.0,
         0.15625,
-        36893488147419103232.0 // 2**65
+        -0.15625,
+        36893488147419103232.0, // 2**65
+        -36893488147419103232.0 // 2**65
     };
     size_t nfloats = sizeof(floats)/sizeof(float);
     printf("We're printing floats!\n");
@@ -1964,8 +1967,8 @@ int main() {
     for (size_t i = 0; i < nfloats; i++) {
         float f = floats[i];
         union floatint fi = {.f=f};
-        printf("%12g %08x %s\n", f, fi.i, bitString(fi.i, 32));
-        printf("%12g %08x sign: %hhu exponent: %hhu exp-127: %d mantissa: %08x\n", 
+        printf("%12g 0x%08x 0b%s\n", f, fi.i, bitString(fi.i, 32));
+        printf("%12g 0x%08x sign: %hhu exponent: %3hhu exp-127: %4d mantissa: 0x%06x\n", 
                f,
                fi.i,
                fi.t.sign,
@@ -1974,7 +1977,7 @@ int main() {
                fi.t.mantissa
         );
         /* // We don't need bitfields
-        printf("%12g %08x sign: %hhu exponent: %hhu exp-127: %d mantissa: %08x\n", 
+        printf("%12g %08x sign: %hhu exponent: %hhu exp-127: %4d mantissa: 0x%06x\n", 
                f,
                fi.i,
                (fi.i >> 31),
@@ -1994,54 +1997,56 @@ int main() {
 We're printing floats!
 sizeof(floatint) == 4
 sizeof(float_t) == 4
-           0 00000000 00000000000000000000000000000000
-           0 00000000 sign: 0 exponent: 0 exp-127: -127 mantissa: 00000000
-          -0 80000000 10000000000000000000000000000000
-          -0 80000000 sign: 1 exponent: 0 exp-127: -127 mantissa: 00000000
-         inf 7f800000 01111111100000000000000000000000
-         inf 7f800000 sign: 0 exponent: 255 exp-127: 128 mantissa: 00000000
-        -inf ff800000 11111111100000000000000000000000
-        -inf ff800000 sign: 1 exponent: 255 exp-127: 128 mantissa: 00000000
-         nan 7fc00000 01111111110000000000000000000000
-         nan 7fc00000 sign: 0 exponent: 255 exp-127: 128 mantissa: 00400000
-       1e-05 3727c5ac 00110111001001111100010110101100
-       1e-05 3727c5ac sign: 0 exponent: 110 exp-127: -17 mantissa: 0027c5ac
-      0.0001 38d1b717 00111000110100011011011100010111
-      0.0001 38d1b717 sign: 0 exponent: 113 exp-127: -14 mantissa: 0051b717
-       0.001 3a83126f 00111010100000110001001001101111
-       0.001 3a83126f sign: 0 exponent: 117 exp-127: -10 mantissa: 0003126f
-        0.01 3c23d70a 00111100001000111101011100001010
-        0.01 3c23d70a sign: 0 exponent: 120 exp-127: -7 mantissa: 0023d70a
-         0.1 3dcccccd 00111101110011001100110011001101
-         0.1 3dcccccd sign: 0 exponent: 123 exp-127: -4 mantissa: 004ccccd
-           1 3f800000 00111111100000000000000000000000
-           1 3f800000 sign: 0 exponent: 127 exp-127: 0 mantissa: 00000000
-    0.015625 3c800000 00111100100000000000000000000000
-    0.015625 3c800000 sign: 0 exponent: 121 exp-127: -6 mantissa: 00000000
-     0.03125 3d000000 00111101000000000000000000000000
-     0.03125 3d000000 sign: 0 exponent: 122 exp-127: -5 mantissa: 00000000
-      0.0625 3d800000 00111101100000000000000000000000
-      0.0625 3d800000 sign: 0 exponent: 123 exp-127: -4 mantissa: 00000000
-       0.125 3e000000 00111110000000000000000000000000
-       0.125 3e000000 sign: 0 exponent: 124 exp-127: -3 mantissa: 00000000
-        0.25 3e800000 00111110100000000000000000000000
-        0.25 3e800000 sign: 0 exponent: 125 exp-127: -2 mantissa: 00000000
-         0.5 3f000000 00111111000000000000000000000000
-         0.5 3f000000 sign: 0 exponent: 126 exp-127: -1 mantissa: 00000000
-           1 3f800000 00111111100000000000000000000000
-           1 3f800000 sign: 0 exponent: 127 exp-127: 0 mantissa: 00000000
-           2 40000000 01000000000000000000000000000000
-           2 40000000 sign: 0 exponent: 128 exp-127: 1 mantissa: 00000000
-           4 40800000 01000000100000000000000000000000
-           4 40800000 sign: 0 exponent: 129 exp-127: 2 mantissa: 00000000
-         128 43000000 01000011000000000000000000000000
-         128 43000000 sign: 0 exponent: 134 exp-127: 7 mantissa: 00000000
-       65536 47800000 01000111100000000000000000000000
-       65536 47800000 sign: 0 exponent: 143 exp-127: 16 mantissa: 00000000
-     0.15625 3e200000 00111110001000000000000000000000
-     0.15625 3e200000 sign: 0 exponent: 124 exp-127: -3 mantissa: 00200000
- 3.68935e+19 60000000 01100000000000000000000000000000
- 3.68935e+19 60000000 sign: 0 exponent: 192 exp-127: 65 mantissa: 00000000
+           0 0x00000000 0b00000000000000000000000000000000
+           0 0x00000000 sign: 0 exponent:   0 exp-127: -127 mantissa: 0x000000
+          -0 0x80000000 0b10000000000000000000000000000000
+          -0 0x80000000 sign: 1 exponent:   0 exp-127: -127 mantissa: 0x000000
+         inf 0x7f800000 0b01111111100000000000000000000000
+         inf 0x7f800000 sign: 0 exponent: 255 exp-127:  128 mantissa: 0x000000
+        -inf 0xff800000 0b11111111100000000000000000000000
+        -inf 0xff800000 sign: 1 exponent: 255 exp-127:  128 mantissa: 0x000000
+         nan 0x7fc00000 0b01111111110000000000000000000000
+         nan 0x7fc00000 sign: 0 exponent: 255 exp-127:  128 mantissa: 0x400000
+       1e-05 0x3727c5ac 0b00110111001001111100010110101100
+       1e-05 0x3727c5ac sign: 0 exponent: 110 exp-127:  -17 mantissa: 0x27c5ac
+      0.0001 0x38d1b717 0b00111000110100011011011100010111
+      0.0001 0x38d1b717 sign: 0 exponent: 113 exp-127:  -14 mantissa: 0x51b717
+       0.001 0x3a83126f 0b00111010100000110001001001101111
+       0.001 0x3a83126f sign: 0 exponent: 117 exp-127:  -10 mantissa: 0x03126f
+        0.01 0x3c23d70a 0b00111100001000111101011100001010
+        0.01 0x3c23d70a sign: 0 exponent: 120 exp-127:   -7 mantissa: 0x23d70a
+         0.1 0x3dcccccd 0b00111101110011001100110011001101
+         0.1 0x3dcccccd sign: 0 exponent: 123 exp-127:   -4 mantissa: 0x4ccccd
+           1 0x3f800000 0b00111111100000000000000000000000
+           1 0x3f800000 sign: 0 exponent: 127 exp-127:    0 mantissa: 0x000000
+    0.015625 0x3c800000 0b00111100100000000000000000000000
+    0.015625 0x3c800000 sign: 0 exponent: 121 exp-127:   -6 mantissa: 0x000000
+     0.03125 0x3d000000 0b00111101000000000000000000000000
+     0.03125 0x3d000000 sign: 0 exponent: 122 exp-127:   -5 mantissa: 0x000000
+      0.0625 0x3d800000 0b00111101100000000000000000000000
+      0.0625 0x3d800000 sign: 0 exponent: 123 exp-127:   -4 mantissa: 0x000000
+       0.125 0x3e000000 0b00111110000000000000000000000000
+       0.125 0x3e000000 sign: 0 exponent: 124 exp-127:   -3 mantissa: 0x000000
+        0.25 0x3e800000 0b00111110100000000000000000000000
+        0.25 0x3e800000 sign: 0 exponent: 125 exp-127:   -2 mantissa: 0x000000
+         0.5 0x3f000000 0b00111111000000000000000000000000
+         0.5 0x3f000000 sign: 0 exponent: 126 exp-127:   -1 mantissa: 0x000000
+           1 0x3f800000 0b00111111100000000000000000000000
+           1 0x3f800000 sign: 0 exponent: 127 exp-127:    0 mantissa: 0x000000
+           2 0x40000000 0b01000000000000000000000000000000
+           2 0x40000000 sign: 0 exponent: 128 exp-127:    1 mantissa: 0x000000
+           4 0x40800000 0b01000000100000000000000000000000
+           4 0x40800000 sign: 0 exponent: 129 exp-127:    2 mantissa: 0x000000
+         128 0x43000000 0b01000011000000000000000000000000
+         128 0x43000000 sign: 0 exponent: 134 exp-127:    7 mantissa: 0x000000
+       65536 0x47800000 0b01000111100000000000000000000000
+       65536 0x47800000 sign: 0 exponent: 143 exp-127:   16 mantissa: 0x000000
+     0.15625 0x3e200000 0b00111110001000000000000000000000
+     0.15625 0x3e200000 sign: 0 exponent: 124 exp-127:   -3 mantissa: 0x200000
+    -0.15625 0xbe200000 0b10111110001000000000000000000000
+    -0.15625 0xbe200000 sign: 1 exponent: 124 exp-127:   -3 mantissa: 0x200000
+           0 0x00000000 0b00000000000000000000000000000000
+           0 0x00000000 sign: 0 exponent:   0 exp-127: -127 mantissa: 0x000000
 #+end_example
 
 *** How do I avoid typepunning?
