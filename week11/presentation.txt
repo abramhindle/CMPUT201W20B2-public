@@ -1530,7 +1530,7 @@ _________________
   |         printf("WARNING: Corn? REALLY?\n");
   |     }
   |     if (pizza == (CHEESE | THINCRUST) || pizza == (CHEESE | THICKCRUST)) {
-  |         printf("WARNING: SPAAAAAAAARTA, or spatarn.\n");
+  |         printf("WARNING: SPAAAAAAAARTA, or spartan.\n");
   |     }
   | }
   | int main() {
@@ -1552,6 +1552,18 @@ _________________
   |     pizza = CHEESE | THINCRUST;
   |     printPizza(pizza);
   |     violation(pizza);
+  |     // TOGGLE
+  |     printf("\n\nLet's use XOR to toggle flags!\n");
+  |     pizza = CHEESE | CORN | THINCRUST | THICKCRUST;
+  |     pizza = pizza ^ CORN; // NOPE
+  |     pizza = pizza ^ THINCRUST; // NOPE
+  |     printPizza(pizza);
+  |     violation(pizza);
+  |     pizza = pizza ^ CORN; // CORN IS BACK!
+  |     printPizza(pizza);
+  |     violation(pizza);
+  | 
+  | 
   | }
   | 
   `----
@@ -1721,7 +1733,14 @@ _________________
   | A pizza of cheese, thin crust, corn (srsly?), .
   | WARNING: Corn? REALLY?
   | A pizza of cheese, thin crust, .
-  | WARNING: SPAAAAAAAARTA, or spatarn.
+  | WARNING: SPAAAAAAAARTA, or spartan.
+  | 
+  | 
+  | Let's use XOR to toggle flags!
+  | A pizza of cheese, thick crust, .
+  | WARNING: SPAAAAAAAARTA, or spartan.
+  | A pizza of cheese, thick crust, corn (srsly?), .
+  | WARNING: Corn? REALLY?
   `----
 
 
