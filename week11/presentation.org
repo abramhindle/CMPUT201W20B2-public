@@ -1650,12 +1650,12 @@ WARNING: Corn? REALLY?
 A pizza of cheese, thin crust, corn (srsly?), .
 WARNING: Corn? REALLY?
 A pizza of cheese, thin crust, .
-WARNING: SPAAAAAAAARTA, or spatarn.
+WARNING: SPAAAAAAAARTA, or spartan.
 
 
 Let's use XOR to toggle flags!
 A pizza of cheese, thick crust, .
-WARNING: SPAAAAAAAARTA, or spatarn.
+WARNING: SPAAAAAAAARTA, or spartan.
 A pizza of cheese, thick crust, corn (srsly?), .
 WARNING: Corn? REALLY?
 #+end_example
@@ -1881,6 +1881,8 @@ Type: float
 |            0 |         11000000 |  65 | 00000000000000000000000 | 3.68e+19 | 2^65       |
 |            1 |         11111111 |   0 | 00000000000000000000000 |     -inf |            |
 |            0 |         11111111 |   0 | 00000000000000000000000 |      inf |            |
+|            0 |         11111111 |   0 | 10000000000000000000000 |      nan |            |
+|            0 |         11111111 |   0 | 00000000000000000000001 |      nan |            |
 
 - Neat design trick: you can sort them as signed integers (two's complement)!
 - -0 is right before 0 for signed integer sorting
@@ -1929,6 +1931,7 @@ int main() {
        -0.0,
         INFINITY,
        -INFINITY,
+        NAN,
         0.00001,
         0.0001,
         0.001,
@@ -1994,6 +1997,8 @@ sizeof(float_t) == 4
          inf 7f800000 sign: 0 exponent: 255 exp-127: 128 mantissa: 00000000
         -inf ff800000 11111111100000000000000000000000
         -inf ff800000 sign: 1 exponent: 255 exp-127: 128 mantissa: 00000000
+         nan 7fc00000 01111111110000000000000000000000
+         nan 7fc00000 sign: 0 exponent: 255 exp-127: 128 mantissa: 00400000
        1e-05 3727c5ac 00110111001001111100010110101100
        1e-05 3727c5ac sign: 0 exponent: 110 exp-127: -17 mantissa: 0027c5ac
       0.0001 38d1b717 00111000110100011011011100010111
