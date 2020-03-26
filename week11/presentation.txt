@@ -853,9 +853,12 @@ _________________
 
   0x00000001 & 0xFFFFFFFF = 0x1
 
-  if (0x10 & input) {
-
-  }
+  ,----
+  | // how to check a flag
+  | if (0x10 & input) {
+  | 
+  | }
+  `----
 
   ,----
   | #include <stdio.h>
@@ -1078,8 +1081,7 @@ _________________
 1.6.5 bitwise OR
 ----------------
 
-  The | operator is bitwise complement. It is the or operator between
-  bits.
+  The | operator is bitwise OR. It is the or operator between bits.
 
   The | operator is a binary operator.
 
@@ -1096,13 +1098,13 @@ _________________
   |     printf("ORing 1 bit\n");
   |     for (uint32_t i = 0 ; i < 32; i++) {
   |         uint32_t bit = (1 << i);
-  |         printf("0x%08x & 0x%08x = 0x%08x\n",
+  |         printf("0x%08x | 0x%08x = 0x%08x\n",
   |                pressF, bit,  pressF | bit);
   |     }
   |     pressF = 0x11111111;
   |     for (uint32_t i = 0 ; i < 32; i++) {
   |         uint32_t bit = (1 << i);
-  |         printf("0x%08x & 0x%08x = 0x%08x\n",
+  |         printf("0x%08x | 0x%08x = 0x%08x\n",
   |                pressF, bit,  pressF | bit);
   |     }
   | }
@@ -1110,70 +1112,70 @@ _________________
 
   ,----
   | ORing 1 bit
-  | 0xffffffff & 0x00000001 = 0xffffffff
-  | 0xffffffff & 0x00000002 = 0xffffffff
-  | 0xffffffff & 0x00000004 = 0xffffffff
-  | 0xffffffff & 0x00000008 = 0xffffffff
-  | 0xffffffff & 0x00000010 = 0xffffffff
-  | 0xffffffff & 0x00000020 = 0xffffffff
-  | 0xffffffff & 0x00000040 = 0xffffffff
-  | 0xffffffff & 0x00000080 = 0xffffffff
-  | 0xffffffff & 0x00000100 = 0xffffffff
-  | 0xffffffff & 0x00000200 = 0xffffffff
-  | 0xffffffff & 0x00000400 = 0xffffffff
-  | 0xffffffff & 0x00000800 = 0xffffffff
-  | 0xffffffff & 0x00001000 = 0xffffffff
-  | 0xffffffff & 0x00002000 = 0xffffffff
-  | 0xffffffff & 0x00004000 = 0xffffffff
-  | 0xffffffff & 0x00008000 = 0xffffffff
-  | 0xffffffff & 0x00010000 = 0xffffffff
-  | 0xffffffff & 0x00020000 = 0xffffffff
-  | 0xffffffff & 0x00040000 = 0xffffffff
-  | 0xffffffff & 0x00080000 = 0xffffffff
-  | 0xffffffff & 0x00100000 = 0xffffffff
-  | 0xffffffff & 0x00200000 = 0xffffffff
-  | 0xffffffff & 0x00400000 = 0xffffffff
-  | 0xffffffff & 0x00800000 = 0xffffffff
-  | 0xffffffff & 0x01000000 = 0xffffffff
-  | 0xffffffff & 0x02000000 = 0xffffffff
-  | 0xffffffff & 0x04000000 = 0xffffffff
-  | 0xffffffff & 0x08000000 = 0xffffffff
-  | 0xffffffff & 0x10000000 = 0xffffffff
-  | 0xffffffff & 0x20000000 = 0xffffffff
-  | 0xffffffff & 0x40000000 = 0xffffffff
-  | 0xffffffff & 0x80000000 = 0xffffffff
-  | 0x11111111 & 0x00000001 = 0x11111111
-  | 0x11111111 & 0x00000002 = 0x11111113
-  | 0x11111111 & 0x00000004 = 0x11111115
-  | 0x11111111 & 0x00000008 = 0x11111119
-  | 0x11111111 & 0x00000010 = 0x11111111
-  | 0x11111111 & 0x00000020 = 0x11111131
-  | 0x11111111 & 0x00000040 = 0x11111151
-  | 0x11111111 & 0x00000080 = 0x11111191
-  | 0x11111111 & 0x00000100 = 0x11111111
-  | 0x11111111 & 0x00000200 = 0x11111311
-  | 0x11111111 & 0x00000400 = 0x11111511
-  | 0x11111111 & 0x00000800 = 0x11111911
-  | 0x11111111 & 0x00001000 = 0x11111111
-  | 0x11111111 & 0x00002000 = 0x11113111
-  | 0x11111111 & 0x00004000 = 0x11115111
-  | 0x11111111 & 0x00008000 = 0x11119111
-  | 0x11111111 & 0x00010000 = 0x11111111
-  | 0x11111111 & 0x00020000 = 0x11131111
-  | 0x11111111 & 0x00040000 = 0x11151111
-  | 0x11111111 & 0x00080000 = 0x11191111
-  | 0x11111111 & 0x00100000 = 0x11111111
-  | 0x11111111 & 0x00200000 = 0x11311111
-  | 0x11111111 & 0x00400000 = 0x11511111
-  | 0x11111111 & 0x00800000 = 0x11911111
-  | 0x11111111 & 0x01000000 = 0x11111111
-  | 0x11111111 & 0x02000000 = 0x13111111
-  | 0x11111111 & 0x04000000 = 0x15111111
-  | 0x11111111 & 0x08000000 = 0x19111111
-  | 0x11111111 & 0x10000000 = 0x11111111
-  | 0x11111111 & 0x20000000 = 0x31111111
-  | 0x11111111 & 0x40000000 = 0x51111111
-  | 0x11111111 & 0x80000000 = 0x91111111
+  | 0xffffffff | 0x00000001 = 0xffffffff
+  | 0xffffffff | 0x00000002 = 0xffffffff
+  | 0xffffffff | 0x00000004 = 0xffffffff
+  | 0xffffffff | 0x00000008 = 0xffffffff
+  | 0xffffffff | 0x00000010 = 0xffffffff
+  | 0xffffffff | 0x00000020 = 0xffffffff
+  | 0xffffffff | 0x00000040 = 0xffffffff
+  | 0xffffffff | 0x00000080 = 0xffffffff
+  | 0xffffffff | 0x00000100 = 0xffffffff
+  | 0xffffffff | 0x00000200 = 0xffffffff
+  | 0xffffffff | 0x00000400 = 0xffffffff
+  | 0xffffffff | 0x00000800 = 0xffffffff
+  | 0xffffffff | 0x00001000 = 0xffffffff
+  | 0xffffffff | 0x00002000 = 0xffffffff
+  | 0xffffffff | 0x00004000 = 0xffffffff
+  | 0xffffffff | 0x00008000 = 0xffffffff
+  | 0xffffffff | 0x00010000 = 0xffffffff
+  | 0xffffffff | 0x00020000 = 0xffffffff
+  | 0xffffffff | 0x00040000 = 0xffffffff
+  | 0xffffffff | 0x00080000 = 0xffffffff
+  | 0xffffffff | 0x00100000 = 0xffffffff
+  | 0xffffffff | 0x00200000 = 0xffffffff
+  | 0xffffffff | 0x00400000 = 0xffffffff
+  | 0xffffffff | 0x00800000 = 0xffffffff
+  | 0xffffffff | 0x01000000 = 0xffffffff
+  | 0xffffffff | 0x02000000 = 0xffffffff
+  | 0xffffffff | 0x04000000 = 0xffffffff
+  | 0xffffffff | 0x08000000 = 0xffffffff
+  | 0xffffffff | 0x10000000 = 0xffffffff
+  | 0xffffffff | 0x20000000 = 0xffffffff
+  | 0xffffffff | 0x40000000 = 0xffffffff
+  | 0xffffffff | 0x80000000 = 0xffffffff
+  | 0x11111111 | 0x00000001 = 0x11111111
+  | 0x11111111 | 0x00000002 = 0x11111113
+  | 0x11111111 | 0x00000004 = 0x11111115
+  | 0x11111111 | 0x00000008 = 0x11111119
+  | 0x11111111 | 0x00000010 = 0x11111111
+  | 0x11111111 | 0x00000020 = 0x11111131
+  | 0x11111111 | 0x00000040 = 0x11111151
+  | 0x11111111 | 0x00000080 = 0x11111191
+  | 0x11111111 | 0x00000100 = 0x11111111
+  | 0x11111111 | 0x00000200 = 0x11111311
+  | 0x11111111 | 0x00000400 = 0x11111511
+  | 0x11111111 | 0x00000800 = 0x11111911
+  | 0x11111111 | 0x00001000 = 0x11111111
+  | 0x11111111 | 0x00002000 = 0x11113111
+  | 0x11111111 | 0x00004000 = 0x11115111
+  | 0x11111111 | 0x00008000 = 0x11119111
+  | 0x11111111 | 0x00010000 = 0x11111111
+  | 0x11111111 | 0x00020000 = 0x11131111
+  | 0x11111111 | 0x00040000 = 0x11151111
+  | 0x11111111 | 0x00080000 = 0x11191111
+  | 0x11111111 | 0x00100000 = 0x11111111
+  | 0x11111111 | 0x00200000 = 0x11311111
+  | 0x11111111 | 0x00400000 = 0x11511111
+  | 0x11111111 | 0x00800000 = 0x11911111
+  | 0x11111111 | 0x01000000 = 0x11111111
+  | 0x11111111 | 0x02000000 = 0x13111111
+  | 0x11111111 | 0x04000000 = 0x15111111
+  | 0x11111111 | 0x08000000 = 0x19111111
+  | 0x11111111 | 0x10000000 = 0x11111111
+  | 0x11111111 | 0x20000000 = 0x31111111
+  | 0x11111111 | 0x40000000 = 0x51111111
+  | 0x11111111 | 0x80000000 = 0x91111111
   `----
 
 
@@ -1204,13 +1206,13 @@ _________________
   |     printf("ORing 1 bit\n");
   |     for (uint32_t i = 0 ; i < 32; i++) {
   |         uint32_t bit = (1 << i);
-  |         printf("0x%08x & 0x%08x = 0x%08x\n",
+  |         printf("0x%08x ^ 0x%08x = 0x%08x\n",
   |                pressF, bit,  pressF ^ bit);
   |     }
   |     pressF = 0x11111111;
   |     for (uint32_t i = 0 ; i < 32; i++) {
   |         uint32_t bit = (1 << i);
-  |         printf("0x%08x & 0x%08x = 0x%08x\n",
+  |         printf("0x%08x ^ 0x%08x = 0x%08x\n",
   |                pressF, bit,  pressF ^ bit);
   |     }
   | }
@@ -1218,70 +1220,70 @@ _________________
 
   ,----
   | ORing 1 bit
-  | 0xffffffff & 0x00000001 = 0xfffffffe
-  | 0xffffffff & 0x00000002 = 0xfffffffd
-  | 0xffffffff & 0x00000004 = 0xfffffffb
-  | 0xffffffff & 0x00000008 = 0xfffffff7
-  | 0xffffffff & 0x00000010 = 0xffffffef
-  | 0xffffffff & 0x00000020 = 0xffffffdf
-  | 0xffffffff & 0x00000040 = 0xffffffbf
-  | 0xffffffff & 0x00000080 = 0xffffff7f
-  | 0xffffffff & 0x00000100 = 0xfffffeff
-  | 0xffffffff & 0x00000200 = 0xfffffdff
-  | 0xffffffff & 0x00000400 = 0xfffffbff
-  | 0xffffffff & 0x00000800 = 0xfffff7ff
-  | 0xffffffff & 0x00001000 = 0xffffefff
-  | 0xffffffff & 0x00002000 = 0xffffdfff
-  | 0xffffffff & 0x00004000 = 0xffffbfff
-  | 0xffffffff & 0x00008000 = 0xffff7fff
-  | 0xffffffff & 0x00010000 = 0xfffeffff
-  | 0xffffffff & 0x00020000 = 0xfffdffff
-  | 0xffffffff & 0x00040000 = 0xfffbffff
-  | 0xffffffff & 0x00080000 = 0xfff7ffff
-  | 0xffffffff & 0x00100000 = 0xffefffff
-  | 0xffffffff & 0x00200000 = 0xffdfffff
-  | 0xffffffff & 0x00400000 = 0xffbfffff
-  | 0xffffffff & 0x00800000 = 0xff7fffff
-  | 0xffffffff & 0x01000000 = 0xfeffffff
-  | 0xffffffff & 0x02000000 = 0xfdffffff
-  | 0xffffffff & 0x04000000 = 0xfbffffff
-  | 0xffffffff & 0x08000000 = 0xf7ffffff
-  | 0xffffffff & 0x10000000 = 0xefffffff
-  | 0xffffffff & 0x20000000 = 0xdfffffff
-  | 0xffffffff & 0x40000000 = 0xbfffffff
-  | 0xffffffff & 0x80000000 = 0x7fffffff
-  | 0x11111111 & 0x00000001 = 0x11111110
-  | 0x11111111 & 0x00000002 = 0x11111113
-  | 0x11111111 & 0x00000004 = 0x11111115
-  | 0x11111111 & 0x00000008 = 0x11111119
-  | 0x11111111 & 0x00000010 = 0x11111101
-  | 0x11111111 & 0x00000020 = 0x11111131
-  | 0x11111111 & 0x00000040 = 0x11111151
-  | 0x11111111 & 0x00000080 = 0x11111191
-  | 0x11111111 & 0x00000100 = 0x11111011
-  | 0x11111111 & 0x00000200 = 0x11111311
-  | 0x11111111 & 0x00000400 = 0x11111511
-  | 0x11111111 & 0x00000800 = 0x11111911
-  | 0x11111111 & 0x00001000 = 0x11110111
-  | 0x11111111 & 0x00002000 = 0x11113111
-  | 0x11111111 & 0x00004000 = 0x11115111
-  | 0x11111111 & 0x00008000 = 0x11119111
-  | 0x11111111 & 0x00010000 = 0x11101111
-  | 0x11111111 & 0x00020000 = 0x11131111
-  | 0x11111111 & 0x00040000 = 0x11151111
-  | 0x11111111 & 0x00080000 = 0x11191111
-  | 0x11111111 & 0x00100000 = 0x11011111
-  | 0x11111111 & 0x00200000 = 0x11311111
-  | 0x11111111 & 0x00400000 = 0x11511111
-  | 0x11111111 & 0x00800000 = 0x11911111
-  | 0x11111111 & 0x01000000 = 0x10111111
-  | 0x11111111 & 0x02000000 = 0x13111111
-  | 0x11111111 & 0x04000000 = 0x15111111
-  | 0x11111111 & 0x08000000 = 0x19111111
-  | 0x11111111 & 0x10000000 = 0x01111111
-  | 0x11111111 & 0x20000000 = 0x31111111
-  | 0x11111111 & 0x40000000 = 0x51111111
-  | 0x11111111 & 0x80000000 = 0x91111111
+  | 0xffffffff ^ 0x00000001 = 0xfffffffe
+  | 0xffffffff ^ 0x00000002 = 0xfffffffd
+  | 0xffffffff ^ 0x00000004 = 0xfffffffb
+  | 0xffffffff ^ 0x00000008 = 0xfffffff7
+  | 0xffffffff ^ 0x00000010 = 0xffffffef
+  | 0xffffffff ^ 0x00000020 = 0xffffffdf
+  | 0xffffffff ^ 0x00000040 = 0xffffffbf
+  | 0xffffffff ^ 0x00000080 = 0xffffff7f
+  | 0xffffffff ^ 0x00000100 = 0xfffffeff
+  | 0xffffffff ^ 0x00000200 = 0xfffffdff
+  | 0xffffffff ^ 0x00000400 = 0xfffffbff
+  | 0xffffffff ^ 0x00000800 = 0xfffff7ff
+  | 0xffffffff ^ 0x00001000 = 0xffffefff
+  | 0xffffffff ^ 0x00002000 = 0xffffdfff
+  | 0xffffffff ^ 0x00004000 = 0xffffbfff
+  | 0xffffffff ^ 0x00008000 = 0xffff7fff
+  | 0xffffffff ^ 0x00010000 = 0xfffeffff
+  | 0xffffffff ^ 0x00020000 = 0xfffdffff
+  | 0xffffffff ^ 0x00040000 = 0xfffbffff
+  | 0xffffffff ^ 0x00080000 = 0xfff7ffff
+  | 0xffffffff ^ 0x00100000 = 0xffefffff
+  | 0xffffffff ^ 0x00200000 = 0xffdfffff
+  | 0xffffffff ^ 0x00400000 = 0xffbfffff
+  | 0xffffffff ^ 0x00800000 = 0xff7fffff
+  | 0xffffffff ^ 0x01000000 = 0xfeffffff
+  | 0xffffffff ^ 0x02000000 = 0xfdffffff
+  | 0xffffffff ^ 0x04000000 = 0xfbffffff
+  | 0xffffffff ^ 0x08000000 = 0xf7ffffff
+  | 0xffffffff ^ 0x10000000 = 0xefffffff
+  | 0xffffffff ^ 0x20000000 = 0xdfffffff
+  | 0xffffffff ^ 0x40000000 = 0xbfffffff
+  | 0xffffffff ^ 0x80000000 = 0x7fffffff
+  | 0x11111111 ^ 0x00000001 = 0x11111110
+  | 0x11111111 ^ 0x00000002 = 0x11111113
+  | 0x11111111 ^ 0x00000004 = 0x11111115
+  | 0x11111111 ^ 0x00000008 = 0x11111119
+  | 0x11111111 ^ 0x00000010 = 0x11111101
+  | 0x11111111 ^ 0x00000020 = 0x11111131
+  | 0x11111111 ^ 0x00000040 = 0x11111151
+  | 0x11111111 ^ 0x00000080 = 0x11111191
+  | 0x11111111 ^ 0x00000100 = 0x11111011
+  | 0x11111111 ^ 0x00000200 = 0x11111311
+  | 0x11111111 ^ 0x00000400 = 0x11111511
+  | 0x11111111 ^ 0x00000800 = 0x11111911
+  | 0x11111111 ^ 0x00001000 = 0x11110111
+  | 0x11111111 ^ 0x00002000 = 0x11113111
+  | 0x11111111 ^ 0x00004000 = 0x11115111
+  | 0x11111111 ^ 0x00008000 = 0x11119111
+  | 0x11111111 ^ 0x00010000 = 0x11101111
+  | 0x11111111 ^ 0x00020000 = 0x11131111
+  | 0x11111111 ^ 0x00040000 = 0x11151111
+  | 0x11111111 ^ 0x00080000 = 0x11191111
+  | 0x11111111 ^ 0x00100000 = 0x11011111
+  | 0x11111111 ^ 0x00200000 = 0x11311111
+  | 0x11111111 ^ 0x00400000 = 0x11511111
+  | 0x11111111 ^ 0x00800000 = 0x11911111
+  | 0x11111111 ^ 0x01000000 = 0x10111111
+  | 0x11111111 ^ 0x02000000 = 0x13111111
+  | 0x11111111 ^ 0x04000000 = 0x15111111
+  | 0x11111111 ^ 0x08000000 = 0x19111111
+  | 0x11111111 ^ 0x10000000 = 0x01111111
+  | 0x11111111 ^ 0x20000000 = 0x31111111
+  | 0x11111111 ^ 0x40000000 = 0x51111111
+  | 0x11111111 ^ 0x80000000 = 0x91111111
   `----
 
 
@@ -1290,6 +1292,12 @@ _________________
   XOR has interesting properties .
 
   a ^ b ^ a = b
+
+  a ^ b != b for most values
+
+  (a ^ b) ^ a = b
+
+  (a ^ b) ^ b = a
 
   So if we send a message of a^b we can decode the message of (a^b)^b
 
@@ -1451,11 +1459,15 @@ _________________
   | 
   | open("~/.bashrc", O_RDONLY); // open ~/.bashrc for read only access
   | open("/tmp/map.txt", O_WRONLY | O_CREATE); // open /tmp/map.txt to write to it
+  | // 00000101
   | open("./log.txt", O_WRONLY | O_CREATE | O_APPEND); // open ./map.txt to write to it or append to it
-  | 
+  | // 00002101
   | // So 
   | O_WRONLY | O_CREATE            == 00000101 (00000001 | 00000100)
   | O_WRONLY | O_CREATE | O_APPEND == 00002101 (00000001 | 00000100 | 00002000)
+  | if (00002101 & O_CREATE) {
+  |     printf("O_CREATE is set!\n");
+  | }
   | // Question wht number format are they using to define these flags?
   `----
 
@@ -1464,7 +1476,7 @@ _________________
 
   warning: flags should only be unsigned integers
 
-  warning: flags must be not 0
+  warning: flags should be not 0
 
 
 * 1.6.8.1 Expected Flag use:
@@ -1477,7 +1489,7 @@ _________________
 
   To check for FLAG1 and FLAG2 being hot you should:
 
-  `if (input & FLAG1 && input & FLAG2) `
+  `if ((input & FLAG1) && (input & FLAG2)) `
 
   or
 
@@ -1485,7 +1497,8 @@ _________________
 
   It's very convoluted so don't get too complicated
 
-  This is a bug: `if (input & (FLAG1 | FLAG2))`
+  This is a bug: ` // actually checks if FLAG1 or FLAG2 is set (FLAG1,
+  FLAG2, FLAG1|FLAG2) if (input & (FLAG1 | FLAG2))`
 
   It actually just checks if you have either FLAG1 or FLAG2.
 
@@ -1494,6 +1507,191 @@ _________________
 
   Hazel talks in depth about pizza
   - <https://docs.google.com/document/d/1S-I-OthHf0mgNZXnTSOvyx5lSduQwsbHYMmVPLtTl1Y/edit>#
+
+  ,----
+  | OK build some pizza using |
+  | 
+  | 
+  | A pizza of cheese, corn (srsly?), .
+  | A pizza of cheese, thin crust, black metal sauce, corn (srsly?), exotic meats, .
+  | 
+  | 
+  | OK build some pizza via iteration
+  | 
+  | 
+  | A pizza of .
+  | A pizza of cheese, .
+  | A pizza of thin crust, .
+  | A pizza of cheese, thin crust, .
+  | A pizza of thick crust, .
+  | A pizza of cheese, thick crust, .
+  | A pizza of thin crust, thick crust, .
+  | A pizza of cheese, thin crust, thick crust, .
+  | A pizza of tomato sauce, .
+  | A pizza of cheese, tomato sauce, .
+  | A pizza of thin crust, tomato sauce, .
+  | A pizza of cheese, thin crust, tomato sauce, .
+  | A pizza of thick crust, tomato sauce, .
+  | A pizza of cheese, thick crust, tomato sauce, .
+  | A pizza of thin crust, thick crust, tomato sauce, .
+  | A pizza of cheese, thin crust, thick crust, tomato sauce, .
+  | A pizza of black metal sauce, .
+  | A pizza of cheese, black metal sauce, .
+  | A pizza of thin crust, black metal sauce, .
+  | A pizza of cheese, thin crust, black metal sauce, .
+  | A pizza of thick crust, black metal sauce, .
+  | A pizza of cheese, thick crust, black metal sauce, .
+  | A pizza of thin crust, thick crust, black metal sauce, .
+  | A pizza of cheese, thin crust, thick crust, black metal sauce, .
+  | A pizza of tomato sauce, black metal sauce, .
+  | A pizza of cheese, tomato sauce, black metal sauce, .
+  | A pizza of thin crust, tomato sauce, black metal sauce, .
+  | A pizza of cheese, thin crust, tomato sauce, black metal sauce, .
+  | A pizza of thick crust, tomato sauce, black metal sauce, .
+  | A pizza of cheese, thick crust, tomato sauce, black metal sauce, .
+  | A pizza of thin crust, thick crust, tomato sauce, black metal sauce, .
+  | A pizza of cheese, thin crust, thick crust, tomato sauce, black metal sauce, .
+  | A pizza of corn (srsly?), .
+  | A pizza of cheese, corn (srsly?), .
+  | A pizza of thin crust, corn (srsly?), .
+  | A pizza of cheese, thin crust, corn (srsly?), .
+  | A pizza of thick crust, corn (srsly?), .
+  | A pizza of cheese, thick crust, corn (srsly?), .
+  | A pizza of thin crust, thick crust, corn (srsly?), .
+  | A pizza of cheese, thin crust, thick crust, corn (srsly?), .
+  | A pizza of tomato sauce, corn (srsly?), .
+  | A pizza of cheese, tomato sauce, corn (srsly?), .
+  | A pizza of thin crust, tomato sauce, corn (srsly?), .
+  | A pizza of cheese, thin crust, tomato sauce, corn (srsly?), .
+  | A pizza of thick crust, tomato sauce, corn (srsly?), .
+  | A pizza of cheese, thick crust, tomato sauce, corn (srsly?), .
+  | A pizza of thin crust, thick crust, tomato sauce, corn (srsly?), .
+  | A pizza of cheese, thin crust, thick crust, tomato sauce, corn (srsly?), .
+  | A pizza of black metal sauce, corn (srsly?), .
+  | A pizza of cheese, black metal sauce, corn (srsly?), .
+  | A pizza of thin crust, black metal sauce, corn (srsly?), .
+  | A pizza of cheese, thin crust, black metal sauce, corn (srsly?), .
+  | A pizza of thick crust, black metal sauce, corn (srsly?), .
+  | A pizza of cheese, thick crust, black metal sauce, corn (srsly?), .
+  | A pizza of thin crust, thick crust, black metal sauce, corn (srsly?), .
+  | A pizza of cheese, thin crust, thick crust, black metal sauce, corn (srsly?), .
+  | A pizza of tomato sauce, black metal sauce, corn (srsly?), .
+  | A pizza of cheese, tomato sauce, black metal sauce, corn (srsly?), .
+  | A pizza of thin crust, tomato sauce, black metal sauce, corn (srsly?), .
+  | A pizza of cheese, thin crust, tomato sauce, black metal sauce, corn (srsly?), .
+  | A pizza of thick crust, tomato sauce, black metal sauce, corn (srsly?), .
+  | A pizza of cheese, thick crust, tomato sauce, black metal sauce, corn (srsly?), .
+  | A pizza of thin crust, thick crust, tomato sauce, black metal sauce, corn (srsly?), .
+  | A pizza of cheese, thin crust, thick crust, tomato sauce, black metal sauce, corn (srsly?), .
+  | A pizza of onions, .
+  | A pizza of cheese, onions, .
+  | A pizza of thin crust, onions, .
+  | A pizza of cheese, thin crust, onions, .
+  | A pizza of thick crust, onions, .
+  | A pizza of cheese, thick crust, onions, .
+  | A pizza of thin crust, thick crust, onions, .
+  | A pizza of cheese, thin crust, thick crust, onions, .
+  | A pizza of tomato sauce, onions, .
+  | A pizza of cheese, tomato sauce, onions, .
+  | A pizza of thin crust, tomato sauce, onions, .
+  | A pizza of cheese, thin crust, tomato sauce, onions, .
+  | A pizza of thick crust, tomato sauce, onions, .
+  | A pizza of cheese, thick crust, tomato sauce, onions, .
+  | A pizza of thin crust, thick crust, tomato sauce, onions, .
+  | A pizza of cheese, thin crust, thick crust, tomato sauce, onions, .
+  | A pizza of black metal sauce, onions, .
+  | A pizza of cheese, black metal sauce, onions, .
+  | A pizza of thin crust, black metal sauce, onions, .
+  | A pizza of cheese, thin crust, black metal sauce, onions, .
+  | A pizza of thick crust, black metal sauce, onions, .
+  | A pizza of cheese, thick crust, black metal sauce, onions, .
+  | A pizza of thin crust, thick crust, black metal sauce, onions, .
+  | A pizza of cheese, thin crust, thick crust, black metal sauce, onions, .
+  | A pizza of tomato sauce, black metal sauce, onions, .
+  | A pizza of cheese, tomato sauce, black metal sauce, onions, .
+  | A pizza of thin crust, tomato sauce, black metal sauce, onions, .
+  | A pizza of cheese, thin crust, tomato sauce, black metal sauce, onions, .
+  | A pizza of thick crust, tomato sauce, black metal sauce, onions, .
+  | A pizza of cheese, thick crust, tomato sauce, black metal sauce, onions, .
+  | A pizza of thin crust, thick crust, tomato sauce, black metal sauce, onions, .
+  | A pizza of cheese, thin crust, thick crust, tomato sauce, black metal sauce, onions, .
+  | A pizza of corn (srsly?), onions, .
+  | A pizza of cheese, corn (srsly?), onions, .
+  | A pizza of thin crust, corn (srsly?), onions, .
+  | A pizza of cheese, thin crust, corn (srsly?), onions, .
+  | A pizza of thick crust, corn (srsly?), onions, .
+  | A pizza of cheese, thick crust, corn (srsly?), onions, .
+  | A pizza of thin crust, thick crust, corn (srsly?), onions, .
+  | A pizza of cheese, thin crust, thick crust, corn (srsly?), onions, .
+  | A pizza of tomato sauce, corn (srsly?), onions, .
+  | A pizza of cheese, tomato sauce, corn (srsly?), onions, .
+  | A pizza of thin crust, tomato sauce, corn (srsly?), onions, .
+  | A pizza of cheese, thin crust, tomato sauce, corn (srsly?), onions, .
+  | A pizza of thick crust, tomato sauce, corn (srsly?), onions, .
+  | A pizza of cheese, thick crust, tomato sauce, corn (srsly?), onions, .
+  | A pizza of thin crust, thick crust, tomato sauce, corn (srsly?), onions, .
+  | A pizza of cheese, thin crust, thick crust, tomato sauce, corn (srsly?), onions, .
+  | A pizza of black metal sauce, corn (srsly?), onions, .
+  | A pizza of cheese, black metal sauce, corn (srsly?), onions, .
+  | A pizza of thin crust, black metal sauce, corn (srsly?), onions, .
+  | A pizza of cheese, thin crust, black metal sauce, corn (srsly?), onions, .
+  | A pizza of thick crust, black metal sauce, corn (srsly?), onions, .
+  | A pizza of cheese, thick crust, black metal sauce, corn (srsly?), onions, .
+  | A pizza of thin crust, thick crust, black metal sauce, corn (srsly?), onions, .
+  | A pizza of cheese, thin crust, thick crust, black metal sauce, corn (srsly?), onions, .
+  | A pizza of tomato sauce, black metal sauce, corn (srsly?), onions, .
+  | A pizza of cheese, tomato sauce, black metal sauce, corn (srsly?), onions, .
+  | A pizza of thin crust, tomato sauce, black metal sauce, corn (srsly?), onions, .
+  | A pizza of cheese, thin crust, tomato sauce, black metal sauce, corn (srsly?), onions, .
+  | A pizza of thick crust, tomato sauce, black metal sauce, corn (srsly?), onions, .
+  | A pizza of cheese, thick crust, tomato sauce, black metal sauce, corn (srsly?), onions, .
+  | A pizza of thin crust, thick crust, tomato sauce, black metal sauce, corn (srsly?), onions, .
+  | A pizza of cheese, thin crust, thick crust, tomato sauce, black metal sauce, corn (srsly?), onions, .
+  | A pizza of exotic meats, .
+  | A pizza of cheese, exotic meats, .
+  | A pizza of thin crust, exotic meats, .
+  | A pizza of cheese, thin crust, exotic meats, .
+  | A pizza of thick crust, exotic meats, .
+  | A pizza of cheese, thick crust, exotic meats, .
+  | A pizza of thin crust, thick crust, exotic meats, .
+  | A pizza of cheese, thin crust, thick crust, exotic meats, .
+  | A pizza of tomato sauce, exotic meats, .
+  | A pizza of cheese, tomato sauce, exotic meats, .
+  | A pizza of thin crust, tomato sauce, exotic meats, .
+  | A pizza of cheese, thin crust, tomato sauce, exotic meats, .
+  | A pizza of thick crust, tomato sauce, exotic meats, .
+  | A pizza of cheese, thick crust, tomato sauce, exotic meats, .
+  | A pizza of thin crust, thick crust, tomato sauce, exotic meats, .
+  | 
+  | 
+  | OK check some pizzas yo
+  | 
+  | 
+  | A pizza of cheese, thin crust, thick crust, corn (srsly?), .
+  | WARNING: Impossible to make a thin / thick crust pizza!
+  | WARNING: Corn? REALLY?
+  | A pizza of cheese, thin crust, corn (srsly?), .
+  | WARNING: Corn? REALLY?
+  | A pizza of cheese, thin crust, .
+  | WARNING: SPAAAAAAAARTA, or spartan.
+  | 
+  | 
+  | Let's use XOR to toggle flags!
+  | A pizza of cheese, thick crust, .
+  | WARNING: SPAAAAAAAARTA, or spartan.
+  | A pizza of cheese, thick crust, corn (srsly?), .
+  | WARNING: Corn? REALLY?
+  | A pizza of cheese, thick crust, .
+  | WARNING: SPAAAAAAAARTA, or spartan.
+  | A pizza of cheese, thick crust, corn (srsly?), .
+  | WARNING: Corn? REALLY?
+  | A pizza of cheese, thick crust, .
+  | WARNING: SPAAAAAAAARTA, or spartan.
+  | A pizza of cheese, thick crust, corn (srsly?), .
+  | WARNING: Corn? REALLY?
+  | A pizza of cheese, thick crust, .
+  | WARNING: SPAAAAAAAARTA, or spartan.
+  `----
 
   ,----
   | #include <inttypes.h>
@@ -1528,8 +1726,13 @@ _________________
   | }
   | void violation(PizzaFlags pizza) {
   |     // Not all pizzas are created equal
+  |     // if (pizza & (THINCRUST | THICKCRUST)) {
   |     if (pizza & THINCRUST && pizza & THICKCRUST) {
   |         printf("WARNING: Impossible to make a thin / thick crust pizza!\n");
+  |     }
+  |     // if (! (pizza & THINCRUST ) && ! (pizza & THICKCURST)  ) {
+  |     if (! (pizza & (THINCRUST | THICKCRUST))) {
+  |         printf("WARNING: No Crust???\n");
   |     }
   |     if (pizza & CORN) {
   |         printf("WARNING: Corn? REALLY?\n");
@@ -1557,6 +1760,7 @@ _________________
   |     pizza = CHEESE | THINCRUST;
   |     printPizza(pizza);
   |     violation(pizza);
+  | 
   |     // TOGGLE
   |     printf("\n\nLet's use XOR to toggle flags!\n");
   |     pizza = CHEESE | CORN | THINCRUST | THICKCRUST;
@@ -1567,6 +1771,11 @@ _________________
   |     pizza = pizza ^ CORN; // CORN IS BACK!
   |     printPizza(pizza);
   |     violation(pizza);
+  |     for (int i = 0 ; i < 5; i++) {
+  |        pizza = pizza ^ CORN; // CORN IS BACK!
+  |        printPizza(pizza);
+  |        violation(pizza);
+  |     }
   | 
   | 
   | }
@@ -1746,6 +1955,16 @@ _________________
   | WARNING: SPAAAAAAAARTA, or spartan.
   | A pizza of cheese, thick crust, corn (srsly?), .
   | WARNING: Corn? REALLY?
+  | A pizza of cheese, thick crust, .
+  | WARNING: SPAAAAAAAARTA, or spartan.
+  | A pizza of cheese, thick crust, corn (srsly?), .
+  | WARNING: Corn? REALLY?
+  | A pizza of cheese, thick crust, .
+  | WARNING: SPAAAAAAAARTA, or spartan.
+  | A pizza of cheese, thick crust, corn (srsly?), .
+  | WARNING: Corn? REALLY?
+  | A pizza of cheese, thick crust, .
+  | WARNING: SPAAAAAAAARTA, or spartan.
   `----
 
 
@@ -1775,14 +1994,20 @@ _________________
   |     unsigned int b2:  4;
   |     unsigned int b3:  8;
   |     unsigned int b4: 16;
-  |     unsigned int b5:  1;
-  |     //unsigned int b6: 1;
+  |     //unsigned int b5:  1;
+  |     //unsigned int b6: 32;
   | };
   | 
   | int main() {
-  |     struct bitfield b = { 0, 3, 12, 242, 65000 };
+  |     struct bitfield b = { 0, 3, 12, 242, 65000};
+  |     union bex {
+  |         unsigned int i;
+  |         struct bitfield b;
+  |     } bi;
+  |     bi.b = b;
   |     printf("%hhu %hhu %hhu %hhu %hu\n", b.b0, b.b1, b.b2, b.b3, b.b4);
   |     printf("size: %lu\n", sizeof(b));
+  |     printf("%08x\n", bi.i);
   | }
   | 
   `----
@@ -1790,7 +2015,13 @@ _________________
   ,----
   | 0 3 12 242 65000
   | size: 4
+  | 7ef47966
   `----
+
+
+  111 100 10 (b3)(745) [1 100(b2)](54) [11 (b1) 0 (b0)]6
+
+  1111 F 2 242
 
 
 * 1.6.10.1 Chmod example

@@ -1,4 +1,4 @@
-% Created 2020-03-26 Thu 11:38
+% Created 2020-03-26 Thu 14:12
 % Intended LaTeX compiler: pdflatex
 \documentclass[11pt]{article}
 \usepackage[utf8]{inputenc}
@@ -31,10 +31,10 @@
 
 
 \section{Week11}
-\label{sec:orge176552}
+\label{sec:orgb5764f6}
 \url{https://github.com/abramhindle/CMPUT201W20B2-public/tree/master/week11}
 \subsection{Copyright Statement}
-\label{sec:org207b83d}
+\label{sec:org0a37868}
 
 If you are in CMPUT201 at UAlberta this code is released in the public
 domain to you.
@@ -42,7 +42,7 @@ domain to you.
 Otherwise it is (c) 2020 Abram Hindle, Hazel Campbell AGPL3.0+
 
 \subsubsection{License}
-\label{sec:org4e4440b}
+\label{sec:orgedfd86d}
 
 CMPUT 201 C Notes
 Copyright (C) 2020 Abram Hindle, Hazel Campbell
@@ -62,7 +62,7 @@ along with this program.  If not, see \url{https://www.gnu.org/licenses/}.
 
 
 \subsubsection{Hazel Code is licensed under AGPL3.0+}
-\label{sec:org2631f53}
+\label{sec:org77e7064}
 
 Hazel's code is also found here
 \url{https://github.com/hazelybell/examples/tree/C-2020-01}
@@ -71,12 +71,12 @@ Hazel code is licensed: The example code is licensed under the AGPL3+
 license, unless otherwise noted.
 
 \subsection{Alternative version}
-\label{sec:org68a02ec}
+\label{sec:org0d97bb3}
 
 Checkout the .txt, the .pdf, and the .html version
 
 \subsection{Init ORG-MODE}
-\label{sec:orgbdce2e6}
+\label{sec:org7329cf9}
 
 \begin{verbatim}
 ;; I need this for org-mode to work well
@@ -98,7 +98,7 @@ Checkout the .txt, the .pdf, and the .html version
 \end{verbatim}
 
 \subsubsection{Org export}
-\label{sec:org90f881c}
+\label{sec:org1a1e17d}
 \begin{verbatim}
 (org-html-export-to-html)
 (org-latex-export-to-pdf)
@@ -107,7 +107,7 @@ Checkout the .txt, the .pdf, and the .html version
 
 
 \subsubsection{Org Template}
-\label{sec:org0630c01}
+\label{sec:org95de8da}
 Copy and paste this to demo C
 
 \begin{verbatim}
@@ -119,12 +119,12 @@ int main(int argc, char**argv) {
 \end{verbatim}
 
 \subsection{Remember how to compile?}
-\label{sec:org7f4de8a}
+\label{sec:orgd325d19}
 
 gcc  -std=c99 -pedantic -Wall -Wextra -ftrapv -ggdb3 -o programname programname.c
 
 \subsection{Numbers!}
-\label{sec:org8379951}
+\label{sec:orgc211417}
 
 Computers love powers of 2 because we calculate everything via bits.
 
@@ -150,7 +150,7 @@ Bases used on computers:
 \end{itemize}
 
 \subsubsection{Binary}
-\label{sec:org5a27fe8}
+\label{sec:org598e1e1}
 
 \begin{verbatim}
 Base 2: powers of 2
@@ -169,7 +169,7 @@ Digits: 0,1
 \end{verbatim}
 
 \subsubsection{Octal}
-\label{sec:org1871876}
+\label{sec:orgda03c76}
 
 \begin{verbatim}
 #include <stdio.h>
@@ -208,7 +208,7 @@ Digits: 0,1,2,3,4,5,6,7
 \end{verbatim}
 
 \subsubsection{Base10 Review}
-\label{sec:orgc8ce988}
+\label{sec:orgae768cb}
 \begin{verbatim}
 Base 10: power of 10
 
@@ -228,7 +228,7 @@ Base 10: power of 10
 \end{verbatim}
 
 \subsubsection{Hex Review}
-\label{sec:org8886840}
+\label{sec:org4db9c96}
 
 \begin{verbatim}
 Base 16: power of 16
@@ -265,7 +265,7 @@ Digit Lookup
 \end{verbatim}
 
 \subsection{Bitwise Operators}
-\label{sec:org98bf389}
+\label{sec:orgf2f5783}
 
 Bitwise operators operate at the bit-level for variables such as integers.
 
@@ -276,7 +276,7 @@ Also be aware that structs have padding so you might get unexpected
 results.
 
 \subsubsection{Left Shift}
-\label{sec:org90e2a76}
+\label{sec:orgfda69d1}
 
 0b000001 << 1 = 0b000010
 0b000001 << 2 = 0b000100
@@ -511,7 +511,7 @@ int main() {
 
 
 \subsubsection{Right Shift}
-\label{sec:org9e33bcb}
+\label{sec:orgaff779d}
 
 Integer Division by 2. Shifts bits to the right. Do not use negative values.
 
@@ -740,7 +740,7 @@ int main() {
 \end{verbatim}
 
 \subsubsection{Could we access the bits with shifts?}
-\label{sec:org4170d99}
+\label{sec:orgd5f1224}
 
 \begin{verbatim}
 #include <stdio.h>
@@ -764,7 +764,7 @@ u32: 11111111011101110000101010111110
 
 \begin{enumerate}
 \item Bitprinter.h
-\label{sec:org5b5ffeb}
+\label{sec:orgd72545b}
 \begin{verbatim}
 #ifndef _BITPRINTER_H_
 #define _BITPRINTER_H_
@@ -798,7 +798,7 @@ static char * bitString8(uint8_t value) {
 \end{enumerate}
 
 \subsubsection{bitwise and}
-\label{sec:org217ccc6}
+\label{sec:orgf9bdebe}
 
 The \& operator is bitwise complement. It means every bit of an integer
 is and'd. 
@@ -820,9 +820,12 @@ The \& operator is a binary operator.
 
 0x00000001 \& 0xFFFFFFFF = 0x1
 
-if (0x10 \& input) \{
+\begin{verbatim}
+// how to check a flag
+if (0x10 & input) {
 
-\}
+}
+\end{verbatim}
 
 \begin{verbatim}
 #include <stdio.h>
@@ -914,11 +917,11 @@ ffffffff & 80000000 = 80000000
 
 \begin{enumerate}
 \item Uses of \&
-\label{sec:org8126ad6}
+\label{sec:orgbfdec69}
 
 \begin{enumerate}
 \item Checking for bits
-\label{sec:org8048fb9}
+\label{sec:orgf7e20fa}
 \begin{verbatim}
 #include <inttypes.h>
 #include <stdio.h>
@@ -968,7 +971,7 @@ Lets see some bits!
 
 
 \item Bit Printing
-\label{sec:org4360520}
+\label{sec:orgda8443e}
 
 \& is way safer than shift for bit printing.
 
@@ -1050,9 +1053,9 @@ Interesting[0] & Interesting[1]
 
 
 \subsubsection{bitwise OR}
-\label{sec:org4ba8f85}
+\label{sec:org5916f83}
 
-The | operator is bitwise complement. It is the or operator between
+The | operator is bitwise OR. It is the or operator between
 bits. 
 
 The | operator is a binary operator.
@@ -1072,13 +1075,13 @@ int main() {
     printf("ORing 1 bit\n");
     for (uint32_t i = 0 ; i < 32; i++) {
         uint32_t bit = (1 << i);
-        printf("0x%08x & 0x%08x = 0x%08x\n",
+        printf("0x%08x | 0x%08x = 0x%08x\n",
                pressF, bit,  pressF | bit);
     }
     pressF = 0x11111111;
     for (uint32_t i = 0 ; i < 32; i++) {
         uint32_t bit = (1 << i);
-        printf("0x%08x & 0x%08x = 0x%08x\n",
+        printf("0x%08x | 0x%08x = 0x%08x\n",
                pressF, bit,  pressF | bit);
     }
 }
@@ -1086,81 +1089,81 @@ int main() {
 
 \begin{verbatim}
 ORing 1 bit
-0xffffffff & 0x00000001 = 0xffffffff
-0xffffffff & 0x00000002 = 0xffffffff
-0xffffffff & 0x00000004 = 0xffffffff
-0xffffffff & 0x00000008 = 0xffffffff
-0xffffffff & 0x00000010 = 0xffffffff
-0xffffffff & 0x00000020 = 0xffffffff
-0xffffffff & 0x00000040 = 0xffffffff
-0xffffffff & 0x00000080 = 0xffffffff
-0xffffffff & 0x00000100 = 0xffffffff
-0xffffffff & 0x00000200 = 0xffffffff
-0xffffffff & 0x00000400 = 0xffffffff
-0xffffffff & 0x00000800 = 0xffffffff
-0xffffffff & 0x00001000 = 0xffffffff
-0xffffffff & 0x00002000 = 0xffffffff
-0xffffffff & 0x00004000 = 0xffffffff
-0xffffffff & 0x00008000 = 0xffffffff
-0xffffffff & 0x00010000 = 0xffffffff
-0xffffffff & 0x00020000 = 0xffffffff
-0xffffffff & 0x00040000 = 0xffffffff
-0xffffffff & 0x00080000 = 0xffffffff
-0xffffffff & 0x00100000 = 0xffffffff
-0xffffffff & 0x00200000 = 0xffffffff
-0xffffffff & 0x00400000 = 0xffffffff
-0xffffffff & 0x00800000 = 0xffffffff
-0xffffffff & 0x01000000 = 0xffffffff
-0xffffffff & 0x02000000 = 0xffffffff
-0xffffffff & 0x04000000 = 0xffffffff
-0xffffffff & 0x08000000 = 0xffffffff
-0xffffffff & 0x10000000 = 0xffffffff
-0xffffffff & 0x20000000 = 0xffffffff
-0xffffffff & 0x40000000 = 0xffffffff
-0xffffffff & 0x80000000 = 0xffffffff
-0x11111111 & 0x00000001 = 0x11111111
-0x11111111 & 0x00000002 = 0x11111113
-0x11111111 & 0x00000004 = 0x11111115
-0x11111111 & 0x00000008 = 0x11111119
-0x11111111 & 0x00000010 = 0x11111111
-0x11111111 & 0x00000020 = 0x11111131
-0x11111111 & 0x00000040 = 0x11111151
-0x11111111 & 0x00000080 = 0x11111191
-0x11111111 & 0x00000100 = 0x11111111
-0x11111111 & 0x00000200 = 0x11111311
-0x11111111 & 0x00000400 = 0x11111511
-0x11111111 & 0x00000800 = 0x11111911
-0x11111111 & 0x00001000 = 0x11111111
-0x11111111 & 0x00002000 = 0x11113111
-0x11111111 & 0x00004000 = 0x11115111
-0x11111111 & 0x00008000 = 0x11119111
-0x11111111 & 0x00010000 = 0x11111111
-0x11111111 & 0x00020000 = 0x11131111
-0x11111111 & 0x00040000 = 0x11151111
-0x11111111 & 0x00080000 = 0x11191111
-0x11111111 & 0x00100000 = 0x11111111
-0x11111111 & 0x00200000 = 0x11311111
-0x11111111 & 0x00400000 = 0x11511111
-0x11111111 & 0x00800000 = 0x11911111
-0x11111111 & 0x01000000 = 0x11111111
-0x11111111 & 0x02000000 = 0x13111111
-0x11111111 & 0x04000000 = 0x15111111
-0x11111111 & 0x08000000 = 0x19111111
-0x11111111 & 0x10000000 = 0x11111111
-0x11111111 & 0x20000000 = 0x31111111
-0x11111111 & 0x40000000 = 0x51111111
-0x11111111 & 0x80000000 = 0x91111111
+0xffffffff | 0x00000001 = 0xffffffff
+0xffffffff | 0x00000002 = 0xffffffff
+0xffffffff | 0x00000004 = 0xffffffff
+0xffffffff | 0x00000008 = 0xffffffff
+0xffffffff | 0x00000010 = 0xffffffff
+0xffffffff | 0x00000020 = 0xffffffff
+0xffffffff | 0x00000040 = 0xffffffff
+0xffffffff | 0x00000080 = 0xffffffff
+0xffffffff | 0x00000100 = 0xffffffff
+0xffffffff | 0x00000200 = 0xffffffff
+0xffffffff | 0x00000400 = 0xffffffff
+0xffffffff | 0x00000800 = 0xffffffff
+0xffffffff | 0x00001000 = 0xffffffff
+0xffffffff | 0x00002000 = 0xffffffff
+0xffffffff | 0x00004000 = 0xffffffff
+0xffffffff | 0x00008000 = 0xffffffff
+0xffffffff | 0x00010000 = 0xffffffff
+0xffffffff | 0x00020000 = 0xffffffff
+0xffffffff | 0x00040000 = 0xffffffff
+0xffffffff | 0x00080000 = 0xffffffff
+0xffffffff | 0x00100000 = 0xffffffff
+0xffffffff | 0x00200000 = 0xffffffff
+0xffffffff | 0x00400000 = 0xffffffff
+0xffffffff | 0x00800000 = 0xffffffff
+0xffffffff | 0x01000000 = 0xffffffff
+0xffffffff | 0x02000000 = 0xffffffff
+0xffffffff | 0x04000000 = 0xffffffff
+0xffffffff | 0x08000000 = 0xffffffff
+0xffffffff | 0x10000000 = 0xffffffff
+0xffffffff | 0x20000000 = 0xffffffff
+0xffffffff | 0x40000000 = 0xffffffff
+0xffffffff | 0x80000000 = 0xffffffff
+0x11111111 | 0x00000001 = 0x11111111
+0x11111111 | 0x00000002 = 0x11111113
+0x11111111 | 0x00000004 = 0x11111115
+0x11111111 | 0x00000008 = 0x11111119
+0x11111111 | 0x00000010 = 0x11111111
+0x11111111 | 0x00000020 = 0x11111131
+0x11111111 | 0x00000040 = 0x11111151
+0x11111111 | 0x00000080 = 0x11111191
+0x11111111 | 0x00000100 = 0x11111111
+0x11111111 | 0x00000200 = 0x11111311
+0x11111111 | 0x00000400 = 0x11111511
+0x11111111 | 0x00000800 = 0x11111911
+0x11111111 | 0x00001000 = 0x11111111
+0x11111111 | 0x00002000 = 0x11113111
+0x11111111 | 0x00004000 = 0x11115111
+0x11111111 | 0x00008000 = 0x11119111
+0x11111111 | 0x00010000 = 0x11111111
+0x11111111 | 0x00020000 = 0x11131111
+0x11111111 | 0x00040000 = 0x11151111
+0x11111111 | 0x00080000 = 0x11191111
+0x11111111 | 0x00100000 = 0x11111111
+0x11111111 | 0x00200000 = 0x11311111
+0x11111111 | 0x00400000 = 0x11511111
+0x11111111 | 0x00800000 = 0x11911111
+0x11111111 | 0x01000000 = 0x11111111
+0x11111111 | 0x02000000 = 0x13111111
+0x11111111 | 0x04000000 = 0x15111111
+0x11111111 | 0x08000000 = 0x19111111
+0x11111111 | 0x10000000 = 0x11111111
+0x11111111 | 0x20000000 = 0x31111111
+0x11111111 | 0x40000000 = 0x51111111
+0x11111111 | 0x80000000 = 0x91111111
 \end{verbatim}
 
 \begin{enumerate}
 \item Uses of |
-\label{sec:org52860f6}
+\label{sec:orgd8649ba}
 
 We mostly use | to combine bits together for arguments to functions.
 \end{enumerate}
 
 \subsubsection{bitwise XOR}
-\label{sec:orgbc2f599}
+\label{sec:org8f82edb}
 
 The \^{} operator is bitwise exclusive OR. It is the XOR operator between
 bits. It differs from or because when both inputs bits are hot the
@@ -1183,13 +1186,13 @@ int main() {
     printf("ORing 1 bit\n");
     for (uint32_t i = 0 ; i < 32; i++) {
         uint32_t bit = (1 << i);
-        printf("0x%08x & 0x%08x = 0x%08x\n",
+        printf("0x%08x ^ 0x%08x = 0x%08x\n",
                pressF, bit,  pressF ^ bit);
     }
     pressF = 0x11111111;
     for (uint32_t i = 0 ; i < 32; i++) {
         uint32_t bit = (1 << i);
-        printf("0x%08x & 0x%08x = 0x%08x\n",
+        printf("0x%08x ^ 0x%08x = 0x%08x\n",
                pressF, bit,  pressF ^ bit);
     }
 }
@@ -1197,79 +1200,85 @@ int main() {
 
 \begin{verbatim}
 ORing 1 bit
-0xffffffff & 0x00000001 = 0xfffffffe
-0xffffffff & 0x00000002 = 0xfffffffd
-0xffffffff & 0x00000004 = 0xfffffffb
-0xffffffff & 0x00000008 = 0xfffffff7
-0xffffffff & 0x00000010 = 0xffffffef
-0xffffffff & 0x00000020 = 0xffffffdf
-0xffffffff & 0x00000040 = 0xffffffbf
-0xffffffff & 0x00000080 = 0xffffff7f
-0xffffffff & 0x00000100 = 0xfffffeff
-0xffffffff & 0x00000200 = 0xfffffdff
-0xffffffff & 0x00000400 = 0xfffffbff
-0xffffffff & 0x00000800 = 0xfffff7ff
-0xffffffff & 0x00001000 = 0xffffefff
-0xffffffff & 0x00002000 = 0xffffdfff
-0xffffffff & 0x00004000 = 0xffffbfff
-0xffffffff & 0x00008000 = 0xffff7fff
-0xffffffff & 0x00010000 = 0xfffeffff
-0xffffffff & 0x00020000 = 0xfffdffff
-0xffffffff & 0x00040000 = 0xfffbffff
-0xffffffff & 0x00080000 = 0xfff7ffff
-0xffffffff & 0x00100000 = 0xffefffff
-0xffffffff & 0x00200000 = 0xffdfffff
-0xffffffff & 0x00400000 = 0xffbfffff
-0xffffffff & 0x00800000 = 0xff7fffff
-0xffffffff & 0x01000000 = 0xfeffffff
-0xffffffff & 0x02000000 = 0xfdffffff
-0xffffffff & 0x04000000 = 0xfbffffff
-0xffffffff & 0x08000000 = 0xf7ffffff
-0xffffffff & 0x10000000 = 0xefffffff
-0xffffffff & 0x20000000 = 0xdfffffff
-0xffffffff & 0x40000000 = 0xbfffffff
-0xffffffff & 0x80000000 = 0x7fffffff
-0x11111111 & 0x00000001 = 0x11111110
-0x11111111 & 0x00000002 = 0x11111113
-0x11111111 & 0x00000004 = 0x11111115
-0x11111111 & 0x00000008 = 0x11111119
-0x11111111 & 0x00000010 = 0x11111101
-0x11111111 & 0x00000020 = 0x11111131
-0x11111111 & 0x00000040 = 0x11111151
-0x11111111 & 0x00000080 = 0x11111191
-0x11111111 & 0x00000100 = 0x11111011
-0x11111111 & 0x00000200 = 0x11111311
-0x11111111 & 0x00000400 = 0x11111511
-0x11111111 & 0x00000800 = 0x11111911
-0x11111111 & 0x00001000 = 0x11110111
-0x11111111 & 0x00002000 = 0x11113111
-0x11111111 & 0x00004000 = 0x11115111
-0x11111111 & 0x00008000 = 0x11119111
-0x11111111 & 0x00010000 = 0x11101111
-0x11111111 & 0x00020000 = 0x11131111
-0x11111111 & 0x00040000 = 0x11151111
-0x11111111 & 0x00080000 = 0x11191111
-0x11111111 & 0x00100000 = 0x11011111
-0x11111111 & 0x00200000 = 0x11311111
-0x11111111 & 0x00400000 = 0x11511111
-0x11111111 & 0x00800000 = 0x11911111
-0x11111111 & 0x01000000 = 0x10111111
-0x11111111 & 0x02000000 = 0x13111111
-0x11111111 & 0x04000000 = 0x15111111
-0x11111111 & 0x08000000 = 0x19111111
-0x11111111 & 0x10000000 = 0x01111111
-0x11111111 & 0x20000000 = 0x31111111
-0x11111111 & 0x40000000 = 0x51111111
-0x11111111 & 0x80000000 = 0x91111111
+0xffffffff ^ 0x00000001 = 0xfffffffe
+0xffffffff ^ 0x00000002 = 0xfffffffd
+0xffffffff ^ 0x00000004 = 0xfffffffb
+0xffffffff ^ 0x00000008 = 0xfffffff7
+0xffffffff ^ 0x00000010 = 0xffffffef
+0xffffffff ^ 0x00000020 = 0xffffffdf
+0xffffffff ^ 0x00000040 = 0xffffffbf
+0xffffffff ^ 0x00000080 = 0xffffff7f
+0xffffffff ^ 0x00000100 = 0xfffffeff
+0xffffffff ^ 0x00000200 = 0xfffffdff
+0xffffffff ^ 0x00000400 = 0xfffffbff
+0xffffffff ^ 0x00000800 = 0xfffff7ff
+0xffffffff ^ 0x00001000 = 0xffffefff
+0xffffffff ^ 0x00002000 = 0xffffdfff
+0xffffffff ^ 0x00004000 = 0xffffbfff
+0xffffffff ^ 0x00008000 = 0xffff7fff
+0xffffffff ^ 0x00010000 = 0xfffeffff
+0xffffffff ^ 0x00020000 = 0xfffdffff
+0xffffffff ^ 0x00040000 = 0xfffbffff
+0xffffffff ^ 0x00080000 = 0xfff7ffff
+0xffffffff ^ 0x00100000 = 0xffefffff
+0xffffffff ^ 0x00200000 = 0xffdfffff
+0xffffffff ^ 0x00400000 = 0xffbfffff
+0xffffffff ^ 0x00800000 = 0xff7fffff
+0xffffffff ^ 0x01000000 = 0xfeffffff
+0xffffffff ^ 0x02000000 = 0xfdffffff
+0xffffffff ^ 0x04000000 = 0xfbffffff
+0xffffffff ^ 0x08000000 = 0xf7ffffff
+0xffffffff ^ 0x10000000 = 0xefffffff
+0xffffffff ^ 0x20000000 = 0xdfffffff
+0xffffffff ^ 0x40000000 = 0xbfffffff
+0xffffffff ^ 0x80000000 = 0x7fffffff
+0x11111111 ^ 0x00000001 = 0x11111110
+0x11111111 ^ 0x00000002 = 0x11111113
+0x11111111 ^ 0x00000004 = 0x11111115
+0x11111111 ^ 0x00000008 = 0x11111119
+0x11111111 ^ 0x00000010 = 0x11111101
+0x11111111 ^ 0x00000020 = 0x11111131
+0x11111111 ^ 0x00000040 = 0x11111151
+0x11111111 ^ 0x00000080 = 0x11111191
+0x11111111 ^ 0x00000100 = 0x11111011
+0x11111111 ^ 0x00000200 = 0x11111311
+0x11111111 ^ 0x00000400 = 0x11111511
+0x11111111 ^ 0x00000800 = 0x11111911
+0x11111111 ^ 0x00001000 = 0x11110111
+0x11111111 ^ 0x00002000 = 0x11113111
+0x11111111 ^ 0x00004000 = 0x11115111
+0x11111111 ^ 0x00008000 = 0x11119111
+0x11111111 ^ 0x00010000 = 0x11101111
+0x11111111 ^ 0x00020000 = 0x11131111
+0x11111111 ^ 0x00040000 = 0x11151111
+0x11111111 ^ 0x00080000 = 0x11191111
+0x11111111 ^ 0x00100000 = 0x11011111
+0x11111111 ^ 0x00200000 = 0x11311111
+0x11111111 ^ 0x00400000 = 0x11511111
+0x11111111 ^ 0x00800000 = 0x11911111
+0x11111111 ^ 0x01000000 = 0x10111111
+0x11111111 ^ 0x02000000 = 0x13111111
+0x11111111 ^ 0x04000000 = 0x15111111
+0x11111111 ^ 0x08000000 = 0x19111111
+0x11111111 ^ 0x10000000 = 0x01111111
+0x11111111 ^ 0x20000000 = 0x31111111
+0x11111111 ^ 0x40000000 = 0x51111111
+0x11111111 ^ 0x80000000 = 0x91111111
 \end{verbatim}
 
 \begin{enumerate}
 \item Uses of \^{}
-\label{sec:orga61e338}
+\label{sec:org373d2dd}
 
 XOR has interesting properties .
 
 a \^{} b \^{} a = b
+
+a \^{} b != b for most values
+
+(a \^{} b) \^{} a = b
+
+(a \^{} b) \^{} b = a
 
 So if we send a message of a\textsuperscript{b} we can decode the message of (a\textsuperscript{b})\textsuperscript{b}
 
@@ -1305,7 +1314,7 @@ Encrypted Again: I enjoy olive bread
 \end{enumerate}
 
 \subsubsection{bitwise complement}
-\label{sec:orge64835c}
+\label{sec:org39b1384}
 
 The \textasciitilde{} operator is bitwise complement. It means every bit is notted
 The \textasciitilde{} operator is a unary operator.
@@ -1378,7 +1387,7 @@ int main() {
 
 
 \subsubsection{Flags}
-\label{sec:org1a47602}
+\label{sec:orgd44b518}
 
 In C flags are often used. Flags are parameters who's bits indicate if
 some option is chosen.
@@ -1435,11 +1444,15 @@ create the file on disk if it doesn't already exist!
 
 open("~/.bashrc", O_RDONLY); // open ~/.bashrc for read only access
 open("/tmp/map.txt", O_WRONLY | O_CREATE); // open /tmp/map.txt to write to it
+// 00000101
 open("./log.txt", O_WRONLY | O_CREATE | O_APPEND); // open ./map.txt to write to it or append to it
-
+// 00002101
 // So 
 O_WRONLY | O_CREATE            == 00000101 (00000001 | 00000100)
 O_WRONLY | O_CREATE | O_APPEND == 00002101 (00000001 | 00000100 | 00002000)
+if (00002101 & O_CREATE) {
+    printf("O_CREATE is set!\n");
+}
 // Question wht number format are they using to define these flags?
 \end{verbatim}
 
@@ -1447,11 +1460,11 @@ warning: open is just an example. Please use fopen if you want to read / write f
 
 warning: flags should only be unsigned integers
 
-warning: flags must be not 0
+warning: flags should be not 0
 
 \begin{enumerate}
 \item Expected Flag use:
-\label{sec:org4727231}
+\label{sec:org1e96ee6}
 
 Use | to set a flag:   FLAG1 | FLAG2
 
@@ -1461,7 +1474,7 @@ Watch out testing for truth and combining flags
 
 To check for FLAG1 and FLAG2 being hot you should:
 
-`if (input \& FLAG1 \&\& input \& FLAG2) `
+`if ((input \& FLAG1) \&\& (input \& FLAG2)) `
 
 or
 
@@ -1470,18 +1483,205 @@ or
 It's very convoluted so don't get too complicated
 
 This is a bug:
-`if (input \& (FLAG1 | FLAG2))`
+`
+// actually checks if FLAG1 or FLAG2 is set (FLAG1, FLAG2, FLAG1|FLAG2)
+if (input \& (FLAG1 | FLAG2))`
 
 It actually just checks if you have either FLAG1 or FLAG2.
 
 
 \item Flags Example
-\label{sec:org072d5d8}
+\label{sec:org86032e7}
 
 Hazel talks in depth about pizza
 \begin{itemize}
 \item \url{https://docs.google.com/document/d/1S-I-OthHf0mgNZXnTSOvyx5lSduQwsbHYMmVPLtTl1Y/edit}\#
 \end{itemize}
+
+\begin{verbatim}
+OK build some pizza using |
+
+
+A pizza of cheese, corn (srsly?), .
+A pizza of cheese, thin crust, black metal sauce, corn (srsly?), exotic meats, .
+
+
+OK build some pizza via iteration
+
+
+A pizza of .
+A pizza of cheese, .
+A pizza of thin crust, .
+A pizza of cheese, thin crust, .
+A pizza of thick crust, .
+A pizza of cheese, thick crust, .
+A pizza of thin crust, thick crust, .
+A pizza of cheese, thin crust, thick crust, .
+A pizza of tomato sauce, .
+A pizza of cheese, tomato sauce, .
+A pizza of thin crust, tomato sauce, .
+A pizza of cheese, thin crust, tomato sauce, .
+A pizza of thick crust, tomato sauce, .
+A pizza of cheese, thick crust, tomato sauce, .
+A pizza of thin crust, thick crust, tomato sauce, .
+A pizza of cheese, thin crust, thick crust, tomato sauce, .
+A pizza of black metal sauce, .
+A pizza of cheese, black metal sauce, .
+A pizza of thin crust, black metal sauce, .
+A pizza of cheese, thin crust, black metal sauce, .
+A pizza of thick crust, black metal sauce, .
+A pizza of cheese, thick crust, black metal sauce, .
+A pizza of thin crust, thick crust, black metal sauce, .
+A pizza of cheese, thin crust, thick crust, black metal sauce, .
+A pizza of tomato sauce, black metal sauce, .
+A pizza of cheese, tomato sauce, black metal sauce, .
+A pizza of thin crust, tomato sauce, black metal sauce, .
+A pizza of cheese, thin crust, tomato sauce, black metal sauce, .
+A pizza of thick crust, tomato sauce, black metal sauce, .
+A pizza of cheese, thick crust, tomato sauce, black metal sauce, .
+A pizza of thin crust, thick crust, tomato sauce, black metal sauce, .
+A pizza of cheese, thin crust, thick crust, tomato sauce, black metal sauce, .
+A pizza of corn (srsly?), .
+A pizza of cheese, corn (srsly?), .
+A pizza of thin crust, corn (srsly?), .
+A pizza of cheese, thin crust, corn (srsly?), .
+A pizza of thick crust, corn (srsly?), .
+A pizza of cheese, thick crust, corn (srsly?), .
+A pizza of thin crust, thick crust, corn (srsly?), .
+A pizza of cheese, thin crust, thick crust, corn (srsly?), .
+A pizza of tomato sauce, corn (srsly?), .
+A pizza of cheese, tomato sauce, corn (srsly?), .
+A pizza of thin crust, tomato sauce, corn (srsly?), .
+A pizza of cheese, thin crust, tomato sauce, corn (srsly?), .
+A pizza of thick crust, tomato sauce, corn (srsly?), .
+A pizza of cheese, thick crust, tomato sauce, corn (srsly?), .
+A pizza of thin crust, thick crust, tomato sauce, corn (srsly?), .
+A pizza of cheese, thin crust, thick crust, tomato sauce, corn (srsly?), .
+A pizza of black metal sauce, corn (srsly?), .
+A pizza of cheese, black metal sauce, corn (srsly?), .
+A pizza of thin crust, black metal sauce, corn (srsly?), .
+A pizza of cheese, thin crust, black metal sauce, corn (srsly?), .
+A pizza of thick crust, black metal sauce, corn (srsly?), .
+A pizza of cheese, thick crust, black metal sauce, corn (srsly?), .
+A pizza of thin crust, thick crust, black metal sauce, corn (srsly?), .
+A pizza of cheese, thin crust, thick crust, black metal sauce, corn (srsly?), .
+A pizza of tomato sauce, black metal sauce, corn (srsly?), .
+A pizza of cheese, tomato sauce, black metal sauce, corn (srsly?), .
+A pizza of thin crust, tomato sauce, black metal sauce, corn (srsly?), .
+A pizza of cheese, thin crust, tomato sauce, black metal sauce, corn (srsly?), .
+A pizza of thick crust, tomato sauce, black metal sauce, corn (srsly?), .
+A pizza of cheese, thick crust, tomato sauce, black metal sauce, corn (srsly?), .
+A pizza of thin crust, thick crust, tomato sauce, black metal sauce, corn (srsly?), .
+A pizza of cheese, thin crust, thick crust, tomato sauce, black metal sauce, corn (srsly?), .
+A pizza of onions, .
+A pizza of cheese, onions, .
+A pizza of thin crust, onions, .
+A pizza of cheese, thin crust, onions, .
+A pizza of thick crust, onions, .
+A pizza of cheese, thick crust, onions, .
+A pizza of thin crust, thick crust, onions, .
+A pizza of cheese, thin crust, thick crust, onions, .
+A pizza of tomato sauce, onions, .
+A pizza of cheese, tomato sauce, onions, .
+A pizza of thin crust, tomato sauce, onions, .
+A pizza of cheese, thin crust, tomato sauce, onions, .
+A pizza of thick crust, tomato sauce, onions, .
+A pizza of cheese, thick crust, tomato sauce, onions, .
+A pizza of thin crust, thick crust, tomato sauce, onions, .
+A pizza of cheese, thin crust, thick crust, tomato sauce, onions, .
+A pizza of black metal sauce, onions, .
+A pizza of cheese, black metal sauce, onions, .
+A pizza of thin crust, black metal sauce, onions, .
+A pizza of cheese, thin crust, black metal sauce, onions, .
+A pizza of thick crust, black metal sauce, onions, .
+A pizza of cheese, thick crust, black metal sauce, onions, .
+A pizza of thin crust, thick crust, black metal sauce, onions, .
+A pizza of cheese, thin crust, thick crust, black metal sauce, onions, .
+A pizza of tomato sauce, black metal sauce, onions, .
+A pizza of cheese, tomato sauce, black metal sauce, onions, .
+A pizza of thin crust, tomato sauce, black metal sauce, onions, .
+A pizza of cheese, thin crust, tomato sauce, black metal sauce, onions, .
+A pizza of thick crust, tomato sauce, black metal sauce, onions, .
+A pizza of cheese, thick crust, tomato sauce, black metal sauce, onions, .
+A pizza of thin crust, thick crust, tomato sauce, black metal sauce, onions, .
+A pizza of cheese, thin crust, thick crust, tomato sauce, black metal sauce, onions, .
+A pizza of corn (srsly?), onions, .
+A pizza of cheese, corn (srsly?), onions, .
+A pizza of thin crust, corn (srsly?), onions, .
+A pizza of cheese, thin crust, corn (srsly?), onions, .
+A pizza of thick crust, corn (srsly?), onions, .
+A pizza of cheese, thick crust, corn (srsly?), onions, .
+A pizza of thin crust, thick crust, corn (srsly?), onions, .
+A pizza of cheese, thin crust, thick crust, corn (srsly?), onions, .
+A pizza of tomato sauce, corn (srsly?), onions, .
+A pizza of cheese, tomato sauce, corn (srsly?), onions, .
+A pizza of thin crust, tomato sauce, corn (srsly?), onions, .
+A pizza of cheese, thin crust, tomato sauce, corn (srsly?), onions, .
+A pizza of thick crust, tomato sauce, corn (srsly?), onions, .
+A pizza of cheese, thick crust, tomato sauce, corn (srsly?), onions, .
+A pizza of thin crust, thick crust, tomato sauce, corn (srsly?), onions, .
+A pizza of cheese, thin crust, thick crust, tomato sauce, corn (srsly?), onions, .
+A pizza of black metal sauce, corn (srsly?), onions, .
+A pizza of cheese, black metal sauce, corn (srsly?), onions, .
+A pizza of thin crust, black metal sauce, corn (srsly?), onions, .
+A pizza of cheese, thin crust, black metal sauce, corn (srsly?), onions, .
+A pizza of thick crust, black metal sauce, corn (srsly?), onions, .
+A pizza of cheese, thick crust, black metal sauce, corn (srsly?), onions, .
+A pizza of thin crust, thick crust, black metal sauce, corn (srsly?), onions, .
+A pizza of cheese, thin crust, thick crust, black metal sauce, corn (srsly?), onions, .
+A pizza of tomato sauce, black metal sauce, corn (srsly?), onions, .
+A pizza of cheese, tomato sauce, black metal sauce, corn (srsly?), onions, .
+A pizza of thin crust, tomato sauce, black metal sauce, corn (srsly?), onions, .
+A pizza of cheese, thin crust, tomato sauce, black metal sauce, corn (srsly?), onions, .
+A pizza of thick crust, tomato sauce, black metal sauce, corn (srsly?), onions, .
+A pizza of cheese, thick crust, tomato sauce, black metal sauce, corn (srsly?), onions, .
+A pizza of thin crust, thick crust, tomato sauce, black metal sauce, corn (srsly?), onions, .
+A pizza of cheese, thin crust, thick crust, tomato sauce, black metal sauce, corn (srsly?), onions, .
+A pizza of exotic meats, .
+A pizza of cheese, exotic meats, .
+A pizza of thin crust, exotic meats, .
+A pizza of cheese, thin crust, exotic meats, .
+A pizza of thick crust, exotic meats, .
+A pizza of cheese, thick crust, exotic meats, .
+A pizza of thin crust, thick crust, exotic meats, .
+A pizza of cheese, thin crust, thick crust, exotic meats, .
+A pizza of tomato sauce, exotic meats, .
+A pizza of cheese, tomato sauce, exotic meats, .
+A pizza of thin crust, tomato sauce, exotic meats, .
+A pizza of cheese, thin crust, tomato sauce, exotic meats, .
+A pizza of thick crust, tomato sauce, exotic meats, .
+A pizza of cheese, thick crust, tomato sauce, exotic meats, .
+A pizza of thin crust, thick crust, tomato sauce, exotic meats, .
+
+
+OK check some pizzas yo
+
+
+A pizza of cheese, thin crust, thick crust, corn (srsly?), .
+WARNING: Impossible to make a thin / thick crust pizza!
+WARNING: Corn? REALLY?
+A pizza of cheese, thin crust, corn (srsly?), .
+WARNING: Corn? REALLY?
+A pizza of cheese, thin crust, .
+WARNING: SPAAAAAAAARTA, or spartan.
+
+
+Let's use XOR to toggle flags!
+A pizza of cheese, thick crust, .
+WARNING: SPAAAAAAAARTA, or spartan.
+A pizza of cheese, thick crust, corn (srsly?), .
+WARNING: Corn? REALLY?
+A pizza of cheese, thick crust, .
+WARNING: SPAAAAAAAARTA, or spartan.
+A pizza of cheese, thick crust, corn (srsly?), .
+WARNING: Corn? REALLY?
+A pizza of cheese, thick crust, .
+WARNING: SPAAAAAAAARTA, or spartan.
+A pizza of cheese, thick crust, corn (srsly?), .
+WARNING: Corn? REALLY?
+A pizza of cheese, thick crust, .
+WARNING: SPAAAAAAAARTA, or spartan.
+\end{verbatim}
 
 \begin{verbatim}
 #include <inttypes.h>
@@ -1516,8 +1716,13 @@ void printPizza(PizzaFlags pizza) {
 }
 void violation(PizzaFlags pizza) {
     // Not all pizzas are created equal
+    // if (pizza & (THINCRUST | THICKCRUST)) {
     if (pizza & THINCRUST && pizza & THICKCRUST) {
         printf("WARNING: Impossible to make a thin / thick crust pizza!\n");
+    }
+    // if (! (pizza & THINCRUST ) && ! (pizza & THICKCURST)  ) {
+    if (! (pizza & (THINCRUST | THICKCRUST))) {
+        printf("WARNING: No Crust???\n");
     }
     if (pizza & CORN) {
         printf("WARNING: Corn? REALLY?\n");
@@ -1545,6 +1750,7 @@ int main() {
     pizza = CHEESE | THINCRUST;
     printPizza(pizza);
     violation(pizza);
+
     // TOGGLE
     printf("\n\nLet's use XOR to toggle flags!\n");
     pizza = CHEESE | CORN | THINCRUST | THICKCRUST;
@@ -1555,6 +1761,11 @@ int main() {
     pizza = pizza ^ CORN; // CORN IS BACK!
     printPizza(pizza);
     violation(pizza);
+    for (int i = 0 ; i < 5; i++) {
+       pizza = pizza ^ CORN; // CORN IS BACK!
+       printPizza(pizza);
+       violation(pizza);
+    }
 
 
 }
@@ -1734,11 +1945,21 @@ A pizza of cheese, thick crust, .
 WARNING: SPAAAAAAAARTA, or spartan.
 A pizza of cheese, thick crust, corn (srsly?), .
 WARNING: Corn? REALLY?
+A pizza of cheese, thick crust, .
+WARNING: SPAAAAAAAARTA, or spartan.
+A pizza of cheese, thick crust, corn (srsly?), .
+WARNING: Corn? REALLY?
+A pizza of cheese, thick crust, .
+WARNING: SPAAAAAAAARTA, or spartan.
+A pizza of cheese, thick crust, corn (srsly?), .
+WARNING: Corn? REALLY?
+A pizza of cheese, thick crust, .
+WARNING: SPAAAAAAAARTA, or spartan.
 \end{verbatim}
 \end{enumerate}
 
 \subsubsection{PRACTICE and More resources}
-\label{sec:org018c339}
+\label{sec:orge273ed8}
 
 \begin{itemize}
 \item PLEASE Read Hazel's Notes on the subject 
@@ -1758,7 +1979,7 @@ WARNING: Corn? REALLY?
 
 
 \subsubsection{BitFields}
-\label{sec:orgcc27187}
+\label{sec:org647f8f3}
 
 \begin{verbatim}
 
@@ -1768,14 +1989,20 @@ struct bitfield {
     unsigned int b2:  4;
     unsigned int b3:  8;
     unsigned int b4: 16;
-    unsigned int b5:  1;
-    //unsigned int b6: 1;
+    //unsigned int b5:  1;
+    //unsigned int b6: 32;
 };
 
 int main() {
-    struct bitfield b = { 0, 3, 12, 242, 65000 };
+    struct bitfield b = { 0, 3, 12, 242, 65000};
+    union bex {
+        unsigned int i;
+        struct bitfield b;
+    } bi;
+    bi.b = b;
     printf("%hhu %hhu %hhu %hhu %hu\n", b.b0, b.b1, b.b2, b.b3, b.b4);
     printf("size: %lu\n", sizeof(b));
+    printf("%08x\n", bi.i);
 }
 
 \end{verbatim}
@@ -1783,11 +2010,19 @@ int main() {
 \begin{verbatim}
 0 3 12 242 65000
 size: 4
+7ef47966
 \end{verbatim}
+
+
+111 100  10 (b3)(745) [1 100(b2)](54) [11 (b1)  0 (b0)]6
+
+1111 
+F 2 242
+
 
 \begin{enumerate}
 \item Chmod example
-\label{sec:orge978714}
+\label{sec:org3ff07dd}
 
 Let's try bitfields and unix file permissions!
 
@@ -1948,10 +2183,10 @@ Better? 7 1 0 017
 \end{enumerate}
 
 \subsection{Floating Point Numbers}
-\label{sec:org6b81bb5}
+\label{sec:orgf1fbda1}
 
 \subsubsection{Resources}
-\label{sec:org1be0c07}
+\label{sec:org9e4513e}
 
 Helpful resources:
 \begin{itemize}
@@ -1960,7 +2195,7 @@ Helpful resources:
 \end{itemize}
 
 \subsubsection{Single precision IEEE754 floating point numbers}
-\label{sec:org3d56ef5}
+\label{sec:org5b5e23e}
 
 Type: float
 
@@ -2008,7 +2243,7 @@ Sign (1 bit) & Exponent (8 bit) & b10 & Fraction (23 bit) & Value & base 2\\
 pow(2,-3) + 0*pow(2,-4) + 1*pow(2,-5) (pow(2,5)==32, pow(2,-5) = 1/32.0)
 
 \subsubsection{Let's explore the bits of floats}
-\label{sec:org9ad7064}
+\label{sec:org3d1fbce}
 
 \begin{verbatim}
 #include <math.h>
@@ -2162,7 +2397,7 @@ sizeof(float_t) == 4
 \end{verbatim}
 
 \subsubsection{How do I avoid typepunning?}
-\label{sec:org1dc4d9b}
+\label{sec:org4b39066}
 
 The C99 is OK with union type punning :-/
 
