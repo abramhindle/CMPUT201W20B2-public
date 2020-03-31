@@ -441,12 +441,7 @@ have the same size.
   }
 #+end_src
 
-** Coupling
-
-Coupling often refers to how much 1 module (like a .c file or a .h
-file) relies on other modules.
-
-*** Modules
+** Modules
 
 A module can have different levels of granularity:
 
@@ -458,13 +453,23 @@ A module can have different levels of granularity:
 - service level (distributed systems, webservices)
 - ecosystem level (Ubuntu or pip or web)
 
+In C typically a module refers to a pair of .c file or a pair of .h
+and .c files.
+
+*** Refs
+
+Structed Design https://ieeexplore.ieee.org/document/5388187
+
+** Coupling
+
+Coupling often refers to how much 1 module (like a .c file or a .h
+file) relies on other modules.
+
+*** Coupling
+
 1 fast way in C of calculating coupling is to count the number of
 include directives.
 
 The number of includes gives one an idea of how many modules that your
 module relies upon.
-
-*** Refs
-
-Structed Design https://ieeexplore.ieee.org/document/5388187
 
