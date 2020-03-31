@@ -1033,6 +1033,11 @@ parameter defs. Its responsibilities are the creation of parameters
 and parameter defs. Its only weird responsibility is for printing
 parameters which is probably its least cohesive part.
 
+High cohesion is good because it means the module is topical and
+relevant. It doesn't have any weird responsibilities. It won't have to
+change to address extra responsibilities. High cohesion typically
+limits coupling.
+
 To calculate cohesion there's many metrics suggested but I suggest
 reading the module and writing bullet points about responsibilities.
 Let's look at ppdarray.c:
