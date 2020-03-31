@@ -1,0 +1,470 @@
+#+TITLE: CMPUT201W20B2 Week 12
+#+PROPERTY: header-args:C             :exports both :eval yes :flags -std=c99 -pedantic -Wall -Wextra -ftrapv -ggdb3 :eval yes :results value verbatim
+#+PROPERTY: header-args:sh            :exports both :eval yes :results value verbatim
+#+PROPERTY: header-args:shell         :exports both :eval yes :results value verbatim
+
+* Week12
+https://github.com/abramhindle/CMPUT201W20B2-public/tree/master/week12
+** Copyright Statement
+
+If you are in CMPUT201 at UAlberta this code is released in the public
+domain to you.
+
+Otherwise it is (c) 2020 Abram Hindle, Hazel Campbell AGPL3.0+
+
+*** License
+
+    CMPUT 201 C Notes
+    Copyright (C) 2020 Abram Hindle, Hazel Campbell
+
+    This program is free software: you can redistribute it and/or modify
+    it under the terms of the GNU Affero General Public License as
+    published by the Free Software Foundation, either version 3 of the
+    License, or (at your option) any later version.
+
+    This program is distributed in the hope that it will be useful,
+    but WITHOUT ANY WARRANTY; without even the implied warranty of
+    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+    GNU Affero General Public License for more details.
+
+    You should have received a copy of the GNU Affero General Public License
+    along with this program.  If not, see <https://www.gnu.org/licenses/>.
+
+
+*** Hazel Code is licensed under AGPL3.0+
+
+Hazel's code is also found here
+https://github.com/hazelybell/examples/tree/C-2020-01
+
+Hazel code is licensed: The example code is licensed under the AGPL3+
+license, unless otherwise noted.
+
+** Alternative version
+
+Checkout the .txt, the .pdf, and the .html version
+
+** Init ORG-MODE
+
+#+BEGIN_SRC elisp
+;; I need this for org-mode to work well
+;; If we have a new org-mode use ob-shell
+;; otherwise use ob-sh --- but not both!
+(if (require 'ob-shell nil 'noerror)
+  (progn
+    (org-babel-do-load-languages 'org-babel-load-languages '((shell . t))))
+  (progn
+    (require 'ob-sh)
+    (org-babel-do-load-languages 'org-babel-load-languages '((sh . t)))))
+(org-babel-do-load-languages 'org-babel-load-languages '((C . t)))
+(org-babel-do-load-languages 'org-babel-load-languages '((python . t)))
+(setq org-src-fontify-natively t)
+(setq org-confirm-babel-evaluate nil) ;; danger!
+(custom-set-faces
+ '(org-block ((t (:inherit shadow :foreground "black"))))
+ '(org-code ((t (:inherit shadow :foreground "black")))))
+#+END_SRC
+
+#+RESULTS:
+
+*** Org export
+#+BEGIN_SRC elisp
+(org-html-export-to-html)
+(org-latex-export-to-pdf)
+(org-ascii-export-to-ascii)
+#+END_SRC
+
+#+RESULTS:
+: presentation.txt
+
+
+*** Org Template
+Copy and paste this to demo C
+
+#+BEGIN_SRC C :exports both
+#include <stdio.h>
+
+int main(int argc, char**argv) {
+    return 0;
+}
+#+END_SRC
+
+#+RESULTS:
+
+** Remember how to compile?
+
+gcc  -std=c99 -pedantic -Wall -Wextra -ftrapv -ggdb3 -o programname programname.c
+
+** Numbers!
+
+Computers love powers of 2 because we calculate everything via bits.
+
+Bases used on computers:
+
+2, 8, 10, 16
+
+- 32 in base 16 is  2*pow(16,1) = 0x20 
+- 32 in base 10 is  3*pow(10,1) + 2*pow(10,0) = 3*10 + 2*1 = 32
+- 32 in base 8 is   4*pow(8,1) = 4*8 = 32 = 040
+- 32 in base 2 is   1*pow(2,5) = 0b100000
+
+- 31 in base 16 is  1*pow(16,1) + 15*pow(16,0)
+- 31 in base 10 is  3*pow(10,1) + 1*pow(10,0)
+- 31 in base 8 is   3*pow(8,1) + 7*pow(8,0)
+- 31 in base 2 is   1*pow(2,4) + 1*pow(2,3) + 1*pow(2,2) + 1*pow(2,1) + 1*pow(2,0)
+
+- Notation for base 2 for 31:  0b11111 # not available in C, good in python
+- Notation for base 8 for 31:  037     # available in C    , good in python
+- Notation for base 10 for 31: 31      # available in C    , good in python
+- Notation for base 16 for 31: 0x1F    # available in C    , good in python
+
+*** Binary
+
+#+begin_example    
+    Base 2: powers of 2
+    
+    Digits: 0,1
+    
+    0:  0b00000  8:  0b01000
+    1:  0b00001  9:  0b01001 
+    2:  0b00010 10:  0b01010 
+    3:  0b00011 11:  0b01011 
+    4:  0b00100 12:  0b01100
+    5:  0b00101 13:  0b01101
+    6:  0b00110 14:  0b01110         
+    7:  0b00111 15:  0b01111
+                16:  0b10000
+#+end_example
+
+*** Octal
+
+#+begin_src C 
+#include <stdio.h>
+
+int main() {
+   printf("%d\n", 037);
+}
+#+end_src
+
+#+RESULTS:
+: 31
+
+#+begin_example    
+    Base 8: powers of 8
+    
+    3 bits
+    
+    Digits: 0,1,2,3,4,5,6,7
+    
+    0:  000  8: 010
+    1:  001  9: 011   
+    2:  002 10: 012   
+    3:  003 11: 013   
+    4:  004 12: 014  
+    5:  005 13: 015  
+    6:  006 14: 016           
+    7:  007 15: 017  
+            16: 020
+    
+    07:                            7 =   7
+    077:                     7*8 + 7 =  63
+    0777:            7*8*8 + 7*8 + 7 = 511
+    07777: 7*8*8*8 + 7*8*8 + 7*8 + 7 = 4095
+#+end_example
+
+*** Base10 Review
+#+begin_example
+    Base 10: power of 10
+    
+       Digits: 0,1,2,3,4,5,6,7,8,9
+    
+    ~4 bits - not a power of 2
+    
+    0:  0  8:  8
+    1:  1  9:  9   
+    2:  2 10: 10  
+    3:  3 11: 11  
+    4:  4 12: 12  
+    5:  5 13: 13 
+    6:  6 14: 14          
+    7:  7 15: 15 
+          16: 16
+#+end_example
+    
+*** Hex Review
+
+#+begin_example    
+    Base 16: power of 16
+    
+       Digits: 0,1,2,3,4,5,6,7,8,9,A,B,C,D,E,F
+    or Digits: 0,1,2,3,4,5,6,7,8,9,a,b,c,d,e,f
+    
+    0:  0x00  8: 0x08
+    1:  0x01  9: 0x09   
+    2:  0x02 10: 0x0A  
+    3:  0x03 11: 0x0B   
+    4:  0x04 12: 0x0C  
+    5:  0x05 13: 0x0D  
+    6:  0x06 14: 0x0E           
+    7:  0x07 15: 0x0F  
+             16: 0x10
+    0xF    =                                  15 =    15 = 2^4 - 1
+    0xFF   =                          15*16 + 15 =   255 = 2^8 - 1
+    0xFFF  =               15*16*16 + 15*16 + 15 =  4095 = 2^12 - 1
+    0xFFFF = 15*16*16*16 + 15*16*16 + 15*16 + 15 = 65535 = 2^16 - 1
+    
+    Digit Lookup
+    
+    0:  0x0 0b0000     8: 0x8 0b1000
+    1:  0x1 0b0001     9: 0x9 0b1001  
+    2:  0x2 0b0010    10: 0xA 0b1010 
+    3:  0x3 0b0011    11: 0xB 0b1011  
+    4:  0x4 0b0100    12: 0xC 0b1100 
+    5:  0x5 0b0101    13: 0xD 0b1101 
+    6:  0x6 0b0110    14: 0xE 0b1110          
+    7:  0x7 0b0111    15: 0xF 0b1111 
+
+    1 nibble = 4 bits = 1 hex digit
+#+end_example    
+
+** Floating Point Numbers    
+
+*** Resources
+
+Helpful resources:
+- https://en.wikipedia.org/wiki/IEEE_754
+- http://steve.hollasch.net/cgindex/coding/ieeefloat.html
+
+*** Single precision IEEE754 floating point numbers
+
+Type: float
+
+-Sign: 0 - positive, 1 negative
+-Exponent: unsigned 8 bit integer with 127 (2^7-1) offset
+  -        -126 to 127
+- Fraction: 24 bits (only 23 used). The first bit is implied. 
+  - So 00000000000000000000000 is actually 100000000000000000000000
+ 
+| Sign (1 bit) | Exponent (8 bit) | b10 |       Fraction (23 bit) |    Value | base 2     |
+|            0 |         01111100 |  -3 | 01000000000000000000000 |  0.15625 | 1/8 + 1/32 |
+|            1 |         01111100 |  -3 | 01000000000000000000000 | -0.15625 |            |
+|            0 |         01111100 |  -3 | 01000000000000000000000 | -0.15625 |            |
+|            0 |         00000000 |   0 | 00000000000000000000000 |        0 |            |
+|            1 |         00000000 |   0 | 00000000000000000000000 |       -0 |            |
+|            0 |         11000000 |  65 | 00000000000000000000000 | 3.68e+19 | 2^65       |
+|            1 |         11111111 |   0 | 00000000000000000000000 |     -inf |            |
+|            0 |         11111111 |   0 | 00000000000000000000000 |      inf |            |
+|            0 |         11111111 |   0 | 10000000000000000000000 |      nan |            |
+|            0 |         11111111 |   0 | 00000000000000000000001 |      nan |            |
+
+- Neat design trick: you can sort them as signed integers (two's complement)!
+- -0 is right before 0 for signed integer sorting
+
+|            0 |         01111100 |  -3 | 01000000000000000000000 |  0.15625 | 1/8 + 1/32 |
+
+0.15625 to floating point. Implied bit is pow(2,-3)
+
+pow(2,-3) + 0*pow(2,-4) + 1*pow(2,-5) (pow(2,5)==32, pow(2,-5) = 1/32.0)
+
+*** Let's explore the bits of floats
+
+#+BEGIN_SRC C :exports both
+#include <math.h>
+#include <stdio.h>
+#include <inttypes.h>
+// 0x1L MUST be used 0x1 causes bugs
+#define BIT(x,y) (x & (0x1L << y))
+#define MAXBITSTRBITS 129
+static char _bitstr[MAXBITSTRBITS] = { '\0' };
+static char * bitString(uint64_t value, const unsigned int bits) {
+    // iterator must be uint64_t
+    for (uint64_t i = 0 ; i < bits; i++) {
+        char bit = (BIT(value,i))?'1':'0';
+        _bitstr[bits-1-i] = bit;
+    }
+    _bitstr[bits] = '\0';
+    return _bitstr;
+}
+
+// NOT PORTABLE
+struct float_t {
+    unsigned int mantissa:23; // LOWEST
+    unsigned int exponent:8;
+    unsigned int sign:1; // HIGHEST
+};
+// type pun for fun!
+union floatint {
+    float f;
+    uint32_t i;
+    struct float_t t;
+};
+
+
+int main() {
+    float floats[] = {
+        0.0,
+       -0.0,
+        INFINITY,
+       -INFINITY,
+        NAN,
+        0.00001,
+        0.0001,
+        0.001,
+        0.01,
+        0.1,
+        1.0,
+        1/64.0,
+        1/32.0,
+        1/16.0,
+        1/8.0,
+        1/4.0,
+        1/2.0,
+        1.0,
+        2.0,
+        4.0,
+        128.0,
+        65536.0,
+        0.15625,
+        -0.15625,
+        36893488147419103232.0, // 2**65
+        -36893488147419103232.0 // 2**65
+    };
+    size_t nfloats = sizeof(floats)/sizeof(float);
+    printf("We're printing floats!\n");
+    printf("sizeof(floatint) == %lu\n", sizeof(union floatint));
+    printf("sizeof(float_t) == %lu\n", sizeof(struct float_t));
+    for (size_t i = 0; i < nfloats; i++) {
+        float f = floats[i];
+        union floatint fi = {.f=f};
+        printf("%12g 0x%08x 0b%s\n", f, fi.i, bitString(fi.i, 32));
+        printf("%12g 0x%08x sign: %hhu exponent: %3hhu exp-127: %4d mantissa: 0x%06x\n", 
+               f,
+               fi.i,
+               fi.t.sign,
+               fi.t.exponent,
+               (int)fi.t.exponent - (int)127,
+               fi.t.mantissa
+        );
+        /* // We don't need bitfields
+        printf("%12g %08x sign: %hhu exponent: %hhu exp-127: %4d mantissa: 0x%06x\n", 
+               f,
+               fi.i,
+               (fi.i >> 31),
+               ((fi.i << 1) >> 24),
+               (int)((fi.i << 1) >> 24) - (int)127,
+               (fi.i & 0x007FFFFF)
+        );
+        */ 
+
+    }
+    puts("");
+}
+#+END_SRC
+
+#+RESULTS:
+#+begin_example
+We're printing floats!
+sizeof(floatint) == 4
+sizeof(float_t) == 4
+           0 0x00000000 0b00000000000000000000000000000000
+           0 0x00000000 sign: 0 exponent:   0 exp-127: -127 mantissa: 0x000000
+          -0 0x80000000 0b10000000000000000000000000000000
+          -0 0x80000000 sign: 1 exponent:   0 exp-127: -127 mantissa: 0x000000
+         inf 0x7f800000 0b01111111100000000000000000000000
+         inf 0x7f800000 sign: 0 exponent: 255 exp-127:  128 mantissa: 0x000000
+        -inf 0xff800000 0b11111111100000000000000000000000
+        -inf 0xff800000 sign: 1 exponent: 255 exp-127:  128 mantissa: 0x000000
+         nan 0x7fc00000 0b01111111110000000000000000000000
+         nan 0x7fc00000 sign: 0 exponent: 255 exp-127:  128 mantissa: 0x400000
+       1e-05 0x3727c5ac 0b00110111001001111100010110101100
+       1e-05 0x3727c5ac sign: 0 exponent: 110 exp-127:  -17 mantissa: 0x27c5ac
+      0.0001 0x38d1b717 0b00111000110100011011011100010111
+      0.0001 0x38d1b717 sign: 0 exponent: 113 exp-127:  -14 mantissa: 0x51b717
+       0.001 0x3a83126f 0b00111010100000110001001001101111
+       0.001 0x3a83126f sign: 0 exponent: 117 exp-127:  -10 mantissa: 0x03126f
+        0.01 0x3c23d70a 0b00111100001000111101011100001010
+        0.01 0x3c23d70a sign: 0 exponent: 120 exp-127:   -7 mantissa: 0x23d70a
+         0.1 0x3dcccccd 0b00111101110011001100110011001101
+         0.1 0x3dcccccd sign: 0 exponent: 123 exp-127:   -4 mantissa: 0x4ccccd
+           1 0x3f800000 0b00111111100000000000000000000000
+           1 0x3f800000 sign: 0 exponent: 127 exp-127:    0 mantissa: 0x000000
+    0.015625 0x3c800000 0b00111100100000000000000000000000
+    0.015625 0x3c800000 sign: 0 exponent: 121 exp-127:   -6 mantissa: 0x000000
+     0.03125 0x3d000000 0b00111101000000000000000000000000
+     0.03125 0x3d000000 sign: 0 exponent: 122 exp-127:   -5 mantissa: 0x000000
+      0.0625 0x3d800000 0b00111101100000000000000000000000
+      0.0625 0x3d800000 sign: 0 exponent: 123 exp-127:   -4 mantissa: 0x000000
+       0.125 0x3e000000 0b00111110000000000000000000000000
+       0.125 0x3e000000 sign: 0 exponent: 124 exp-127:   -3 mantissa: 0x000000
+        0.25 0x3e800000 0b00111110100000000000000000000000
+        0.25 0x3e800000 sign: 0 exponent: 125 exp-127:   -2 mantissa: 0x000000
+         0.5 0x3f000000 0b00111111000000000000000000000000
+         0.5 0x3f000000 sign: 0 exponent: 126 exp-127:   -1 mantissa: 0x000000
+           1 0x3f800000 0b00111111100000000000000000000000
+           1 0x3f800000 sign: 0 exponent: 127 exp-127:    0 mantissa: 0x000000
+           2 0x40000000 0b01000000000000000000000000000000
+           2 0x40000000 sign: 0 exponent: 128 exp-127:    1 mantissa: 0x000000
+           4 0x40800000 0b01000000100000000000000000000000
+           4 0x40800000 sign: 0 exponent: 129 exp-127:    2 mantissa: 0x000000
+         128 0x43000000 0b01000011000000000000000000000000
+         128 0x43000000 sign: 0 exponent: 134 exp-127:    7 mantissa: 0x000000
+       65536 0x47800000 0b01000111100000000000000000000000
+       65536 0x47800000 sign: 0 exponent: 143 exp-127:   16 mantissa: 0x000000
+     0.15625 0x3e200000 0b00111110001000000000000000000000
+     0.15625 0x3e200000 sign: 0 exponent: 124 exp-127:   -3 mantissa: 0x200000
+    -0.15625 0xbe200000 0b10111110001000000000000000000000
+    -0.15625 0xbe200000 sign: 1 exponent: 124 exp-127:   -3 mantissa: 0x200000
+ 3.68935e+19 0x60000000 0b01100000000000000000000000000000
+ 3.68935e+19 0x60000000 sign: 0 exponent: 192 exp-127:   65 mantissa: 0x000000
+-3.68935e+19 0xe0000000 0b11100000000000000000000000000000
+-3.68935e+19 0xe0000000 sign: 1 exponent: 192 exp-127:   65 mantissa: 0x000000
+#+end_example
+
+*** How do I avoid typepunning?
+
+The C99 is OK with union type punning :-/
+
+The "blessed" way that is C11 compatible is memcpy.
+
+Bitfields are generally considered "CURSED" due to platform specific
+behaviour.
+
+You should only memcpy direct types like uint64_t and double IFF they
+have the same size.
+
+#+begin_src c :eval no :main no :exports code
+  // PUN64 copies the bits of double value into a 64bit unsigned int and
+  // returns it.
+  uint64_t PUN64(double value) {
+    uint64_t output = 0;
+    memcpy(&output, &value, sizeof(uint64_t));
+    return output;
+  }
+#+end_src
+
+** Coupling
+
+Coupling often refers to how much 1 module (like a .c file or a .h
+file) relies on other modules.
+
+*** Modules
+
+A module can have different levels of granularity:
+
+- function level 
+- file level (.c or .h)
+- library level (shared code .so)
+- process level (an executable)
+- platform level (GNU/Linux)
+- service level (distributed systems, webservices)
+- ecosystem level (Ubuntu or pip or web)
+
+1 fast way in C of calculating coupling is to count the number of
+include directives.
+
+The number of includes gives one an idea of how many modules that your
+module relies upon.
+
+*** Refs
+
+Structed Design https://ieeexplore.ieee.org/document/5388187
+
