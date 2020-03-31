@@ -460,6 +460,8 @@ and .c files.
 
 Structed Design https://ieeexplore.ieee.org/document/5388187
 
+
+
 ** Coupling
 
 Coupling often refers to how much 1 module (like a .c file or a .h
@@ -477,7 +479,16 @@ In object oriented languages like Java or C++ coupling often refers to
 the number of modules (Classes) that a single class refers to.
 
 Coupling is related to dependencies. Too many dependencies makes a
-system complicated--often erroneously called complex.
+system complicated--often erroneously called complex. If one of these
+dependencies changes, breaks, is deprecated it can harm anything that
+relies upon it. Knowing that a module is heavily relied upon is
+important as well because it implies the risk involved with changing
+that module.
+
+High coupling is bad because it makes code weak to change:
+- too many dependencies increase change of change
+- too many dependencies increase bug risk
+- too many dependencies means dependencies will probably change
 
 In "structured design" as suggested by Constantine there are multiple
 kinds of coupling.
@@ -520,7 +531,7 @@ For data and control flow coupling,
 For global coupling,
 
 - g_d = number of global variables used as data
-- g-c = number of global variables used as control
+- g_c = number of global variables used as control
 
 For environmental coupling,
 
@@ -803,7 +814,7 @@ void checkInput(int err); // a prototype!
 #endif
 #+end_src
 
-coupling_h = ?
+- coupling_h = ?
 
 #+begin_src C :eval no :exports code
 #include "parameters.h"
@@ -836,9 +847,9 @@ void freeParamsCombo(Combo combo, Parameter * params);
 void freeCombo(Combo combo);
 #+end_src
 
-w=3
-z=2
-coupling_h = 1/(4*w + z)
+- w=3
+- z=2
+- coupling_h = 1/(4*w + z)
 
 #+begin_src C :eval no :exports code
 // Implement a guard
@@ -921,9 +932,9 @@ void printParams(Parameter * params, size_t size);
 
 3 includes & 1 reference to int64_t
 
-w=3
-z=1
-coupling_h = 1/(4*w + z)
+- w=3
+- z=1
+- coupling_h = 1/(4*w + z)
 
 #+begin_src C :eval no :exports code
 #include "parameters.h"
@@ -999,10 +1010,53 @@ void addStringPPDArray(PPDArray array, char * str );
 
 3 includes & 3 reference to int64_t, Parameter and ParameterDef
 
-w=3
-z=3
-coupling_h = 1/(4*w + z)
+- w=3
+- z=3
+- coupling_h = 1/(4*w + z)
 
+** Cohesion 
+
+Cohesion is about how relevant code is to itself. A highly cohesive
+module is topical, that is about it is about a single topic.
+
+stdlib.h is low cohesion because it does too many things. From memory
+allocation to random number generation stdlib.h does too much. It is
+not cohesive.
+
+math.h has better cohesion than stdlib.h but its cohesion is
+considered low because the functions are just logically related to
+math and floating point operations. In fact many of the operations
+could be refactored and moved into floating point specific libraries.
+
+parameters.h is very cohesive, it only deals with parameters and
+parameter defs. Its responsibilities are the creation of parameters
+and parameter defs. Its only weird responsibility is for printing
+parameters which is probably its least cohesive part.
+
+To calculate cohesion there's many metrics suggested but I suggest
+reading the module and writing bullet points about responsibilities.
+Let's look at ppdarray.c:
+  - representation: structs for PPD array and containers
+  - creation & allocation
+  - destruction & deallocation
+  - array access
+  - array appending
+
+So 5 responsibilities. Let's look at checkinput.h:
+  - error detection
+  - error reporting
+
+Checkinput.h is clearly more cohesive than PPDArray mostly because it
+has less responsibilities. Even though both are very cohesive modules
+
+My stdio.h has 122 externs defined within it. It is way less cohesive
+than PPDArray but all of stdio.h's externs are about io to terminals
+and files. So it is still logically cohesive. 
+
+My stdlib.h has 153 externs defined within it. But it handles memory
+allocation, temporary files, environment variables, sorting, binary
+search, converting floats to strings, etc. No cohesive and often
+called coincidental cohesion (aka you're lucky if it is cohesive).
 
 *** Refs
 
