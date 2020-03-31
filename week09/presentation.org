@@ -122,7 +122,7 @@ https://docs.google.com/document/d/1wcBnHZEaW4ukcZNlMNZJdbxkyPOQFGQhtANpqW5tx_8/
         - no guarantees
         - your compiler w/ optimizer is typically better.
 *** Type qualifiers
-
+file:/usr/include/string.h
 Add these to types to communicate to other programmers and the
 compiler.
 
@@ -175,9 +175,9 @@ all of this gets skipped
 #endif
 
 // Try commenting/uncommenting the following:
-#define TURBO
-#define DEBUG
 
+
+#define TURBO
 
 
 int main() {
@@ -205,7 +205,6 @@ int main() {
 #+RESULTS:
 : Value is 27!
 : Turbo is on!
-: Reached end of main, quitting!
 
 
 
@@ -235,7 +234,7 @@ order doesnt matter here
 order matters here too
 #endif
 
-#ifndef MAIN_DEFINED
+#ifdef MAIN_DEFINED
 #define MAIN_DEFINED
 int main() {
     printf("Main 1!\n");
@@ -253,7 +252,7 @@ int main() {
 #+END_SRC
 
 #+RESULTS:
-: Main 1!
+: Main 2!
 
 *** Guards
 
