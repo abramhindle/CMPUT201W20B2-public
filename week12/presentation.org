@@ -456,12 +456,6 @@ A module can have different levels of granularity:
 In C typically a module refers to a pair of .c file or a pair of .h
 and .c files.
 
-*** Refs
-
-Structed Design https://ieeexplore.ieee.org/document/5388187
-
-
-
 ** Coupling
 
 Coupling often refers to how much 1 module (like a .c file or a .h

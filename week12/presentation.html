@@ -3,7 +3,7 @@
 "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
 <head>
-<!-- 2020-03-31 Tue 11:38 -->
+<!-- 2020-03-31 Tue 12:27 -->
 <meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <title>CMPUT201W20B2 Week 12</title>
@@ -247,52 +247,48 @@ for the JavaScript code in this tag.
 <h2>Table of Contents</h2>
 <div id="text-table-of-contents">
 <ul>
-<li><a href="#orgea6c828">1. Week12</a>
+<li><a href="#orgadeb6ca">1. Week12</a>
 <ul>
-<li><a href="#orgd1003d6">1.1. Copyright Statement</a>
+<li><a href="#org115f64c">1.1. Copyright Statement</a>
 <ul>
-<li><a href="#orgb344332">1.1.1. License</a></li>
-<li><a href="#org083ae98">1.1.2. Hazel Code is licensed under AGPL3.0+</a></li>
+<li><a href="#org4d9a98b">1.1.1. License</a></li>
+<li><a href="#org7879016">1.1.2. Hazel Code is licensed under AGPL3.0+</a></li>
 </ul>
 </li>
-<li><a href="#org069734b">1.2. Alternative version</a></li>
-<li><a href="#orgd869017">1.3. Init ORG-MODE</a>
+<li><a href="#org6f1d05e">1.2. Alternative version</a></li>
+<li><a href="#orga90fbbb">1.3. Init ORG-MODE</a>
 <ul>
-<li><a href="#orgc2e2d67">1.3.1. Org export</a></li>
-<li><a href="#org11b7cb5">1.3.2. Org Template</a></li>
+<li><a href="#org49dd19b">1.3.1. Org export</a></li>
+<li><a href="#org65a8a87">1.3.2. Org Template</a></li>
 </ul>
 </li>
-<li><a href="#org928f043">1.4. Remember how to compile?</a></li>
-<li><a href="#org5abc4dc">1.5. Numbers!</a>
+<li><a href="#orge3117e3">1.4. Remember how to compile?</a></li>
+<li><a href="#orgb98f659">1.5. Numbers!</a>
 <ul>
-<li><a href="#org09893e9">1.5.1. Binary</a></li>
-<li><a href="#orga2bb5c2">1.5.2. Octal</a></li>
-<li><a href="#org8c8ef8b">1.5.3. Base10 Review</a></li>
-<li><a href="#org87deb6a">1.5.4. Hex Review</a></li>
+<li><a href="#org1025cc5">1.5.1. Binary</a></li>
+<li><a href="#orga9e56f5">1.5.2. Octal</a></li>
+<li><a href="#org41bef78">1.5.3. Base10 Review</a></li>
+<li><a href="#org907ae29">1.5.4. Hex Review</a></li>
 </ul>
 </li>
-<li><a href="#org7f3ec29">1.6. Floating Point Numbers</a>
+<li><a href="#org6164dd7">1.6. Floating Point Numbers</a>
 <ul>
-<li><a href="#orgdeb15ad">1.6.1. Resources</a></li>
-<li><a href="#org3c07a25">1.6.2. Single precision IEEE754 floating point numbers</a></li>
-<li><a href="#orgb4ec27f">1.6.3. Let's explore the bits of floats</a></li>
-<li><a href="#org1ecc21b">1.6.4. How do I avoid typepunning?</a></li>
+<li><a href="#org7459f77">1.6.1. Resources</a></li>
+<li><a href="#orgca7b923">1.6.2. Single precision IEEE754 floating point numbers</a></li>
+<li><a href="#org337a4f4">1.6.3. Let's explore the bits of floats</a></li>
+<li><a href="#org199d13e">1.6.4. How do I avoid typepunning?</a></li>
 </ul>
 </li>
-<li><a href="#orgd69a162">1.7. Modules</a>
+<li><a href="#org8837b3b">1.7. Modules</a></li>
+<li><a href="#orgfc8e2c9">1.8. Coupling</a>
 <ul>
-<li><a href="#orgfa2f959">1.7.1. Refs</a></li>
+<li><a href="#org013fe8c">1.8.1. Coupling</a></li>
+<li><a href="#orgc0f932c">1.8.2. Graph Coupling</a></li>
 </ul>
 </li>
-<li><a href="#org12f4366">1.8. Coupling</a>
+<li><a href="#org5277ab2">1.9. Cohesion</a>
 <ul>
-<li><a href="#org6ec1c28">1.8.1. Coupling</a></li>
-<li><a href="#orge6f8ff8">1.8.2. Graph Coupling</a></li>
-</ul>
-</li>
-<li><a href="#org94f3260">1.9. Cohesion</a>
-<ul>
-<li><a href="#orgdca15ba">1.9.1. Refs</a></li>
+<li><a href="#org10d7c4d">1.9.1. Refs</a></li>
 </ul>
 </li>
 </ul>
@@ -301,15 +297,15 @@ for the JavaScript code in this tag.
 </div>
 </div>
 
-<div id="outline-container-orgea6c828" class="outline-2">
-<h2 id="orgea6c828"><span class="section-number-2">1</span> Week12</h2>
+<div id="outline-container-orgadeb6ca" class="outline-2">
+<h2 id="orgadeb6ca"><span class="section-number-2">1</span> Week12</h2>
 <div class="outline-text-2" id="text-1">
 <p>
 <a href="https://github.com/abramhindle/CMPUT201W20B2-public/tree/master/week12">https://github.com/abramhindle/CMPUT201W20B2-public/tree/master/week12</a>
 </p>
 </div>
-<div id="outline-container-orgd1003d6" class="outline-3">
-<h3 id="orgd1003d6"><span class="section-number-3">1.1</span> Copyright Statement</h3>
+<div id="outline-container-org115f64c" class="outline-3">
+<h3 id="org115f64c"><span class="section-number-3">1.1</span> Copyright Statement</h3>
 <div class="outline-text-3" id="text-1-1">
 <p>
 If you are in CMPUT201 at UAlberta this code is released in the public
@@ -321,8 +317,8 @@ Otherwise it is (c) 2020 Abram Hindle, Hazel Campbell AGPL3.0+
 </p>
 </div>
 
-<div id="outline-container-orgb344332" class="outline-4">
-<h4 id="orgb344332"><span class="section-number-4">1.1.1</span> License</h4>
+<div id="outline-container-org4d9a98b" class="outline-4">
+<h4 id="org4d9a98b"><span class="section-number-4">1.1.1</span> License</h4>
 <div class="outline-text-4" id="text-1-1-1">
 <p>
 CMPUT 201 C Notes
@@ -351,8 +347,8 @@ along with this program.  If not, see <a href="https://www.gnu.org/licenses/">ht
 </div>
 
 
-<div id="outline-container-org083ae98" class="outline-4">
-<h4 id="org083ae98"><span class="section-number-4">1.1.2</span> Hazel Code is licensed under AGPL3.0+</h4>
+<div id="outline-container-org7879016" class="outline-4">
+<h4 id="org7879016"><span class="section-number-4">1.1.2</span> Hazel Code is licensed under AGPL3.0+</h4>
 <div class="outline-text-4" id="text-1-1-2">
 <p>
 Hazel's code is also found here
@@ -367,8 +363,8 @@ license, unless otherwise noted.
 </div>
 </div>
 
-<div id="outline-container-org069734b" class="outline-3">
-<h3 id="org069734b"><span class="section-number-3">1.2</span> Alternative version</h3>
+<div id="outline-container-org6f1d05e" class="outline-3">
+<h3 id="org6f1d05e"><span class="section-number-3">1.2</span> Alternative version</h3>
 <div class="outline-text-3" id="text-1-2">
 <p>
 Checkout the .txt, the .pdf, and the .html version
@@ -376,8 +372,8 @@ Checkout the .txt, the .pdf, and the .html version
 </div>
 </div>
 
-<div id="outline-container-orgd869017" class="outline-3">
-<h3 id="orgd869017"><span class="section-number-3">1.3</span> Init ORG-MODE</h3>
+<div id="outline-container-orga90fbbb" class="outline-3">
+<h3 id="orga90fbbb"><span class="section-number-3">1.3</span> Init ORG-MODE</h3>
 <div class="outline-text-3" id="text-1-3">
 <div class="org-src-container">
 <pre class="src src-elisp"><span style="color: #b22222;">;; </span><span style="color: #b22222;">I need this for org-mode to work well</span>
@@ -400,8 +396,8 @@ Checkout the .txt, the .pdf, and the .html version
 </div>
 </div>
 
-<div id="outline-container-orgc2e2d67" class="outline-4">
-<h4 id="orgc2e2d67"><span class="section-number-4">1.3.1</span> Org export</h4>
+<div id="outline-container-org49dd19b" class="outline-4">
+<h4 id="org49dd19b"><span class="section-number-4">1.3.1</span> Org export</h4>
 <div class="outline-text-4" id="text-1-3-1">
 <div class="org-src-container">
 <pre class="src src-elisp">(org-html-export-to-html)
@@ -413,8 +409,8 @@ Checkout the .txt, the .pdf, and the .html version
 </div>
 
 
-<div id="outline-container-org11b7cb5" class="outline-4">
-<h4 id="org11b7cb5"><span class="section-number-4">1.3.2</span> Org Template</h4>
+<div id="outline-container-org65a8a87" class="outline-4">
+<h4 id="org65a8a87"><span class="section-number-4">1.3.2</span> Org Template</h4>
 <div class="outline-text-4" id="text-1-3-2">
 <p>
 Copy and paste this to demo C
@@ -432,8 +428,8 @@ Copy and paste this to demo C
 </div>
 </div>
 
-<div id="outline-container-org928f043" class="outline-3">
-<h3 id="org928f043"><span class="section-number-3">1.4</span> Remember how to compile?</h3>
+<div id="outline-container-orge3117e3" class="outline-3">
+<h3 id="orge3117e3"><span class="section-number-3">1.4</span> Remember how to compile?</h3>
 <div class="outline-text-3" id="text-1-4">
 <p>
 gcc  -std=c99 -pedantic -Wall -Wextra -ftrapv -ggdb3 -o programname programname.c
@@ -441,8 +437,8 @@ gcc  -std=c99 -pedantic -Wall -Wextra -ftrapv -ggdb3 -o programname programname.
 </div>
 </div>
 
-<div id="outline-container-org5abc4dc" class="outline-3">
-<h3 id="org5abc4dc"><span class="section-number-3">1.5</span> Numbers!</h3>
+<div id="outline-container-orgb98f659" class="outline-3">
+<h3 id="orgb98f659"><span class="section-number-3">1.5</span> Numbers!</h3>
 <div class="outline-text-3" id="text-1-5">
 <p>
 Computers love powers of 2 because we calculate everything via bits.
@@ -474,8 +470,8 @@ Bases used on computers:
 </ul>
 </div>
 
-<div id="outline-container-org09893e9" class="outline-4">
-<h4 id="org09893e9"><span class="section-number-4">1.5.1</span> Binary</h4>
+<div id="outline-container-org1025cc5" class="outline-4">
+<h4 id="org1025cc5"><span class="section-number-4">1.5.1</span> Binary</h4>
 <div class="outline-text-4" id="text-1-5-1">
 <pre class="example">
 Base 2: powers of 2
@@ -495,8 +491,8 @@ Digits: 0,1
 </div>
 </div>
 
-<div id="outline-container-orga2bb5c2" class="outline-4">
-<h4 id="orga2bb5c2"><span class="section-number-4">1.5.2</span> Octal</h4>
+<div id="outline-container-orga9e56f5" class="outline-4">
+<h4 id="orga9e56f5"><span class="section-number-4">1.5.2</span> Octal</h4>
 <div class="outline-text-4" id="text-1-5-2">
 <div class="org-src-container">
 <pre class="src src-C"><span style="color: #483d8b;">#include</span> <span style="color: #8b2252;">&lt;stdio.h&gt;</span>
@@ -537,8 +533,8 @@ Digits: 0,1,2,3,4,5,6,7
 </div>
 </div>
 
-<div id="outline-container-org8c8ef8b" class="outline-4">
-<h4 id="org8c8ef8b"><span class="section-number-4">1.5.3</span> Base10 Review</h4>
+<div id="outline-container-org41bef78" class="outline-4">
+<h4 id="org41bef78"><span class="section-number-4">1.5.3</span> Base10 Review</h4>
 <div class="outline-text-4" id="text-1-5-3">
 <pre class="example">
 Base 10: power of 10
@@ -560,8 +556,8 @@ Base 10: power of 10
 </div>
 </div>
 
-<div id="outline-container-org87deb6a" class="outline-4">
-<h4 id="org87deb6a"><span class="section-number-4">1.5.4</span> Hex Review</h4>
+<div id="outline-container-org907ae29" class="outline-4">
+<h4 id="org907ae29"><span class="section-number-4">1.5.4</span> Hex Review</h4>
 <div class="outline-text-4" id="text-1-5-4">
 <pre class="example">
 Base 16: power of 16
@@ -600,12 +596,12 @@ Digit Lookup
 </div>
 </div>
 
-<div id="outline-container-org7f3ec29" class="outline-3">
-<h3 id="org7f3ec29"><span class="section-number-3">1.6</span> Floating Point Numbers</h3>
+<div id="outline-container-org6164dd7" class="outline-3">
+<h3 id="org6164dd7"><span class="section-number-3">1.6</span> Floating Point Numbers</h3>
 <div class="outline-text-3" id="text-1-6">
 </div>
-<div id="outline-container-orgdeb15ad" class="outline-4">
-<h4 id="orgdeb15ad"><span class="section-number-4">1.6.1</span> Resources</h4>
+<div id="outline-container-org7459f77" class="outline-4">
+<h4 id="org7459f77"><span class="section-number-4">1.6.1</span> Resources</h4>
 <div class="outline-text-4" id="text-1-6-1">
 <p>
 Helpful resources:
@@ -617,8 +613,8 @@ Helpful resources:
 </div>
 </div>
 
-<div id="outline-container-org3c07a25" class="outline-4">
-<h4 id="org3c07a25"><span class="section-number-4">1.6.2</span> Single precision IEEE754 floating point numbers</h4>
+<div id="outline-container-orgca7b923" class="outline-4">
+<h4 id="orgca7b923"><span class="section-number-4">1.6.2</span> Single precision IEEE754 floating point numbers</h4>
 <div class="outline-text-4" id="text-1-6-2">
 <p>
 Type: float
@@ -799,8 +795,8 @@ pow(2,-3) + 0*pow(2,-4) + 1*pow(2,-5) (pow(2,5)==32, pow(2,-5) = 1/32.0)
 </div>
 </div>
 
-<div id="outline-container-orgb4ec27f" class="outline-4">
-<h4 id="orgb4ec27f"><span class="section-number-4">1.6.3</span> Let's explore the bits of floats</h4>
+<div id="outline-container-org337a4f4" class="outline-4">
+<h4 id="org337a4f4"><span class="section-number-4">1.6.3</span> Let's explore the bits of floats</h4>
 <div class="outline-text-4" id="text-1-6-3">
 <div class="org-src-container">
 <pre class="src src-C"><span style="color: #483d8b;">#include</span> <span style="color: #8b2252;">&lt;math.h&gt;</span>
@@ -956,8 +952,8 @@ sizeof(float_t) == 4
 </div>
 </div>
 
-<div id="outline-container-org1ecc21b" class="outline-4">
-<h4 id="org1ecc21b"><span class="section-number-4">1.6.4</span> How do I avoid typepunning?</h4>
+<div id="outline-container-org199d13e" class="outline-4">
+<h4 id="org199d13e"><span class="section-number-4">1.6.4</span> How do I avoid typepunning?</h4>
 <div class="outline-text-4" id="text-1-6-4">
 <p>
 The C99 is OK with union type punning :-/
@@ -991,8 +987,8 @@ have the same size.
 </div>
 </div>
 
-<div id="outline-container-orgd69a162" class="outline-3">
-<h3 id="orgd69a162"><span class="section-number-3">1.7</span> Modules</h3>
+<div id="outline-container-org8837b3b" class="outline-3">
+<h3 id="org8837b3b"><span class="section-number-3">1.7</span> Modules</h3>
 <div class="outline-text-3" id="text-1-7">
 <p>
 A module can have different levels of granularity:
@@ -1013,21 +1009,10 @@ In C typically a module refers to a pair of .c file or a pair of .h
 and .c files.
 </p>
 </div>
-
-<div id="outline-container-orgfa2f959" class="outline-4">
-<h4 id="orgfa2f959"><span class="section-number-4">1.7.1</span> Refs</h4>
-<div class="outline-text-4" id="text-1-7-1">
-<p>
-Structed Design <a href="https://ieeexplore.ieee.org/document/5388187">https://ieeexplore.ieee.org/document/5388187</a>
-</p>
-</div>
-</div>
 </div>
 
-
-
-<div id="outline-container-org12f4366" class="outline-3">
-<h3 id="org12f4366"><span class="section-number-3">1.8</span> Coupling</h3>
+<div id="outline-container-orgfc8e2c9" class="outline-3">
+<h3 id="orgfc8e2c9"><span class="section-number-3">1.8</span> Coupling</h3>
 <div class="outline-text-3" id="text-1-8">
 <p>
 Coupling often refers to how much 1 module (like a .c file or a .h
@@ -1035,8 +1020,8 @@ file) relies on other modules.
 </p>
 </div>
 
-<div id="outline-container-org6ec1c28" class="outline-4">
-<h4 id="org6ec1c28"><span class="section-number-4">1.8.1</span> Coupling</h4>
+<div id="outline-container-org013fe8c" class="outline-4">
+<h4 id="org013fe8c"><span class="section-number-4">1.8.1</span> Coupling</h4>
 <div class="outline-text-4" id="text-1-8-1">
 <p>
 1 fast way in C of calculating coupling is to count the number of
@@ -1098,8 +1083,8 @@ to other modules and their parts by name.
 </div>
 </div>
 
-<div id="outline-container-orge6f8ff8" class="outline-4">
-<h4 id="orge6f8ff8"><span class="section-number-4">1.8.2</span> Graph Coupling</h4>
+<div id="outline-container-orgc0f932c" class="outline-4">
+<h4 id="orgc0f932c"><span class="section-number-4">1.8.2</span> Graph Coupling</h4>
 <div class="outline-text-4" id="text-1-8-2">
 <p>
 From Pressman and Dhama [DHA95].
@@ -1175,7 +1160,7 @@ Low  m<sub>c</sub>: high coupling
 </div>
 
 <ol class="org-ol">
-<li><a id="org99bde60"></a>Coupling<sub>h</sub> &#x2013; my take<br />
+<li><a id="org79662c4"></a>Coupling<sub>h</sub> &#x2013; my take<br />
 <div class="outline-text-5" id="text-1-8-2-1">
 <p>
 My take?
@@ -1217,9 +1202,9 @@ You can invent your own coupling measures for your own purposes.
 </div>
 </li>
 
-<li><a id="org3db3c8c"></a>Low coupling<br />
+<li><a id="org31d540c"></a>Low coupling<br />
 <ol class="org-ol">
-<li><a id="orgedf2e65"></a>No Coupling<br />
+<li><a id="orgd3d97df"></a>No Coupling<br />
 <div class="outline-text-6" id="text-1-8-2-2-1">
 <div class="org-src-container">
 <pre class="src src-C"><span style="color: #b22222;">// </span><span style="color: #b22222;">0 coupling, no modules</span>
@@ -1238,7 +1223,7 @@ You can invent your own coupling measures for your own purposes.
 </div>
 </li>
 
-<li><a id="orga3ea35a"></a>A little coupling<br />
+<li><a id="org93e21ef"></a>A little coupling<br />
 <div class="outline-text-6" id="text-1-8-2-2-2">
 <p>
 We're now related to the stdlib IO routines
@@ -1265,7 +1250,7 @@ We're now related to the stdlib IO routines
 </li>
 
 
-<li><a id="org753449f"></a>A little more coupling<br />
+<li><a id="org264e7ed"></a>A little more coupling<br />
 <div class="outline-text-6" id="text-1-8-2-2-3">
 <p>
 Now we're bound to stdlib.h and randr
@@ -1292,7 +1277,7 @@ Now we're bound to stdlib.h and randr
 </div>
 </li>
 
-<li><a id="org8594193"></a>More coupling<br />
+<li><a id="org60386c3"></a>More coupling<br />
 <div class="outline-text-6" id="text-1-8-2-2-4">
 <p>
 Now we're bound to string.h as well
@@ -1323,7 +1308,7 @@ Now we're bound to string.h as well
 </div>
 </li>
 
-<li><a id="orgc6d5131"></a>Even More Coupling:<br />
+<li><a id="orgcfaf160"></a>Even More Coupling:<br />
 <div class="outline-text-6" id="text-1-8-2-2-5">
 <div class="org-src-container">
 <pre class="src src-C"><span style="color: #b22222;">/*</span>
@@ -1375,7 +1360,7 @@ Now we're bound to string.h as well
 </li>
 
 
-<li><a id="org4da7ece"></a>A lot of coupling<br />
+<li><a id="orgf779a2d"></a>A lot of coupling<br />
 <div class="outline-text-6" id="text-1-8-2-2-6">
 <p>
 GUI apps often rely on lots of libraries.
@@ -1401,82 +1386,82 @@ It needs:
 </div>
 
 <pre class="example">
-linux-vdso.so.1 (0x00007ffd2e9fb000)
-libevdocument3.so.4 =&gt; /usr/lib/x86_64-linux-gnu/libevdocument3.so.4 (0x00007f346132f000)
-libevview3.so.3 =&gt; /usr/lib/x86_64-linux-gnu/libevview3.so.3 (0x00007f34610d8000)
-libsecret-1.so.0 =&gt; /usr/lib/x86_64-linux-gnu/libsecret-1.so.0 (0x00007f3460e88000)
-libgnome-desktop-3.so.17 =&gt; /usr/lib/x86_64-linux-gnu/libgnome-desktop-3.so.17 (0x00007f3460c4c000)
-libgtk-3.so.0 =&gt; /usr/lib/x86_64-linux-gnu/libgtk-3.so.0 (0x00007f3460344000)
-libgdk-3.so.0 =&gt; /usr/lib/x86_64-linux-gnu/libgdk-3.so.0 (0x00007f346004e000)
-libpangocairo-1.0.so.0 =&gt; /usr/lib/x86_64-linux-gnu/libpangocairo-1.0.so.0 (0x00007f345fe41000)
-libpango-1.0.so.0 =&gt; /usr/lib/x86_64-linux-gnu/libpango-1.0.so.0 (0x00007f345fbf4000)
-libatk-1.0.so.0 =&gt; /usr/lib/x86_64-linux-gnu/libatk-1.0.so.0 (0x00007f345f9ce000)
-libcairo-gobject.so.2 =&gt; /usr/lib/x86_64-linux-gnu/libcairo-gobject.so.2 (0x00007f345f7c5000)
-libcairo.so.2 =&gt; /usr/lib/x86_64-linux-gnu/libcairo.so.2 (0x00007f345f4a8000)
-libgio-2.0.so.0 =&gt; /usr/lib/x86_64-linux-gnu/libgio-2.0.so.0 (0x00007f345f109000)
-libgdk_pixbuf-2.0.so.0 =&gt; /usr/lib/x86_64-linux-gnu/libgdk_pixbuf-2.0.so.0 (0x00007f345eee5000)
-libgobject-2.0.so.0 =&gt; /usr/lib/x86_64-linux-gnu/libgobject-2.0.so.0 (0x00007f345ec91000)
-libglib-2.0.so.0 =&gt; /usr/lib/x86_64-linux-gnu/libglib-2.0.so.0 (0x00007f345e97a000)
-libm.so.6 =&gt; /lib/x86_64-linux-gnu/libm.so.6 (0x00007f345e5dc000)
-libpthread.so.0 =&gt; /lib/x86_64-linux-gnu/libpthread.so.0 (0x00007f345e3bd000)
-libc.so.6 =&gt; /lib/x86_64-linux-gnu/libc.so.6 (0x00007f345dfcc000)
-libgmodule-2.0.so.0 =&gt; /usr/lib/x86_64-linux-gnu/libgmodule-2.0.so.0 (0x00007f345ddc8000)
-libz.so.1 =&gt; /lib/x86_64-linux-gnu/libz.so.1 (0x00007f345dbab000)
-libgstvideo-1.0.so.0 =&gt; /usr/lib/x86_64-linux-gnu/libgstvideo-1.0.so.0 (0x00007f345d912000)
-libgstreamer-1.0.so.0 =&gt; /usr/lib/x86_64-linux-gnu/libgstreamer-1.0.so.0 (0x00007f345d5d7000)
-libgcrypt.so.20 =&gt; /lib/x86_64-linux-gnu/libgcrypt.so.20 (0x00007f345d2bb000)
-libX11.so.6 =&gt; /usr/lib/x86_64-linux-gnu/libX11.so.6 (0x00007f345cf83000)
-libudev.so.1 =&gt; /lib/x86_64-linux-gnu/libudev.so.1 (0x00007f345cd65000)
-libseccomp.so.2 =&gt; /lib/x86_64-linux-gnu/libseccomp.so.2 (0x00007f345cb1e000)
-librt.so.1 =&gt; /lib/x86_64-linux-gnu/librt.so.1 (0x00007f345c916000)
-libXi.so.6 =&gt; /usr/lib/x86_64-linux-gnu/libXi.so.6 (0x00007f345c706000)
-libXfixes.so.3 =&gt; /usr/lib/x86_64-linux-gnu/libXfixes.so.3 (0x00007f345c500000)
-libatk-bridge-2.0.so.0 =&gt; /usr/lib/x86_64-linux-gnu/libatk-bridge-2.0.so.0 (0x00007f345c2cf000)
-libepoxy.so.0 =&gt; /usr/lib/x86_64-linux-gnu/libepoxy.so.0 (0x00007f345bfce000)
-libpangoft2-1.0.so.0 =&gt; /usr/lib/x86_64-linux-gnu/libpangoft2-1.0.so.0 (0x00007f345bdb8000)
-libfontconfig.so.1 =&gt; /usr/lib/x86_64-linux-gnu/libfontconfig.so.1 (0x00007f345bb73000)
-libXinerama.so.1 =&gt; /usr/lib/x86_64-linux-gnu/libXinerama.so.1 (0x00007f345b970000)
-libXrandr.so.2 =&gt; /usr/lib/x86_64-linux-gnu/libXrandr.so.2 (0x00007f345b765000)
-libXcursor.so.1 =&gt; /usr/lib/x86_64-linux-gnu/libXcursor.so.1 (0x00007f345b55b000)
-libXcomposite.so.1 =&gt; /usr/lib/x86_64-linux-gnu/libXcomposite.so.1 (0x00007f345b358000)
-libXdamage.so.1 =&gt; /usr/lib/x86_64-linux-gnu/libXdamage.so.1 (0x00007f345b155000)
-libxkbcommon.so.0 =&gt; /usr/lib/x86_64-linux-gnu/libxkbcommon.so.0 (0x00007f345af16000)
-libwayland-cursor.so.0 =&gt; /usr/lib/x86_64-linux-gnu/libwayland-cursor.so.0 (0x00007f345ad0e000)
-libwayland-egl.so.1 =&gt; /usr/lib/x86_64-linux-gnu/libwayland-egl.so.1 (0x00007f345ab0c000)
-libwayland-client.so.0 =&gt; /usr/lib/x86_64-linux-gnu/libwayland-client.so.0 (0x00007f345a8fd000)
-libXext.so.6 =&gt; /usr/lib/x86_64-linux-gnu/libXext.so.6 (0x00007f345a6eb000)
-libfreetype.so.6 =&gt; /usr/lib/x86_64-linux-gnu/libfreetype.so.6 (0x00007f345a437000)
-libthai.so.0 =&gt; /usr/lib/x86_64-linux-gnu/libthai.so.0 (0x00007f345a22e000)
-libpixman-1.so.0 =&gt; /usr/lib/x86_64-linux-gnu/libpixman-1.so.0 (0x00007f3459f89000)
-libpng16.so.16 =&gt; /usr/lib/x86_64-linux-gnu/libpng16.so.16 (0x00007f3459d57000)
-libxcb-shm.so.0 =&gt; /usr/lib/x86_64-linux-gnu/libxcb-shm.so.0 (0x00007f3459b54000)
-libxcb.so.1 =&gt; /usr/lib/x86_64-linux-gnu/libxcb.so.1 (0x00007f345992c000)
-libxcb-render.so.0 =&gt; /usr/lib/x86_64-linux-gnu/libxcb-render.so.0 (0x00007f345971f000)
-libXrender.so.1 =&gt; /usr/lib/x86_64-linux-gnu/libXrender.so.1 (0x00007f3459515000)
-libselinux.so.1 =&gt; /lib/x86_64-linux-gnu/libselinux.so.1 (0x00007f34592ed000)
-libresolv.so.2 =&gt; /lib/x86_64-linux-gnu/libresolv.so.2 (0x00007f34590d2000)
-libmount.so.1 =&gt; /lib/x86_64-linux-gnu/libmount.so.1 (0x00007f3458e7e000)
-libffi.so.6 =&gt; /usr/lib/x86_64-linux-gnu/libffi.so.6 (0x00007f3458c76000)
-libpcre.so.3 =&gt; /lib/x86_64-linux-gnu/libpcre.so.3 (0x00007f3458a04000)
-/lib64/ld-linux-x86-64.so.2 (0x00007f34617d5000)
-libdl.so.2 =&gt; /lib/x86_64-linux-gnu/libdl.so.2 (0x00007f3458800000)
-libgstbase-1.0.so.0 =&gt; /usr/lib/x86_64-linux-gnu/libgstbase-1.0.so.0 (0x00007f345858b000)
-liborc-0.4.so.0 =&gt; /usr/lib/x86_64-linux-gnu/liborc-0.4.so.0 (0x00007f345830f000)
-libgpg-error.so.0 =&gt; /lib/x86_64-linux-gnu/libgpg-error.so.0 (0x00007f34580fa000)
-libdbus-1.so.3 =&gt; /lib/x86_64-linux-gnu/libdbus-1.so.3 (0x00007f3457ead000)
-libatspi.so.0 =&gt; /usr/lib/x86_64-linux-gnu/libatspi.so.0 (0x00007f3457c7d000)
-libharfbuzz.so.0 =&gt; /usr/lib/x86_64-linux-gnu/libharfbuzz.so.0 (0x00007f34579df000)
-libexpat.so.1 =&gt; /lib/x86_64-linux-gnu/libexpat.so.1 (0x00007f34577ad000)
-libdatrie.so.1 =&gt; /usr/lib/x86_64-linux-gnu/libdatrie.so.1 (0x00007f34575a6000)
-libXau.so.6 =&gt; /usr/lib/x86_64-linux-gnu/libXau.so.6 (0x00007f34573a2000)
-libXdmcp.so.6 =&gt; /usr/lib/x86_64-linux-gnu/libXdmcp.so.6 (0x00007f345719c000)
-libblkid.so.1 =&gt; /lib/x86_64-linux-gnu/libblkid.so.1 (0x00007f3456f4f000)
-libsystemd.so.0 =&gt; /lib/x86_64-linux-gnu/libsystemd.so.0 (0x00007f3456ccb000)
-libgraphite2.so.3 =&gt; /usr/lib/x86_64-linux-gnu/libgraphite2.so.3 (0x00007f3456a9e000)
-libbsd.so.0 =&gt; /lib/x86_64-linux-gnu/libbsd.so.0 (0x00007f3456889000)
-libuuid.so.1 =&gt; /lib/x86_64-linux-gnu/libuuid.so.1 (0x00007f3456682000)
-liblzma.so.5 =&gt; /lib/x86_64-linux-gnu/liblzma.so.5 (0x00007f345645c000)
-liblz4.so.1 =&gt; /usr/lib/x86_64-linux-gnu/liblz4.so.1 (0x00007f3456240000)
+linux-vdso.so.1 (0x00007ffcb1bf9000)
+libevdocument3.so.4 =&gt; /usr/lib/x86_64-linux-gnu/libevdocument3.so.4 (0x00007feac9234000)
+libevview3.so.3 =&gt; /usr/lib/x86_64-linux-gnu/libevview3.so.3 (0x00007feac8fdd000)
+libsecret-1.so.0 =&gt; /usr/lib/x86_64-linux-gnu/libsecret-1.so.0 (0x00007feac8d8d000)
+libgnome-desktop-3.so.17 =&gt; /usr/lib/x86_64-linux-gnu/libgnome-desktop-3.so.17 (0x00007feac8b51000)
+libgtk-3.so.0 =&gt; /usr/lib/x86_64-linux-gnu/libgtk-3.so.0 (0x00007feac8249000)
+libgdk-3.so.0 =&gt; /usr/lib/x86_64-linux-gnu/libgdk-3.so.0 (0x00007feac7f53000)
+libpangocairo-1.0.so.0 =&gt; /usr/lib/x86_64-linux-gnu/libpangocairo-1.0.so.0 (0x00007feac7d46000)
+libpango-1.0.so.0 =&gt; /usr/lib/x86_64-linux-gnu/libpango-1.0.so.0 (0x00007feac7af9000)
+libatk-1.0.so.0 =&gt; /usr/lib/x86_64-linux-gnu/libatk-1.0.so.0 (0x00007feac78d3000)
+libcairo-gobject.so.2 =&gt; /usr/lib/x86_64-linux-gnu/libcairo-gobject.so.2 (0x00007feac76ca000)
+libcairo.so.2 =&gt; /usr/lib/x86_64-linux-gnu/libcairo.so.2 (0x00007feac73ad000)
+libgio-2.0.so.0 =&gt; /usr/lib/x86_64-linux-gnu/libgio-2.0.so.0 (0x00007feac700e000)
+libgdk_pixbuf-2.0.so.0 =&gt; /usr/lib/x86_64-linux-gnu/libgdk_pixbuf-2.0.so.0 (0x00007feac6dea000)
+libgobject-2.0.so.0 =&gt; /usr/lib/x86_64-linux-gnu/libgobject-2.0.so.0 (0x00007feac6b96000)
+libglib-2.0.so.0 =&gt; /usr/lib/x86_64-linux-gnu/libglib-2.0.so.0 (0x00007feac687f000)
+libm.so.6 =&gt; /lib/x86_64-linux-gnu/libm.so.6 (0x00007feac64e1000)
+libpthread.so.0 =&gt; /lib/x86_64-linux-gnu/libpthread.so.0 (0x00007feac62c2000)
+libc.so.6 =&gt; /lib/x86_64-linux-gnu/libc.so.6 (0x00007feac5ed1000)
+libgmodule-2.0.so.0 =&gt; /usr/lib/x86_64-linux-gnu/libgmodule-2.0.so.0 (0x00007feac5ccd000)
+libz.so.1 =&gt; /lib/x86_64-linux-gnu/libz.so.1 (0x00007feac5ab0000)
+libgstvideo-1.0.so.0 =&gt; /usr/lib/x86_64-linux-gnu/libgstvideo-1.0.so.0 (0x00007feac5817000)
+libgstreamer-1.0.so.0 =&gt; /usr/lib/x86_64-linux-gnu/libgstreamer-1.0.so.0 (0x00007feac54dc000)
+libgcrypt.so.20 =&gt; /lib/x86_64-linux-gnu/libgcrypt.so.20 (0x00007feac51c0000)
+libX11.so.6 =&gt; /usr/lib/x86_64-linux-gnu/libX11.so.6 (0x00007feac4e88000)
+libudev.so.1 =&gt; /lib/x86_64-linux-gnu/libudev.so.1 (0x00007feac4c6a000)
+libseccomp.so.2 =&gt; /lib/x86_64-linux-gnu/libseccomp.so.2 (0x00007feac4a23000)
+librt.so.1 =&gt; /lib/x86_64-linux-gnu/librt.so.1 (0x00007feac481b000)
+libXi.so.6 =&gt; /usr/lib/x86_64-linux-gnu/libXi.so.6 (0x00007feac460b000)
+libXfixes.so.3 =&gt; /usr/lib/x86_64-linux-gnu/libXfixes.so.3 (0x00007feac4405000)
+libatk-bridge-2.0.so.0 =&gt; /usr/lib/x86_64-linux-gnu/libatk-bridge-2.0.so.0 (0x00007feac41d4000)
+libepoxy.so.0 =&gt; /usr/lib/x86_64-linux-gnu/libepoxy.so.0 (0x00007feac3ed3000)
+libpangoft2-1.0.so.0 =&gt; /usr/lib/x86_64-linux-gnu/libpangoft2-1.0.so.0 (0x00007feac3cbd000)
+libfontconfig.so.1 =&gt; /usr/lib/x86_64-linux-gnu/libfontconfig.so.1 (0x00007feac3a78000)
+libXinerama.so.1 =&gt; /usr/lib/x86_64-linux-gnu/libXinerama.so.1 (0x00007feac3875000)
+libXrandr.so.2 =&gt; /usr/lib/x86_64-linux-gnu/libXrandr.so.2 (0x00007feac366a000)
+libXcursor.so.1 =&gt; /usr/lib/x86_64-linux-gnu/libXcursor.so.1 (0x00007feac3460000)
+libXcomposite.so.1 =&gt; /usr/lib/x86_64-linux-gnu/libXcomposite.so.1 (0x00007feac325d000)
+libXdamage.so.1 =&gt; /usr/lib/x86_64-linux-gnu/libXdamage.so.1 (0x00007feac305a000)
+libxkbcommon.so.0 =&gt; /usr/lib/x86_64-linux-gnu/libxkbcommon.so.0 (0x00007feac2e1b000)
+libwayland-cursor.so.0 =&gt; /usr/lib/x86_64-linux-gnu/libwayland-cursor.so.0 (0x00007feac2c13000)
+libwayland-egl.so.1 =&gt; /usr/lib/x86_64-linux-gnu/libwayland-egl.so.1 (0x00007feac2a11000)
+libwayland-client.so.0 =&gt; /usr/lib/x86_64-linux-gnu/libwayland-client.so.0 (0x00007feac2802000)
+libXext.so.6 =&gt; /usr/lib/x86_64-linux-gnu/libXext.so.6 (0x00007feac25f0000)
+libfreetype.so.6 =&gt; /usr/lib/x86_64-linux-gnu/libfreetype.so.6 (0x00007feac233c000)
+libthai.so.0 =&gt; /usr/lib/x86_64-linux-gnu/libthai.so.0 (0x00007feac2133000)
+libpixman-1.so.0 =&gt; /usr/lib/x86_64-linux-gnu/libpixman-1.so.0 (0x00007feac1e8e000)
+libpng16.so.16 =&gt; /usr/lib/x86_64-linux-gnu/libpng16.so.16 (0x00007feac1c5c000)
+libxcb-shm.so.0 =&gt; /usr/lib/x86_64-linux-gnu/libxcb-shm.so.0 (0x00007feac1a59000)
+libxcb.so.1 =&gt; /usr/lib/x86_64-linux-gnu/libxcb.so.1 (0x00007feac1831000)
+libxcb-render.so.0 =&gt; /usr/lib/x86_64-linux-gnu/libxcb-render.so.0 (0x00007feac1624000)
+libXrender.so.1 =&gt; /usr/lib/x86_64-linux-gnu/libXrender.so.1 (0x00007feac141a000)
+libselinux.so.1 =&gt; /lib/x86_64-linux-gnu/libselinux.so.1 (0x00007feac11f2000)
+libresolv.so.2 =&gt; /lib/x86_64-linux-gnu/libresolv.so.2 (0x00007feac0fd7000)
+libmount.so.1 =&gt; /lib/x86_64-linux-gnu/libmount.so.1 (0x00007feac0d83000)
+libffi.so.6 =&gt; /usr/lib/x86_64-linux-gnu/libffi.so.6 (0x00007feac0b7b000)
+libpcre.so.3 =&gt; /lib/x86_64-linux-gnu/libpcre.so.3 (0x00007feac0909000)
+/lib64/ld-linux-x86-64.so.2 (0x00007feac96da000)
+libdl.so.2 =&gt; /lib/x86_64-linux-gnu/libdl.so.2 (0x00007feac0705000)
+libgstbase-1.0.so.0 =&gt; /usr/lib/x86_64-linux-gnu/libgstbase-1.0.so.0 (0x00007feac0490000)
+liborc-0.4.so.0 =&gt; /usr/lib/x86_64-linux-gnu/liborc-0.4.so.0 (0x00007feac0214000)
+libgpg-error.so.0 =&gt; /lib/x86_64-linux-gnu/libgpg-error.so.0 (0x00007feabffff000)
+libdbus-1.so.3 =&gt; /lib/x86_64-linux-gnu/libdbus-1.so.3 (0x00007feabfdb2000)
+libatspi.so.0 =&gt; /usr/lib/x86_64-linux-gnu/libatspi.so.0 (0x00007feabfb82000)
+libharfbuzz.so.0 =&gt; /usr/lib/x86_64-linux-gnu/libharfbuzz.so.0 (0x00007feabf8e4000)
+libexpat.so.1 =&gt; /lib/x86_64-linux-gnu/libexpat.so.1 (0x00007feabf6b2000)
+libdatrie.so.1 =&gt; /usr/lib/x86_64-linux-gnu/libdatrie.so.1 (0x00007feabf4ab000)
+libXau.so.6 =&gt; /usr/lib/x86_64-linux-gnu/libXau.so.6 (0x00007feabf2a7000)
+libXdmcp.so.6 =&gt; /usr/lib/x86_64-linux-gnu/libXdmcp.so.6 (0x00007feabf0a1000)
+libblkid.so.1 =&gt; /lib/x86_64-linux-gnu/libblkid.so.1 (0x00007feabee54000)
+libsystemd.so.0 =&gt; /lib/x86_64-linux-gnu/libsystemd.so.0 (0x00007feabebd0000)
+libgraphite2.so.3 =&gt; /usr/lib/x86_64-linux-gnu/libgraphite2.so.3 (0x00007feabe9a3000)
+libbsd.so.0 =&gt; /lib/x86_64-linux-gnu/libbsd.so.0 (0x00007feabe78e000)
+libuuid.so.1 =&gt; /lib/x86_64-linux-gnu/libuuid.so.1 (0x00007feabe587000)
+liblzma.so.5 =&gt; /lib/x86_64-linux-gnu/liblzma.so.5 (0x00007feabe361000)
+liblz4.so.1 =&gt; /usr/lib/x86_64-linux-gnu/liblz4.so.1 (0x00007feabe145000)
 </pre>
 
 <ul class="org-ul">
@@ -1489,7 +1474,7 @@ liblz4.so.1 =&gt; /usr/lib/x86_64-linux-gnu/liblz4.so.1 (0x00007f3456240000)
 </div>
 </li>
 
-<li><a id="org185f5fc"></a>More examples from Assignment 8<br />
+<li><a id="org0ffb4bb"></a>More examples from Assignment 8<br />
 <div class="outline-text-6" id="text-1-8-2-2-7">
 <div class="org-src-container">
 <pre class="src src-c"><span style="color: #b22222;">// </span><span style="color: #b22222;">Have a guard to ensure that we don't include it multiple times.</span>
@@ -1726,8 +1711,8 @@ liblz4.so.1 =&gt; /usr/lib/x86_64-linux-gnu/liblz4.so.1 (0x00007f3456240000)
 </div>
 </div>
 
-<div id="outline-container-org94f3260" class="outline-3">
-<h3 id="org94f3260"><span class="section-number-3">1.9</span> Cohesion</h3>
+<div id="outline-container-org5277ab2" class="outline-3">
+<h3 id="org5277ab2"><span class="section-number-3">1.9</span> Cohesion</h3>
 <div class="outline-text-3" id="text-1-9">
 <p>
 Cohesion is about how relevant code is to itself. A highly cohesive
@@ -1801,8 +1786,8 @@ called coincidental cohesion (aka you're lucky if it is cohesive).
 </p>
 </div>
 
-<div id="outline-container-orgdca15ba" class="outline-4">
-<h4 id="orgdca15ba"><span class="section-number-4">1.9.1</span> Refs</h4>
+<div id="outline-container-org10d7c4d" class="outline-4">
+<h4 id="org10d7c4d"><span class="section-number-4">1.9.1</span> Refs</h4>
 <div class="outline-text-4" id="text-1-9-1">
 <p>
 W. P. Stevens, G. J. Myers and L. L. Constantine, "Structured design,"
@@ -1826,7 +1811,7 @@ Journal of Systems and Software, vol. 29, no. 4, April 1995.
 </div>
 <div id="postamble" class="status">
 <p class="author">Author: Abram Hindle</p>
-<p class="date">Created: 2020-03-31 Tue 11:38</p>
+<p class="date">Created: 2020-03-31 Tue 12:27</p>
 <p class="validation"><a href="http://validator.w3.org/check?uri=referer">Validate</a></p>
 </div>
 </body>
