@@ -502,8 +502,65 @@ Model your modules as a directed graph.
 - Modules are vertices.
 - References are edges.
 
-Fan-out 
+Fan-out is the number of modules a module calls.
 
+Fan-in is the number of modules that call that module. Fan-in does not
+imply the module is truly coupled to other modules, just that it is
+popular and relied upon. Meaning it shouldn't change much!
+
+From Pressman and Dhama [DHA95]:
+
+For data and control flow coupling,
+
+- d_i = number of input data parameters
+- c_i = number of input control parameters
+- d_o = number of output data parameters
+- c_o = number of output control parameters
+
+For global coupling,
+
+- g_d = number of global variables used as data
+- g-c = number of global variables used as control
+
+For environmental coupling,
+
+- w = number of modules called (fan-out)
+- r = number of modules calling the module under consideration (fan-in)
+
+Using these measures, a module coupling indicator, m c , is defined in the following way:
+
+ - m_c = k/M
+ - where k = 1, a proportionality constant 8 and
+
+ - M = d_i + (a * c_i ) + d_o + (b * c_o ) + g_d + (c* g_c ) + w + r
+ - where a = b = c = 2.
+
+High m_c: low coupling
+Low  m_c: high coupling
+
+**** Coupling_h -- my take
+
+My take?
+
+Forget about the nitty gritty coupling and focus on
+fan-out and dependencies.
+
+I would calculate coupling as unidirectional:
+
+- where x = number of unique external function calls
+- where y = number of unique external variable access
+- where z = number of unique externally defined types
+- where lambda ~ 4 or however more important you feel that fan-out is
+- w = number of modules called (fan-out)
+- coupling_h = 1 / (1 + lambda*w + x + y + z)
+
+If coupling_h is 1 you are decoupled.
+
+If coupling_h in near 0.0 you are pretty heavily coupled.
+
+For a C module I recommend counting both .h and .c together
+
+You can invent your own coupling measures for your own purposes.
 
 **** Low coupling
 ***** No Coupling
@@ -514,6 +571,11 @@ int main() {
     return RET;
 }
 #+end_src
+
+- w = x = y = z = 0
+- lamba = 4
+- coupling_h = 1/(1+0) = 1
+
 ***** A little coupling
 
 We're now related to the stdlib IO routines
@@ -527,6 +589,11 @@ int main() {
 }
 #+end_src
 
+- w = 1
+- x = 1
+- y = z = 0
+- lamba = 4
+- coupling_h = 1/(4*1+1+0+0) = 1/5
 
 
 ***** A little more coupling
@@ -543,6 +610,11 @@ int main() {
 }
 #+end_src
 
+- w = 2
+- x = 2
+- y = z = 0
+- lamba = 4
+- coupling_h = 1/(4*2+2+0+0) = 1/10
 
 ***** More coupling
 
@@ -562,6 +634,11 @@ int main() {
 }
 #+end_src
 
+- w = 3
+- x = 3
+- y = z = 0
+- lamba = 4
+- coupling_h = 1/(4*3+3+0+0) = 1/15
 
 ***** Even More Coupling:
 
@@ -602,6 +679,12 @@ int main() {
 #include "csv.h"
 #include "getopt.h"
 #+end_src
+
+- w = 10 or 12
+- x = ??
+- y = z = ??
+- lamba = 4
+- coupling_h = 1/(4*10+0+0) = 1/40
 
 
 ***** A lot of coupling
@@ -700,6 +783,227 @@ ldd /usr/bin/evince
 	liblz4.so.1 => /usr/lib/x86_64-linux-gnu/liblz4.so.1 (0x00007fbb1d78c000)
 #+end_example
 
+- w ~ 70
+- x = ??
+- y = z = ??
+- lamba = 4
+- coupling_h = 1/(4*70+0+0) = 1/280
+
+***** More examples from Assignment 8
+
+#+begin_src c :eval no :exports code
+// Have a guard to ensure that we don't include it multiple times.
+#ifndef _CHECKINPUT_H_
+/* checkInput: given the result of scanf check if it 
+ * 0 elements read or EOF. If so exit(1) with a warning.
+ *
+ */
+#define _CHECKINPUT_H_
+void checkInput(int err); // a prototype!
+#endif
+#+end_src
+
+coupling_h = ?
+
+#+begin_src C :eval no :exports code
+#include "parameters.h"
+#include <stdio.h>
+#include <stdlib.h>
+
+// You must implement a guard
+
+struct combo_t;
+
+typedef struct combo_t * Combo;
+
+// Create a Cartesian Product Combo generator
+Combo createParameterCombo();
+// Add parameter definition to the Combo
+void addParameterDefCombo(Combo combo, ParameterDef def);
+// Add a parameter of a previous parameter definition to the Combo
+size_t addParameterCombo(Combo combo, Parameter param);
+// How man parameter definitions are defined in this combo
+size_t nParamsCombo(Combo combo);
+// a boolean of whether or not there are more product combos to come
+// used for terminating while loops
+bool hasNextCombo(Combo combo);
+// The next product combo as a malloc'd array of parameters of
+// nParamsCombo(combo) length
+Parameter * nextCombo(Combo combo);
+// Free a parameter list created by nextCombo
+void freeParamsCombo(Combo combo, Parameter * params);
+// Free a cartesian product combo generator
+void freeCombo(Combo combo);
+#+end_src
+
+w=3
+z=2
+coupling_h = 1/(4*w + z)
+
+#+begin_src C :eval no :exports code
+// Implement a guard
+
+#include <inttypes.h>
+#include <stdbool.h>
+#include <stdlib.h>
+
+enum type_flag {
+  LONG,
+  DOUBLE,
+  STRING,
+  CHAR,
+};
+
+typedef enum type_flag TypeFlag;
+
+union any_t {
+  int64_t aLong;
+  double aDouble;
+  char * aString;
+  char aChar;
+};
+
+typedef union any_t Any;
+
+struct parameter_def {
+  char * name;
+  TypeFlag type;
+};
+
+typedef struct parameter_def ParameterDef;
+
+struct parameter_t {
+  ParameterDef def;
+  Any any;
+};
+
+typedef struct parameter_t Parameter;
+
+// create a parameter def for aDouble
+ParameterDef doubleParameterDef( char * name );
+// create a parameter def for aLong
+ParameterDef longParameterDef(   char * name );
+// create a parameter def for aString
+ParameterDef stringParameterDef( char * name );
+// create a parameter def for aChar
+ParameterDef charParameterDef(   char * name );
+// create a parameter def for aChar
+ParameterDef mkParameterDef(   char * name, TypeFlag flag );
+
+// Are param1 and param2 equal?
+bool         equalParameterDef(  ParameterDef param1, ParameterDef param2);
+
+// create a double parameter 
+Parameter    mkDoubleParameter(  ParameterDef def, double value);
+// create a long parameter 
+Parameter    mkLongParameter(    ParameterDef def, long   value);
+// create a string parameter 
+Parameter    mkStringParameter(  ParameterDef def, char * value);
+// create a char parameter 
+Parameter    mkCharParameter(    ParameterDef def, char   value);
+// return the name of a parameter's def
+char *       nameParameter(      Parameter param );
+// return the type of a parameter from its def
+TypeFlag     typeParameter(      Parameter param );
+// return the double value of a parameter
+double       doubleParameter(    Parameter param );
+// return the long value of a parameter
+long         longParameter(      Parameter param );
+// return the string value of a parameter
+char *       stringParameter(    Parameter param );
+// return the char value of a parameter
+char         charParameter(      Parameter param );
+// Are param1 and param2 equal?
+bool         equalParameter(     Parameter param1, Parameter param2);
+// Print parameters!
+void printParams(Parameter * params, size_t size);
+#+end_src
+
+3 includes & 1 reference to int64_t
+
+w=3
+z=1
+coupling_h = 1/(4*w + z)
+
+#+begin_src C :eval no :exports code
+#include "parameters.h"
+#include <inttypes.h>
+#include <stdlib.h>
+#include <stdio.h>
+
+// You need a guard here!
+
+// forward declaration
+union ppd_t;
+// This is an array of defs, params, or arrays
+// Assume you keep the same sort of values within this array
+struct ppd_array {
+  union ppd_t * params; // A pointer to an array of ppd_t unions (PPD)
+  size_t size;
+};
+typedef struct ppd_array * PPDArray;
+
+union ppd_t {
+  ParameterDef       def;
+  Parameter          param;
+  struct ppd_array * array;
+  int64_t            int64;
+  char             * str;
+};
+
+typedef union ppd_t PPD;
+
+// create PPDArray
+PPDArray createPPDArray();
+// get the number of elements in a PPDArray
+size_t sizePPDArray(PPDArray array);
+// Free a PPD Array
+void freePPDArray(PPDArray array);
+// Free a PPD Array and all of its PPD Arrays (not recursive)
+// Frees an array of arrays, by freeing each contained array
+void freeArrayPPDArray(PPDArray array);
+// return a parameter def at index of PPDArray array
+ParameterDef parameterDefPPDArray(PPDArray array, size_t index);
+// return a pointer to parameter def at index of PPDArray array
+// pretty unsafe
+ParameterDef * parameterDefRefPPDArray(PPDArray array, size_t index);
+// return a parameter at index of PPDArray array
+Parameter parameterPPDArray(PPDArray array, size_t index);
+// return a array at index of PPDArray array
+PPDArray arrayPPDArray(PPDArray array, size_t index);
+// return an int64 at index of PPDArray array
+int64_t int64PPDArray(PPDArray array, size_t index);
+// return a string at index of PPDArray array
+char * stringPPDArray(PPDArray array, size_t index);
+// at index of array set the int64 value to 
+void setInt64PPDArray(PPDArray array, size_t index, int64_t value);
+// extend PPDArray 1 slot and put this PPD into that slot
+// may use realloc!
+void addPPDPPDArray(PPDArray array, PPD defOrParam);
+// extend PPDArray 1 slot and put this ParameterDef into that slot
+// may use realloc!
+void addDefPPDArray(PPDArray array, ParameterDef def);
+// extend PPDArray 1 slot and put this Parameter into that slot
+// may use realloc!
+void addParamPPDArray(PPDArray array, Parameter param);
+// extend PPDArray 1 slot and put this Array newArray into that slot
+// may use realloc!
+void addPPDArrayPPDArray(PPDArray array, PPDArray newArray  );
+// extend PPDArray 1 slot and put this int64 into that slot
+// may use realloc!
+void addInt64PPDArray(PPDArray array, int64_t int64  );
+// extend PPDArray 1 slot and put this string into that slot
+// may use realloc!
+void addStringPPDArray(PPDArray array, char * str );
+#+end_src
+
+3 includes & 3 reference to int64_t, Parameter and ParameterDef
+
+w=3
+z=3
+coupling_h = 1/(4*w + z)
+
+
 *** Refs
 
 W. P. Stevens, G. J. Myers and L. L. Constantine, "Structured design,"
@@ -709,5 +1013,5 @@ https://ieeexplore.ieee.org/document/5388187
 Roger Pressman. 2009. Software Engineering: A Practitioner’s Approach
 (7th. ed.). McGraw-Hill, Inc., USA.
 
-  
-
+[DHA95] Dhama, H., “Quantitative Models of Cohesion and Coupling in Software,”
+Journal of Systems and Software, vol. 29, no. 4, April 1995.
