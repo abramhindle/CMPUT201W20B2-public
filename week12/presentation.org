@@ -464,6 +464,90 @@ include directives.
 The number of includes gives one an idea of how many modules that your
 module relies upon.
 
+*** Coupling
+
+In object oriented languages like Java or C++ coupling often refers to
+the number of modules (Classes) that a single class refers to.
+
+Coupling is related to dependencies. Too many dependencies makes a
+system complicated--often erroneously called complex.
+
+In "structured design" as suggested by Constantine there are multiple
+kinds of coupling.
+
+- Data coupling: you pass parameters to another module
+  - connected by name
+- Control coupling: you use another module for control flow
+- Content/Common coupling: when you use code directly from another module
+  - macros can cause this problem
+  - includes could do this if it includes code.
+
+Fundamentally in C at the file level we're really just going to be
+using data coupling. If you say coupling most people will assume this
+is what you are talking about. Essentially your .h or .c file refers
+to other modules and their parts by name.
+
+**** Low coupling
+***** No Coupling
+#+begin_src C :eval no :exports code
+// 0 coupling, no modules
+#define RET 404
+int main() {
+    return RET;
+}
+#+end_src
+***** A little coupling
+
+We're now related to the stdlib IO routines
+
+#+begin_src C :eval no :exports code
+#include <stdio.h>
+#define RET
+int main() {
+    printf("%d\n", RET);
+    return RET;
+}
+#+end_src
+
+
+
+***** A little more coupling
+
+Now we're bound to stdlib.h and randr
+
+#+begin_src C :eval no :exports code
+#include <stdio.h>
+#include <stdlib.h>
+#define RET
+int main() {
+    printf("%d\n", rand());
+    return RET;
+}
+#+end_src
+
+
+***** More coupling
+
+Now we're bound to string.h as well
+
+#+begin_src C :eval no :exports code
+#include <stdio.h>
+#include <stdlib.h>
+#include <string.h>
+#define RET
+int main() {
+    char * str1 = "aaaaaa";
+    char * str2 = "aaaaab";
+    printf("%d\n", rand());
+    printf("%d\n", strcmp(str1,str2));
+    return RET;
+}
+#+end_src
+
+
+
+
+
 *** Refs
 
 Structed Design https://ieeexplore.ieee.org/document/5388187
