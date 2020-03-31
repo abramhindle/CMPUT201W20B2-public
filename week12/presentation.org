@@ -238,16 +238,48 @@ Helpful resources:
 
 Type: float
 
+Size: 32 bits / 4 bytes
+
 -Sign: 0 - positive, 1 negative
 -Exponent: unsigned 8 bit integer with 127 (2^7-1) offset
   -        -126 to 127
+  -        1*pow(2,-126) to 1*pow(2,127)
 - Fraction: 24 bits (only 23 used). The first bit is implied. 
   - So 00000000000000000000000 is actually 100000000000000000000000
- 
+- 0.19e2
+- 1.9e1
+- 100*0.19 = 19
+- b1.11e1
+- b0.111e2
+- 1.0101e2 = 1*2^2 + 0*2^1 + 1*2^0+ 0*2^-1 + 1*2^-2
+           = 4             + 1             + 1/4    = 5.25
+- 1.1101e-4 = 1*2^-4 + 1*2^-5 + 1*2^-6 + 1*2-8
+            = 1/16  + 1/32  + 1/64 + 1/256
+            = 0.11328125
+2^-126
+
+#+begin_src C :exports both
+#include <stdio.h>
+int main() {
+    /*printf("%d\n", 0.0F == -0.0F);
+    printf("%g\n", 1.0F * -0.0F);
+    printf("%0.3f\n", 1.0e+126F * 4.0F);
+    printf("%0.3f\n", 1.0e+126F * -4.0F); */
+    printf("%e\n", 1.0e38F + 2.0e38F);
+    printf("%e\n", 1.0e38F + 4.0e38F);
+}
+#+end_src
+
+#+RESULTS:
+: 3.000000e+38
+: inf
+
+: -0.010 = 1*1/100
+
+
 | Sign (1 bit) | Exponent (8 bit) | b10 |       Fraction (23 bit) |    Value | base 2     |
 |            0 |         01111100 |  -3 | 01000000000000000000000 |  0.15625 | 1/8 + 1/32 |
 |            1 |         01111100 |  -3 | 01000000000000000000000 | -0.15625 |            |
-|            0 |         01111100 |  -3 | 01000000000000000000000 | -0.15625 |            |
 |            0 |         00000000 |   0 | 00000000000000000000000 |        0 |            |
 |            1 |         00000000 |   0 | 00000000000000000000000 |       -0 |            |
 |            0 |         11000000 |  65 | 00000000000000000000000 | 3.68e+19 | 2^65       |
@@ -336,6 +368,7 @@ int main() {
         float f = floats[i];
         union floatint fi = {.f=f};
         printf("%12g 0x%08x 0b%s\n", f, fi.i, bitString(fi.i, 32));
+        /*
         printf("%12g 0x%08x sign: %hhu exponent: %3hhu exp-127: %4d mantissa: 0x%06x\n", 
                f,
                fi.i,
@@ -343,17 +376,19 @@ int main() {
                fi.t.exponent,
                (int)fi.t.exponent - (int)127,
                fi.t.mantissa
-        );
-        /* // We don't need bitfields
-        printf("%12g %08x sign: %hhu exponent: %hhu exp-127: %4d mantissa: 0x%06x\n", 
+        );*/
+        // We don't need bitfields
+        printf("%12g 0x%08x sign: %hhu exponent: %hhu exp-127: %4d mantissa: 0x%06x\n", 
                f,
                fi.i,
                (fi.i >> 31),
                ((fi.i << 1) >> 24),
                (int)((fi.i << 1) >> 24) - (int)127,
                (fi.i & 0x007FFFFF)
+               //0000 0000 0111 1111 1111 1111 1111 1111
+               //0      0   7    F    F   F    F    F
         );
-        */ 
+         
 
     }
     puts("");
@@ -366,9 +401,9 @@ We're printing floats!
 sizeof(floatint) == 4
 sizeof(float_t) == 4
            0 0x00000000 0b00000000000000000000000000000000
-           0 0x00000000 sign: 0 exponent:   0 exp-127: -127 mantissa: 0x000000
+           0 0x00000000 sign: 0 exponent: 0 exp-127: -127 mantissa: 0x000000
           -0 0x80000000 0b10000000000000000000000000000000
-          -0 0x80000000 sign: 1 exponent:   0 exp-127: -127 mantissa: 0x000000
+          -0 0x80000000 sign: 1 exponent: 0 exp-127: -127 mantissa: 0x000000
          inf 0x7f800000 0b01111111100000000000000000000000
          inf 0x7f800000 sign: 0 exponent: 255 exp-127:  128 mantissa: 0x000000
         -inf 0xff800000 0b11111111100000000000000000000000
@@ -480,7 +515,7 @@ important as well because it implies the risk involved with changing
 that module.
 
 High coupling is bad because it makes code weak to change:
-- too many dependencies increase change of change
+- too many dependencies increase risk of change
 - too many dependencies increase bug risk
 - too many dependencies means dependencies will probably change
 
@@ -534,7 +569,8 @@ For environmental coupling,
 
 Using these measures, a module coupling indicator, m c , is defined in the following way:
 
- - m_c = k/M
+ - m_c = k/M = 1/(d_i + (a * c_i ) + d_o + (b * c_o ) + g_d + (c* g_c ) + w + r)
+   - alternative m_c = k/M = 1/(1 + w + r)
  - where k = 1, a proportionality constant 8 and
 
  - M = d_i + (a * c_i ) + d_o + (b * c_o ) + g_d + (c* g_c ) + w + r
@@ -555,6 +591,7 @@ I would calculate coupling as unidirectional:
 - where x = number of unique external function calls
 - where y = number of unique external variable access
 - where z = number of unique externally defined types
+- where w = number of modules called (fan-out)
 - where lambda ~ 4 or however more important you feel that fan-out is
 - w = number of modules called (fan-out)
 - coupling_h = 1 / (1 + lambda*w + x + y + z)
@@ -567,7 +604,7 @@ For a C module I recommend counting both .h and .c together
 
 You can invent your own coupling measures for your own purposes.
 
-**** Low coupling
+**** Coupling Examples
 ***** No Coupling
 #+begin_src C :eval no :exports code
 // 0 coupling, no modules
@@ -796,6 +833,7 @@ ldd /usr/bin/evince
 
 ***** More examples from Assignment 8
 
+checkinput.h 
 #+begin_src c :eval no :exports code
 // Have a guard to ensure that we don't include it multiple times.
 #ifndef _CHECKINPUT_H_
@@ -808,7 +846,7 @@ void checkInput(int err); // a prototype!
 #endif
 #+end_src
 
-- coupling_h = ?
+- coupling_h = 1 = 1/1
 
 #+begin_src C :eval no :exports code
 #include "parameters.h"
@@ -845,6 +883,7 @@ void freeCombo(Combo combo);
 - z=2
 - coupling_h = 1/(4*w + z)
 
+parameter.h
 #+begin_src C :eval no :exports code
 // Implement a guard
 
@@ -924,12 +963,13 @@ bool         equalParameter(     Parameter param1, Parameter param2);
 void printParams(Parameter * params, size_t size);
 #+end_src
 
-3 includes & 1 reference to int64_t
+3 includes 
 
 - w=3
-- z=1
+- z=0
 - coupling_h = 1/(4*w + z)
 
+ppdarray.h
 #+begin_src C :eval no :exports code
 #include "parameters.h"
 #include <inttypes.h>
@@ -1057,6 +1097,8 @@ allocation, temporary files, environment variables, sorting, binary
 search, converting floats to strings, etc. No cohesive and often
 called coincidental cohesion (aka you're lucky if it is cohesive).
 
+*** McCabe's Cyclometic Complexity
+
 *** Refs
 
 W. P. Stevens, G. J. Myers and L. L. Constantine, "Structured design,"
@@ -1068,3 +1110,32 @@ Roger Pressman. 2009. Software Engineering: A Practitioner’s Approach
 
 [DHA95] Dhama, H., “Quantitative Models of Cohesion and Coupling in Software,”
 Journal of Systems and Software, vol. 29, no. 4, April 1995.
+
+** Big Programs
+*** DOOM
+
+#+begin_example
+=================     ===============     ===============   ========  ========
+\\ . . . . . . .\\   //. . . . . . .\\   //. . . . . . .\\  \\. . .\\// . . //
+||. . ._____. . .|| ||. . ._____. . .|| ||. . ._____. . .|| || . . .\/ . . .||
+|| . .||   ||. . || || . .||   ||. . || || . .||   ||. . || ||. . . . . . . ||
+||. . ||   || . .|| ||. . ||   || . .|| ||. . ||   || . .|| || . | . . . . .||
+|| . .||   ||. _-|| ||-_ .||   ||. . || || . .||   ||. _-|| ||-_.|\ . . . . ||
+||. . ||   ||-'  || ||  `-||   || . .|| ||. . ||   ||-'  || ||  `|\_ . .|. .||
+|| . _||   ||    || ||    ||   ||_ . || || . _||   ||    || ||   |\ `-_/| . ||
+||_-' ||  .|/    || ||    \|.  || `-_|| ||_-' ||  .|/    || ||   | \  / |-_.||
+||    ||_-'      || ||      `-_||    || ||    ||_-'      || ||   | \  / |  `||
+||    `'         || ||         `'    || ||    `'         || ||   | \  / |   ||
+||            .===' `===.         .==='.`===.         .===' /==. |  \/  |   ||
+||         .=='   \_|-_ `===. .==='   _|_   `===. .===' _-|/   `==  \/  |   ||
+||      .=='    _-'    `-_  `='    _-'   `-_    `='  _-'   `-_  /|  \/  |   ||
+||   .=='    _-'          `-__\._-'         `-_./__-'         `' |. /|  |   ||
+||.=='    _-'                                                     `' |  /==.||
+=='    _-'                                                            \/   `==
+\   _-'                                                                `-_   /
+ `''                                                                      ``'
+#+end_example
+
+iD software 1995 game doom.
+
+https://github.com/id-Software/DOOM/tree/master/linuxdoom-1.10
