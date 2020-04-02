@@ -1114,8 +1114,8 @@ forced OCLint on you.
 
 Typically for a subroutine McCabes is calculated as (P=1):
 
-M = E - N + 2P
-M = E - N + 2
+MCC = E - N + 2P
+MCC = E - N + 2
 
 Where E is the number of edges in a module (directed edges) and N is
 the number of nodes. 
@@ -1139,7 +1139,7 @@ This module has 3 nodes 2 edges and 1 exit:
     return 5 * input;
 #+end_example
 
-M = 2 - 3 + 2 = 1
+MCC = 2 - 3 + 2 = 1
 
 McCabes argued that subroutines or modules with complexity greater
 than 10 should be split into smaller modules.
@@ -1174,7 +1174,7 @@ int sum(int * array, size_t n) {
 
 E = 5
 N = 5
-M = E - N + 2 = 2
+MCC = E - N + 2 = 2
 
 So that 1 for loop is worth 1
 
@@ -1203,7 +1203,7 @@ int sum(int * array, size_t n) {
 #+end_src
 E=17
 N=14
-M=17-14+2 = 5
+MCC=17-14+2 = 5
 
 Effectively McCabes is close to the 1 + the number of branch points in
 a program. So I could estimate the complexity of that program by
@@ -1233,7 +1233,7 @@ int passCode(int * code) {
 
 E = 13
 N = 8
-M = 13 - 8 + 2 = 7
+MCC = 13 - 8 + 2 = 7
 
 #+begin_src C :eval no :exports code :tangle passcodesum.c :main no
 int passCode(int * code) {
@@ -1248,7 +1248,7 @@ int passCode(int * code) {
 }
 #+end_src
 
-M = 7 - 8 + 2 = 1
+MCC = 7 - 8 + 2 = 1
 
 #+begin_src C :eval no :exports code :tangle passcodeifsum.c :main no
 int passCode(int * code) {
@@ -1269,9 +1269,12 @@ int passCode(int * code) {
 
 N = 14
 E = 19
-M = 19 - 14 + 2 = 7
+MCC = 19 - 14 + 2 = 7
 
 If you want to use OCLint to print MCCabe's just force the threshold
+
+Using the `-rc CYCLOMATIC_COMPLEXITY=0` argument OCLint will print MCC
+for all programs.
 
 #+begin_src sh :exports both
 for file in sum.c sum4.c passcodedeep.c passcodesum.c passcodeifsum.c
@@ -1366,7 +1369,7 @@ oclint --disable-rule=UselessParentheses -rc CYCLOMATIC_COMPLEXITY=0
 McCabes is correlated with lines of code, so it is effectively a size
 measure. We know that if each line has a probability of being buggy
 then more lines implies more bugs. McCabes doesn't really help us
-here.
+here. OClint has NCSS which is a lines of code measure.
 
 McCabes ignores function pointers and dot operators. So dynamic code
 is not counted. McCabes also ignores delegation functions (like a
@@ -1419,6 +1422,175 @@ Software Engineering (4): 308–320. doi:10.1109/tse.1976.233837
  `''                                                                      ``'
 #+end_example
 
+*** License
+
+The license of code from doom is under the Doom License.
+
+https://github.com/id-Software/DOOM/blob/master/linuxdoom-1.10/DOOMLIC.TXT
+
+This is not the GPL release :(
+
+*** Discussion
+
 iD software 1995 game doom.
 
 https://github.com/id-Software/DOOM/tree/master/linuxdoom-1.10
+
+General tips on code reading:
+
+- Go to the build system, how is the program built
+  - What are the main entries to the program?
+  - Start with the makefiles and similar build files
+  - https://github.com/id-Software/DOOM/blob/master/linuxdoom-1.10/Makefile
+    - file:~/src/DOOM/linuxdoom-1.10/Makefile
+  - https://github.com/id-Software/DOOM/blob/master/linuxdoom-1.10/i_main.c
+    - file:~/src/DOOM/linuxdoom-1.10/i_main.c
+- .h files give an overview of what is important in each module
+  - https://github.com/id-Software/DOOM/blob/master/linuxdoom-1.10/d_main.h
+    - file:~/src/DOOM/linuxdoom-1.10/d_main.h
+  - https://github.com/id-Software/DOOM/blob/master/linuxdoom-1.10/d_main.c
+    - file:~/src/DOOM/linuxdoom-1.10/d_main.c
+- Read descriptions of functions and modules
+- Use grep or other tools to search across the source code
+  - E.g. let's look at blitting (rapid copying of data)
+  #+begin_src sh 
+  grep -i blit ~/src/DOOM/linuxdoom-1.10/*.h
+  grep -i blit ~/src/DOOM/linuxdoom-1.10/*.c
+  #+end_src
+
+  #+RESULTS:
+  #+begin_example
+  /home/hindle1/src/DOOM/linuxdoom-1.10/doomstat.h:extern  boolean		noblit;
+  /home/hindle1/src/DOOM/linuxdoom-1.10/i_video.h:void I_UpdateNoBlit (void);
+  /home/hindle1/src/DOOM/linuxdoom-1.10/r_data.h:// Retrieve column data for span blitting.
+  /home/hindle1/src/DOOM/linuxdoom-1.10/r_draw.h:// The span blitting interface.
+  /home/hindle1/src/DOOM/linuxdoom-1.10/r_draw.h:// Span blitting for rows, floor/ceiling.
+  /home/hindle1/src/DOOM/linuxdoom-1.10/v_video.h://	Functions to blit a block to the screen.
+  /home/hindle1/src/DOOM/linuxdoom-1.10/d_main.c :    I_UpdateNoBlit ();
+  /home/hindle1/src/DOOM/linuxdoom-1.10/d_main.c:	I_FinishUpdate ();              // page flip or blit buffer
+  /home/hindle1/src/DOOM/linuxdoom-1.10/d_main.c:	I_UpdateNoBlit ();
+  /home/hindle1/src/DOOM/linuxdoom-1.10/d_main.c:	I_FinishUpdate ();                      // page flip or blit buffer
+  /home/hindle1/src/DOOM/linuxdoom-1.10/g_game.c:boolean         noblit;                 // for comparative timing purposes 
+  /home/hindle1/src/DOOM/linuxdoom-1.10/g_game.c:    noblit = M_CheckParm ("-noblit"); 
+  /home/hindle1/src/DOOM/linuxdoom-1.10/i_video.c:// I_UpdateNoBlit
+  /home/hindle1/src/DOOM/linuxdoom-1.10/i_video.c:void I_UpdateNoBlit (void)
+  /home/hindle1/src/DOOM/linuxdoom-1.10/i_video.c:    // scales the screen size before blitting it
+  /home/hindle1/src/DOOM/linuxdoom-1.10/m_menu.c:// but before it has been blitted.
+  /home/hindle1/src/DOOM/linuxdoom-1.10/v_video.c://	Functions to blit a block to the screen.
+  #+end_example
+- Look at the file names! Sometimes they tell you a lot!
+
+  This doom source code is organized by prefixes. These indicate
+  grouping of modules.
+
+  From DoomWiki contributors, 1999, Doom source code, https://doomwiki.org/wiki/Doom_source_code
+   #+begin_example
+   AM_*
+       Automap code
+   D_*
+       Initialisation/general code
+   F_*
+       "Finale" (end of game) and "screen melt" code.
+   G_*
+       Main game loop/control
+   HU_*
+       Heads-up display
+   I_*
+       System-specific code
+   M_*
+       Miscellaneous (includes the menu)
+   P_*
+       Game logic/behaviour
+   R_*
+       Rendering engine
+   S_*
+       Sound code
+   ST_*
+       Status bar
+   V_*
+       General graphic rendering
+   WI_*
+       End-of level "intermission" screen
+   W_*
+       WAD file loading
+   Z_*
+       Zone memory allocation system
+   
+   The following are common prefixes for functions, although they do not denote a particular subsystem, and there are no files with these prefixes:
+   
+   A_*
+       Action functions invoked in sprite movement frames (these are the functions used in Dehacked "code pointers")
+   PIT_*
+       Callback functions passed to P_BlockThingsIterator (see p_maputl.c)
+   T_*
+       "Thinker" functions set to be called each clock tic for some purpose (eg, moving platforms or flickering lights)
+   #+end_example
+
+- Memory allocation is always interesting in a C program
+
+  #+begin_src sh 
+  grep malloc ~/src/DOOM/linuxdoom-1.10/*.h
+  grep malloc ~/src/DOOM/linuxdoom-1.10/*.c
+  #+end_src
+
+  #+RESULTS:
+  #+begin_example
+  /home/hindle1/src/DOOM/linuxdoom-1.10/i_system.h:// to get the ammount of memory to malloc
+  /home/hindle1/src/DOOM/linuxdoom-1.10/i_system.h:// just mallocs under unix
+  /home/hindle1/src/DOOM/linuxdoom-1.10/d_main.c:    newfile = malloc (strlen(file)+1);
+  /home/hindle1/src/DOOM/linuxdoom-1.10/d_main.c:    doom2wad = malloc(strlen(doomwaddir)+1+9+1);
+  /home/hindle1/src/DOOM/linuxdoom-1.10/d_main.c:    doomuwad = malloc(strlen(doomwaddir)+1+8+1);
+  /home/hindle1/src/DOOM/linuxdoom-1.10/d_main.c:    doomwad = malloc(strlen(doomwaddir)+1+8+1);
+  /home/hindle1/src/DOOM/linuxdoom-1.10/d_main.c:    doom1wad = malloc(strlen(doomwaddir)+1+9+1);
+  /home/hindle1/src/DOOM/linuxdoom-1.10/d_main.c:    // Insufficient malloc, caused spurious realloc errors.
+  /home/hindle1/src/DOOM/linuxdoom-1.10/d_main.c:    plutoniawad = malloc(strlen(doomwaddir)+1+/*9*/12+1);
+  /home/hindle1/src/DOOM/linuxdoom-1.10/d_main.c:    tntwad = malloc(strlen(doomwaddir)+1+9+1);
+  /home/hindle1/src/DOOM/linuxdoom-1.10/d_main.c:    doom2fwad = malloc(strlen(doomwaddir)+1+10+1);
+  /home/hindle1/src/DOOM/linuxdoom-1.10/d_main.c:	    file = malloc (size);
+  /home/hindle1/src/DOOM/linuxdoom-1.10/d_main.c:	    myargv = malloc(sizeof(char *)*MAXARGVS);
+  /home/hindle1/src/DOOM/linuxdoom-1.10/i_net.c:    doomcom = malloc (sizeof (*doomcom) );
+  /home/hindle1/src/DOOM/linuxdoom-1.10/i_system.c:    return (byte *) malloc (*size);
+  /home/hindle1/src/DOOM/linuxdoom-1.10/i_system.c:    mem = (byte *)malloc (length);
+  /home/hindle1/src/DOOM/linuxdoom-1.10/i_video.c:    				(char*)malloc(X_width * X_height),
+  /home/hindle1/src/DOOM/linuxdoom-1.10/i_video.c:	screens[0] = (unsigned char *) malloc (SCREENWIDTH * SCREENHEIGHT);
+  /home/hindle1/src/DOOM/linuxdoom-1.10/m_misc.c:		    newstring = (char *) malloc(len);
+  /home/hindle1/src/DOOM/linuxdoom-1.10/w_wad.c:#include <malloc.h>
+  /home/hindle1/src/DOOM/linuxdoom-1.10/w_wad.c:    lumpinfo = malloc(1);	
+  /home/hindle1/src/DOOM/linuxdoom-1.10/w_wad.c:    lumpcache = malloc (size);
+  /home/hindle1/src/DOOM/linuxdoom-1.10/z_zone.c:    // total bytes malloced, including header
+  #+end_example
+
+  Turns out they pool allocate at the start and do their own memory management.
+  So they don't plan to call upon malloc very much after this point.
+
+  #+begin_src sh 
+  grep I_ZoneBase ~/src/DOOM/linuxdoom-1.10/*.h
+  grep I_ZoneBase ~/src/DOOM/linuxdoom-1.10/*.c
+  #+end_src
+
+  #+RESULTS:
+  : /home/hindle1/src/DOOM/linuxdoom-1.10/i_system.h:byte*	I_ZoneBase (int *size);
+  : /home/hindle1/src/DOOM/linuxdoom-1.10/i_system.c:byte* I_ZoneBase (int*	size)
+  : /home/hindle1/src/DOOM/linuxdoom-1.10/z_zone.c:    mainzone = (memzone_t *)I_ZoneBase (&size);
+
+
+
+- file:~/src/DOOM/
+- file:~/src/DOOM/linuxdoom-1.10/Makefile
+- file:~/src/DOOM/linuxdoom-1.10/i_main.c
+- file:~/src/DOOM/linuxdoom-1.10/d_main.h
+
+*** Refs
+- DoomWiki contributors, 1999, Doom source code, https://doomwiki.org/wiki/Doom_source_code
+- DoomWiki contributors, 1999, Doom source code files, https://doomwiki.org/wiki/Doom_source_code_files
+- iD Software, 1997, Doom Source Code https://github.com/id-Software/DOOM/
+- Fabien Sanglard, 2010, http://fabiensanglard.net/doomIphone/doomClassicRenderer.php
+  - All about the engine itself
+- Tom Hall, John Romero, 2011, Doom Postmortem
+  https://www.gdcvault.com/play/1014627/Classic-Game-Postmortem
+  - Developers discuss doom
+- John Romero, 1993, A visit to iD Software, 
+  https://www.youtube.com/watch?v=Q65xJfVkiaI
+- Kris Occhipinti, 2015, Doom Source Code Editing Prboom GCC Linux Tutorial
+   https://www.youtube.com/watch?v=Cd8T5-j1QwQ
+   https://pastebin.com/T29s9Mss
