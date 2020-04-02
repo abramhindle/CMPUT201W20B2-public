@@ -1099,17 +1099,300 @@ called coincidental cohesion (aka you're lucky if it is cohesive).
 
 *** McCabe's Cyclometic Complexity
 
+McCabe's Cyclometic Complexity is [McCabe76] the number of unique
+paths through a module. The idea is that a module is complicated
+(complex) if there's lots of routes through the module.
+
+Programmers worry about complicated code because it can become a
+maintainability nightmare. It is hard to read and understand and can
+have lots of corner cases making it very hard to test. This means it
+is probably less reliable and trustable. Typically we correlate
+complicated with the idea that it is not maintainable. 
+
+You had to deal with McCabe's cyclometic complexity ever since we
+forced OCLint on you.
+
+Typically for a subroutine McCabes is calculated as (P=1):
+
+M = E - N + 2P
+M = E - N + 2
+
+Where E is the number of edges in a module (directed edges) and N is
+the number of nodes. 
+
+#+begin_src C :exports code :eval no
+int main() {
+    int input = 0;
+    scanf("%d", &input);
+    return 5 * input;
+}
+#+end_src
+
+This module has 3 nodes 2 edges and 1 exit:
+#+begin_example
+    int input = 0;
+    |
+    V
+    scanf("%d", &input);
+    |
+    V
+    return 5 * input;
+#+end_example
+
+M = 2 - 3 + 2 = 1
+
+McCabes argued that subroutines or modules with complexity greater
+than 10 should be split into smaller modules.
+
+#+begin_src C :exports code :eval no :main no :tangle sum.c
+#include <inttypes.h>
+#include <stdlib.h>
+int sum(int * array, size_t n) {
+    int sum = 0;
+    for (size_t i = 0 ; i < n ; i++ ) {
+        sum += array[i];
+    }
+    return sum;
+}
+#+end_src
+
+#+begin_example
+    int sum = 0;
+    |
+    V
+    for (size_t i = 0 ; i < n ; i++ ) {//<-+ // we could split this up
+         |                                 |
+         V                                 |
+        sum += array[i]                    |
+         |                                 |
+         V                                 |
+    } // ----------------------------------+
+    |
+    V
+    return sum;
+#+end_example
+
+E = 5
+N = 5
+M = E - N + 2 = 2
+
+So that 1 for loop is worth 1
+
+
+OK now let's do another sum that works but it more "complex".
+
+#+begin_src C :exports code :eval no :main no :tangle sum4.c
+#include <inttypes.h>
+#include <stdlib.h>
+int sum(int * array, size_t n) {
+    int sum = 0; // N+=1
+    for (size_t i = 0 ; i < n ; i+=4 ) { // N+=1
+        sum += array[i]; // N+=1
+    } // N+=1 E+=1
+    for (size_t i = 1 ; i < n ; i+=4 ) { // N+=1
+        sum += array[i]; // N+=1
+    } // N+=1 E+=1
+    for (size_t i = 2 ; i < n ; i+=4 ) { // N+=1
+        sum += array[i]; // N+=1
+    } // N+=1 E+=1
+    for (size_t i = 3 ; i < n ; i+=4 ) { // N+=1
+        sum += array[i]; // N+=1
+    } // N+=1 E+=1
+    return sum; // N+=1
+}
+#+end_src
+E=17
+N=14
+M=17-14+2 = 5
+
+Effectively McCabes is close to the 1 + the number of branch points in
+a program. So I could estimate the complexity of that program by
+counting the number of if, while, do, for statements. This means I can
+skip a lot of the complicated modelling and just count those.
+
+
+#+begin_src C :exports code :eval no :tangle passcodedeep.c :main no
+int passCode(int * code) {
+
+    if ( code[0] == 'C' ) { // N+=1 E+=2
+        if ( code[1] == 'R' ) { // N+=1 E+=2
+            if ( code[2] == 'E' ) { // N+=1 E+=2
+                if ( code[3] == 'D' ) { // N+=1 E+=2
+                    if ( code[4] == 'I' ) { // N+=1 E+=2
+                        if ( code[5] == 'T' ) { // N+=1 E+=2
+                            return 1; // N+=1
+                        }
+                    }
+                }
+            }
+        }
+    }
+    return 0; // N+=1
+}
+#+end_src
+
+E = 13
+N = 8
+M = 13 - 8 + 2 = 7
+
+#+begin_src C :eval no :exports code :tangle passcodesum.c :main no
+int passCode(int * code) {
+    int sum = 0; // N+=1 E+=1
+    sum += code[0] == 'C'; // N+=1 E+=1
+    sum += code[1] == 'R'; // N+=1 E+=1
+    sum += code[2] == 'E'; // N+=1 E+=1
+    sum += code[3] == 'D'; // N+=1 E+=1
+    sum += code[4] == 'I'; // N+=1 E+=1
+    sum += code[5] == 'T'; // N+=1 E+=1
+    return sum==6; // N+=1
+}
+#+end_src
+
+M = 7 - 8 + 2 = 1
+
+#+begin_src C :eval no :exports code :tangle passcodeifsum.c :main no
+int passCode(int * code) {
+    int sum = 0; // N+=1 E+=1
+    if (code[0] == 'C') sum++; // N+=2 E+=3
+    // it's E+3 because:
+    // the if statement condition is false is 1 path
+    // and you need 2 edges to, 1 to reach sum++ and 1 
+    // to exit the if statement
+    if (code[1] == 'R') sum++; // N+=2 E+=3
+    if (code[2] == 'E') sum++; // N+=2 E+=3
+    if (code[3] == 'D') sum++; // N+=2 E+=3
+    if (code[4] == 'I') sum++; // N+=2 E+=3
+    if (code[5] == 'T') sum++; // N+=2 E+=3
+    return sum==6; // N+=1
+}
+#+end_src
+
+N = 14
+E = 19
+M = 19 - 14 + 2 = 7
+
+If you want to use OCLint to print MCCabe's just force the threshold
+
+#+begin_src sh :exports both
+for file in sum.c sum4.c passcodedeep.c passcodesum.c passcodeifsum.c
+do
+echo $file
+/usr/local/bin/oclint --disable-rule=UselessParentheses \
+   -rc CYCLOMATIC_COMPLEXITY=0  $file --  \
+   -std=c99 -pedantic -Wall -Wextra -ftrapv -ggdb3  \
+   -c $file 
+done
+echo good
+#+end_src
+
+#+RESULTS:
+#+begin_example
+sum.c
+
+
+OCLint Report
+
+Summary: TotalFiles=1 FilesWithViolations=1 P1=0 P2=1 P3=1 
+
+/home/hindle1/projects/CMPUT201W20/2020-01/CMPUT201W20B2-public/week12/sum.c:3:22: short variable name [naming|P3] Length of variable name `n` is 1, which is shorter than the threshold of 3
+/home/hindle1/projects/CMPUT201W20/2020-01/CMPUT201W20B2-public/week12/sum.c:3:1: high cyclomatic complexity [size|P2] Cyclomatic Complexity Number 2 exceeds limit of 0
+
+[OCLint (http://oclint.org) v0.15]
+sum4.c
+
+
+OCLint Report
+
+Summary: TotalFiles=1 FilesWithViolations=1 P1=0 P2=1 P3=1 
+
+/home/hindle1/projects/CMPUT201W20/2020-01/CMPUT201W20B2-public/week12/sum4.c:3:22: short variable name [naming|P3] Length of variable name `n` is 1, which is shorter than the threshold of 3
+/home/hindle1/projects/CMPUT201W20/2020-01/CMPUT201W20B2-public/week12/sum4.c:3:1: high cyclomatic complexity [size|P2] Cyclomatic Complexity Number 5 exceeds limit of 0
+
+[OCLint (http://oclint.org) v0.15]
+passcodedeep.c
+
+
+OCLint Report
+
+Summary: TotalFiles=1 FilesWithViolations=1 P1=0 P2=1 P3=7 
+
+/home/hindle1/projects/CMPUT201W20/2020-01/CMPUT201W20B2-public/week12/passcodedeep.c:1:26: deep nested block [size|P3] Block depth of 7 exceeds limit of 5
+/home/hindle1/projects/CMPUT201W20/2020-01/CMPUT201W20B2-public/week12/passcodedeep.c:3:27: deep nested block [size|P3] Block depth of 6 exceeds limit of 5
+/home/hindle1/projects/CMPUT201W20/2020-01/CMPUT201W20B2-public/week12/passcodedeep.c:3:5: collapsible if statements [basic|P3] 
+/home/hindle1/projects/CMPUT201W20/2020-01/CMPUT201W20B2-public/week12/passcodedeep.c:4:9: collapsible if statements [basic|P3] 
+/home/hindle1/projects/CMPUT201W20/2020-01/CMPUT201W20B2-public/week12/passcodedeep.c:5:13: collapsible if statements [basic|P3] 
+/home/hindle1/projects/CMPUT201W20/2020-01/CMPUT201W20B2-public/week12/passcodedeep.c:6:17: collapsible if statements [basic|P3] 
+/home/hindle1/projects/CMPUT201W20/2020-01/CMPUT201W20B2-public/week12/passcodedeep.c:7:21: collapsible if statements [basic|P3] 
+/home/hindle1/projects/CMPUT201W20/2020-01/CMPUT201W20B2-public/week12/passcodedeep.c:1:1: high cyclomatic complexity [size|P2] Cyclomatic Complexity Number 7 exceeds limit of 0
+
+[OCLint (http://oclint.org) v0.15]
+passcodesum.c
+
+
+OCLint Report
+
+Summary: TotalFiles=1 FilesWithViolations=1 P1=0 P2=1 P3=0 
+
+/home/hindle1/projects/CMPUT201W20/2020-01/CMPUT201W20B2-public/week12/passcodesum.c:1:1: high cyclomatic complexity [size|P2] Cyclomatic Complexity Number 1 exceeds limit of 0
+
+[OCLint (http://oclint.org) v0.15]
+passcodeifsum.c
+
+
+OCLint Report
+
+Summary: TotalFiles=1 FilesWithViolations=1 P1=0 P2=1 P3=0 
+
+/home/hindle1/projects/CMPUT201W20/2020-01/CMPUT201W20B2-public/week12/passcodeifsum.c:1:1: high cyclomatic complexity [size|P2] Cyclomatic Complexity Number 7 exceeds limit of 0
+
+[OCLint (http://oclint.org) v0.15]
+good
+#+end_example
+
+**** OCLint
+
+How does OCLint calculate Cyclometic complexity?
+https://github.com/oclint/oclint/blob/master/oclint-rules/rules/size/CyclomaticComplexityRule.cpp
+https://github.com/oclint/oclint/blob/master/oclint-metrics/lib/CyclomaticComplexityMetric.cpp
+
+It traverses the code as a tree, and counts all conditions, whiles,
+do, cases, fors, and if statements and adds 1.
+
+
+oclint --disable-rule=UselessParentheses -rc CYCLOMATIC_COMPLEXITY=0 
+
+**** Criticism of McCabe's
+
+McCabes is correlated with lines of code, so it is effectively a size
+measure. We know that if each line has a probability of being buggy
+then more lines implies more bugs. McCabes doesn't really help us
+here.
+
+McCabes ignores function pointers and dot operators. So dynamic code
+is not counted. McCabes also ignores delegation functions (like a
+function with a case statement) that you might call, effectively
+making highly divergent code paths. 
+
+McCabes typically ignores multi-module dependencies.
+
+McCabes under counts paths through a program. The NPath metric can
+count the paths.
+
 *** Refs
 
-W. P. Stevens, G. J. Myers and L. L. Constantine, "Structured design,"
+[Stevens74] W. P. Stevens, G. J. Myers and L. L. Constantine, "Structured design,"
 in IBM Systems Journal, vol. 13, no. 2, pp. 115-139, 1974.
 https://ieeexplore.ieee.org/document/5388187
 
-Roger Pressman. 2009. Software Engineering: A Practitioner’s Approach
+[Pressman09] Roger Pressman. 2009. Software Engineering: A Practitioner’s Approach
 (7th. ed.). McGraw-Hill, Inc., USA.
 
 [DHA95] Dhama, H., “Quantitative Models of Cohesion and Coupling in Software,”
 Journal of Systems and Software, vol. 29, no. 4, April 1995.
+
+[McCabe76] McCabe (December 1976). "A Complexity Measure". IEEE Transactions on
+Software Engineering (4): 308–320. doi:10.1109/tse.1976.233837
+
 
 ** Big Programs
 *** DOOM
