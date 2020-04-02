@@ -1453,7 +1453,7 @@ General tips on code reading:
 - Read descriptions of functions and modules
 - Use grep or other tools to search across the source code
   - E.g. let's look at blitting (rapid copying of data)
-  #+begin_src sh 
+  #+begin_src sh :exports both
   grep -i blit ~/src/DOOM/linuxdoom-1.10/*.h
   grep -i blit ~/src/DOOM/linuxdoom-1.10/*.c
   #+end_src
@@ -1528,7 +1528,7 @@ General tips on code reading:
 
 - Memory allocation is always interesting in a C program
 
-  #+begin_src sh 
+  #+begin_src sh :exports both
   grep malloc ~/src/DOOM/linuxdoom-1.10/*.h
   grep malloc ~/src/DOOM/linuxdoom-1.10/*.c
   #+end_src
@@ -1563,7 +1563,7 @@ General tips on code reading:
   Turns out they pool allocate at the start and do their own memory management.
   So they don't plan to call upon malloc very much after this point.
 
-  #+begin_src sh 
+  #+begin_src sh :exports both
   grep I_ZoneBase ~/src/DOOM/linuxdoom-1.10/*.h
   grep I_ZoneBase ~/src/DOOM/linuxdoom-1.10/*.c
   #+end_src
