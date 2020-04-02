@@ -1442,14 +1442,14 @@ General tips on code reading:
   - What are the main entries to the program?
   - Start with the makefiles and similar build files
   - https://github.com/id-Software/DOOM/blob/master/linuxdoom-1.10/Makefile
-    - file:~/src/DOOM/linuxdoom-1.10/Makefile
+    - [[file:~/src/DOOM/linuxdoom-1.10/Makefile][Makefile]]
   - https://github.com/id-Software/DOOM/blob/master/linuxdoom-1.10/i_main.c
-    - file:~/src/DOOM/linuxdoom-1.10/i_main.c
+    - [[file:~/src/DOOM/linuxdoom-1.10/i_main.c][i_main.c]]
 - .h files give an overview of what is important in each module
   - https://github.com/id-Software/DOOM/blob/master/linuxdoom-1.10/d_main.h
-    - file:~/src/DOOM/linuxdoom-1.10/d_main.h
+    - [[file:~/src/DOOM/linuxdoom-1.10/d_main.h][d_main.h]]
   - https://github.com/id-Software/DOOM/blob/master/linuxdoom-1.10/d_main.c
-    - file:~/src/DOOM/linuxdoom-1.10/d_main.c
+    - [[file:~/src/DOOM/linuxdoom-1.10/d_main.c][d_main.c]]
 - Read descriptions of functions and modules
 - Use grep or other tools to search across the source code
   - E.g. let's look at blitting (rapid copying of data)
@@ -1575,10 +1575,10 @@ General tips on code reading:
 
 
 
-- file:~/src/DOOM/
-- file:~/src/DOOM/linuxdoom-1.10/Makefile
-- file:~/src/DOOM/linuxdoom-1.10/i_main.c
-- file:~/src/DOOM/linuxdoom-1.10/d_main.h
+- [[file:~/src/DOOM/][~/src/DOOM/]]
+- [[file:~/src/DOOM/linuxdoom-1.10/Makefile][~/src/DOOM/linuxdoom-1.10/Makefile]]
+- [[file:~/src/DOOM/linuxdoom-1.10/i_main.c][~/src/DOOM/linuxdoom-1.10/i_main.c]]
+- [[file:~/src/DOOM/linuxdoom-1.10/d_main.h][~/src/DOOM/linuxdoom-1.10/d_main.h]]
 
 *** Refs
 - DoomWiki contributors, 1999, Doom source code, https://doomwiki.org/wiki/Doom_source_code

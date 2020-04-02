@@ -33,7 +33,13 @@ _________________
 ..... 1. Coupling
 ..... 2. Graph Coupling
 .. 9. Cohesion
-..... 1. Refs
+..... 1. McCabe's Cyclometic Complexity
+..... 2. Refs
+.. 10. Big Programs
+..... 1. DOOM
+..... 2. License
+..... 3. Discussion
+..... 4. Refs
 
 
 
@@ -307,19 +313,55 @@ _________________
 
   Type: float
 
+  Size: 32 bits / 4 bytes
+
   -Sign: 0 - positive, 1 negative Exponent: unsigned 8 bit integer with
   -127 (2^7-1) offset
   - -126 to 127
+  - 1*pow(2,-126) to 1*pow(2,127)
   - Fraction: 24 bits (only 23 used). The first bit is implied.
     - So 00000000000000000000000 is actually 100000000000000000000000
+  - 0.19e2
+  - 1.9e1
+  - 100*0.19 = 19
+  - b1.11e1
+  - b0.111e2
+  - 1.0101e2 = 1*2^2 + 0*2^1 + 1*2^0+ 0*2^-1 + 1*2^-2 = 4 + 1 + 1/4 =
+    5.25
+  - 1.1101e-4 = 1*2^-4 + 1*2^-5 + 1*2^-6 + 1*2-8 = 1/16 + 1/32 + 1/64 +
+    1/256 = 0.11328125
+  2^-126
 
-   Sign (1 bit)  Exponent (8 bit)  b10        Fraction (23 bit)     Value  base 2     
+  ,----
+  | #include <stdio.h>
+  | int main() {
+  |     /*printf("%d\n", 0.0F == -0.0F);
+  |     printf("%g\n", 1.0F * -0.0F);
+  |     printf("%0.3f\n", 1.0e+126F * 4.0F);
+  |     printf("%0.3f\n", 1.0e+126F * -4.0F); */
+  |     printf("%e\n", 1.0e38F + 2.0e38F);
+  |     printf("%e\n", 1.0e38F + 4.0e38F);
+  | }
+  `----
+
+  ,----
+  | 3.000000e+38
+  | inf
+  `----
+
+
+  ,----
+  | -0.010 = 1*1/100
+  `----
+
+
+
+   Sign (1 bit)  Exponent (8 bit)  b10        Fraction (23 bit)     Value      base 2 
               0          01111100   -3  01000000000000000000000   0.15625  1/8 + 1/32 
               1          01111100   -3  01000000000000000000000  -0.15625             
-              0          01111100   -3  01000000000000000000000  -0.15625             
               0          00000000    0  00000000000000000000000         0             
               1          00000000    0  00000000000000000000000        -0             
-              0          11000000   65  00000000000000000000000  3.68e+19  2^65       
+              0          11000000   65  00000000000000000000000  3.68e+19        2^65 
               1          11111111    0  00000000000000000000000      -inf             
               0          11111111    0  00000000000000000000000       inf             
               0          11111111    0  10000000000000000000000       nan             
@@ -409,6 +451,7 @@ _________________
   |         float f = floats[i];
   |         union floatint fi = {.f=f};
   |         printf("%12g 0x%08x 0b%s\n", f, fi.i, bitString(fi.i, 32));
+  |         /*
   |         printf("%12g 0x%08x sign: %hhu exponent: %3hhu exp-127: %4d mantissa: 0x%06x\n", 
   |                f,
   |                fi.i,
@@ -416,17 +459,19 @@ _________________
   |                fi.t.exponent,
   |                (int)fi.t.exponent - (int)127,
   |                fi.t.mantissa
-  |         );
-  |         /* // We don't need bitfields
-  |         printf("%12g %08x sign: %hhu exponent: %hhu exp-127: %4d mantissa: 0x%06x\n", 
+  |         );*/
+  |         // We don't need bitfields
+  |         printf("%12g 0x%08x sign: %hhu exponent: %hhu exp-127: %4d mantissa: 0x%06x\n", 
   |                f,
   |                fi.i,
   |                (fi.i >> 31),
   |                ((fi.i << 1) >> 24),
   |                (int)((fi.i << 1) >> 24) - (int)127,
   |                (fi.i & 0x007FFFFF)
+  |                //0000 0000 0111 1111 1111 1111 1111 1111
+  |                //0      0   7    F    F   F    F    F
   |         );
-  |         */ 
+  | 
   | 
   |     }
   |     puts("");
@@ -438,9 +483,9 @@ _________________
   | sizeof(floatint) == 4
   | sizeof(float_t) == 4
   |            0 0x00000000 0b00000000000000000000000000000000
-  |            0 0x00000000 sign: 0 exponent:   0 exp-127: -127 mantissa: 0x000000
+  |            0 0x00000000 sign: 0 exponent: 0 exp-127: -127 mantissa: 0x000000
   |           -0 0x80000000 0b10000000000000000000000000000000
-  |           -0 0x80000000 sign: 1 exponent:   0 exp-127: -127 mantissa: 0x000000
+  |           -0 0x80000000 sign: 1 exponent: 0 exp-127: -127 mantissa: 0x000000
   |          inf 0x7f800000 0b01111111100000000000000000000000
   |          inf 0x7f800000 sign: 0 exponent: 255 exp-127:  128 mantissa: 0x000000
   |         -inf 0xff800000 0b11111111100000000000000000000000
@@ -560,7 +605,7 @@ _________________
   that module.
 
   High coupling is bad because it makes code weak to change:
-  - too many dependencies increase change of change
+  - too many dependencies increase risk of change
   - too many dependencies increase bug risk
   - too many dependencies means dependencies will probably change
 
@@ -619,7 +664,9 @@ _________________
   Using these measures, a module coupling indicator, m c , is defined in
   the following way:
 
-  - m_c = k/M
+  - m_c = k/M = 1/(d_i + (a * c_i ) + d_o + (b * c_o ) + g_d + (c* g_c )
+    + w + r)
+    - alternative m_c = k/M = 1/(1 + w + r)
   - where k = 1, a proportionality constant 8 and
 
   - M = d_i + (a * c_i ) + d_o + (b * c_o ) + g_d + (c* g_c ) + w + r
@@ -640,6 +687,7 @@ _________________
   - where x = number of unique external function calls
   - where y = number of unique external variable access
   - where z = number of unique externally defined types
+  - where w = number of modules called (fan-out)
   - where lambda ~ 4 or however more important you feel that fan-out is
   - w = number of modules called (fan-out)
   - coupling_h = 1 / (1 + lambda*w + x + y + z)
@@ -653,7 +701,7 @@ _________________
   You can invent your own coupling measures for your own purposes.
 
 
-* 1.8.2.2 Low coupling
+* 1.8.2.2 Coupling Examples
 
   + 1.8.2.2.1 No Coupling
 
@@ -800,82 +848,82 @@ _________________
     `----
 
     ,----
-    | linux-vdso.so.1 (0x00007ffdad1f2000)
-    | libevdocument3.so.4 => /usr/lib/x86_64-linux-gnu/libevdocument3.so.4 (0x00007f7ca062c000)
-    | libevview3.so.3 => /usr/lib/x86_64-linux-gnu/libevview3.so.3 (0x00007f7ca03d5000)
-    | libsecret-1.so.0 => /usr/lib/x86_64-linux-gnu/libsecret-1.so.0 (0x00007f7ca0185000)
-    | libgnome-desktop-3.so.17 => /usr/lib/x86_64-linux-gnu/libgnome-desktop-3.so.17 (0x00007f7c9ff49000)
-    | libgtk-3.so.0 => /usr/lib/x86_64-linux-gnu/libgtk-3.so.0 (0x00007f7c9f641000)
-    | libgdk-3.so.0 => /usr/lib/x86_64-linux-gnu/libgdk-3.so.0 (0x00007f7c9f34b000)
-    | libpangocairo-1.0.so.0 => /usr/lib/x86_64-linux-gnu/libpangocairo-1.0.so.0 (0x00007f7c9f13e000)
-    | libpango-1.0.so.0 => /usr/lib/x86_64-linux-gnu/libpango-1.0.so.0 (0x00007f7c9eef1000)
-    | libatk-1.0.so.0 => /usr/lib/x86_64-linux-gnu/libatk-1.0.so.0 (0x00007f7c9eccb000)
-    | libcairo-gobject.so.2 => /usr/lib/x86_64-linux-gnu/libcairo-gobject.so.2 (0x00007f7c9eac2000)
-    | libcairo.so.2 => /usr/lib/x86_64-linux-gnu/libcairo.so.2 (0x00007f7c9e7a5000)
-    | libgio-2.0.so.0 => /usr/lib/x86_64-linux-gnu/libgio-2.0.so.0 (0x00007f7c9e406000)
-    | libgdk_pixbuf-2.0.so.0 => /usr/lib/x86_64-linux-gnu/libgdk_pixbuf-2.0.so.0 (0x00007f7c9e1e2000)
-    | libgobject-2.0.so.0 => /usr/lib/x86_64-linux-gnu/libgobject-2.0.so.0 (0x00007f7c9df8e000)
-    | libglib-2.0.so.0 => /usr/lib/x86_64-linux-gnu/libglib-2.0.so.0 (0x00007f7c9dc77000)
-    | libm.so.6 => /lib/x86_64-linux-gnu/libm.so.6 (0x00007f7c9d8d9000)
-    | libpthread.so.0 => /lib/x86_64-linux-gnu/libpthread.so.0 (0x00007f7c9d6ba000)
-    | libc.so.6 => /lib/x86_64-linux-gnu/libc.so.6 (0x00007f7c9d2c9000)
-    | libgmodule-2.0.so.0 => /usr/lib/x86_64-linux-gnu/libgmodule-2.0.so.0 (0x00007f7c9d0c5000)
-    | libz.so.1 => /lib/x86_64-linux-gnu/libz.so.1 (0x00007f7c9cea8000)
-    | libgstvideo-1.0.so.0 => /usr/lib/x86_64-linux-gnu/libgstvideo-1.0.so.0 (0x00007f7c9cc0f000)
-    | libgstreamer-1.0.so.0 => /usr/lib/x86_64-linux-gnu/libgstreamer-1.0.so.0 (0x00007f7c9c8d4000)
-    | libgcrypt.so.20 => /lib/x86_64-linux-gnu/libgcrypt.so.20 (0x00007f7c9c5b8000)
-    | libX11.so.6 => /usr/lib/x86_64-linux-gnu/libX11.so.6 (0x00007f7c9c280000)
-    | libudev.so.1 => /lib/x86_64-linux-gnu/libudev.so.1 (0x00007f7c9c062000)
-    | libseccomp.so.2 => /lib/x86_64-linux-gnu/libseccomp.so.2 (0x00007f7c9be1b000)
-    | librt.so.1 => /lib/x86_64-linux-gnu/librt.so.1 (0x00007f7c9bc13000)
-    | libXi.so.6 => /usr/lib/x86_64-linux-gnu/libXi.so.6 (0x00007f7c9ba03000)
-    | libXfixes.so.3 => /usr/lib/x86_64-linux-gnu/libXfixes.so.3 (0x00007f7c9b7fd000)
-    | libatk-bridge-2.0.so.0 => /usr/lib/x86_64-linux-gnu/libatk-bridge-2.0.so.0 (0x00007f7c9b5cc000)
-    | libepoxy.so.0 => /usr/lib/x86_64-linux-gnu/libepoxy.so.0 (0x00007f7c9b2cb000)
-    | libpangoft2-1.0.so.0 => /usr/lib/x86_64-linux-gnu/libpangoft2-1.0.so.0 (0x00007f7c9b0b5000)
-    | libfontconfig.so.1 => /usr/lib/x86_64-linux-gnu/libfontconfig.so.1 (0x00007f7c9ae70000)
-    | libXinerama.so.1 => /usr/lib/x86_64-linux-gnu/libXinerama.so.1 (0x00007f7c9ac6d000)
-    | libXrandr.so.2 => /usr/lib/x86_64-linux-gnu/libXrandr.so.2 (0x00007f7c9aa62000)
-    | libXcursor.so.1 => /usr/lib/x86_64-linux-gnu/libXcursor.so.1 (0x00007f7c9a858000)
-    | libXcomposite.so.1 => /usr/lib/x86_64-linux-gnu/libXcomposite.so.1 (0x00007f7c9a655000)
-    | libXdamage.so.1 => /usr/lib/x86_64-linux-gnu/libXdamage.so.1 (0x00007f7c9a452000)
-    | libxkbcommon.so.0 => /usr/lib/x86_64-linux-gnu/libxkbcommon.so.0 (0x00007f7c9a213000)
-    | libwayland-cursor.so.0 => /usr/lib/x86_64-linux-gnu/libwayland-cursor.so.0 (0x00007f7c9a00b000)
-    | libwayland-egl.so.1 => /usr/lib/x86_64-linux-gnu/libwayland-egl.so.1 (0x00007f7c99e09000)
-    | libwayland-client.so.0 => /usr/lib/x86_64-linux-gnu/libwayland-client.so.0 (0x00007f7c99bfa000)
-    | libXext.so.6 => /usr/lib/x86_64-linux-gnu/libXext.so.6 (0x00007f7c999e8000)
-    | libfreetype.so.6 => /usr/lib/x86_64-linux-gnu/libfreetype.so.6 (0x00007f7c99734000)
-    | libthai.so.0 => /usr/lib/x86_64-linux-gnu/libthai.so.0 (0x00007f7c9952b000)
-    | libpixman-1.so.0 => /usr/lib/x86_64-linux-gnu/libpixman-1.so.0 (0x00007f7c99286000)
-    | libpng16.so.16 => /usr/lib/x86_64-linux-gnu/libpng16.so.16 (0x00007f7c99054000)
-    | libxcb-shm.so.0 => /usr/lib/x86_64-linux-gnu/libxcb-shm.so.0 (0x00007f7c98e51000)
-    | libxcb.so.1 => /usr/lib/x86_64-linux-gnu/libxcb.so.1 (0x00007f7c98c29000)
-    | libxcb-render.so.0 => /usr/lib/x86_64-linux-gnu/libxcb-render.so.0 (0x00007f7c98a1c000)
-    | libXrender.so.1 => /usr/lib/x86_64-linux-gnu/libXrender.so.1 (0x00007f7c98812000)
-    | libselinux.so.1 => /lib/x86_64-linux-gnu/libselinux.so.1 (0x00007f7c985ea000)
-    | libresolv.so.2 => /lib/x86_64-linux-gnu/libresolv.so.2 (0x00007f7c983cf000)
-    | libmount.so.1 => /lib/x86_64-linux-gnu/libmount.so.1 (0x00007f7c9817b000)
-    | libffi.so.6 => /usr/lib/x86_64-linux-gnu/libffi.so.6 (0x00007f7c97f73000)
-    | libpcre.so.3 => /lib/x86_64-linux-gnu/libpcre.so.3 (0x00007f7c97d01000)
-    | /lib64/ld-linux-x86-64.so.2 (0x00007f7ca0ad2000)
-    | libdl.so.2 => /lib/x86_64-linux-gnu/libdl.so.2 (0x00007f7c97afd000)
-    | libgstbase-1.0.so.0 => /usr/lib/x86_64-linux-gnu/libgstbase-1.0.so.0 (0x00007f7c97888000)
-    | liborc-0.4.so.0 => /usr/lib/x86_64-linux-gnu/liborc-0.4.so.0 (0x00007f7c9760c000)
-    | libgpg-error.so.0 => /lib/x86_64-linux-gnu/libgpg-error.so.0 (0x00007f7c973f7000)
-    | libdbus-1.so.3 => /lib/x86_64-linux-gnu/libdbus-1.so.3 (0x00007f7c971aa000)
-    | libatspi.so.0 => /usr/lib/x86_64-linux-gnu/libatspi.so.0 (0x00007f7c96f7a000)
-    | libharfbuzz.so.0 => /usr/lib/x86_64-linux-gnu/libharfbuzz.so.0 (0x00007f7c96cdc000)
-    | libexpat.so.1 => /lib/x86_64-linux-gnu/libexpat.so.1 (0x00007f7c96aaa000)
-    | libdatrie.so.1 => /usr/lib/x86_64-linux-gnu/libdatrie.so.1 (0x00007f7c968a3000)
-    | libXau.so.6 => /usr/lib/x86_64-linux-gnu/libXau.so.6 (0x00007f7c9669f000)
-    | libXdmcp.so.6 => /usr/lib/x86_64-linux-gnu/libXdmcp.so.6 (0x00007f7c96499000)
-    | libblkid.so.1 => /lib/x86_64-linux-gnu/libblkid.so.1 (0x00007f7c9624c000)
-    | libsystemd.so.0 => /lib/x86_64-linux-gnu/libsystemd.so.0 (0x00007f7c95fc8000)
-    | libgraphite2.so.3 => /usr/lib/x86_64-linux-gnu/libgraphite2.so.3 (0x00007f7c95d9b000)
-    | libbsd.so.0 => /lib/x86_64-linux-gnu/libbsd.so.0 (0x00007f7c95b86000)
-    | libuuid.so.1 => /lib/x86_64-linux-gnu/libuuid.so.1 (0x00007f7c9597f000)
-    | liblzma.so.5 => /lib/x86_64-linux-gnu/liblzma.so.5 (0x00007f7c95759000)
-    | liblz4.so.1 => /usr/lib/x86_64-linux-gnu/liblz4.so.1 (0x00007f7c9553d000)
+    | linux-vdso.so.1 (0x00007fffdb9d0000)
+    | libevdocument3.so.4 => /usr/lib/x86_64-linux-gnu/libevdocument3.so.4 (0x00007fae05eef000)
+    | libevview3.so.3 => /usr/lib/x86_64-linux-gnu/libevview3.so.3 (0x00007fae05c98000)
+    | libsecret-1.so.0 => /usr/lib/x86_64-linux-gnu/libsecret-1.so.0 (0x00007fae05a48000)
+    | libgnome-desktop-3.so.17 => /usr/lib/x86_64-linux-gnu/libgnome-desktop-3.so.17 (0x00007fae0580c000)
+    | libgtk-3.so.0 => /usr/lib/x86_64-linux-gnu/libgtk-3.so.0 (0x00007fae04f04000)
+    | libgdk-3.so.0 => /usr/lib/x86_64-linux-gnu/libgdk-3.so.0 (0x00007fae04c0e000)
+    | libpangocairo-1.0.so.0 => /usr/lib/x86_64-linux-gnu/libpangocairo-1.0.so.0 (0x00007fae04a01000)
+    | libpango-1.0.so.0 => /usr/lib/x86_64-linux-gnu/libpango-1.0.so.0 (0x00007fae047b4000)
+    | libatk-1.0.so.0 => /usr/lib/x86_64-linux-gnu/libatk-1.0.so.0 (0x00007fae0458e000)
+    | libcairo-gobject.so.2 => /usr/lib/x86_64-linux-gnu/libcairo-gobject.so.2 (0x00007fae04385000)
+    | libcairo.so.2 => /usr/lib/x86_64-linux-gnu/libcairo.so.2 (0x00007fae04068000)
+    | libgio-2.0.so.0 => /usr/lib/x86_64-linux-gnu/libgio-2.0.so.0 (0x00007fae03cc9000)
+    | libgdk_pixbuf-2.0.so.0 => /usr/lib/x86_64-linux-gnu/libgdk_pixbuf-2.0.so.0 (0x00007fae03aa5000)
+    | libgobject-2.0.so.0 => /usr/lib/x86_64-linux-gnu/libgobject-2.0.so.0 (0x00007fae03851000)
+    | libglib-2.0.so.0 => /usr/lib/x86_64-linux-gnu/libglib-2.0.so.0 (0x00007fae0353a000)
+    | libm.so.6 => /lib/x86_64-linux-gnu/libm.so.6 (0x00007fae0319c000)
+    | libpthread.so.0 => /lib/x86_64-linux-gnu/libpthread.so.0 (0x00007fae02f7d000)
+    | libc.so.6 => /lib/x86_64-linux-gnu/libc.so.6 (0x00007fae02b8c000)
+    | libgmodule-2.0.so.0 => /usr/lib/x86_64-linux-gnu/libgmodule-2.0.so.0 (0x00007fae02988000)
+    | libz.so.1 => /lib/x86_64-linux-gnu/libz.so.1 (0x00007fae0276b000)
+    | libgstvideo-1.0.so.0 => /usr/lib/x86_64-linux-gnu/libgstvideo-1.0.so.0 (0x00007fae024d2000)
+    | libgstreamer-1.0.so.0 => /usr/lib/x86_64-linux-gnu/libgstreamer-1.0.so.0 (0x00007fae02197000)
+    | libgcrypt.so.20 => /lib/x86_64-linux-gnu/libgcrypt.so.20 (0x00007fae01e7b000)
+    | libX11.so.6 => /usr/lib/x86_64-linux-gnu/libX11.so.6 (0x00007fae01b43000)
+    | libudev.so.1 => /lib/x86_64-linux-gnu/libudev.so.1 (0x00007fae01925000)
+    | libseccomp.so.2 => /lib/x86_64-linux-gnu/libseccomp.so.2 (0x00007fae016de000)
+    | librt.so.1 => /lib/x86_64-linux-gnu/librt.so.1 (0x00007fae014d6000)
+    | libXi.so.6 => /usr/lib/x86_64-linux-gnu/libXi.so.6 (0x00007fae012c6000)
+    | libXfixes.so.3 => /usr/lib/x86_64-linux-gnu/libXfixes.so.3 (0x00007fae010c0000)
+    | libatk-bridge-2.0.so.0 => /usr/lib/x86_64-linux-gnu/libatk-bridge-2.0.so.0 (0x00007fae00e8f000)
+    | libepoxy.so.0 => /usr/lib/x86_64-linux-gnu/libepoxy.so.0 (0x00007fae00b8e000)
+    | libpangoft2-1.0.so.0 => /usr/lib/x86_64-linux-gnu/libpangoft2-1.0.so.0 (0x00007fae00978000)
+    | libfontconfig.so.1 => /usr/lib/x86_64-linux-gnu/libfontconfig.so.1 (0x00007fae00733000)
+    | libXinerama.so.1 => /usr/lib/x86_64-linux-gnu/libXinerama.so.1 (0x00007fae00530000)
+    | libXrandr.so.2 => /usr/lib/x86_64-linux-gnu/libXrandr.so.2 (0x00007fae00325000)
+    | libXcursor.so.1 => /usr/lib/x86_64-linux-gnu/libXcursor.so.1 (0x00007fae0011b000)
+    | libXcomposite.so.1 => /usr/lib/x86_64-linux-gnu/libXcomposite.so.1 (0x00007fadfff18000)
+    | libXdamage.so.1 => /usr/lib/x86_64-linux-gnu/libXdamage.so.1 (0x00007fadffd15000)
+    | libxkbcommon.so.0 => /usr/lib/x86_64-linux-gnu/libxkbcommon.so.0 (0x00007fadffad6000)
+    | libwayland-cursor.so.0 => /usr/lib/x86_64-linux-gnu/libwayland-cursor.so.0 (0x00007fadff8ce000)
+    | libwayland-egl.so.1 => /usr/lib/x86_64-linux-gnu/libwayland-egl.so.1 (0x00007fadff6cc000)
+    | libwayland-client.so.0 => /usr/lib/x86_64-linux-gnu/libwayland-client.so.0 (0x00007fadff4bd000)
+    | libXext.so.6 => /usr/lib/x86_64-linux-gnu/libXext.so.6 (0x00007fadff2ab000)
+    | libfreetype.so.6 => /usr/lib/x86_64-linux-gnu/libfreetype.so.6 (0x00007fadfeff7000)
+    | libthai.so.0 => /usr/lib/x86_64-linux-gnu/libthai.so.0 (0x00007fadfedee000)
+    | libpixman-1.so.0 => /usr/lib/x86_64-linux-gnu/libpixman-1.so.0 (0x00007fadfeb49000)
+    | libpng16.so.16 => /usr/lib/x86_64-linux-gnu/libpng16.so.16 (0x00007fadfe917000)
+    | libxcb-shm.so.0 => /usr/lib/x86_64-linux-gnu/libxcb-shm.so.0 (0x00007fadfe714000)
+    | libxcb.so.1 => /usr/lib/x86_64-linux-gnu/libxcb.so.1 (0x00007fadfe4ec000)
+    | libxcb-render.so.0 => /usr/lib/x86_64-linux-gnu/libxcb-render.so.0 (0x00007fadfe2df000)
+    | libXrender.so.1 => /usr/lib/x86_64-linux-gnu/libXrender.so.1 (0x00007fadfe0d5000)
+    | libselinux.so.1 => /lib/x86_64-linux-gnu/libselinux.so.1 (0x00007fadfdead000)
+    | libresolv.so.2 => /lib/x86_64-linux-gnu/libresolv.so.2 (0x00007fadfdc92000)
+    | libmount.so.1 => /lib/x86_64-linux-gnu/libmount.so.1 (0x00007fadfda3e000)
+    | libffi.so.6 => /usr/lib/x86_64-linux-gnu/libffi.so.6 (0x00007fadfd836000)
+    | libpcre.so.3 => /lib/x86_64-linux-gnu/libpcre.so.3 (0x00007fadfd5c4000)
+    | /lib64/ld-linux-x86-64.so.2 (0x00007fae06395000)
+    | libdl.so.2 => /lib/x86_64-linux-gnu/libdl.so.2 (0x00007fadfd3c0000)
+    | libgstbase-1.0.so.0 => /usr/lib/x86_64-linux-gnu/libgstbase-1.0.so.0 (0x00007fadfd14b000)
+    | liborc-0.4.so.0 => /usr/lib/x86_64-linux-gnu/liborc-0.4.so.0 (0x00007fadfcecf000)
+    | libgpg-error.so.0 => /lib/x86_64-linux-gnu/libgpg-error.so.0 (0x00007fadfccba000)
+    | libdbus-1.so.3 => /lib/x86_64-linux-gnu/libdbus-1.so.3 (0x00007fadfca6d000)
+    | libatspi.so.0 => /usr/lib/x86_64-linux-gnu/libatspi.so.0 (0x00007fadfc83d000)
+    | libharfbuzz.so.0 => /usr/lib/x86_64-linux-gnu/libharfbuzz.so.0 (0x00007fadfc59f000)
+    | libexpat.so.1 => /lib/x86_64-linux-gnu/libexpat.so.1 (0x00007fadfc36d000)
+    | libdatrie.so.1 => /usr/lib/x86_64-linux-gnu/libdatrie.so.1 (0x00007fadfc166000)
+    | libXau.so.6 => /usr/lib/x86_64-linux-gnu/libXau.so.6 (0x00007fadfbf62000)
+    | libXdmcp.so.6 => /usr/lib/x86_64-linux-gnu/libXdmcp.so.6 (0x00007fadfbd5c000)
+    | libblkid.so.1 => /lib/x86_64-linux-gnu/libblkid.so.1 (0x00007fadfbb0f000)
+    | libsystemd.so.0 => /lib/x86_64-linux-gnu/libsystemd.so.0 (0x00007fadfb88b000)
+    | libgraphite2.so.3 => /usr/lib/x86_64-linux-gnu/libgraphite2.so.3 (0x00007fadfb65e000)
+    | libbsd.so.0 => /lib/x86_64-linux-gnu/libbsd.so.0 (0x00007fadfb449000)
+    | libuuid.so.1 => /lib/x86_64-linux-gnu/libuuid.so.1 (0x00007fadfb242000)
+    | liblzma.so.5 => /lib/x86_64-linux-gnu/liblzma.so.5 (0x00007fadfb01c000)
+    | liblz4.so.1 => /usr/lib/x86_64-linux-gnu/liblz4.so.1 (0x00007fadfae00000)
     `----
 
     - w ~ 70
@@ -887,6 +935,7 @@ _________________
 
   + 1.8.2.2.7 More examples from Assignment 8
 
+    checkinput.h
     ,----
     | // Have a guard to ensure that we don't include it multiple times.
     | #ifndef _CHECKINPUT_H_
@@ -899,7 +948,7 @@ _________________
     | #endif
     `----
 
-    - coupling_h = ?
+    - coupling_h = 1 = 1/1
 
     ,----
     | #include "parameters.h"
@@ -936,6 +985,7 @@ _________________
     - z=2
     - coupling_h = 1/(4*w + z)
 
+    parameter.h
     ,----
     | // Implement a guard
     | 
@@ -1015,12 +1065,13 @@ _________________
     | void printParams(Parameter * params, size_t size);
     `----
 
-    3 includes & 1 reference to int64_t
+    3 includes
 
     - w=3
-    - z=1
+    - z=0
     - coupling_h = 1/(4*w + z)
 
+    ppdarray.h
     ,----
     | #include "parameters.h"
     | #include <inttypes.h>
@@ -1151,16 +1202,532 @@ _________________
   called coincidental cohesion (aka you're lucky if it is cohesive).
 
 
-1.9.1 Refs
+1.9.1 McCabe's Cyclometic Complexity
+------------------------------------
+
+  McCabe's Cyclometic Complexity is [McCabe76] the number of unique
+  paths through a module. The idea is that a module is complicated
+  (complex) if there's lots of routes through the module.
+
+  Programmers worry about complicated code because it can become a
+  maintainability nightmare. It is hard to read and understand and can
+  have lots of corner cases making it very hard to test. This means it
+  is probably less reliable and trustable. Typically we correlate
+  complicated with the idea that it is not maintainable.
+
+  You had to deal with McCabe's cyclometic complexity ever since we
+  forced OCLint on you.
+
+  Typically for a subroutine McCabes is calculated as (P=1):
+
+  MCC = E - N + 2P MCC = E - N + 2
+
+  Where E is the number of edges in a module (directed edges) and N is
+  the number of nodes.
+
+  ,----
+  | int main() {
+  |     int input = 0;
+  |     scanf("%d", &input);
+  |     return 5 * input;
+  | }
+  `----
+
+  This module has 3 nodes 2 edges and 1 exit:
+  ,----
+  | int input = 0;
+  | |
+  | V
+  | scanf("%d", &input);
+  | |
+  | V
+  | return 5 * input;
+  `----
+
+  MCC = 2 - 3 + 2 = 1
+
+  McCabes argued that subroutines or modules with complexity greater
+  than 10 should be split into smaller modules.
+
+  ,----
+  | #include <inttypes.h>
+  | #include <stdlib.h>
+  | int sum(int * array, size_t n) {
+  |     int sum = 0;
+  |     for (size_t i = 0 ; i < n ; i++ ) {
+  |         sum += array[i];
+  |     }
+  |     return sum;
+  | }
+  `----
+
+  ,----
+  | int sum = 0;
+  | |
+  | V
+  | for (size_t i = 0 ; i < n ; i++ ) {//<-+ // we could split this up
+  |      |                                 |
+  |      V                                 |
+  |     sum += array[i]                    |
+  |      |                                 |
+  |      V                                 |
+  | } // ----------------------------------+
+  | |
+  | V
+  | return sum;
+  `----
+
+  E = 5 N = 5 MCC = E - N + 2 = 2
+
+  So that 1 for loop is worth 1
+
+
+  OK now let's do another sum that works but it more "complex".
+
+  ,----
+  | #include <inttypes.h>
+  | #include <stdlib.h>
+  | int sum(int * array, size_t n) {
+  |     int sum = 0; // N+=1
+  |     for (size_t i = 0 ; i < n ; i+=4 ) { // N+=1
+  |         sum += array[i]; // N+=1
+  |     } // N+=1 E+=1
+  |     for (size_t i = 1 ; i < n ; i+=4 ) { // N+=1
+  |         sum += array[i]; // N+=1
+  |     } // N+=1 E+=1
+  |     for (size_t i = 2 ; i < n ; i+=4 ) { // N+=1
+  |         sum += array[i]; // N+=1
+  |     } // N+=1 E+=1
+  |     for (size_t i = 3 ; i < n ; i+=4 ) { // N+=1
+  |         sum += array[i]; // N+=1
+  |     } // N+=1 E+=1
+  |     return sum; // N+=1
+  | }
+  `----
+  E=17 N=14 MCC=17-14+2 = 5
+
+  Effectively McCabes is close to the 1 + the number of branch points in
+  a program. So I could estimate the complexity of that program by
+  counting the number of if, while, do, for statements. This means I can
+  skip a lot of the complicated modelling and just count those.
+
+
+  ,----
+  | int passCode(int * code) {
+  | 
+  |     if ( code[0] == 'C' ) { // N+=1 E+=2
+  |         if ( code[1] == 'R' ) { // N+=1 E+=2
+  |             if ( code[2] == 'E' ) { // N+=1 E+=2
+  |                 if ( code[3] == 'D' ) { // N+=1 E+=2
+  |                     if ( code[4] == 'I' ) { // N+=1 E+=2
+  |                         if ( code[5] == 'T' ) { // N+=1 E+=2
+  |                             return 1; // N+=1
+  |                         }
+  |                     }
+  |                 }
+  |             }
+  |         }
+  |     }
+  |     return 0; // N+=1
+  | }
+  `----
+
+  E = 13 N = 8 MCC = 13 - 8 + 2 = 7
+
+  ,----
+  | int passCode(int * code) {
+  |     int sum = 0; // N+=1 E+=1
+  |     sum += code[0] == 'C'; // N+=1 E+=1
+  |     sum += code[1] == 'R'; // N+=1 E+=1
+  |     sum += code[2] == 'E'; // N+=1 E+=1
+  |     sum += code[3] == 'D'; // N+=1 E+=1
+  |     sum += code[4] == 'I'; // N+=1 E+=1
+  |     sum += code[5] == 'T'; // N+=1 E+=1
+  |     return sum==6; // N+=1
+  | }
+  `----
+
+  MCC = 7 - 8 + 2 = 1
+
+  ,----
+  | int passCode(int * code) {
+  |     int sum = 0; // N+=1 E+=1
+  |     if (code[0] == 'C') sum++; // N+=2 E+=3
+  |     // it's E+3 because:
+  |     // the if statement condition is false is 1 path
+  |     // and you need 2 edges to, 1 to reach sum++ and 1 
+  |     // to exit the if statement
+  |     if (code[1] == 'R') sum++; // N+=2 E+=3
+  |     if (code[2] == 'E') sum++; // N+=2 E+=3
+  |     if (code[3] == 'D') sum++; // N+=2 E+=3
+  |     if (code[4] == 'I') sum++; // N+=2 E+=3
+  |     if (code[5] == 'T') sum++; // N+=2 E+=3
+  |     return sum==6; // N+=1
+  | }
+  `----
+
+  N = 14 E = 19 MCC = 19 - 14 + 2 = 7
+
+  If you want to use OCLint to print MCCabe's just force the threshold
+
+  Using the `-rc CYCLOMATIC_COMPLEXITY=0` argument OCLint will print MCC
+  for all programs.
+
+  ,----
+  | for file in sum.c sum4.c passcodedeep.c passcodesum.c passcodeifsum.c
+  | do
+  | echo $file
+  | /usr/local/bin/oclint --disable-rule=UselessParentheses \
+  |    -rc CYCLOMATIC_COMPLEXITY=0  $file --  \
+  |    -std=c99 -pedantic -Wall -Wextra -ftrapv -ggdb3  \
+  |    -c $file 
+  | done
+  | echo good
+  `----
+
+  ,----
+  | sum.c
+  | 
+  | 
+  | OCLint Report
+  | 
+  | Summary: TotalFiles=1 FilesWithViolations=1 P1=0 P2=1 P3=1 
+  | 
+  | /home/hindle1/projects/CMPUT201W20/2020-01/CMPUT201W20B2-public/week12/sum.c:3:22: short variable name [naming|P3] Length of variable name `n` is 1, which is shorter than the threshold of 3
+  | /home/hindle1/projects/CMPUT201W20/2020-01/CMPUT201W20B2-public/week12/sum.c:3:1: high cyclomatic complexity [size|P2] Cyclomatic Complexity Number 2 exceeds limit of 0
+  | 
+  | [OCLint (http://oclint.org) v0.15]
+  | sum4.c
+  | 
+  | 
+  | OCLint Report
+  | 
+  | Summary: TotalFiles=1 FilesWithViolations=1 P1=0 P2=1 P3=1 
+  | 
+  | /home/hindle1/projects/CMPUT201W20/2020-01/CMPUT201W20B2-public/week12/sum4.c:3:22: short variable name [naming|P3] Length of variable name `n` is 1, which is shorter than the threshold of 3
+  | /home/hindle1/projects/CMPUT201W20/2020-01/CMPUT201W20B2-public/week12/sum4.c:3:1: high cyclomatic complexity [size|P2] Cyclomatic Complexity Number 5 exceeds limit of 0
+  | 
+  | [OCLint (http://oclint.org) v0.15]
+  | passcodedeep.c
+  | 
+  | 
+  | OCLint Report
+  | 
+  | Summary: TotalFiles=1 FilesWithViolations=1 P1=0 P2=1 P3=7 
+  | 
+  | /home/hindle1/projects/CMPUT201W20/2020-01/CMPUT201W20B2-public/week12/passcodedeep.c:1:26: deep nested block [size|P3] Block depth of 7 exceeds limit of 5
+  | /home/hindle1/projects/CMPUT201W20/2020-01/CMPUT201W20B2-public/week12/passcodedeep.c:3:27: deep nested block [size|P3] Block depth of 6 exceeds limit of 5
+  | /home/hindle1/projects/CMPUT201W20/2020-01/CMPUT201W20B2-public/week12/passcodedeep.c:3:5: collapsible if statements [basic|P3] 
+  | /home/hindle1/projects/CMPUT201W20/2020-01/CMPUT201W20B2-public/week12/passcodedeep.c:4:9: collapsible if statements [basic|P3] 
+  | /home/hindle1/projects/CMPUT201W20/2020-01/CMPUT201W20B2-public/week12/passcodedeep.c:5:13: collapsible if statements [basic|P3] 
+  | /home/hindle1/projects/CMPUT201W20/2020-01/CMPUT201W20B2-public/week12/passcodedeep.c:6:17: collapsible if statements [basic|P3] 
+  | /home/hindle1/projects/CMPUT201W20/2020-01/CMPUT201W20B2-public/week12/passcodedeep.c:7:21: collapsible if statements [basic|P3] 
+  | /home/hindle1/projects/CMPUT201W20/2020-01/CMPUT201W20B2-public/week12/passcodedeep.c:1:1: high cyclomatic complexity [size|P2] Cyclomatic Complexity Number 7 exceeds limit of 0
+  | 
+  | [OCLint (http://oclint.org) v0.15]
+  | passcodesum.c
+  | 
+  | 
+  | OCLint Report
+  | 
+  | Summary: TotalFiles=1 FilesWithViolations=1 P1=0 P2=1 P3=0 
+  | 
+  | /home/hindle1/projects/CMPUT201W20/2020-01/CMPUT201W20B2-public/week12/passcodesum.c:1:1: high cyclomatic complexity [size|P2] Cyclomatic Complexity Number 1 exceeds limit of 0
+  | 
+  | [OCLint (http://oclint.org) v0.15]
+  | passcodeifsum.c
+  | 
+  | 
+  | OCLint Report
+  | 
+  | Summary: TotalFiles=1 FilesWithViolations=1 P1=0 P2=1 P3=0 
+  | 
+  | /home/hindle1/projects/CMPUT201W20/2020-01/CMPUT201W20B2-public/week12/passcodeifsum.c:1:1: high cyclomatic complexity [size|P2] Cyclomatic Complexity Number 7 exceeds limit of 0
+  | 
+  | [OCLint (http://oclint.org) v0.15]
+  | good
+  `----
+
+
+* 1.9.1.1 OCLint
+
+  How does OCLint calculate Cyclometic complexity?
+  <https://github.com/oclint/oclint/blob/master/oclint-rules/rules/size/CyclomaticComplexityRule.cpp>
+  <https://github.com/oclint/oclint/blob/master/oclint-metrics/lib/CyclomaticComplexityMetric.cpp>
+
+  It traverses the code as a tree, and counts all conditions, whiles,
+  do, cases, fors, and if statements and adds 1.
+
+
+  oclint --disable-rule=UselessParentheses -rc CYCLOMATIC_COMPLEXITY=0
+
+
+* 1.9.1.2 Criticism of McCabe's
+
+  McCabes is correlated with lines of code, so it is effectively a size
+  measure. We know that if each line has a probability of being buggy
+  then more lines implies more bugs. McCabes doesn't really help us
+  here. OClint has NCSS which is a lines of code measure.
+
+  McCabes ignores function pointers and dot operators. So dynamic code
+  is not counted. McCabes also ignores delegation functions (like a
+  function with a case statement) that you might call, effectively
+  making highly divergent code paths.
+
+  McCabes typically ignores multi-module dependencies.
+
+  McCabes under counts paths through a program. The NPath metric can
+  count the paths.
+
+
+1.9.2 Refs
 ----------
 
-  W. P. Stevens, G. J. Myers and L. L. Constantine, "Structured design,"
-  in IBM Systems Journal, vol. 13, no. 2, pp. 115-139, 1974.
-  <https://ieeexplore.ieee.org/document/5388187>
+  [Stevens74] W. P. Stevens, G. J. Myers and L. L. Constantine,
+  "Structured design," in IBM Systems Journal, vol. 13, no. 2, pp.
+  115-139, 1974. <https://ieeexplore.ieee.org/document/5388187>
 
-  Roger Pressman. 2009. Software Engineering: A Practitioner’s Approach
-  (7th. ed.). McGraw-Hill, Inc., USA.
+  [Pressman09] Roger Pressman. 2009. Software Engineering: A
+  Practitioner’s Approach (7th. ed.). McGraw-Hill, Inc., USA.
 
   [DHA95] Dhama, H., “Quantitative Models of Cohesion and Coupling in
   Software,” Journal of Systems and Software, vol. 29, no. 4, April
   1995.
+
+  [McCabe76] McCabe (December 1976). "A Complexity Measure". IEEE
+  Transactions on Software Engineering (4): 308–320.
+  <doi:10.1109/tse.1976.233837>
+
+
+1.10 Big Programs
+~~~~~~~~~~~~~~~~~
+
+1.10.1 DOOM
+-----------
+
+  ,----
+  | =================     ===============     ===============   ========  ========
+  | \\ . . . . . . .\\   //. . . . . . .\\   //. . . . . . .\\  \\. . .\\// . . //
+  | ||. . ._____. . .|| ||. . ._____. . .|| ||. . ._____. . .|| || . . .\/ . . .||
+  | || . .||   ||. . || || . .||   ||. . || || . .||   ||. . || ||. . . . . . . ||
+  | ||. . ||   || . .|| ||. . ||   || . .|| ||. . ||   || . .|| || . | . . . . .||
+  | || . .||   ||. _-|| ||-_ .||   ||. . || || . .||   ||. _-|| ||-_.|\ . . . . ||
+  | ||. . ||   ||-'  || ||  `-||   || . .|| ||. . ||   ||-'  || ||  `|\_ . .|. .||
+  | || . _||   ||    || ||    ||   ||_ . || || . _||   ||    || ||   |\ `-_/| . ||
+  | ||_-' ||  .|/    || ||    \|.  || `-_|| ||_-' ||  .|/    || ||   | \  / |-_.||
+  | ||    ||_-'      || ||      `-_||    || ||    ||_-'      || ||   | \  / |  `||
+  | ||    `'         || ||         `'    || ||    `'         || ||   | \  / |   ||
+  | ||            .===' `===.         .==='.`===.         .===' /==. |  \/  |   ||
+  | ||         .=='   \_|-_ `===. .==='   _|_   `===. .===' _-|/   `==  \/  |   ||
+  | ||      .=='    _-'    `-_  `='    _-'   `-_    `='  _-'   `-_  /|  \/  |   ||
+  | ||   .=='    _-'          `-__\._-'         `-_./__-'         `' |. /|  |   ||
+  | ||.=='    _-'                                                     `' |  /==.||
+  | =='    _-'                                                            \/   `==
+  | \   _-'                                                                `-_   /
+  |  `''                                                                      ``'
+  `----
+
+
+1.10.2 License
+--------------
+
+  The license of code from doom is under the Doom License.
+
+  <https://github.com/id-Software/DOOM/blob/master/linuxdoom-1.10/DOOMLIC.TXT>
+
+  This is not the GPL release :(
+
+
+1.10.3 Discussion
+-----------------
+
+  iD software 1995 game doom.
+
+  <https://github.com/id-Software/DOOM/tree/master/linuxdoom-1.10>
+
+  General tips on code reading:
+
+  - Go to the build system, how is the program built
+    - What are the main entries to the program?
+    - Start with the makefiles and similar build files
+    - <https://github.com/id-Software/DOOM/blob/master/linuxdoom-1.10/Makefile>
+      - [Makefile]
+    - <https://github.com/id-Software/DOOM/blob/master/linuxdoom-1.10/i_main.c>
+      - [i_main.c]
+  - .h files give an overview of what is important in each module
+    - <https://github.com/id-Software/DOOM/blob/master/linuxdoom-1.10/d_main.h>
+      - [d_main.h]
+    - <https://github.com/id-Software/DOOM/blob/master/linuxdoom-1.10/d_main.c>
+      - [d_main.c]
+  - Read descriptions of functions and modules
+  - Use grep or other tools to search across the source code
+    - E.g. let's look at blitting (rapid copying of data)
+    ,----
+    | grep -i blit ~/src/DOOM/linuxdoom-1.10/*.h
+    | grep -i blit ~/src/DOOM/linuxdoom-1.10/*.c
+    `----
+
+    ,----
+    | /home/hindle1/src/DOOM/linuxdoom-1.10/doomstat.h:extern  boolean		noblit;
+    | /home/hindle1/src/DOOM/linuxdoom-1.10/i_video.h:void I_UpdateNoBlit (void);
+    | /home/hindle1/src/DOOM/linuxdoom-1.10/r_data.h:// Retrieve column data for span blitting.
+    | /home/hindle1/src/DOOM/linuxdoom-1.10/r_draw.h:// The span blitting interface.
+    | /home/hindle1/src/DOOM/linuxdoom-1.10/r_draw.h:// Span blitting for rows, floor/ceiling.
+    | /home/hindle1/src/DOOM/linuxdoom-1.10/v_video.h://	Functions to blit a block to the screen.
+    | /home/hindle1/src/DOOM/linuxdoom-1.10/d_main.c:    I_UpdateNoBlit ();
+    | /home/hindle1/src/DOOM/linuxdoom-1.10/d_main.c:	I_FinishUpdate ();              // page flip or blit buffer
+    | /home/hindle1/src/DOOM/linuxdoom-1.10/d_main.c:	I_UpdateNoBlit ();
+    | /home/hindle1/src/DOOM/linuxdoom-1.10/d_main.c:	I_FinishUpdate ();                      // page flip or blit buffer
+    | /home/hindle1/src/DOOM/linuxdoom-1.10/g_game.c:boolean         noblit;                 // for comparative timing purposes 
+    | /home/hindle1/src/DOOM/linuxdoom-1.10/g_game.c:    noblit = M_CheckParm ("-noblit"); 
+    | /home/hindle1/src/DOOM/linuxdoom-1.10/i_video.c:// I_UpdateNoBlit
+    | /home/hindle1/src/DOOM/linuxdoom-1.10/i_video.c:void I_UpdateNoBlit (void)
+    | /home/hindle1/src/DOOM/linuxdoom-1.10/i_video.c:    // scales the screen size before blitting it
+    | /home/hindle1/src/DOOM/linuxdoom-1.10/m_menu.c:// but before it has been blitted.
+    | /home/hindle1/src/DOOM/linuxdoom-1.10/v_video.c://	Functions to blit a block to the screen.
+    `----
+  - Look at the file names! Sometimes they tell you a lot!
+
+    This doom source code is organized by prefixes. These indicate
+    grouping of modules.
+
+    From DoomWiki contributors, 1999, Doom source code,
+    <https://doomwiki.org/wiki/Doom_source_code>
+    ,----
+    | AM_*
+    |     Automap code
+    | D_*
+    |     Initialisation/general code
+    | F_*
+    |     "Finale" (end of game) and "screen melt" code.
+    | G_*
+    |     Main game loop/control
+    | HU_*
+    |     Heads-up display
+    | I_*
+    |     System-specific code
+    | M_*
+    |     Miscellaneous (includes the menu)
+    | P_*
+    |     Game logic/behaviour
+    | R_*
+    |     Rendering engine
+    | S_*
+    |     Sound code
+    | ST_*
+    |     Status bar
+    | V_*
+    |     General graphic rendering
+    | WI_*
+    |     End-of level "intermission" screen
+    | W_*
+    |     WAD file loading
+    | Z_*
+    |     Zone memory allocation system
+    | 
+    | The following are common prefixes for functions, although they do not denote a particular subsystem, and there are no files with these prefixes:
+    | 
+    | A_*
+    |     Action functions invoked in sprite movement frames (these are the functions used in Dehacked "code pointers")
+    | PIT_*
+    |     Callback functions passed to P_BlockThingsIterator (see p_maputl.c)
+    | T_*
+    |     "Thinker" functions set to be called each clock tic for some purpose (eg, moving platforms or flickering lights)
+    `----
+
+  - Memory allocation is always interesting in a C program
+
+    ,----
+    | grep malloc ~/src/DOOM/linuxdoom-1.10/*.h
+    | grep malloc ~/src/DOOM/linuxdoom-1.10/*.c
+    `----
+
+    ,----
+    | /home/hindle1/src/DOOM/linuxdoom-1.10/i_system.h:// to get the ammount of memory to malloc
+    | /home/hindle1/src/DOOM/linuxdoom-1.10/i_system.h:// just mallocs under unix
+    | /home/hindle1/src/DOOM/linuxdoom-1.10/d_main.c:    newfile = malloc (strlen(file)+1);
+    | /home/hindle1/src/DOOM/linuxdoom-1.10/d_main.c:    doom2wad = malloc(strlen(doomwaddir)+1+9+1);
+    | /home/hindle1/src/DOOM/linuxdoom-1.10/d_main.c:    doomuwad = malloc(strlen(doomwaddir)+1+8+1);
+    | /home/hindle1/src/DOOM/linuxdoom-1.10/d_main.c:    doomwad = malloc(strlen(doomwaddir)+1+8+1);
+    | /home/hindle1/src/DOOM/linuxdoom-1.10/d_main.c:    doom1wad = malloc(strlen(doomwaddir)+1+9+1);
+    | /home/hindle1/src/DOOM/linuxdoom-1.10/d_main.c:    // Insufficient malloc, caused spurious realloc errors.
+    | /home/hindle1/src/DOOM/linuxdoom-1.10/d_main.c:    plutoniawad = malloc(strlen(doomwaddir)+1+/*9*/12+1);
+    | /home/hindle1/src/DOOM/linuxdoom-1.10/d_main.c:    tntwad = malloc(strlen(doomwaddir)+1+9+1);
+    | /home/hindle1/src/DOOM/linuxdoom-1.10/d_main.c:    doom2fwad = malloc(strlen(doomwaddir)+1+10+1);
+    | /home/hindle1/src/DOOM/linuxdoom-1.10/d_main.c:	    file = malloc (size);
+    | /home/hindle1/src/DOOM/linuxdoom-1.10/d_main.c:	    myargv = malloc(sizeof(char *)*MAXARGVS);
+    | /home/hindle1/src/DOOM/linuxdoom-1.10/i_net.c:    doomcom = malloc (sizeof (*doomcom) );
+    | /home/hindle1/src/DOOM/linuxdoom-1.10/i_system.c:    return (byte *) malloc (*size);
+    | /home/hindle1/src/DOOM/linuxdoom-1.10/i_system.c:    mem = (byte *)malloc (length);
+    | /home/hindle1/src/DOOM/linuxdoom-1.10/i_video.c:    				(char*)malloc(X_width * X_height),
+    | /home/hindle1/src/DOOM/linuxdoom-1.10/i_video.c:	screens[0] = (unsigned char *) malloc (SCREENWIDTH * SCREENHEIGHT);
+    | /home/hindle1/src/DOOM/linuxdoom-1.10/m_misc.c:		    newstring = (char *) malloc(len);
+    | /home/hindle1/src/DOOM/linuxdoom-1.10/w_wad.c:#include <malloc.h>
+    | /home/hindle1/src/DOOM/linuxdoom-1.10/w_wad.c:    lumpinfo = malloc(1);	
+    | /home/hindle1/src/DOOM/linuxdoom-1.10/w_wad.c:    lumpcache = malloc (size);
+    | /home/hindle1/src/DOOM/linuxdoom-1.10/z_zone.c:    // total bytes malloced, including header
+    `----
+
+    Turns out they pool allocate at the start and do their own memory
+    management. So they don't plan to call upon malloc very much after
+    this point.
+
+    ,----
+    | grep I_ZoneBase ~/src/DOOM/linuxdoom-1.10/*.h
+    | grep I_ZoneBase ~/src/DOOM/linuxdoom-1.10/*.c
+    `----
+
+    ,----
+    | /home/hindle1/src/DOOM/linuxdoom-1.10/i_system.h:byte*	I_ZoneBase (int *size);
+    | /home/hindle1/src/DOOM/linuxdoom-1.10/i_system.c:byte* I_ZoneBase (int*	size)
+    | /home/hindle1/src/DOOM/linuxdoom-1.10/z_zone.c:    mainzone = (memzone_t *)I_ZoneBase (&size);
+    `----
+
+
+
+  - [~/src/DOOM/]
+  - [~/src/DOOM/linuxdoom-1.10/Makefile]
+  - [~/src/DOOM/linuxdoom-1.10/i_main.c]
+  - [~/src/DOOM/linuxdoom-1.10/d_main.h]
+
+
+[Makefile] <file:~/src/DOOM/linuxdoom-1.10/Makefile>
+
+[i_main.c] <file:~/src/DOOM/linuxdoom-1.10/i_main.c>
+
+[d_main.h] <file:~/src/DOOM/linuxdoom-1.10/d_main.h>
+
+[d_main.c] <file:~/src/DOOM/linuxdoom-1.10/d_main.c>
+
+[~/src/DOOM/] <file:~/src/DOOM/>
+
+[~/src/DOOM/linuxdoom-1.10/Makefile]
+<file:~/src/DOOM/linuxdoom-1.10/Makefile>
+
+[~/src/DOOM/linuxdoom-1.10/i_main.c]
+<file:~/src/DOOM/linuxdoom-1.10/i_main.c>
+
+[~/src/DOOM/linuxdoom-1.10/d_main.h]
+<file:~/src/DOOM/linuxdoom-1.10/d_main.h>
+
+
+1.10.4 Refs
+-----------
+
+  - DoomWiki contributors, 1999, Doom source code,
+    <https://doomwiki.org/wiki/Doom_source_code>
+  - DoomWiki contributors, 1999, Doom source code files,
+    <https://doomwiki.org/wiki/Doom_source_code_files>
+  - iD Software, 1997, Doom Source Code
+    <https://github.com/id-Software/DOOM/>
+  - Fabien Sanglard, 2010,
+    <http://fabiensanglard.net/doomIphone/doomClassicRenderer.php>
+    - All about the engine itself
+  - Tom Hall, John Romero, 2011, Doom Postmortem
+    <https://www.gdcvault.com/play/1014627/Classic-Game-Postmortem>
+    - Developers discuss doom
+  - John Romero, 1993, A visit to iD Software,
+    <https://www.youtube.com/watch?v=Q65xJfVkiaI>
+  - Kris Occhipinti, 2015, Doom Source Code Editing Prboom GCC Linux
+    Tutorial <https://www.youtube.com/watch?v=Cd8T5-j1QwQ>
+    <https://pastebin.com/T29s9Mss>

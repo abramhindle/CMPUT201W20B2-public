@@ -3,7 +3,7 @@
 "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
 <head>
-<!-- 2020-03-31 Tue 12:27 -->
+<!-- 2020-04-02 Thu 11:32 -->
 <meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <title>CMPUT201W20B2 Week 12</title>
@@ -247,48 +247,57 @@ for the JavaScript code in this tag.
 <h2>Table of Contents</h2>
 <div id="text-table-of-contents">
 <ul>
-<li><a href="#orgadeb6ca">1. Week12</a>
+<li><a href="#orgb8f7e40">1. Week12</a>
 <ul>
-<li><a href="#org115f64c">1.1. Copyright Statement</a>
+<li><a href="#org3b3ae76">1.1. Copyright Statement</a>
 <ul>
-<li><a href="#org4d9a98b">1.1.1. License</a></li>
-<li><a href="#org7879016">1.1.2. Hazel Code is licensed under AGPL3.0+</a></li>
+<li><a href="#orgcb68c08">1.1.1. License</a></li>
+<li><a href="#org6cf6ec6">1.1.2. Hazel Code is licensed under AGPL3.0+</a></li>
 </ul>
 </li>
-<li><a href="#org6f1d05e">1.2. Alternative version</a></li>
-<li><a href="#orga90fbbb">1.3. Init ORG-MODE</a>
+<li><a href="#org6f0e2a7">1.2. Alternative version</a></li>
+<li><a href="#org6296ce0">1.3. Init ORG-MODE</a>
 <ul>
-<li><a href="#org49dd19b">1.3.1. Org export</a></li>
-<li><a href="#org65a8a87">1.3.2. Org Template</a></li>
+<li><a href="#org7a921e7">1.3.1. Org export</a></li>
+<li><a href="#org8c0d0e0">1.3.2. Org Template</a></li>
 </ul>
 </li>
-<li><a href="#orge3117e3">1.4. Remember how to compile?</a></li>
-<li><a href="#orgb98f659">1.5. Numbers!</a>
+<li><a href="#org6233cef">1.4. Remember how to compile?</a></li>
+<li><a href="#org98e2b72">1.5. Numbers!</a>
 <ul>
-<li><a href="#org1025cc5">1.5.1. Binary</a></li>
-<li><a href="#orga9e56f5">1.5.2. Octal</a></li>
-<li><a href="#org41bef78">1.5.3. Base10 Review</a></li>
-<li><a href="#org907ae29">1.5.4. Hex Review</a></li>
+<li><a href="#org6599483">1.5.1. Binary</a></li>
+<li><a href="#org633b006">1.5.2. Octal</a></li>
+<li><a href="#org55b77fc">1.5.3. Base10 Review</a></li>
+<li><a href="#org60224f4">1.5.4. Hex Review</a></li>
 </ul>
 </li>
-<li><a href="#org6164dd7">1.6. Floating Point Numbers</a>
+<li><a href="#org0aead2a">1.6. Floating Point Numbers</a>
 <ul>
-<li><a href="#org7459f77">1.6.1. Resources</a></li>
-<li><a href="#orgca7b923">1.6.2. Single precision IEEE754 floating point numbers</a></li>
-<li><a href="#org337a4f4">1.6.3. Let's explore the bits of floats</a></li>
-<li><a href="#org199d13e">1.6.4. How do I avoid typepunning?</a></li>
+<li><a href="#org97021f5">1.6.1. Resources</a></li>
+<li><a href="#org0b8a301">1.6.2. Single precision IEEE754 floating point numbers</a></li>
+<li><a href="#org5dd151a">1.6.3. Let's explore the bits of floats</a></li>
+<li><a href="#org6d3557f">1.6.4. How do I avoid typepunning?</a></li>
 </ul>
 </li>
-<li><a href="#org8837b3b">1.7. Modules</a></li>
-<li><a href="#orgfc8e2c9">1.8. Coupling</a>
+<li><a href="#org00fb701">1.7. Modules</a></li>
+<li><a href="#org3573c9a">1.8. Coupling</a>
 <ul>
-<li><a href="#org013fe8c">1.8.1. Coupling</a></li>
-<li><a href="#orgc0f932c">1.8.2. Graph Coupling</a></li>
+<li><a href="#orge147e27">1.8.1. Coupling</a></li>
+<li><a href="#org4273518">1.8.2. Graph Coupling</a></li>
 </ul>
 </li>
-<li><a href="#org5277ab2">1.9. Cohesion</a>
+<li><a href="#org5d42a70">1.9. Cohesion</a>
 <ul>
-<li><a href="#org10d7c4d">1.9.1. Refs</a></li>
+<li><a href="#orgb222758">1.9.1. McCabe's Cyclometic Complexity</a></li>
+<li><a href="#orga0f69a0">1.9.2. Refs</a></li>
+</ul>
+</li>
+<li><a href="#org538a79d">1.10. Big Programs</a>
+<ul>
+<li><a href="#orge47eeab">1.10.1. DOOM</a></li>
+<li><a href="#org264d649">1.10.2. License</a></li>
+<li><a href="#org944ceae">1.10.3. Discussion</a></li>
+<li><a href="#orgcd4b5d5">1.10.4. Refs</a></li>
 </ul>
 </li>
 </ul>
@@ -297,15 +306,15 @@ for the JavaScript code in this tag.
 </div>
 </div>
 
-<div id="outline-container-orgadeb6ca" class="outline-2">
-<h2 id="orgadeb6ca"><span class="section-number-2">1</span> Week12</h2>
+<div id="outline-container-orgb8f7e40" class="outline-2">
+<h2 id="orgb8f7e40"><span class="section-number-2">1</span> Week12</h2>
 <div class="outline-text-2" id="text-1">
 <p>
 <a href="https://github.com/abramhindle/CMPUT201W20B2-public/tree/master/week12">https://github.com/abramhindle/CMPUT201W20B2-public/tree/master/week12</a>
 </p>
 </div>
-<div id="outline-container-org115f64c" class="outline-3">
-<h3 id="org115f64c"><span class="section-number-3">1.1</span> Copyright Statement</h3>
+<div id="outline-container-org3b3ae76" class="outline-3">
+<h3 id="org3b3ae76"><span class="section-number-3">1.1</span> Copyright Statement</h3>
 <div class="outline-text-3" id="text-1-1">
 <p>
 If you are in CMPUT201 at UAlberta this code is released in the public
@@ -317,8 +326,8 @@ Otherwise it is (c) 2020 Abram Hindle, Hazel Campbell AGPL3.0+
 </p>
 </div>
 
-<div id="outline-container-org4d9a98b" class="outline-4">
-<h4 id="org4d9a98b"><span class="section-number-4">1.1.1</span> License</h4>
+<div id="outline-container-orgcb68c08" class="outline-4">
+<h4 id="orgcb68c08"><span class="section-number-4">1.1.1</span> License</h4>
 <div class="outline-text-4" id="text-1-1-1">
 <p>
 CMPUT 201 C Notes
@@ -347,8 +356,8 @@ along with this program.  If not, see <a href="https://www.gnu.org/licenses/">ht
 </div>
 
 
-<div id="outline-container-org7879016" class="outline-4">
-<h4 id="org7879016"><span class="section-number-4">1.1.2</span> Hazel Code is licensed under AGPL3.0+</h4>
+<div id="outline-container-org6cf6ec6" class="outline-4">
+<h4 id="org6cf6ec6"><span class="section-number-4">1.1.2</span> Hazel Code is licensed under AGPL3.0+</h4>
 <div class="outline-text-4" id="text-1-1-2">
 <p>
 Hazel's code is also found here
@@ -363,8 +372,8 @@ license, unless otherwise noted.
 </div>
 </div>
 
-<div id="outline-container-org6f1d05e" class="outline-3">
-<h3 id="org6f1d05e"><span class="section-number-3">1.2</span> Alternative version</h3>
+<div id="outline-container-org6f0e2a7" class="outline-3">
+<h3 id="org6f0e2a7"><span class="section-number-3">1.2</span> Alternative version</h3>
 <div class="outline-text-3" id="text-1-2">
 <p>
 Checkout the .txt, the .pdf, and the .html version
@@ -372,8 +381,8 @@ Checkout the .txt, the .pdf, and the .html version
 </div>
 </div>
 
-<div id="outline-container-orga90fbbb" class="outline-3">
-<h3 id="orga90fbbb"><span class="section-number-3">1.3</span> Init ORG-MODE</h3>
+<div id="outline-container-org6296ce0" class="outline-3">
+<h3 id="org6296ce0"><span class="section-number-3">1.3</span> Init ORG-MODE</h3>
 <div class="outline-text-3" id="text-1-3">
 <div class="org-src-container">
 <pre class="src src-elisp"><span style="color: #b22222;">;; </span><span style="color: #b22222;">I need this for org-mode to work well</span>
@@ -396,8 +405,8 @@ Checkout the .txt, the .pdf, and the .html version
 </div>
 </div>
 
-<div id="outline-container-org49dd19b" class="outline-4">
-<h4 id="org49dd19b"><span class="section-number-4">1.3.1</span> Org export</h4>
+<div id="outline-container-org7a921e7" class="outline-4">
+<h4 id="org7a921e7"><span class="section-number-4">1.3.1</span> Org export</h4>
 <div class="outline-text-4" id="text-1-3-1">
 <div class="org-src-container">
 <pre class="src src-elisp">(org-html-export-to-html)
@@ -409,8 +418,8 @@ Checkout the .txt, the .pdf, and the .html version
 </div>
 
 
-<div id="outline-container-org65a8a87" class="outline-4">
-<h4 id="org65a8a87"><span class="section-number-4">1.3.2</span> Org Template</h4>
+<div id="outline-container-org8c0d0e0" class="outline-4">
+<h4 id="org8c0d0e0"><span class="section-number-4">1.3.2</span> Org Template</h4>
 <div class="outline-text-4" id="text-1-3-2">
 <p>
 Copy and paste this to demo C
@@ -428,8 +437,8 @@ Copy and paste this to demo C
 </div>
 </div>
 
-<div id="outline-container-orge3117e3" class="outline-3">
-<h3 id="orge3117e3"><span class="section-number-3">1.4</span> Remember how to compile?</h3>
+<div id="outline-container-org6233cef" class="outline-3">
+<h3 id="org6233cef"><span class="section-number-3">1.4</span> Remember how to compile?</h3>
 <div class="outline-text-3" id="text-1-4">
 <p>
 gcc  -std=c99 -pedantic -Wall -Wextra -ftrapv -ggdb3 -o programname programname.c
@@ -437,8 +446,8 @@ gcc  -std=c99 -pedantic -Wall -Wextra -ftrapv -ggdb3 -o programname programname.
 </div>
 </div>
 
-<div id="outline-container-orgb98f659" class="outline-3">
-<h3 id="orgb98f659"><span class="section-number-3">1.5</span> Numbers!</h3>
+<div id="outline-container-org98e2b72" class="outline-3">
+<h3 id="org98e2b72"><span class="section-number-3">1.5</span> Numbers!</h3>
 <div class="outline-text-3" id="text-1-5">
 <p>
 Computers love powers of 2 because we calculate everything via bits.
@@ -470,8 +479,8 @@ Bases used on computers:
 </ul>
 </div>
 
-<div id="outline-container-org1025cc5" class="outline-4">
-<h4 id="org1025cc5"><span class="section-number-4">1.5.1</span> Binary</h4>
+<div id="outline-container-org6599483" class="outline-4">
+<h4 id="org6599483"><span class="section-number-4">1.5.1</span> Binary</h4>
 <div class="outline-text-4" id="text-1-5-1">
 <pre class="example">
 Base 2: powers of 2
@@ -491,8 +500,8 @@ Digits: 0,1
 </div>
 </div>
 
-<div id="outline-container-orga9e56f5" class="outline-4">
-<h4 id="orga9e56f5"><span class="section-number-4">1.5.2</span> Octal</h4>
+<div id="outline-container-org633b006" class="outline-4">
+<h4 id="org633b006"><span class="section-number-4">1.5.2</span> Octal</h4>
 <div class="outline-text-4" id="text-1-5-2">
 <div class="org-src-container">
 <pre class="src src-C"><span style="color: #483d8b;">#include</span> <span style="color: #8b2252;">&lt;stdio.h&gt;</span>
@@ -533,8 +542,8 @@ Digits: 0,1,2,3,4,5,6,7
 </div>
 </div>
 
-<div id="outline-container-org41bef78" class="outline-4">
-<h4 id="org41bef78"><span class="section-number-4">1.5.3</span> Base10 Review</h4>
+<div id="outline-container-org55b77fc" class="outline-4">
+<h4 id="org55b77fc"><span class="section-number-4">1.5.3</span> Base10 Review</h4>
 <div class="outline-text-4" id="text-1-5-3">
 <pre class="example">
 Base 10: power of 10
@@ -556,8 +565,8 @@ Base 10: power of 10
 </div>
 </div>
 
-<div id="outline-container-org907ae29" class="outline-4">
-<h4 id="org907ae29"><span class="section-number-4">1.5.4</span> Hex Review</h4>
+<div id="outline-container-org60224f4" class="outline-4">
+<h4 id="org60224f4"><span class="section-number-4">1.5.4</span> Hex Review</h4>
 <div class="outline-text-4" id="text-1-5-4">
 <pre class="example">
 Base 16: power of 16
@@ -596,12 +605,12 @@ Digit Lookup
 </div>
 </div>
 
-<div id="outline-container-org6164dd7" class="outline-3">
-<h3 id="org6164dd7"><span class="section-number-3">1.6</span> Floating Point Numbers</h3>
+<div id="outline-container-org0aead2a" class="outline-3">
+<h3 id="org0aead2a"><span class="section-number-3">1.6</span> Floating Point Numbers</h3>
 <div class="outline-text-3" id="text-1-6">
 </div>
-<div id="outline-container-org7459f77" class="outline-4">
-<h4 id="org7459f77"><span class="section-number-4">1.6.1</span> Resources</h4>
+<div id="outline-container-org97021f5" class="outline-4">
+<h4 id="org97021f5"><span class="section-number-4">1.6.1</span> Resources</h4>
 <div class="outline-text-4" id="text-1-6-1">
 <p>
 Helpful resources:
@@ -613,11 +622,15 @@ Helpful resources:
 </div>
 </div>
 
-<div id="outline-container-orgca7b923" class="outline-4">
-<h4 id="orgca7b923"><span class="section-number-4">1.6.2</span> Single precision IEEE754 floating point numbers</h4>
+<div id="outline-container-org0b8a301" class="outline-4">
+<h4 id="org0b8a301"><span class="section-number-4">1.6.2</span> Single precision IEEE754 floating point numbers</h4>
 <div class="outline-text-4" id="text-1-6-2">
 <p>
 Type: float
+</p>
+
+<p>
+Size: 32 bits / 4 bytes
 </p>
 
 <p>
@@ -626,13 +639,52 @@ Type: float
 </p>
 <ul class="org-ul">
 <li>-126 to 127</li>
+<li>1*pow(2,-126) to 1*pow(2,127)</li>
 </ul>
 <ul class="org-ul">
 <li>Fraction: 24 bits (only 23 used). The first bit is implied. 
 <ul class="org-ul">
 <li>So 00000000000000000000000 is actually 100000000000000000000000</li>
 </ul></li>
+<li>0.19e2</li>
+<li>1.9e1</li>
+<li>100*0.19 = 19</li>
+<li>b1.11e1</li>
+<li>b0.111e2</li>
+<li>1.0101e2 = 1*2<sup>2</sup> + 0*2<sup>1</sup> + 1*2<sup>0</sup>+ 0*2<sup>-1</sup> + 1*2<sup>-2</sup>
+= 4             + 1             + 1/4    = 5.25</li>
+<li>1.1101e-4 = 1*2<sup>-4</sup> + 1*2<sup>-5</sup> + 1*2<sup>-6</sup> + 1*2-8
+= 1/16  + 1/32  + 1/64 + 1/256
+= 0.11328125</li>
 </ul>
+<p>
+2<sup>-126</sup>
+</p>
+
+<div class="org-src-container">
+<pre class="src src-C"><span style="color: #483d8b;">#include</span> <span style="color: #8b2252;">&lt;stdio.h&gt;</span>
+<span style="color: #228b22;">int</span> <span style="color: #0000ff;">main</span>() {
+    <span style="color: #b22222;">/*</span><span style="color: #b22222;">printf("%d\n", 0.0F == -0.0F);</span>
+<span style="color: #b22222;">    printf("%g\n", 1.0F * -0.0F);</span>
+<span style="color: #b22222;">    printf("%0.3f\n", 1.0e+126F * 4.0F);</span>
+<span style="color: #b22222;">    printf("%0.3f\n", 1.0e+126F * -4.0F); </span><span style="color: #b22222;">*/</span>
+    printf(<span style="color: #8b2252;">"%e\n"</span>, 1.0e38F + 2.0e38F);
+    printf(<span style="color: #8b2252;">"%e\n"</span>, 1.0e38F + 4.0e38F);
+}
+</pre>
+</div>
+
+<pre class="example">
+3.000000e+38
+inf
+</pre>
+
+
+<pre class="example">
+-0.010 = 1*1/100
+</pre>
+
+
 
 <table border="2" cellspacing="0" cellpadding="6" rules="groups" frame="hsides">
 
@@ -671,15 +723,6 @@ Type: float
 
 <tr>
 <td class="org-right">1</td>
-<td class="org-right">01111100</td>
-<td class="org-right">-3</td>
-<td class="org-right">01000000000000000000000</td>
-<td class="org-right">-0.15625</td>
-<td class="org-left">&#xa0;</td>
-</tr>
-
-<tr>
-<td class="org-right">0</td>
 <td class="org-right">01111100</td>
 <td class="org-right">-3</td>
 <td class="org-right">01000000000000000000000</td>
@@ -795,8 +838,8 @@ pow(2,-3) + 0*pow(2,-4) + 1*pow(2,-5) (pow(2,5)==32, pow(2,-5) = 1/32.0)
 </div>
 </div>
 
-<div id="outline-container-org337a4f4" class="outline-4">
-<h4 id="org337a4f4"><span class="section-number-4">1.6.3</span> Let's explore the bits of floats</h4>
+<div id="outline-container-org5dd151a" class="outline-4">
+<h4 id="org5dd151a"><span class="section-number-4">1.6.3</span> Let's explore the bits of floats</h4>
 <div class="outline-text-4" id="text-1-6-3">
 <div class="org-src-container">
 <pre class="src src-C"><span style="color: #483d8b;">#include</span> <span style="color: #8b2252;">&lt;math.h&gt;</span>
@@ -867,24 +910,27 @@ pow(2,-3) + 0*pow(2,-4) + 1*pow(2,-5) (pow(2,5)==32, pow(2,-5) = 1/32.0)
         <span style="color: #228b22;">float</span> <span style="color: #a0522d;">f</span> = floats[i];
         <span style="color: #a020f0;">union</span> <span style="color: #228b22;">floatint</span> <span style="color: #a0522d;">fi</span> = {.f=f};
         printf(<span style="color: #8b2252;">"%12g 0x%08x 0b%s\n"</span>, f, fi.i, bitString(fi.i, 32));
-        printf(<span style="color: #8b2252;">"%12g 0x%08x sign: %hhu exponent: %3hhu exp-127: %4d mantissa: 0x%06x\n"</span>, 
-               f,
-               fi.i,
-               fi.t.sign,
-               fi.t.exponent,
-               (<span style="color: #228b22;">int</span>)fi.t.exponent - (<span style="color: #228b22;">int</span>)127,
-               fi.t.mantissa
-        );
-        <span style="color: #b22222;">/* </span><span style="color: #b22222;">// We don't need bitfields</span>
-<span style="color: #b22222;">        printf("%12g %08x sign: %hhu exponent: %hhu exp-127: %4d mantissa: 0x%06x\n", </span>
+        <span style="color: #b22222;">/*</span>
+<span style="color: #b22222;">        printf("%12g 0x%08x sign: %hhu exponent: %3hhu exp-127: %4d mantissa: 0x%06x\n", </span>
 <span style="color: #b22222;">               f,</span>
 <span style="color: #b22222;">               fi.i,</span>
-<span style="color: #b22222;">               (fi.i &gt;&gt; 31),</span>
-<span style="color: #b22222;">               ((fi.i &lt;&lt; 1) &gt;&gt; 24),</span>
-<span style="color: #b22222;">               (int)((fi.i &lt;&lt; 1) &gt;&gt; 24) - (int)127,</span>
-<span style="color: #b22222;">               (fi.i &amp; 0x007FFFFF)</span>
-<span style="color: #b22222;">        );</span>
-<span style="color: #b22222;">        </span><span style="color: #b22222;">*/</span> 
+<span style="color: #b22222;">               fi.t.sign,</span>
+<span style="color: #b22222;">               fi.t.exponent,</span>
+<span style="color: #b22222;">               (int)fi.t.exponent - (int)127,</span>
+<span style="color: #b22222;">               fi.t.mantissa</span>
+<span style="color: #b22222;">        );</span><span style="color: #b22222;">*/</span>
+        <span style="color: #b22222;">// </span><span style="color: #b22222;">We don't need bitfields</span>
+        printf(<span style="color: #8b2252;">"%12g 0x%08x sign: %hhu exponent: %hhu exp-127: %4d mantissa: 0x%06x\n"</span>, 
+               f,
+               fi.i,
+               (fi.i &gt;&gt; 31),
+               ((fi.i &lt;&lt; 1) &gt;&gt; 24),
+               (<span style="color: #228b22;">int</span>)((fi.i &lt;&lt; 1) &gt;&gt; 24) - (<span style="color: #228b22;">int</span>)127,
+               (fi.i &amp; 0x007FFFFF)
+               <span style="color: #b22222;">//</span><span style="color: #b22222;">0000 0000 0111 1111 1111 1111 1111 1111</span>
+               <span style="color: #b22222;">//</span><span style="color: #b22222;">0      0   7    F    F   F    F    F</span>
+        );
+
 
     }
     puts(<span style="color: #8b2252;">""</span>);
@@ -897,9 +943,9 @@ We're printing floats!
 sizeof(floatint) == 4
 sizeof(float_t) == 4
            0 0x00000000 0b00000000000000000000000000000000
-           0 0x00000000 sign: 0 exponent:   0 exp-127: -127 mantissa: 0x000000
+           0 0x00000000 sign: 0 exponent: 0 exp-127: -127 mantissa: 0x000000
           -0 0x80000000 0b10000000000000000000000000000000
-          -0 0x80000000 sign: 1 exponent:   0 exp-127: -127 mantissa: 0x000000
+          -0 0x80000000 sign: 1 exponent: 0 exp-127: -127 mantissa: 0x000000
          inf 0x7f800000 0b01111111100000000000000000000000
          inf 0x7f800000 sign: 0 exponent: 255 exp-127:  128 mantissa: 0x000000
         -inf 0xff800000 0b11111111100000000000000000000000
@@ -952,8 +998,8 @@ sizeof(float_t) == 4
 </div>
 </div>
 
-<div id="outline-container-org199d13e" class="outline-4">
-<h4 id="org199d13e"><span class="section-number-4">1.6.4</span> How do I avoid typepunning?</h4>
+<div id="outline-container-org6d3557f" class="outline-4">
+<h4 id="org6d3557f"><span class="section-number-4">1.6.4</span> How do I avoid typepunning?</h4>
 <div class="outline-text-4" id="text-1-6-4">
 <p>
 The C99 is OK with union type punning :-/
@@ -987,8 +1033,8 @@ have the same size.
 </div>
 </div>
 
-<div id="outline-container-org8837b3b" class="outline-3">
-<h3 id="org8837b3b"><span class="section-number-3">1.7</span> Modules</h3>
+<div id="outline-container-org00fb701" class="outline-3">
+<h3 id="org00fb701"><span class="section-number-3">1.7</span> Modules</h3>
 <div class="outline-text-3" id="text-1-7">
 <p>
 A module can have different levels of granularity:
@@ -1011,8 +1057,8 @@ and .c files.
 </div>
 </div>
 
-<div id="outline-container-orgfc8e2c9" class="outline-3">
-<h3 id="orgfc8e2c9"><span class="section-number-3">1.8</span> Coupling</h3>
+<div id="outline-container-org3573c9a" class="outline-3">
+<h3 id="org3573c9a"><span class="section-number-3">1.8</span> Coupling</h3>
 <div class="outline-text-3" id="text-1-8">
 <p>
 Coupling often refers to how much 1 module (like a .c file or a .h
@@ -1020,8 +1066,8 @@ file) relies on other modules.
 </p>
 </div>
 
-<div id="outline-container-org013fe8c" class="outline-4">
-<h4 id="org013fe8c"><span class="section-number-4">1.8.1</span> Coupling</h4>
+<div id="outline-container-orge147e27" class="outline-4">
+<h4 id="orge147e27"><span class="section-number-4">1.8.1</span> Coupling</h4>
 <div class="outline-text-4" id="text-1-8-1">
 <p>
 1 fast way in C of calculating coupling is to count the number of
@@ -1051,7 +1097,7 @@ that module.
 High coupling is bad because it makes code weak to change:
 </p>
 <ul class="org-ul">
-<li>too many dependencies increase change of change</li>
+<li>too many dependencies increase risk of change</li>
 <li>too many dependencies increase bug risk</li>
 <li>too many dependencies means dependencies will probably change</li>
 </ul>
@@ -1083,8 +1129,8 @@ to other modules and their parts by name.
 </div>
 </div>
 
-<div id="outline-container-orgc0f932c" class="outline-4">
-<h4 id="orgc0f932c"><span class="section-number-4">1.8.2</span> Graph Coupling</h4>
+<div id="outline-container-org4273518" class="outline-4">
+<h4 id="org4273518"><span class="section-number-4">1.8.2</span> Graph Coupling</h4>
 <div class="outline-text-4" id="text-1-8-2">
 <p>
 From Pressman and Dhama [DHA95].
@@ -1146,7 +1192,10 @@ Using these measures, a module coupling indicator, m c , is defined in the follo
 </p>
 
 <ul class="org-ul">
-<li>m<sub>c</sub> = k/M</li>
+<li>m<sub>c</sub> = k/M = 1/(d<sub>i</sub> + (a * c<sub>i</sub> ) + d<sub>o</sub> + (b * c<sub>o</sub> ) + g<sub>d</sub> + (c* g<sub>c</sub> ) + w + r)
+<ul class="org-ul">
+<li>alternative m<sub>c</sub> = k/M = 1/(1 + w + r)</li>
+</ul></li>
 <li>where k = 1, a proportionality constant 8 and</li>
 
 <li>M = d<sub>i</sub> + (a * c<sub>i</sub> ) + d<sub>o</sub> + (b * c<sub>o</sub> ) + g<sub>d</sub> + (c* g<sub>c</sub> ) + w + r</li>
@@ -1160,7 +1209,7 @@ Low  m<sub>c</sub>: high coupling
 </div>
 
 <ol class="org-ol">
-<li><a id="org79662c4"></a>Coupling<sub>h</sub> &#x2013; my take<br />
+<li><a id="orgd19664d"></a>Coupling<sub>h</sub> &#x2013; my take<br />
 <div class="outline-text-5" id="text-1-8-2-1">
 <p>
 My take?
@@ -1179,6 +1228,7 @@ I would calculate coupling as unidirectional:
 <li>where x = number of unique external function calls</li>
 <li>where y = number of unique external variable access</li>
 <li>where z = number of unique externally defined types</li>
+<li>where w = number of modules called (fan-out)</li>
 <li>where lambda ~ 4 or however more important you feel that fan-out is</li>
 <li>w = number of modules called (fan-out)</li>
 <li>coupling<sub>h</sub> = 1 / (1 + lambda*w + x + y + z)</li>
@@ -1202,9 +1252,9 @@ You can invent your own coupling measures for your own purposes.
 </div>
 </li>
 
-<li><a id="org31d540c"></a>Low coupling<br />
+<li><a id="orgb496a00"></a>Coupling Examples<br />
 <ol class="org-ol">
-<li><a id="orgd3d97df"></a>No Coupling<br />
+<li><a id="org0ceee86"></a>No Coupling<br />
 <div class="outline-text-6" id="text-1-8-2-2-1">
 <div class="org-src-container">
 <pre class="src src-C"><span style="color: #b22222;">// </span><span style="color: #b22222;">0 coupling, no modules</span>
@@ -1223,7 +1273,7 @@ You can invent your own coupling measures for your own purposes.
 </div>
 </li>
 
-<li><a id="org93e21ef"></a>A little coupling<br />
+<li><a id="org2651dd4"></a>A little coupling<br />
 <div class="outline-text-6" id="text-1-8-2-2-2">
 <p>
 We're now related to the stdlib IO routines
@@ -1250,7 +1300,7 @@ We're now related to the stdlib IO routines
 </li>
 
 
-<li><a id="org264e7ed"></a>A little more coupling<br />
+<li><a id="orgffd2023"></a>A little more coupling<br />
 <div class="outline-text-6" id="text-1-8-2-2-3">
 <p>
 Now we're bound to stdlib.h and randr
@@ -1277,7 +1327,7 @@ Now we're bound to stdlib.h and randr
 </div>
 </li>
 
-<li><a id="org60386c3"></a>More coupling<br />
+<li><a id="orgb310d62"></a>More coupling<br />
 <div class="outline-text-6" id="text-1-8-2-2-4">
 <p>
 Now we're bound to string.h as well
@@ -1308,7 +1358,7 @@ Now we're bound to string.h as well
 </div>
 </li>
 
-<li><a id="orgcfaf160"></a>Even More Coupling:<br />
+<li><a id="orgbea7206"></a>Even More Coupling:<br />
 <div class="outline-text-6" id="text-1-8-2-2-5">
 <div class="org-src-container">
 <pre class="src src-C"><span style="color: #b22222;">/*</span>
@@ -1360,7 +1410,7 @@ Now we're bound to string.h as well
 </li>
 
 
-<li><a id="orgf779a2d"></a>A lot of coupling<br />
+<li><a id="orgb4d82b8"></a>A lot of coupling<br />
 <div class="outline-text-6" id="text-1-8-2-2-6">
 <p>
 GUI apps often rely on lots of libraries.
@@ -1386,82 +1436,82 @@ It needs:
 </div>
 
 <pre class="example">
-linux-vdso.so.1 (0x00007ffcb1bf9000)
-libevdocument3.so.4 =&gt; /usr/lib/x86_64-linux-gnu/libevdocument3.so.4 (0x00007feac9234000)
-libevview3.so.3 =&gt; /usr/lib/x86_64-linux-gnu/libevview3.so.3 (0x00007feac8fdd000)
-libsecret-1.so.0 =&gt; /usr/lib/x86_64-linux-gnu/libsecret-1.so.0 (0x00007feac8d8d000)
-libgnome-desktop-3.so.17 =&gt; /usr/lib/x86_64-linux-gnu/libgnome-desktop-3.so.17 (0x00007feac8b51000)
-libgtk-3.so.0 =&gt; /usr/lib/x86_64-linux-gnu/libgtk-3.so.0 (0x00007feac8249000)
-libgdk-3.so.0 =&gt; /usr/lib/x86_64-linux-gnu/libgdk-3.so.0 (0x00007feac7f53000)
-libpangocairo-1.0.so.0 =&gt; /usr/lib/x86_64-linux-gnu/libpangocairo-1.0.so.0 (0x00007feac7d46000)
-libpango-1.0.so.0 =&gt; /usr/lib/x86_64-linux-gnu/libpango-1.0.so.0 (0x00007feac7af9000)
-libatk-1.0.so.0 =&gt; /usr/lib/x86_64-linux-gnu/libatk-1.0.so.0 (0x00007feac78d3000)
-libcairo-gobject.so.2 =&gt; /usr/lib/x86_64-linux-gnu/libcairo-gobject.so.2 (0x00007feac76ca000)
-libcairo.so.2 =&gt; /usr/lib/x86_64-linux-gnu/libcairo.so.2 (0x00007feac73ad000)
-libgio-2.0.so.0 =&gt; /usr/lib/x86_64-linux-gnu/libgio-2.0.so.0 (0x00007feac700e000)
-libgdk_pixbuf-2.0.so.0 =&gt; /usr/lib/x86_64-linux-gnu/libgdk_pixbuf-2.0.so.0 (0x00007feac6dea000)
-libgobject-2.0.so.0 =&gt; /usr/lib/x86_64-linux-gnu/libgobject-2.0.so.0 (0x00007feac6b96000)
-libglib-2.0.so.0 =&gt; /usr/lib/x86_64-linux-gnu/libglib-2.0.so.0 (0x00007feac687f000)
-libm.so.6 =&gt; /lib/x86_64-linux-gnu/libm.so.6 (0x00007feac64e1000)
-libpthread.so.0 =&gt; /lib/x86_64-linux-gnu/libpthread.so.0 (0x00007feac62c2000)
-libc.so.6 =&gt; /lib/x86_64-linux-gnu/libc.so.6 (0x00007feac5ed1000)
-libgmodule-2.0.so.0 =&gt; /usr/lib/x86_64-linux-gnu/libgmodule-2.0.so.0 (0x00007feac5ccd000)
-libz.so.1 =&gt; /lib/x86_64-linux-gnu/libz.so.1 (0x00007feac5ab0000)
-libgstvideo-1.0.so.0 =&gt; /usr/lib/x86_64-linux-gnu/libgstvideo-1.0.so.0 (0x00007feac5817000)
-libgstreamer-1.0.so.0 =&gt; /usr/lib/x86_64-linux-gnu/libgstreamer-1.0.so.0 (0x00007feac54dc000)
-libgcrypt.so.20 =&gt; /lib/x86_64-linux-gnu/libgcrypt.so.20 (0x00007feac51c0000)
-libX11.so.6 =&gt; /usr/lib/x86_64-linux-gnu/libX11.so.6 (0x00007feac4e88000)
-libudev.so.1 =&gt; /lib/x86_64-linux-gnu/libudev.so.1 (0x00007feac4c6a000)
-libseccomp.so.2 =&gt; /lib/x86_64-linux-gnu/libseccomp.so.2 (0x00007feac4a23000)
-librt.so.1 =&gt; /lib/x86_64-linux-gnu/librt.so.1 (0x00007feac481b000)
-libXi.so.6 =&gt; /usr/lib/x86_64-linux-gnu/libXi.so.6 (0x00007feac460b000)
-libXfixes.so.3 =&gt; /usr/lib/x86_64-linux-gnu/libXfixes.so.3 (0x00007feac4405000)
-libatk-bridge-2.0.so.0 =&gt; /usr/lib/x86_64-linux-gnu/libatk-bridge-2.0.so.0 (0x00007feac41d4000)
-libepoxy.so.0 =&gt; /usr/lib/x86_64-linux-gnu/libepoxy.so.0 (0x00007feac3ed3000)
-libpangoft2-1.0.so.0 =&gt; /usr/lib/x86_64-linux-gnu/libpangoft2-1.0.so.0 (0x00007feac3cbd000)
-libfontconfig.so.1 =&gt; /usr/lib/x86_64-linux-gnu/libfontconfig.so.1 (0x00007feac3a78000)
-libXinerama.so.1 =&gt; /usr/lib/x86_64-linux-gnu/libXinerama.so.1 (0x00007feac3875000)
-libXrandr.so.2 =&gt; /usr/lib/x86_64-linux-gnu/libXrandr.so.2 (0x00007feac366a000)
-libXcursor.so.1 =&gt; /usr/lib/x86_64-linux-gnu/libXcursor.so.1 (0x00007feac3460000)
-libXcomposite.so.1 =&gt; /usr/lib/x86_64-linux-gnu/libXcomposite.so.1 (0x00007feac325d000)
-libXdamage.so.1 =&gt; /usr/lib/x86_64-linux-gnu/libXdamage.so.1 (0x00007feac305a000)
-libxkbcommon.so.0 =&gt; /usr/lib/x86_64-linux-gnu/libxkbcommon.so.0 (0x00007feac2e1b000)
-libwayland-cursor.so.0 =&gt; /usr/lib/x86_64-linux-gnu/libwayland-cursor.so.0 (0x00007feac2c13000)
-libwayland-egl.so.1 =&gt; /usr/lib/x86_64-linux-gnu/libwayland-egl.so.1 (0x00007feac2a11000)
-libwayland-client.so.0 =&gt; /usr/lib/x86_64-linux-gnu/libwayland-client.so.0 (0x00007feac2802000)
-libXext.so.6 =&gt; /usr/lib/x86_64-linux-gnu/libXext.so.6 (0x00007feac25f0000)
-libfreetype.so.6 =&gt; /usr/lib/x86_64-linux-gnu/libfreetype.so.6 (0x00007feac233c000)
-libthai.so.0 =&gt; /usr/lib/x86_64-linux-gnu/libthai.so.0 (0x00007feac2133000)
-libpixman-1.so.0 =&gt; /usr/lib/x86_64-linux-gnu/libpixman-1.so.0 (0x00007feac1e8e000)
-libpng16.so.16 =&gt; /usr/lib/x86_64-linux-gnu/libpng16.so.16 (0x00007feac1c5c000)
-libxcb-shm.so.0 =&gt; /usr/lib/x86_64-linux-gnu/libxcb-shm.so.0 (0x00007feac1a59000)
-libxcb.so.1 =&gt; /usr/lib/x86_64-linux-gnu/libxcb.so.1 (0x00007feac1831000)
-libxcb-render.so.0 =&gt; /usr/lib/x86_64-linux-gnu/libxcb-render.so.0 (0x00007feac1624000)
-libXrender.so.1 =&gt; /usr/lib/x86_64-linux-gnu/libXrender.so.1 (0x00007feac141a000)
-libselinux.so.1 =&gt; /lib/x86_64-linux-gnu/libselinux.so.1 (0x00007feac11f2000)
-libresolv.so.2 =&gt; /lib/x86_64-linux-gnu/libresolv.so.2 (0x00007feac0fd7000)
-libmount.so.1 =&gt; /lib/x86_64-linux-gnu/libmount.so.1 (0x00007feac0d83000)
-libffi.so.6 =&gt; /usr/lib/x86_64-linux-gnu/libffi.so.6 (0x00007feac0b7b000)
-libpcre.so.3 =&gt; /lib/x86_64-linux-gnu/libpcre.so.3 (0x00007feac0909000)
-/lib64/ld-linux-x86-64.so.2 (0x00007feac96da000)
-libdl.so.2 =&gt; /lib/x86_64-linux-gnu/libdl.so.2 (0x00007feac0705000)
-libgstbase-1.0.so.0 =&gt; /usr/lib/x86_64-linux-gnu/libgstbase-1.0.so.0 (0x00007feac0490000)
-liborc-0.4.so.0 =&gt; /usr/lib/x86_64-linux-gnu/liborc-0.4.so.0 (0x00007feac0214000)
-libgpg-error.so.0 =&gt; /lib/x86_64-linux-gnu/libgpg-error.so.0 (0x00007feabffff000)
-libdbus-1.so.3 =&gt; /lib/x86_64-linux-gnu/libdbus-1.so.3 (0x00007feabfdb2000)
-libatspi.so.0 =&gt; /usr/lib/x86_64-linux-gnu/libatspi.so.0 (0x00007feabfb82000)
-libharfbuzz.so.0 =&gt; /usr/lib/x86_64-linux-gnu/libharfbuzz.so.0 (0x00007feabf8e4000)
-libexpat.so.1 =&gt; /lib/x86_64-linux-gnu/libexpat.so.1 (0x00007feabf6b2000)
-libdatrie.so.1 =&gt; /usr/lib/x86_64-linux-gnu/libdatrie.so.1 (0x00007feabf4ab000)
-libXau.so.6 =&gt; /usr/lib/x86_64-linux-gnu/libXau.so.6 (0x00007feabf2a7000)
-libXdmcp.so.6 =&gt; /usr/lib/x86_64-linux-gnu/libXdmcp.so.6 (0x00007feabf0a1000)
-libblkid.so.1 =&gt; /lib/x86_64-linux-gnu/libblkid.so.1 (0x00007feabee54000)
-libsystemd.so.0 =&gt; /lib/x86_64-linux-gnu/libsystemd.so.0 (0x00007feabebd0000)
-libgraphite2.so.3 =&gt; /usr/lib/x86_64-linux-gnu/libgraphite2.so.3 (0x00007feabe9a3000)
-libbsd.so.0 =&gt; /lib/x86_64-linux-gnu/libbsd.so.0 (0x00007feabe78e000)
-libuuid.so.1 =&gt; /lib/x86_64-linux-gnu/libuuid.so.1 (0x00007feabe587000)
-liblzma.so.5 =&gt; /lib/x86_64-linux-gnu/liblzma.so.5 (0x00007feabe361000)
-liblz4.so.1 =&gt; /usr/lib/x86_64-linux-gnu/liblz4.so.1 (0x00007feabe145000)
+linux-vdso.so.1 (0x00007ffcc9db0000)
+libevdocument3.so.4 =&gt; /usr/lib/x86_64-linux-gnu/libevdocument3.so.4 (0x00007f08d0a3c000)
+libevview3.so.3 =&gt; /usr/lib/x86_64-linux-gnu/libevview3.so.3 (0x00007f08d07e5000)
+libsecret-1.so.0 =&gt; /usr/lib/x86_64-linux-gnu/libsecret-1.so.0 (0x00007f08d0595000)
+libgnome-desktop-3.so.17 =&gt; /usr/lib/x86_64-linux-gnu/libgnome-desktop-3.so.17 (0x00007f08d0359000)
+libgtk-3.so.0 =&gt; /usr/lib/x86_64-linux-gnu/libgtk-3.so.0 (0x00007f08cfa51000)
+libgdk-3.so.0 =&gt; /usr/lib/x86_64-linux-gnu/libgdk-3.so.0 (0x00007f08cf75b000)
+libpangocairo-1.0.so.0 =&gt; /usr/lib/x86_64-linux-gnu/libpangocairo-1.0.so.0 (0x00007f08cf54e000)
+libpango-1.0.so.0 =&gt; /usr/lib/x86_64-linux-gnu/libpango-1.0.so.0 (0x00007f08cf301000)
+libatk-1.0.so.0 =&gt; /usr/lib/x86_64-linux-gnu/libatk-1.0.so.0 (0x00007f08cf0db000)
+libcairo-gobject.so.2 =&gt; /usr/lib/x86_64-linux-gnu/libcairo-gobject.so.2 (0x00007f08ceed2000)
+libcairo.so.2 =&gt; /usr/lib/x86_64-linux-gnu/libcairo.so.2 (0x00007f08cebb5000)
+libgio-2.0.so.0 =&gt; /usr/lib/x86_64-linux-gnu/libgio-2.0.so.0 (0x00007f08ce816000)
+libgdk_pixbuf-2.0.so.0 =&gt; /usr/lib/x86_64-linux-gnu/libgdk_pixbuf-2.0.so.0 (0x00007f08ce5f2000)
+libgobject-2.0.so.0 =&gt; /usr/lib/x86_64-linux-gnu/libgobject-2.0.so.0 (0x00007f08ce39e000)
+libglib-2.0.so.0 =&gt; /usr/lib/x86_64-linux-gnu/libglib-2.0.so.0 (0x00007f08ce087000)
+libm.so.6 =&gt; /lib/x86_64-linux-gnu/libm.so.6 (0x00007f08cdce9000)
+libpthread.so.0 =&gt; /lib/x86_64-linux-gnu/libpthread.so.0 (0x00007f08cdaca000)
+libc.so.6 =&gt; /lib/x86_64-linux-gnu/libc.so.6 (0x00007f08cd6d9000)
+libgmodule-2.0.so.0 =&gt; /usr/lib/x86_64-linux-gnu/libgmodule-2.0.so.0 (0x00007f08cd4d5000)
+libz.so.1 =&gt; /lib/x86_64-linux-gnu/libz.so.1 (0x00007f08cd2b8000)
+libgstvideo-1.0.so.0 =&gt; /usr/lib/x86_64-linux-gnu/libgstvideo-1.0.so.0 (0x00007f08cd01f000)
+libgstreamer-1.0.so.0 =&gt; /usr/lib/x86_64-linux-gnu/libgstreamer-1.0.so.0 (0x00007f08ccce4000)
+libgcrypt.so.20 =&gt; /lib/x86_64-linux-gnu/libgcrypt.so.20 (0x00007f08cc9c8000)
+libX11.so.6 =&gt; /usr/lib/x86_64-linux-gnu/libX11.so.6 (0x00007f08cc690000)
+libudev.so.1 =&gt; /lib/x86_64-linux-gnu/libudev.so.1 (0x00007f08cc472000)
+libseccomp.so.2 =&gt; /lib/x86_64-linux-gnu/libseccomp.so.2 (0x00007f08cc22b000)
+librt.so.1 =&gt; /lib/x86_64-linux-gnu/librt.so.1 (0x00007f08cc023000)
+libXi.so.6 =&gt; /usr/lib/x86_64-linux-gnu/libXi.so.6 (0x00007f08cbe13000)
+libXfixes.so.3 =&gt; /usr/lib/x86_64-linux-gnu/libXfixes.so.3 (0x00007f08cbc0d000)
+libatk-bridge-2.0.so.0 =&gt; /usr/lib/x86_64-linux-gnu/libatk-bridge-2.0.so.0 (0x00007f08cb9dc000)
+libepoxy.so.0 =&gt; /usr/lib/x86_64-linux-gnu/libepoxy.so.0 (0x00007f08cb6db000)
+libpangoft2-1.0.so.0 =&gt; /usr/lib/x86_64-linux-gnu/libpangoft2-1.0.so.0 (0x00007f08cb4c5000)
+libfontconfig.so.1 =&gt; /usr/lib/x86_64-linux-gnu/libfontconfig.so.1 (0x00007f08cb280000)
+libXinerama.so.1 =&gt; /usr/lib/x86_64-linux-gnu/libXinerama.so.1 (0x00007f08cb07d000)
+libXrandr.so.2 =&gt; /usr/lib/x86_64-linux-gnu/libXrandr.so.2 (0x00007f08cae72000)
+libXcursor.so.1 =&gt; /usr/lib/x86_64-linux-gnu/libXcursor.so.1 (0x00007f08cac68000)
+libXcomposite.so.1 =&gt; /usr/lib/x86_64-linux-gnu/libXcomposite.so.1 (0x00007f08caa65000)
+libXdamage.so.1 =&gt; /usr/lib/x86_64-linux-gnu/libXdamage.so.1 (0x00007f08ca862000)
+libxkbcommon.so.0 =&gt; /usr/lib/x86_64-linux-gnu/libxkbcommon.so.0 (0x00007f08ca623000)
+libwayland-cursor.so.0 =&gt; /usr/lib/x86_64-linux-gnu/libwayland-cursor.so.0 (0x00007f08ca41b000)
+libwayland-egl.so.1 =&gt; /usr/lib/x86_64-linux-gnu/libwayland-egl.so.1 (0x00007f08ca219000)
+libwayland-client.so.0 =&gt; /usr/lib/x86_64-linux-gnu/libwayland-client.so.0 (0x00007f08ca00a000)
+libXext.so.6 =&gt; /usr/lib/x86_64-linux-gnu/libXext.so.6 (0x00007f08c9df8000)
+libfreetype.so.6 =&gt; /usr/lib/x86_64-linux-gnu/libfreetype.so.6 (0x00007f08c9b44000)
+libthai.so.0 =&gt; /usr/lib/x86_64-linux-gnu/libthai.so.0 (0x00007f08c993b000)
+libpixman-1.so.0 =&gt; /usr/lib/x86_64-linux-gnu/libpixman-1.so.0 (0x00007f08c9696000)
+libpng16.so.16 =&gt; /usr/lib/x86_64-linux-gnu/libpng16.so.16 (0x00007f08c9464000)
+libxcb-shm.so.0 =&gt; /usr/lib/x86_64-linux-gnu/libxcb-shm.so.0 (0x00007f08c9261000)
+libxcb.so.1 =&gt; /usr/lib/x86_64-linux-gnu/libxcb.so.1 (0x00007f08c9039000)
+libxcb-render.so.0 =&gt; /usr/lib/x86_64-linux-gnu/libxcb-render.so.0 (0x00007f08c8e2c000)
+libXrender.so.1 =&gt; /usr/lib/x86_64-linux-gnu/libXrender.so.1 (0x00007f08c8c22000)
+libselinux.so.1 =&gt; /lib/x86_64-linux-gnu/libselinux.so.1 (0x00007f08c89fa000)
+libresolv.so.2 =&gt; /lib/x86_64-linux-gnu/libresolv.so.2 (0x00007f08c87df000)
+libmount.so.1 =&gt; /lib/x86_64-linux-gnu/libmount.so.1 (0x00007f08c858b000)
+libffi.so.6 =&gt; /usr/lib/x86_64-linux-gnu/libffi.so.6 (0x00007f08c8383000)
+libpcre.so.3 =&gt; /lib/x86_64-linux-gnu/libpcre.so.3 (0x00007f08c8111000)
+/lib64/ld-linux-x86-64.so.2 (0x00007f08d0ee2000)
+libdl.so.2 =&gt; /lib/x86_64-linux-gnu/libdl.so.2 (0x00007f08c7f0d000)
+libgstbase-1.0.so.0 =&gt; /usr/lib/x86_64-linux-gnu/libgstbase-1.0.so.0 (0x00007f08c7c98000)
+liborc-0.4.so.0 =&gt; /usr/lib/x86_64-linux-gnu/liborc-0.4.so.0 (0x00007f08c7a1c000)
+libgpg-error.so.0 =&gt; /lib/x86_64-linux-gnu/libgpg-error.so.0 (0x00007f08c7807000)
+libdbus-1.so.3 =&gt; /lib/x86_64-linux-gnu/libdbus-1.so.3 (0x00007f08c75ba000)
+libatspi.so.0 =&gt; /usr/lib/x86_64-linux-gnu/libatspi.so.0 (0x00007f08c738a000)
+libharfbuzz.so.0 =&gt; /usr/lib/x86_64-linux-gnu/libharfbuzz.so.0 (0x00007f08c70ec000)
+libexpat.so.1 =&gt; /lib/x86_64-linux-gnu/libexpat.so.1 (0x00007f08c6eba000)
+libdatrie.so.1 =&gt; /usr/lib/x86_64-linux-gnu/libdatrie.so.1 (0x00007f08c6cb3000)
+libXau.so.6 =&gt; /usr/lib/x86_64-linux-gnu/libXau.so.6 (0x00007f08c6aaf000)
+libXdmcp.so.6 =&gt; /usr/lib/x86_64-linux-gnu/libXdmcp.so.6 (0x00007f08c68a9000)
+libblkid.so.1 =&gt; /lib/x86_64-linux-gnu/libblkid.so.1 (0x00007f08c665c000)
+libsystemd.so.0 =&gt; /lib/x86_64-linux-gnu/libsystemd.so.0 (0x00007f08c63d8000)
+libgraphite2.so.3 =&gt; /usr/lib/x86_64-linux-gnu/libgraphite2.so.3 (0x00007f08c61ab000)
+libbsd.so.0 =&gt; /lib/x86_64-linux-gnu/libbsd.so.0 (0x00007f08c5f96000)
+libuuid.so.1 =&gt; /lib/x86_64-linux-gnu/libuuid.so.1 (0x00007f08c5d8f000)
+liblzma.so.5 =&gt; /lib/x86_64-linux-gnu/liblzma.so.5 (0x00007f08c5b69000)
+liblz4.so.1 =&gt; /usr/lib/x86_64-linux-gnu/liblz4.so.1 (0x00007f08c594d000)
 </pre>
 
 <ul class="org-ul">
@@ -1474,8 +1524,11 @@ liblz4.so.1 =&gt; /usr/lib/x86_64-linux-gnu/liblz4.so.1 (0x00007feabe145000)
 </div>
 </li>
 
-<li><a id="org0ffb4bb"></a>More examples from Assignment 8<br />
+<li><a id="org2ad9858"></a>More examples from Assignment 8<br />
 <div class="outline-text-6" id="text-1-8-2-2-7">
+<p>
+checkinput.h 
+</p>
 <div class="org-src-container">
 <pre class="src src-c"><span style="color: #b22222;">// </span><span style="color: #b22222;">Have a guard to ensure that we don't include it multiple times.</span>
 <span style="color: #483d8b;">#if</span><span style="color: #483d8b;">n</span><span style="color: #483d8b;">def</span> _CHECKINPUT_H_
@@ -1490,7 +1543,7 @@ liblz4.so.1 =&gt; /usr/lib/x86_64-linux-gnu/liblz4.so.1 (0x00007feabe145000)
 </div>
 
 <ul class="org-ul">
-<li>coupling<sub>h</sub> = ?</li>
+<li>coupling<sub>h</sub> = 1 = 1/1</li>
 </ul>
 
 <div class="org-src-container">
@@ -1531,6 +1584,9 @@ liblz4.so.1 =&gt; /usr/lib/x86_64-linux-gnu/liblz4.so.1 (0x00007feabe145000)
 <li>coupling<sub>h</sub> = 1/(4*w + z)</li>
 </ul>
 
+<p>
+parameter.h
+</p>
 <div class="org-src-container">
 <pre class="src src-C"><span style="color: #b22222;">// </span><span style="color: #b22222;">Implement a guard</span>
 
@@ -1612,15 +1668,18 @@ liblz4.so.1 =&gt; /usr/lib/x86_64-linux-gnu/liblz4.so.1 (0x00007feabe145000)
 </div>
 
 <p>
-3 includes &amp; 1 reference to int64<sub>t</sub>
+3 includes 
 </p>
 
 <ul class="org-ul">
 <li>w=3</li>
-<li>z=1</li>
+<li>z=0</li>
 <li>coupling<sub>h</sub> = 1/(4*w + z)</li>
 </ul>
 
+<p>
+ppdarray.h
+</p>
 <div class="org-src-container">
 <pre class="src src-C"><span style="color: #483d8b;">#include</span> <span style="color: #8b2252;">"parameters.h"</span>
 <span style="color: #483d8b;">#include</span> <span style="color: #8b2252;">&lt;inttypes.h&gt;</span>
@@ -1711,8 +1770,8 @@ liblz4.so.1 =&gt; /usr/lib/x86_64-linux-gnu/liblz4.so.1 (0x00007feabe145000)
 </div>
 </div>
 
-<div id="outline-container-org5277ab2" class="outline-3">
-<h3 id="org5277ab2"><span class="section-number-3">1.9</span> Cohesion</h3>
+<div id="outline-container-org5d42a70" class="outline-3">
+<h3 id="org5d42a70"><span class="section-number-3">1.9</span> Cohesion</h3>
 <div class="outline-text-3" id="text-1-9">
 <p>
 Cohesion is about how relevant code is to itself. A highly cohesive
@@ -1786,17 +1845,368 @@ called coincidental cohesion (aka you're lucky if it is cohesive).
 </p>
 </div>
 
-<div id="outline-container-org10d7c4d" class="outline-4">
-<h4 id="org10d7c4d"><span class="section-number-4">1.9.1</span> Refs</h4>
+<div id="outline-container-orgb222758" class="outline-4">
+<h4 id="orgb222758"><span class="section-number-4">1.9.1</span> McCabe's Cyclometic Complexity</h4>
 <div class="outline-text-4" id="text-1-9-1">
 <p>
-W. P. Stevens, G. J. Myers and L. L. Constantine, "Structured design,"
+McCabe's Cyclometic Complexity is [McCabe76] the number of unique
+paths through a module. The idea is that a module is complicated
+(complex) if there's lots of routes through the module.
+</p>
+
+<p>
+Programmers worry about complicated code because it can become a
+maintainability nightmare. It is hard to read and understand and can
+have lots of corner cases making it very hard to test. This means it
+is probably less reliable and trustable. Typically we correlate
+complicated with the idea that it is not maintainable. 
+</p>
+
+<p>
+You had to deal with McCabe's cyclometic complexity ever since we
+forced OCLint on you.
+</p>
+
+<p>
+Typically for a subroutine McCabes is calculated as (P=1):
+</p>
+
+<p>
+MCC = E - N + 2P
+MCC = E - N + 2
+</p>
+
+<p>
+Where E is the number of edges in a module (directed edges) and N is
+the number of nodes. 
+</p>
+
+<div class="org-src-container">
+<pre class="src src-C"><span style="color: #228b22;">int</span> <span style="color: #0000ff;">main</span>() {
+    <span style="color: #228b22;">int</span> <span style="color: #a0522d;">input</span> = 0;
+    scanf(<span style="color: #8b2252;">"%d"</span>, &amp;input);
+    <span style="color: #a020f0;">return</span> 5 * input;
+}
+</pre>
+</div>
+
+<p>
+This module has 3 nodes 2 edges and 1 exit:
+</p>
+<pre class="example">
+int input = 0;
+|
+V
+scanf("%d", &amp;input);
+|
+V
+return 5 * input;
+</pre>
+
+<p>
+MCC = 2 - 3 + 2 = 1
+</p>
+
+<p>
+McCabes argued that subroutines or modules with complexity greater
+than 10 should be split into smaller modules.
+</p>
+
+<div class="org-src-container">
+<pre class="src src-C"><span style="color: #483d8b;">#include</span> <span style="color: #8b2252;">&lt;inttypes.h&gt;</span>
+<span style="color: #483d8b;">#include</span> <span style="color: #8b2252;">&lt;stdlib.h&gt;</span>
+<span style="color: #228b22;">int</span> <span style="color: #0000ff;">sum</span>(<span style="color: #228b22;">int</span> * <span style="color: #a0522d;">array</span>, <span style="color: #228b22;">size_t</span> <span style="color: #a0522d;">n</span>) {
+    <span style="color: #228b22;">int</span> <span style="color: #a0522d;">sum</span> = 0;
+    <span style="color: #a020f0;">for</span> (<span style="color: #228b22;">size_t</span> <span style="color: #a0522d;">i</span> = 0 ; i &lt; n ; i++ ) {
+        sum += array[i];
+    }
+    <span style="color: #a020f0;">return</span> sum;
+}
+</pre>
+</div>
+
+<pre class="example">
+int sum = 0;
+|
+V
+for (size_t i = 0 ; i &lt; n ; i++ ) {//&lt;-+ // we could split this up
+     |                                 |
+     V                                 |
+    sum += array[i]                    |
+     |                                 |
+     V                                 |
+} // ----------------------------------+
+|
+V
+return sum;
+</pre>
+
+<p>
+E = 5
+N = 5
+MCC = E - N + 2 = 2
+</p>
+
+<p>
+So that 1 for loop is worth 1
+</p>
+
+
+<p>
+OK now let's do another sum that works but it more "complex".
+</p>
+
+<div class="org-src-container">
+<pre class="src src-C"><span style="color: #483d8b;">#include</span> <span style="color: #8b2252;">&lt;inttypes.h&gt;</span>
+<span style="color: #483d8b;">#include</span> <span style="color: #8b2252;">&lt;stdlib.h&gt;</span>
+<span style="color: #228b22;">int</span> <span style="color: #0000ff;">sum</span>(<span style="color: #228b22;">int</span> * <span style="color: #a0522d;">array</span>, <span style="color: #228b22;">size_t</span> <span style="color: #a0522d;">n</span>) {
+    <span style="color: #228b22;">int</span> <span style="color: #a0522d;">sum</span> = 0; <span style="color: #b22222;">// </span><span style="color: #b22222;">N+=1</span>
+    <span style="color: #a020f0;">for</span> (<span style="color: #228b22;">size_t</span> <span style="color: #a0522d;">i</span> = 0 ; i &lt; n ; i+=4 ) { <span style="color: #b22222;">// </span><span style="color: #b22222;">N+=1</span>
+        sum += array[i]; <span style="color: #b22222;">// </span><span style="color: #b22222;">N+=1</span>
+    } <span style="color: #b22222;">// </span><span style="color: #b22222;">N+=1 E+=1</span>
+    <span style="color: #a020f0;">for</span> (<span style="color: #228b22;">size_t</span> <span style="color: #a0522d;">i</span> = 1 ; i &lt; n ; i+=4 ) { <span style="color: #b22222;">// </span><span style="color: #b22222;">N+=1</span>
+        sum += array[i]; <span style="color: #b22222;">// </span><span style="color: #b22222;">N+=1</span>
+    } <span style="color: #b22222;">// </span><span style="color: #b22222;">N+=1 E+=1</span>
+    <span style="color: #a020f0;">for</span> (<span style="color: #228b22;">size_t</span> <span style="color: #a0522d;">i</span> = 2 ; i &lt; n ; i+=4 ) { <span style="color: #b22222;">// </span><span style="color: #b22222;">N+=1</span>
+        sum += array[i]; <span style="color: #b22222;">// </span><span style="color: #b22222;">N+=1</span>
+    } <span style="color: #b22222;">// </span><span style="color: #b22222;">N+=1 E+=1</span>
+    <span style="color: #a020f0;">for</span> (<span style="color: #228b22;">size_t</span> <span style="color: #a0522d;">i</span> = 3 ; i &lt; n ; i+=4 ) { <span style="color: #b22222;">// </span><span style="color: #b22222;">N+=1</span>
+        sum += array[i]; <span style="color: #b22222;">// </span><span style="color: #b22222;">N+=1</span>
+    } <span style="color: #b22222;">// </span><span style="color: #b22222;">N+=1 E+=1</span>
+    <span style="color: #a020f0;">return</span> sum; <span style="color: #b22222;">// </span><span style="color: #b22222;">N+=1</span>
+}
+</pre>
+</div>
+<p>
+E=17
+N=14
+MCC=17-14+2 = 5
+</p>
+
+<p>
+Effectively McCabes is close to the 1 + the number of branch points in
+a program. So I could estimate the complexity of that program by
+counting the number of if, while, do, for statements. This means I can
+skip a lot of the complicated modelling and just count those.
+</p>
+
+
+<div class="org-src-container">
+<pre class="src src-C"><span style="color: #228b22;">int</span> <span style="color: #0000ff;">passCode</span>(<span style="color: #228b22;">int</span> * <span style="color: #a0522d;">code</span>) {
+
+    <span style="color: #a020f0;">if</span> ( code[0] == <span style="color: #8b2252;">'C'</span> ) { <span style="color: #b22222;">// </span><span style="color: #b22222;">N+=1 E+=2</span>
+        <span style="color: #a020f0;">if</span> ( code[1] == <span style="color: #8b2252;">'R'</span> ) { <span style="color: #b22222;">// </span><span style="color: #b22222;">N+=1 E+=2</span>
+            <span style="color: #a020f0;">if</span> ( code[2] == <span style="color: #8b2252;">'E'</span> ) { <span style="color: #b22222;">// </span><span style="color: #b22222;">N+=1 E+=2</span>
+                <span style="color: #a020f0;">if</span> ( code[3] == <span style="color: #8b2252;">'D'</span> ) { <span style="color: #b22222;">// </span><span style="color: #b22222;">N+=1 E+=2</span>
+                    <span style="color: #a020f0;">if</span> ( code[4] == <span style="color: #8b2252;">'I'</span> ) { <span style="color: #b22222;">// </span><span style="color: #b22222;">N+=1 E+=2</span>
+                        <span style="color: #a020f0;">if</span> ( code[5] == <span style="color: #8b2252;">'T'</span> ) { <span style="color: #b22222;">// </span><span style="color: #b22222;">N+=1 E+=2</span>
+                            <span style="color: #a020f0;">return</span> 1; <span style="color: #b22222;">// </span><span style="color: #b22222;">N+=1</span>
+                        }
+                    }
+                }
+            }
+        }
+    }
+    <span style="color: #a020f0;">return</span> 0; <span style="color: #b22222;">// </span><span style="color: #b22222;">N+=1</span>
+}
+</pre>
+</div>
+
+<p>
+E = 13
+N = 8
+MCC = 13 - 8 + 2 = 7
+</p>
+
+<div class="org-src-container">
+<pre class="src src-C"><span style="color: #228b22;">int</span> <span style="color: #0000ff;">passCode</span>(<span style="color: #228b22;">int</span> * <span style="color: #a0522d;">code</span>) {
+    <span style="color: #228b22;">int</span> <span style="color: #a0522d;">sum</span> = 0; <span style="color: #b22222;">// </span><span style="color: #b22222;">N+=1 E+=1</span>
+    sum += code[0] == <span style="color: #8b2252;">'C'</span>; <span style="color: #b22222;">// </span><span style="color: #b22222;">N+=1 E+=1</span>
+    sum += code[1] == <span style="color: #8b2252;">'R'</span>; <span style="color: #b22222;">// </span><span style="color: #b22222;">N+=1 E+=1</span>
+    sum += code[2] == <span style="color: #8b2252;">'E'</span>; <span style="color: #b22222;">// </span><span style="color: #b22222;">N+=1 E+=1</span>
+    sum += code[3] == <span style="color: #8b2252;">'D'</span>; <span style="color: #b22222;">// </span><span style="color: #b22222;">N+=1 E+=1</span>
+    sum += code[4] == <span style="color: #8b2252;">'I'</span>; <span style="color: #b22222;">// </span><span style="color: #b22222;">N+=1 E+=1</span>
+    sum += code[5] == <span style="color: #8b2252;">'T'</span>; <span style="color: #b22222;">// </span><span style="color: #b22222;">N+=1 E+=1</span>
+    <span style="color: #a020f0;">return</span> sum==6; <span style="color: #b22222;">// </span><span style="color: #b22222;">N+=1</span>
+}
+</pre>
+</div>
+
+<p>
+MCC = 7 - 8 + 2 = 1
+</p>
+
+<div class="org-src-container">
+<pre class="src src-C"><span style="color: #228b22;">int</span> <span style="color: #0000ff;">passCode</span>(<span style="color: #228b22;">int</span> * <span style="color: #a0522d;">code</span>) {
+    <span style="color: #228b22;">int</span> <span style="color: #a0522d;">sum</span> = 0; <span style="color: #b22222;">// </span><span style="color: #b22222;">N+=1 E+=1</span>
+    <span style="color: #a020f0;">if</span> (code[0] == <span style="color: #8b2252;">'C'</span>) sum++; <span style="color: #b22222;">// </span><span style="color: #b22222;">N+=2 E+=3</span>
+    <span style="color: #b22222;">// </span><span style="color: #b22222;">it's E+3 because:</span>
+    <span style="color: #b22222;">// </span><span style="color: #b22222;">the if statement condition is false is 1 path</span>
+    <span style="color: #b22222;">// </span><span style="color: #b22222;">and you need 2 edges to, 1 to reach sum++ and 1 </span>
+    <span style="color: #b22222;">// </span><span style="color: #b22222;">to exit the if statement</span>
+    <span style="color: #a020f0;">if</span> (code[1] == <span style="color: #8b2252;">'R'</span>) sum++; <span style="color: #b22222;">// </span><span style="color: #b22222;">N+=2 E+=3</span>
+    <span style="color: #a020f0;">if</span> (code[2] == <span style="color: #8b2252;">'E'</span>) sum++; <span style="color: #b22222;">// </span><span style="color: #b22222;">N+=2 E+=3</span>
+    <span style="color: #a020f0;">if</span> (code[3] == <span style="color: #8b2252;">'D'</span>) sum++; <span style="color: #b22222;">// </span><span style="color: #b22222;">N+=2 E+=3</span>
+    <span style="color: #a020f0;">if</span> (code[4] == <span style="color: #8b2252;">'I'</span>) sum++; <span style="color: #b22222;">// </span><span style="color: #b22222;">N+=2 E+=3</span>
+    <span style="color: #a020f0;">if</span> (code[5] == <span style="color: #8b2252;">'T'</span>) sum++; <span style="color: #b22222;">// </span><span style="color: #b22222;">N+=2 E+=3</span>
+    <span style="color: #a020f0;">return</span> sum==6; <span style="color: #b22222;">// </span><span style="color: #b22222;">N+=1</span>
+}
+</pre>
+</div>
+
+<p>
+N = 14
+E = 19
+MCC = 19 - 14 + 2 = 7
+</p>
+
+<p>
+If you want to use OCLint to print MCCabe's just force the threshold
+</p>
+
+<p>
+Using the `-rc CYCLOMATIC<sub>COMPLEXITY</sub>=0` argument OCLint will print MCC
+for all programs.
+</p>
+
+<div class="org-src-container">
+<pre class="src src-sh"><span style="color: #a020f0;">for</span> file<span style="color: #a020f0;"> in</span> sum.c sum4.c passcodedeep.c passcodesum.c passcodeifsum.c
+<span style="color: #a020f0;">do</span>
+<span style="color: #483d8b;">echo</span> $<span style="color: #a0522d;">file</span>
+/usr/local/bin/oclint --disable-rule=UselessParentheses <span style="color: #8b2252;">\</span>
+   -rc <span style="color: #a0522d;">CYCLOMATIC_COMPLEXITY</span>=0  $<span style="color: #a0522d;">file</span> --  <span style="color: #8b2252;">\</span>
+   -std=c99 -pedantic -Wall -Wextra -ftrapv -ggdb3  <span style="color: #8b2252;">\</span>
+   -c $<span style="color: #a0522d;">file</span> 
+<span style="color: #a020f0;">done</span>
+<span style="color: #483d8b;">echo</span> good
+</pre>
+</div>
+
+<pre class="example">
+sum.c
+
+
+OCLint Report
+
+Summary: TotalFiles=1 FilesWithViolations=1 P1=0 P2=1 P3=1 
+
+/home/hindle1/projects/CMPUT201W20/2020-01/CMPUT201W20B2-public/week12/sum.c:3:22: short variable name [naming|P3] Length of variable name `n` is 1, which is shorter than the threshold of 3
+/home/hindle1/projects/CMPUT201W20/2020-01/CMPUT201W20B2-public/week12/sum.c:3:1: high cyclomatic complexity [size|P2] Cyclomatic Complexity Number 2 exceeds limit of 0
+
+[OCLint (http://oclint.org) v0.15]
+sum4.c
+
+
+OCLint Report
+
+Summary: TotalFiles=1 FilesWithViolations=1 P1=0 P2=1 P3=1 
+
+/home/hindle1/projects/CMPUT201W20/2020-01/CMPUT201W20B2-public/week12/sum4.c:3:22: short variable name [naming|P3] Length of variable name `n` is 1, which is shorter than the threshold of 3
+/home/hindle1/projects/CMPUT201W20/2020-01/CMPUT201W20B2-public/week12/sum4.c:3:1: high cyclomatic complexity [size|P2] Cyclomatic Complexity Number 5 exceeds limit of 0
+
+[OCLint (http://oclint.org) v0.15]
+passcodedeep.c
+
+
+OCLint Report
+
+Summary: TotalFiles=1 FilesWithViolations=1 P1=0 P2=1 P3=7 
+
+/home/hindle1/projects/CMPUT201W20/2020-01/CMPUT201W20B2-public/week12/passcodedeep.c:1:26: deep nested block [size|P3] Block depth of 7 exceeds limit of 5
+/home/hindle1/projects/CMPUT201W20/2020-01/CMPUT201W20B2-public/week12/passcodedeep.c:3:27: deep nested block [size|P3] Block depth of 6 exceeds limit of 5
+/home/hindle1/projects/CMPUT201W20/2020-01/CMPUT201W20B2-public/week12/passcodedeep.c:3:5: collapsible if statements [basic|P3] 
+/home/hindle1/projects/CMPUT201W20/2020-01/CMPUT201W20B2-public/week12/passcodedeep.c:4:9: collapsible if statements [basic|P3] 
+/home/hindle1/projects/CMPUT201W20/2020-01/CMPUT201W20B2-public/week12/passcodedeep.c:5:13: collapsible if statements [basic|P3] 
+/home/hindle1/projects/CMPUT201W20/2020-01/CMPUT201W20B2-public/week12/passcodedeep.c:6:17: collapsible if statements [basic|P3] 
+/home/hindle1/projects/CMPUT201W20/2020-01/CMPUT201W20B2-public/week12/passcodedeep.c:7:21: collapsible if statements [basic|P3] 
+/home/hindle1/projects/CMPUT201W20/2020-01/CMPUT201W20B2-public/week12/passcodedeep.c:1:1: high cyclomatic complexity [size|P2] Cyclomatic Complexity Number 7 exceeds limit of 0
+
+[OCLint (http://oclint.org) v0.15]
+passcodesum.c
+
+
+OCLint Report
+
+Summary: TotalFiles=1 FilesWithViolations=1 P1=0 P2=1 P3=0 
+
+/home/hindle1/projects/CMPUT201W20/2020-01/CMPUT201W20B2-public/week12/passcodesum.c:1:1: high cyclomatic complexity [size|P2] Cyclomatic Complexity Number 1 exceeds limit of 0
+
+[OCLint (http://oclint.org) v0.15]
+passcodeifsum.c
+
+
+OCLint Report
+
+Summary: TotalFiles=1 FilesWithViolations=1 P1=0 P2=1 P3=0 
+
+/home/hindle1/projects/CMPUT201W20/2020-01/CMPUT201W20B2-public/week12/passcodeifsum.c:1:1: high cyclomatic complexity [size|P2] Cyclomatic Complexity Number 7 exceeds limit of 0
+
+[OCLint (http://oclint.org) v0.15]
+good
+</pre>
+</div>
+
+<ol class="org-ol">
+<li><a id="orgda41c1e"></a>OCLint<br />
+<div class="outline-text-5" id="text-1-9-1-1">
+<p>
+How does OCLint calculate Cyclometic complexity?
+<a href="https://github.com/oclint/oclint/blob/master/oclint-rules/rules/size/CyclomaticComplexityRule.cpp">https://github.com/oclint/oclint/blob/master/oclint-rules/rules/size/CyclomaticComplexityRule.cpp</a>
+<a href="https://github.com/oclint/oclint/blob/master/oclint-metrics/lib/CyclomaticComplexityMetric.cpp">https://github.com/oclint/oclint/blob/master/oclint-metrics/lib/CyclomaticComplexityMetric.cpp</a>
+</p>
+
+<p>
+It traverses the code as a tree, and counts all conditions, whiles,
+do, cases, fors, and if statements and adds 1.
+</p>
+
+
+<p>
+oclint &#x2013;disable-rule=UselessParentheses -rc CYCLOMATIC<sub>COMPLEXITY</sub>=0 
+</p>
+</div>
+</li>
+
+<li><a id="org3d270b2"></a>Criticism of McCabe's<br />
+<div class="outline-text-5" id="text-1-9-1-2">
+<p>
+McCabes is correlated with lines of code, so it is effectively a size
+measure. We know that if each line has a probability of being buggy
+then more lines implies more bugs. McCabes doesn't really help us
+here. OClint has NCSS which is a lines of code measure.
+</p>
+
+<p>
+McCabes ignores function pointers and dot operators. So dynamic code
+is not counted. McCabes also ignores delegation functions (like a
+function with a case statement) that you might call, effectively
+making highly divergent code paths. 
+</p>
+
+<p>
+McCabes typically ignores multi-module dependencies.
+</p>
+
+<p>
+McCabes under counts paths through a program. The NPath metric can
+count the paths.
+</p>
+</div>
+</li>
+</ol>
+</div>
+
+<div id="outline-container-orga0f69a0" class="outline-4">
+<h4 id="orga0f69a0"><span class="section-number-4">1.9.2</span> Refs</h4>
+<div class="outline-text-4" id="text-1-9-2">
+<p>
+[Stevens74] W. P. Stevens, G. J. Myers and L. L. Constantine, "Structured design,"
 in IBM Systems Journal, vol. 13, no. 2, pp. 115-139, 1974.
 <a href="https://ieeexplore.ieee.org/document/5388187">https://ieeexplore.ieee.org/document/5388187</a>
 </p>
 
 <p>
-Roger Pressman. 2009. Software Engineering: A Practitioner’s Approach
+[Pressman09] Roger Pressman. 2009. Software Engineering: A Practitioner’s Approach
 (7th. ed.). McGraw-Hill, Inc., USA.
 </p>
 
@@ -1804,6 +2214,277 @@ Roger Pressman. 2009. Software Engineering: A Practitioner’s Approach
 [DHA95] Dhama, H., “Quantitative Models of Cohesion and Coupling in Software,”
 Journal of Systems and Software, vol. 29, no. 4, April 1995.
 </p>
+
+<p>
+[McCabe76] McCabe (December 1976). "A Complexity Measure". IEEE Transactions on
+Software Engineering (4): 308–320. <a href="10.1109/tse.1976.233837">10.1109/tse.1976.233837</a>
+</p>
+</div>
+</div>
+</div>
+
+
+<div id="outline-container-org538a79d" class="outline-3">
+<h3 id="org538a79d"><span class="section-number-3">1.10</span> Big Programs</h3>
+<div class="outline-text-3" id="text-1-10">
+</div>
+<div id="outline-container-orge47eeab" class="outline-4">
+<h4 id="orge47eeab"><span class="section-number-4">1.10.1</span> DOOM</h4>
+<div class="outline-text-4" id="text-1-10-1">
+<pre class="example">
+=================     ===============     ===============   ========  ========
+\\ . . . . . . .\\   //. . . . . . .\\   //. . . . . . .\\  \\. . .\\// . . //
+||. . ._____. . .|| ||. . ._____. . .|| ||. . ._____. . .|| || . . .\/ . . .||
+|| . .||   ||. . || || . .||   ||. . || || . .||   ||. . || ||. . . . . . . ||
+||. . ||   || . .|| ||. . ||   || . .|| ||. . ||   || . .|| || . | . . . . .||
+|| . .||   ||. _-|| ||-_ .||   ||. . || || . .||   ||. _-|| ||-_.|\ . . . . ||
+||. . ||   ||-'  || ||  `-||   || . .|| ||. . ||   ||-'  || ||  `|\_ . .|. .||
+|| . _||   ||    || ||    ||   ||_ . || || . _||   ||    || ||   |\ `-_/| . ||
+||_-' ||  .|/    || ||    \|.  || `-_|| ||_-' ||  .|/    || ||   | \  / |-_.||
+||    ||_-'      || ||      `-_||    || ||    ||_-'      || ||   | \  / |  `||
+||    `'         || ||         `'    || ||    `'         || ||   | \  / |   ||
+||            .===' `===.         .==='.`===.         .===' /==. |  \/  |   ||
+||         .=='   \_|-_ `===. .==='   _|_   `===. .===' _-|/   `==  \/  |   ||
+||      .=='    _-'    `-_  `='    _-'   `-_    `='  _-'   `-_  /|  \/  |   ||
+||   .=='    _-'          `-__\._-'         `-_./__-'         `' |. /|  |   ||
+||.=='    _-'                                                     `' |  /==.||
+=='    _-'                                                            \/   `==
+\   _-'                                                                `-_   /
+ `''                                                                      ``'
+</pre>
+</div>
+</div>
+
+<div id="outline-container-org264d649" class="outline-4">
+<h4 id="org264d649"><span class="section-number-4">1.10.2</span> License</h4>
+<div class="outline-text-4" id="text-1-10-2">
+<p>
+The license of code from doom is under the Doom License.
+</p>
+
+<p>
+<a href="https://github.com/id-Software/DOOM/blob/master/linuxdoom-1.10/DOOMLIC.TXT">https://github.com/id-Software/DOOM/blob/master/linuxdoom-1.10/DOOMLIC.TXT</a>
+</p>
+
+<p>
+This is not the GPL release :(
+</p>
+</div>
+</div>
+
+<div id="outline-container-org944ceae" class="outline-4">
+<h4 id="org944ceae"><span class="section-number-4">1.10.3</span> Discussion</h4>
+<div class="outline-text-4" id="text-1-10-3">
+<p>
+iD software 1995 game doom.
+</p>
+
+<p>
+<a href="https://github.com/id-Software/DOOM/tree/master/linuxdoom-1.10">https://github.com/id-Software/DOOM/tree/master/linuxdoom-1.10</a>
+</p>
+
+<p>
+General tips on code reading:
+</p>
+
+<ul class="org-ul">
+<li>Go to the build system, how is the program built
+<ul class="org-ul">
+<li>What are the main entries to the program?</li>
+<li>Start with the makefiles and similar build files</li>
+<li><a href="https://github.com/id-Software/DOOM/blob/master/linuxdoom-1.10/Makefile">https://github.com/id-Software/DOOM/blob/master/linuxdoom-1.10/Makefile</a>
+<ul class="org-ul">
+<li><a href="file:///home/hindle1/src/DOOM/linuxdoom-1.10/Makefile">Makefile</a></li>
+</ul></li>
+<li><a href="https://github.com/id-Software/DOOM/blob/master/linuxdoom-1.10/i_main.c">https://github.com/id-Software/DOOM/blob/master/linuxdoom-1.10/i_main.c</a>
+<ul class="org-ul">
+<li><a href="file:///home/hindle1/src/DOOM/linuxdoom-1.10/i_main.c">i<sub>main.c</sub></a></li>
+</ul></li>
+</ul></li>
+<li>.h files give an overview of what is important in each module
+<ul class="org-ul">
+<li><a href="https://github.com/id-Software/DOOM/blob/master/linuxdoom-1.10/d_main.h">https://github.com/id-Software/DOOM/blob/master/linuxdoom-1.10/d_main.h</a>
+<ul class="org-ul">
+<li><a href="file:///home/hindle1/src/DOOM/linuxdoom-1.10/d_main.h">d<sub>main.h</sub></a></li>
+</ul></li>
+<li><a href="https://github.com/id-Software/DOOM/blob/master/linuxdoom-1.10/d_main.c">https://github.com/id-Software/DOOM/blob/master/linuxdoom-1.10/d_main.c</a>
+<ul class="org-ul">
+<li><a href="file:///home/hindle1/src/DOOM/linuxdoom-1.10/d_main.c">d<sub>main.c</sub></a></li>
+</ul></li>
+</ul></li>
+<li>Read descriptions of functions and modules</li>
+<li><p>
+Use grep or other tools to search across the source code
+</p>
+<ul class="org-ul">
+<li>E.g. let's look at blitting (rapid copying of data)</li>
+</ul>
+<div class="org-src-container">
+<pre class="src src-sh">grep -i blit ~/src/DOOM/linuxdoom-1.10/*.h
+grep -i blit ~/src/DOOM/linuxdoom-1.10/*.c
+</pre>
+</div>
+
+<pre class="example">
+/home/hindle1/src/DOOM/linuxdoom-1.10/doomstat.h:extern  boolean		noblit;
+/home/hindle1/src/DOOM/linuxdoom-1.10/i_video.h:void I_UpdateNoBlit (void);
+/home/hindle1/src/DOOM/linuxdoom-1.10/r_data.h:// Retrieve column data for span blitting.
+/home/hindle1/src/DOOM/linuxdoom-1.10/r_draw.h:// The span blitting interface.
+/home/hindle1/src/DOOM/linuxdoom-1.10/r_draw.h:// Span blitting for rows, floor/ceiling.
+/home/hindle1/src/DOOM/linuxdoom-1.10/v_video.h://	Functions to blit a block to the screen.
+/home/hindle1/src/DOOM/linuxdoom-1.10/d_main.c:    I_UpdateNoBlit ();
+/home/hindle1/src/DOOM/linuxdoom-1.10/d_main.c:	I_FinishUpdate ();              // page flip or blit buffer
+/home/hindle1/src/DOOM/linuxdoom-1.10/d_main.c:	I_UpdateNoBlit ();
+/home/hindle1/src/DOOM/linuxdoom-1.10/d_main.c:	I_FinishUpdate ();                      // page flip or blit buffer
+/home/hindle1/src/DOOM/linuxdoom-1.10/g_game.c:boolean         noblit;                 // for comparative timing purposes 
+/home/hindle1/src/DOOM/linuxdoom-1.10/g_game.c:    noblit = M_CheckParm ("-noblit"); 
+/home/hindle1/src/DOOM/linuxdoom-1.10/i_video.c:// I_UpdateNoBlit
+/home/hindle1/src/DOOM/linuxdoom-1.10/i_video.c:void I_UpdateNoBlit (void)
+/home/hindle1/src/DOOM/linuxdoom-1.10/i_video.c:    // scales the screen size before blitting it
+/home/hindle1/src/DOOM/linuxdoom-1.10/m_menu.c:// but before it has been blitted.
+/home/hindle1/src/DOOM/linuxdoom-1.10/v_video.c://	Functions to blit a block to the screen.
+</pre></li>
+<li><p>
+Look at the file names! Sometimes they tell you a lot!
+</p>
+
+<p>
+This doom source code is organized by prefixes. These indicate
+grouping of modules.
+</p>
+
+<p>
+From DoomWiki contributors, 1999, Doom source code, <a href="https://doomwiki.org/wiki/Doom_source_code">https://doomwiki.org/wiki/Doom_source_code</a>
+</p>
+<pre class="example">
+AM_*
+    Automap code
+D_*
+    Initialisation/general code
+F_*
+    "Finale" (end of game) and "screen melt" code.
+G_*
+    Main game loop/control
+HU_*
+    Heads-up display
+I_*
+    System-specific code
+M_*
+    Miscellaneous (includes the menu)
+P_*
+    Game logic/behaviour
+R_*
+    Rendering engine
+S_*
+    Sound code
+ST_*
+    Status bar
+V_*
+    General graphic rendering
+WI_*
+    End-of level "intermission" screen
+W_*
+    WAD file loading
+Z_*
+    Zone memory allocation system
+
+The following are common prefixes for functions, although they do not denote a particular subsystem, and there are no files with these prefixes:
+
+A_*
+    Action functions invoked in sprite movement frames (these are the functions used in Dehacked "code pointers")
+PIT_*
+    Callback functions passed to P_BlockThingsIterator (see p_maputl.c)
+T_*
+    "Thinker" functions set to be called each clock tic for some purpose (eg, moving platforms or flickering lights)
+</pre></li>
+
+<li><p>
+Memory allocation is always interesting in a C program
+</p>
+
+<div class="org-src-container">
+<pre class="src src-sh">grep malloc ~/src/DOOM/linuxdoom-1.10/*.h
+grep malloc ~/src/DOOM/linuxdoom-1.10/*.c
+</pre>
+</div>
+
+<pre class="example">
+/home/hindle1/src/DOOM/linuxdoom-1.10/i_system.h:// to get the ammount of memory to malloc
+/home/hindle1/src/DOOM/linuxdoom-1.10/i_system.h:// just mallocs under unix
+/home/hindle1/src/DOOM/linuxdoom-1.10/d_main.c:    newfile = malloc (strlen(file)+1);
+/home/hindle1/src/DOOM/linuxdoom-1.10/d_main.c:    doom2wad = malloc(strlen(doomwaddir)+1+9+1);
+/home/hindle1/src/DOOM/linuxdoom-1.10/d_main.c:    doomuwad = malloc(strlen(doomwaddir)+1+8+1);
+/home/hindle1/src/DOOM/linuxdoom-1.10/d_main.c:    doomwad = malloc(strlen(doomwaddir)+1+8+1);
+/home/hindle1/src/DOOM/linuxdoom-1.10/d_main.c:    doom1wad = malloc(strlen(doomwaddir)+1+9+1);
+/home/hindle1/src/DOOM/linuxdoom-1.10/d_main.c:    // Insufficient malloc, caused spurious realloc errors.
+/home/hindle1/src/DOOM/linuxdoom-1.10/d_main.c:    plutoniawad = malloc(strlen(doomwaddir)+1+/*9*/12+1);
+/home/hindle1/src/DOOM/linuxdoom-1.10/d_main.c:    tntwad = malloc(strlen(doomwaddir)+1+9+1);
+/home/hindle1/src/DOOM/linuxdoom-1.10/d_main.c:    doom2fwad = malloc(strlen(doomwaddir)+1+10+1);
+/home/hindle1/src/DOOM/linuxdoom-1.10/d_main.c:	    file = malloc (size);
+/home/hindle1/src/DOOM/linuxdoom-1.10/d_main.c:	    myargv = malloc(sizeof(char *)*MAXARGVS);
+/home/hindle1/src/DOOM/linuxdoom-1.10/i_net.c:    doomcom = malloc (sizeof (*doomcom) );
+/home/hindle1/src/DOOM/linuxdoom-1.10/i_system.c:    return (byte *) malloc (*size);
+/home/hindle1/src/DOOM/linuxdoom-1.10/i_system.c:    mem = (byte *)malloc (length);
+/home/hindle1/src/DOOM/linuxdoom-1.10/i_video.c:    				(char*)malloc(X_width * X_height),
+/home/hindle1/src/DOOM/linuxdoom-1.10/i_video.c:	screens[0] = (unsigned char *) malloc (SCREENWIDTH * SCREENHEIGHT);
+/home/hindle1/src/DOOM/linuxdoom-1.10/m_misc.c:		    newstring = (char *) malloc(len);
+/home/hindle1/src/DOOM/linuxdoom-1.10/w_wad.c:#include &lt;malloc.h&gt;
+/home/hindle1/src/DOOM/linuxdoom-1.10/w_wad.c:    lumpinfo = malloc(1);	
+/home/hindle1/src/DOOM/linuxdoom-1.10/w_wad.c:    lumpcache = malloc (size);
+/home/hindle1/src/DOOM/linuxdoom-1.10/z_zone.c:    // total bytes malloced, including header
+</pre>
+
+<p>
+Turns out they pool allocate at the start and do their own memory management.
+So they don't plan to call upon malloc very much after this point.
+</p>
+
+<div class="org-src-container">
+<pre class="src src-sh">grep I_ZoneBase ~/src/DOOM/linuxdoom-1.10/*.h
+grep I_ZoneBase ~/src/DOOM/linuxdoom-1.10/*.c
+</pre>
+</div>
+
+<pre class="example">
+/home/hindle1/src/DOOM/linuxdoom-1.10/i_system.h:byte*	I_ZoneBase (int *size);
+/home/hindle1/src/DOOM/linuxdoom-1.10/i_system.c:byte* I_ZoneBase (int*	size)
+/home/hindle1/src/DOOM/linuxdoom-1.10/z_zone.c:    mainzone = (memzone_t *)I_ZoneBase (&amp;size);
+</pre></li>
+</ul>
+
+
+
+<ul class="org-ul">
+<li><a href="file:///home/hindle1/src/DOOM/">~/src/DOOM/</a></li>
+<li><a href="file:///home/hindle1/src/DOOM/linuxdoom-1.10/Makefile">~/src/DOOM/linuxdoom-1.10/Makefile</a></li>
+<li><a href="file:///home/hindle1/src/DOOM/linuxdoom-1.10/i_main.c">~/src/DOOM/linuxdoom-1.10/i<sub>main.c</sub></a></li>
+<li><a href="file:///home/hindle1/src/DOOM/linuxdoom-1.10/d_main.h">~/src/DOOM/linuxdoom-1.10/d<sub>main.h</sub></a></li>
+</ul>
+</div>
+</div>
+
+<div id="outline-container-orgcd4b5d5" class="outline-4">
+<h4 id="orgcd4b5d5"><span class="section-number-4">1.10.4</span> Refs</h4>
+<div class="outline-text-4" id="text-1-10-4">
+<ul class="org-ul">
+<li>DoomWiki contributors, 1999, Doom source code, <a href="https://doomwiki.org/wiki/Doom_source_code">https://doomwiki.org/wiki/Doom_source_code</a></li>
+<li>DoomWiki contributors, 1999, Doom source code files, <a href="https://doomwiki.org/wiki/Doom_source_code_files">https://doomwiki.org/wiki/Doom_source_code_files</a></li>
+<li>iD Software, 1997, Doom Source Code <a href="https://github.com/id-Software/DOOM/">https://github.com/id-Software/DOOM/</a></li>
+<li>Fabien Sanglard, 2010, <a href="http://fabiensanglard.net/doomIphone/doomClassicRenderer.php">http://fabiensanglard.net/doomIphone/doomClassicRenderer.php</a>
+<ul class="org-ul">
+<li>All about the engine itself</li>
+</ul></li>
+<li>Tom Hall, John Romero, 2011, Doom Postmortem
+<a href="https://www.gdcvault.com/play/1014627/Classic-Game-Postmortem">https://www.gdcvault.com/play/1014627/Classic-Game-Postmortem</a>
+<ul class="org-ul">
+<li>Developers discuss doom</li>
+</ul></li>
+<li>John Romero, 1993, A visit to iD Software, 
+<a href="https://www.youtube.com/watch?v=Q65xJfVkiaI">https://www.youtube.com/watch?v=Q65xJfVkiaI</a></li>
+<li>Kris Occhipinti, 2015, Doom Source Code Editing Prboom GCC Linux Tutorial
+<a href="https://www.youtube.com/watch?v=Cd8T5-j1QwQ">https://www.youtube.com/watch?v=Cd8T5-j1QwQ</a>
+<a href="https://pastebin.com/T29s9Mss">https://pastebin.com/T29s9Mss</a></li>
+</ul>
 </div>
 </div>
 </div>
@@ -1811,7 +2492,7 @@ Journal of Systems and Software, vol. 29, no. 4, April 1995.
 </div>
 <div id="postamble" class="status">
 <p class="author">Author: Abram Hindle</p>
-<p class="date">Created: 2020-03-31 Tue 12:27</p>
+<p class="date">Created: 2020-04-02 Thu 11:32</p>
 <p class="validation"><a href="http://validator.w3.org/check?uri=referer">Validate</a></p>
 </div>
 </body>
