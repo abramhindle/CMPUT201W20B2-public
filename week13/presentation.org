@@ -115,7 +115,7 @@ Programs that run in the UNIX terminal have 3 main streams:
 - stderr: 
   - standard err or standard error to write out to terminals but not
     modify the main output
-  - `2>` `|&` or `2>&1 |`
+  - `2>`  or `2>&1 |` or `|&` (bash only)
   - C: `fputs(stderr,...), fputchar(stderr,...), fprintf(stderr,...), ...`
 
 They are called streams because you serially output information to
@@ -179,10 +179,13 @@ ls | tr '[:lower:]' '[:upper:]'
 
 We can chain pipes:
 #+begin_src sh :exports both
+echo translate AC IR LL LK
 tr 'AC' 'IR' < allcaps.txt | sed -e 's/LL/LK/'
+echo translate AC IR LL LK ^S
 tr 'AC' 'IR' < allcaps.txt | sed -e 's/LL/LK/' | \
    sed -e 's/^/S/'
 # we can chain commands together
+echo translate AC IR LL LK ^S K K T
 tr 'AC' 'IR' < allcaps.txt | sed -e 's/LL/LK/' | \
    sed -e 's/^/S/' | \
    sed -e 's/K /K T/'
@@ -190,12 +193,17 @@ ls | grep .org | sort
 #+end_src
 
 #+RESULTS:
+: AC IR LL LK
 : ILK RIPS
+: AC IR LL LK ^S
 : SILK RIPS
+: AC IR LL LK ^S K K T
 : SILK TRIPS
+: #presentation.org#
 : presentation.org
 : presentation.org~
 
+sed is a useful regular expression program for manipulating text.
 
 ****** stderr & shell
 
@@ -364,6 +372,8 @@ computer. If you want to ensure data is written try to engage in
 flush. Sometimes no data will appear until you flush or close the
 file. Keep those pipes clean.
 
+***** fopen
+
 #+begin_src C :exports both
 #include <stdio.h>
 #define SIZE 1024
@@ -371,9 +381,17 @@ int main() {
     char buffer[SIZE] = {'\0'};
     // open coolbears.txt for writing
     FILE * f_cb  = fopen("coolbears.txt", "w"); 
+    if (f_cb == NULL) {
+        perror("Couldn't open coolbears.txt");
+        abort();
+    }
     fputs("Polar bears", f_cb);
     fclose(f_cb);
     FILE * f_cbr = fopen("coolbears.txt", "r"); 
+    if (f_cbr == NULL) {
+        perror("Couldn't open coolbears.txt");
+        abort();
+    }
     fgets(buffer, SIZE, f_cbr);
     printf("%s\n",buffer);
     fclose(f_cbr);
@@ -382,6 +400,50 @@ int main() {
 
 #+RESULTS:
 : Polar bears
+
+***** perror
+
+perror produces nice errors.
+
+perror("An error string"); will report the immediate fopen error if
+there is one.
+
+Copy this code or put it in macro.
+#+begin_src C :eval no
+FILE * file = fopen("filename", "w"); // open coolbears.txt for writing
+if (file == NULL) {
+    perror("filename could not be opened");
+    abort();
+}
+#+end_src
+
+
+#+begin_src C :exports both :tangle perror.c
+#include <stdio.h>
+int main() {
+    // open a file I can't open
+    FILE * f_cb  = fopen("/proc/whatever", "w"); 
+    if (f_cb == NULL) {
+        perror("Couldn't open /proc/whatever");
+        abort();
+    }
+    printf("We shouldn't be here!\n");
+}
+#+end_src
+
+#+RESULTS:
+
+#+begin_src sh :exports both
+gcc  -std=c99 -pedantic -Wall -Wextra -ftrapv -ggdb3 -o perror ./perror.c && \
+./perror 2>&1 
+exit 0
+#+end_src
+
+#+RESULTS:
+: Couldn't open /proc/whatever: No such file or directory
+: Aborted (core dumped)
+
+***** closing
 
 OK but what if we don't close it?
 
@@ -392,13 +454,25 @@ int main() {
     char buffer[SIZE] = {'\0'};
     // open coolbears.txt for writing
     FILE * f_cb  = fopen("coolbears.txt", "w"); 
+    if (f_cb == NULL) {
+        perror("Couldn't open coolbears.txt");
+        abort();
+    }
     fputs("Polar bears", f_cb);
     FILE * f_cbr = fopen("coolbears.txt", "r"); 
+    if (f_cbr == NULL) {
+        perror("Couldn't open coolbears.txt");
+        abort();
+    }
     fgets(buffer, SIZE, f_cbr);
     printf("This is the buffer before close: %s\n",buffer);
     fclose(f_cbr);
     fclose(f_cb);
     f_cbr = fopen("coolbears.txt", "r"); 
+    if (f_cbr == NULL) {
+        perror("Couldn't open coolbears.txt");
+        abort();
+    }
     fgets(buffer, SIZE, f_cbr);
     printf("This is the buffer after close: %s\n",buffer);
     fclose(f_cbr);
@@ -418,6 +492,8 @@ cat coolbears.txt
 #+RESULTS:
 : Polar bears
 
+****** fflushing and fclose
+
 Now let's see what flush does for us!
 #+begin_src C :exports both
 #include <stdio.h>
@@ -426,14 +502,26 @@ int main() {
     char buffer[SIZE] = {'\0'};
     // open coolbears.txt for writing
     FILE * f_cb  = fopen("coolbears.txt", "w"); 
+    if (f_cb == NULL) {
+        perror("Couldn't open coolbears.txt");
+        abort();
+    }
     fputs("Polar bears", f_cb);
     fflush(f_cb); // WE'RE FLUSHING!
     FILE * f_cbr = fopen("coolbears.txt", "r"); 
+    if (f_cbr == NULL) {
+        perror("Couldn't open coolbears.txt");
+        abort();
+    }
     fgets(buffer, SIZE, f_cbr);
     printf("This is the buffer before close but after flush: %s\n",buffer);
     fclose(f_cbr);
     fclose(f_cb);
     f_cbr = fopen("coolbears.txt", "r"); 
+    if (f_cbr == NULL) {
+        perror("Couldn't open coolbears.txt");
+        abort();
+    }
     fgets(buffer, SIZE, f_cbr);
     printf("This is the buffer after close: %s\n",buffer);
     fclose(f_cbr);
@@ -444,10 +532,17 @@ int main() {
 #+RESULTS:
 : This is the buffer before close but after flush: Polar bears
 : This is the buffer after close: Polar bears
-: Close your buffers!
+: Close your buffers! Keep your pipes clean
 
 **** writing
 ***** fprintf
+
+fprintf is printf for files. It takes a FILE * as the first argument
+and then it looks like printf after that.
+
+fputs is available too and does the same thing except no laying out of
+strings.
+
 #+begin_src C :exports both
 #include <stdio.h>
 #include <stdlib.h>
@@ -457,10 +552,18 @@ int main() {
     char buffer[SIZE] = {'\0'};
     // open coolbears.txt for writing
     FILE * f_cb  = fopen("fprintf.txt", "w"); 
+    if (f_cb == NULL) {
+        perror("Couldn't open fprintf.txt");
+        abort();
+    }
     // It's just like printf!
     fprintf(f_cb,"A random number %d\n", rand());
     fclose(f_cb);
     FILE * f_cbr = fopen("fprintf.txt", "r"); 
+    if (f_cbr == NULL) {
+        perror("Couldn't open fprintf.txt");
+        abort();
+    }
     fgets(buffer, SIZE, f_cbr);
     printf("%s\n",buffer);
     fclose(f_cbr);
@@ -468,10 +571,18 @@ int main() {
 #+end_src
 
 #+RESULTS:
-: A random number 1887874972
+: A random number 1199792083
 
 **** reading
+
+For reading text from a file you options like fgets, fgetc, and
+fscanf.
+
 ***** fscanf
+
+fscanf looks and feels like scanf except it outputs to FILE * streams.
+The first argument is a FILE *.
+
 #+begin_src C :exports both
 #include <stdio.h>
 #include <stdlib.h>
@@ -482,10 +593,19 @@ int main() {
     char buffer[SIZE] = {'\0'};
     // open coolbears.txt for writing
     FILE * f_cb  = fopen("fprintf.txt", "w"); 
+    if (f_cb == NULL) {
+        perror("Couldn't open fprintf.txt");
+        abort();
+    }
     // It's just like printf!
     fprintf(f_cb,"A random number %d\n", rand());
     fclose(f_cb);
     FILE * f_cbr = fopen("fprintf.txt", "r"); 
+    if (f_cbr == NULL) {
+        perror("Couldn't open fprintf.txt");
+        abort();
+    }
+
     for (int i = 0 ; i < 3; i++) {
         CHECK(fscanf(f_cbr, "%s",buffer));
         printf("%s\n",buffer);
@@ -502,14 +622,15 @@ int main() {
 : A
 : random
 : number
-: 1558341960
+: 632306008
 
 ***** fgets
 
-fgets gets a little complicated because you have to test for EOF.
-
-You can check for an null response and use feof, but probably you have
-to do both.
+fgets gets a little complicated because you have to test for EOF. You
+can check for an null response and use the feof function, but probably
+you have to do both. If you find you're repeating the last line of a
+file it is because you are reading nothing and you're reusing the
+buffer you just used.
 
 #+begin_src C :exports both
 #include <stdio.h>
@@ -521,33 +642,42 @@ int main() {
     char buffer[SIZE] = {'\0'};
     srand(time(NULL));
     // open coolbears.txt for writing
-    FILE * f_cb  = fopen("fgets.txt", "w"); 
+    FILE * filew  = fopen("fgets.txt", "w"); 
+    if (filew == NULL) {
+        perror("Couldn't open fgets.txt");
+        abort();
+    }
+
     // It's just like printf!
     const int totalLines = 1 + (rand() % N);
     for (int i = 0 ; i < totalLines; i++) {
-        fprintf(f_cb,"A random number %d\n", rand());
+        fprintf(filew,"A random number %d\n", rand());
     }
-    fclose(f_cb);
-    FILE * f_cbr = fopen("fgets.txt", "r"); 
-    while(!feof(f_cbr)) {
-        if (fgets(buffer, SIZE, f_cbr)) {
+    fclose(filew);
+    FILE * filer = fopen("fgets.txt", "r"); 
+    if (filer == NULL) {
+        perror("Couldn't open fgets.txt");
+        abort();
+    }
+
+    while(!feof(filer)) {
+        if (fgets(buffer, SIZE, filer)) {
            printf("fgets.txt: %s", buffer);
         }
     }
-    fclose(f_cbr);
+    fclose(filer);
     return 0;
 }
 #+end_src
 
 #+RESULTS:
-: fgets.txt: A random number 1696256828
-: fgets.txt: A random number 382707092
-: fgets.txt: A random number 92505306
-: fgets.txt: A random number 1788338362
-: fgets.txt: A random number 1530091624
-: fgets.txt: A random number 1545090145
-: fgets.txt: A random number 2139568362
-
+: fgets.txt: A random number 1410636209
+: fgets.txt: A random number 572897036
+: fgets.txt: A random number 46628646
+: fgets.txt: A random number 7050258
+: fgets.txt: A random number 1873294443
+: fgets.txt: A random number 2061715624
+: fgets.txt: A random number 614071061
 
 **** flushing
 
@@ -557,7 +687,7 @@ certain threshold is met, typically size but sometimes time (depending
 on the system). Buffered will increase latency to print something but
 will often improve overall bandwidth to disk.
 
-#+begin_src C :eval no
+#+begin_src C :eval no :exports code
 fflush(FILE * stream); // will flush your stream
 #+end_src
 
@@ -572,6 +702,10 @@ Flush when you need to.
 int main() {
     srand(time(NULL));
     FILE * file = fopen("fflush.txt", "w"); 
+    if (file == NULL) {
+        perror("Couldn't open fflush.txt");
+        abort();
+    }
     for (int i = 0 ; i < SIZE; i++) {
         fprintf(file, "%d\n", rand());
         fflush(file); // WE'RE FLUSHING!
@@ -590,6 +724,10 @@ int main() {
 int main() {
     char buffer[BUFF];
     FILE * file = fopen("fflush.txt", "r"); 
+    if (file == NULL) {
+        perror("Couldn't open fflush.txt");
+        abort();
+    }
     while(!feof(file)) {
         if (!fgets(buffer,BUFF,file)) {
             break;
@@ -631,6 +769,11 @@ out. It will not be compiler and architecture portable so carefully
 craft your structs before you write them out. Use explicit padding.
 For 64-bit and 32-bit compatibility pad to modulus 8 bytes.
 
+***** Writing Binary Files
+
+fwrite is our buddy. It will help us write arbitrary sections of
+memory to a file.
+
 #+begin_src C :exports both :eval yes :tangle binarywrite.c
 #include <assert.h>
 #include <stdio.h>
@@ -646,6 +789,11 @@ struct demo {
 int main() {
     srand(time(NULL));
     FILE * file = fopen("binary.bin", "w"); 
+    if (file == NULL) {
+        perror("Couldn't open binary.bin");
+        abort();
+    }
+
     int realSize = 1 + (rand() % SIZE);
     assert(1==fwrite(&realSize, sizeof(int), 1, file));
     for (int i = 0 ; i < realSize; i++) {
@@ -666,66 +814,25 @@ int main() {
 
 #+RESULTS:
 #+begin_example
-Writing 1487396678
-	Writing 6.62951e+07
-	Writing 4.71371e-10
+Writing 1261796412
+	Writing 4.90154e+08
+	Writing 6.05296e-10
 	Writing X
-Writing 237319659
-	Writing 6.43308e+08
-	Writing 1.11901e-09
+Writing 1515345272
+	Writing 3.19668e+08
+	Writing 1.36133e-09
 	Writing X
-Writing 775792282
-	Writing 2.55359e+07
-	Writing 1.45765e-09
+Writing 1764304537
+	Writing 1.52156e+08
+	Writing 5.48835e-10
+	Writing X
+Writing 243855245
+	Writing 1.08255e+08
+	Writing 1.31258e-09
 	Writing X
 #+end_example
 
-#+begin_src C :exports both :eval yes :tangle binaryread.c
-#include <assert.h>
-#include <time.h>
-#include <stdio.h>
-#define BUFF 1024
-struct demo {
-    int i;
-    float f;
-    double d;
-    char c;
-};
-int main() {
-    char buffer[BUFF];
-    FILE * file = fopen("binary.bin", "r"); 
-    int size=0;
-    assert(1==fread(&size, sizeof(size), 1, file));
-
-    while(!feof(file)) {
-        struct demo readDemo;
-        if (1!=fread(&readDemo, sizeof(readDemo), 1, file)) {
-           break;
-        }
-        printf("Reading %d\n", readDemo.i);
-        printf("\tReading %f\n", readDemo.f);
-        printf("\tReading %g\n", readDemo.d);
-        printf("\tReading %c\n", readDemo.c);
-    }
-    fclose(file);
-}
-#+end_src
-
-#+RESULTS:
-#+begin_example
-Reading 1487396678
-	Reading 66295088.000000
-	Reading 4.71371e-10
-	Reading X
-Reading 237319659
-	Reading 643307584.000000
-	Reading 1.11901e-09
-	Reading X
-Reading 775792282
-	Reading 25535876.000000
-	Reading 1.45765e-09
-	Reading X
-#+end_example
+So those structs are written to binary.bin
 
 When you write out structs, watch for padding. Look for the letter X.
 Count the number of bytes after the last X.
@@ -735,14 +842,84 @@ hexdump -C binary.bin
 #+end_src
 
 #+RESULTS:
-: 00000000  03 00 00 00 46 df a7 58  4c e5 7c 4c f8 33 9e 94  |....F..XL.|L.3..|
-: 00000010  38 32 00 3e 58 bb 91 ff  b0 55 00 00 eb 35 25 0e  |82.>X....U...5%.|
-: 00000020  61 60 19 4e 58 33 c3 03  76 39 13 3e 58 bb 91 ff  |a`.NX3..v9.>X...|
-: 00000030  b0 55 00 00 9a a6 3d 2e  c2 d2 c2 4b 11 b0 26 8e  |.U....=....K..&.|
-: 00000040  d1 0a 19 3e 58 bb 91 ff  b0 55 00 00              |...>X....U..|
-: 0000004c
+: 00000000  10 00 00 00 ff ff ff ff  b7 b4 4e 4e 4f 29 34 8b  |..........NNO)4.|
+: 00000010  6a 06 15 3e 58 3c 9a a2  6b 55 00 00 15 8b b9 7a  |j..>X<..kU.....z|
+: 00000020  ac 15 02 4e 79 b6 42 70  62 a6 04 3e 58 3c 9a a2  |...Ny.Bpb..>X<..|
+: 00000030  6b 55 00 00 78 f6 53 02  6b 70 ff 4d 15 1f 9b 84  |kU..x.S.kp.M....|
+: 00000040  75 e2 0f 3e 58 3c 9a a2  6b 55 00 00 ff ff ff ff  |u..>X<..kU......|
+: 00000050  c8 a1 eb 4c 77 e7 a7 5f  f3 e4 46 3e 58 3c 9a a2  |...Lw.._..F>X<..|
+: 00000060  6b 55 00 00                                       |kU..|
+: 00000064
+
+***** Reading binary
+
+Reading binary requires that you know what types you are reading. Be
+warned that if you mix different types you need to read them in proper
+order.
+
+#+begin_src C :exports both :eval yes :tangle binaryread.c
+  #include <assert.h>
+  #include <time.h>
+  #include <stdio.h>
+  #define BUFF 1024
+  struct demo {
+      int i;
+      float f;
+      double d;
+      char c;
+  };
+  int main() {
+      char buffer[BUFF];
+      FILE * file = fopen("binary.bin", "r"); 
+      if (file == NULL) {
+          perror("Couldn't open binary.bin");
+          abort();
+      }
+      int size=0;
+      assert(1==fread(&size, sizeof(size), 1, file));
+      // we'll just ignore the size and just keep reading until we have
+      // to stop.
+      while(!feof(file)) {
+          struct demo readDemo;
+          if (1!=fread(&readDemo, sizeof(readDemo), 1, file)) {
+             break;
+          }
+          printf("Reading %d\n", readDemo.i);
+          printf("\tReading %f\n", readDemo.f);
+          printf("\tReading %g\n", readDemo.d);
+          printf("\tReading %c\n", readDemo.c);
+      }
+      fclose(file);
+  }
+#+end_src
+
+#+RESULTS:
+#+begin_example
+Reading -1
+	Reading 866987456.000000
+	Reading 1.22382e-09
+	Reading X
+Reading 2058980117
+	Reading 545614592.000000
+	Reading 6.00992e-10
+	Reading X
+Reading 39057016
+	Reading 535694688.000000
+	Reading 9.27964e-10
+	Reading X
+Reading -1
+	Reading 123539008.000000
+	Reading 1.0661e-08
+	Reading X
+#+end_example
 
 *** Command line arguments
+
+How do I make program like?
+
+#+begin_src sh :exports code :eval no
+./argv some commandline args -l
+#+end_src
 
 To get arguments from the commandline you can add the parameters:
 - `int argc` -- number of commandline arguments
@@ -778,6 +955,9 @@ cp -f argv argv-new && \
 : arg 0: ./argv	arg 1: 1	arg 2: 2	
 : arg 0: ./argv	arg 1: 1	arg 2: 2	arg 3: 3	
 : arg 0: ./argv-new	arg 1: 1	arg 2: 2	arg 3: 3	
+
+
+**** atoi for integer arguments
 
 So atoi is your friend :)
 
@@ -815,11 +995,10 @@ gcc  -std=c99 -pedantic -Wall -Wextra -ftrapv -ggdb3 \
 : 
 
 
-
 *** mmap()
 
-mmap is neat, it maps memory from a file or even a process to pointers
-in memory. We do this with shared libraries too. So you can read and
+mmap is neat, it maps memory to and from a file or even another
+process. We do this with shared libraries too. So you can read and
 write to a file just by writing to memory. The OS deals with it very
 effeciently you just have to be very size aware. mmapping files is not
 good for streams and stream processing, it gets complicated. It is
@@ -843,14 +1022,22 @@ struct demo {
 int main() {
     srand(time(NULL));
     FILE * file = fopen("binary.bin", "r+"); 
+    if (file == NULL) {
+        perror("Couldn't open binary.bin");
+        abort();
+    }
     int fd = fileno(file);
     int rsize = 0;
     assert(1==fread(&rsize, sizeof(rsize), 1, file));
-    const size_t size = sizeof(struct demo) * rsize;
+    const size_t size = sizeof(int) + sizeof(struct demo) * rsize;
     printf("N %d struct demos are in binary.bin\n", rsize);
-    printf("mmapping %u bytes of memory from the file\n", size);
+    const size_t new_size = size + sizeof(struct demo);
+    // if you want to increase a file's size use ftruncate 
+    // before you do this
+    ftruncate(fd, new_size); 
+    printf("mmapping %u bytes of memory from the file\n", new_size);
     int * mapped = mmap(0, 
-        size,
+        new_size,
         PROT_READ | PROT_WRITE, 
         MAP_SHARED, 
         fd, 
@@ -872,8 +1059,11 @@ int main() {
         printf("\tReading %c\n", randd.c);
     }
     // demo we can write a -1
-    // run the program twice and you'll the last integer is -1
-    demos[rsize-1].i = -1;
+    // run the program twice and your first integer is -1
+    demos[0].i = -1;
+    // now let's extend the file by 1 record!
+    demos[rsize] = demos[rsize-1];
+    mapped[0] = rsize+1;
     munmap(demos, size);
     fclose(file);
 }
@@ -881,21 +1071,40 @@ int main() {
 
 #+RESULTS:
 #+begin_example
-N 3 struct demos are in binary.bin
-mmapping 72 bytes of memory from the file
-Reading 1487396678
-	Reading 6.62951e+07
-	Reading 4.71371e-10
-	Reading X
-Reading 237319659
-	Reading 6.43308e+08
-	Reading 1.11901e-09
-	Reading X
+N 6 struct demos are in binary.bin
+mmapping 172 bytes of memory from the file
 Reading -1
-	Reading 2.55359e+07
-	Reading 1.45765e-09
+	Reading 4.90154e+08
+	Reading 6.05296e-10
+	Reading X
+Reading 1515345272
+	Reading 3.19668e+08
+	Reading 1.36133e-09
+	Reading X
+Reading 1764304537
+	Reading 1.52156e+08
+	Reading 5.48835e-10
+	Reading X
+Reading 243855245
+	Reading 1.08255e+08
+	Reading 1.31258e-09
+	Reading X
+Reading 243855245
+	Reading 1.08255e+08
+	Reading 1.31258e-09
+	Reading X
+Reading 243855245
+	Reading 1.08255e+08
+	Reading 1.31258e-09
 	Reading X
 #+end_example
+
+#+begin_src sh :eval yes :exports both
+ls -l binary.bin
+#+end_src
+
+#+RESULTS:
+: -rw-rw-r-- 1 hindle1 hindle1 172 Apr  7 11:17 binary.bin
 
 If you want to see some bad code that's small and uses mmap checkout:
 

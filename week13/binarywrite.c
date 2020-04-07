@@ -12,7 +12,13 @@ struct demo {
 int main() {
     srand(time(NULL));
     FILE * file = fopen("binary.bin", "w"); 
+    if (file == NULL) {
+        perror("Couldn't open binary.bin");
+        abort();
+    }
+
     int realSize = 1 + (rand() % SIZE);
+    assert(1==fwrite(&realSize, sizeof(int), 1, file));
     for (int i = 0 ; i < realSize; i++) {
         struct demo randd;
         randd.i = rand();

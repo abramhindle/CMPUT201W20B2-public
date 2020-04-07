@@ -6,6 +6,10 @@
 int main() {
     srand(time(NULL));
     FILE * file = fopen("fflush.txt", "w"); 
+    if (file == NULL) {
+        perror("Couldn't open fflush.txt");
+        abort();
+    }
     for (int i = 0 ; i < SIZE; i++) {
         fprintf(file, "%d\n", rand());
         fflush(file); // WE'RE FLUSHING!
