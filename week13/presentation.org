@@ -842,7 +842,7 @@ struct demo {
 };
 int main() {
     srand(time(NULL));
-    FILE * file = fopen("binary.bin", "r"); 
+    FILE * file = fopen("binary.bin", "r+"); 
     int fd = fileno(file);
     int rsize = 0;
     assert(1==fread(&rsize, sizeof(rsize), 1, file));
@@ -851,7 +851,7 @@ int main() {
     printf("mmapping %u bytes of memory from the file\n", size);
     int * mapped = mmap(0, 
         size,
-        PROT_READ, // | PROT_WRITE, 
+        PROT_READ | PROT_WRITE, 
         MAP_SHARED, 
         fd, 
         0);
@@ -871,6 +871,9 @@ int main() {
         printf("\tReading %g\n", randd.d);
         printf("\tReading %c\n", randd.c);
     }
+    // demo we can write a -1
+    // run the program twice and you'll the last integer is -1
+    demos[rsize-1].i = -1;
     munmap(demos, size);
     fclose(file);
 }
@@ -888,7 +891,7 @@ Reading 237319659
 	Reading 6.43308e+08
 	Reading 1.11901e-09
 	Reading X
-Reading 775792282
+Reading -1
 	Reading 2.55359e+07
 	Reading 1.45765e-09
 	Reading X
