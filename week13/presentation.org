@@ -1,0 +1,116 @@
+#+TITLE: CMPUT201W20B2 Week 13
+#+PROPERTY: header-args:C             :exports both :eval yes :flags -std=c99 -pedantic -Wall -Wextra -ftrapv -ggdb3 :eval yes :results value verbatim
+#+PROPERTY: header-args:sh            :exports both :eval yes :results value verbatim
+#+PROPERTY: header-args:shell         :exports both :eval yes :results value verbatim
+
+* Week13
+https://github.com/abramhindle/CMPUT201W20B2-public/tree/master/week12
+** Copyright Statement
+
+If you are in CMPUT201 at UAlberta this code is released in the public
+domain to you.
+
+Otherwise it is (c) 2020 Abram Hindle, Hazel Campbell AGPL3.0+
+
+*** License
+
+    CMPUT 201 C Notes
+    Copyright (C) 2020 Abram Hindle, Hazel Campbell
+
+    This program is free software: you can redistribute it and/or modify
+    it under the terms of the GNU Affero General Public License as
+    published by the Free Software Foundation, either version 3 of the
+    License, or (at your option) any later version.
+
+    This program is distributed in the hope that it will be useful,
+    but WITHOUT ANY WARRANTY; without even the implied warranty of
+    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+    GNU Affero General Public License for more details.
+
+    You should have received a copy of the GNU Affero General Public License
+    along with this program.  If not, see <https://www.gnu.org/licenses/>.
+
+
+*** Hazel Code is licensed under AGPL3.0+
+
+Hazel's code is also found here
+https://github.com/hazelybell/examples/tree/C-2020-01
+
+Hazel code is licensed: The example code is licensed under the AGPL3+
+license, unless otherwise noted.
+
+** Alternative version
+
+Checkout the .txt, the .pdf, and the .html version
+
+** Init ORG-MODE
+
+#+BEGIN_SRC elisp
+;; I need this for org-mode to work well
+;; If we have a new org-mode use ob-shell
+;; otherwise use ob-sh --- but not both!
+(if (require 'ob-shell nil 'noerror)
+  (progn
+    (org-babel-do-load-languages 'org-babel-load-languages '((shell . t))))
+  (progn
+    (require 'ob-sh)
+    (org-babel-do-load-languages 'org-babel-load-languages '((sh . t)))))
+(org-babel-do-load-languages 'org-babel-load-languages '((C . t)))
+(org-babel-do-load-languages 'org-babel-load-languages '((python . t)))
+(setq org-src-fontify-natively t)
+(setq org-confirm-babel-evaluate nil) ;; danger!
+(custom-set-faces
+ '(org-block ((t (:inherit shadow :foreground "black"))))
+ '(org-code ((t (:inherit shadow :foreground "black")))))
+#+END_SRC
+
+#+RESULTS:
+
+*** Org export
+#+BEGIN_SRC elisp
+(org-html-export-to-html)
+(org-latex-export-to-pdf)
+(org-ascii-export-to-ascii)
+#+END_SRC
+
+#+RESULTS:
+: presentation.txt
+
+
+*** Org Template
+Copy and paste this to demo C
+
+#+BEGIN_SRC C :exports both
+#include <stdio.h>
+
+int main(int argc, char**argv) {
+    return 0;
+}
+#+END_SRC
+
+#+RESULTS:
+
+** Remember how to compile?
+
+gcc  -std=c99 -pedantic -Wall -Wextra -ftrapv -ggdb3 -o programname programname.c
+
+** IO
+*** Streams
+**** STDIN
+**** STDOUT & STDERR
+
+*** Files
+**** open and close
+***** fopen & fclose
+**** reading
+***** fscanf
+***** fgets
+**** writing
+***** fprintf
+**** flushing
+**** tmp files
+**** remove
+*** Command line arguments
+**** ARGC
+**** ARGV
+*** mmap()

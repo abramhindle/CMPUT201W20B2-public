@@ -1420,6 +1420,7 @@ Software Engineering (4): 308–320. doi:10.1109/tse.1976.233837
 =='    _-'                                                            \/   `==
 \   _-'                                                                `-_   /
  `''                                                                      ``'
+                                                       (c) 1994 F.P. de Vries.
 #+end_example
 
 *** License
