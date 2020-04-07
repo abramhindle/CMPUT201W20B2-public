@@ -4,7 +4,7 @@
 #+PROPERTY: header-args:shell         :exports both :eval yes :results value verbatim
 
 * Week13
-https://github.com/abramhindle/CMPUT201W20B2-public/tree/master/week12
+https://github.com/abramhindle/CMPUT201W20B2-public/tree/master/week13
 ** Copyright Statement
 
 If you are in CMPUT201 at UAlberta this code is released in the public
