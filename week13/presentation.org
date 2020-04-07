@@ -427,7 +427,7 @@ int main() {
     // open coolbears.txt for writing
     FILE * f_cb  = fopen("coolbears.txt", "w"); 
     fputs("Polar bears", f_cb);
-    fflush(f_cb);
+    fflush(f_cb); // WE'RE FLUSHING!
     FILE * f_cbr = fopen("coolbears.txt", "r"); 
     fgets(buffer, SIZE, f_cbr);
     printf("This is the buffer before close but after flush: %s\n",buffer);
@@ -446,21 +446,462 @@ int main() {
 : This is the buffer after close: Polar bears
 : Close your buffers!
 
-**** reading
-***** fscanf
-***** fgets
 **** writing
 ***** fprintf
+#+begin_src C :exports both
+#include <stdio.h>
+#include <stdlib.h>
+#define SIZE 1024
+int main() {
+    srand(time(NULL));
+    char buffer[SIZE] = {'\0'};
+    // open coolbears.txt for writing
+    FILE * f_cb  = fopen("fprintf.txt", "w"); 
+    // It's just like printf!
+    fprintf(f_cb,"A random number %d\n", rand());
+    fclose(f_cb);
+    FILE * f_cbr = fopen("fprintf.txt", "r"); 
+    fgets(buffer, SIZE, f_cbr);
+    printf("%s\n",buffer);
+    fclose(f_cbr);
+}
+#+end_src
+
+#+RESULTS:
+: A random number 1887874972
+
+**** reading
+***** fscanf
+#+begin_src C :exports both
+#include <stdio.h>
+#include <stdlib.h>
+#define SIZE 1024
+#define CHECK(x) ((x)==1)?1:(abort(),0);
+int main() {
+    srand(time(NULL));
+    char buffer[SIZE] = {'\0'};
+    // open coolbears.txt for writing
+    FILE * f_cb  = fopen("fprintf.txt", "w"); 
+    // It's just like printf!
+    fprintf(f_cb,"A random number %d\n", rand());
+    fclose(f_cb);
+    FILE * f_cbr = fopen("fprintf.txt", "r"); 
+    for (int i = 0 ; i < 3; i++) {
+        CHECK(fscanf(f_cbr, "%s",buffer));
+        printf("%s\n",buffer);
+    }
+    int input=0;
+    CHECK(fscanf(f_cbr, "%d",&input));
+    printf("%d\n", input);
+    fclose(f_cbr);
+    return 0;
+}
+#+end_src
+
+#+RESULTS:
+: A
+: random
+: number
+: 1558341960
+
+***** fgets
+
+fgets gets a little complicated because you have to test for EOF.
+
+You can check for an null response and use feof, but probably you have
+to do both.
+
+#+begin_src C :exports both
+#include <stdio.h>
+#include <stdlib.h>
+#include <time.h>
+#define SIZE 1024
+#define N 8
+int main() {
+    char buffer[SIZE] = {'\0'};
+    srand(time(NULL));
+    // open coolbears.txt for writing
+    FILE * f_cb  = fopen("fgets.txt", "w"); 
+    // It's just like printf!
+    const int totalLines = 1 + (rand() % N);
+    for (int i = 0 ; i < totalLines; i++) {
+        fprintf(f_cb,"A random number %d\n", rand());
+    }
+    fclose(f_cb);
+    FILE * f_cbr = fopen("fgets.txt", "r"); 
+    while(!feof(f_cbr)) {
+        if (fgets(buffer, SIZE, f_cbr)) {
+           printf("fgets.txt: %s", buffer);
+        }
+    }
+    fclose(f_cbr);
+    return 0;
+}
+#+end_src
+
+#+RESULTS:
+: fgets.txt: A random number 1696256828
+: fgets.txt: A random number 382707092
+: fgets.txt: A random number 92505306
+: fgets.txt: A random number 1788338362
+: fgets.txt: A random number 1530091624
+: fgets.txt: A random number 1545090145
+: fgets.txt: A random number 2139568362
+
+
 **** flushing
-**** tmp files
-**** remove
+
+If you want to ensure something gets to a file or a term you should
+flush. Typically I/O is BUFFERED. Buffered means it is flushed once a
+certain threshold is met, typically size but sometimes time (depending
+on the system). Buffered will increase latency to print something but
+will often improve overall bandwidth to disk.
+
+#+begin_src C :eval no
+fflush(FILE * stream); // will flush your stream
+#+end_src
+
+Flush when you need to.
+
+#+begin_src C :exports code :eval no :tangle fflushrandr.c
+#include <stdio.h>
+#include <stdlib.h>
+#include <time.h>
+#include <unistd.h>
+#define SIZE 5
+int main() {
+    srand(time(NULL));
+    FILE * file = fopen("fflush.txt", "w"); 
+    for (int i = 0 ; i < SIZE; i++) {
+        fprintf(file, "%d\n", rand());
+        fflush(file); // WE'RE FLUSHING!
+        sleep(1);
+    }
+    fclose(file);
+}
+#+end_src
+
+#+begin_src C :exports code :eval no :tangle fflushreader.c
+#include <time.h>
+#include <stdio.h>
+#include <unistd.h>
+#define SIZE 20
+#define BUFF 1024
+int main() {
+    char buffer[BUFF];
+    FILE * file = fopen("fflush.txt", "r"); 
+    while(!feof(file)) {
+        if (!fgets(buffer,BUFF,file)) {
+            break;
+        }
+        printf("%s", buffer);
+        sleep(1);
+    }
+    fclose(file);
+}
+#+end_src
+
+#+begin_src sh :exports both
+gcc  -std=c99 -pedantic -Wall -Wextra -ftrapv -ggdb3 -o fflushrandr fflushrandr.c && \
+gcc  -std=c99 -pedantic -Wall -Wextra -ftrapv -ggdb3 -o fflushreader fflushreader.c && \
+echo This will take 7 seconds && \
+( ./fflushrandr & sleep 2; ./fflushreader)
+#+end_src
+
+#+RESULTS:
+: This will take 7 seconds
+: 413493830
+: 851365006
+: 290153846
+: 1232904670
+: 705823962
+**** Binary Files
+
+From stdio.h:
+#+begin_src C :exports code :eval no
+       size_t fread(void *ptr, size_t size, size_t nmemb, FILE *stream);
+
+       size_t fwrite(const void *ptr, size_t size, size_t nmemb,
+                     FILE *stream);
+#+end_src
+
+fread and fwrite will write memory to a stream and back again. Any
+pointer can be used, the bytes in memory will be serialized in and
+out. It will not be compiler and architecture portable so carefully
+craft your structs before you write them out. Use explicit padding.
+For 64-bit and 32-bit compatibility pad to modulus 8 bytes.
+
+#+begin_src C :exports code :eval yes :tangle binarywrite.c
+#include <assert.h>
+#include <stdio.h>
+#include <stdlib.h>
+#include <time.h>
+#define SIZE 5
+struct demo {
+    int i;
+    float f;
+    double d;
+    char c;
+};
+int main() {
+    srand(time(NULL));
+    FILE * file = fopen("binary.bin", "w"); 
+    int realSize = 1 + (rand() % SIZE);
+    assert(1==fwrite(&realSize, sizeof(int), 1, file));
+    for (int i = 0 ; i < realSize; i++) {
+        struct demo randd;
+        randd.i = rand();
+        randd.f = rand() / 2.0F;
+        randd.d = 1.0 / (rand()+1.0);
+        randd.c = 'X';
+        printf("Writing %d\n", randd.i);
+        printf("\tWriting %g\n", randd.f);
+        printf("\tWriting %g\n", randd.d);
+        printf("\tWriting %c\n", randd.c);
+        assert(1==fwrite(&randd, sizeof(randd), 1, file));
+    }
+    fclose(file);
+}
+#+end_src
+
+#+RESULTS:
+#+begin_example
+Writing 1236502944
+	Writing 2.04285e+08
+	Writing 2.99507e-08
+	Writing X
+Writing 1879890664
+	Writing 6.66276e+08
+	Writing 4.66956e-10
+	Writing X
+Writing 462585909
+	Writing 8.822e+08
+	Writing 7.84293e-10
+	Writing X
+Writing 712170413
+	Writing 5.335e+08
+	Writing 8.98769e-10
+	Writing X
+#+end_example
+
+#+begin_src C :exports code :eval yes :tangle binaryread.c
+#include <assert.h>
+#include <time.h>
+#include <stdio.h>
+#define BUFF 1024
+struct demo {
+    int i;
+    float f;
+    double d;
+    char c;
+};
+int main() {
+    char buffer[BUFF];
+    FILE * file = fopen("binary.bin", "r"); 
+    int size=0;
+    assert(1==fread(&size, sizeof(size), 1, file));
+
+    while(!feof(file)) {
+        struct demo readDemo;
+        if (1!=fread(&readDemo, sizeof(readDemo), 1, file)) {
+           break;
+        }
+        printf("Reading %d\n", readDemo.i);
+        printf("\tReading %f\n", readDemo.f);
+        printf("\tReading %g\n", readDemo.d);
+        printf("\tReading %c\n", readDemo.c);
+    }
+    fclose(file);
+}
+#+end_src
+
+#+RESULTS:
+: Reading 1145970821
+: 	Reading 150339968.000000
+: 	Reading 5.02359e-10
+: 	Reading X
+: Reading 1038626930
+: 	Reading 166802944.000000
+: 	Reading 1.27338e-09
+: 	Reading X
+
+When you write out structs, watch for padding. Look for the letter X.
+Count the number of bytes after the last X.
+
+#+begin_src sh :exports both
+hexdump -C binary.bin
+#+end_src
+
+#+RESULTS:
+: 00000000  02 00 00 00 85 20 4e 44  18 60 0f 4d 21 cf 1a 68  |..... ND.`.M!..h|
+: 00000010  cc 42 01 3e 58 2b 2f 4e  1a 56 00 00 72 30 e8 3d  |.B.>X+/N.V..r0.=|
+: 00000020  60 13 1f 4d d6 35 e7 7c  5f e0 15 3e 58 2b 2f 4e  |`..M.5.|_..>X+/N|
+: 00000030  1a 56 00 00                                       |.V..|
+: 00000034
+
 *** Command line arguments
-**** ARGC
-**** ARGV
+
+To get arguments from the commandline you can add the parameters:
+- `int argc` -- number of commandline arguments
+- `char ** argv` -- array of strings of commandline arguments
+
+#+begin_src C :exports both :tangle argv.c
+#include <stdio.h>
+
+int main(int argc, char ** argv) {
+    for (int i = 0 ; i < argc; i++) {
+        printf("arg %d: %s\t", i, argv[i]);
+    }
+    puts("");
+}
+#+end_src
+
+#+RESULTS:
+: arg 0: /tmp/babel-7888jxN/C-bin-7888FYP
+
+#+begin_src sh :exports both
+gcc  -std=c99 -pedantic -Wall -Wextra -ftrapv -ggdb3 -o argv argv.c && \
+./argv &&  \
+./argv 1  && \
+./argv 1 2 && \
+./argv 1 2 3 && \
+cp -f argv argv-new && \
+./argv-new 1 2 3 
+#+end_src
+
+#+RESULTS:
+: arg 0: ./argv	
+: arg 0: ./argv	arg 1: 1	
+: arg 0: ./argv	arg 1: 1	arg 2: 2	
+: arg 0: ./argv	arg 1: 1	arg 2: 2	arg 3: 3	
+: arg 0: ./argv-new	arg 1: 1	arg 2: 2	arg 3: 3	
+
+So atoi is your friend :)
+
+#+begin_src C :exports both :eval no :tangle argvrand.c
+#include <stdio.h>
+#include <stdlib.h>
+
+int main(int argc, char ** argv) {
+    if (argc != 2) { exit(1); }
+    int n = atoi(argv[1]);
+    for (int i = 0 ; i < n; i++) {
+        printf("%d\t", rand());
+    }
+    printf("\n");
+}
+#+end_src
+
+#+RESULTS:
+
+#+begin_src sh :exports both
+gcc  -std=c99 -pedantic -Wall -Wextra -ftrapv -ggdb3 \
+     -o argvrand argvrand.c && \
+(./argvrand || echo not enough args: $?) && \
+./argvrand 1 && \
+./argvrand 2 && \
+./argvrand 3 && \
+./argvrand 0 
+#+end_src
+
+#+RESULTS:
+: not enough args: 1
+: 1804289383	
+: 1804289383	846930886	
+: 1804289383	846930886	1681692777	
+: 
+
+
+
 *** mmap()
+
+mmap is neat, it maps memory from a file or even a process to pointers
+in memory. We do this with shared libraries too. So you can read and
+write to a file just by writing to memory. The OS deals with it very
+effeciently you just have to be very size aware. mmapping files is not
+good for streams and stream processing, it gets complicated. It is
+good for fixed sized structs.
+
+#+begin_src C :exports code :eval yes :tangle mmapread.c
+#include <assert.h>
+#include <sys/mman.h>
+#include <sys/types.h>
+#include <stdio.h>
+#include <stdlib.h>
+#include <time.h>
+#define SIZE 2
+struct demo {
+    int i;
+    float f;
+    double d;
+    char c;
+    // char cc[7]; // you can make padding explicit
+};
+int main() {
+    srand(time(NULL));
+    FILE * file = fopen("binary.bin", "r"); 
+    int fd = fileno(file);
+    int rsize = 0;
+    assert(1==fread(&rsize, sizeof(rsize), 1, file));
+    const size_t size = sizeof(struct demo) * rsize;
+    printf("N %d struct demos are in binary.bin\n", rsize);
+    printf("mmapping %u bytes of memory from the file\n", size);
+    int * mapped = mmap(0, 
+        size,
+        PROT_READ, // | PROT_WRITE, 
+        MAP_SHARED, 
+        fd, 
+        0);
+    if (mapped == MAP_FAILED) {
+        perror("mmap");
+        exit(1);
+    }
+    // read 4 bytes from the head
+    assert(rsize == (int)*mapped);
+    // really abusive but we're 1 int after the start eh
+    struct demo * demos = (struct demo *)(mapped+1);
+    // OK now look for the read ?
+    for (int i = 0 ; i < rsize; i++) {
+        struct demo randd = demos[i];
+        printf("Reading %d\n", randd.i);
+        printf("\tReading %g\n", randd.f);
+        printf("\tReading %g\n", randd.d);
+        printf("\tReading %c\n", randd.c);
+    }
+    munmap(demos, size);
+    fclose(file);
+}
+#+end_src
+
+#+RESULTS:
+#+begin_example
+N 4 struct demos are in binary.bin
+mmapping 96 bytes of memory from the file
+Reading 1236502944
+	Reading 2.04285e+08
+	Reading 2.99507e-08
+	Reading X
+Reading 1879890664
+	Reading 6.66276e+08
+	Reading 4.66956e-10
+	Reading X
+Reading 462585909
+	Reading 8.822e+08
+	Reading 7.84293e-10
+	Reading X
+Reading 712170413
+	Reading 5.335e+08
+	Reading 8.98769e-10
+	Reading X
+#+end_example
+
+If you want to see some bad code that's small and uses mmap checkout:
+
+https://github.com/abramhindle/a-simple-pseudo-bayesian-spam-filter/blob/master/filter.c
 
 ** References
 
-Hazel Cambell's thorough notes on Stream I/O:
+KN King, C Programming, Chapter 28, 2nd Edition
 
+Hazel Cambell's thorough notes on Stream I/O:
 https://docs.google.com/document/d/1b48EzfP03JYEFt42wCajU5kv76oVbTxEXa2JO0q17ag/edit
