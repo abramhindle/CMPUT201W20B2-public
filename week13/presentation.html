@@ -1,0 +1,1441 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
+<head>
+<!-- 2020-04-06 Mon 23:32 -->
+<meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>CMPUT201W20B2 Week 13</title>
+<meta name="generator" content="Org mode" />
+<meta name="author" content="Abram Hindle" />
+<style type="text/css">
+ <!--/*--><![CDATA[/*><!--*/
+  .title  { text-align: center;
+             margin-bottom: .2em; }
+  .subtitle { text-align: center;
+              font-size: medium;
+              font-weight: bold;
+              margin-top:0; }
+  .todo   { font-family: monospace; color: red; }
+  .done   { font-family: monospace; color: green; }
+  .priority { font-family: monospace; color: orange; }
+  .tag    { background-color: #eee; font-family: monospace;
+            padding: 2px; font-size: 80%; font-weight: normal; }
+  .timestamp { color: #bebebe; }
+  .timestamp-kwd { color: #5f9ea0; }
+  .org-right  { margin-left: auto; margin-right: 0px;  text-align: right; }
+  .org-left   { margin-left: 0px;  margin-right: auto; text-align: left; }
+  .org-center { margin-left: auto; margin-right: auto; text-align: center; }
+  .underline { text-decoration: underline; }
+  #postamble p, #preamble p { font-size: 90%; margin: .2em; }
+  p.verse { margin-left: 3%; }
+  pre {
+    border: 1px solid #ccc;
+    box-shadow: 3px 3px 3px #eee;
+    padding: 8pt;
+    font-family: monospace;
+    overflow: auto;
+    margin: 1.2em;
+  }
+  pre.src {
+    position: relative;
+    overflow: visible;
+    padding-top: 1.2em;
+  }
+  pre.src:before {
+    display: none;
+    position: absolute;
+    background-color: white;
+    top: -10px;
+    right: 10px;
+    padding: 3px;
+    border: 1px solid black;
+  }
+  pre.src:hover:before { display: inline;}
+  /* Languages per Org manual */
+  pre.src-asymptote:before { content: 'Asymptote'; }
+  pre.src-awk:before { content: 'Awk'; }
+  pre.src-C:before { content: 'C'; }
+  /* pre.src-C++ doesn't work in CSS */
+  pre.src-clojure:before { content: 'Clojure'; }
+  pre.src-css:before { content: 'CSS'; }
+  pre.src-D:before { content: 'D'; }
+  pre.src-ditaa:before { content: 'ditaa'; }
+  pre.src-dot:before { content: 'Graphviz'; }
+  pre.src-calc:before { content: 'Emacs Calc'; }
+  pre.src-emacs-lisp:before { content: 'Emacs Lisp'; }
+  pre.src-fortran:before { content: 'Fortran'; }
+  pre.src-gnuplot:before { content: 'gnuplot'; }
+  pre.src-haskell:before { content: 'Haskell'; }
+  pre.src-hledger:before { content: 'hledger'; }
+  pre.src-java:before { content: 'Java'; }
+  pre.src-js:before { content: 'Javascript'; }
+  pre.src-latex:before { content: 'LaTeX'; }
+  pre.src-ledger:before { content: 'Ledger'; }
+  pre.src-lisp:before { content: 'Lisp'; }
+  pre.src-lilypond:before { content: 'Lilypond'; }
+  pre.src-lua:before { content: 'Lua'; }
+  pre.src-matlab:before { content: 'MATLAB'; }
+  pre.src-mscgen:before { content: 'Mscgen'; }
+  pre.src-ocaml:before { content: 'Objective Caml'; }
+  pre.src-octave:before { content: 'Octave'; }
+  pre.src-org:before { content: 'Org mode'; }
+  pre.src-oz:before { content: 'OZ'; }
+  pre.src-plantuml:before { content: 'Plantuml'; }
+  pre.src-processing:before { content: 'Processing.js'; }
+  pre.src-python:before { content: 'Python'; }
+  pre.src-R:before { content: 'R'; }
+  pre.src-ruby:before { content: 'Ruby'; }
+  pre.src-sass:before { content: 'Sass'; }
+  pre.src-scheme:before { content: 'Scheme'; }
+  pre.src-screen:before { content: 'Gnu Screen'; }
+  pre.src-sed:before { content: 'Sed'; }
+  pre.src-sh:before { content: 'shell'; }
+  pre.src-sql:before { content: 'SQL'; }
+  pre.src-sqlite:before { content: 'SQLite'; }
+  /* additional languages in org.el's org-babel-load-languages alist */
+  pre.src-forth:before { content: 'Forth'; }
+  pre.src-io:before { content: 'IO'; }
+  pre.src-J:before { content: 'J'; }
+  pre.src-makefile:before { content: 'Makefile'; }
+  pre.src-maxima:before { content: 'Maxima'; }
+  pre.src-perl:before { content: 'Perl'; }
+  pre.src-picolisp:before { content: 'Pico Lisp'; }
+  pre.src-scala:before { content: 'Scala'; }
+  pre.src-shell:before { content: 'Shell Script'; }
+  pre.src-ebnf2ps:before { content: 'ebfn2ps'; }
+  /* additional language identifiers per "defun org-babel-execute"
+       in ob-*.el */
+  pre.src-cpp:before  { content: 'C++'; }
+  pre.src-abc:before  { content: 'ABC'; }
+  pre.src-coq:before  { content: 'Coq'; }
+  pre.src-groovy:before  { content: 'Groovy'; }
+  /* additional language identifiers from org-babel-shell-names in
+     ob-shell.el: ob-shell is the only babel language using a lambda to put
+     the execution function name together. */
+  pre.src-bash:before  { content: 'bash'; }
+  pre.src-csh:before  { content: 'csh'; }
+  pre.src-ash:before  { content: 'ash'; }
+  pre.src-dash:before  { content: 'dash'; }
+  pre.src-ksh:before  { content: 'ksh'; }
+  pre.src-mksh:before  { content: 'mksh'; }
+  pre.src-posh:before  { content: 'posh'; }
+  /* Additional Emacs modes also supported by the LaTeX listings package */
+  pre.src-ada:before { content: 'Ada'; }
+  pre.src-asm:before { content: 'Assembler'; }
+  pre.src-caml:before { content: 'Caml'; }
+  pre.src-delphi:before { content: 'Delphi'; }
+  pre.src-html:before { content: 'HTML'; }
+  pre.src-idl:before { content: 'IDL'; }
+  pre.src-mercury:before { content: 'Mercury'; }
+  pre.src-metapost:before { content: 'MetaPost'; }
+  pre.src-modula-2:before { content: 'Modula-2'; }
+  pre.src-pascal:before { content: 'Pascal'; }
+  pre.src-ps:before { content: 'PostScript'; }
+  pre.src-prolog:before { content: 'Prolog'; }
+  pre.src-simula:before { content: 'Simula'; }
+  pre.src-tcl:before { content: 'tcl'; }
+  pre.src-tex:before { content: 'TeX'; }
+  pre.src-plain-tex:before { content: 'Plain TeX'; }
+  pre.src-verilog:before { content: 'Verilog'; }
+  pre.src-vhdl:before { content: 'VHDL'; }
+  pre.src-xml:before { content: 'XML'; }
+  pre.src-nxml:before { content: 'XML'; }
+  /* add a generic configuration mode; LaTeX export needs an additional
+     (add-to-list 'org-latex-listings-langs '(conf " ")) in .emacs */
+  pre.src-conf:before { content: 'Configuration File'; }
+
+  table { border-collapse:collapse; }
+  caption.t-above { caption-side: top; }
+  caption.t-bottom { caption-side: bottom; }
+  td, th { vertical-align:top;  }
+  th.org-right  { text-align: center;  }
+  th.org-left   { text-align: center;   }
+  th.org-center { text-align: center; }
+  td.org-right  { text-align: right;  }
+  td.org-left   { text-align: left;   }
+  td.org-center { text-align: center; }
+  dt { font-weight: bold; }
+  .footpara { display: inline; }
+  .footdef  { margin-bottom: 1em; }
+  .figure { padding: 1em; }
+  .figure p { text-align: center; }
+  .equation-container {
+    display: table;
+    text-align: center;
+    width: 100%;
+  }
+  .equation {
+    vertical-align: middle;
+  }
+  .equation-label {
+    display: table-cell;
+    text-align: right;
+    vertical-align: middle;
+  }
+  .inlinetask {
+    padding: 10px;
+    border: 2px solid gray;
+    margin: 10px;
+    background: #ffffcc;
+  }
+  #org-div-home-and-up
+   { text-align: right; font-size: 70%; white-space: nowrap; }
+  textarea { overflow-x: auto; }
+  .linenr { font-size: smaller }
+  .code-highlighted { background-color: #ffff00; }
+  .org-info-js_info-navigation { border-style: none; }
+  #org-info-js_console-label
+    { font-size: 10px; font-weight: bold; white-space: nowrap; }
+  .org-info-js_search-highlight
+    { background-color: #ffff00; color: #000000; font-weight: bold; }
+  .org-svg { width: 90%; }
+  /*]]>*/-->
+</style>
+<script type="text/javascript">
+/*
+@licstart  The following is the entire license notice for the
+JavaScript code in this tag.
+
+Copyright (C) 2012-2019 Free Software Foundation, Inc.
+
+The JavaScript code in this tag is free software: you can
+redistribute it and/or modify it under the terms of the GNU
+General Public License (GNU GPL) as published by the Free Software
+Foundation, either version 3 of the License, or (at your option)
+any later version.  The code is distributed WITHOUT ANY WARRANTY;
+without even the implied warranty of MERCHANTABILITY or FITNESS
+FOR A PARTICULAR PURPOSE.  See the GNU GPL for more details.
+
+As additional permission under GNU GPL version 3 section 7, you
+may distribute non-source (e.g., minimized or compacted) forms of
+that code without the copy of the GNU GPL normally required by
+section 4, provided you include this license notice and a URL
+through which recipients can access the Corresponding Source.
+
+
+@licend  The above is the entire license notice
+for the JavaScript code in this tag.
+*/
+<!--/*--><![CDATA[/*><!--*/
+ function CodeHighlightOn(elem, id)
+ {
+   var target = document.getElementById(id);
+   if(null != target) {
+     elem.cacheClassElem = elem.className;
+     elem.cacheClassTarget = target.className;
+     target.className = "code-highlighted";
+     elem.className   = "code-highlighted";
+   }
+ }
+ function CodeHighlightOff(elem, id)
+ {
+   var target = document.getElementById(id);
+   if(elem.cacheClassElem)
+     elem.className = elem.cacheClassElem;
+   if(elem.cacheClassTarget)
+     target.className = elem.cacheClassTarget;
+ }
+/*]]>*///-->
+</script>
+</head>
+<body>
+<div id="content">
+<h1 class="title">CMPUT201W20B2 Week 13</h1>
+<div id="table-of-contents">
+<h2>Table of Contents</h2>
+<div id="text-table-of-contents">
+<ul>
+<li><a href="#orgac424d1">1. Week13</a>
+<ul>
+<li><a href="#org3a8f379">1.1. Copyright Statement</a>
+<ul>
+<li><a href="#org8a22bef">1.1.1. License</a></li>
+<li><a href="#org09f6fb0">1.1.2. Hazel Code is licensed under AGPL3.0+</a></li>
+</ul>
+</li>
+<li><a href="#orge9edb70">1.2. Alternative version</a></li>
+<li><a href="#org94dedea">1.3. Init ORG-MODE</a>
+<ul>
+<li><a href="#org08c67a4">1.3.1. Org export</a></li>
+<li><a href="#orgfafc567">1.3.2. Org Template</a></li>
+</ul>
+</li>
+<li><a href="#orgee592f9">1.4. Remember how to compile?</a></li>
+<li><a href="#org1cc468d">1.5. IO</a>
+<ul>
+<li><a href="#orge5ed26e">1.5.1. Streams</a></li>
+<li><a href="#orge53ed44">1.5.2. Files</a></li>
+<li><a href="#orgbca52db">1.5.3. Command line arguments</a></li>
+<li><a href="#org3cba4e1">1.5.4. mmap()</a></li>
+</ul>
+</li>
+<li><a href="#orga2fa3d2">1.6. References</a></li>
+</ul>
+</li>
+</ul>
+</div>
+</div>
+
+<div id="outline-container-orgac424d1" class="outline-2">
+<h2 id="orgac424d1"><span class="section-number-2">1</span> Week13</h2>
+<div class="outline-text-2" id="text-1">
+<p>
+<a href="https://github.com/abramhindle/CMPUT201W20B2-public/tree/master/week12">https://github.com/abramhindle/CMPUT201W20B2-public/tree/master/week12</a>
+</p>
+</div>
+<div id="outline-container-org3a8f379" class="outline-3">
+<h3 id="org3a8f379"><span class="section-number-3">1.1</span> Copyright Statement</h3>
+<div class="outline-text-3" id="text-1-1">
+<p>
+If you are in CMPUT201 at UAlberta this code is released in the public
+domain to you.
+</p>
+
+<p>
+Otherwise it is (c) 2020 Abram Hindle, Hazel Campbell AGPL3.0+
+</p>
+</div>
+
+<div id="outline-container-org8a22bef" class="outline-4">
+<h4 id="org8a22bef"><span class="section-number-4">1.1.1</span> License</h4>
+<div class="outline-text-4" id="text-1-1-1">
+<p>
+CMPUT 201 C Notes
+Copyright (C) 2020 Abram Hindle, Hazel Campbell
+</p>
+
+<p>
+This program is free software: you can redistribute it and/or modify
+it under the terms of the GNU Affero General Public License as
+published by the Free Software Foundation, either version 3 of the
+License, or (at your option) any later version.
+</p>
+
+<p>
+This program is distributed in the hope that it will be useful,
+but WITHOUT ANY WARRANTY; without even the implied warranty of
+MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+GNU Affero General Public License for more details.
+</p>
+
+<p>
+You should have received a copy of the GNU Affero General Public License
+along with this program.  If not, see <a href="https://www.gnu.org/licenses/">https://www.gnu.org/licenses/</a>.
+</p>
+</div>
+</div>
+
+
+<div id="outline-container-org09f6fb0" class="outline-4">
+<h4 id="org09f6fb0"><span class="section-number-4">1.1.2</span> Hazel Code is licensed under AGPL3.0+</h4>
+<div class="outline-text-4" id="text-1-1-2">
+<p>
+Hazel's code is also found here
+<a href="https://github.com/hazelybell/examples/tree/C-2020-01">https://github.com/hazelybell/examples/tree/C-2020-01</a>
+</p>
+
+<p>
+Hazel code is licensed: The example code is licensed under the AGPL3+
+license, unless otherwise noted.
+</p>
+</div>
+</div>
+</div>
+
+<div id="outline-container-orge9edb70" class="outline-3">
+<h3 id="orge9edb70"><span class="section-number-3">1.2</span> Alternative version</h3>
+<div class="outline-text-3" id="text-1-2">
+<p>
+Checkout the .txt, the .pdf, and the .html version
+</p>
+</div>
+</div>
+
+<div id="outline-container-org94dedea" class="outline-3">
+<h3 id="org94dedea"><span class="section-number-3">1.3</span> Init ORG-MODE</h3>
+<div class="outline-text-3" id="text-1-3">
+<div class="org-src-container">
+<pre class="src src-elisp"><span style="color: #b22222;">;; </span><span style="color: #b22222;">I need this for org-mode to work well</span>
+<span style="color: #b22222;">;; </span><span style="color: #b22222;">If we have a new org-mode use ob-shell</span>
+<span style="color: #b22222;">;; </span><span style="color: #b22222;">otherwise use ob-sh --- but not both!</span>
+(<span style="color: #a020f0;">if</span> (<span style="color: #a020f0;">require</span> '<span style="color: #008b8b;">ob-shell</span> nil 'noerror)
+  (<span style="color: #a020f0;">progn</span>
+    (org-babel-do-load-languages 'org-babel-load-languages '((shell . t))))
+  (<span style="color: #a020f0;">progn</span>
+    (<span style="color: #a020f0;">require</span> '<span style="color: #008b8b;">ob-sh</span>)
+    (org-babel-do-load-languages 'org-babel-load-languages '((sh . t)))))
+(org-babel-do-load-languages 'org-babel-load-languages '((C . t)))
+(org-babel-do-load-languages 'org-babel-load-languages '((python . t)))
+(<span style="color: #a020f0;">setq</span> org-src-fontify-natively t)
+(<span style="color: #a020f0;">setq</span> org-confirm-babel-evaluate nil) <span style="color: #b22222;">;; </span><span style="color: #b22222;">danger!</span>
+(custom-set-faces
+ '(org-block ((t (<span style="color: #483d8b;">:inherit</span> shadow <span style="color: #483d8b;">:foreground</span> <span style="color: #8b2252;">"black"</span>))))
+ '(org-code ((t (<span style="color: #483d8b;">:inherit</span> shadow <span style="color: #483d8b;">:foreground</span> <span style="color: #8b2252;">"black"</span>)))))
+</pre>
+</div>
+</div>
+
+<div id="outline-container-org08c67a4" class="outline-4">
+<h4 id="org08c67a4"><span class="section-number-4">1.3.1</span> Org export</h4>
+<div class="outline-text-4" id="text-1-3-1">
+<div class="org-src-container">
+<pre class="src src-elisp">(org-html-export-to-html)
+(org-latex-export-to-pdf)
+(org-ascii-export-to-ascii)
+</pre>
+</div>
+</div>
+</div>
+
+
+<div id="outline-container-orgfafc567" class="outline-4">
+<h4 id="orgfafc567"><span class="section-number-4">1.3.2</span> Org Template</h4>
+<div class="outline-text-4" id="text-1-3-2">
+<p>
+Copy and paste this to demo C
+</p>
+
+<div class="org-src-container">
+<pre class="src src-C"><span style="color: #483d8b;">#include</span> <span style="color: #8b2252;">&lt;stdio.h&gt;</span>
+
+<span style="color: #228b22;">int</span> <span style="color: #0000ff;">main</span>(<span style="color: #228b22;">int</span> <span style="color: #a0522d;">argc</span>, <span style="color: #228b22;">char</span>**<span style="color: #a0522d;">argv</span>) {
+    <span style="color: #a020f0;">return</span> 0;
+}
+</pre>
+</div>
+</div>
+</div>
+</div>
+
+<div id="outline-container-orgee592f9" class="outline-3">
+<h3 id="orgee592f9"><span class="section-number-3">1.4</span> Remember how to compile?</h3>
+<div class="outline-text-3" id="text-1-4">
+<p>
+gcc  -std=c99 -pedantic -Wall -Wextra -ftrapv -ggdb3 -o programname programname.c
+</p>
+</div>
+</div>
+
+<div id="outline-container-org1cc468d" class="outline-3">
+<h3 id="org1cc468d"><span class="section-number-3">1.5</span> IO</h3>
+<div class="outline-text-3" id="text-1-5">
+<p>
+stdio.h in C contains numerous IO routines.
+</p>
+
+<p>
+You use it primarily for printf and scanf.
+</p>
+</div>
+
+<div id="outline-container-orge5ed26e" class="outline-4">
+<h4 id="orge5ed26e"><span class="section-number-4">1.5.1</span> Streams</h4>
+<div class="outline-text-4" id="text-1-5-1">
+<p>
+Programs that run in the UNIX terminal have 3 main streams:
+</p>
+
+<ul class="org-ul">
+<li>stdin 
+<ul class="org-ul">
+<li>standard in or standard input to read</li>
+<li>shell: `&lt;` `|`</li>
+<li>C: `gets, getchar, scanf, fgets(stdin,&#x2026;), read(stdin,&#x2026;) , &#x2026;`</li>
+</ul></li>
+<li>stdout
+<ul class="org-ul">
+<li>standard out or standard output to write out to the terminals</li>
+<li>shell: `&gt;` `|`</li>
+<li>C: `puts, printf, fputs(stdout,&#x2026;), fputc(stdout,&#x2026;), &#x2026;`</li>
+</ul></li>
+<li>stderr: 
+<ul class="org-ul">
+<li>standard err or standard error to write out to terminals but not
+modify the main output</li>
+<li>`2&gt;` `|&amp;` or `2&gt;&amp;1 |`</li>
+<li>C: `fputs(stderr,&#x2026;), fputchar(stderr,&#x2026;), fprintf(stderr,&#x2026;), &#x2026;`</li>
+</ul></li>
+</ul>
+
+<p>
+They are called streams because you serially output information to
+them. And multiple sources can write to the stream. It's like talking
+or a stream of consciousness. 1 byte after another.
+</p>
+</div>
+
+<ol class="org-ol">
+<li><a id="orge5667d8"></a>shell<br />
+<div class="outline-text-6" id="text-1-5-1-0-1">
+<p>
+Typically a terminal will mix stdout and stderr.
+</p>
+
+<p>
+You can type in input to standard input.
+</p>
+
+<p>
+You can "pipe" input to standard input: |
+</p>
+
+<p>
+You can redirect file input to standard input: &lt;
+</p>
+
+<p>
+Example: using a pipe to pipe the string `ALL CAPS` through the tr
+program to lower case it.
+</p>
+
+<div class="org-src-container">
+<pre class="src src-sh"><span style="color: #483d8b;">echo</span> ALL CAPS | tr <span style="color: #8b2252;">'[:upper:]'</span> <span style="color: #8b2252;">'[:lower:]'</span>
+</pre>
+</div>
+
+<pre class="example">
+all caps
+</pre>
+
+
+<p>
+tr is a translation program it takes characters from 1 argument and
+turns them into another.
+</p>
+
+<div class="org-src-container">
+<pre class="src src-sh"><span style="color: #483d8b;">echo</span> ALL CAPS | tr <span style="color: #8b2252;">'ALC'</span> <span style="color: #8b2252;">'ODP'</span>
+</pre>
+</div>
+
+<pre class="example">
+ODD POPS
+</pre>
+
+
+<p>
+We can make files by redirecting stdout to a file
+</p>
+<div class="org-src-container">
+<pre class="src src-sh"><span style="color: #483d8b;">echo</span> ALL CAPS &gt; allcaps.txt
+cat allcaps.txt | tr <span style="color: #8b2252;">'AL'</span> <span style="color: #8b2252;">'OP'</span>
+<span style="color: #483d8b;">echo</span> From Ontario, catch those <span style="color: #b22222;"># </span><span style="color: #b22222;">just echo to stdout</span>
+tr <span style="color: #8b2252;">'AC'</span> <span style="color: #8b2252;">'IR'</span> &lt; allcaps.txt
+</pre>
+</div>
+
+<pre class="example">
+OPP COPS
+From Ontario, catch those
+ILL RIPS
+</pre>
+
+
+<p>
+We can filter arbitrary commands:
+</p>
+
+<div class="org-src-container">
+<pre class="src src-sh">ls | tr <span style="color: #8b2252;">'[:lower:]'</span> <span style="color: #8b2252;">'[:upper:]'</span>
+</pre>
+</div>
+
+<pre class="example">
+20.TXT
+30.TXT
+ALLCAPS.TXT
+ARGV
+ARGV.C
+ARGV-NEW
+ARGVRAND
+ARGVRAND.C
+AUTO
+BINARY.BIN
+BINARYREAD.C
+BINARYWRITE.C
+COOLBEARS.TXT
+FFLUSHRANDR
+FFLUSHRANDR.C
+FFLUSHREADER
+FFLUSHREADER.C
+FFLUSH.SH
+FFLUSH.TXT
+FGETS.TXT
+FPRINTF.TXT
+PRESENTATION.ORG
+PRESENTATION.ORG~
+STDIN-EXAMPLE
+STDIN-EXAMPLE.C
+STDOUT-EXAMPLE
+STDOUT-EXAMPLE.C
+</pre>
+
+<p>
+We can chain pipes:
+</p>
+<div class="org-src-container">
+<pre class="src src-sh">tr <span style="color: #8b2252;">'AC'</span> <span style="color: #8b2252;">'IR'</span> &lt; allcaps.txt | sed -e <span style="color: #8b2252;">'s/LL/LK/'</span>
+tr <span style="color: #8b2252;">'AC'</span> <span style="color: #8b2252;">'IR'</span> &lt; allcaps.txt | sed -e <span style="color: #8b2252;">'s/LL/LK/'</span> | <span style="color: #8b2252;">\</span>
+   sed -e <span style="color: #8b2252;">'s/^/S/'</span>
+<span style="color: #b22222;"># </span><span style="color: #b22222;">we can chain commands together</span>
+tr <span style="color: #8b2252;">'AC'</span> <span style="color: #8b2252;">'IR'</span> &lt; allcaps.txt | sed -e <span style="color: #8b2252;">'s/LL/LK/'</span> | <span style="color: #8b2252;">\</span>
+   sed -e <span style="color: #8b2252;">'s/^/S/'</span> | <span style="color: #8b2252;">\</span>
+   sed -e <span style="color: #8b2252;">'s/K /K T/'</span>
+ls | grep .org | sort
+</pre>
+</div>
+
+<pre class="example">
+ILK RIPS
+SILK RIPS
+SILK TRIPS
+presentation.org
+presentation.org~
+</pre>
+</div>
+
+
+<ol class="org-ol">
+<li><a id="org0ff753a"></a>stderr &amp; shell<br />
+<div class="outline-text-7" id="text-1-5-1-0-1-1">
+<div class="org-src-container">
+<pre class="src src-sh">ls -l missing
+<span style="color: #a020f0;">exit</span> 0
+</pre>
+</div>
+
+<p>
+Where is it?
+</p>
+
+<div class="org-src-container">
+<pre class="src src-sh">ls -l missing 2&gt;&amp;1
+<span style="color: #a020f0;">exit</span> 0
+</pre>
+</div>
+
+<pre class="example">
+ls: cannot access 'missing': No such file or directory
+</pre>
+
+
+<p>
+Once we redirect stderr to stdout we can pipe it and manipulate it!
+</p>
+
+<div class="org-src-container">
+<pre class="src src-sh">ls -l missing 2&gt;&amp;1 | tr <span style="color: #8b2252;">'[:lower:]'</span> <span style="color: #8b2252;">'[:upper:]'</span>
+</pre>
+</div>
+
+<pre class="example">
+LS: CANNOT ACCESS 'MISSING': NO SUCH FILE OR DIRECTORY
+</pre>
+
+
+<p>
+Or perhaps we don't want to see the error
+</p>
+
+<div class="org-src-container">
+<pre class="src src-sh">ls -l missing 2&gt; /dev/null
+<span style="color: #a020f0;">exit</span> 0
+</pre>
+</div>
+
+<p>
+Maybe we just want stderr
+</p>
+<div class="org-src-container">
+<pre class="src src-sh">ls -l *.org missing 2&gt;&amp;1 &gt; /dev/null
+<span style="color: #a020f0;">exit</span> 0
+</pre>
+</div>
+
+<pre class="example">
+ls: cannot access 'missing': No such file or directory
+</pre>
+
+
+<p>
+Maybe we just want BOTH
+</p>
+<div class="org-src-container">
+<pre class="src src-sh">ls -l *.org missing 2&gt;&amp;1
+<span style="color: #a020f0;">exit</span> 0
+</pre>
+</div>
+
+<pre class="example">
+ls: cannot access 'missing': No such file or directory
+-rw-r--r-- 1 hindle1 hindle1 22703 Apr  6 23:32 presentation.org
+</pre>
+</div>
+</li>
+</ol>
+</li>
+
+<li><a id="org3ec382e"></a>C<br />
+<ol class="org-ol">
+<li><a id="org4edbf41"></a>output<br />
+<div class="outline-text-7" id="text-1-5-1-0-2-1">
+<div class="org-src-container">
+<pre class="src src-C"><span style="color: #483d8b;">#include</span> <span style="color: #8b2252;">&lt;stdio.h&gt;</span>
+<span style="color: #228b22;">int</span> <span style="color: #0000ff;">main</span>() {
+    printf(<span style="color: #8b2252;">"OK this is to stdout!\n"</span>);
+    fprintf(stdout,<span style="color: #8b2252;">"OK this is to stdout as well!\n"</span>);
+    fprintf(stderr,<span style="color: #8b2252;">"OK this is to stderr!\n"</span>);
+    <span style="color: #a020f0;">return</span> 0;
+}
+</pre>
+</div>
+
+<pre class="example">
+OK this is to stdout!
+OK this is to stdout as well!
+</pre>
+
+
+<p>
+Hmmm org-mode ignores stderr
+</p>
+
+<div class="org-src-container">
+<pre class="src src-shell">gcc  -std=c99 -pedantic -Wall -Wextra -ftrapv -ggdb3 -o stdout-example stdout-example.c
+./stdout-example 2&gt;&amp;1
+</pre>
+</div>
+
+<pre class="example">
+OK this is to stderr!
+OK this is to stdout!
+OK this is to stdout as well!
+</pre>
+
+
+<p>
+Ah now it appears
+</p>
+</div>
+</li>
+
+
+<li><a id="org2e9df3c"></a>input<br />
+<div class="outline-text-7" id="text-1-5-1-0-2-2">
+<div class="org-src-container">
+<pre class="src src-C"><span style="color: #483d8b;">#include</span> <span style="color: #8b2252;">&lt;stdio.h&gt;</span>
+<span style="color: #228b22;">int</span> <span style="color: #0000ff;">main</span>() {
+    <span style="color: #228b22;">int</span> <span style="color: #a0522d;">input</span>;
+    <span style="color: #a020f0;">if</span> (scanf(<span style="color: #8b2252;">"%d"</span>, &amp;input)!=1) abort();
+    fprintf(stdout, <span style="color: #8b2252;">"From stdin %d\n"</span>, input);
+    fprintf(stderr, <span style="color: #8b2252;">"ERR: From stdin %d\n"</span>, input);
+    <span style="color: #a020f0;">return</span> 0;
+}
+</pre>
+</div>
+
+<div class="org-src-container">
+<pre class="src src-shell">gcc  -std=c99 -pedantic -Wall -Wextra -ftrapv -ggdb3 -o stdin-example stdin-example.c
+<span style="color: #483d8b;">echo</span> 10 | ./stdin-example 2&gt;&amp;1
+<span style="color: #483d8b;">echo</span> 20 &gt; 20.txt
+<span style="color: #483d8b;">echo</span> 30 &gt; 30.txt
+./stdin-example 2&gt;&amp;1 &lt; 20.txt
+./stdin-example &lt; 30.txt 2&gt;&amp;1
+</pre>
+</div>
+
+<pre class="example">
+ERR: From stdin 10
+From stdin 10
+ERR: From stdin 20
+From stdin 20
+ERR: From stdin 30
+From stdin 30
+</pre>
+
+
+<p>
+You've mostly seen this before except the `fprintf(stderr,&#x2026;)` part.
+</p>
+</div>
+</li>
+</ol>
+</li>
+</ol>
+</div>
+
+<div id="outline-container-orge53ed44" class="outline-4">
+<h4 id="orge53ed44"><span class="section-number-4">1.5.2</span> Files</h4>
+<div class="outline-text-4" id="text-1-5-2">
+<p>
+Files can be addressed as streams as well. But we have to open and
+close them. So we can treat files exactly like stdin and stdout but
+with a few changes.
+</p>
+
+<ol class="org-ol">
+<li>We need a file handle (like stdin, stdout, or stderr). This handle
+is for the OS to know which file the process is talking about.</li>
+<li>We need to decide if we are reading write or both and we need to
+open a file to produce a file handle. Or use an existing one.
+<ul class="org-ul">
+<li>fopen</li>
+</ul></li>
+<li>We need to write to it using write and f* operations.
+<ul class="org-ul">
+<li>fprintf</li>
+<li>fputs</li>
+</ul></li>
+<li>We need to read from it using read and f* operations.
+<ul class="org-ul">
+<li>fgets</li>
+<li>fgetc</li>
+</ul></li>
+<li>We need to close the file after we're done. fclose.</li>
+</ol>
+</div>
+
+<ol class="org-ol">
+<li><a id="org190a4a7"></a>open and close<br />
+<div class="outline-text-5" id="text-1-5-2-1">
+<p>
+To open a file we use fopen. To close it we fclose. Don't use open and
+close because that's not portable. That's for the OS.
+</p>
+
+<div class="org-src-container">
+<pre class="src src-C"><span style="color: #228b22;">FILE</span> *<span style="color: #0000ff;">fopen</span>(<span style="color: #a020f0;">const</span> <span style="color: #228b22;">char</span> *<span style="color: #a0522d;">pathname</span>, <span style="color: #a020f0;">const</span> <span style="color: #228b22;">char</span> *<span style="color: #a0522d;">mode</span>);
+<span style="color: #228b22;">int</span> <span style="color: #0000ff;">fclose</span>(<span style="color: #228b22;">FILE</span> *<span style="color: #a0522d;">stream</span>);
+</pre>
+</div>
+
+<p>
+The mode is a string
+</p>
+<ul class="org-ul">
+<li>"r" - read</li>
+<li>"w" - write (erase file)</li>
+<li>"a" - append (add to end of file)</li>
+<li>"r+" - read and write</li>
+<li>"w+" - write and read (erase file)</li>
+<li>"a+" - append and read</li>
+</ul>
+
+<div class="org-src-container">
+<pre class="src src-C"><span style="color: #228b22;">FILE</span> * <span style="color: #a0522d;">f_cb</span> = fopen(<span style="color: #8b2252;">"coolbears.txt"</span>, <span style="color: #8b2252;">"w"</span>); <span style="color: #b22222;">// </span><span style="color: #b22222;">open coolbears.txt for writing</span>
+<span style="color: #228b22;">int</span> <span style="color: #0000ff;">fclose</span>(f_cb); <span style="color: #b22222;">// </span><span style="color: #b22222;">close coolbears.txt</span>
+</pre>
+</div>
+
+<p>
+If you don't close a file you can lose bytes you wrote to it because
+they didn't get flushed to disk. This is important because people
+might kill your program your you might reboot or shutdown the
+computer. If you want to ensure data is written try to engage in
+flush. Sometimes no data will appear until you flush or close the
+file. Keep those pipes clean.
+</p>
+
+<div class="org-src-container">
+<pre class="src src-C"><span style="color: #483d8b;">#include</span> <span style="color: #8b2252;">&lt;stdio.h&gt;</span>
+<span style="color: #483d8b;">#define</span> <span style="color: #a0522d;">SIZE</span> 1024
+<span style="color: #228b22;">int</span> <span style="color: #0000ff;">main</span>() {
+    <span style="color: #228b22;">char</span> <span style="color: #a0522d;">buffer</span>[SIZE] = {<span style="color: #8b2252;">'\0'</span>};
+    <span style="color: #b22222;">// </span><span style="color: #b22222;">open coolbears.txt for writing</span>
+    <span style="color: #228b22;">FILE</span> * <span style="color: #a0522d;">f_cb</span>  = fopen(<span style="color: #8b2252;">"coolbears.txt"</span>, <span style="color: #8b2252;">"w"</span>); 
+    fputs(<span style="color: #8b2252;">"Polar bears"</span>, f_cb);
+    fclose(f_cb);
+    <span style="color: #228b22;">FILE</span> * <span style="color: #a0522d;">f_cbr</span> = fopen(<span style="color: #8b2252;">"coolbears.txt"</span>, <span style="color: #8b2252;">"r"</span>); 
+    fgets(buffer, SIZE, f_cbr);
+    printf(<span style="color: #8b2252;">"%s\n"</span>,buffer);
+    fclose(f_cbr);
+}
+</pre>
+</div>
+
+<pre class="example">
+Polar bears
+</pre>
+
+
+<p>
+OK but what if we don't close it?
+</p>
+
+<div class="org-src-container">
+<pre class="src src-C"><span style="color: #483d8b;">#include</span> <span style="color: #8b2252;">&lt;stdio.h&gt;</span>
+<span style="color: #483d8b;">#define</span> <span style="color: #a0522d;">SIZE</span> 1024
+<span style="color: #228b22;">int</span> <span style="color: #0000ff;">main</span>() {
+    <span style="color: #228b22;">char</span> <span style="color: #a0522d;">buffer</span>[SIZE] = {<span style="color: #8b2252;">'\0'</span>};
+    <span style="color: #b22222;">// </span><span style="color: #b22222;">open coolbears.txt for writing</span>
+    <span style="color: #228b22;">FILE</span> * <span style="color: #a0522d;">f_cb</span>  = fopen(<span style="color: #8b2252;">"coolbears.txt"</span>, <span style="color: #8b2252;">"w"</span>); 
+    fputs(<span style="color: #8b2252;">"Polar bears"</span>, f_cb);
+    <span style="color: #228b22;">FILE</span> * <span style="color: #a0522d;">f_cbr</span> = fopen(<span style="color: #8b2252;">"coolbears.txt"</span>, <span style="color: #8b2252;">"r"</span>); 
+    fgets(buffer, SIZE, f_cbr);
+    printf(<span style="color: #8b2252;">"This is the buffer before close: %s\n"</span>,buffer);
+    fclose(f_cbr);
+    fclose(f_cb);
+    f_cbr = fopen(<span style="color: #8b2252;">"coolbears.txt"</span>, <span style="color: #8b2252;">"r"</span>); 
+    fgets(buffer, SIZE, f_cbr);
+    printf(<span style="color: #8b2252;">"This is the buffer after close: %s\n"</span>,buffer);
+    fclose(f_cbr);
+    printf(<span style="color: #8b2252;">"Close your buffers!"</span>);
+}
+</pre>
+</div>
+
+<pre class="example">
+This is the buffer before close: 
+This is the buffer after close: Polar bears
+Close your buffers!
+</pre>
+
+
+<div class="org-src-container">
+<pre class="src src-sh">cat coolbears.txt
+</pre>
+</div>
+
+<pre class="example">
+Polar bears
+</pre>
+
+
+<p>
+Now let's see what flush does for us!
+</p>
+<div class="org-src-container">
+<pre class="src src-C"><span style="color: #483d8b;">#include</span> <span style="color: #8b2252;">&lt;stdio.h&gt;</span>
+<span style="color: #483d8b;">#define</span> <span style="color: #a0522d;">SIZE</span> 1024
+<span style="color: #228b22;">int</span> <span style="color: #0000ff;">main</span>() {
+    <span style="color: #228b22;">char</span> <span style="color: #a0522d;">buffer</span>[SIZE] = {<span style="color: #8b2252;">'\0'</span>};
+    <span style="color: #b22222;">// </span><span style="color: #b22222;">open coolbears.txt for writing</span>
+    <span style="color: #228b22;">FILE</span> * <span style="color: #a0522d;">f_cb</span>  = fopen(<span style="color: #8b2252;">"coolbears.txt"</span>, <span style="color: #8b2252;">"w"</span>); 
+    fputs(<span style="color: #8b2252;">"Polar bears"</span>, f_cb);
+    fflush(f_cb); <span style="color: #b22222;">// </span><span style="color: #b22222;">WE'RE FLUSHING!</span>
+    <span style="color: #228b22;">FILE</span> * <span style="color: #a0522d;">f_cbr</span> = fopen(<span style="color: #8b2252;">"coolbears.txt"</span>, <span style="color: #8b2252;">"r"</span>); 
+    fgets(buffer, SIZE, f_cbr);
+    printf(<span style="color: #8b2252;">"This is the buffer before close but after flush: %s\n"</span>,buffer);
+    fclose(f_cbr);
+    fclose(f_cb);
+    f_cbr = fopen(<span style="color: #8b2252;">"coolbears.txt"</span>, <span style="color: #8b2252;">"r"</span>); 
+    fgets(buffer, SIZE, f_cbr);
+    printf(<span style="color: #8b2252;">"This is the buffer after close: %s\n"</span>,buffer);
+    fclose(f_cbr);
+    printf(<span style="color: #8b2252;">"Close your buffers! Keep your pipes clean"</span>);
+}
+</pre>
+</div>
+
+<pre class="example">
+This is the buffer before close but after flush: Polar bears
+This is the buffer after close: Polar bears
+Close your buffers! Keep your pipes clean
+</pre>
+</div>
+</li>
+
+<li><a id="orgd82f533"></a>writing<br />
+<ol class="org-ol">
+<li><a id="org08b1ce1"></a>fprintf<br />
+<div class="outline-text-6" id="text-1-5-2-2-1">
+<div class="org-src-container">
+<pre class="src src-C"><span style="color: #483d8b;">#include</span> <span style="color: #8b2252;">&lt;stdio.h&gt;</span>
+<span style="color: #483d8b;">#include</span> <span style="color: #8b2252;">&lt;stdlib.h&gt;</span>
+<span style="color: #483d8b;">#define</span> <span style="color: #a0522d;">SIZE</span> 1024
+<span style="color: #228b22;">int</span> <span style="color: #0000ff;">main</span>() {
+    srand(time(<span style="color: #008b8b;">NULL</span>));
+    <span style="color: #228b22;">char</span> <span style="color: #a0522d;">buffer</span>[SIZE] = {<span style="color: #8b2252;">'\0'</span>};
+    <span style="color: #b22222;">// </span><span style="color: #b22222;">open coolbears.txt for writing</span>
+    <span style="color: #228b22;">FILE</span> * <span style="color: #a0522d;">f_cb</span>  = fopen(<span style="color: #8b2252;">"fprintf.txt"</span>, <span style="color: #8b2252;">"w"</span>); 
+    <span style="color: #b22222;">// </span><span style="color: #b22222;">It's just like printf!</span>
+    fprintf(f_cb,<span style="color: #8b2252;">"A random number %d\n"</span>, rand());
+    fclose(f_cb);
+    <span style="color: #228b22;">FILE</span> * <span style="color: #a0522d;">f_cbr</span> = fopen(<span style="color: #8b2252;">"fprintf.txt"</span>, <span style="color: #8b2252;">"r"</span>); 
+    fgets(buffer, SIZE, f_cbr);
+    printf(<span style="color: #8b2252;">"%s\n"</span>,buffer);
+    fclose(f_cbr);
+}
+</pre>
+</div>
+
+<pre class="example">
+A random number 555405529
+</pre>
+</div>
+</li>
+</ol>
+</li>
+
+<li><a id="org2853bfe"></a>reading<br />
+<ol class="org-ol">
+<li><a id="org5bca31b"></a>fscanf<br />
+<div class="outline-text-6" id="text-1-5-2-3-1">
+<div class="org-src-container">
+<pre class="src src-C"><span style="color: #483d8b;">#include</span> <span style="color: #8b2252;">&lt;stdio.h&gt;</span>
+<span style="color: #483d8b;">#include</span> <span style="color: #8b2252;">&lt;stdlib.h&gt;</span>
+<span style="color: #483d8b;">#define</span> <span style="color: #a0522d;">SIZE</span> 1024
+<span style="color: #483d8b;">#define</span> <span style="color: #0000ff;">CHECK</span>(<span style="color: #a0522d;">x</span>) ((x)==1)?1:(abort(),0);
+<span style="color: #228b22;">int</span> <span style="color: #0000ff;">main</span>() {
+    srand(time(<span style="color: #008b8b;">NULL</span>));
+    <span style="color: #228b22;">char</span> <span style="color: #a0522d;">buffer</span>[SIZE] = {<span style="color: #8b2252;">'\0'</span>};
+    <span style="color: #b22222;">// </span><span style="color: #b22222;">open coolbears.txt for writing</span>
+    <span style="color: #228b22;">FILE</span> * <span style="color: #a0522d;">f_cb</span>  = fopen(<span style="color: #8b2252;">"fprintf.txt"</span>, <span style="color: #8b2252;">"w"</span>); 
+    <span style="color: #b22222;">// </span><span style="color: #b22222;">It's just like printf!</span>
+    fprintf(f_cb,<span style="color: #8b2252;">"A random number %d\n"</span>, rand());
+    fclose(f_cb);
+    <span style="color: #228b22;">FILE</span> * <span style="color: #a0522d;">f_cbr</span> = fopen(<span style="color: #8b2252;">"fprintf.txt"</span>, <span style="color: #8b2252;">"r"</span>); 
+    <span style="color: #a020f0;">for</span> (<span style="color: #228b22;">int</span> <span style="color: #a0522d;">i</span> = 0 ; i &lt; 3; i++) {
+        CHECK(fscanf(f_cbr, <span style="color: #8b2252;">"%s"</span>,buffer));
+        printf(<span style="color: #8b2252;">"%s\n"</span>,buffer);
+    }
+    <span style="color: #228b22;">int</span> <span style="color: #a0522d;">input</span>=0;
+    CHECK(fscanf(f_cbr, <span style="color: #8b2252;">"%d"</span>,&amp;input));
+    printf(<span style="color: #8b2252;">"%d\n"</span>, input);
+    fclose(f_cbr);
+    <span style="color: #a020f0;">return</span> 0;
+}
+</pre>
+</div>
+
+<pre class="example">
+A
+random
+number
+555405529
+</pre>
+</div>
+</li>
+
+<li><a id="org73d4d40"></a>fgets<br />
+<div class="outline-text-6" id="text-1-5-2-3-2">
+<p>
+fgets gets a little complicated because you have to test for EOF.
+</p>
+
+<p>
+You can check for an null response and use feof, but probably you have
+to do both.
+</p>
+
+<div class="org-src-container">
+<pre class="src src-C"><span style="color: #483d8b;">#include</span> <span style="color: #8b2252;">&lt;stdio.h&gt;</span>
+<span style="color: #483d8b;">#include</span> <span style="color: #8b2252;">&lt;stdlib.h&gt;</span>
+<span style="color: #483d8b;">#include</span> <span style="color: #8b2252;">&lt;time.h&gt;</span>
+<span style="color: #483d8b;">#define</span> <span style="color: #a0522d;">SIZE</span> 1024
+<span style="color: #483d8b;">#define</span> <span style="color: #a0522d;">N</span> 8
+<span style="color: #228b22;">int</span> <span style="color: #0000ff;">main</span>() {
+    <span style="color: #228b22;">char</span> <span style="color: #a0522d;">buffer</span>[SIZE] = {<span style="color: #8b2252;">'\0'</span>};
+    srand(time(<span style="color: #008b8b;">NULL</span>));
+    <span style="color: #b22222;">// </span><span style="color: #b22222;">open coolbears.txt for writing</span>
+    <span style="color: #228b22;">FILE</span> * <span style="color: #a0522d;">f_cb</span>  = fopen(<span style="color: #8b2252;">"fgets.txt"</span>, <span style="color: #8b2252;">"w"</span>); 
+    <span style="color: #b22222;">// </span><span style="color: #b22222;">It's just like printf!</span>
+    <span style="color: #a020f0;">const</span> <span style="color: #228b22;">int</span> <span style="color: #a0522d;">totalLines</span> = 1 + (rand() % N);
+    <span style="color: #a020f0;">for</span> (<span style="color: #228b22;">int</span> <span style="color: #a0522d;">i</span> = 0 ; i &lt; totalLines; i++) {
+        fprintf(f_cb,<span style="color: #8b2252;">"A random number %d\n"</span>, rand());
+    }
+    fclose(f_cb);
+    <span style="color: #228b22;">FILE</span> * <span style="color: #a0522d;">f_cbr</span> = fopen(<span style="color: #8b2252;">"fgets.txt"</span>, <span style="color: #8b2252;">"r"</span>); 
+    <span style="color: #a020f0;">while</span>(!feof(f_cbr)) {
+        <span style="color: #a020f0;">if</span> (fgets(buffer, SIZE, f_cbr)) {
+           printf(<span style="color: #8b2252;">"fgets.txt: %s"</span>, buffer);
+        }
+    }
+    fclose(f_cbr);
+    <span style="color: #a020f0;">return</span> 0;
+}
+</pre>
+</div>
+
+<pre class="example">
+fgets.txt: A random number 1283135184
+fgets.txt: A random number 635851701
+fgets.txt: A random number 689878857
+fgets.txt: A random number 504931221
+fgets.txt: A random number 973174242
+fgets.txt: A random number 944395598
+</pre>
+</div>
+</li>
+</ol>
+</li>
+
+
+<li><a id="orgb6a2fd8"></a>flushing<br />
+<div class="outline-text-5" id="text-1-5-2-4">
+<p>
+If you want to ensure something gets to a file or a term you should
+flush. Typically I/O is BUFFERED. Buffered means it is flushed once a
+certain threshold is met, typically size but sometimes time (depending
+on the system). Buffered will increase latency to print something but
+will often improve overall bandwidth to disk.
+</p>
+
+<div class="org-src-container">
+<pre class="src src-C">fflush(<span style="color: #228b22;">FILE</span> * <span style="color: #a0522d;">stream</span>); <span style="color: #b22222;">// </span><span style="color: #b22222;">will flush your stream</span>
+</pre>
+</div>
+
+<p>
+Flush when you need to.
+</p>
+
+<div class="org-src-container">
+<pre class="src src-C"><span style="color: #483d8b;">#include</span> <span style="color: #8b2252;">&lt;stdio.h&gt;</span>
+<span style="color: #483d8b;">#include</span> <span style="color: #8b2252;">&lt;stdlib.h&gt;</span>
+<span style="color: #483d8b;">#include</span> <span style="color: #8b2252;">&lt;time.h&gt;</span>
+<span style="color: #483d8b;">#include</span> <span style="color: #8b2252;">&lt;unistd.h&gt;</span>
+<span style="color: #483d8b;">#define</span> <span style="color: #a0522d;">SIZE</span> 5
+<span style="color: #228b22;">int</span> <span style="color: #0000ff;">main</span>() {
+    srand(time(<span style="color: #008b8b;">NULL</span>));
+    <span style="color: #228b22;">FILE</span> * <span style="color: #a0522d;">file</span> = fopen(<span style="color: #8b2252;">"fflush.txt"</span>, <span style="color: #8b2252;">"w"</span>); 
+    <span style="color: #a020f0;">for</span> (<span style="color: #228b22;">int</span> <span style="color: #a0522d;">i</span> = 0 ; i &lt; SIZE; i++) {
+        fprintf(file, <span style="color: #8b2252;">"%d\n"</span>, rand());
+        fflush(file); <span style="color: #b22222;">// </span><span style="color: #b22222;">WE'RE FLUSHING!</span>
+        sleep(1);
+    }
+    fclose(file);
+}
+</pre>
+</div>
+
+<div class="org-src-container">
+<pre class="src src-C"><span style="color: #483d8b;">#include</span> <span style="color: #8b2252;">&lt;time.h&gt;</span>
+<span style="color: #483d8b;">#include</span> <span style="color: #8b2252;">&lt;stdio.h&gt;</span>
+<span style="color: #483d8b;">#include</span> <span style="color: #8b2252;">&lt;unistd.h&gt;</span>
+<span style="color: #483d8b;">#define</span> <span style="color: #a0522d;">SIZE</span> 20
+<span style="color: #483d8b;">#define</span> <span style="color: #a0522d;">BUFF</span> 1024
+<span style="color: #228b22;">int</span> <span style="color: #0000ff;">main</span>() {
+    <span style="color: #228b22;">char</span> <span style="color: #a0522d;">buffer</span>[BUFF];
+    <span style="color: #228b22;">FILE</span> * <span style="color: #a0522d;">file</span> = fopen(<span style="color: #8b2252;">"fflush.txt"</span>, <span style="color: #8b2252;">"r"</span>); 
+    <span style="color: #a020f0;">while</span>(!feof(file)) {
+        <span style="color: #a020f0;">if</span> (!fgets(buffer,BUFF,file)) {
+            <span style="color: #a020f0;">break</span>;
+        }
+        printf(<span style="color: #8b2252;">"%s"</span>, buffer);
+        sleep(1);
+    }
+    fclose(file);
+}
+</pre>
+</div>
+
+<div class="org-src-container">
+<pre class="src src-sh">gcc  -std=c99 -pedantic -Wall -Wextra -ftrapv -ggdb3 -o fflushrandr fflushrandr.c &amp;&amp; <span style="color: #8b2252;">\</span>
+gcc  -std=c99 -pedantic -Wall -Wextra -ftrapv -ggdb3 -o fflushreader fflushreader.c &amp;&amp; <span style="color: #8b2252;">\</span>
+<span style="color: #483d8b;">echo</span> This will take 7 seconds &amp;&amp; <span style="color: #8b2252;">\</span>
+( ./fflushrandr &amp; sleep 2; ./fflushreader)
+</pre>
+</div>
+
+<pre class="example">
+This will take 7 seconds
+251984141
+1283135184
+635851701
+689878857
+504931221
+</pre>
+</div>
+</li>
+<li><a id="org5d61a36"></a>Binary Files<br />
+<div class="outline-text-5" id="text-1-5-2-5">
+<p>
+From stdio.h:
+</p>
+<div class="org-src-container">
+<pre class="src src-C"><span style="color: #228b22;">size_t</span> <span style="color: #0000ff;">fread</span>(<span style="color: #228b22;">void</span> *<span style="color: #a0522d;">ptr</span>, <span style="color: #228b22;">size_t</span> <span style="color: #a0522d;">size</span>, <span style="color: #228b22;">size_t</span> <span style="color: #a0522d;">nmemb</span>, <span style="color: #228b22;">FILE</span> *<span style="color: #a0522d;">stream</span>);
+
+<span style="color: #228b22;">size_t</span> <span style="color: #0000ff;">fwrite</span>(<span style="color: #a020f0;">const</span> <span style="color: #228b22;">void</span> *<span style="color: #a0522d;">ptr</span>, <span style="color: #228b22;">size_t</span> <span style="color: #a0522d;">size</span>, <span style="color: #228b22;">size_t</span> <span style="color: #a0522d;">nmemb</span>,
+              <span style="color: #228b22;">FILE</span> *<span style="color: #a0522d;">stream</span>);
+</pre>
+</div>
+
+<p>
+fread and fwrite will write memory to a stream and back again. Any
+pointer can be used, the bytes in memory will be serialized in and
+out. It will not be compiler and architecture portable so carefully
+craft your structs before you write them out. Use explicit padding.
+For 64-bit and 32-bit compatibility pad to modulus 8 bytes.
+</p>
+
+<div class="org-src-container">
+<pre class="src src-C"><span style="color: #483d8b;">#include</span> <span style="color: #8b2252;">&lt;assert.h&gt;</span>
+<span style="color: #483d8b;">#include</span> <span style="color: #8b2252;">&lt;stdio.h&gt;</span>
+<span style="color: #483d8b;">#include</span> <span style="color: #8b2252;">&lt;stdlib.h&gt;</span>
+<span style="color: #483d8b;">#include</span> <span style="color: #8b2252;">&lt;time.h&gt;</span>
+<span style="color: #483d8b;">#define</span> <span style="color: #a0522d;">SIZE</span> 5
+<span style="color: #a020f0;">struct</span> <span style="color: #228b22;">demo</span> {
+    <span style="color: #228b22;">int</span> <span style="color: #a0522d;">i</span>;
+    <span style="color: #228b22;">float</span> <span style="color: #a0522d;">f</span>;
+    <span style="color: #228b22;">double</span> <span style="color: #a0522d;">d</span>;
+    <span style="color: #228b22;">char</span> <span style="color: #a0522d;">c</span>;
+};
+<span style="color: #228b22;">int</span> <span style="color: #0000ff;">main</span>() {
+    srand(time(<span style="color: #008b8b;">NULL</span>));
+    <span style="color: #228b22;">FILE</span> * <span style="color: #a0522d;">file</span> = fopen(<span style="color: #8b2252;">"binary.bin"</span>, <span style="color: #8b2252;">"w"</span>); 
+    <span style="color: #228b22;">int</span> <span style="color: #a0522d;">realSize</span> = 1 + (rand() % SIZE);
+    assert(1==fwrite(&amp;realSize, <span style="color: #a020f0;">sizeof</span>(<span style="color: #228b22;">int</span>), 1, file));
+    <span style="color: #a020f0;">for</span> (<span style="color: #228b22;">int</span> <span style="color: #a0522d;">i</span> = 0 ; i &lt; realSize; i++) {
+        <span style="color: #a020f0;">struct</span> <span style="color: #228b22;">demo</span> <span style="color: #a0522d;">randd</span>;
+        randd.i = rand();
+        randd.f = rand() / 2.0F;
+        randd.d = 1.0 / (rand()+1.0);
+        randd.c = <span style="color: #8b2252;">'X'</span>;
+        printf(<span style="color: #8b2252;">"Writing %d\n"</span>, randd.i);
+        printf(<span style="color: #8b2252;">"\tWriting %g\n"</span>, randd.f);
+        printf(<span style="color: #8b2252;">"\tWriting %g\n"</span>, randd.d);
+        printf(<span style="color: #8b2252;">"\tWriting %c\n"</span>, randd.c);
+        assert(1==fwrite(&amp;randd, <span style="color: #a020f0;">sizeof</span>(randd), 1, file));
+    }
+    fclose(file);
+}
+</pre>
+</div>
+
+<div class="org-src-container">
+<pre class="src src-C"><span style="color: #483d8b;">#include</span> <span style="color: #8b2252;">&lt;assert.h&gt;</span>
+<span style="color: #483d8b;">#include</span> <span style="color: #8b2252;">&lt;time.h&gt;</span>
+<span style="color: #483d8b;">#include</span> <span style="color: #8b2252;">&lt;stdio.h&gt;</span>
+<span style="color: #483d8b;">#define</span> <span style="color: #a0522d;">BUFF</span> 1024
+<span style="color: #a020f0;">struct</span> <span style="color: #228b22;">demo</span> {
+    <span style="color: #228b22;">int</span> <span style="color: #a0522d;">i</span>;
+    <span style="color: #228b22;">float</span> <span style="color: #a0522d;">f</span>;
+    <span style="color: #228b22;">double</span> <span style="color: #a0522d;">d</span>;
+    <span style="color: #228b22;">char</span> <span style="color: #a0522d;">c</span>;
+};
+<span style="color: #228b22;">int</span> <span style="color: #0000ff;">main</span>() {
+    <span style="color: #228b22;">char</span> <span style="color: #a0522d;">buffer</span>[BUFF];
+    <span style="color: #228b22;">FILE</span> * <span style="color: #a0522d;">file</span> = fopen(<span style="color: #8b2252;">"binary.bin"</span>, <span style="color: #8b2252;">"r"</span>); 
+    <span style="color: #228b22;">int</span> <span style="color: #a0522d;">size</span>=0;
+    assert(1==fread(&amp;size, <span style="color: #a020f0;">sizeof</span>(size), 1, file));
+
+    <span style="color: #a020f0;">while</span>(!feof(file)) {
+        <span style="color: #a020f0;">struct</span> <span style="color: #228b22;">demo</span> <span style="color: #a0522d;">readDemo</span>;
+        <span style="color: #a020f0;">if</span> (1!=fread(&amp;readDemo, <span style="color: #a020f0;">sizeof</span>(readDemo), 1, file)) {
+           <span style="color: #a020f0;">break</span>;
+        }
+        printf(<span style="color: #8b2252;">"Reading %d\n"</span>, readDemo.i);
+        printf(<span style="color: #8b2252;">"\tReading %f\n"</span>, readDemo.f);
+        printf(<span style="color: #8b2252;">"\tReading %g\n"</span>, readDemo.d);
+        printf(<span style="color: #8b2252;">"\tReading %c\n"</span>, readDemo.c);
+    }
+    fclose(file);
+}
+</pre>
+</div>
+
+<p>
+When you write out structs, watch for padding. Look for the letter X.
+Count the number of bytes after the last X.
+</p>
+
+<div class="org-src-container">
+<pre class="src src-sh">hexdump -C binary.bin
+</pre>
+</div>
+
+<pre class="example">
+00000000  04 00 00 00 a0 89 b3 49  61 d2 42 4d 66 42 7d d0  |.......Ia.BMfB}.|
+00000010  62 14 60 3e 58 7b 14 70  05 56 00 00 e8 da 0c 70  |b.`&gt;X{.p.V.....p|
+00000020  47 da 1e 4e fb 8c cf 16  64 0b 00 3e 58 7b 14 70  |G..N....d..&gt;X{.p|
+00000030  05 56 00 00 35 80 92 1b  36 55 52 4e 72 e9 b3 c3  |.V..5...6URNr...|
+00000040  b6 f2 0a 3e 58 7b 14 70  05 56 00 00 ad db 72 2a  |...&gt;X{.p.V....r*|
+00000050  7b 64 fe 4d e8 a4 a0 06  a7 e1 0e 3e 58 7b 14 70  |{d.M.......&gt;X{.p|
+00000060  05 56 00 00                                       |.V..|
+00000064
+</pre>
+</div>
+</li>
+</ol>
+</div>
+
+<div id="outline-container-orgbca52db" class="outline-4">
+<h4 id="orgbca52db"><span class="section-number-4">1.5.3</span> Command line arguments</h4>
+<div class="outline-text-4" id="text-1-5-3">
+<p>
+To get arguments from the commandline you can add the parameters:
+</p>
+<ul class="org-ul">
+<li>`int argc` &#x2013; number of commandline arguments</li>
+<li>`char ** argv` &#x2013; array of strings of commandline arguments</li>
+</ul>
+
+<div class="org-src-container">
+<pre class="src src-C"><span style="color: #483d8b;">#include</span> <span style="color: #8b2252;">&lt;stdio.h&gt;</span>
+
+<span style="color: #228b22;">int</span> <span style="color: #0000ff;">main</span>(<span style="color: #228b22;">int</span> <span style="color: #a0522d;">argc</span>, <span style="color: #228b22;">char</span> ** <span style="color: #a0522d;">argv</span>) {
+    <span style="color: #a020f0;">for</span> (<span style="color: #228b22;">int</span> <span style="color: #a0522d;">i</span> = 0 ; i &lt; argc; i++) {
+        printf(<span style="color: #8b2252;">"arg %d: %s\t"</span>, i, argv[i]);
+    }
+    puts(<span style="color: #8b2252;">""</span>);
+}
+</pre>
+</div>
+
+<pre class="example">
+arg 0: /tmp/babel-7888jxN/C-bin-7888aII
+</pre>
+
+
+<div class="org-src-container">
+<pre class="src src-sh">gcc  -std=c99 -pedantic -Wall -Wextra -ftrapv -ggdb3 -o argv argv.c &amp;&amp; <span style="color: #8b2252;">\</span>
+./argv &amp;&amp;  <span style="color: #8b2252;">\</span>
+./argv 1  &amp;&amp; <span style="color: #8b2252;">\</span>
+./argv 1 2 &amp;&amp; <span style="color: #8b2252;">\</span>
+./argv 1 2 3 &amp;&amp; <span style="color: #8b2252;">\</span>
+cp -f argv argv-new &amp;&amp; <span style="color: #8b2252;">\</span>
+./argv-new 1 2 3 
+</pre>
+</div>
+
+<pre class="example">
+arg 0: ./argv	
+arg 0: ./argv	arg 1: 1	
+arg 0: ./argv	arg 1: 1	arg 2: 2	
+arg 0: ./argv	arg 1: 1	arg 2: 2	arg 3: 3	
+arg 0: ./argv-new	arg 1: 1	arg 2: 2	arg 3: 3	
+</pre>
+
+
+<p>
+So atoi is your friend :)
+</p>
+
+<div class="org-src-container">
+<pre class="src src-C"><span style="color: #483d8b;">#include</span> <span style="color: #8b2252;">&lt;stdio.h&gt;</span>
+<span style="color: #483d8b;">#include</span> <span style="color: #8b2252;">&lt;stdlib.h&gt;</span>
+
+<span style="color: #228b22;">int</span> <span style="color: #0000ff;">main</span>(<span style="color: #228b22;">int</span> <span style="color: #a0522d;">argc</span>, <span style="color: #228b22;">char</span> ** <span style="color: #a0522d;">argv</span>) {
+    <span style="color: #a020f0;">if</span> (argc != 2) { exit(1); }
+    <span style="color: #228b22;">int</span> <span style="color: #a0522d;">n</span> = atoi(argv[1]);
+    <span style="color: #a020f0;">for</span> (<span style="color: #228b22;">int</span> <span style="color: #a0522d;">i</span> = 0 ; i &lt; n; i++) {
+        printf(<span style="color: #8b2252;">"%d\t"</span>, rand());
+    }
+    printf(<span style="color: #8b2252;">"\n"</span>);
+}
+</pre>
+</div>
+
+<div class="org-src-container">
+<pre class="src src-sh">gcc  -std=c99 -pedantic -Wall -Wextra -ftrapv -ggdb3 <span style="color: #8b2252;">\</span>
+     -o argvrand argvrand.c &amp;&amp; <span style="color: #8b2252;">\</span>
+(./argvrand || <span style="color: #483d8b;">echo</span> not enough args: $<span style="color: #a0522d;">?</span>) &amp;&amp; <span style="color: #8b2252;">\</span>
+./argvrand 1 &amp;&amp; <span style="color: #8b2252;">\</span>
+./argvrand 2 &amp;&amp; <span style="color: #8b2252;">\</span>
+./argvrand 3 &amp;&amp; <span style="color: #8b2252;">\</span>
+./argvrand 0 
+</pre>
+</div>
+
+<pre class="example">
+not enough args: 1
+1804289383	
+1804289383	846930886	
+1804289383	846930886	1681692777	
+
+</pre>
+</div>
+</div>
+
+
+
+<div id="outline-container-org3cba4e1" class="outline-4">
+<h4 id="org3cba4e1"><span class="section-number-4">1.5.4</span> mmap()</h4>
+<div class="outline-text-4" id="text-1-5-4">
+<p>
+mmap is neat, it maps memory from a file or even a process to pointers
+in memory. We do this with shared libraries too. So you can read and
+write to a file just by writing to memory. The OS deals with it very
+effeciently you just have to be very size aware. mmapping files is not
+good for streams and stream processing, it gets complicated. It is
+good for fixed sized structs.
+</p>
+
+<div class="org-src-container">
+<pre class="src src-C"><span style="color: #483d8b;">#include</span> <span style="color: #8b2252;">&lt;assert.h&gt;</span>
+<span style="color: #483d8b;">#include</span> <span style="color: #8b2252;">&lt;sys/mman.h&gt;</span>
+<span style="color: #483d8b;">#include</span> <span style="color: #8b2252;">&lt;sys/types.h&gt;</span>
+<span style="color: #483d8b;">#include</span> <span style="color: #8b2252;">&lt;stdio.h&gt;</span>
+<span style="color: #483d8b;">#include</span> <span style="color: #8b2252;">&lt;stdlib.h&gt;</span>
+<span style="color: #483d8b;">#include</span> <span style="color: #8b2252;">&lt;time.h&gt;</span>
+<span style="color: #483d8b;">#define</span> <span style="color: #a0522d;">SIZE</span> 2
+<span style="color: #a020f0;">struct</span> <span style="color: #228b22;">demo</span> {
+    <span style="color: #228b22;">int</span> <span style="color: #a0522d;">i</span>;
+    <span style="color: #228b22;">float</span> <span style="color: #a0522d;">f</span>;
+    <span style="color: #228b22;">double</span> <span style="color: #a0522d;">d</span>;
+    <span style="color: #228b22;">char</span> <span style="color: #a0522d;">c</span>;
+    <span style="color: #b22222;">// </span><span style="color: #b22222;">char cc[7]; // you can make padding explicit</span>
+};
+<span style="color: #228b22;">int</span> <span style="color: #0000ff;">main</span>() {
+    srand(time(<span style="color: #008b8b;">NULL</span>));
+    <span style="color: #228b22;">FILE</span> * <span style="color: #a0522d;">file</span> = fopen(<span style="color: #8b2252;">"binary.bin"</span>, <span style="color: #8b2252;">"r"</span>); 
+    <span style="color: #228b22;">int</span> <span style="color: #a0522d;">fd</span> = fileno(file);
+    <span style="color: #228b22;">int</span> <span style="color: #a0522d;">rsize</span> = 0;
+    assert(1==fread(&amp;rsize, <span style="color: #a020f0;">sizeof</span>(rsize), 1, file));
+    <span style="color: #a020f0;">const</span> <span style="color: #228b22;">size_t</span> <span style="color: #a0522d;">size</span> = <span style="color: #a020f0;">sizeof</span>(<span style="color: #a020f0;">struct</span> <span style="color: #228b22;">demo</span>) * rsize;
+    printf(<span style="color: #8b2252;">"N %d struct demos are in binary.bin\n"</span>, rsize);
+    printf(<span style="color: #8b2252;">"mmapping %u bytes of memory from the file\n"</span>, size);
+    <span style="color: #228b22;">int</span> * <span style="color: #a0522d;">mapped</span> = mmap(0, 
+        size,
+        PROT_READ, <span style="color: #b22222;">// </span><span style="color: #b22222;">| PROT_WRITE, </span>
+        MAP_SHARED, 
+        fd, 
+        0);
+    <span style="color: #a020f0;">if</span> (mapped == MAP_FAILED) {
+        perror(<span style="color: #8b2252;">"mmap"</span>);
+        exit(1);
+    }
+    <span style="color: #b22222;">// </span><span style="color: #b22222;">read 4 bytes from the head</span>
+    assert(rsize == (<span style="color: #228b22;">int</span>)*mapped);
+    <span style="color: #b22222;">// </span><span style="color: #b22222;">really abusive but we're 1 int after the start eh</span>
+    <span style="color: #a020f0;">struct</span> <span style="color: #228b22;">demo</span> * <span style="color: #a0522d;">demos</span> = (<span style="color: #a020f0;">struct</span> <span style="color: #228b22;">demo</span> *)(mapped+1);
+    <span style="color: #b22222;">// </span><span style="color: #b22222;">OK now look for the read ?</span>
+    <span style="color: #a020f0;">for</span> (<span style="color: #228b22;">int</span> <span style="color: #a0522d;">i</span> = 0 ; i &lt; rsize; i++) {
+        <span style="color: #a020f0;">struct</span> <span style="color: #228b22;">demo</span> <span style="color: #a0522d;">randd</span> = demos[i];
+        printf(<span style="color: #8b2252;">"Reading %d\n"</span>, randd.i);
+        printf(<span style="color: #8b2252;">"\tReading %g\n"</span>, randd.f);
+        printf(<span style="color: #8b2252;">"\tReading %g\n"</span>, randd.d);
+        printf(<span style="color: #8b2252;">"\tReading %c\n"</span>, randd.c);
+    }
+    munmap(demos, size);
+    fclose(file);
+}
+</pre>
+</div>
+
+<p>
+If you want to see some bad code that's small and uses mmap checkout:
+</p>
+
+<p>
+<a href="https://github.com/abramhindle/a-simple-pseudo-bayesian-spam-filter/blob/master/filter.c">https://github.com/abramhindle/a-simple-pseudo-bayesian-spam-filter/blob/master/filter.c</a>
+</p>
+</div>
+</div>
+</div>
+
+<div id="outline-container-orga2fa3d2" class="outline-3">
+<h3 id="orga2fa3d2"><span class="section-number-3">1.6</span> References</h3>
+<div class="outline-text-3" id="text-1-6">
+<p>
+KN King, C Programming, Chapter 28, 2nd Edition
+</p>
+
+<p>
+Hazel Cambell's thorough notes on Stream I/O:
+<a href="https://docs.google.com/document/d/1b48EzfP03JYEFt42wCajU5kv76oVbTxEXa2JO0q17ag/edit">https://docs.google.com/document/d/1b48EzfP03JYEFt42wCajU5kv76oVbTxEXa2JO0q17ag/edit</a>
+</p>
+</div>
+</div>
+</div>
+</div>
+<div id="postamble" class="status">
+<p class="author">Author: Abram Hindle</p>
+<p class="date">Created: 2020-04-06 Mon 23:32</p>
+<p class="validation"><a href="http://validator.w3.org/check?uri=referer">Validate</a></p>
+</div>
+</body>
+</html>
