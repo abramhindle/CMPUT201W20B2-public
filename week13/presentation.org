@@ -95,13 +95,357 @@ int main(int argc, char**argv) {
 gcc  -std=c99 -pedantic -Wall -Wextra -ftrapv -ggdb3 -o programname programname.c
 
 ** IO
+
+stdio.h in C contains numerous IO routines.
+
+You use it primarily for printf and scanf.
+
 *** Streams
-**** STDIN
-**** STDOUT & STDERR
+
+Programs that run in the UNIX terminal have 3 main streams:
+
+- stdin 
+  - standard in or standard input to read
+  - shell: `<` `|`
+  - C: `gets, getchar, scanf, fgets(stdin,...), read(stdin,...) , ...`
+- stdout
+  - standard out or standard output to write out to the terminals
+  - shell: `>` `|`
+  - C: `puts, printf, fputs(stdout,...), fputc(stdout,...), ...`
+- stderr: 
+  - standard err or standard error to write out to terminals but not
+    modify the main output
+  - `2>` `|&` or `2>&1 |`
+  - C: `fputs(stderr,...), fputchar(stderr,...), fprintf(stderr,...), ...`
+
+They are called streams because you serially output information to
+them. And multiple sources can write to the stream. It's like talking
+or a stream of consciousness. 1 byte after another.
+
+***** shell
+
+Typically a terminal will mix stdout and stderr.
+
+You can type in input to standard input.
+
+You can "pipe" input to standard input: |
+
+You can redirect file input to standard input: <
+
+Example: using a pipe to pipe the string `ALL CAPS` through the tr
+program to lower case it.
+
+#+begin_src sh :exports both
+echo ALL CAPS | tr '[:upper:]' '[:lower:]'
+#+end_src
+
+#+RESULTS:
+: all caps
+
+tr is a translation program it takes characters from 1 argument and
+turns them into another.
+
+#+begin_src sh :exports both
+echo ALL CAPS | tr 'ALC' 'ODP'
+#+end_src
+
+#+RESULTS:
+: ODD POPS
+
+We can make files by redirecting stdout to a file
+#+begin_src sh :exports both
+echo ALL CAPS > allcaps.txt
+cat allcaps.txt | tr 'AL' 'OP'
+echo From Ontario, catch those # just echo to stdout
+tr 'AC' 'IR' < allcaps.txt
+#+end_src
+
+#+RESULTS:
+: OPP COPS
+: From Ontario, catch those
+: ILL RIPS
+
+We can filter arbitrary commands:
+
+#+begin_src sh :exports both
+ls | tr '[:lower:]' '[:upper:]'
+#+end_src
+
+#+RESULTS:
+: ALLCAPS.TXT
+: AUTO
+: PRESENTATION.ORG
+: PRESENTATION.ORG~
+
+We can chain pipes:
+#+begin_src sh :exports both
+tr 'AC' 'IR' < allcaps.txt | sed -e 's/LL/LK/'
+tr 'AC' 'IR' < allcaps.txt | sed -e 's/LL/LK/' | \
+   sed -e 's/^/S/'
+# we can chain commands together
+tr 'AC' 'IR' < allcaps.txt | sed -e 's/LL/LK/' | \
+   sed -e 's/^/S/' | \
+   sed -e 's/K /K T/'
+ls | grep .org | sort
+#+end_src
+
+#+RESULTS:
+: ILK RIPS
+: SILK RIPS
+: SILK TRIPS
+: presentation.org
+: presentation.org~
+
+
+****** stderr & shell
+
+#+begin_src sh :exports both
+ls -l missing
+exit 0
+#+end_src
+
+#+RESULTS:
+
+Where is it?
+
+#+begin_src sh :exports both
+ls -l missing 2>&1
+exit 0
+#+end_src
+
+#+RESULTS:
+: ls: cannot access 'missing': No such file or directory
+
+Once we redirect stderr to stdout we can pipe it and manipulate it!
+
+#+begin_src sh :exports both
+ls -l missing 2>&1 | tr '[:lower:]' '[:upper:]'
+#+end_src
+
+#+RESULTS:
+: LS: CANNOT ACCESS 'MISSING': NO SUCH FILE OR DIRECTORY
+
+Or perhaps we don't want to see the error
+
+#+begin_src sh :exports both
+ls -l missing 2> /dev/null
+exit 0
+#+end_src
+
+#+RESULTS:
+
+Maybe we just want stderr
+#+begin_src sh :exports both
+ls -l *.org missing 2>&1 > /dev/null
+exit 0
+#+end_src
+
+#+RESULTS:
+: ls: cannot access 'missing': No such file or directory
+
+Maybe we just want BOTH
+#+begin_src sh :exports both
+ls -l *.org missing 2>&1
+exit 0
+#+end_src
+
+#+RESULTS:
+: ls: cannot access 'missing': No such file or directory
+: -rw-r--r-- 1 hindle1 hindle1 6341 Apr  6 20:35 presentation.org
+
+***** C
+****** output
+#+begin_src C :exports both :tangle stdout-example.c
+#include <stdio.h>
+int main() {
+    printf("OK this is to stdout!\n");
+    fprintf(stdout,"OK this is to stdout as well!\n");
+    fprintf(stderr,"OK this is to stderr!\n");
+    return 0;
+}
+#+end_src
+
+#+RESULTS:
+: OK this is to stdout!
+: OK this is to stdout as well!
+
+Hmmm org-mode ignores stderr
+
+#+begin_src shell :exports both
+gcc  -std=c99 -pedantic -Wall -Wextra -ftrapv -ggdb3 -o stdout-example stdout-example.c
+./stdout-example 2>&1
+#+end_src
+
+#+RESULTS:
+: OK this is to stderr!
+: OK this is to stdout!
+: OK this is to stdout as well!
+
+Ah now it appears
+
+
+****** input
+#+begin_src C :eval no :exports both :tangle stdin-example.c
+#include <stdio.h>
+int main() {
+    int input;
+    if (scanf("%d", &input)!=1) abort();
+    fprintf(stdout, "From stdin %d\n", input);
+    fprintf(stderr, "ERR: From stdin %d\n", input);
+    return 0;
+}
+#+end_src
+
+#+begin_src shell :exports both
+gcc  -std=c99 -pedantic -Wall -Wextra -ftrapv -ggdb3 -o stdin-example stdin-example.c
+echo 10 | ./stdin-example 2>&1
+echo 20 > 20.txt
+echo 30 > 30.txt
+./stdin-example 2>&1 < 20.txt
+./stdin-example < 30.txt 2>&1
+#+end_src
+
+#+RESULTS:
+: ERR: From stdin 10
+: From stdin 10
+: ERR: From stdin 20
+: From stdin 20
+: ERR: From stdin 30
+: From stdin 30
+
+You've mostly seen this before except the `fprintf(stderr,...)` part.
 
 *** Files
+
+Files can be addressed as streams as well. But we have to open and
+close them. So we can treat files exactly like stdin and stdout but
+with a few changes.
+
+1. We need a file handle (like stdin, stdout, or stderr). This handle
+   is for the OS to know which file the process is talking about.
+2. We need to decide if we are reading write or both and we need to
+   open a file to produce a file handle. Or use an existing one.
+   - fopen
+3. We need to write to it using write and f* operations.
+   - fprintf
+   - fputs   
+3. We need to read from it using read and f* operations.
+   - fgets
+   - fgetc   
+4. We need to close the file after we're done. fclose.
+
 **** open and close
-***** fopen & fclose
+
+To open a file we use fopen. To close it we fclose. Don't use open and
+close because that's not portable. That's for the OS.
+
+#+begin_src C :eval no
+FILE *fopen(const char *pathname, const char *mode);
+int fclose(FILE *stream);
+#+end_src
+
+The mode is a string
+- "r" - read
+- "w" - write (erase file)
+- "a" - append (add to end of file)
+- "r+" - read and write
+- "w+" - write and read (erase file)
+- "a+" - append and read
+
+#+begin_src C :eval no
+FILE * f_cb = fopen("coolbears.txt", "w"); // open coolbears.txt for writing
+int fclose(f_cb); // close coolbears.txt
+#+end_src
+
+If you don't close a file you can lose bytes you wrote to it because
+they didn't get flushed to disk. This is important because people
+might kill your program your you might reboot or shutdown the
+computer. If you want to ensure data is written try to engage in
+flush. Sometimes no data will appear until you flush or close the
+file. Keep those pipes clean.
+
+#+begin_src C :exports both
+#include <stdio.h>
+#define SIZE 1024
+int main() {
+    char buffer[SIZE] = {'\0'};
+    // open coolbears.txt for writing
+    FILE * f_cb  = fopen("coolbears.txt", "w"); 
+    fputs("Polar bears", f_cb);
+    fclose(f_cb);
+    FILE * f_cbr = fopen("coolbears.txt", "r"); 
+    fgets(buffer, SIZE, f_cbr);
+    printf("%s\n",buffer);
+    fclose(f_cbr);
+}
+#+end_src
+
+#+RESULTS:
+: Polar bears
+
+OK but what if we don't close it?
+
+#+begin_src C :exports both
+#include <stdio.h>
+#define SIZE 1024
+int main() {
+    char buffer[SIZE] = {'\0'};
+    // open coolbears.txt for writing
+    FILE * f_cb  = fopen("coolbears.txt", "w"); 
+    fputs("Polar bears", f_cb);
+    FILE * f_cbr = fopen("coolbears.txt", "r"); 
+    fgets(buffer, SIZE, f_cbr);
+    printf("This is the buffer before close: %s\n",buffer);
+    fclose(f_cbr);
+    fclose(f_cb);
+    f_cbr = fopen("coolbears.txt", "r"); 
+    fgets(buffer, SIZE, f_cbr);
+    printf("This is the buffer after close: %s\n",buffer);
+    fclose(f_cbr);
+    printf("Close your buffers!");
+}
+#+end_src
+
+#+RESULTS:
+: This is the buffer before close: 
+: This is the buffer after close: Polar bears
+: Close your buffers!
+
+#+begin_src sh :exports both
+cat coolbears.txt
+#+end_src
+
+#+RESULTS:
+: Polar bears
+
+Now let's see what flush does for us!
+#+begin_src C :exports both
+#include <stdio.h>
+#define SIZE 1024
+int main() {
+    char buffer[SIZE] = {'\0'};
+    // open coolbears.txt for writing
+    FILE * f_cb  = fopen("coolbears.txt", "w"); 
+    fputs("Polar bears", f_cb);
+    fflush(f_cb);
+    FILE * f_cbr = fopen("coolbears.txt", "r"); 
+    fgets(buffer, SIZE, f_cbr);
+    printf("This is the buffer before close but after flush: %s\n",buffer);
+    fclose(f_cbr);
+    fclose(f_cb);
+    f_cbr = fopen("coolbears.txt", "r"); 
+    fgets(buffer, SIZE, f_cbr);
+    printf("This is the buffer after close: %s\n",buffer);
+    fclose(f_cbr);
+    printf("Close your buffers! Keep your pipes clean");
+}
+#+end_src
+
+#+RESULTS:
+: This is the buffer before close but after flush: Polar bears
+: This is the buffer after close: Polar bears
+: Close your buffers!
+
 **** reading
 ***** fscanf
 ***** fgets
@@ -114,3 +458,9 @@ gcc  -std=c99 -pedantic -Wall -Wextra -ftrapv -ggdb3 -o programname programname.
 **** ARGC
 **** ARGV
 *** mmap()
+
+** References
+
+Hazel Cambell's thorough notes on Stream I/O:
+
+https://docs.google.com/document/d/1b48EzfP03JYEFt42wCajU5kv76oVbTxEXa2JO0q17ag/edit
