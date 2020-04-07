@@ -3,7 +3,7 @@
 "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
 <head>
-<!-- 2020-04-06 Mon 23:32 -->
+<!-- 2020-04-06 Mon 23:35 -->
 <meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <title>CMPUT201W20B2 Week 13</title>
@@ -247,46 +247,46 @@ for the JavaScript code in this tag.
 <h2>Table of Contents</h2>
 <div id="text-table-of-contents">
 <ul>
-<li><a href="#orgac424d1">1. Week13</a>
+<li><a href="#orge0affb6">1. Week13</a>
 <ul>
-<li><a href="#org3a8f379">1.1. Copyright Statement</a>
+<li><a href="#org37ebe9d">1.1. Copyright Statement</a>
 <ul>
-<li><a href="#org8a22bef">1.1.1. License</a></li>
-<li><a href="#org09f6fb0">1.1.2. Hazel Code is licensed under AGPL3.0+</a></li>
+<li><a href="#org9e58b8c">1.1.1. License</a></li>
+<li><a href="#org1c065d3">1.1.2. Hazel Code is licensed under AGPL3.0+</a></li>
 </ul>
 </li>
-<li><a href="#orge9edb70">1.2. Alternative version</a></li>
-<li><a href="#org94dedea">1.3. Init ORG-MODE</a>
+<li><a href="#org4079d22">1.2. Alternative version</a></li>
+<li><a href="#org091ab0b">1.3. Init ORG-MODE</a>
 <ul>
-<li><a href="#org08c67a4">1.3.1. Org export</a></li>
-<li><a href="#orgfafc567">1.3.2. Org Template</a></li>
+<li><a href="#org17a02cc">1.3.1. Org export</a></li>
+<li><a href="#orgd4151ab">1.3.2. Org Template</a></li>
 </ul>
 </li>
-<li><a href="#orgee592f9">1.4. Remember how to compile?</a></li>
-<li><a href="#org1cc468d">1.5. IO</a>
+<li><a href="#orgbb30def">1.4. Remember how to compile?</a></li>
+<li><a href="#org34c6ca9">1.5. IO</a>
 <ul>
-<li><a href="#orge5ed26e">1.5.1. Streams</a></li>
-<li><a href="#orge53ed44">1.5.2. Files</a></li>
-<li><a href="#orgbca52db">1.5.3. Command line arguments</a></li>
-<li><a href="#org3cba4e1">1.5.4. mmap()</a></li>
+<li><a href="#orge9b3a36">1.5.1. Streams</a></li>
+<li><a href="#org5608698">1.5.2. Files</a></li>
+<li><a href="#orgaee677f">1.5.3. Command line arguments</a></li>
+<li><a href="#org24ed9f5">1.5.4. mmap()</a></li>
 </ul>
 </li>
-<li><a href="#orga2fa3d2">1.6. References</a></li>
+<li><a href="#org3a9cb5b">1.6. References</a></li>
 </ul>
 </li>
 </ul>
 </div>
 </div>
 
-<div id="outline-container-orgac424d1" class="outline-2">
-<h2 id="orgac424d1"><span class="section-number-2">1</span> Week13</h2>
+<div id="outline-container-orge0affb6" class="outline-2">
+<h2 id="orge0affb6"><span class="section-number-2">1</span> Week13</h2>
 <div class="outline-text-2" id="text-1">
 <p>
 <a href="https://github.com/abramhindle/CMPUT201W20B2-public/tree/master/week12">https://github.com/abramhindle/CMPUT201W20B2-public/tree/master/week12</a>
 </p>
 </div>
-<div id="outline-container-org3a8f379" class="outline-3">
-<h3 id="org3a8f379"><span class="section-number-3">1.1</span> Copyright Statement</h3>
+<div id="outline-container-org37ebe9d" class="outline-3">
+<h3 id="org37ebe9d"><span class="section-number-3">1.1</span> Copyright Statement</h3>
 <div class="outline-text-3" id="text-1-1">
 <p>
 If you are in CMPUT201 at UAlberta this code is released in the public
@@ -298,8 +298,8 @@ Otherwise it is (c) 2020 Abram Hindle, Hazel Campbell AGPL3.0+
 </p>
 </div>
 
-<div id="outline-container-org8a22bef" class="outline-4">
-<h4 id="org8a22bef"><span class="section-number-4">1.1.1</span> License</h4>
+<div id="outline-container-org9e58b8c" class="outline-4">
+<h4 id="org9e58b8c"><span class="section-number-4">1.1.1</span> License</h4>
 <div class="outline-text-4" id="text-1-1-1">
 <p>
 CMPUT 201 C Notes
@@ -328,8 +328,8 @@ along with this program.  If not, see <a href="https://www.gnu.org/licenses/">ht
 </div>
 
 
-<div id="outline-container-org09f6fb0" class="outline-4">
-<h4 id="org09f6fb0"><span class="section-number-4">1.1.2</span> Hazel Code is licensed under AGPL3.0+</h4>
+<div id="outline-container-org1c065d3" class="outline-4">
+<h4 id="org1c065d3"><span class="section-number-4">1.1.2</span> Hazel Code is licensed under AGPL3.0+</h4>
 <div class="outline-text-4" id="text-1-1-2">
 <p>
 Hazel's code is also found here
@@ -344,8 +344,8 @@ license, unless otherwise noted.
 </div>
 </div>
 
-<div id="outline-container-orge9edb70" class="outline-3">
-<h3 id="orge9edb70"><span class="section-number-3">1.2</span> Alternative version</h3>
+<div id="outline-container-org4079d22" class="outline-3">
+<h3 id="org4079d22"><span class="section-number-3">1.2</span> Alternative version</h3>
 <div class="outline-text-3" id="text-1-2">
 <p>
 Checkout the .txt, the .pdf, and the .html version
@@ -353,8 +353,8 @@ Checkout the .txt, the .pdf, and the .html version
 </div>
 </div>
 
-<div id="outline-container-org94dedea" class="outline-3">
-<h3 id="org94dedea"><span class="section-number-3">1.3</span> Init ORG-MODE</h3>
+<div id="outline-container-org091ab0b" class="outline-3">
+<h3 id="org091ab0b"><span class="section-number-3">1.3</span> Init ORG-MODE</h3>
 <div class="outline-text-3" id="text-1-3">
 <div class="org-src-container">
 <pre class="src src-elisp"><span style="color: #b22222;">;; </span><span style="color: #b22222;">I need this for org-mode to work well</span>
@@ -377,8 +377,8 @@ Checkout the .txt, the .pdf, and the .html version
 </div>
 </div>
 
-<div id="outline-container-org08c67a4" class="outline-4">
-<h4 id="org08c67a4"><span class="section-number-4">1.3.1</span> Org export</h4>
+<div id="outline-container-org17a02cc" class="outline-4">
+<h4 id="org17a02cc"><span class="section-number-4">1.3.1</span> Org export</h4>
 <div class="outline-text-4" id="text-1-3-1">
 <div class="org-src-container">
 <pre class="src src-elisp">(org-html-export-to-html)
@@ -390,8 +390,8 @@ Checkout the .txt, the .pdf, and the .html version
 </div>
 
 
-<div id="outline-container-orgfafc567" class="outline-4">
-<h4 id="orgfafc567"><span class="section-number-4">1.3.2</span> Org Template</h4>
+<div id="outline-container-orgd4151ab" class="outline-4">
+<h4 id="orgd4151ab"><span class="section-number-4">1.3.2</span> Org Template</h4>
 <div class="outline-text-4" id="text-1-3-2">
 <p>
 Copy and paste this to demo C
@@ -409,8 +409,8 @@ Copy and paste this to demo C
 </div>
 </div>
 
-<div id="outline-container-orgee592f9" class="outline-3">
-<h3 id="orgee592f9"><span class="section-number-3">1.4</span> Remember how to compile?</h3>
+<div id="outline-container-orgbb30def" class="outline-3">
+<h3 id="orgbb30def"><span class="section-number-3">1.4</span> Remember how to compile?</h3>
 <div class="outline-text-3" id="text-1-4">
 <p>
 gcc  -std=c99 -pedantic -Wall -Wextra -ftrapv -ggdb3 -o programname programname.c
@@ -418,8 +418,8 @@ gcc  -std=c99 -pedantic -Wall -Wextra -ftrapv -ggdb3 -o programname programname.
 </div>
 </div>
 
-<div id="outline-container-org1cc468d" class="outline-3">
-<h3 id="org1cc468d"><span class="section-number-3">1.5</span> IO</h3>
+<div id="outline-container-org34c6ca9" class="outline-3">
+<h3 id="org34c6ca9"><span class="section-number-3">1.5</span> IO</h3>
 <div class="outline-text-3" id="text-1-5">
 <p>
 stdio.h in C contains numerous IO routines.
@@ -430,8 +430,8 @@ You use it primarily for printf and scanf.
 </p>
 </div>
 
-<div id="outline-container-orge5ed26e" class="outline-4">
-<h4 id="orge5ed26e"><span class="section-number-4">1.5.1</span> Streams</h4>
+<div id="outline-container-orge9b3a36" class="outline-4">
+<h4 id="orge9b3a36"><span class="section-number-4">1.5.1</span> Streams</h4>
 <div class="outline-text-4" id="text-1-5-1">
 <p>
 Programs that run in the UNIX terminal have 3 main streams:
@@ -467,7 +467,7 @@ or a stream of consciousness. 1 byte after another.
 </div>
 
 <ol class="org-ol">
-<li><a id="orge5667d8"></a>shell<br />
+<li><a id="orgb83d907"></a>shell<br />
 <div class="outline-text-6" id="text-1-5-1-0-1">
 <p>
 Typically a terminal will mix stdout and stderr.
@@ -564,8 +564,12 @@ FFLUSH.SH
 FFLUSH.TXT
 FGETS.TXT
 FPRINTF.TXT
+PRESENTATION.HTML
 PRESENTATION.ORG
 PRESENTATION.ORG~
+PRESENTATION.PDF
+PRESENTATION.TEX
+PRESENTATION.TXT
 STDIN-EXAMPLE
 STDIN-EXAMPLE.C
 STDOUT-EXAMPLE
@@ -598,7 +602,7 @@ presentation.org~
 
 
 <ol class="org-ol">
-<li><a id="org0ff753a"></a>stderr &amp; shell<br />
+<li><a id="orgbd4b8de"></a>stderr &amp; shell<br />
 <div class="outline-text-7" id="text-1-5-1-0-1-1">
 <div class="org-src-container">
 <pre class="src src-sh">ls -l missing
@@ -670,16 +674,16 @@ Maybe we just want BOTH
 
 <pre class="example">
 ls: cannot access 'missing': No such file or directory
--rw-r--r-- 1 hindle1 hindle1 22703 Apr  6 23:32 presentation.org
+-rw-r--r-- 1 hindle1 hindle1 22703 Apr  6 23:35 presentation.org
 </pre>
 </div>
 </li>
 </ol>
 </li>
 
-<li><a id="org3ec382e"></a>C<br />
+<li><a id="orge4930a6"></a>C<br />
 <ol class="org-ol">
-<li><a id="org4edbf41"></a>output<br />
+<li><a id="orgb168eec"></a>output<br />
 <div class="outline-text-7" id="text-1-5-1-0-2-1">
 <div class="org-src-container">
 <pre class="src src-C"><span style="color: #483d8b;">#include</span> <span style="color: #8b2252;">&lt;stdio.h&gt;</span>
@@ -722,7 +726,7 @@ Ah now it appears
 </li>
 
 
-<li><a id="org2e9df3c"></a>input<br />
+<li><a id="org1f37362"></a>input<br />
 <div class="outline-text-7" id="text-1-5-1-0-2-2">
 <div class="org-src-container">
 <pre class="src src-C"><span style="color: #483d8b;">#include</span> <span style="color: #8b2252;">&lt;stdio.h&gt;</span>
@@ -766,8 +770,8 @@ You've mostly seen this before except the `fprintf(stderr,&#x2026;)` part.
 </ol>
 </div>
 
-<div id="outline-container-orge53ed44" class="outline-4">
-<h4 id="orge53ed44"><span class="section-number-4">1.5.2</span> Files</h4>
+<div id="outline-container-org5608698" class="outline-4">
+<h4 id="org5608698"><span class="section-number-4">1.5.2</span> Files</h4>
 <div class="outline-text-4" id="text-1-5-2">
 <p>
 Files can be addressed as streams as well. But we have to open and
@@ -798,7 +802,7 @@ open a file to produce a file handle. Or use an existing one.
 </div>
 
 <ol class="org-ol">
-<li><a id="org190a4a7"></a>open and close<br />
+<li><a id="org525eecb"></a>open and close<br />
 <div class="outline-text-5" id="text-1-5-2-1">
 <p>
 To open a file we use fopen. To close it we fclose. Don't use open and
@@ -937,9 +941,9 @@ Close your buffers! Keep your pipes clean
 </div>
 </li>
 
-<li><a id="orgd82f533"></a>writing<br />
+<li><a id="org2d25e5e"></a>writing<br />
 <ol class="org-ol">
-<li><a id="org08b1ce1"></a>fprintf<br />
+<li><a id="org5c30ea3"></a>fprintf<br />
 <div class="outline-text-6" id="text-1-5-2-2-1">
 <div class="org-src-container">
 <pre class="src src-C"><span style="color: #483d8b;">#include</span> <span style="color: #8b2252;">&lt;stdio.h&gt;</span>
@@ -962,16 +966,16 @@ Close your buffers! Keep your pipes clean
 </div>
 
 <pre class="example">
-A random number 555405529
+A random number 1374500212
 </pre>
 </div>
 </li>
 </ol>
 </li>
 
-<li><a id="org2853bfe"></a>reading<br />
+<li><a id="orgfb15fd1"></a>reading<br />
 <ol class="org-ol">
-<li><a id="org5bca31b"></a>fscanf<br />
+<li><a id="org3038cee"></a>fscanf<br />
 <div class="outline-text-6" id="text-1-5-2-3-1">
 <div class="org-src-container">
 <pre class="src src-C"><span style="color: #483d8b;">#include</span> <span style="color: #8b2252;">&lt;stdio.h&gt;</span>
@@ -1004,12 +1008,12 @@ A random number 555405529
 A
 random
 number
-555405529
+2146958817
 </pre>
 </div>
 </li>
 
-<li><a id="org73d4d40"></a>fgets<br />
+<li><a id="org0763d9d"></a>fgets<br />
 <div class="outline-text-6" id="text-1-5-2-3-2">
 <p>
 fgets gets a little complicated because you have to test for EOF.
@@ -1050,12 +1054,8 @@ to do both.
 </div>
 
 <pre class="example">
-fgets.txt: A random number 1283135184
-fgets.txt: A random number 635851701
-fgets.txt: A random number 689878857
-fgets.txt: A random number 504931221
-fgets.txt: A random number 973174242
-fgets.txt: A random number 944395598
+fgets.txt: A random number 316727561
+fgets.txt: A random number 667000779
 </pre>
 </div>
 </li>
@@ -1063,7 +1063,7 @@ fgets.txt: A random number 944395598
 </li>
 
 
-<li><a id="orgb6a2fd8"></a>flushing<br />
+<li><a id="orge146fc7"></a>flushing<br />
 <div class="outline-text-5" id="text-1-5-2-4">
 <p>
 If you want to ensure something gets to a file or a term you should
@@ -1132,15 +1132,15 @@ gcc  -std=c99 -pedantic -Wall -Wextra -ftrapv -ggdb3 -o fflushreader fflushreade
 
 <pre class="example">
 This will take 7 seconds
-251984141
-1283135184
-635851701
-689878857
-504931221
+2146958817
+316727561
+667000779
+1589648104
+1870383188
 </pre>
 </div>
 </li>
-<li><a id="org5d61a36"></a>Binary Files<br />
+<li><a id="orge541044"></a>Binary Files<br />
 <div class="outline-text-5" id="text-1-5-2-5">
 <p>
 From stdio.h:
@@ -1195,6 +1195,29 @@ For 64-bit and 32-bit compatibility pad to modulus 8 bytes.
 </pre>
 </div>
 
+<pre class="example">
+Writing 89636225
+	Writing 1.00096e+09
+	Writing 9.63323e-10
+	Writing X
+Writing 885482712
+	Writing 6.02905e+08
+	Writing 5.37577e-10
+	Writing X
+Writing 244141376
+	Writing 8.09012e+08
+	Writing 7.93043e-10
+	Writing X
+Writing 1344577116
+	Writing 7.31015e+08
+	Writing 7.28243e-10
+	Writing X
+Writing 759794927
+	Writing 3.15183e+08
+	Writing 4.98117e-10
+	Writing X
+</pre>
+
 <div class="org-src-container">
 <pre class="src src-C"><span style="color: #483d8b;">#include</span> <span style="color: #8b2252;">&lt;assert.h&gt;</span>
 <span style="color: #483d8b;">#include</span> <span style="color: #8b2252;">&lt;time.h&gt;</span>
@@ -1227,6 +1250,29 @@ For 64-bit and 32-bit compatibility pad to modulus 8 bytes.
 </pre>
 </div>
 
+<pre class="example">
+Reading 89636225
+	Reading 1000961280.000000
+	Reading 9.63323e-10
+	Reading X
+Reading 885482712
+	Reading 602905152.000000
+	Reading 5.37577e-10
+	Reading X
+Reading 244141376
+	Reading 809011776.000000
+	Reading 7.93043e-10
+	Reading X
+Reading 1344577116
+	Reading 731015296.000000
+	Reading 7.28243e-10
+	Reading X
+Reading 759794927
+	Reading 315182592.000000
+	Reading 4.98117e-10
+	Reading X
+</pre>
+
 <p>
 When you write out structs, watch for padding. Look for the letter X.
 Count the number of bytes after the last X.
@@ -1238,22 +1284,23 @@ Count the number of bytes after the last X.
 </div>
 
 <pre class="example">
-00000000  04 00 00 00 a0 89 b3 49  61 d2 42 4d 66 42 7d d0  |.......Ia.BMfB}.|
-00000010  62 14 60 3e 58 7b 14 70  05 56 00 00 e8 da 0c 70  |b.`&gt;X{.p.V.....p|
-00000020  47 da 1e 4e fb 8c cf 16  64 0b 00 3e 58 7b 14 70  |G..N....d..&gt;X{.p|
-00000030  05 56 00 00 35 80 92 1b  36 55 52 4e 72 e9 b3 c3  |.V..5...6URNr...|
-00000040  b6 f2 0a 3e 58 7b 14 70  05 56 00 00 ad db 72 2a  |...&gt;X{.p.V....r*|
-00000050  7b 64 fe 4d e8 a4 a0 06  a7 e1 0e 3e 58 7b 14 70  |{d.M.......&gt;X{.p|
-00000060  05 56 00 00                                       |.V..|
-00000064
+00000000  05 00 00 00 81 bd 57 05  d4 a5 6e 4e 78 5c 91 c4  |......W...nNx\..|
+00000010  bd 8c 10 3e 58 4b 86 54  10 56 00 00 d8 64 c7 34  |...&gt;XK.T.V...d.4|
+00000020  69 be 0f 4e 60 89 c2 11  93 78 02 3e 58 4b 86 54  |i..N`....x.&gt;XK.T|
+00000030  10 56 00 00 40 4d 8d 0e  29 e2 40 4e 47 bb ef 4d  |.V..@M..).@NG..M|
+00000040  ae 3f 0b 3e 58 4b 86 54  10 56 00 00 5c 9e 24 50  |.?.&gt;XK.T.V..\.$P|
+00000050  a2 49 2e 4e 7f 90 e7 ad  b0 05 09 3e 58 4b 86 54  |.I.N.......&gt;XK.T|
+00000060  10 56 00 00 ef 8c 49 2d  70 4a 96 4d b9 de 80 43  |.V....I-pJ.M...C|
+00000070  7b 1d 01 3e 58 4b 86 54  10 56 00 00              |{..&gt;XK.T.V..|
+0000007c
 </pre>
 </div>
 </li>
 </ol>
 </div>
 
-<div id="outline-container-orgbca52db" class="outline-4">
-<h4 id="orgbca52db"><span class="section-number-4">1.5.3</span> Command line arguments</h4>
+<div id="outline-container-orgaee677f" class="outline-4">
+<h4 id="orgaee677f"><span class="section-number-4">1.5.3</span> Command line arguments</h4>
 <div class="outline-text-4" id="text-1-5-3">
 <p>
 To get arguments from the commandline you can add the parameters:
@@ -1276,7 +1323,7 @@ To get arguments from the commandline you can add the parameters:
 </div>
 
 <pre class="example">
-arg 0: /tmp/babel-7888jxN/C-bin-7888aII
+arg 0: /tmp/babel-7888jxN/C-bin-78884pO
 </pre>
 
 
@@ -1342,8 +1389,8 @@ not enough args: 1
 
 
 
-<div id="outline-container-org3cba4e1" class="outline-4">
-<h4 id="org3cba4e1"><span class="section-number-4">1.5.4</span> mmap()</h4>
+<div id="outline-container-org24ed9f5" class="outline-4">
+<h4 id="org24ed9f5"><span class="section-number-4">1.5.4</span> mmap()</h4>
 <div class="outline-text-4" id="text-1-5-4">
 <p>
 mmap is neat, it maps memory from a file or even a process to pointers
@@ -1406,6 +1453,31 @@ good for fixed sized structs.
 </pre>
 </div>
 
+<pre class="example">
+N 5 struct demos are in binary.bin
+mmapping 120 bytes of memory from the file
+Reading 89636225
+	Reading 1.00096e+09
+	Reading 9.63323e-10
+	Reading X
+Reading 885482712
+	Reading 6.02905e+08
+	Reading 5.37577e-10
+	Reading X
+Reading 244141376
+	Reading 8.09012e+08
+	Reading 7.93043e-10
+	Reading X
+Reading 1344577116
+	Reading 7.31015e+08
+	Reading 7.28243e-10
+	Reading X
+Reading 759794927
+	Reading 3.15183e+08
+	Reading 4.98117e-10
+	Reading X
+</pre>
+
 <p>
 If you want to see some bad code that's small and uses mmap checkout:
 </p>
@@ -1417,8 +1489,8 @@ If you want to see some bad code that's small and uses mmap checkout:
 </div>
 </div>
 
-<div id="outline-container-orga2fa3d2" class="outline-3">
-<h3 id="orga2fa3d2"><span class="section-number-3">1.6</span> References</h3>
+<div id="outline-container-org3a9cb5b" class="outline-3">
+<h3 id="org3a9cb5b"><span class="section-number-3">1.6</span> References</h3>
 <div class="outline-text-3" id="text-1-6">
 <p>
 KN King, C Programming, Chapter 28, 2nd Edition
@@ -1434,7 +1506,7 @@ Hazel Cambell's thorough notes on Stream I/O:
 </div>
 <div id="postamble" class="status">
 <p class="author">Author: Abram Hindle</p>
-<p class="date">Created: 2020-04-06 Mon 23:32</p>
+<p class="date">Created: 2020-04-06 Mon 23:35</p>
 <p class="validation"><a href="http://validator.w3.org/check?uri=referer">Validate</a></p>
 </div>
 </body>

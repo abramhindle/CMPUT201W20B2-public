@@ -245,10 +245,13 @@ _________________
   | FGETS.TXT
   | FPRINTF.TXT
   | PRESENTATION.HTML
+  | PRESENTATION.HTML~
   | PRESENTATION.ORG
   | PRESENTATION.ORG~
   | PRESENTATION.PDF
   | PRESENTATION.TEX
+  | PRESENTATION.TEX~
+  | PRESENTATION.TXT
   | STDIN-EXAMPLE
   | STDIN-EXAMPLE.C
   | STDOUT-EXAMPLE
@@ -333,7 +336,7 @@ _________________
 
     ,----
     | ls: cannot access 'missing': No such file or directory
-    | -rw-r--r-- 1 hindle1 hindle1 22703 Apr  6 23:32 presentation.org
+    | -rw-r--r-- 1 hindle1 hindle1 22703 Apr  6 23:35 presentation.org
     `----
 
 
@@ -575,7 +578,7 @@ _________________
     `----
 
     ,----
-    | A random number 306797041
+    | A random number 830199664
     `----
 
 
@@ -613,7 +616,7 @@ _________________
     | A
     | random
     | number
-    | 306797041
+    | 830199664
     `----
 
 
@@ -653,8 +656,7 @@ _________________
     `----
 
     ,----
-    | fgets.txt: A random number 1659777169
-    | fgets.txt: A random number 323501951
+    | fgets.txt: A random number 511804536
     `----
 
 
@@ -719,11 +721,11 @@ _________________
 
   ,----
   | This will take 7 seconds
-  | 306797041
-  | 1659777169
-  | 323501951
-  | 91982833
-  | 753110270
+  | 830199664
+  | 511804536
+  | 1015044325
+  | 613370768
+  | 909025815
   `----
 
 
@@ -777,6 +779,14 @@ _________________
   `----
 
   ,----
+  | Writing 1348842617
+  | 	Writing 9.56819e+07
+  | 	Writing 1.86777e-08
+  | 	Writing X
+  `----
+
+
+  ,----
   | #include <assert.h>
   | #include <time.h>
   | #include <stdio.h>
@@ -807,6 +817,14 @@ _________________
   | }
   `----
 
+  ,----
+  | Reading 1348842617
+  | 	Reading 95681904.000000
+  | 	Reading 1.86777e-08
+  | 	Reading X
+  `----
+
+
   When you write out structs, watch for padding. Look for the letter X.
   Count the number of bytes after the last X.
 
@@ -815,14 +833,9 @@ _________________
   `----
 
   ,----
-  | 00000000  04 00 00 00 a0 89 b3 49  61 d2 42 4d 66 42 7d d0  |.......Ia.BMfB}.|
-  | 00000010  62 14 60 3e 58 7b 14 70  05 56 00 00 e8 da 0c 70  |b.`>X{.p.V.....p|
-  | 00000020  47 da 1e 4e fb 8c cf 16  64 0b 00 3e 58 7b 14 70  |G..N....d..>X{.p|
-  | 00000030  05 56 00 00 35 80 92 1b  36 55 52 4e 72 e9 b3 c3  |.V..5...6URNr...|
-  | 00000040  b6 f2 0a 3e 58 7b 14 70  05 56 00 00 ad db 72 2a  |...>X{.p.V....r*|
-  | 00000050  7b 64 fe 4d e8 a4 a0 06  a7 e1 0e 3e 58 7b 14 70  |{d.M.......>X{.p|
-  | 00000060  05 56 00 00                                       |.V..|
-  | 00000064
+  | 00000000  01 00 00 00 79 b4 65 50  ae 7f b6 4c 16 bc 41 2b  |....y.eP...L..A+|
+  | 00000010  13 0e 54 3e 58 db 2b d1  d5 55 00 00              |..T>X.+..U..|
+  | 0000001c
   `----
 
 
@@ -845,7 +858,7 @@ _________________
   `----
 
   ,----
-  | arg 0: /tmp/babel-7888jxN/C-bin-7888yHU
+  | arg 0: /tmp/babel-7888jxN/C-bin-78885Qv
   `----
 
 
@@ -962,6 +975,16 @@ _________________
   |     fclose(file);
   | }
   `----
+
+  ,----
+  | N 1 struct demos are in binary.bin
+  | mmapping 24 bytes of memory from the file
+  | Reading 1348842617
+  | 	Reading 9.56819e+07
+  | 	Reading 1.86777e-08
+  | 	Reading X
+  `----
+
 
   If you want to see some bad code that's small and uses mmap checkout:
 
