@@ -100,7 +100,7 @@ stdio.h in C contains numerous IO routines.
 
 You use it primarily for printf and scanf.
 
-*** Streams
+** Streams
 
 Programs that run in the UNIX terminal have 3 main streams:
 
@@ -323,7 +323,7 @@ echo 30 > 30.txt
 
 You've mostly seen this before except the `fprintf(stderr,...)` part.
 
-*** Files
+** Files
 
 Files can be addressed as streams as well. But we have to open and
 close them. So we can treat files exactly like stdin and stdout but
@@ -342,7 +342,7 @@ with a few changes.
    - fgetc   
 4. We need to close the file after we're done. fclose.
 
-**** open and close
+*** open and close
 
 To open a file we use fopen. To close it we fclose. Don't use open and
 close because that's not portable. That's for the OS.
@@ -372,7 +372,7 @@ computer. If you want to ensure data is written try to engage in
 flush. Sometimes no data will appear until you flush or close the
 file. Keep those pipes clean.
 
-***** fopen
+**** fopen
 
 #+begin_src C :exports both
 #include <stdio.h>
@@ -401,7 +401,7 @@ int main() {
 #+RESULTS:
 : Polar bears
 
-***** perror
+**** perror
 
 perror produces nice errors.
 
@@ -443,7 +443,7 @@ exit 0
 : Couldn't open /proc/whatever: No such file or directory
 : Aborted (core dumped)
 
-***** closing
+**** closing
 
 OK but what if we don't close it?
 
@@ -534,8 +534,8 @@ int main() {
 : This is the buffer after close: Polar bears
 : Close your buffers! Keep your pipes clean
 
-**** writing
-***** fprintf
+*** writing
+**** fprintf
 
 fprintf is printf for files. It takes a FILE * as the first argument
 and then it looks like printf after that.
@@ -573,12 +573,12 @@ int main() {
 #+RESULTS:
 : A random number 1199792083
 
-**** reading
+*** reading
 
 For reading text from a file you options like fgets, fgetc, and
 fscanf.
 
-***** fscanf
+**** fscanf
 
 fscanf looks and feels like scanf except it outputs to FILE * streams.
 The first argument is a FILE *.
@@ -624,7 +624,7 @@ int main() {
 : number
 : 632306008
 
-***** fgets
+**** fgets
 
 fgets gets a little complicated because you have to test for EOF. You
 can check for an null response and use the feof function, but probably
@@ -679,7 +679,7 @@ int main() {
 : fgets.txt: A random number 2061715624
 : fgets.txt: A random number 614071061
 
-**** flushing
+*** flushing
 
 If you want to ensure something gets to a file or a term you should
 flush. Typically I/O is BUFFERED. Buffered means it is flushed once a
@@ -753,7 +753,7 @@ echo This will take 7 seconds && \
 : 290153846
 : 1232904670
 : 705823962
-**** Binary Files
+*** Binary Files
 
 From stdio.h:
 #+begin_src C :exports code :eval no
@@ -769,7 +769,7 @@ out. It will not be compiler and architecture portable so carefully
 craft your structs before you write them out. Use explicit padding.
 For 64-bit and 32-bit compatibility pad to modulus 8 bytes.
 
-***** Writing Binary Files
+**** Writing Binary Files
 
 fwrite is our buddy. It will help us write arbitrary sections of
 memory to a file.
@@ -851,7 +851,7 @@ hexdump -C binary.bin
 : 00000060  6b 55 00 00                                       |kU..|
 : 00000064
 
-***** Reading binary
+**** Reading binary
 
 Reading binary requires that you know what types you are reading. Be
 warned that if you mix different types you need to read them in proper
@@ -913,7 +913,7 @@ Reading -1
 	Reading X
 #+end_example
 
-*** Command line arguments
+** Command line arguments
 
 How do I make program like?
 
@@ -957,7 +957,7 @@ cp -f argv argv-new && \
 : arg 0: ./argv-new	arg 1: 1	arg 2: 2	arg 3: 3	
 
 
-**** atoi for integer arguments
+*** atoi for integer arguments
 
 So atoi is your friend :)
 
@@ -995,7 +995,7 @@ gcc  -std=c99 -pedantic -Wall -Wextra -ftrapv -ggdb3 \
 : 
 
 
-*** mmap()
+** mmap()
 
 mmap is neat, it maps memory to and from a file or even another
 process. We do this with shared libraries too. So you can read and
