@@ -22,11 +22,15 @@ int main() {
     int fd = fileno(file);
     int rsize = 0;
     assert(1==fread(&rsize, sizeof(rsize), 1, file));
-    const size_t size = sizeof(struct demo) * rsize;
+    const size_t size = sizeof(int) + sizeof(struct demo) * rsize;
     printf("N %d struct demos are in binary.bin\n", rsize);
-    printf("mmapping %u bytes of memory from the file\n", size);
+    const size_t new_size = size + sizeof(struct demo);
+    // if you want to increase a file's size use ftruncate 
+    // before you do this
+    ftruncate(fd, new_size); 
+    printf("mmapping %u bytes of memory from the file\n", new_size);
     int * mapped = mmap(0, 
-        size,
+        new_size,
         PROT_READ | PROT_WRITE, 
         MAP_SHARED, 
         fd, 
@@ -48,8 +52,11 @@ int main() {
         printf("\tReading %c\n", randd.c);
     }
     // demo we can write a -1
-    // run the program twice and you'll the last integer is -1
-    demos[rsize-1].i = -1;
+    // run the program twice and your first integer is -1
+    demos[0].i = -1;
+    // now let's extend the file by 1 record!
+    demos[rsize] = demos[rsize-1];
+    mapped[0] = rsize+1;
     munmap(demos, size);
     fclose(file);
 }

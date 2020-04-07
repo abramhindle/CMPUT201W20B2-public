@@ -3,7 +3,7 @@
 "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
 <head>
-<!-- 2020-04-07 Tue 11:32 -->
+<!-- 2020-04-07 Tue 14:19 -->
 <meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <title>CMPUT201W20B2 Week 13</title>
@@ -247,55 +247,55 @@ for the JavaScript code in this tag.
 <h2>Table of Contents</h2>
 <div id="text-table-of-contents">
 <ul>
-<li><a href="#orge8fee0e">1. Week13</a>
+<li><a href="#org4dcabe7">1. Week13</a>
 <ul>
-<li><a href="#orgdb16958">1.1. Copyright Statement</a>
+<li><a href="#org86806db">1.1. Copyright Statement</a>
 <ul>
-<li><a href="#orgf6b5cde">1.1.1. License</a></li>
-<li><a href="#org0060e21">1.1.2. Hazel Code is licensed under AGPL3.0+</a></li>
+<li><a href="#org87b74ca">1.1.1. License</a></li>
+<li><a href="#org4cf8a58">1.1.2. Hazel Code is licensed under AGPL3.0+</a></li>
 </ul>
 </li>
-<li><a href="#orgfd3f68f">1.2. Alternative version</a></li>
-<li><a href="#orgcbc2b88">1.3. Init ORG-MODE</a>
+<li><a href="#org9e2442d">1.2. Alternative version</a></li>
+<li><a href="#org9b2bb16">1.3. Init ORG-MODE</a>
 <ul>
-<li><a href="#orgd873758">1.3.1. Org export</a></li>
-<li><a href="#org833c9cb">1.3.2. Org Template</a></li>
+<li><a href="#orgbab9dd5">1.3.1. Org export</a></li>
+<li><a href="#org35d06e0">1.3.2. Org Template</a></li>
 </ul>
 </li>
-<li><a href="#org43510f0">1.4. Remember how to compile?</a></li>
-<li><a href="#org756be00">1.5. IO</a></li>
-<li><a href="#org45df2b7">1.6. Streams</a></li>
-<li><a href="#org2f9368f">1.7. Files</a>
+<li><a href="#org99cf9fb">1.4. Remember how to compile?</a></li>
+<li><a href="#org7a1ed7e">1.5. IO</a></li>
+<li><a href="#orga5faaed">1.6. Streams</a></li>
+<li><a href="#org5a8e44c">1.7. Files</a>
 <ul>
-<li><a href="#org4f29de2">1.7.1. open and close</a></li>
-<li><a href="#orge838b48">1.7.2. writing</a></li>
-<li><a href="#orgfc4e94a">1.7.3. reading</a></li>
-<li><a href="#org89a1a29">1.7.4. flushing</a></li>
-<li><a href="#orgf459d44">1.7.5. Binary Files</a></li>
+<li><a href="#org8bcd656">1.7.1. open and close</a></li>
+<li><a href="#org88d5cc5">1.7.2. writing</a></li>
+<li><a href="#orgf685202">1.7.3. reading</a></li>
+<li><a href="#org80841f8">1.7.4. flushing</a></li>
+<li><a href="#org01ad848">1.7.5. Binary Files</a></li>
 </ul>
 </li>
-<li><a href="#org8f1a62a">1.8. Command line arguments</a>
+<li><a href="#orgc81e76f">1.8. Command line arguments</a>
 <ul>
-<li><a href="#org53b1e6e">1.8.1. atoi for integer arguments</a></li>
+<li><a href="#orgdb7fea3">1.8.1. atoi for integer arguments</a></li>
 </ul>
 </li>
-<li><a href="#orgf5c7656">1.9. mmap()</a></li>
-<li><a href="#org68845d5">1.10. References</a></li>
+<li><a href="#org61b1e70">1.9. mmap()</a></li>
+<li><a href="#org1662c94">1.10. References</a></li>
 </ul>
 </li>
 </ul>
 </div>
 </div>
 
-<div id="outline-container-orge8fee0e" class="outline-2">
-<h2 id="orge8fee0e"><span class="section-number-2">1</span> Week13</h2>
+<div id="outline-container-org4dcabe7" class="outline-2">
+<h2 id="org4dcabe7"><span class="section-number-2">1</span> Week13</h2>
 <div class="outline-text-2" id="text-1">
 <p>
 <a href="https://github.com/abramhindle/CMPUT201W20B2-public/tree/master/week13">https://github.com/abramhindle/CMPUT201W20B2-public/tree/master/week13</a>
 </p>
 </div>
-<div id="outline-container-orgdb16958" class="outline-3">
-<h3 id="orgdb16958"><span class="section-number-3">1.1</span> Copyright Statement</h3>
+<div id="outline-container-org86806db" class="outline-3">
+<h3 id="org86806db"><span class="section-number-3">1.1</span> Copyright Statement</h3>
 <div class="outline-text-3" id="text-1-1">
 <p>
 If you are in CMPUT201 at UAlberta this code is released in the public
@@ -307,8 +307,8 @@ Otherwise it is (c) 2020 Abram Hindle, Hazel Campbell AGPL3.0+
 </p>
 </div>
 
-<div id="outline-container-orgf6b5cde" class="outline-4">
-<h4 id="orgf6b5cde"><span class="section-number-4">1.1.1</span> License</h4>
+<div id="outline-container-org87b74ca" class="outline-4">
+<h4 id="org87b74ca"><span class="section-number-4">1.1.1</span> License</h4>
 <div class="outline-text-4" id="text-1-1-1">
 <p>
 CMPUT 201 C Notes
@@ -337,8 +337,8 @@ along with this program.  If not, see <a href="https://www.gnu.org/licenses/">ht
 </div>
 
 
-<div id="outline-container-org0060e21" class="outline-4">
-<h4 id="org0060e21"><span class="section-number-4">1.1.2</span> Hazel Code is licensed under AGPL3.0+</h4>
+<div id="outline-container-org4cf8a58" class="outline-4">
+<h4 id="org4cf8a58"><span class="section-number-4">1.1.2</span> Hazel Code is licensed under AGPL3.0+</h4>
 <div class="outline-text-4" id="text-1-1-2">
 <p>
 Hazel's code is also found here
@@ -353,8 +353,8 @@ license, unless otherwise noted.
 </div>
 </div>
 
-<div id="outline-container-orgfd3f68f" class="outline-3">
-<h3 id="orgfd3f68f"><span class="section-number-3">1.2</span> Alternative version</h3>
+<div id="outline-container-org9e2442d" class="outline-3">
+<h3 id="org9e2442d"><span class="section-number-3">1.2</span> Alternative version</h3>
 <div class="outline-text-3" id="text-1-2">
 <p>
 Checkout the .txt, the .pdf, and the .html version
@@ -362,8 +362,8 @@ Checkout the .txt, the .pdf, and the .html version
 </div>
 </div>
 
-<div id="outline-container-orgcbc2b88" class="outline-3">
-<h3 id="orgcbc2b88"><span class="section-number-3">1.3</span> Init ORG-MODE</h3>
+<div id="outline-container-org9b2bb16" class="outline-3">
+<h3 id="org9b2bb16"><span class="section-number-3">1.3</span> Init ORG-MODE</h3>
 <div class="outline-text-3" id="text-1-3">
 <div class="org-src-container">
 <pre class="src src-elisp"><span style="color: #b22222;">;; </span><span style="color: #b22222;">I need this for org-mode to work well</span>
@@ -386,8 +386,8 @@ Checkout the .txt, the .pdf, and the .html version
 </div>
 </div>
 
-<div id="outline-container-orgd873758" class="outline-4">
-<h4 id="orgd873758"><span class="section-number-4">1.3.1</span> Org export</h4>
+<div id="outline-container-orgbab9dd5" class="outline-4">
+<h4 id="orgbab9dd5"><span class="section-number-4">1.3.1</span> Org export</h4>
 <div class="outline-text-4" id="text-1-3-1">
 <div class="org-src-container">
 <pre class="src src-elisp">(org-html-export-to-html)
@@ -399,8 +399,8 @@ Checkout the .txt, the .pdf, and the .html version
 </div>
 
 
-<div id="outline-container-org833c9cb" class="outline-4">
-<h4 id="org833c9cb"><span class="section-number-4">1.3.2</span> Org Template</h4>
+<div id="outline-container-org35d06e0" class="outline-4">
+<h4 id="org35d06e0"><span class="section-number-4">1.3.2</span> Org Template</h4>
 <div class="outline-text-4" id="text-1-3-2">
 <p>
 Copy and paste this to demo C
@@ -418,8 +418,8 @@ Copy and paste this to demo C
 </div>
 </div>
 
-<div id="outline-container-org43510f0" class="outline-3">
-<h3 id="org43510f0"><span class="section-number-3">1.4</span> Remember how to compile?</h3>
+<div id="outline-container-org99cf9fb" class="outline-3">
+<h3 id="org99cf9fb"><span class="section-number-3">1.4</span> Remember how to compile?</h3>
 <div class="outline-text-3" id="text-1-4">
 <p>
 gcc  -std=c99 -pedantic -Wall -Wextra -ftrapv -ggdb3 -o programname programname.c
@@ -427,8 +427,8 @@ gcc  -std=c99 -pedantic -Wall -Wextra -ftrapv -ggdb3 -o programname programname.
 </div>
 </div>
 
-<div id="outline-container-org756be00" class="outline-3">
-<h3 id="org756be00"><span class="section-number-3">1.5</span> IO</h3>
+<div id="outline-container-org7a1ed7e" class="outline-3">
+<h3 id="org7a1ed7e"><span class="section-number-3">1.5</span> IO</h3>
 <div class="outline-text-3" id="text-1-5">
 <p>
 stdio.h in C contains numerous IO routines.
@@ -440,8 +440,8 @@ You use it primarily for printf and scanf.
 </div>
 </div>
 
-<div id="outline-container-org45df2b7" class="outline-3">
-<h3 id="org45df2b7"><span class="section-number-3">1.6</span> Streams</h3>
+<div id="outline-container-orga5faaed" class="outline-3">
+<h3 id="orga5faaed"><span class="section-number-3">1.6</span> Streams</h3>
 <div class="outline-text-3" id="text-1-6">
 <p>
 Programs that run in the UNIX terminal have 3 main streams:
@@ -477,7 +477,7 @@ or a stream of consciousness. 1 byte after another.
 </div>
 
 <ol class="org-ol">
-<li><a id="org25df9ef"></a>shell<br />
+<li><a id="orgb3d3eec"></a>shell<br />
 <div class="outline-text-6" id="text-1-6-0-0-1">
 <p>
 Typically a terminal will mix stdout and stderr.
@@ -629,7 +629,7 @@ sed is a useful regular expression program for manipulating text.
 </div>
 
 <ol class="org-ol">
-<li><a id="org4e4a25b"></a>stderr &amp; shell<br />
+<li><a id="orgdef50fb"></a>stderr &amp; shell<br />
 <div class="outline-text-7" id="text-1-6-0-0-1-1">
 <div class="org-src-container">
 <pre class="src src-sh">ls -l missing
@@ -701,16 +701,16 @@ Maybe we just want BOTH
 
 <pre class="example">
 ls: cannot access 'missing': No such file or directory
--rw-r--r-- 1 hindle1 hindle1 27907 Apr  7 11:32 presentation.org
+-rw-r--r-- 1 hindle1 hindle1 27414 Apr  7 14:19 presentation.org
 </pre>
 </div>
 </li>
 </ol>
 </li>
 
-<li><a id="orge2d2d5f"></a>C<br />
+<li><a id="orgf52626d"></a>C<br />
 <ol class="org-ol">
-<li><a id="org23bc234"></a>output<br />
+<li><a id="orgc765a64"></a>output<br />
 <div class="outline-text-7" id="text-1-6-0-0-2-1">
 <div class="org-src-container">
 <pre class="src src-C"><span style="color: #483d8b;">#include</span> <span style="color: #8b2252;">&lt;stdio.h&gt;</span>
@@ -753,7 +753,7 @@ Ah now it appears
 </li>
 
 
-<li><a id="org64b5d62"></a>input<br />
+<li><a id="org35ab3e0"></a>input<br />
 <div class="outline-text-7" id="text-1-6-0-0-2-2">
 <div class="org-src-container">
 <pre class="src src-C"><span style="color: #483d8b;">#include</span> <span style="color: #8b2252;">&lt;stdio.h&gt;</span>
@@ -797,8 +797,8 @@ You've mostly seen this before except the `fprintf(stderr,&#x2026;)` part.
 </ol>
 </div>
 
-<div id="outline-container-org2f9368f" class="outline-3">
-<h3 id="org2f9368f"><span class="section-number-3">1.7</span> Files</h3>
+<div id="outline-container-org5a8e44c" class="outline-3">
+<h3 id="org5a8e44c"><span class="section-number-3">1.7</span> Files</h3>
 <div class="outline-text-3" id="text-1-7">
 <p>
 Files can be addressed as streams as well. But we have to open and
@@ -823,13 +823,14 @@ open a file to produce a file handle. Or use an existing one.
 <ul class="org-ul">
 <li>fgets</li>
 <li>fgetc</li>
+<li>fscanf</li>
 </ul></li>
 <li>We need to close the file after we're done. fclose.</li>
 </ol>
 </div>
 
-<div id="outline-container-org4f29de2" class="outline-4">
-<h4 id="org4f29de2"><span class="section-number-4">1.7.1</span> open and close</h4>
+<div id="outline-container-org8bcd656" class="outline-4">
+<h4 id="org8bcd656"><span class="section-number-4">1.7.1</span> open and close</h4>
 <div class="outline-text-4" id="text-1-7-1">
 <p>
 To open a file we use fopen. To close it we fclose. Don't use open and
@@ -871,7 +872,7 @@ file. Keep those pipes clean.
 </div>
 
 <ol class="org-ol">
-<li><a id="orge81a6e4"></a>fopen<br />
+<li><a id="org08d26a6"></a>fopen<br />
 <div class="outline-text-5" id="text-1-7-1-1">
 <div class="org-src-container">
 <pre class="src src-C"><span style="color: #483d8b;">#include</span> <span style="color: #8b2252;">&lt;stdio.h&gt;</span>
@@ -904,7 +905,7 @@ Polar bears
 </div>
 </li>
 
-<li><a id="orga31d55c"></a>perror<br />
+<li><a id="org2266bc6"></a>perror<br />
 <div class="outline-text-5" id="text-1-7-1-2">
 <p>
 perror produces nice errors.
@@ -956,7 +957,7 @@ Aborted (core dumped)
 </div>
 </li>
 
-<li><a id="orgb79a3d8"></a>closing<br />
+<li><a id="org88cea85"></a>closing<br />
 <div class="outline-text-5" id="text-1-7-1-3">
 <p>
 OK but what if we don't close it?
@@ -1014,7 +1015,7 @@ Polar bears
 </div>
 
 <ol class="org-ol">
-<li><a id="orgbe2d179"></a>fflushing and fclose<br />
+<li><a id="org0ffde50"></a>fflushing and fclose<br />
 <div class="outline-text-7" id="text-1-7-1-3-0-1">
 <p>
 Now let's see what flush does for us!
@@ -1066,12 +1067,12 @@ Close your buffers! Keep your pipes clean
 </ol>
 </div>
 
-<div id="outline-container-orge838b48" class="outline-4">
-<h4 id="orge838b48"><span class="section-number-4">1.7.2</span> writing</h4>
+<div id="outline-container-org88d5cc5" class="outline-4">
+<h4 id="org88d5cc5"><span class="section-number-4">1.7.2</span> writing</h4>
 <div class="outline-text-4" id="text-1-7-2">
 </div>
 <ol class="org-ol">
-<li><a id="orge457e8b"></a>fprintf<br />
+<li><a id="orgef63270"></a>fprintf<br />
 <div class="outline-text-5" id="text-1-7-2-1">
 <p>
 fprintf is printf for files. It takes a FILE * as the first argument
@@ -1112,15 +1113,15 @@ strings.
 </div>
 
 <pre class="example">
-A random number 1274680425
+A random number 1252312717
 </pre>
 </div>
 </li>
 </ol>
 </div>
 
-<div id="outline-container-orgfc4e94a" class="outline-4">
-<h4 id="orgfc4e94a"><span class="section-number-4">1.7.3</span> reading</h4>
+<div id="outline-container-orgf685202" class="outline-4">
+<h4 id="orgf685202"><span class="section-number-4">1.7.3</span> reading</h4>
 <div class="outline-text-4" id="text-1-7-3">
 <p>
 For reading text from a file you options like fgets, fgetc, and
@@ -1129,7 +1130,7 @@ fscanf.
 </div>
 
 <ol class="org-ol">
-<li><a id="orgd8b4620"></a>fscanf<br />
+<li><a id="orgd0b8507"></a>fscanf<br />
 <div class="outline-text-5" id="text-1-7-3-1">
 <p>
 fscanf looks and feels like scanf except it outputs to FILE * streams.
@@ -1176,12 +1177,12 @@ The first argument is a FILE *.
 A
 random
 number
-1274680425
+1252312717
 </pre>
 </div>
 </li>
 
-<li><a id="org2d7070d"></a>fgets<br />
+<li><a id="orgde070b1"></a>fgets<br />
 <div class="outline-text-5" id="text-1-7-3-2">
 <p>
 fgets gets a little complicated because you have to test for EOF. You
@@ -1219,11 +1220,11 @@ buffer you just used.
         abort();
     }
 
-    <span style="color: #a020f0;">while</span>(!feof(filer)) {
-        <span style="color: #a020f0;">if</span> (fgets(buffer, SIZE, filer)) {
+    <span style="color: #b22222;">//</span><span style="color: #b22222;">while(!feof(filer)) {</span>
+    <span style="color: #a020f0;">while</span> (fgets(buffer, SIZE, filer)) {
            printf(<span style="color: #8b2252;">"fgets.txt: %s"</span>, buffer);
-        }
     }
+
     fclose(filer);
     <span style="color: #a020f0;">return</span> 0;
 }
@@ -1231,23 +1232,27 @@ buffer you just used.
 </div>
 
 <pre class="example">
-fgets.txt: A random number 1706014451
-fgets.txt: A random number 708276857
+fgets.txt: A random number 2117932764
+fgets.txt: A random number 467446059
+fgets.txt: A random number 2091057187
+fgets.txt: A random number 1605930736
+fgets.txt: A random number 516205525
+fgets.txt: A random number 1006921039
 </pre>
 </div>
 </li>
 </ol>
 </div>
 
-<div id="outline-container-org89a1a29" class="outline-4">
-<h4 id="org89a1a29"><span class="section-number-4">1.7.4</span> flushing</h4>
+<div id="outline-container-org80841f8" class="outline-4">
+<h4 id="org80841f8"><span class="section-number-4">1.7.4</span> flushing</h4>
 <div class="outline-text-4" id="text-1-7-4">
 <p>
-If you want to ensure something gets to a file or a term you should
-flush. Typically I/O is BUFFERED. Buffered means it is flushed once a
-certain threshold is met, typically size but sometimes time (depending
-on the system). Buffered will increase latency to print something but
-will often improve overall bandwidth to disk.
+If you want to ensure something gets to a file or a terminal you
+should flush. Typically I/O is BUFFERED. Buffered means it is flushed
+once a certain threshold is met, typically size but sometimes time
+(depending on the system). Buffered will increase latency to print
+something but will often improve overall bandwidth to disk.
 </p>
 
 <div class="org-src-container">
@@ -1317,16 +1322,16 @@ gcc  -std=c99 -pedantic -Wall -Wextra -ftrapv -ggdb3 -o fflushreader fflushreade
 
 <pre class="example">
 This will take 7 seconds
-1274680425
-1706014451
-708276857
-577747855
-356984816
+956682261
+862912260
+1122811618
+1714813968
+397329109
 </pre>
 </div>
 </div>
-<div id="outline-container-orgf459d44" class="outline-4">
-<h4 id="orgf459d44"><span class="section-number-4">1.7.5</span> Binary Files</h4>
+<div id="outline-container-org01ad848" class="outline-4">
+<h4 id="org01ad848"><span class="section-number-4">1.7.5</span> Binary Files</h4>
 <div class="outline-text-4" id="text-1-7-5">
 <p>
 From stdio.h:
@@ -1349,7 +1354,7 @@ For 64-bit and 32-bit compatibility pad to modulus 8 bytes.
 </div>
 
 <ol class="org-ol">
-<li><a id="org18b4338"></a>Writing Binary Files<br />
+<li><a id="orgae61b8d"></a>Writing Binary Files<br />
 <div class="outline-text-5" id="text-1-7-5-1">
 <p>
 fwrite is our buddy. It will help us write arbitrary sections of
@@ -1370,7 +1375,7 @@ memory to a file.
 };
 <span style="color: #228b22;">int</span> <span style="color: #0000ff;">main</span>() {
     srand(time(<span style="color: #008b8b;">NULL</span>));
-    <span style="color: #228b22;">FILE</span> * <span style="color: #a0522d;">file</span> = fopen(<span style="color: #8b2252;">"binary.bin"</span>, <span style="color: #8b2252;">"w"</span>); 
+    <span style="color: #228b22;">FILE</span> * <span style="color: #a0522d;">file</span> = fopen(<span style="color: #8b2252;">"binary.bin"</span>, <span style="color: #8b2252;">"wb"</span>); 
     <span style="color: #a020f0;">if</span> (file == <span style="color: #008b8b;">NULL</span>) {
         perror(<span style="color: #8b2252;">"Couldn't open binary.bin"</span>);
         abort();
@@ -1396,23 +1401,16 @@ memory to a file.
 </div>
 
 <pre class="example">
-Writing 1459436436
-	Writing 4.75808e+08
-	Writing 9.24319e-10
+Writing 627405312
+	Writing 1.50804e+08
+	Writing 8.66072e-10
 	Writing X
-Writing 1496447813
-	Writing 5.14798e+08
-	Writing 9.71448e-10
-	Writing X
-Writing 923694789
-	Writing 7.48283e+08
-	Writing 2.11071e-09
-	Writing X
-Writing 323965650
-	Writing 6.8636e+08
-	Writing 1.37797e-09
+Writing 1549932425
+	Writing 9.39493e+06
+	Writing 1.29097e-09
 	Writing X
 </pre>
+
 
 <p>
 So those structs are written to binary.bin
@@ -1429,19 +1427,16 @@ Count the number of bytes after the last X.
 </div>
 
 <pre class="example">
-00000000  04 00 00 00 94 3b fd 56  04 e2 e2 4d d0 db 98 36  |.....;.V...M...6|
-00000010  65 c2 0f 3e 58 5c 31 d9  05 56 00 00 45 fb 31 59  |e..&gt;X\1..V..E.1Y|
-00000020  93 79 f5 4d a5 b3 e6 70  79 b0 10 3e 58 5c 31 d9  |.y.M...py..&gt;X\1.|
-00000030  05 56 00 00 c5 76 0e 37  99 67 32 4e 54 e9 b8 7c  |.V...v.7.g2NT..||
-00000040  81 21 22 3e 58 5c 31 d9  05 56 00 00 d2 52 4f 13  |.!"&gt;X\1..V...RO.|
-00000050  14 a4 23 4e 0c 09 9e 5e  5c ac 17 3e 58 5c 31 d9  |..#N...^\..&gt;X\1.|
-00000060  05 56 00 00                                       |.V..|
-00000064
+00000000  02 00 00 00 00 72 65 25  78 d1 0f 4d d7 98 08 4a  |.....re%x..M...J|
+00000010  0d c2 0d 3e 58 4c 6d 9a  c6 55 00 00 89 17 62 5c  |...&gt;XLm..U....b\|
+00000020  f4 5a 0f 4b 8e b9 f0 14  c4 2d 16 3e 58 4c 6d 9a  |.Z.K.....-.&gt;XLm.|
+00000030  c6 55 00 00                                       |.U..|
+00000034
 </pre>
 </div>
 </li>
 
-<li><a id="org5749446"></a>Reading binary<br />
+<li><a id="org05517b8"></a>Reading binary<br />
 <div class="outline-text-5" id="text-1-7-5-2">
 <p>
 Reading binary requires that you know what types you are reading. Be
@@ -1459,10 +1454,11 @@ order.
     <span style="color: #228b22;">float</span> <span style="color: #a0522d;">f</span>;
     <span style="color: #228b22;">double</span> <span style="color: #a0522d;">d</span>;
     <span style="color: #228b22;">char</span> <span style="color: #a0522d;">c</span>;
+    <span style="color: #228b22;">char</span> <span style="color: #a0522d;">padding</span>[7];
 };
 <span style="color: #228b22;">int</span> <span style="color: #0000ff;">main</span>() {
     <span style="color: #228b22;">char</span> <span style="color: #a0522d;">buffer</span>[BUFF];
-    <span style="color: #228b22;">FILE</span> * <span style="color: #a0522d;">file</span> = fopen(<span style="color: #8b2252;">"binary.bin"</span>, <span style="color: #8b2252;">"r"</span>); 
+    <span style="color: #228b22;">FILE</span> * <span style="color: #a0522d;">file</span> = fopen(<span style="color: #8b2252;">"binary.bin"</span>, <span style="color: #8b2252;">"rb"</span>); 
     <span style="color: #a020f0;">if</span> (file == <span style="color: #008b8b;">NULL</span>) {
         perror(<span style="color: #8b2252;">"Couldn't open binary.bin"</span>);
         abort();
@@ -1487,21 +1483,13 @@ order.
 </div>
 
 <pre class="example">
-Reading 1459436436
-	Reading 475807872.000000
-	Reading 9.24319e-10
+Reading 627405312
+	Reading 150804352.000000
+	Reading 8.66072e-10
 	Reading X
-Reading 1496447813
-	Reading 514798176.000000
-	Reading 9.71448e-10
-	Reading X
-Reading 923694789
-	Reading 748283456.000000
-	Reading 2.11071e-09
-	Reading X
-Reading 323965650
-	Reading 686359808.000000
-	Reading 1.37797e-09
+Reading 1549932425
+	Reading 9394932.000000
+	Reading 1.29097e-09
 	Reading X
 </pre>
 </div>
@@ -1510,8 +1498,8 @@ Reading 323965650
 </div>
 </div>
 
-<div id="outline-container-org8f1a62a" class="outline-3">
-<h3 id="org8f1a62a"><span class="section-number-3">1.8</span> Command line arguments</h3>
+<div id="outline-container-orgc81e76f" class="outline-3">
+<h3 id="orgc81e76f"><span class="section-number-3">1.8</span> Command line arguments</h3>
 <div class="outline-text-3" id="text-1-8">
 <p>
 How do I make program like?
@@ -1543,7 +1531,7 @@ To get arguments from the commandline you can add the parameters:
 </div>
 
 <pre class="example">
-arg 0: /tmp/babel-7888jxN/C-bin-7888esy
+arg 0: /tmp/babel-14088kiM/C-bin-14088MSl
 </pre>
 
 
@@ -1568,8 +1556,8 @@ arg 0: ./argv-new	arg 1: 1	arg 2: 2	arg 3: 3
 </div>
 
 
-<div id="outline-container-org53b1e6e" class="outline-4">
-<h4 id="org53b1e6e"><span class="section-number-4">1.8.1</span> atoi for integer arguments</h4>
+<div id="outline-container-orgdb7fea3" class="outline-4">
+<h4 id="orgdb7fea3"><span class="section-number-4">1.8.1</span> atoi for integer arguments</h4>
 <div class="outline-text-4" id="text-1-8-1">
 <p>
 So atoi is your friend :)
@@ -1578,8 +1566,9 @@ So atoi is your friend :)
 <div class="org-src-container">
 <pre class="src src-C"><span style="color: #483d8b;">#include</span> <span style="color: #8b2252;">&lt;stdio.h&gt;</span>
 <span style="color: #483d8b;">#include</span> <span style="color: #8b2252;">&lt;stdlib.h&gt;</span>
-
+<span style="color: #483d8b;">#include</span> <span style="color: #8b2252;">&lt;time.h&gt;</span>
 <span style="color: #228b22;">int</span> <span style="color: #0000ff;">main</span>(<span style="color: #228b22;">int</span> <span style="color: #a0522d;">argc</span>, <span style="color: #228b22;">char</span> ** <span style="color: #a0522d;">argv</span>) {
+    srand(time(<span style="color: #008b8b;">NULL</span>));
     <span style="color: #a020f0;">if</span> (argc != 2) { exit(1); }
     <span style="color: #228b22;">int</span> <span style="color: #a0522d;">n</span> = atoi(argv[1]);
     <span style="color: #a020f0;">for</span> (<span style="color: #228b22;">int</span> <span style="color: #a0522d;">i</span> = 0 ; i &lt; n; i++) {
@@ -1603,18 +1592,17 @@ So atoi is your friend :)
 
 <pre class="example">
 not enough args: 1
-1804289383	
-1804289383	846930886	
-1804289383	846930886	1681692777	
+2046062401	
+2046062401	627405312	
+2046062401	627405312	301608692	
 
 </pre>
 </div>
 </div>
 </div>
 
-
-<div id="outline-container-orgf5c7656" class="outline-3">
-<h3 id="orgf5c7656"><span class="section-number-3">1.9</span> mmap()</h3>
+<div id="outline-container-org61b1e70" class="outline-3">
+<h3 id="org61b1e70"><span class="section-number-3">1.9</span> mmap()</h3>
 <div class="outline-text-3" id="text-1-9">
 <p>
 mmap is neat, it maps memory to and from a file or even another
@@ -1682,33 +1670,25 @@ good for fixed sized structs.
     <span style="color: #b22222;">// </span><span style="color: #b22222;">demo we can write a -1</span>
     <span style="color: #b22222;">// </span><span style="color: #b22222;">run the program twice and your first integer is -1</span>
     demos[0].i = -1;
-    <span style="color: #b22222;">// </span><span style="color: #b22222;">now let's extend the file by 1 record!</span>
-    demos[rsize] = demos[rsize-1];
+    <span style="color: #b22222;">// </span><span style="color: #b22222;">// now let's extend the file by 1 record!</span>
     mapped[0] = rsize+1;
-    munmap(demos, size);
+    demos[rsize] = demos[rsize-1];
+    munmap(demos, new_size);
     fclose(file);
 }
 </pre>
 </div>
 
 <pre class="example">
-N 4 struct demos are in binary.bin
-mmapping 124 bytes of memory from the file
-Reading 1459436436
-	Reading 4.75808e+08
-	Reading 9.24319e-10
+N 2 struct demos are in binary.bin
+mmapping 76 bytes of memory from the file
+Reading 627405312
+	Reading 1.50804e+08
+	Reading 8.66072e-10
 	Reading X
-Reading 1496447813
-	Reading 5.14798e+08
-	Reading 9.71448e-10
-	Reading X
-Reading 923694789
-	Reading 7.48283e+08
-	Reading 2.11071e-09
-	Reading X
-Reading 323965650
-	Reading 6.8636e+08
-	Reading 1.37797e-09
+Reading 1549932425
+	Reading 9.39493e+06
+	Reading 1.29097e-09
 	Reading X
 </pre>
 
@@ -1718,7 +1698,7 @@ Reading 323965650
 </div>
 
 <pre class="example">
--rw-rw-r-- 1 hindle1 hindle1 124 Apr  7 11:32 binary.bin
+-rw-rw-r-- 1 hindle1 hindle1 76 Apr  7 14:19 binary.bin
 </pre>
 
 
@@ -1732,8 +1712,8 @@ If you want to see some bad code that's small and uses mmap checkout:
 </div>
 </div>
 
-<div id="outline-container-org68845d5" class="outline-3">
-<h3 id="org68845d5"><span class="section-number-3">1.10</span> References</h3>
+<div id="outline-container-org1662c94" class="outline-3">
+<h3 id="org1662c94"><span class="section-number-3">1.10</span> References</h3>
 <div class="outline-text-3" id="text-1-10">
 <p>
 KN King, C Programming, Chapter 28, 2nd Edition
@@ -1749,7 +1729,7 @@ Hazel Cambell's thorough notes on Stream I/O:
 </div>
 <div id="postamble" class="status">
 <p class="author">Author: Abram Hindle</p>
-<p class="date">Created: 2020-04-07 Tue 11:32</p>
+<p class="date">Created: 2020-04-07 Tue 14:19</p>
 <p class="validation"><a href="http://validator.w3.org/check?uri=referer">Validate</a></p>
 </div>
 </body>

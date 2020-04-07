@@ -356,7 +356,7 @@ _________________
 
     ,----
     | ls: cannot access 'missing': No such file or directory
-    | -rw-r--r-- 1 hindle1 hindle1 27907 Apr  7 11:32 presentation.org
+    | -rw-r--r-- 1 hindle1 hindle1 27414 Apr  7 14:19 presentation.org
     `----
 
 
@@ -451,6 +451,7 @@ _________________
   4. We need to read from it using read and f* operations.
      - fgets
      - fgetc
+     - fscanf
   5. We need to close the file after we're done. fclose.
 
 
@@ -695,7 +696,7 @@ _________________
   `----
 
   ,----
-  | A random number 1798409574
+  | A random number 397408809
   `----
 
 
@@ -750,7 +751,7 @@ _________________
   | A
   | random
   | number
-  | 1798409574
+  | 397408809
   `----
 
 
@@ -790,35 +791,30 @@ _________________
   |         abort();
   |     }
   | 
-  |     while(!feof(filer)) {
-  |         if (fgets(buffer, SIZE, filer)) {
+  |     //while(!feof(filer)) {
+  |     while (fgets(buffer, SIZE, filer)) {
   |            printf("fgets.txt: %s", buffer);
-  |         }
   |     }
+  | 
   |     fclose(filer);
   |     return 0;
   | }
   `----
 
   ,----
-  | fgets.txt: A random number 1709070639
-  | fgets.txt: A random number 1699986532
-  | fgets.txt: A random number 285413613
-  | fgets.txt: A random number 1395327654
-  | fgets.txt: A random number 1116702946
-  | fgets.txt: A random number 567711845
-  | fgets.txt: A random number 344999898
+  | fgets.txt: A random number 1936727408
+  | fgets.txt: A random number 2108125141
   `----
 
 
 1.7.4 flushing
 --------------
 
-  If you want to ensure something gets to a file or a term you should
-  flush. Typically I/O is BUFFERED. Buffered means it is flushed once a
-  certain threshold is met, typically size but sometimes time (depending
-  on the system). Buffered will increase latency to print something but
-  will often improve overall bandwidth to disk.
+  If you want to ensure something gets to a file or a terminal you
+  should flush. Typically I/O is BUFFERED. Buffered means it is flushed
+  once a certain threshold is met, typically size but sometimes time
+  (depending on the system). Buffered will increase latency to print
+  something but will often improve overall bandwidth to disk.
 
   ,----
   | fflush(FILE * stream); // will flush your stream
@@ -881,11 +877,11 @@ _________________
 
   ,----
   | This will take 7 seconds
-  | 1798409574
-  | 1709070639
-  | 1699986532
-  | 285413613
-  | 1395327654
+  | 397408809
+  | 1936727408
+  | 2108125141
+  | 337466978
+  | 357931861
   `----
 
 
@@ -926,7 +922,7 @@ _________________
   | };
   | int main() {
   |     srand(time(NULL));
-  |     FILE * file = fopen("binary.bin", "w"); 
+  |     FILE * file = fopen("binary.bin", "wb"); 
   |     if (file == NULL) {
   |         perror("Couldn't open binary.bin");
   |         abort();
@@ -951,16 +947,19 @@ _________________
   `----
 
   ,----
-  | Writing 1474484447
-  | 	Writing 9.77219e+08
-  | 	Writing 1.25079e-09
+  | Writing 1517872919
+  | 	Writing 4.34349e+08
+  | 	Writing 6.47079e-10
   | 	Writing X
-  | Writing 401422924
-  | 	Writing 7.0596e+07
-  | 	Writing 1.60589e-09
+  | Writing 1372942173
+  | 	Writing 3.32094e+08
+  | 	Writing 8.87887e-10
+  | 	Writing X
+  | Writing 1407998216
+  | 	Writing 3.5822e+08
+  | 	Writing 8.26312e-10
   | 	Writing X
   `----
-
 
   So those structs are written to binary.bin
 
@@ -972,11 +971,12 @@ _________________
   `----
 
   ,----
-  | 00000000  02 00 00 00 df d8 e2 57  ba fc 68 4e 3f eb 01 f7  |.......W..hN?...|
-  | 00000010  04 7d 15 3e 58 6c 5f 54  72 55 00 00 4c 3a ed 17  |.}.>Xl_TrU..L:..|
-  | 00000020  b7 a6 86 4c be 49 7d e6  c6 96 1b 3e 58 6c 5f 54  |...L.I}....>Xl_T|
-  | 00000030  72 55 00 00                                       |rU..|
-  | 00000034
+  | 00000000  03 00 00 00 17 e7 78 5a  2b 1d cf 4d 88 66 7e d6  |......xZ+..M.f~.|
+  | 00000010  c3 3b 06 3e 58 cc 39 cf  98 55 00 00 5d 6f d5 51  |.;.>X.9..U..]o.Q|
+  | 00000020  e0 5a 9e 4d d7 1d 73 ed  ef 81 0e 3e 58 cc 39 cf  |.Z.M..s....>X.9.|
+  | 00000030  98 55 00 00 08 59 ec 53  0d d0 aa 4d 1d dd b3 b9  |.U...Y.S...M....|
+  | 00000040  51 64 0c 3e 58 cc 39 cf  98 55 00 00              |Qd.>X.9..U..|
+  | 0000004c
   `----
 
 
@@ -996,10 +996,11 @@ _________________
   |     float f;
   |     double d;
   |     char c;
+  |     char padding[7];
   | };
   | int main() {
   |     char buffer[BUFF];
-  |     FILE * file = fopen("binary.bin", "r"); 
+  |     FILE * file = fopen("binary.bin", "rb"); 
   |     if (file == NULL) {
   |         perror("Couldn't open binary.bin");
   |         abort();
@@ -1023,13 +1024,17 @@ _________________
   `----
 
   ,----
-  | Reading 1474484447
-  | 	Reading 977219200.000000
-  | 	Reading 1.25079e-09
+  | Reading 1517872919
+  | 	Reading 434349408.000000
+  | 	Reading 6.47079e-10
   | 	Reading X
-  | Reading 401422924
-  | 	Reading 70596024.000000
-  | 	Reading 1.60589e-09
+  | Reading 1372942173
+  | 	Reading 332094464.000000
+  | 	Reading 8.87887e-10
+  | 	Reading X
+  | Reading 1407998216
+  | 	Reading 358220192.000000
+  | 	Reading 8.26312e-10
   | 	Reading X
   `----
 
@@ -1059,7 +1064,7 @@ _________________
   `----
 
   ,----
-  | arg 0: /tmp/babel-7888jxN/C-bin-7888fvj
+  | arg 0: /tmp/babel-14088kiM/C-bin-14088NVW
   `----
 
 
@@ -1090,8 +1095,9 @@ _________________
   ,----
   | #include <stdio.h>
   | #include <stdlib.h>
-  | 
+  | #include <time.h>
   | int main(int argc, char ** argv) {
+  |     srand(time(NULL));
   |     if (argc != 2) { exit(1); }
   |     int n = atoi(argv[1]);
   |     for (int i = 0 ; i < n; i++) {
@@ -1113,9 +1119,9 @@ _________________
 
   ,----
   | not enough args: 1
-  | 1804289383	
-  | 1804289383	846930886	
-  | 1804289383	846930886	1681692777	
+  | 1188353772	
+  | 1188353772	1517872919	
+  | 1188353772	1517872919	868698812	
   `----
 
 
@@ -1186,24 +1192,28 @@ _________________
   |     // demo we can write a -1
   |     // run the program twice and your first integer is -1
   |     demos[0].i = -1;
-  |     // now let's extend the file by 1 record!
-  |     demos[rsize] = demos[rsize-1];
+  |     // // now let's extend the file by 1 record!
   |     mapped[0] = rsize+1;
-  |     munmap(demos, size);
+  |     demos[rsize] = demos[rsize-1];
+  |     munmap(demos, new_size);
   |     fclose(file);
   | }
   `----
 
   ,----
-  | N 2 struct demos are in binary.bin
-  | mmapping 76 bytes of memory from the file
-  | Reading 1474484447
-  | 	Reading 9.77219e+08
-  | 	Reading 1.25079e-09
+  | N 3 struct demos are in binary.bin
+  | mmapping 100 bytes of memory from the file
+  | Reading 1517872919
+  | 	Reading 4.34349e+08
+  | 	Reading 6.47079e-10
   | 	Reading X
-  | Reading 401422924
-  | 	Reading 7.0596e+07
-  | 	Reading 1.60589e-09
+  | Reading 1372942173
+  | 	Reading 3.32094e+08
+  | 	Reading 8.87887e-10
+  | 	Reading X
+  | Reading 1407998216
+  | 	Reading 3.5822e+08
+  | 	Reading 8.26312e-10
   | 	Reading X
   `----
 
@@ -1212,7 +1222,7 @@ _________________
   `----
 
   ,----
-  | -rw-rw-r-- 1 hindle1 hindle1 76 Apr  7 11:32 binary.bin
+  | -rw-rw-r-- 1 hindle1 hindle1 100 Apr  7 14:20 binary.bin
   `----
 
 

@@ -11,7 +11,7 @@ struct demo {
 };
 int main() {
     srand(time(NULL));
-    FILE * file = fopen("binary.bin", "w"); 
+    FILE * file = fopen("binary.bin", "wb"); 
     if (file == NULL) {
         perror("Couldn't open binary.bin");
         abort();
